@@ -1,0 +1,78 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
+
+android {
+    compileSdkVersion 26
+    buildToolsVersion "26.0.0"
+    defaultConfig {
+        applicationId "com.teachernavigator.teachernavigator"
+        minSdkVersion 16
+        targetSdkVersion 26
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+
+    //Support
+    compile "com.android.support:appcompat-v7:$supportLibrary"
+    compile "com.android.support:support-v4:$supportLibrary"
+    compile "com.android.support:recyclerview-v7:$supportLibrary"
+    compile "com.android.support:design:$supportLibrary"
+    compile "com.android.support:cardview-v7:$supportLibrary"
+    compile "com.android.support.constraint:constraint-layout:$constratintLayout"
+    testCompile "junit:junit:4.12"
+
+    //GoogleService
+    compile "com.google.android.gms:play-services-location:$googleServices"
+    compile "com.google.android.gms:play-services-maps:$googleServices"
+    compile "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlinVersion"
+
+    //Arch
+    compile "android.arch.lifecycle:runtime:$androidArh"
+    compile "android.arch.lifecycle:extensions:$androidArh"
+    compile "android.arch.persistence.room:runtime:$androidArh"
+
+    //Dagger2
+    compile "com.google.dagger:dagger:$dagger"
+    kapt "com.google.dagger:dagger-compiler:$dagger"
+    provided "org.glassfish:javax.annotation:10.0-b28"
+
+    //RxJava2
+    compile "io.reactivex.rxjava2:rxjava:$rxJava"
+    compile "io.reactivex.rxjava2:rxandroid:$rxAndroid"
+
+    //Networking
+    compile "com.squareup.okhttp3:okhttp:$okhttp"
+    compile "com.squareup.retrofit2:retrofit:$retrofit"
+    compile "com.squareup.retrofit2:converter-gson:$retrofit"
+    compile "com.squareup.retrofit2:adapter-rxjava2:$retrofit"
+    compile "com.squareup.retrofit2:converter-scalars:$retrofit"
+    compile "com.squareup.okhttp3:logging-interceptor:$okhttp"
+
+    //Utils
+    compile "com.github.bumptech.glide:glide:$glide"
+    compile "com.jakewharton:butterknife:$butterKnife"
+    kapt "com.jakewharton:butterknife-compiler:$butterKnife"
+    compile "ru.terrakok.cicerone:cicerone:$cicerone"
+
+    //Test
+    testCompile 'junit:junit:4.12'
+}
+
+repositories {
+    mavenCentral()
+}

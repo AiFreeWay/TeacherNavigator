@@ -7,7 +7,7 @@ import com.teachernavigator.teachernavigator.presentation.ui.base.BaseView
 /**
  * Created by root on 14.08.17.
  */
-interface TopFragmentContainerView : BaseView {
+interface ParentView : BaseView {
 
     fun getActivity(): AppCompatActivity
     fun getSupportFragmentManager(): FragmentManager

@@ -4,10 +4,10 @@ import android.arch.lifecycle.Lifecycle
 import android.arch.lifecycle.OnLifecycleEvent
 import com.example.root.androidtest.application.utils.Logger
 import com.teachernavigator.teachernavigator.BuildConfig
-import com.teachernavigator.teachernavigator.application.di.components.DaggerTopFragmentContainerComponent
-import com.teachernavigator.teachernavigator.application.di.modules.TopFragmentContainerModule
+import com.teachernavigator.teachernavigator.application.di.components.DaggerParentScreenComponent
+import com.teachernavigator.teachernavigator.application.di.modules.ParentScreenModule
 import com.teachernavigator.teachernavigator.presentation.ui.main.activities.abstractions.MainView
-import com.teachernavigator.teachernavigator.presentation.ui.main.fragments.TapeFragment
+import com.teachernavigator.teachernavigator.presentation.ui.main.fragments.TapeFragmentChildMainView
 import com.teachernavigator.teachernavigator.presentation.ui.main.presenters.abstractions.IAcMainPresenter
 import ru.terrakok.cicerone.Router
 import javax.inject.Inject
@@ -27,7 +27,7 @@ class AcMainPresenter(view: MainView) : IAcMainPresenter(view) {
 
     @OnLifecycleEvent(Lifecycle.Event.ON_START)
     private fun onStart() {
-        mRouter.replaceScreen(TapeFragment.FRAGMENT_KEY)
+        mRouter.replaceScreen(TapeFragmentChildMainView.FRAGMENT_KEY)
     }
 
     @OnLifecycleEvent(Lifecycle.Event.ON_STOP)
@@ -36,9 +36,9 @@ class AcMainPresenter(view: MainView) : IAcMainPresenter(view) {
     }
 
     private fun inject() {
-        DaggerTopFragmentContainerComponent.builder()
+        DaggerParentScreenComponent.builder()
                 .rootComponent(getRootComponent(mView.getActivity()))
-                .topFragmentContainerModule(TopFragmentContainerModule(mView))
+                .parentScreenModule(ParentScreenModule(mView))
                 .build()
                 .inject(this)
     }

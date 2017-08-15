@@ -6,13 +6,13 @@ import android.view.View
 import android.view.ViewGroup
 import butterknife.ButterKnife
 import com.teachernavigator.teachernavigator.R
-import com.teachernavigator.teachernavigator.presentation.ui.base.ChildMainFragment
+import com.teachernavigator.teachernavigator.presentation.ui.base.FragmentChildMainView
 import com.teachernavigator.teachernavigator.presentation.ui.main.fragments.abstractions.TapeView
 
 /**
  * Created by root on 14.08.17.
  */
-class TapeFragment: ChildMainFragment(), TapeView {
+class TapeFragmentChildMainView : FragmentChildMainView(), TapeView {
 
     companion object {
 

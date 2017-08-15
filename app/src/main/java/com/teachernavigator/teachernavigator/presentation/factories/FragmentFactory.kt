@@ -2,7 +2,7 @@ package com.teachernavigator.teachernavigator.presentation.factories
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
-import com.teachernavigator.teachernavigator.presentation.ui.main.fragments.TapeFragment
+import com.teachernavigator.teachernavigator.presentation.ui.main.fragments.TapeFragmentChildMainView
 
 /**
  * Created by root on 14.08.17.
@@ -16,7 +16,7 @@ class FragmentFactory {
 
         fun createFragment(screenKey: String?, bundle: Bundle?): Fragment =
             when (screenKey) {
-                TapeFragment.FRAGMENT_KEY -> addBundle(TapeFragment(), bundle)
+                TapeFragmentChildMainView.FRAGMENT_KEY -> addBundle(TapeFragmentChildMainView(), bundle)
                 else -> throw Exception("Invalid fragment key FragmentFactory.createFragment(screenKey: String?)")
             }
 

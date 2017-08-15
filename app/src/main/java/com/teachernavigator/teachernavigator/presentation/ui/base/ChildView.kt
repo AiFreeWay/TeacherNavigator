@@ -1,13 +1,11 @@
 package com.teachernavigator.teachernavigator.presentation.ui.base
 
-import android.support.v4.app.Fragment
 import com.teachernavigator.teachernavigator.presentation.ui.main.activities.abstractions.MainView
 
 /**
- * Created by root on 14.08.17.
+ * Created by root on 15.08.17.
  */
-open class ChildMainFragment : Fragment() {
+interface ChildView {
 
-
-    fun getMainView(): MainView = activity as MainView
+    fun getMainView(): MainView
 }

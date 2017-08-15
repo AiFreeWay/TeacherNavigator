@@ -1,12 +1,12 @@
 package com.teachernavigator.teachernavigator.presentation.ui.main.activities.abstractions
 
-import com.teachernavigator.teachernavigator.presentation.ui.base.TopFragmentContainerView
+import com.teachernavigator.teachernavigator.presentation.ui.base.ParentView
 
 
 /**
  * Created by root on 14.08.17.
  */
-interface MainView : TopFragmentContainerView {
+interface MainView : ParentView {
 
     fun startProgress()
     fun stopProgress()

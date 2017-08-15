@@ -62,18 +62,9 @@ class MainActivity : AppCompatActivity(), MainView {
     }
 
     private fun initToolbar() {
-        setSupportActionBar(mToolbar)
         val drawerToggle = object : ActionBarDrawerToggle(this, mDrawer, mToolbar, 0, 0) {
-            override fun onDrawerClosed(view: View) {
-                super.onDrawerClosed(view)
-            }
-
-            override fun onDrawerOpened(drawerView: View) {
-                super.onDrawerOpened(drawerView)
-            }
-
             override fun onDrawerSlide(drawerView: View, slideOffset: Float) {
-                super.onDrawerSlide(drawerView, 0F) // this disables the animation
+                super.onDrawerSlide(drawerView, 0F)
             }
         }
         drawerToggle.syncState()

@@ -2,7 +2,7 @@ package com.teachernavigator.teachernavigator.application.di.modules
 
 import com.example.root.androidtest.application.utils.Logger
 import com.teachernavigator.teachernavigator.BuildConfig
-import com.teachernavigator.teachernavigator.presentation.ui.base.TopFragmentContainerView
+import com.teachernavigator.teachernavigator.presentation.ui.base.ParentView
 import com.teachernavigator.teachernavigator.presentation.utils.FragmentNavigator
 import dagger.Module
 import dagger.Provides
@@ -13,19 +13,17 @@ import ru.terrakok.cicerone.Router
  * Created by root on 14.08.17.
  */
 @Module
-class TopFragmentContainerModule(viewTop: TopFragmentContainerView) {
+class ParentScreenModule(viewScreens: ParentView) {
 
     private val mCicerone: Cicerone<Router>
 
     init {
-        if (BuildConfig.DEBUG) Logger.testLog("created MODULE TopFragmentContainerModule")
-    }
+        if (BuildConfig.DEBUG) Logger.testLog("created MODULE ParentScreenModule")
 
-    init {
         mCicerone = Cicerone.create()
-        mCicerone.navigatorHolder.setNavigator(FragmentNavigator(viewTop.getActivity(),
-                viewTop.getSupportFragmentManager(),
-                viewTop.getFragmentLayoutId()))
+        mCicerone.navigatorHolder.setNavigator(FragmentNavigator(viewScreens.getActivity(),
+                viewScreens.getSupportFragmentManager(),
+                viewScreens.getFragmentLayoutId()))
     }
 
     @Provides

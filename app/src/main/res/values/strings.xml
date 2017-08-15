@@ -1,3 +1,18 @@
 <resources>
     <string name="app_name">TeacherNavigator</string>
+
+    <!-- Menu items -->
+    <string name="enter">Войти</string>
+    <string name="information_tape">Информационная лента</string>
+    <string name="Settings">Настройки</string>
+    <string name="tags">Тэги</string>
+    <string name="about">О нас</string>
+    <string name="add_publication">Добавить публикацию</string>
+    <string name="my_publication">Мои публикации</string>
+    <string name="my_comments">Мои комментарии</string>
+    <string name="saved">Сохранённое</string>
+    <string name="chat">Чат</string>
+    <string name="support">Поддержка</string>
+    <string name="important_to_know">Важно знать</string>
+    <string name="bank_of_vacancy">Банк вакансий</string>
 </resources>

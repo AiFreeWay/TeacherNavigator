@@ -14,10 +14,12 @@ class MenuItemsFactory {
         fun getAuthMenuItemsFor(context: Context): ArrayList<MenuItem> {
             val items = ArrayList<MenuItem>()
             items.add(MenuItem(MenuItemTypes.LOGIN.id, context.getString(R.string.enter)))
+            items.add(MenuItem(MenuItemTypes.DEVIDER.id))
             items.add(MenuItem(MenuItemTypes.TAPE.id, context.getString(R.string.information_tape)))
             items.add(MenuItem(MenuItemTypes.SETTINGS.id, context.getString(R.string.Settings)))
             items.add(MenuItem(MenuItemTypes.TAGS.id, context.getString(R.string.tags)))
             items.add(MenuItem(MenuItemTypes.ABOUT.id, context.getString(R.string.about)))
+            items.add(MenuItem(MenuItemTypes.DEVIDER.id))
             items.add(MenuItem(MenuItemTypes.ADD_PUBLICATION.id, context.getString(R.string.add_publication)))
             return items
         }

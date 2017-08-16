@@ -8,6 +8,7 @@ import com.teachernavigator.teachernavigator.data.repository.abstractions.MainRe
 import com.teachernavigator.teachernavigator.data.repository.MainRepositoryImpl
 import dagger.Module
 import dagger.Provides
+import javax.inject.Singleton
 
 /**
  * Created by root on 03.08.17.
@@ -16,19 +17,22 @@ import dagger.Provides
 class RootModule(private val mContext: Context) {
 
     init {
-        if (BuildConfig.DEBUG) Logger.testLog("created MODULE RootModule")
+        if (BuildConfig.DEBUG) Logger.logDebug("created MODULE RootModule")
     }
 
     @Provides
     fun  provideContext(): Context {
         return mContext
     }
+
     @Provides
+    @Singleton
     fun  provideNetworkController() : NetworkController {
         return NetworkController()
     }
 
     @Provides
+    @Singleton
     fun provideRepository(repository : MainRepositoryImpl): MainRepository {
         return repository
     }

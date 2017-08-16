@@ -8,10 +8,9 @@ import javax.inject.Singleton
 /**
  * Created by root on 11.08.17.
  */
-@Singleton
 class NetworkController {
 
     init {
-        if (BuildConfig.DEBUG) Logger.testLog("created CONTROLLER NetworkController")
+        if (BuildConfig.DEBUG) Logger.logDebug("created CONTROLLER NetworkController")
     }
 }

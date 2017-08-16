@@ -21,7 +21,7 @@ class AcMainPresenter(view: MainView) : IAcMainPresenter(view) {
     lateinit var mRouter: Router
 
     init {
-        if (BuildConfig.DEBUG) Logger.testLog("created PRESENTER AcMainPresenter")
+        if (BuildConfig.DEBUG) Logger.logDebug("created PRESENTER AcMainPresenter")
         inject()
     }
 

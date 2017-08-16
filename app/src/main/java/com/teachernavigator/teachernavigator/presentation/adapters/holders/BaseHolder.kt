@@ -11,19 +11,22 @@ import android.view.ViewGroup
  */
 abstract class BaseHolder<M> : RecyclerView.ViewHolder {
 
-    protected val mOnClick: () -> Unit?
+    protected val mOnClick: (() -> Unit)?
 
-    constructor(context: Context, onClick: () -> Unit?) : super(View(context)) {
+    companion object {
+
+        fun viewInflater(viewGroup: ViewGroup, resLayout: Int): View {
+            val layoutInflater = LayoutInflater.from(viewGroup.context)
+            return layoutInflater.inflate(resLayout, viewGroup, false)
+        }
+    }
+
+    constructor(context: Context, onClick: (() -> Unit)?) : super(View(context)) {
         mOnClick = onClick
     }
 
-    constructor(itemView: View, onClick: () -> Unit?) : super(itemView) {
+    constructor(itemView: View, onClick: (() -> Unit)?) : super(itemView) {
         mOnClick = onClick
-    }
-
-    protected fun viewInflater(viewGroup: ViewGroup, resLayout: Int): View {
-        val layoutInflater = LayoutInflater.from(itemView.context)
-        return layoutInflater.inflate(resLayout, viewGroup, false)
     }
 
     abstract fun create(viewGroup: ViewGroup): BaseHolder<M>

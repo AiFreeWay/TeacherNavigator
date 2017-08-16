@@ -10,10 +10,9 @@ import javax.inject.Singleton
 /**
  * Created by root on 11.08.17.
  */
-@Singleton
 class MainRepositoryImpl @Inject constructor(private val mNetwokController: NetworkController) : MainRepository {
 
     init {
-        if (BuildConfig.DEBUG) Logger.testLog("created REPOSITORY MainRepositoryImpl")
+        if (BuildConfig.DEBUG) Logger.logDebug("created REPOSITORY MainRepositoryImpl")
     }
 }

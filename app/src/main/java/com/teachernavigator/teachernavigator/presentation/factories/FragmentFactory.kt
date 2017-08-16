@@ -17,7 +17,7 @@ class FragmentFactory {
         fun createFragment(screenKey: String?, bundle: Bundle?): Fragment =
             when (screenKey) {
                 TapeFragmentChildMainView.FRAGMENT_KEY -> addBundle(TapeFragmentChildMainView(), bundle)
-                else -> throw Exception("Invalid fragment key FragmentFactory.createFragment(screenKey: String?)")
+                else -> throw Exception("Invalid fragment key $screenKey FragmentFactory.createFragment(screenKey: String?)")
             }
 
         fun addBundle(fragment: Fragment, bundle: Bundle?): Fragment {

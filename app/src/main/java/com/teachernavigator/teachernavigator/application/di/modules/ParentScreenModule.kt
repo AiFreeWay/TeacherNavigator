@@ -18,7 +18,7 @@ class ParentScreenModule(viewScreens: ParentView) {
     private val mCicerone: Cicerone<Router>
 
     init {
-        if (BuildConfig.DEBUG) Logger.testLog("created MODULE ParentScreenModule")
+        if (BuildConfig.DEBUG) Logger.logDebug("created MODULE ParentScreenModule")
 
         mCicerone = Cicerone.create()
         mCicerone.navigatorHolder.setNavigator(FragmentNavigator(viewScreens.getActivity(),

@@ -5,6 +5,8 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v4.widget.DrawerLayout
 import android.support.v7.app.ActionBarDrawerToggle
+import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.Toolbar
 import android.view.Gravity
 import android.view.View
@@ -14,6 +16,7 @@ import butterknife.BindView
 import butterknife.ButterKnife
 
 import com.teachernavigator.teachernavigator.R
+import com.teachernavigator.teachernavigator.presentation.menu.MenuController
 import com.teachernavigator.teachernavigator.presentation.ui.main.activities.abstractions.MainView
 import com.teachernavigator.teachernavigator.presentation.ui.main.presenters.AcMainPresenter
 
@@ -25,18 +28,23 @@ class MainActivity : AppCompatActivity(), MainView {
     lateinit var mDrawer: DrawerLayout
     @BindView(R.id.ac_main_fl_body)
     lateinit var mFlBody: FrameLayout
+    @BindView(R.id.ac_main_rv_menu)
+    lateinit var mRvMenu: RecyclerView
     @BindView(R.id.ac_main_progress)
     lateinit var mProgressBar: ProgressBar
 
     private val mLifecycle: LifecycleRegistry = LifecycleRegistry(this)
     private lateinit var mPresenter: AcMainPresenter
+    private lateinit var mMenuController: MenuController
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.ac_main)
         ButterKnife.bind(this)
-        mPresenter = AcMainPresenter(this)
         initToolbar()
+        initSideMenu()
+        mPresenter = AcMainPresenter(this)
+        mMenuController.loadToRecycleView(mRvMenu)
     }
 
     override fun getLifecycle(): LifecycleRegistry = mLifecycle
@@ -59,6 +67,11 @@ class MainActivity : AppCompatActivity(), MainView {
 
     override fun setToolbarTitle(title: String) {
         mToolbar.setTitle(title)
+    }
+
+    private fun initSideMenu() {
+        mRvMenu.layoutManager = LinearLayoutManager(this)
+        mMenuController = MenuController.createControllerForNotAithorizationUser(this, this)
     }
 
     private fun initToolbar() {

@@ -3,7 +3,9 @@ package com.teachernavigator.teachernavigator.application.di.components
 import com.example.root.androidtest.application.di.components.RootComponent
 import com.teachernavigator.teachernavigator.application.di.modules.ParentScreenModule
 import com.teachernavigator.teachernavigator.application.di.scopes.PerParentScreen
-import com.teachernavigator.teachernavigator.presentation.ui.main.presenters.AcMainPresenter
+import com.teachernavigator.teachernavigator.data.repository.abstractions.IAuthRepository
+import com.teachernavigator.teachernavigator.presentation.screens.main.presenters.AcMainPresenter
+import com.teachernavigator.teachernavigator.presentation.screens.main.presenters.FmtTapePresenter
 import dagger.Component
 
 /**
@@ -14,4 +16,5 @@ import dagger.Component
 interface ParentScreenComponent {
 
     fun inject(presenter: AcMainPresenter)
+    fun inject(presenter: FmtTapePresenter)
 }

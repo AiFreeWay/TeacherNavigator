@@ -11,7 +11,7 @@ class MenuItemsFactory {
 
     companion object {
 
-        fun getAuthMenuItemsFor(context: Context): ArrayList<MenuItem> {
+        fun getNotAuthMenuItemsFor(context: Context): ArrayList<MenuItem> {
             val items = ArrayList<MenuItem>()
             items.add(MenuItem(MenuItemTypes.LOGIN.id, context.getString(R.string.enter)))
             items.add(MenuItem(MenuItemTypes.DEVIDER.id))
@@ -24,7 +24,7 @@ class MenuItemsFactory {
             return items
         }
 
-        fun getNotAuthMenuItemsFor(context: Context): ArrayList<MenuItem> {
+        fun getAuthMenuItemsFor(context: Context): ArrayList<MenuItem> {
             val items = ArrayList<MenuItem>()
             items.add(MenuItem(MenuItemTypes.PROFILE_HEADER.id))
             items.add(MenuItem(MenuItemTypes.TAPE.id, context.getString(R.string.information_tape)))

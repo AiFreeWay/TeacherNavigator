@@ -4,8 +4,6 @@ import android.content.Context
 import com.example.root.androidtest.application.utils.Logger
 import com.teachernavigator.teachernavigator.BuildConfig
 import com.teachernavigator.teachernavigator.data.network.NetworkController
-import com.teachernavigator.teachernavigator.data.repository.abstractions.MainRepository
-import com.teachernavigator.teachernavigator.data.repository.MainRepositoryImpl
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton
@@ -29,11 +27,5 @@ class RootModule(private val mContext: Context) {
     @Singleton
     fun  provideNetworkController() : NetworkController {
         return NetworkController()
-    }
-
-    @Provides
-    @Singleton
-    fun provideRepository(repository : MainRepositoryImpl): MainRepository {
-        return repository
     }
 }

@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">TeacherNavigator</string>
+    <string name="tape">Лента</string>
+
 
     <!-- Menu items -->
     <string name="enter">Войти</string>
@@ -15,4 +17,8 @@
     <string name="support">Поддержка</string>
     <string name="important_to_know">Важно знать</string>
     <string name="bank_of_vacancy">Банк вакансий</string>
+    <string name="last">Последние</string>
+    <string name="best">Лучшее</string>
+    <string name="news">Новости</string>
+    <string name="Interviews">Опросы</string>
 </resources>

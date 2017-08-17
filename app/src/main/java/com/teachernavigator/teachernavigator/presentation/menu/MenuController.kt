@@ -25,14 +25,14 @@ class MenuController private constructor(lifeCycle: LifecycleRegistry, private v
 
     companion object {
 
-        fun createControllerForAithorizationUser(lifeCycleOwner: LifecycleRegistryOwner, context: Context): MenuController {
+        fun createControllerForAuthorizationUser(lifeCycleOwner: LifecycleRegistryOwner, context: Context): MenuController {
             val menuController = MenuController(lifeCycleOwner.lifecycle, MenuItemsFactory.getAuthMenuItemsFor(context))
             menuController.mAdapterStrategy = MenuAdapterStrategy(menuController)
             return menuController
         }
 
-        fun createControllerForNotAithorizationUser(lifeCycleOwner: LifecycleRegistryOwner, context: Context): MenuController {
-            val menuController = MenuController(lifeCycleOwner.lifecycle, MenuItemsFactory.getAuthMenuItemsFor(context))
+        fun createControllerForNotAuthorizationUser(lifeCycleOwner: LifecycleRegistryOwner, context: Context): MenuController {
+            val menuController = MenuController(lifeCycleOwner.lifecycle, MenuItemsFactory.getNotAuthMenuItemsFor(context))
             menuController.mAdapterStrategy = MenuAdapterStrategy(menuController)
             return menuController
         }

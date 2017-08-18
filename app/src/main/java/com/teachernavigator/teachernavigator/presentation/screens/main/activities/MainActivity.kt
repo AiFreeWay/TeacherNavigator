@@ -16,10 +16,9 @@ import butterknife.BindView
 import butterknife.ButterKnife
 
 import com.teachernavigator.teachernavigator.R
-import com.teachernavigator.teachernavigator.presentation.menu.MenuController
 import com.teachernavigator.teachernavigator.presentation.screens.main.activities.abstractions.MainView
 import com.teachernavigator.teachernavigator.presentation.screens.main.presenters.AcMainPresenter
-import com.teachernavigator.teachernavigator.presentation.screens.main.presenters.abstractions.IAcMainPresenter
+import com.teachernavigator.teachernavigator.presentation.screens.main.presenters.abstractions.IMainPresenter
 
 class MainActivity : AppCompatActivity(), MainView {
 
@@ -35,7 +34,7 @@ class MainActivity : AppCompatActivity(), MainView {
     lateinit var mProgressBar: ProgressBar
 
     private val mLifecycle: LifecycleRegistry = LifecycleRegistry(this)
-    private val mPresenter: IAcMainPresenter = AcMainPresenter()
+    private val mPresenter: IMainPresenter = AcMainPresenter()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,6 +44,12 @@ class MainActivity : AppCompatActivity(), MainView {
         mRvMenu.layoutManager = LinearLayoutManager(this)
         mPresenter.attachView(this)
         mPresenter.loadMenuItemsToRecycleView(mRvMenu)
+        mPresenter.loadStartFragment(savedInstanceState)
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        mPresenter.detachView()
     }
 
     override fun getLifecycle(): LifecycleRegistry = mLifecycle

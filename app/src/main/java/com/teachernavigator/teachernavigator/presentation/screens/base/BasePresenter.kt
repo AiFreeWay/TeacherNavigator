@@ -11,14 +11,19 @@ import io.reactivex.disposables.Disposable
 /**
  * Created by root on 11.08.17.
  */
-abstract class BasePresenter<V : BaseView> : LifecycleObserver {
+abstract class BasePresenter<V : BaseView> : LifecycleObserver, ViewAttacher<V> {
 
     protected val mDisposables: CompositeDisposable = CompositeDisposable()
-    protected lateinit var mView: V
+    protected var mView: V? = null
 
-    open fun attachView(view: V) {
+    override fun attachView(view: V) {
         mView = view
-        mView.lifecycle.addObserver(this)
+        mView!!.lifecycle.addObserver(this)
+    }
+
+    override fun detachView() {
+        mView?.lifecycle?.removeObserver(this)
+        mView = null
     }
 
     protected fun addDissposable(disposable: Disposable) {

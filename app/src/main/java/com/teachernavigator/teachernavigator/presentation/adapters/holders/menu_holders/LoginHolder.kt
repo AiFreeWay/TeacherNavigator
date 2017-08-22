@@ -1,6 +1,7 @@
 package com.teachernavigator.teachernavigator.presentation.adapters.holders.menu_holders
 
 import android.view.ViewGroup
+import com.example.root.androidtest.application.utils.Logger
 import com.teachernavigator.teachernavigator.R
 import com.teachernavigator.teachernavigator.presentation.adapters.holders.BaseHolder
 import com.teachernavigator.teachernavigator.presentation.models.MenuData
@@ -18,7 +19,7 @@ class LoginHolder(viewGroup: ViewGroup) : BaseMenuHolder(viewInflater(viewGroup,
     override fun bind(dataModel: MenuItem) {
         itemView.setOnClickListener {
             val action = MenuData<Any>(dataModel.mType, null)
-            mObserverEmitFromHolder?.onNext(action)
+            mObserverEmitInPresenter?.onNext(action)
         }
     }
 }

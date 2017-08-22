@@ -20,8 +20,8 @@ import io.reactivex.subjects.PublishSubject
 class MenuController private constructor(lifeCycle: LifecycleRegistry, private val mMenuItems: ArrayList<MenuItem>) : LifecycleObserver {
 
     private lateinit var  mAdapterStrategy: AdapterStrategy<MenuItem>
-    private lateinit var mActionsEmitterInHolder: PublishSubject<MenuData<*>>
-    private lateinit var mActionsEmitterFromHolder: PublishSubject<MenuData<*>>
+    private lateinit var mActionsEmitterInHolderFromPresenter: PublishSubject<MenuData<*>>
+    private lateinit var mActionsEmitterInPresenterFromHolder: PublishSubject<MenuData<*>>
 
     companion object {
 
@@ -45,14 +45,14 @@ class MenuController private constructor(lifeCycle: LifecycleRegistry, private v
 
     @OnLifecycleEvent(Lifecycle.Event.ON_START)
     private fun onStart() {
-        mActionsEmitterInHolder = PublishSubject.create<MenuData<*>>()
-        mActionsEmitterFromHolder = PublishSubject.create<MenuData<*>>()
+        mActionsEmitterInHolderFromPresenter = PublishSubject.create<MenuData<*>>()
+        mActionsEmitterInPresenterFromHolder = PublishSubject.create<MenuData<*>>()
     }
 
     @OnLifecycleEvent(Lifecycle.Event.ON_STOP)
     private fun onStop() {
-        mActionsEmitterInHolder.onComplete()
-        mActionsEmitterFromHolder.onComplete()
+        mActionsEmitterInHolderFromPresenter.onComplete()
+        mActionsEmitterInPresenterFromHolder.onComplete()
     }
 
     fun loadToRecycleView(recylerView: RecyclerView) {
@@ -62,10 +62,11 @@ class MenuController private constructor(lifeCycle: LifecycleRegistry, private v
     }
 
     fun <T> sendDataToHolder(menuData: MenuData<T>) {
-        mActionsEmitterInHolder.onNext(menuData)
+        mActionsEmitterInHolderFromPresenter.onNext(menuData)
     }
 
-    fun getActionEmitterInHolder(): Observable<MenuData<*>> = mActionsEmitterInHolder
+    fun getSubscriberFromHolder(): Observable<MenuData<*>> = mActionsEmitterInPresenterFromHolder
 
-    fun getActionEmitterFromHolder(): Observer<MenuData<*>> = mActionsEmitterFromHolder
+    fun getEmitterInPresenter(): Observer<MenuData<*>> = mActionsEmitterInPresenterFromHolder
+    fun getSubscriberFromPresenter(): Observable<MenuData<*>> = mActionsEmitterInHolderFromPresenter
 }

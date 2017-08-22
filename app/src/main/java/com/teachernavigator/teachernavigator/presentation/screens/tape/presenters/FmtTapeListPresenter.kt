@@ -57,7 +57,7 @@ class FmtTapeListPresenter : BasePresenter<TapeListView>(), ITapeListPresenter {
     private fun getPosts() {
         TapeStrategy.getPostByType(mTapeType, mTapeInteractor)
                 .doOnSubscribe { mView!!.getMainView().startProgress() }
-                .subscribe(this::doOnGetPosts, { Logger.logError(it) })
+                .subscribe(this::doOnGetPosts, this::doOnError)
     }
 
     private fun doOnGetPosts(posts: List<Post>) {

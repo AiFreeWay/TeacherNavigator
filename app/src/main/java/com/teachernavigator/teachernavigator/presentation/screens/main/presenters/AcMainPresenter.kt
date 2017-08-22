@@ -10,9 +10,13 @@ import com.teachernavigator.teachernavigator.application.di.components.DaggerPar
 import com.teachernavigator.teachernavigator.application.di.components.ParentScreenComponent
 import com.teachernavigator.teachernavigator.application.di.modules.ParentScreenModule
 import com.teachernavigator.teachernavigator.domain.interactors.abstractions.IAuthInteractor
+import com.teachernavigator.teachernavigator.presentation.factories.MenuItemsFactory
 import com.teachernavigator.teachernavigator.presentation.menu.MenuController
+import com.teachernavigator.teachernavigator.presentation.models.MenuData
+import com.teachernavigator.teachernavigator.presentation.models.MenuItem
 import com.teachernavigator.teachernavigator.presentation.screens.base.BasePresenter
 import com.teachernavigator.teachernavigator.presentation.screens.main.activities.abstractions.MainView
+import com.teachernavigator.teachernavigator.presentation.screens.main.fragments.AuthFragment
 import com.teachernavigator.teachernavigator.presentation.screens.main.fragments.TapeFragment
 import com.teachernavigator.teachernavigator.presentation.screens.main.presenters.abstractions.IMainPresenter
 import ru.terrakok.cicerone.Router
@@ -47,7 +51,7 @@ class AcMainPresenter : BasePresenter<MainView>(), IMainPresenter {
 
     override fun loadMenuItemsToRecycleView(recylerView: RecyclerView) {
         addDissposable(mAuthInteractor.isAuth()
-                .subscribe({doOnGetAuthState(it, recylerView)}, this::doOnError))
+                .subscribe({ doOnGetDataForMenu(it, recylerView)}, this::doOnError))
     }
 
     override fun doOnError(error: Throwable) {
@@ -57,22 +61,27 @@ class AcMainPresenter : BasePresenter<MainView>(), IMainPresenter {
 
     override fun loadStartFragment(savedState: Bundle?) {
         if (savedState == null)
-            mRouter.navigateTo(TapeFragment.FRAGMENT_KEY)
+            mRouter.newRootScreen(TapeFragment.FRAGMENT_KEY)
     }
 
     override fun getParentScreenComponent(): ParentScreenComponent = mParentScreenComponent
 
-    private fun doOnGetAuthState(isAuthorized: Boolean, recylerView: RecyclerView) {
+    private fun doOnGetDataForMenu(isAuthorized: Boolean, recylerView: RecyclerView) {
         if (isAuthorized)
             mMenuController = MenuController.createControllerForAuthorizationUser(mView!!, mView!!.getActivity())
         else
             mMenuController = MenuController.createControllerForNotAuthorizationUser(mView!!, mView!!.getActivity())
         mMenuController.loadToRecycleView(recylerView)
 
+        mMenuController.getSubscriberFromHolder()
+                .subscribe({ onMenuItemClick(it) }, { Logger.logError(it) })
+    }
 
-        //Subscribe On menu
-        mMenuController.getActionEmitterInHolder()
-                .subscribe()
+    private fun onMenuItemClick(item: MenuData<*>) {
+        when(item.mType) {
+            MenuItemsFactory.MenuItemTypes.LOGIN.id -> mRouter.navigateTo(AuthFragment.FRAGMENT_KEY)
+        }
+        mView!!.closeSideMenu()
     }
 
     private fun inject() {

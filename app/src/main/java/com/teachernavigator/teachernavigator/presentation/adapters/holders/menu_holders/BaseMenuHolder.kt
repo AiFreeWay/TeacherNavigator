@@ -13,16 +13,16 @@ import io.reactivex.Observer
  */
 abstract class BaseMenuHolder(itemView: View) : BaseHolder<MenuItem>(itemView, null) {
 
-    protected var mObserverEmitFromHolder: Observer<MenuData<*>>? = null
-    protected var mObservableEmitToHolder: Observable<MenuData<*>>? = null
+    protected var mObservableFromPresenter: Observable<MenuData<*>>? = null
+    protected var mObserverEmitInPresenter: Observer<MenuData<*>>? = null
 
     override abstract fun create(viewGroup: ViewGroup): BaseHolder<MenuItem>
 
-    fun subscribeOnEmitInHolder(observable: Observable<MenuData<*>>) {
-        mObservableEmitToHolder = observable
+    fun subscribeOnEmitFromPresenter(observable: Observable<MenuData<*>>) {
+        mObservableFromPresenter = observable
     }
 
-    fun observOnEmitFromHolder(observer: Observer<MenuData<*>>) {
-        mObserverEmitFromHolder = observer
+    fun observOnEmitInPresenter(observer: Observer<MenuData<*>>) {
+        mObserverEmitInPresenter = observer
     }
 }

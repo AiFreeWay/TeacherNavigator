@@ -23,7 +23,7 @@ class HeaderHolder(viewGroup: ViewGroup) : BaseMenuHolder(viewInflater(viewGroup
     override fun bind(dataModel: MenuItem) {
         itemView.setOnClickListener {
             val action = MenuData<Any>(dataModel.mType, null)
-            mObserverEmitFromHolder?.onNext(action)
+            mObserverEmitInPresenter?.onNext(action)
         }
     }
 }

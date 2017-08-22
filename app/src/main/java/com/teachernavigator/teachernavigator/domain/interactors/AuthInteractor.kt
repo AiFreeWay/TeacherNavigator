@@ -18,9 +18,8 @@ class AuthInteractor @Inject constructor(private val mRepository: IAuthRepositor
         if (BuildConfig.DEBUG) Logger.logDebug("created INTERACTOR AuthInteractor")
     }
 
-    override fun isAuth(): Observable<Boolean> {
-        return mRepository.isAuth()
+    override fun isAuth(): Observable<Boolean> =
+            mRepository.isAuth()
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.newThread())
-    }
 }

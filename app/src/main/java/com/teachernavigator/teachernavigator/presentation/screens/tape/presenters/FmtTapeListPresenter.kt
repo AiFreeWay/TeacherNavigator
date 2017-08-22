@@ -4,7 +4,6 @@ import android.arch.lifecycle.Lifecycle
 import android.arch.lifecycle.OnLifecycleEvent
 import com.example.root.androidtest.application.utils.Logger
 import com.teachernavigator.teachernavigator.BuildConfig
-import com.teachernavigator.teachernavigator.R
 import com.teachernavigator.teachernavigator.domain.interactors.abstractions.ITapeInteractor
 import com.teachernavigator.teachernavigator.domain.models.Post
 import com.teachernavigator.teachernavigator.presentation.screens.base.BasePresenter
@@ -29,7 +28,6 @@ class FmtTapeListPresenter : BasePresenter<TapeListView>(), ITapeListPresenter {
 
     @OnLifecycleEvent(Lifecycle.Event.ON_START)
     private fun onStart() {
-        mView!!.getMainView().setToolbarTitle(R.string.tape)
         getPosts()
     }
 

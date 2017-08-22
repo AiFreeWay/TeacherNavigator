@@ -11,7 +11,7 @@ import android.view.ViewGroup
  */
 abstract class BaseHolder<M> : RecyclerView.ViewHolder {
 
-    protected val mOnClick: (() -> Unit)?
+    protected val mOnClick: ((M) -> Unit)?
 
     companion object {
 
@@ -21,11 +21,11 @@ abstract class BaseHolder<M> : RecyclerView.ViewHolder {
         }
     }
 
-    constructor(context: Context, onClick: (() -> Unit)?) : super(View(context)) {
+    constructor(context: Context, onClick: ((M) -> Unit)?) : super(View(context)) {
         mOnClick = onClick
     }
 
-    constructor(itemView: View, onClick: (() -> Unit)?) : super(itemView) {
+    constructor(itemView: View, onClick: ((M) -> Unit)?) : super(itemView) {
         mOnClick = onClick
     }
 

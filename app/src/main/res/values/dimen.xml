@@ -4,4 +4,5 @@
     <dimen name="normalTextSize">16dp</dimen>
     <dimen name="externalPadding">16dp</dimen>
     <dimen name="internalPadding">8dp</dimen>
+    <dimen name="drawerWidth">280dp</dimen>
 </resources>

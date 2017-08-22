@@ -16,6 +16,7 @@ import butterknife.BindView
 import butterknife.ButterKnife
 
 import com.teachernavigator.teachernavigator.R
+import com.teachernavigator.teachernavigator.application.di.components.ParentScreenComponent
 import com.teachernavigator.teachernavigator.presentation.screens.main.activities.abstractions.MainView
 import com.teachernavigator.teachernavigator.presentation.screens.main.presenters.AcMainPresenter
 import com.teachernavigator.teachernavigator.presentation.screens.main.presenters.abstractions.IMainPresenter
@@ -77,6 +78,8 @@ class MainActivity : AppCompatActivity(), MainView {
     override fun setToolbarTitle(title: Int) {
         mToolbar.setTitle(title)
     }
+
+    override fun getParentScreenComponent(): ParentScreenComponent = mPresenter.getParentScreenComponent()
 
     private fun initToolbar() {
         val drawerToggle = object : ActionBarDrawerToggle(this, mDrawer, mToolbar, 0, 0) {

@@ -2,6 +2,7 @@ package com.teachernavigator.teachernavigator.presentation.screens.main.presente
 
 import android.os.Bundle
 import android.support.v7.widget.RecyclerView
+import com.teachernavigator.teachernavigator.application.di.components.ParentScreenComponent
 import com.teachernavigator.teachernavigator.presentation.screens.base.BasePresenter
 import com.teachernavigator.teachernavigator.presentation.screens.base.ViewAttacher
 import com.teachernavigator.teachernavigator.presentation.screens.main.activities.abstractions.MainView
@@ -13,4 +14,5 @@ interface IMainPresenter : ViewAttacher<MainView> {
 
     fun loadMenuItemsToRecycleView(recylerView: RecyclerView)
     fun loadStartFragment(savedState: Bundle?)
+    fun getParentScreenComponent(): ParentScreenComponent
 }

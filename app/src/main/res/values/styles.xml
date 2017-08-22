@@ -14,5 +14,6 @@
 
     <style name="Text">
         <item name="android:textSize">@dimen/normalTextSize</item>
+        <item name="android:textColor">@color/textColor</item>
     </style>
 </resources>

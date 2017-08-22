@@ -3,10 +3,13 @@ package com.teachernavigator.teachernavigator.application.di.modules
 import com.example.root.androidtest.application.utils.Logger
 import com.teachernavigator.teachernavigator.BuildConfig
 import com.teachernavigator.teachernavigator.application.di.scopes.PerParentScreen
-import com.teachernavigator.teachernavigator.data.repository.AuthRepository
 import com.teachernavigator.teachernavigator.data.repository.abstractions.IAuthRepository
+import com.teachernavigator.teachernavigator.data.repository.abstractions.IMainRepository
+import com.teachernavigator.teachernavigator.data.repository.abstractions.ITapeRepository
 import com.teachernavigator.teachernavigator.domain.interactors.AuthInteractor
+import com.teachernavigator.teachernavigator.domain.interactors.TapeInteractor
 import com.teachernavigator.teachernavigator.domain.interactors.abstractions.IAuthInteractor
+import com.teachernavigator.teachernavigator.domain.interactors.abstractions.ITapeInteractor
 import com.teachernavigator.teachernavigator.presentation.screens.base.ParentView
 import com.teachernavigator.teachernavigator.presentation.utils.FragmentNavigator
 import dagger.Module
@@ -32,19 +35,22 @@ class ParentScreenModule(viewScreens: ParentView) {
     }
 
     @Provides
-    fun provideFragmentRouter(): Router {
-        return mCicerone.router
-    }
+    @PerParentScreen
+    fun provideFragmentRouter(): Router = mCicerone.router
 
     @Provides
     @PerParentScreen
-    fun provideAuthInteractor(interactor : AuthInteractor): IAuthInteractor {
-        return interactor
-    }
+    fun provideAuthRepository(repository: IMainRepository): IAuthRepository = repository
 
     @Provides
     @PerParentScreen
-    fun provideAuthRepository(repository : AuthRepository): IAuthRepository {
-        return repository
-    }
+    fun provideAuthInteractor(interactor : AuthInteractor): IAuthInteractor = interactor
+
+    @Provides
+    @PerParentScreen
+    fun provideTapeRepository(repository: IMainRepository): ITapeRepository = repository
+
+    @Provides
+    @PerParentScreen
+    fun provideTapeInteractor(interactor : TapeInteractor): ITapeInteractor = interactor
 }

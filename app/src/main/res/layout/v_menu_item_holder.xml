@@ -2,14 +2,14 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@android:color/white">
 
     <TextView
         android:id="@+id/v_menu_item_tv_title"
         style="@style/Text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@android:color/white"
         android:paddingBottom="@dimen/internalPadding"
         android:paddingLeft="@dimen/externalPadding"
         android:paddingRight="@dimen/externalPadding"

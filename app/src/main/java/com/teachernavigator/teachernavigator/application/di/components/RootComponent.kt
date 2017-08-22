@@ -3,7 +3,7 @@ package com.example.root.androidtest.application.di.components
 import android.content.Context
 import com.example.root.androidtest.application.di.modules.RootModule
 import com.teachernavigator.teachernavigator.data.network.NetworkController
-import com.teachernavigator.teachernavigator.data.repository.abstractions.IAuthRepository
+import com.teachernavigator.teachernavigator.data.repository.abstractions.IMainRepository
 import dagger.Component
 import javax.inject.Singleton
 
@@ -16,4 +16,5 @@ interface RootComponent {
 
     fun provideContext() : Context
     fun provideNetworkController() : NetworkController
+    fun provideMainRepository() : IMainRepository
 }

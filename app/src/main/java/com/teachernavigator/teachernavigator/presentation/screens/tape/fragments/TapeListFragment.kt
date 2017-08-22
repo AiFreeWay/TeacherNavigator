@@ -42,7 +42,7 @@ class TapeListFragment : FragmentChildMainView(), TapeListView {
         super.onActivityCreated(savedInstanceState)
         mPresenter.setTapeType(arguments.getInt(TAPE_TYPE_KEY))
         mPresenter.attachView(this)
-        mAdapter = MultyRvAdapter<Post>(PostHolder(context, mPresenter::onPostClick))
+        mAdapter = MultyRvAdapter(PostHolder(context, mPresenter::onPostClick))
         mRvList.layoutManager = LinearLayoutManager(context)
         mRvList.adapter = mAdapter
     }

@@ -51,7 +51,7 @@ class AcMainPresenter : BasePresenter<MainView>(), IMainPresenter {
     }
 
     override fun doOnError(error: Throwable) {
-        Logger.logError(error)
+        super.doOnError(error)
         mView!!.stopProgress()
     }
 
@@ -69,6 +69,10 @@ class AcMainPresenter : BasePresenter<MainView>(), IMainPresenter {
             mMenuController = MenuController.createControllerForNotAuthorizationUser(mView!!, mView!!.getActivity())
         mMenuController.loadToRecycleView(recylerView)
 
+
+        //Subscribe On menu
+        mMenuController.getActionEmitterInHolder()
+                .subscribe()
     }
 
     private fun inject() {

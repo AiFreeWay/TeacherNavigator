@@ -12,12 +12,12 @@ import com.teachernavigator.teachernavigator.presentation.models.MenuItem
 /**
  * Created by root on 16.08.17.
  */
-class ItemHolder: BaseMenuHolder {
+class ItemHolder(viewGroup: ViewGroup) : BaseMenuHolder(viewInflater(viewGroup, R.layout.v_menu_item_holder)) {
 
     @BindView(R.id.v_menu_item_tv_title)
     lateinit var mTvTitle: TextView
 
-    constructor(viewGroup: ViewGroup) : super(viewInflater(viewGroup, R.layout.v_menu_item_holder)) {
+    init {
         ButterKnife.bind(this, itemView)
     }
 

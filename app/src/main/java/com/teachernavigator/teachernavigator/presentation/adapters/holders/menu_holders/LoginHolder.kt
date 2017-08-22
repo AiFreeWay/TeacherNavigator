@@ -9,13 +9,9 @@ import com.teachernavigator.teachernavigator.presentation.models.MenuItem
 /**
  * Created by root on 16.08.17.
  */
-class LoginHolder: BaseMenuHolder {
-
-    constructor(viewGroup: ViewGroup) : super(viewInflater(viewGroup, R.layout.v_login_holder)) {
-    }
+class LoginHolder(viewGroup: ViewGroup) : BaseMenuHolder(viewInflater(viewGroup, R.layout.v_login_holder)) {
 
     override fun create(viewGroup: ViewGroup): BaseHolder<MenuItem> {
-        val view = viewInflater(viewGroup, R.layout.v_login_holder)
         return LoginHolder(viewGroup)
     }
 

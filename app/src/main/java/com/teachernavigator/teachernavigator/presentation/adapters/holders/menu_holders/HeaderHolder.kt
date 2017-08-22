@@ -10,9 +10,9 @@ import com.teachernavigator.teachernavigator.presentation.models.MenuItem
 /**
  * Created by root on 16.08.17.
  */
-class HeaderHolder : BaseMenuHolder {
+class HeaderHolder(viewGroup: ViewGroup) : BaseMenuHolder(viewInflater(viewGroup, R.layout.v_header_holder)) {
 
-    constructor(viewGroup: ViewGroup) : super(viewInflater(viewGroup, R.layout.v_header_holder)) {
+    init {
         ButterKnife.bind(this, itemView)
     }
 

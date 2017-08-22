@@ -1,6 +1,5 @@
 package com.teachernavigator.teachernavigator.presentation.adapters.holders.menu_holders
 
-import android.content.Context
 import android.view.View
 import android.view.ViewGroup
 import com.teachernavigator.teachernavigator.presentation.adapters.holders.BaseHolder
@@ -12,16 +11,10 @@ import io.reactivex.Observer
 /**
  * Created by root on 16.08.17.
  */
-abstract class BaseMenuHolder: BaseHolder<MenuItem> {
+abstract class BaseMenuHolder(itemView: View) : BaseHolder<MenuItem>(itemView, null) {
 
     protected var mObserverEmitFromHolder: Observer<MenuData<*>>? = null
     protected var mObservableEmitToHolder: Observable<MenuData<*>>? = null
-
-    constructor(context: Context) : super(View(context), null) {
-    }
-
-    constructor(itemView: View) : super(itemView, null) {
-    }
 
     override abstract fun create(viewGroup: ViewGroup): BaseHolder<MenuItem>
 

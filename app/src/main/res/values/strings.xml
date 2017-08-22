@@ -1,6 +1,8 @@
 <resources>
     <string name="app_name">TeacherNavigator</string>
     <string name="tape">Лента</string>
+    <string name="registration">Регистрация</string>
+    <string name="auth">Авторизация</string>
 
 
     <!-- Menu items -->

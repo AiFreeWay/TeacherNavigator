@@ -17,7 +17,7 @@ class MainRepository @Inject constructor(private val mNetwokController: NetworkC
         if (BuildConfig.DEBUG) Logger.logDebug("created REPOSITORY MainRepository")
     }
 
-    override fun isAuth(): Observable<Boolean> = Observable.just(true)
+    override fun isAuth(): Observable<Boolean> = Observable.just(false)
 
     override fun getBestPosts(): Observable<List<Post>> {
         val posts = ArrayList<Post>()

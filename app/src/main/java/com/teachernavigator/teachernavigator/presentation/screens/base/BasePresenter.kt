@@ -4,6 +4,7 @@ import android.app.Activity
 import android.arch.lifecycle.LifecycleObserver
 import com.example.root.androidtest.application.di.components.RootComponent
 import com.example.root.androidtest.application.utils.Logger
+import com.teachernavigator.teachernavigator.BuildConfig
 import com.teachernavigator.teachernavigator.application.TeacherNavigatopApp
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
@@ -31,7 +32,8 @@ abstract class BasePresenter<V : BaseView> : LifecycleObserver, ViewAttacher<V> 
     }
 
     open protected fun doOnError(error: Throwable) {
-        Logger.logError(error)
+        if (BuildConfig.DEBUG) Logger.logError(error)
+
     }
 
     protected fun getRootComponent(activity: Activity) : RootComponent {

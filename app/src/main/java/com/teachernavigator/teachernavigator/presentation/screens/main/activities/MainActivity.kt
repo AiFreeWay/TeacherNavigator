@@ -45,7 +45,7 @@ class MainActivity : AppCompatActivity(), MainView {
         mRvMenu.layoutManager = LinearLayoutManager(this)
         mPresenter.attachView(this)
         mPresenter.loadMenuItemsToRecycleView(mRvMenu)
-        mPresenter.loadStartFragment(savedInstanceState)
+        mPresenter.openStartFragment(savedInstanceState)
     }
 
     override fun onDestroy() {

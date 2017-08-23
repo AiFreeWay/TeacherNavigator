@@ -59,7 +59,7 @@ class AcMainPresenter : BasePresenter<MainView>(), IMainPresenter {
         mView!!.stopProgress()
     }
 
-    override fun loadStartFragment(savedState: Bundle?) {
+    override fun openStartFragment(savedState: Bundle?) {
         if (savedState == null)
             mRouter.newRootScreen(TapeFragment.FRAGMENT_KEY)
     }

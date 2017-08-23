@@ -15,6 +15,7 @@ buildscript {
         constratintLayout = '1.0.2'
         butterKnife = '8.0.1'
         cicerone = '2.0.0'
+        hawk = '2.0.1'
     }
     repositories {
         jcenter()

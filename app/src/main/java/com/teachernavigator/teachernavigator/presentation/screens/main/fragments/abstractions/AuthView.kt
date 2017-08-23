@@ -7,4 +7,6 @@ import com.teachernavigator.teachernavigator.presentation.screens.base.ChildView
  */
 interface AuthView : ChildView {
 
+    fun lockUi()
+    fun unlockUi()
 }

@@ -38,6 +38,20 @@ class FmtAuthPresenter : BasePresenter<AuthView>(), IAuthPresenter {
         mView!!.getMainView().stopProgress()
     }
 
+    override fun singInViaVkontakte() {}
+
+    override fun singInViaFacebook() {}
+
+    override fun singInViaTwitter() {}
+
+    override fun singInViaGooglePlus() {}
+
+    override fun singIn(login: String, password: String) {}
+
+    override fun openSingUpScreen() {}
+
+    override fun restorePassword() {}
+
     private fun inject() {
         mView!!.getMainView()
                 .getParentScreenComponent()

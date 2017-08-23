@@ -63,7 +63,7 @@ class TapeFragment : FragmentChildMainView(), TapeView {
     override fun onViewStateRestored(savedInstanceState: Bundle?) {
         super.onViewStateRestored(savedInstanceState)
         if (savedInstanceState != null)
-            mVpTapeItems.currentItem = savedInstanceState?.getInt(LAST_VIEW_PAGER_POSITION, 0)
+            mVpTapeItems.currentItem = savedInstanceState.getInt(LAST_VIEW_PAGER_POSITION, 0)
     }
 
     override fun loadOrdersFragments(data: List<ViewPagerItemContainer>) {

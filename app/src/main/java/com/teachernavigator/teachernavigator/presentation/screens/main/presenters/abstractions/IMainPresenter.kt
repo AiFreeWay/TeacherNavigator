@@ -13,6 +13,6 @@ import com.teachernavigator.teachernavigator.presentation.screens.main.activitie
 interface IMainPresenter : ViewAttacher<MainView> {
 
     fun loadMenuItemsToRecycleView(recylerView: RecyclerView)
-    fun loadStartFragment(savedState: Bundle?)
+    fun openStartFragment(savedState: Bundle?)
     fun getParentScreenComponent(): ParentScreenComponent
 }

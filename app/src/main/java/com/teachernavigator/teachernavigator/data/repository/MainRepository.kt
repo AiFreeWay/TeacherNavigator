@@ -2,6 +2,7 @@ package com.teachernavigator.teachernavigator.data.repository
 
 import com.example.root.androidtest.application.utils.Logger
 import com.teachernavigator.teachernavigator.BuildConfig
+import com.teachernavigator.teachernavigator.data.cache.CacheController
 import com.teachernavigator.teachernavigator.data.network.NetworkController
 import com.teachernavigator.teachernavigator.data.repository.abstractions.IMainRepository
 import com.teachernavigator.teachernavigator.domain.models.Post
@@ -17,7 +18,7 @@ class MainRepository @Inject constructor(private val mNetwokController: NetworkC
         if (BuildConfig.DEBUG) Logger.logDebug("created REPOSITORY MainRepository")
     }
 
-    override fun isAuth(): Observable<Boolean> = Observable.just(false)
+    override fun isAuth(): Observable<Boolean> = Observable.just(CacheController.getData(CacheController.TOKEN_KEY, false))
 
     override fun getBestPosts(): Observable<List<Post>> {
         val posts = ArrayList<Post>()

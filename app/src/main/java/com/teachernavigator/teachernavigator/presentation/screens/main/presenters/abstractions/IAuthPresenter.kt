@@ -7,4 +7,12 @@ import com.teachernavigator.teachernavigator.presentation.screens.main.fragments
  * Created by root on 22.08.17.
  */
 interface IAuthPresenter : ViewAttacher<AuthView> {
+    
+    fun singInViaVkontakte()
+    fun singInViaFacebook()
+    fun singInViaTwitter()
+    fun singInViaGooglePlus()
+    fun singIn(login: String, password: String)
+    fun openSingUpScreen()
+    fun restorePassword()
 }

@@ -68,10 +68,11 @@ dependencies {
     compile "com.jakewharton:butterknife:$butterKnife"
     kapt "com.jakewharton:butterknife-compiler:$butterKnife"
     compile "ru.terrakok.cicerone:cicerone:$cicerone"
+    compile "com.orhanobut:hawk:$hawk"
 
     //Leakcanary
-    debugCompile 'com.squareup.leakcanary:leakcanary-android:1.5.2'
-    releaseCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.2'
+    //debugCompile 'com.squareup.leakcanary:leakcanary-android:1.5.2'
+    //releaseCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.2'
 
     //Test
     testCompile 'junit:junit:4.12'

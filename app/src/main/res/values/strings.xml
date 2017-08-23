@@ -3,6 +3,8 @@
     <string name="tape">Лента</string>
     <string name="registration">Регистрация</string>
     <string name="auth">Авторизация</string>
+    <string name="login_hint">Логин (e-mail или моб. телефон)</string>
+    <string name="password">Пароль</string>
 
 
     <!-- Menu items -->
@@ -23,4 +25,6 @@
     <string name="best">Лучшее</string>
     <string name="news">Новости</string>
     <string name="interviews">Опросы</string>
+    <string name="forgot_password">Забыли пароль?</string>
+    <string name="create_account">Создать аккаунт</string>
 </resources>

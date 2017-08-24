@@ -29,7 +29,7 @@ class ItemHolder(viewGroup: ViewGroup) : BaseMenuHolder(viewInflater(viewGroup, 
         mTvTitle.setText(dataModel.mTitle)
         itemView.setOnClickListener {
             val action = MenuData<Any>(dataModel.mType, null)
-            mObserverEmitInPresenter?.onNext(action)
+            mOutputChannel?.onNext(action)
         }
     }
 }

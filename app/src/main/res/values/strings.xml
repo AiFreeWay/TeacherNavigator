@@ -1,12 +1,4 @@
 <resources>
-    <string name="app_name">TeacherNavigator</string>
-    <string name="tape">Лента</string>
-    <string name="registration">Регистрация</string>
-    <string name="auth">Авторизация</string>
-    <string name="login_hint">Логин (e-mail или моб. телефон)</string>
-    <string name="password">Пароль</string>
-
-
     <!-- Menu items -->
     <string name="enter">Войти</string>
     <string name="information_tape">Информационная лента</string>
@@ -25,6 +17,24 @@
     <string name="best">Лучшее</string>
     <string name="news">Новости</string>
     <string name="interviews">Опросы</string>
+
+    <string name="app_name">TeacherNavigator</string>
+    <string name="tape">Лента</string>
+    <string name="registration">Регистрация</string>
+    <string name="auth">Авторизация/Регистрация</string>
+    <string name="login_hint">Логин (e-mail или моб. телефон)</string>
+    <string name="password">Пароль</string>
     <string name="forgot_password">Забыли пароль?</string>
     <string name="create_account">Создать аккаунт</string>
+    <string name="full_name">Имя Фамилия</string>
+    <string name="birthday">Дата рождения</string>
+    <string name="work_place">Место работы (учёбы)</string>
+    <string name="position">Должность</string>
+    <string name="experience">Опыт</string>
+    <string name="trade_unionist">Член профсоюза (Да/Нет)</string>
+    <string name="trade_union_ticket_number">№ профсоюзного билета</string>
+    <string name="email">E-mail</string>
+    <string name="or">Или</string>
+    <string name="phone">Номер телефона</string>
+    <string name="agreement">Согласие на обработку персональных данных</string>
 </resources>

@@ -13,12 +13,13 @@ import com.teachernavigator.teachernavigator.domain.interactors.abstractions.IAu
 import com.teachernavigator.teachernavigator.presentation.factories.MenuItemsFactory
 import com.teachernavigator.teachernavigator.presentation.menu.MenuController
 import com.teachernavigator.teachernavigator.presentation.models.MenuData
-import com.teachernavigator.teachernavigator.presentation.models.MenuItem
+import com.teachernavigator.teachernavigator.presentation.screens.auth.activities.AuthActivity
 import com.teachernavigator.teachernavigator.presentation.screens.base.BasePresenter
 import com.teachernavigator.teachernavigator.presentation.screens.main.activities.abstractions.MainView
-import com.teachernavigator.teachernavigator.presentation.screens.main.fragments.AuthFragment
+import com.teachernavigator.teachernavigator.presentation.screens.auth.fragments.AuthFragment
 import com.teachernavigator.teachernavigator.presentation.screens.main.fragments.TapeFragment
 import com.teachernavigator.teachernavigator.presentation.screens.main.presenters.abstractions.IMainPresenter
+import com.teachernavigator.teachernavigator.presentation.utils.ActivityRouter
 import ru.terrakok.cicerone.Router
 import javax.inject.Inject
 
@@ -33,7 +34,7 @@ class AcMainPresenter : BasePresenter<MainView>(), IMainPresenter {
     lateinit var mAuthInteractor: IAuthInteractor
 
     private lateinit var mParentScreenComponent: ParentScreenComponent
-    private lateinit var mMenuController: MenuController
+    private var mMenuController: MenuController? = null
 
     init {
         if (BuildConfig.DEBUG) Logger.logDebug("created PRESENTER AcMainPresenter")
@@ -71,15 +72,15 @@ class AcMainPresenter : BasePresenter<MainView>(), IMainPresenter {
             mMenuController = MenuController.createControllerForAuthorizationUser(mView!!, mView!!.getActivity())
         else
             mMenuController = MenuController.createControllerForNotAuthorizationUser(mView!!, mView!!.getActivity())
-        mMenuController.loadToRecycleView(recylerView)
+        mMenuController!!.loadToRecycleView(recylerView)
 
-        mMenuController.getSubscriberFromHolder()
+        mMenuController!!.getPresenterChannel().getInputChannel()
                 .subscribe({ onMenuItemClick(it) }, { Logger.logError(it) })
     }
 
     private fun onMenuItemClick(item: MenuData<*>) {
         when(item.mType) {
-            MenuItemsFactory.MenuItemTypes.LOGIN.id -> mRouter.navigateTo(AuthFragment.FRAGMENT_KEY)
+            MenuItemsFactory.MenuItemTypes.LOGIN.id -> ActivityRouter.openActivity(mView!!.getActivity(), AuthActivity::class.java)
         }
         mView!!.closeSideMenu()
     }

@@ -8,10 +8,10 @@ import com.teachernavigator.teachernavigator.BuildConfig
 import com.teachernavigator.teachernavigator.presentation.adapters.AdapterStrategy
 import com.teachernavigator.teachernavigator.presentation.adapters.StrategyMultiRvAdapter
 import com.teachernavigator.teachernavigator.presentation.factories.MenuItemsFactory
+import com.teachernavigator.teachernavigator.presentation.menu.abstractions.IHolderChannel
+import com.teachernavigator.teachernavigator.presentation.menu.abstractions.IPresenterChannel
 import com.teachernavigator.teachernavigator.presentation.models.MenuData
 import com.teachernavigator.teachernavigator.presentation.models.MenuItem
-import io.reactivex.Observable
-import io.reactivex.Observer
 import io.reactivex.subjects.PublishSubject
 
 /**
@@ -20,8 +20,8 @@ import io.reactivex.subjects.PublishSubject
 class MenuController private constructor(lifeCycle: LifecycleRegistry, private val mMenuItems: ArrayList<MenuItem>) : LifecycleObserver {
 
     private lateinit var  mAdapterStrategy: AdapterStrategy<MenuItem>
-    private lateinit var mActionsEmitterInHolderFromPresenter: PublishSubject<MenuData<*>>
-    private lateinit var mActionsEmitterInPresenterFromHolder: PublishSubject<MenuData<*>>
+    private val mHolderChannel: HolderChannel = HolderChannel()
+    private val mPresenterChannel: PresenterChannel = PresenterChannel()
 
     companion object {
 
@@ -41,18 +41,11 @@ class MenuController private constructor(lifeCycle: LifecycleRegistry, private v
     init {
         if (BuildConfig.DEBUG) Logger.logDebug("create CONTROLLER MenuController")
         lifeCycle.addObserver(this)
-    }
+        val inHolderFromPresenter = PublishSubject.create<MenuData<*>>()
+        val inPresenterFromHolder = PublishSubject.create<MenuData<*>>()
 
-    @OnLifecycleEvent(Lifecycle.Event.ON_START)
-    private fun onStart() {
-        mActionsEmitterInHolderFromPresenter = PublishSubject.create<MenuData<*>>()
-        mActionsEmitterInPresenterFromHolder = PublishSubject.create<MenuData<*>>()
-    }
-
-    @OnLifecycleEvent(Lifecycle.Event.ON_STOP)
-    private fun onStop() {
-        mActionsEmitterInHolderFromPresenter.onComplete()
-        mActionsEmitterInPresenterFromHolder.onComplete()
+        mHolderChannel.setSubjects(inHolderFromPresenter, inPresenterFromHolder)
+        mPresenterChannel.setSubjects(inHolderFromPresenter, inPresenterFromHolder)
     }
 
     fun loadToRecycleView(recylerView: RecyclerView) {
@@ -61,12 +54,7 @@ class MenuController private constructor(lifeCycle: LifecycleRegistry, private v
         adapter.loadData(mMenuItems)
     }
 
-    fun <T> sendDataToHolder(menuData: MenuData<T>) {
-        mActionsEmitterInHolderFromPresenter.onNext(menuData)
-    }
+    fun getHolderChannel(): IHolderChannel = mHolderChannel
 
-    fun getSubscriberFromHolder(): Observable<MenuData<*>> = mActionsEmitterInPresenterFromHolder
-
-    fun getEmitterInPresenter(): Observer<MenuData<*>> = mActionsEmitterInPresenterFromHolder
-    fun getSubscriberFromPresenter(): Observable<MenuData<*>> = mActionsEmitterInHolderFromPresenter
+    fun getPresenterChannel(): IPresenterChannel = mPresenterChannel
 }

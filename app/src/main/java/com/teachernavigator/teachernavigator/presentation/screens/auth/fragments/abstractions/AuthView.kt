@@ -1,4 +1,4 @@
-package com.teachernavigator.teachernavigator.presentation.screens.main.fragments.abstractions
+package com.teachernavigator.teachernavigator.presentation.screens.auth.fragments.abstractions
 
 import com.teachernavigator.teachernavigator.presentation.screens.base.ChildView
 

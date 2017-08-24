@@ -27,8 +27,6 @@ class MainActivity : AppCompatActivity(), MainView {
     lateinit var mToolbar: Toolbar
     @BindView(R.id.ac_main_drawer)
     lateinit var mDrawer: DrawerLayout
-    @BindView(R.id.ac_main_fl_body)
-    lateinit var mFlBody: FrameLayout
     @BindView(R.id.ac_main_rv_menu)
     lateinit var mRvMenu: RecyclerView
     @BindView(R.id.ac_main_progress)

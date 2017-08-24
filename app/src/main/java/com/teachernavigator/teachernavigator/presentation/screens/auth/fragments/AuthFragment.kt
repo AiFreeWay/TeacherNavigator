@@ -1,4 +1,4 @@
-package com.teachernavigator.teachernavigator.presentation.screens.main.fragments
+package com.teachernavigator.teachernavigator.presentation.screens.auth.fragments
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,18 +10,19 @@ import android.widget.ImageView
 import android.widget.TextView
 import butterknife.BindView
 import butterknife.ButterKnife
+import com.example.root.androidtest.application.utils.Logger
 import com.teachernavigator.teachernavigator.R
-import com.teachernavigator.teachernavigator.presentation.screens.base.FragmentChildMainView
-import com.teachernavigator.teachernavigator.presentation.screens.main.fragments.abstractions.AuthView
-import com.teachernavigator.teachernavigator.presentation.screens.main.presenters.FmtAuthPresenter
-import com.teachernavigator.teachernavigator.presentation.screens.main.presenters.abstractions.IAuthPresenter
+import com.teachernavigator.teachernavigator.presentation.screens.base.BaseFragment
+import com.teachernavigator.teachernavigator.presentation.screens.auth.fragments.abstractions.AuthView
+import com.teachernavigator.teachernavigator.presentation.screens.auth.presenters.FmtAuthPresenter
+import com.teachernavigator.teachernavigator.presentation.screens.auth.presenters.abstractions.IAuthPresenter
 
 
 /**
  * Created by root on 22.08.17.
  */
 
-class AuthFragment : FragmentChildMainView(), AuthView {
+class AuthFragment : BaseFragment(), AuthView {
 
     companion object {
         val FRAGMENT_KEY = "auth_fragment"
@@ -59,18 +60,17 @@ class AuthFragment : FragmentChildMainView(), AuthView {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         mPresenter.attachView(this)
-
-        mIvVk.setOnClickListener { mPresenter::singInViaVkontakte }
-        mIvFb.setOnClickListener { mPresenter::singInViaFacebook }
-        mIvTw.setOnClickListener { mPresenter::singInViaTwitter }
-        mIvGp.setOnClickListener { mPresenter::singInViaGooglePlus }
-        mTvRestorePassword.setOnClickListener { mPresenter::restorePassword }
+        mIvVk.setOnClickListener { mPresenter.singInViaVkontakte() }
+        mIvFb.setOnClickListener { mPresenter.singInViaFacebook() }
+        mIvTw.setOnClickListener { mPresenter.singInViaTwitter() }
+        mIvGp.setOnClickListener { mPresenter.singInViaGooglePlus() }
+        mTvRestorePassword.setOnClickListener { mPresenter.restorePassword() }
         mBtnSingIn.setOnClickListener {
             val login = mEtLogin.text.toString()
             val pasword = mBtnSingUp.text.toString()
             mPresenter.singIn(login, pasword)
         }
-        mBtnSingUp.setOnClickListener { mPresenter::openSingUpScreen }
+        mBtnSingUp.setOnClickListener { mPresenter.openSingUpScreen() }
     }
 
     override fun onDestroyView() {

@@ -47,7 +47,7 @@ class FmtTapeListPresenter : BasePresenter<TapeListView>(), ITapeListPresenter {
 
     override fun doOnError(error: Throwable) {
         super.doOnError(error)
-        mView!!.getMainView().stopProgress()
+        mView!!.getParentView().stopProgress()
     }
 
     override fun setTapeType(tapeType: Int) {
@@ -56,17 +56,17 @@ class FmtTapeListPresenter : BasePresenter<TapeListView>(), ITapeListPresenter {
 
     private fun getPosts() {
         TapeStrategy.getPostByType(mTapeType, mTapeInteractor)
-                .doOnSubscribe { mView!!.getMainView().startProgress() }
+                .doOnSubscribe { mView!!.getParentView().startProgress() }
                 .subscribe(this::doOnGetPosts, this::doOnError)
     }
 
     private fun doOnGetPosts(posts: List<Post>) {
-        mView!!.getMainView().stopProgress()
+        mView!!.getParentView().stopProgress()
         mView!!.loadPosts(posts)
     }
 
     private fun inject() {
-        mView!!.getMainView()
+        mView!!.getParentView()
                 .getParentScreenComponent()
                 .inject(this)
     }

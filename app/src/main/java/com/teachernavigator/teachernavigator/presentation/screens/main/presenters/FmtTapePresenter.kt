@@ -21,7 +21,7 @@ class FmtTapePresenter : BasePresenter<TapeView>(), ITapePresenter {
 
     @OnLifecycleEvent(Lifecycle.Event.ON_START)
     private fun onStart() {
-        mView!!.getMainView().setToolbarTitle(R.string.tape)
+        mView!!.getParentView().setToolbarTitle(R.string.tape)
     }
 
     @OnLifecycleEvent(Lifecycle.Event.ON_STOP)
@@ -35,11 +35,11 @@ class FmtTapePresenter : BasePresenter<TapeView>(), ITapePresenter {
     }
 
     override fun loadFragments() {
-        mView!!.loadOrdersFragments(TapeFragmentsFactory.createItems(mView!!.getMainView().getActivity()))
+        mView!!.loadOrdersFragments(TapeFragmentsFactory.createItems(mView!!.getParentView().getActivity()))
     }
 
     private fun inject() {
-        mView!!.getMainView()
+        mView!!.getParentView()
                 .getParentScreenComponent()
                 .inject(this)
     }

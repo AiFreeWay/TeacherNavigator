@@ -32,8 +32,8 @@ class MenuAdapterStrategy(private val mMenuController: MenuController) : Adapter
         }
 
         if (type != MenuItemsFactory.MenuItemTypes.DEVIDER.id) {
-            holder.subscribeOnEmitFromPresenter(mMenuController.getSubscriberFromPresenter())
-            holder.observOnEmitInPresenter(mMenuController.getEmitterInPresenter())
+            holder.setInputChannel(mMenuController.getHolderChannel().getInputChannel())
+            holder.setOutputChannel(mMenuController.getHolderChannel().getOutputChannel())
         }
         return holder
     }

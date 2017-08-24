@@ -11,16 +11,15 @@ import butterknife.ButterKnife
 import com.teachernavigator.teachernavigator.R
 import com.teachernavigator.teachernavigator.presentation.adapters.ViewpagerAdapter
 import com.teachernavigator.teachernavigator.presentation.models.ViewPagerItemContainer
-import com.teachernavigator.teachernavigator.presentation.screens.base.FragmentChildMainView
+import com.teachernavigator.teachernavigator.presentation.screens.base.BaseFragment
 import com.teachernavigator.teachernavigator.presentation.screens.main.fragments.abstractions.TapeView
 import com.teachernavigator.teachernavigator.presentation.screens.main.presenters.FmtTapePresenter
 import com.teachernavigator.teachernavigator.presentation.screens.main.presenters.abstractions.ITapePresenter
-import java.util.*
 
 /**
  * Created by root on 14.08.17.
  */
-class TapeFragment : FragmentChildMainView(), TapeView {
+class TapeFragment : BaseFragment(), TapeView {
 
     companion object {
         val FRAGMENT_KEY = "tape_fragment"

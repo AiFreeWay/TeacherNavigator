@@ -1,7 +1,7 @@
-package com.teachernavigator.teachernavigator.presentation.screens.main.presenters.abstractions
+package com.teachernavigator.teachernavigator.presentation.screens.auth.presenters.abstractions
 
 import com.teachernavigator.teachernavigator.presentation.screens.base.ViewAttacher
-import com.teachernavigator.teachernavigator.presentation.screens.main.fragments.abstractions.AuthView
+import com.teachernavigator.teachernavigator.presentation.screens.auth.fragments.abstractions.AuthView
 
 /**
  * Created by root on 22.08.17.

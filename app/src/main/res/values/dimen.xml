@@ -2,6 +2,7 @@
 <resources>
     <dimen name="titleTextSize">20dp</dimen>
     <dimen name="normalTextSize">16dp</dimen>
+    <dimen name="smallTextSize">14dp</dimen>
     <dimen name="externalPadding">16dp</dimen>
     <dimen name="internalPadding">8dp</dimen>
     <dimen name="drawerWidth">280dp</dimen>

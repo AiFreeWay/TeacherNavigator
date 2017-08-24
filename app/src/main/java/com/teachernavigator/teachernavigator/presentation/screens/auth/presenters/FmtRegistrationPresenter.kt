@@ -1,16 +1,17 @@
-package com.teachernavigator.teachernavigator.presentation.screens.main.presenters
+package com.teachernavigator.teachernavigator.presentation.screens.auth.presenters
 
 import android.arch.lifecycle.Lifecycle
 import android.arch.lifecycle.OnLifecycleEvent
 import com.example.root.androidtest.application.utils.Logger
 import com.teachernavigator.teachernavigator.BuildConfig
 import com.teachernavigator.teachernavigator.R
+import com.teachernavigator.teachernavigator.presentation.screens.auth.activities.abstractions.AuthParentView
+import com.teachernavigator.teachernavigator.presentation.screens.auth.fragments.abstractions.RegistrationView
+import com.teachernavigator.teachernavigator.presentation.screens.auth.presenters.abstractions.IRegistrationPresenter
 import com.teachernavigator.teachernavigator.presentation.screens.base.BasePresenter
-import com.teachernavigator.teachernavigator.presentation.screens.main.fragments.abstractions.RegistrationView
-import com.teachernavigator.teachernavigator.presentation.screens.main.presenters.abstractions.IRegistrationPresenter
 
 /**
- * Created by root on 22.08.17.
+ * Created by root on 24.08.17.
  */
 class FmtRegistrationPresenter : BasePresenter<RegistrationView>(), IRegistrationPresenter {
 
@@ -20,7 +21,8 @@ class FmtRegistrationPresenter : BasePresenter<RegistrationView>(), IRegistratio
 
     @OnLifecycleEvent(Lifecycle.Event.ON_START)
     private fun onStart() {
-        mView!!.getMainView().setToolbarTitle(R.string.registration)
+        mView!!.getParentView().setToolbarTitle(R.string.auth)
+        (mView!!.getParentView() as AuthParentView).enableHomeToolbarButton()
     }
 
     @OnLifecycleEvent(Lifecycle.Event.ON_STOP)
@@ -35,11 +37,11 @@ class FmtRegistrationPresenter : BasePresenter<RegistrationView>(), IRegistratio
 
     override fun doOnError(error: Throwable) {
         super.doOnError(error)
-        mView!!.getMainView().stopProgress()
+        mView!!.getParentView().stopProgress()
     }
 
     private fun inject() {
-        mView!!.getMainView()
+        mView!!.getParentView()
                 .getParentScreenComponent()
                 .inject(this)
     }

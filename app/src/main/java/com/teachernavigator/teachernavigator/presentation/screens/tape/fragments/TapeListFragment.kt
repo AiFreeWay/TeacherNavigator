@@ -12,7 +12,7 @@ import com.teachernavigator.teachernavigator.R
 import com.teachernavigator.teachernavigator.domain.models.Post
 import com.teachernavigator.teachernavigator.presentation.adapters.MultyRvAdapter
 import com.teachernavigator.teachernavigator.presentation.adapters.holders.PostHolder
-import com.teachernavigator.teachernavigator.presentation.screens.base.FragmentChildMainView
+import com.teachernavigator.teachernavigator.presentation.screens.base.BaseFragment
 import com.teachernavigator.teachernavigator.presentation.screens.tape.fragments.abstractions.TapeListView
 import com.teachernavigator.teachernavigator.presentation.screens.tape.presenters.FmtTapeListPresenter
 import com.teachernavigator.teachernavigator.presentation.screens.tape.presenters.abstractions.ITapeListPresenter
@@ -20,7 +20,7 @@ import com.teachernavigator.teachernavigator.presentation.screens.tape.presenter
 /**
  * Created by root on 22.08.17.
  */
-class TapeListFragment : FragmentChildMainView(), TapeListView {
+class TapeListFragment : BaseFragment(), TapeListView {
 
     companion object {
         val TAPE_TYPE_KEY = "tape_type_key"

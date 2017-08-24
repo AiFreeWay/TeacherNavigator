@@ -12,4 +12,5 @@ interface IAuthParentPresenter : ViewAttacher<AuthParentView> {
 
     fun openStartFragment(savedState: Bundle?)
     fun getParentScreenComponent(): ParentScreenComponent
+    fun navigateBack()
 }

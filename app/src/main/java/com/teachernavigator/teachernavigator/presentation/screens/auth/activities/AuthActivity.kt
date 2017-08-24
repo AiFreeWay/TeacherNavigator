@@ -4,6 +4,7 @@ import android.arch.lifecycle.LifecycleRegistry
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
+import android.view.MenuItem
 import android.view.View
 import android.widget.ProgressBar
 import butterknife.BindView
@@ -39,6 +40,14 @@ class AuthActivity : AppCompatActivity(), AuthParentView {
     override fun onDestroy() {
         super.onDestroy()
         mPresenter.detachView()
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.getItemId() == android.R.id.home) {
+            mPresenter.navigateBack()
+            return true
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     override fun getActivity(): AppCompatActivity = this

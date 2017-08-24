@@ -51,6 +51,9 @@ class AcAuthParentPresenter : BasePresenter<AuthParentView>(), IAuthParentPresen
 
     override fun getParentScreenComponent(): ParentScreenComponent = mParentScreenComponent
 
+    override fun navigateBack() {
+        mRouter.exit()
+    }
 
     private fun inject() {
         mParentScreenComponent = DaggerParentScreenComponent.builder()

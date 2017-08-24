@@ -60,37 +60,27 @@
             android:src="@drawable/ic_social_gp" />
     </LinearLayout>
 
-    <android.support.design.widget.TextInputLayout
+    <android.support.design.widget.TextInputEditText
+        android:id="@+id/fmt_auth_et_login"
+        style="@style/Text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:hint="@string/login_hint"
         android:layout_marginBottom="@dimen/internalPadding"
         android:layout_marginEnd="@dimen/externalPadding"
         android:layout_marginStart="@dimen/externalPadding"
-        android:layout_marginTop="@dimen/externalPadding">
+        android:layout_marginTop="@dimen/externalPadding"/>
 
-        <android.support.design.widget.TextInputEditText
-            android:id="@+id/fmt_auth_et_login"
-            style="@style/Text"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/login_hint" />
-    </android.support.design.widget.TextInputLayout>
-
-    <android.support.design.widget.TextInputLayout
+    <android.support.design.widget.TextInputEditText
+        android:id="@+id/fmt_auth_et_password"
+        style="@style/Text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:hint="@string/password"
         android:layout_marginBottom="@dimen/internalPadding"
         android:layout_marginEnd="@dimen/externalPadding"
         android:layout_marginStart="@dimen/externalPadding"
-        android:layout_marginTop="@dimen/internalPadding">
-
-        <android.support.design.widget.TextInputEditText
-            android:id="@+id/fmt_auth_et_password"
-            style="@style/Text"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/password" />
-    </android.support.design.widget.TextInputLayout>
+        android:layout_marginTop="@dimen/internalPadding"/>
 
     <TextView
         android:id="@+id/fmt_auth_tv_restore_password"

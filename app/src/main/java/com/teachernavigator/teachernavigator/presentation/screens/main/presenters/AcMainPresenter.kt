@@ -3,7 +3,7 @@ package com.teachernavigator.teachernavigator.presentation.screens.main.presente
 import android.arch.lifecycle.Lifecycle
 import android.arch.lifecycle.OnLifecycleEvent
 import android.os.Bundle
-import android.support.v7.widget.RecyclerView
+import android.view.ViewGroup
 import com.example.root.androidtest.application.utils.Logger
 import com.teachernavigator.teachernavigator.BuildConfig
 import com.teachernavigator.teachernavigator.application.di.components.DaggerParentScreenComponent
@@ -16,7 +16,6 @@ import com.teachernavigator.teachernavigator.presentation.models.MenuData
 import com.teachernavigator.teachernavigator.presentation.screens.auth.activities.AuthActivity
 import com.teachernavigator.teachernavigator.presentation.screens.base.BasePresenter
 import com.teachernavigator.teachernavigator.presentation.screens.main.activities.abstractions.MainView
-import com.teachernavigator.teachernavigator.presentation.screens.auth.fragments.AuthFragment
 import com.teachernavigator.teachernavigator.presentation.screens.main.fragments.TapeFragment
 import com.teachernavigator.teachernavigator.presentation.screens.main.presenters.abstractions.IMainPresenter
 import com.teachernavigator.teachernavigator.presentation.utils.ActivityRouter
@@ -50,9 +49,9 @@ class AcMainPresenter : BasePresenter<MainView>(), IMainPresenter {
         inject()
     }
 
-    override fun loadMenuItemsToRecycleView(recylerView: RecyclerView) {
+    override fun loadMenuItemsToViewGroup(viewGroup: ViewGroup) {
         addDissposable(mAuthInteractor.isAuth()
-                .subscribe({ doOnGetDataForMenu(it, recylerView)}, this::doOnError))
+                .subscribe({ doOnGetDataForMenu(it, viewGroup)}, this::doOnError))
     }
 
     override fun doOnError(error: Throwable) {
@@ -67,12 +66,12 @@ class AcMainPresenter : BasePresenter<MainView>(), IMainPresenter {
 
     override fun getParentScreenComponent(): ParentScreenComponent = mParentScreenComponent
 
-    private fun doOnGetDataForMenu(isAuthorized: Boolean, recylerView: RecyclerView) {
+    private fun doOnGetDataForMenu(isAuthorized: Boolean, viewGroup: ViewGroup) {
         if (isAuthorized)
             mMenuController = MenuController.createControllerForAuthorizationUser(mView!!, mView!!.getActivity())
         else
             mMenuController = MenuController.createControllerForNotAuthorizationUser(mView!!, mView!!.getActivity())
-        mMenuController!!.loadToRecycleView(recylerView)
+        mMenuController!!.loadMenuItemsToViewGroup(viewGroup)
 
         mMenuController!!.getPresenterChannel().getInputChannel()
                 .subscribe({ onMenuItemClick(it) }, { Logger.logError(it) })

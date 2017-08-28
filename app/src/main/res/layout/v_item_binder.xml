@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:orientation="vertical"
     android:background="@android:color/white">
 
     <TextView
-        android:id="@+id/v_bottom_holder_tv_title"
+        android:id="@+id/v_item_tv_title"
         style="@style/Text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
         android:paddingBottom="@dimen/internalPadding"
         android:paddingLeft="@dimen/externalPadding"
         android:paddingRight="@dimen/externalPadding"
         android:paddingTop="@dimen/internalPadding" />
-</FrameLayout>
+</LinearLayout>

@@ -5,12 +5,10 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v4.widget.DrawerLayout
 import android.support.v7.app.ActionBarDrawerToggle
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.Toolbar
 import android.view.Gravity
 import android.view.View
-import android.widget.FrameLayout
+import android.widget.LinearLayout
 import android.widget.ProgressBar
 import butterknife.BindView
 import butterknife.ButterKnife
@@ -27,8 +25,8 @@ class MainActivity : AppCompatActivity(), MainView {
     lateinit var mToolbar: Toolbar
     @BindView(R.id.ac_main_drawer)
     lateinit var mDrawer: DrawerLayout
-    @BindView(R.id.ac_main_rv_menu)
-    lateinit var mRvMenu: RecyclerView
+    @BindView(R.id.ac_main_ll_menu)
+    lateinit var mLlMenu: LinearLayout
     @BindView(R.id.ac_main_progress)
     lateinit var mProgressBar: ProgressBar
 
@@ -40,9 +38,8 @@ class MainActivity : AppCompatActivity(), MainView {
         setContentView(R.layout.ac_main)
         ButterKnife.bind(this)
         initToolbar()
-        mRvMenu.layoutManager = LinearLayoutManager(this)
         mPresenter.attachView(this)
-        mPresenter.loadMenuItemsToRecycleView(mRvMenu)
+        mPresenter.loadMenuItemsToViewGroup(mLlMenu)
         mPresenter.openStartFragment(savedInstanceState)
     }
 

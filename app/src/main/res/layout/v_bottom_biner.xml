@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal">
+
+    <TextView
+        android:id="@+id/v_bottom_holder_tv_title"
+        style="@style/Text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:background="@color/colorAccent"
+        android:textColor="@android:color/white"
+        android:paddingBottom="@dimen/internalPadding"
+        android:paddingLeft="@dimen/externalPadding"
+        android:paddingRight="@dimen/externalPadding"
+        android:paddingTop="@dimen/internalPadding"
+        android:textAlignment="center" />
+</FrameLayout>

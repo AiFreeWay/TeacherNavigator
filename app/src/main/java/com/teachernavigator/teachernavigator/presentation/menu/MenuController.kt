@@ -2,24 +2,24 @@ package com.teachernavigator.teachernavigator.presentation.menu
 
 import android.arch.lifecycle.*
 import android.content.Context
-import android.support.v7.widget.RecyclerView
+import android.view.ViewGroup
 import com.example.root.androidtest.application.utils.Logger
 import com.teachernavigator.teachernavigator.BuildConfig
-import com.teachernavigator.teachernavigator.presentation.adapters.AdapterStrategy
-import com.teachernavigator.teachernavigator.presentation.adapters.StrategyMultiRvAdapter
 import com.teachernavigator.teachernavigator.presentation.factories.MenuItemsFactory
+import com.teachernavigator.teachernavigator.presentation.menu.abstractions.BindStrategy
 import com.teachernavigator.teachernavigator.presentation.menu.abstractions.IHolderChannel
 import com.teachernavigator.teachernavigator.presentation.menu.abstractions.IPresenterChannel
 import com.teachernavigator.teachernavigator.presentation.models.MenuData
 import com.teachernavigator.teachernavigator.presentation.models.MenuItem
 import io.reactivex.subjects.PublishSubject
 
+
 /**
  * Created by root on 15.08.17.
  */
 class MenuController private constructor(lifeCycle: LifecycleRegistry, private val mMenuItems: ArrayList<MenuItem>) : LifecycleObserver {
 
-    private lateinit var  mAdapterStrategy: AdapterStrategy<MenuItem>
+    private lateinit var  mBindStrategy: BindStrategy
     private val mHolderChannel: HolderChannel = HolderChannel()
     private val mPresenterChannel: PresenterChannel = PresenterChannel()
 
@@ -27,13 +27,13 @@ class MenuController private constructor(lifeCycle: LifecycleRegistry, private v
 
         fun createControllerForAuthorizationUser(lifeCycleOwner: LifecycleRegistryOwner, context: Context): MenuController {
             val menuController = MenuController(lifeCycleOwner.lifecycle, MenuItemsFactory.getAuthMenuItemsFor(context))
-            menuController.mAdapterStrategy = MenuAdapterStrategy(menuController)
+            menuController.mBindStrategy = MenuBindStrategy(menuController)
             return menuController
         }
 
         fun createControllerForNotAuthorizationUser(lifeCycleOwner: LifecycleRegistryOwner, context: Context): MenuController {
             val menuController = MenuController(lifeCycleOwner.lifecycle, MenuItemsFactory.getNotAuthMenuItemsFor(context))
-            menuController.mAdapterStrategy = MenuAdapterStrategy(menuController)
+            menuController.mBindStrategy = MenuBindStrategy(menuController)
             return menuController
         }
     }
@@ -48,13 +48,20 @@ class MenuController private constructor(lifeCycle: LifecycleRegistry, private v
         mPresenterChannel.setSubjects(inHolderFromPresenter, inPresenterFromHolder)
     }
 
-    fun loadToRecycleView(recylerView: RecyclerView) {
-        val adapter = StrategyMultiRvAdapter<MenuItem>(mAdapterStrategy)
-        recylerView.adapter = adapter
-        adapter.loadData(mMenuItems)
+    fun loadMenuItemsToViewGroup(viewGroup: ViewGroup) {
+        viewGroup.removeAllViews()
+        mMenuItems.forEach {
+            createBinder(viewGroup, it)
+        }
     }
 
     fun getHolderChannel(): IHolderChannel = mHolderChannel
 
     fun getPresenterChannel(): IPresenterChannel = mPresenterChannel
+
+    private fun createBinder(viewGroup: ViewGroup, menuItem: MenuItem) {
+        val binder = mBindStrategy.createBinder(viewGroup, menuItem.mType)
+        binder.bind(menuItem)
+        viewGroup.addView(binder.getView())
+    }
 }

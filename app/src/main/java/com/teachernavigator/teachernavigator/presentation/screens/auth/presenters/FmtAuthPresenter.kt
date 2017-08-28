@@ -7,6 +7,7 @@ import com.teachernavigator.teachernavigator.BuildConfig
 import com.teachernavigator.teachernavigator.R
 import com.teachernavigator.teachernavigator.presentation.screens.auth.activities.abstractions.AuthParentView
 import com.teachernavigator.teachernavigator.presentation.screens.auth.fragments.RegistrationFragment
+import com.teachernavigator.teachernavigator.presentation.screens.auth.fragments.RestorePasswordFragment
 import com.teachernavigator.teachernavigator.presentation.screens.base.BasePresenter
 import com.teachernavigator.teachernavigator.presentation.screens.auth.fragments.abstractions.AuthView
 import com.teachernavigator.teachernavigator.presentation.screens.auth.presenters.abstractions.IAuthPresenter
@@ -61,7 +62,9 @@ class FmtAuthPresenter : BasePresenter<AuthView>(), IAuthPresenter {
         mRouter.navigateTo(RegistrationFragment.FRAGMENT_KEY)
     }
 
-    override fun restorePassword() {}
+    override fun openRestorePasswordScreen() {
+        mRouter.navigateTo(RestorePasswordFragment.FRAGMENT_KEY)
+    }
 
     private fun inject() {
         mView!!.getParentView()

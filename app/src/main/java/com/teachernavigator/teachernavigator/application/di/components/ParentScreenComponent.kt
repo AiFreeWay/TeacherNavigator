@@ -9,6 +9,7 @@ import com.teachernavigator.teachernavigator.presentation.screens.auth.presenter
 import com.teachernavigator.teachernavigator.presentation.screens.main.presenters.AcMainPresenter
 import com.teachernavigator.teachernavigator.presentation.screens.auth.presenters.FmtAuthPresenter
 import com.teachernavigator.teachernavigator.presentation.screens.auth.presenters.FmtRegistrationPresenter
+import com.teachernavigator.teachernavigator.presentation.screens.auth.presenters.FmtRestorePasswordPresenter
 import com.teachernavigator.teachernavigator.presentation.screens.main.presenters.FmtTapePresenter
 import com.teachernavigator.teachernavigator.presentation.screens.tape.presenters.FmtTapeListPresenter
 import dagger.Component
@@ -30,4 +31,5 @@ interface ParentScreenComponent {
     fun inject(presenter: AcAuthParentPresenter)
     fun inject(presenter: FmtAuthPresenter)
     fun inject(presenter: FmtRegistrationPresenter)
+    fun inject(presenter: FmtRestorePasswordPresenter)
 }

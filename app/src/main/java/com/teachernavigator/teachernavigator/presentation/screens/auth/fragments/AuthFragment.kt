@@ -64,7 +64,7 @@ class AuthFragment : BaseFragment(), AuthView {
         mIvFb.setOnClickListener { mPresenter.singInViaFacebook() }
         mIvTw.setOnClickListener { mPresenter.singInViaTwitter() }
         mIvGp.setOnClickListener { mPresenter.singInViaGooglePlus() }
-        mTvRestorePassword.setOnClickListener { mPresenter.restorePassword() }
+        mTvRestorePassword.setOnClickListener { mPresenter.openRestorePasswordScreen() }
         mBtnSingIn.setOnClickListener {
             val login = mEtLogin.text.toString()
             val pasword = mBtnSingUp.text.toString()

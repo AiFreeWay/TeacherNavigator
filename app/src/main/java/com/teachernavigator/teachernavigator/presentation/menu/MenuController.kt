@@ -6,9 +6,12 @@ import android.view.ViewGroup
 import com.example.root.androidtest.application.utils.Logger
 import com.teachernavigator.teachernavigator.BuildConfig
 import com.teachernavigator.teachernavigator.presentation.factories.MenuItemsFactory
-import com.teachernavigator.teachernavigator.presentation.menu.abstractions.BindStrategy
-import com.teachernavigator.teachernavigator.presentation.menu.abstractions.IHolderChannel
-import com.teachernavigator.teachernavigator.presentation.menu.abstractions.IPresenterChannel
+import com.teachernavigator.teachernavigator.presentation.menu.bind_strategy.BindStrategy
+import com.teachernavigator.teachernavigator.presentation.menu.bind_strategy.MenuBindStrategy
+import com.teachernavigator.teachernavigator.presentation.menu.channels.IHolderChannel
+import com.teachernavigator.teachernavigator.presentation.menu.channels.IPresenterChannel
+import com.teachernavigator.teachernavigator.presentation.menu.channels.HolderChannel
+import com.teachernavigator.teachernavigator.presentation.menu.channels.PresenterChannel
 import com.teachernavigator.teachernavigator.presentation.models.MenuData
 import com.teachernavigator.teachernavigator.presentation.models.MenuItem
 import io.reactivex.subjects.PublishSubject

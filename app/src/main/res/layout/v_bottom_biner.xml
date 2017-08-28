@@ -12,9 +12,6 @@
         android:layout_gravity="bottom"
         android:background="@color/colorAccent"
         android:textColor="@android:color/white"
-        android:paddingBottom="@dimen/internalPadding"
-        android:paddingLeft="@dimen/externalPadding"
-        android:paddingRight="@dimen/externalPadding"
-        android:paddingTop="@dimen/internalPadding"
+        android:padding="@dimen/externalPadding"
         android:textAlignment="center" />
 </FrameLayout>

@@ -14,5 +14,5 @@ interface IAuthPresenter : ViewAttacher<AuthView> {
     fun singInViaGooglePlus()
     fun singIn(login: String, password: String)
     fun openSingUpScreen()
-    fun restorePassword()
+    fun openRestorePasswordScreen()
 }

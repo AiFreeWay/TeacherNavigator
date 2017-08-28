@@ -37,4 +37,6 @@
     <string name="or">Или</string>
     <string name="phone">Номер телефона</string>
     <string name="agreement">Согласие на обработку персональных данных</string>
+    <string name="restore_password">Получить пароль</string>
+    <string name="restore_password_title">Введите Ваш e-mail или моб. телефон указанный при регистрации</string>
 </resources>

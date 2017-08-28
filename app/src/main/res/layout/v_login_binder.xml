@@ -6,7 +6,7 @@
     android:background="@android:color/white">
 
     <TextView
-        style="@style/TitleText"
+        style="@style/Text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"

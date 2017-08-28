@@ -1,4 +1,4 @@
-package com.teachernavigator.teachernavigator.presentation.menu.abstractions
+package com.teachernavigator.teachernavigator.presentation.menu.bind_strategy
 
 import android.view.ViewGroup
 import com.teachernavigator.teachernavigator.presentation.menu.binders.BaseMenuBinder

@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.support.v4.app.Fragment
 import com.teachernavigator.teachernavigator.presentation.screens.auth.fragments.AuthFragment
 import com.teachernavigator.teachernavigator.presentation.screens.auth.fragments.RegistrationFragment
+import com.teachernavigator.teachernavigator.presentation.screens.auth.fragments.RestorePasswordFragment
 import com.teachernavigator.teachernavigator.presentation.screens.main.fragments.TapeFragment
 
 /**
@@ -21,6 +22,7 @@ class FragmentsFactory {
                 TapeFragment.FRAGMENT_KEY -> addBundle(TapeFragment(), bundle)
                 AuthFragment.FRAGMENT_KEY -> addBundle(AuthFragment(), bundle)
                 RegistrationFragment.FRAGMENT_KEY -> addBundle(RegistrationFragment(), bundle)
+                RestorePasswordFragment.FRAGMENT_KEY -> addBundle(RestorePasswordFragment(), bundle)
                 else -> throw Exception("Invalid fragment key $screenKey FragmentsFactory.createFragment(screenKey: String?)")
             }
 

@@ -1,4 +1,4 @@
-package com.teachernavigator.teachernavigator.presentation.menu.abstractions
+package com.teachernavigator.teachernavigator.presentation.menu.channels
 
 import com.teachernavigator.teachernavigator.presentation.models.MenuData
 import io.reactivex.Observable

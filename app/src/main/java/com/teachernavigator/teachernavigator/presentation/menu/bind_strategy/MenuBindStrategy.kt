@@ -1,9 +1,9 @@
-package com.teachernavigator.teachernavigator.presentation.menu
+package com.teachernavigator.teachernavigator.presentation.menu.bind_strategy
 
 import android.view.ViewGroup
 import com.teachernavigator.teachernavigator.presentation.menu.binders.*
 import com.teachernavigator.teachernavigator.presentation.factories.MenuItemsFactory
-import com.teachernavigator.teachernavigator.presentation.menu.abstractions.BindStrategy
+import com.teachernavigator.teachernavigator.presentation.menu.MenuController
 import com.teachernavigator.teachernavigator.presentation.menu.binders.BaseMenuBinder
 
 /**

@@ -13,5 +13,6 @@
         android:background="@color/colorAccent"
         android:textColor="@android:color/white"
         android:padding="@dimen/externalPadding"
-        android:textAlignment="center" />
+        android:drawableLeft="@drawable/pen"
+        android:drawablePadding="@dimen/externalPadding"/>
 </FrameLayout>

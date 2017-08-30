@@ -34,11 +34,10 @@ class PostHolder: BaseHolder<Post> {
     override fun bind(dataModel: Post) {
         itemView.setOnClickListener { mOnClick?.invoke(dataModel) }
         Picasso.with(itemView.context)
-                .load("")
+                .load("http://mock.com")
                 .placeholder(R.drawable.russian_flag)
                 .error(R.drawable.russian_flag)
                 .transform(CircleTransform())
                 .into(mIvAvatar)
-
     }
 }

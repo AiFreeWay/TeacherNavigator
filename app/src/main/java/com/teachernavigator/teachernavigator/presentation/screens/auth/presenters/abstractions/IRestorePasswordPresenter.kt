@@ -8,4 +8,5 @@ import com.teachernavigator.teachernavigator.presentation.screens.base.ViewAttac
  */
 interface IRestorePasswordPresenter : ViewAttacher<RestorePasswordView> {
 
+    fun restorePassword(login: String)
 }

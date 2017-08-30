@@ -39,4 +39,6 @@
     <string name="agreement">Согласие на обработку персональных данных</string>
     <string name="restore_password">Получить пароль</string>
     <string name="restore_password_title">Введите Ваш e-mail или моб. телефон указанный при регистрации</string>
+    <string name="more">Читать далее</string>
+    <string name="complain">Пожаловаться</string>
 </resources>

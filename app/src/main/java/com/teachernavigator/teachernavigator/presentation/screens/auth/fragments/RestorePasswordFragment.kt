@@ -4,6 +4,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.EditText
+import butterknife.BindView
 import butterknife.ButterKnife
 import com.teachernavigator.teachernavigator.R
 import com.teachernavigator.teachernavigator.presentation.screens.auth.fragments.abstractions.RestorePasswordView
@@ -20,6 +23,11 @@ class RestorePasswordFragment : BaseFragment(), RestorePasswordView {
         val FRAGMENT_KEY = "restore_password_fragment"
     }
 
+    @BindView(R.id.fmt_restore_password_et_login)
+    lateinit var mEtLogin: EditText
+    @BindView(R.id.fmt_restore_password_btn_restore)
+    lateinit var mBtnRestore: Button
+
     private val mPresenter: IRestorePasswordPresenter = FmtRestorePasswordPresenter()
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -31,6 +39,7 @@ class RestorePasswordFragment : BaseFragment(), RestorePasswordView {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         mPresenter.attachView(this)
+        mBtnRestore.setOnClickListener { mPresenter.restorePassword(mEtLogin.text.toString()) }
     }
 
     override fun onDestroyView() {
@@ -47,6 +56,7 @@ class RestorePasswordFragment : BaseFragment(), RestorePasswordView {
     }
 
     private fun setEnabledViews(enabled: Boolean) {
-
+        mEtLogin.isEnabled = enabled
+        mBtnRestore.isClickable = enabled
     }
 }

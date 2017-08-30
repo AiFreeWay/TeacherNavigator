@@ -5,7 +5,9 @@ import com.teachernavigator.teachernavigator.BuildConfig
 import com.teachernavigator.teachernavigator.data.cache.CacheController
 import com.teachernavigator.teachernavigator.data.network.NetworkController
 import com.teachernavigator.teachernavigator.data.repository.abstractions.IMainRepository
+import com.teachernavigator.teachernavigator.domain.models.Monade
 import com.teachernavigator.teachernavigator.domain.models.Post
+import com.teachernavigator.teachernavigator.domain.models.SingUpData
 import io.reactivex.Observable
 import javax.inject.Inject
 
@@ -19,6 +21,20 @@ class MainRepository @Inject constructor(private val mNetwokController: NetworkC
     }
 
     override fun isAuth(): Observable<Boolean> = Observable.just(CacheController.getData(CacheController.TOKEN_KEY, false))
+
+    override fun singInViaVkontakte(): Observable<Monade> = Observable.just(Monade("", ""))
+
+    override fun singInViaFacebook(): Observable<Monade> = Observable.just(Monade("", ""))
+
+    override fun singInViaTwitter(): Observable<Monade> = Observable.just(Monade("", ""))
+
+    override fun singInViaGooglePlus(): Observable<Monade> = Observable.just(Monade("", ""))
+
+    override fun singIn(login: String, password: String): Observable<Monade> = Observable.just(Monade("", ""))
+
+    override fun singUp(singUpData: SingUpData): Observable<Monade> = Observable.just(Monade("", ""))
+
+    override fun restorePassword(login: String): Observable<Monade> = Observable.just(Monade("", ""))
 
     override fun getBestPosts(): Observable<List<Post>> {
         val posts = ArrayList<Post>()

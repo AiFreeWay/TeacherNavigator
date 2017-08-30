@@ -64,7 +64,7 @@ dependencies {
     compile "com.squareup.okhttp3:logging-interceptor:$okhttp"
 
     //Utils
-    compile "com.github.bumptech.glide:glide:$glide"
+    compile "com.squareup.picasso:picasso:$picasso"
     compile "com.jakewharton:butterknife:$butterKnife"
     kapt "com.jakewharton:butterknife-compiler:$butterKnife"
     compile "ru.terrakok.cicerone:cicerone:$cicerone"

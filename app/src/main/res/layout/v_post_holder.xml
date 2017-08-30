@@ -1,11 +1,100 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="@dimen/externalPadding"
+    android:paddingRight="@dimen/externalPadding"
+    android:paddingTop="@dimen/externalPadding">
+
+    <ImageView
+        android:id="@+id/v_post_holder_iv_avatar"
+        android:layout_width="55dp"
+        android:layout_height="55dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true" />
 
     <TextView
+        android:id="@+id/v_post_holder_tv_author_name"
+        style="@style/TitleText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="hello"/>
-</LinearLayout>
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="@dimen/internalPadding"
+        android:layout_toEndOf="@+id/v_post_holder_iv_avatar"
+        android:layout_toRightOf="@+id/v_post_holder_iv_avatar"
+        android:text="Алексей С." />
+
+    <TextView
+        android:id="@+id/v_post_holder_tv_post_time"
+        style="@style/SmallText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/v_post_holder_tv_author_name"
+        android:layout_alignStart="@+id/v_post_holder_tv_author_name"
+        android:layout_below="@+id/v_post_holder_tv_author_name"
+        android:layout_marginTop="@dimen/internalPadding"
+        android:text="12 минут назад"
+        android:textColor="@color/grey" />
+
+    <ImageView
+        android:id="@+id/v_post_holder_iv_subscribe"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="@dimen/internalPadding"
+        android:layout_marginStart="@dimen/internalPadding"
+        android:layout_toEndOf="@+id/v_post_holder_tv_author_name"
+        android:layout_toRightOf="@+id/v_post_holder_tv_author_name"
+        android:src="@drawable/subscribe" />
+
+    <TextView
+        android:id="@+id/v_post_holder_tv_title"
+        style="@style/TitleText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/v_post_holder_iv_avatar"
+        android:layout_marginTop="@dimen/internalPadding"
+        android:fontFamily="sans-serif-medium"
+        android:text="Федеральные государственный образовательные стандарты"
+        android:textAllCaps="false" />
+
+    <TextView
+        android:id="@+id/v_post_holder_tv_text"
+        style="@style/Text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/v_post_holder_tv_title"
+        android:layout_marginTop="@dimen/externalPadding"
+        android:text="Федеральные государственные образовательные стандарты (ФГОС) представляют собой совокупность требований, обязательных при реализации основных образовательных программ начального общего, основного общего, среднего (полного) общего, начального профессионального, среднего профессионального и высшего профессионального образования образовательными учреждениями, имеющими государственную аккредитацию." />
+
+    <TextView
+        android:id="@+id/v_post_holder_tv_mode"
+        style="@style/Text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/v_post_holder_tv_text"
+        android:layout_marginTop="@dimen/externalPadding"
+        android:text="@string/more"
+        android:textColor="@color/blue" />
+
+    <android.support.v7.widget.AppCompatButton
+        android:id="@+id/fmt_registration_btn_sing_up"
+        style="@style/Button"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/normalButtonHeight"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/v_post_holder_tv_text"
+        android:layout_marginTop="@dimen/internalPadding"
+        android:text="@string/complain"
+        android:textAllCaps="false"
+        app:backgroundTint="@color/red" />
+</RelativeLayout>

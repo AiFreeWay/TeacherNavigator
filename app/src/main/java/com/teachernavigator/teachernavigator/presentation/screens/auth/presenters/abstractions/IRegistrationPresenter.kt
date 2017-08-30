@@ -6,6 +6,7 @@ import com.teachernavigator.teachernavigator.presentation.screens.base.ViewAttac
 /**
  * Created by root on 24.08.17.
  */
-interface IRegistrationPresenter : ViewAttacher<RegistrationView>{
+interface IRegistrationPresenter : ViewAttacher<RegistrationView> {
 
+    fun singUp()
 }

@@ -37,8 +37,6 @@ dependencies {
     testCompile "junit:junit:4.12"
 
     //GoogleService
-    compile "com.google.android.gms:play-services-location:$googleServices"
-    compile "com.google.android.gms:play-services-maps:$googleServices"
     compile "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlinVersion"
 
     //Arch
@@ -69,6 +67,8 @@ dependencies {
     kapt "com.jakewharton:butterknife-compiler:$butterKnife"
     compile "ru.terrakok.cicerone:cicerone:$cicerone"
     compile "com.orhanobut:hawk:$hawk"
+    compile "de.hdodenhof:circleimageview:$circleView"
+    compile "com.github.greenfrvr:hashtag-view:$hashtagView"
 
     //Leakcanary
     //debugCompile 'com.squareup.leakcanary:leakcanary-android:1.5.2'

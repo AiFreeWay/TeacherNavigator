@@ -2,18 +2,18 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:paddingLeft="@dimen/externalPadding"
-    android:paddingRight="@dimen/externalPadding"
+    android:layout_height="wrap_content"
     android:paddingTop="@dimen/externalPadding">
 
-    <ImageView
+    <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/v_post_holder_iv_avatar"
         android:layout_width="55dp"
         android:layout_height="55dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true" />
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="@dimen/externalPadding"
+        android:layout_marginStart="@dimen/externalPadding" />
 
     <TextView
         android:id="@+id/v_post_holder_tv_author_name"
@@ -22,6 +22,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_marginLeft="@dimen/internalPadding"
+        android:layout_marginStart="@dimen/internalPadding"
+        android:layout_marginTop="@dimen/internalPadding"
         android:layout_toEndOf="@+id/v_post_holder_iv_avatar"
         android:layout_toRightOf="@+id/v_post_holder_iv_avatar"
         android:text="Алексей С." />
@@ -34,7 +36,6 @@
         android:layout_alignLeft="@+id/v_post_holder_tv_author_name"
         android:layout_alignStart="@+id/v_post_holder_tv_author_name"
         android:layout_below="@+id/v_post_holder_tv_author_name"
-        android:layout_marginTop="@dimen/internalPadding"
         android:text="12 минут назад"
         android:textColor="@color/grey" />
 
@@ -43,8 +44,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:layout_marginLeft="@dimen/internalPadding"
-        android:layout_marginStart="@dimen/internalPadding"
+        android:layout_marginLeft="@dimen/externalPadding"
+        android:layout_marginRight="@dimen/externalPadding"
+        android:layout_marginStart="@dimen/externalPadding"
+        android:layout_marginTop="@dimen/internalPadding"
         android:layout_toEndOf="@+id/v_post_holder_tv_author_name"
         android:layout_toRightOf="@+id/v_post_holder_tv_author_name"
         android:src="@drawable/subscribe" />
@@ -57,6 +60,8 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/v_post_holder_iv_avatar"
+        android:layout_marginLeft="@dimen/externalPadding"
+        android:layout_marginRight="@dimen/externalPadding"
         android:layout_marginTop="@dimen/internalPadding"
         android:fontFamily="sans-serif-medium"
         android:text="Федеральные государственный образовательные стандарты"
@@ -70,6 +75,8 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/v_post_holder_tv_title"
+        android:layout_marginLeft="@dimen/externalPadding"
+        android:layout_marginRight="@dimen/externalPadding"
         android:layout_marginTop="@dimen/externalPadding"
         android:text="Федеральные государственные образовательные стандарты (ФГОС) представляют собой совокупность требований, обязательных при реализации основных образовательных программ начального общего, основного общего, среднего (полного) общего, начального профессионального, среднего профессионального и высшего профессионального образования образовательными учреждениями, имеющими государственную аккредитацию." />
 
@@ -81,20 +88,121 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/v_post_holder_tv_text"
+        android:layout_marginLeft="@dimen/externalPadding"
+        android:layout_marginStart="@dimen/externalPadding"
         android:layout_marginTop="@dimen/externalPadding"
         android:text="@string/more"
         android:textColor="@color/blue" />
 
     <android.support.v7.widget.AppCompatButton
-        android:id="@+id/fmt_registration_btn_sing_up"
+        android:id="@+id/fmt_post_holder_btn_sing_up"
         style="@style/Button"
         android:layout_width="wrap_content"
         android:layout_height="@dimen/normalButtonHeight"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_below="@+id/v_post_holder_tv_text"
+        android:layout_marginEnd="@dimen/externalPadding"
+        android:layout_marginRight="@dimen/externalPadding"
         android:layout_marginTop="@dimen/internalPadding"
         android:text="@string/complain"
         android:textAllCaps="false"
         app:backgroundTint="@color/red" />
+
+    <com.greenfrvr.hashtagview.HashtagView
+        android:id="@+id/fmt_post_holder_hv_hasttags"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/fmt_post_holder_btn_sing_up"
+        android:layout_marginLeft="@dimen/externalPadding"
+        android:layout_marginRight="@dimen/externalPadding"
+        android:paddingTop="@dimen/externalPadding"
+        app:rowGravity="left"
+        app:tagTextColor="@color/colorAccent"
+        app:tagTextSize="@dimen/normalTextSize" />
+
+    <View
+        android:id="@+id/fmt_post_holder_v_devider"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/fmt_post_holder_hv_hasttags"
+        android:layout_marginLeft="@dimen/externalPadding"
+        android:layout_marginRight="@dimen/externalPadding"
+        android:layout_marginTop="@dimen/internalPadding"
+        android:background="@color/colorAccent" />
+
+    <TextView
+        android:id="@+id/fmt_post_holder_tv_minus"
+        style="@style/Text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/fmt_post_holder_v_devider"
+        android:layout_marginLeft="@dimen/externalPadding"
+        android:layout_marginStart="@dimen/externalPadding"
+        android:layout_marginTop="10dp"
+        android:text="@string/minus" />
+
+    <TextView
+        android:id="@+id/fmt_post_holder_tv_likes"
+        style="@style/Text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/fmt_post_holder_tv_minus"
+        android:layout_alignBottom="@+id/fmt_post_holder_tv_minus"
+        android:layout_marginLeft="@dimen/internalPadding"
+        android:layout_marginRight="@dimen/internalPadding"
+        android:layout_toEndOf="@+id/fmt_post_holder_tv_minus"
+        android:layout_toRightOf="@+id/fmt_post_holder_tv_minus"
+        android:text="@string/default_likes_count" />
+
+    <TextView
+        android:id="@+id/fmt_post_holder_tv_plus"
+        style="@style/Text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/fmt_post_holder_tv_likes"
+        android:layout_alignBottom="@+id/fmt_post_holder_tv_likes"
+        android:layout_toEndOf="@+id/fmt_post_holder_tv_likes"
+        android:layout_toRightOf="@+id/fmt_post_holder_tv_likes"
+        android:text="@string/plus" />
+
+    <TextView
+        android:id="@+id/fmt_post_holder_tv_comments"
+        style="@style/Text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/fmt_post_holder_v_devider"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/internalPadding"
+        android:drawableEnd="@drawable/ic_comments"
+        android:drawablePadding="@dimen/miniPadding"
+        android:drawableRight="@drawable/ic_comments" />
+
+    <ImageView
+        android:id="@+id/fmt_post_holder_iv_save"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/fmt_post_holder_v_devider"
+        android:layout_marginEnd="@dimen/externalPadding"
+        android:layout_marginRight="@dimen/externalPadding"
+        android:layout_marginTop="12dp"
+        android:src="@drawable/ic_save" />
+
+    <View
+        android:id="@+id/fmt_post_holder_v_devider2"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/fmt_post_holder_tv_comments"
+        android:layout_marginTop="@dimen/internalPadding"
+        android:background="@color/colorAccent" />
 </RelativeLayout>

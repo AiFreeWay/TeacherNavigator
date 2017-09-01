@@ -19,8 +19,6 @@ class MenuBindStrategy(private val mMenuController: MenuController) : BindStrate
             MenuItemsFactory.MenuItemTypes.DEVIDER.id -> DeviderBinder(parent)
             MenuItemsFactory.MenuItemTypes.TAPE.id -> ItemBinder(parent)
             MenuItemsFactory.MenuItemTypes.SETTINGS.id -> ItemBinder(parent)
-            MenuItemsFactory.MenuItemTypes.TAGS.id -> ItemBinder(parent)
-            MenuItemsFactory.MenuItemTypes.ABOUT.id -> ItemBinder(parent)
             MenuItemsFactory.MenuItemTypes.MY_PUBLICATION.id -> ItemBinder(parent)
             MenuItemsFactory.MenuItemTypes.MY_COMMENTS.id -> ItemBinder(parent)
             MenuItemsFactory.MenuItemTypes.SAVED.id -> ItemBinder(parent)

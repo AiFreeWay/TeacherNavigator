@@ -6,8 +6,8 @@
     <dimen name="externalPadding">16dp</dimen>
     <dimen name="internalPadding">8dp</dimen>
     <dimen name="miniPadding">4dp</dimen>
-    <dimen name="drawerWidth">280dp</dimen>
-    <dimen name="drawerWidthInternal">275dp</dimen>
+    <dimen name="drawerWidth">300dp</dimen>
+    <dimen name="drawerWidthInternal">300dp</dimen>
     <dimen name="miniButtonHeight">40dp</dimen>
     <dimen name="normalButtonHeight">48dp</dimen>
 </resources>

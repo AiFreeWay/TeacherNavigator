@@ -18,9 +18,7 @@ class MenuItemsFactory {
             items.add(MenuItem(MenuItemTypes.TAPE.id, context.getString(R.string.information_tape)))
             items.add(MenuItem(MenuItemTypes.DEVIDER.id))
             items.add(MenuItem(MenuItemTypes.SETTINGS.id, context.getString(R.string.Settings)))
-            items.add(MenuItem(MenuItemTypes.TAGS.id, context.getString(R.string.tags)))
-            items.add(MenuItem(MenuItemTypes.ABOUT.id, context.getString(R.string.about)))
-            items.add(MenuItem(MenuItemTypes.ADD_PUBLICATION.id, context.getString(R.string.add_publication)))
+            items.add(MenuItem(MenuItemTypes.ADD_PUBLICATION.id))
             return items
         }
 
@@ -39,9 +37,10 @@ class MenuItemsFactory {
             items.add(MenuItem(MenuItemTypes.DEVIDER.id))
 
             items.add(MenuItem(MenuItemTypes.SETTINGS.id, context.getString(R.string.Settings)))
-            items.add(MenuItem(MenuItemTypes.TAGS.id, context.getString(R.string.tags)))
-            items.add(MenuItem(MenuItemTypes.ABOUT.id, context.getString(R.string.about)))
-            items.add(MenuItem(MenuItemTypes.ADD_PUBLICATION.id, context.getString(R.string.add_publication)))
+            items.add(MenuItem(MenuItemTypes.SETTINGS.id, context.getString(R.string.Settings)))
+            items.add(MenuItem(MenuItemTypes.SETTINGS.id, context.getString(R.string.Settings)))
+            items.add(MenuItem(MenuItemTypes.SETTINGS.id, context.getString(R.string.Settings)))
+            items.add(MenuItem(MenuItemTypes.ADD_PUBLICATION.id))
             return items
         }
     }
@@ -51,8 +50,6 @@ class MenuItemsFactory {
 
         TAPE(1),
         SETTINGS(2),
-        TAGS(3),
-        ABOUT(4),
         ADD_PUBLICATION(5),
 
         PROFILE_HEADER(6),

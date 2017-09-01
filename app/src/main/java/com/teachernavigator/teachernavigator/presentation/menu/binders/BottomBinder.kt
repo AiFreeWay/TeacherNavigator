@@ -13,15 +13,11 @@ import com.teachernavigator.teachernavigator.presentation.models.MenuItem
  */
 class BottomBinder(viewGroup: ViewGroup) : BaseMenuBinder(viewInflater(viewGroup, R.layout.v_bottom_biner)) {
 
-    @BindView(R.id.v_bottom_holder_tv_title)
-    lateinit var mTvTitle: TextView
-
     init {
         ButterKnife.bind(this, mView)
     }
 
     override fun bind(menuItem: MenuItem) {
-        mTvTitle.setText(menuItem.mTitle)
         mView.setOnClickListener {
             val action = MenuData<Any>(menuItem.mType, null)
             mOutputChannel?.onNext(action)

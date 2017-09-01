@@ -1,18 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center_horizontal">
+    android:paddingBottom="32dp">
 
     <TextView
-        android:id="@+id/v_bottom_holder_tv_title"
+        android:id="@+id/v_bottom_holder_tv_about"
         style="@style/Text"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        android:background="@color/colorAccent"
-        android:textColor="@android:color/white"
-        android:padding="@dimen/externalPadding"
-        android:drawableLeft="@drawable/pen"
-        android:drawablePadding="@dimen/externalPadding"/>
-</FrameLayout>
+        android:layout_width="wrap_content"
+        android:layout_height="80dp"
+        android:layout_alignLeft="@+id/v_bottom_holder_btn_add_publication"
+        android:layout_alignParentBottom="true"
+        android:layout_alignStart="@+id/v_bottom_holder_btn_add_publication"
+        android:layout_marginLeft="@dimen/externalPadding"
+        android:layout_marginStart="@dimen/externalPadding"
+        android:text="@string/about"
+        android:textColor="@color/colorAccent" />
+
+    <TextView
+        android:id="@+id/v_bottom_holder_tv_tags"
+        style="@style/Text"
+        android:layout_width="wrap_content"
+        android:layout_height="80dp"
+        android:layout_alignEnd="@+id/v_bottom_holder_btn_add_publication"
+        android:layout_alignParentBottom="true"
+        android:layout_alignRight="@+id/v_bottom_holder_btn_add_publication"
+        android:layout_marginEnd="@dimen/externalPadding"
+        android:layout_marginRight="@dimen/externalPadding"
+        android:text="@string/tags"
+        android:textColor="@color/colorAccent" />
+
+    <android.support.v7.widget.AppCompatButton
+        android:id="@+id/v_bottom_holder_btn_add_publication"
+        style="@style/Button"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/normalButtonHeight"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:text="@string/add_publication" />
+</RelativeLayout>

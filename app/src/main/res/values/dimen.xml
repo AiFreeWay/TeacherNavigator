@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="titleTextSize">20dp</dimen>
-    <dimen name="normalTextSize">16dp</dimen>
+    <dimen name="normalTextSize">14dp</dimen>
     <dimen name="smallTextSize">14dp</dimen>
     <dimen name="externalPadding">16dp</dimen>
     <dimen name="internalPadding">8dp</dimen>
@@ -10,4 +10,5 @@
     <dimen name="drawerWidthInternal">300dp</dimen>
     <dimen name="miniButtonHeight">40dp</dimen>
     <dimen name="normalButtonHeight">48dp</dimen>
+    <dimen name="buttonAndTextWidth">250dp</dimen>
 </resources>

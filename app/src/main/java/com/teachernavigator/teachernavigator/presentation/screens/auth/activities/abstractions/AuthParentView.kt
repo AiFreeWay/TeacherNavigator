@@ -7,6 +7,6 @@ import com.teachernavigator.teachernavigator.presentation.screens.base.ParentVie
  */
 interface AuthParentView : ParentView {
 
-    fun enableHomeToolbarButton()
-    fun disableHomeToolbarButton()
+    fun showActionBar()
+    fun hightActionBar()
 }

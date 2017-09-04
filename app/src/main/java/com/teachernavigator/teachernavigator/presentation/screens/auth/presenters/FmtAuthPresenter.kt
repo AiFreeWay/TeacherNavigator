@@ -33,7 +33,7 @@ class FmtAuthPresenter : BasePresenter<AuthView>(), IAuthPresenter {
     @OnLifecycleEvent(Lifecycle.Event.ON_START)
     private fun onStart() {
         mView!!.getParentView().setToolbarTitle(R.string.auth)
-        (mView!!.getParentView() as AuthParentView).disableHomeToolbarButton()
+        (mView!!.getParentView() as AuthParentView).hightActionBar()
     }
 
     @OnLifecycleEvent(Lifecycle.Event.ON_STOP)

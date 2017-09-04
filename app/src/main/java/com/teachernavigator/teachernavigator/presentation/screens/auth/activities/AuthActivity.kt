@@ -74,17 +74,17 @@ class AuthActivity : AppCompatActivity(), AuthParentView {
 
     override fun getLifecycle(): LifecycleRegistry = mLifecycle
 
-    override fun enableHomeToolbarButton() {
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        supportActionBar?.setHomeButtonEnabled(true)
+    override fun showActionBar() {
+        mToolbar.visibility = View.VISIBLE
     }
 
-    override fun disableHomeToolbarButton() {
-        supportActionBar?.setDisplayHomeAsUpEnabled(false)
-        supportActionBar?.setHomeButtonEnabled(false)
+    override fun hightActionBar() {
+        mToolbar.visibility = View.GONE
     }
 
     private fun initToolbar() {
         setSupportActionBar(mToolbar)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setHomeButtonEnabled(true)
     }
 }

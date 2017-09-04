@@ -10,7 +10,6 @@ import android.widget.ImageView
 import android.widget.TextView
 import butterknife.BindView
 import butterknife.ButterKnife
-import com.example.root.androidtest.application.utils.Logger
 import com.teachernavigator.teachernavigator.R
 import com.teachernavigator.teachernavigator.presentation.screens.base.BaseFragment
 import com.teachernavigator.teachernavigator.presentation.screens.auth.fragments.abstractions.AuthView
@@ -46,8 +45,8 @@ class AuthFragment : BaseFragment(), AuthView {
     lateinit var mTvRestorePassword: TextView
     @BindView(R.id.fmt_auth_btn_sing_in)
     lateinit var mBtnSingIn: Button
-    @BindView(R.id.fmt_auth_btn_sing_up)
-    lateinit var mBtnSingUp: Button
+    @BindView(R.id.fmt_auth_tv_sing_up)
+    lateinit var mTvSingUp: TextView
 
     private val mPresenter: IAuthPresenter = FmtAuthPresenter()
 
@@ -67,10 +66,10 @@ class AuthFragment : BaseFragment(), AuthView {
         mTvRestorePassword.setOnClickListener { mPresenter.openRestorePasswordScreen() }
         mBtnSingIn.setOnClickListener {
             val login = mEtLogin.text.toString()
-            val pasword = mBtnSingUp.text.toString()
+            val pasword = mTvSingUp.text.toString()
             mPresenter.singIn(login, pasword)
         }
-        mBtnSingUp.setOnClickListener { mPresenter.openSingUpScreen() }
+        mTvSingUp.setOnClickListener { mPresenter.openSingUpScreen() }
     }
 
     override fun onDestroyView() {
@@ -97,6 +96,6 @@ class AuthFragment : BaseFragment(), AuthView {
 
         mTvRestorePassword.isClickable = enabled
         mBtnSingIn.isClickable = enabled
-        mBtnSingUp.isClickable = enabled
+        mTvSingUp.isClickable = enabled
     }
 }

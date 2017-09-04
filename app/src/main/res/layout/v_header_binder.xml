@@ -1,18 +1,70 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/colorAccent">
+    android:background="@android:color/white">
+
+    <ImageView
+        android:id="@+id/v_header_binder_iv_settings"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:layout_gravity="end"
+        android:layout_marginEnd="22dp"
+        android:layout_marginRight="22dp"
+        android:layout_marginTop="22dp"
+        android:src="@drawable/ic_settings" />
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/v_header_binder_iv_avatar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center"
+        android:layout_marginTop="29dp"
+        android:src="@drawable/ic_avatar" />
 
     <TextView
-        android:id="@+id/v_header_holder_tv_title"
+        android:id="@+id/v_header_binder_tv_title"
         style="@style/TitleText"
-        android:text="Header"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/v_header_binder_iv_avatar"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center"
+        android:layout_marginTop="13dp"
+        android:text="Алексей морозов" />
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        android:paddingBottom="@dimen/internalPadding"
-        android:paddingLeft="@dimen/externalPadding"
-        android:paddingRight="@dimen/externalPadding"
-        android:paddingTop="@dimen/internalPadding" />
-</FrameLayout>
+        android:orientation="horizontal"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="23dp"
+        android:gravity="center_horizontal"
+        android:layout_below="@+id/v_header_binder_tv_title"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
+
+        <TextView
+            android:id="@+id/v_header_binder_tv_rating"
+            style="@style/Text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="8dp"
+            android:layout_marginEnd="8dp"
+            android:text="aw 0 dc"/>
+
+        <TextView
+            android:id="@+id/v_header_binder_tv_subscribers"
+            style="@style/Text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_marginStart="8dp"
+            android:text="dc 0 aw"/>
+    </LinearLayout>
+</RelativeLayout>

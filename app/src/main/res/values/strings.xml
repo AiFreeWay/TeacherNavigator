@@ -21,7 +21,7 @@
     <string name="app_name">TeacherNavigator</string>
     <string name="tape">Лента</string>
     <string name="registration">Регистрация</string>
-    <string name="auth">Авторизация/Регистрация</string>
+    <string name="auth">Авторизация</string>
     <string name="login_hint">Логин (e-mail или моб. телефон)</string>
     <string name="password">Пароль</string>
     <string name="forgot_password">Забыли пароль?</string>

@@ -28,7 +28,7 @@ class FmtRestorePasswordPresenter : BasePresenter<RestorePasswordView>(), IResto
     @OnLifecycleEvent(Lifecycle.Event.ON_START)
     private fun onStart() {
         mView!!.getParentView().setToolbarTitle(R.string.auth)
-        (mView!!.getParentView() as AuthParentView).enableHomeToolbarButton()
+        (mView!!.getParentView() as AuthParentView).hightActionBar()
     }
 
     @OnLifecycleEvent(Lifecycle.Event.ON_STOP)

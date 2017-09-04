@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="32dp">
+    android:layout_marginTop="@dimen/externalPadding">
 
     <TextView
         android:id="@+id/v_bottom_holder_tv_about"
         style="@style/Text"
         android:layout_width="wrap_content"
-        android:layout_height="80dp"
+        android:layout_height="112dp"
         android:layout_alignLeft="@+id/v_bottom_holder_btn_add_publication"
         android:layout_alignParentBottom="true"
         android:layout_alignStart="@+id/v_bottom_holder_btn_add_publication"
@@ -21,7 +22,7 @@
         android:id="@+id/v_bottom_holder_tv_tags"
         style="@style/Text"
         android:layout_width="wrap_content"
-        android:layout_height="80dp"
+        android:layout_height="112dp"
         android:layout_alignEnd="@+id/v_bottom_holder_btn_add_publication"
         android:layout_alignParentBottom="true"
         android:layout_alignRight="@+id/v_bottom_holder_btn_add_publication"
@@ -30,12 +31,19 @@
         android:text="@string/tags"
         android:textColor="@color/colorAccent" />
 
-    <android.support.v7.widget.AppCompatButton
+    <FrameLayout
         android:id="@+id/v_bottom_holder_btn_add_publication"
-        style="@style/Button"
         android:layout_width="wrap_content"
-        android:layout_height="@dimen/normalButtonHeight"
+        android:layout_height="80dp"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:text="@string/add_publication" />
+        android:layout_centerHorizontal="true">
+
+        <android.support.v7.widget.AppCompatButton
+            style="@style/Button"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/normalButtonHeight"
+            android:layout_marginBottom="32dp"
+            android:text="@string/add_publication"
+            app:backgroundTint="@color/colorAccent" />
+    </FrameLayout>
 </RelativeLayout>

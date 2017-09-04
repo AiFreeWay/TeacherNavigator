@@ -28,8 +28,8 @@ class FmtRegistrationPresenter : BasePresenter<RegistrationView>(), IRegistratio
 
     @OnLifecycleEvent(Lifecycle.Event.ON_START)
     private fun onStart() {
-        mView!!.getParentView().setToolbarTitle(R.string.auth)
-        (mView!!.getParentView() as AuthParentView).enableHomeToolbarButton()
+        mView!!.getParentView().setToolbarTitle(R.string.registration)
+        (mView!!.getParentView() as AuthParentView).showActionBar()
     }
 
     @OnLifecycleEvent(Lifecycle.Event.ON_STOP)

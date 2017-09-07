@@ -1,6 +1,6 @@
 package com.teachernavigator.teachernavigator.data.repository.abstractions
 
-import com.teachernavigator.teachernavigator.domain.models.Post
+import com.teachernavigator.teachernavigator.data.models.PostNetwork
 import io.reactivex.Observable
 
 /**
@@ -8,8 +8,9 @@ import io.reactivex.Observable
  */
 interface ITapeRepository {
 
-    fun getBestPosts(): Observable<List<Post>>
-    fun getInterviewsPosts(): Observable<List<Post>>
-    fun getLastPosts(): Observable<List<Post>>
-    fun getNewsPosts(): Observable<List<Post>>
+    fun getBestPosts(): Observable<Array<PostNetwork>>
+    fun getInterviewsPosts(): Observable<Array<PostNetwork>>
+    fun getLatestPosts(): Observable<Array<PostNetwork>>
+    fun getNewsPosts(): Observable<Array<PostNetwork>>
+    fun getPostById(postId: Int): Observable<PostNetwork>
 }

@@ -1,6 +1,7 @@
 package com.teachernavigator.teachernavigator.presentation.screens.auth.fragments
 
 import android.os.Bundle
+import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -39,7 +40,10 @@ class RestorePasswordFragment : BaseFragment(), RestorePasswordView {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         mPresenter.attachView(this)
-        mBtnRestore.setOnClickListener { mPresenter.restorePassword(mEtLogin.text.toString()) }
+        mBtnRestore.setOnClickListener {
+            if (checkLoginField())
+                mPresenter.restorePassword(mEtLogin.text.toString())
+        }
     }
 
     override fun onDestroyView() {
@@ -57,6 +61,14 @@ class RestorePasswordFragment : BaseFragment(), RestorePasswordView {
 
     private fun setEnabledViews(enabled: Boolean) {
         mEtLogin.isEnabled = enabled
-        mBtnRestore.isClickable = enabled
+        mBtnRestore.isEnabled = enabled
+    }
+
+    private fun checkLoginField(): Boolean {
+        if (TextUtils.isEmpty(mEtLogin.text.toString())) {
+            showToast(getString(R.string.indicate_login))
+            return false
+        }
+        return true
     }
 }

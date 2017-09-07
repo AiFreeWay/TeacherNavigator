@@ -10,5 +10,6 @@ interface RegistrationView : ChildView {
 
     fun lockUi()
     fun unlockUi()
+    fun showAccountCreatedDilog()
     fun getSingUpData(): SingUpData
 }

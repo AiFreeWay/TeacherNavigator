@@ -3,9 +3,13 @@
     <color name="colorPrimary">#39bf65</color>
     <color name="colorPrimaryDark">#31a356</color>
     <color name="colorAccent">#39bf65</color>
-    <color name="colorDevider">#ddd</color>
+    <color name="colorDevider">#e8e8e8</color>
+    <color name="lightGrey">#f2f2f2</color>
     <color name="grey">#bbb</color>
-    <color name="textColor">#333</color>
+    <color name="darkTextColor">#282a33</color>
+    <color name="textColor">#424b54</color>
+    <color name="greyTextColor">#555760</color>
+    <color name="lightTextColor">#afafaf</color>
     <color name="red">#ff0000</color>
     <color name="blue">#0000ff</color>
     <color name="orange">#ff9f00</color>

@@ -11,23 +11,15 @@ class DateMapper {
 
     companion object {
 
-        val DATE_FORMAT: String = "dd-MM-yyyy"
-        val DATE_TIME_FORMAT: String = "dd-MM-yyyy HH:mm"
-        val TIME_FORMAT: String = "HH:mm"
+        private val DATE_TIME_FORMAT: String = "dd.MM.yyyy в HH:mm"
+        private val PARSE_DATE_TIME_FORMAT: String = "yyyy-MM-dd'T'HH:mm:ss.SSSSSSXXX"
 
-        fun mapDate(date: Long): String {
-            val dateFormat: DateFormat = SimpleDateFormat(DATE_FORMAT)
-            return dateFormat.format(Date(date*1000L))
-        }
+        private val mDateFormatter = SimpleDateFormat(DATE_TIME_FORMAT)
+        private val mDateParser = SimpleDateFormat(PARSE_DATE_TIME_FORMAT)
 
-        fun mapDateTime(date: Long): String {
-            val dateFormat: DateFormat = SimpleDateFormat(DATE_TIME_FORMAT)
-            return dateFormat.format(Date(date*1000L))
-        }
-
-        fun mapTime(date: Long): String {
-            val dateFormat: DateFormat = SimpleDateFormat(TIME_FORMAT)
-            return dateFormat.format(Date(date*1000L))
+        fun mapDate(date: String): String {
+            val parsedDate = mDateParser.parse(date)
+            return mDateFormatter.format(parsedDate)
         }
     }
 }

@@ -1,6 +1,7 @@
 package com.teachernavigator.teachernavigator.presentation.screens.main.activities
 
 import android.arch.lifecycle.LifecycleRegistry
+import android.content.Context
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v4.widget.DrawerLayout
@@ -76,7 +77,10 @@ class MainActivity : AppCompatActivity(), MainView {
 
     override fun getParentScreenComponent(): ParentScreenComponent = mPresenter.getParentScreenComponent()
 
+    override fun getContext(): Context = this
+
     private fun initToolbar() {
+        setSupportActionBar(mToolbar)
         val drawerToggle = object : ActionBarDrawerToggle(this, mDrawer, mToolbar, 0, 0) {
             override fun onDrawerSlide(drawerView: View, slideOffset: Float) {
                 super.onDrawerSlide(drawerView, 0F)

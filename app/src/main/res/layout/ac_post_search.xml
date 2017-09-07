@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white">
+
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/ac_post_search_appBarLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/ac_post_search_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?android:attr/actionBarSize"
+            android:background="@color/colorPrimary"
+            app:layout_scrollFlags="scroll|enterAlways" />
+    </android.support.design.widget.AppBarLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/ac_post_search_appBarLayout">
+
+        <android.support.design.widget.TextInputEditText
+            android:id="@+id/fmt_post_search_et_search"
+            style="@style/EditText"
+            android:layout_width="@dimen/buttonAndTextWidth"
+            android:layout_height="@dimen/normalControlsHeight"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/externalPadding"
+            android:background="@drawable/oval_edit_text_backgroud"
+            android:hint="@string/search"
+            android:lines="1" />
+
+        <TextView
+            android:id="@+id/fmt_post_search_tv_add_tag"
+            style="@style/SmallText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/fmt_post_search_et_search"
+            android:layout_alignStart="@+id/fmt_post_search_et_search"
+            android:layout_below="@+id/fmt_post_search_et_search"
+            android:layout_marginTop="@dimen/externalPadding"
+            android:background="@drawable/hash_tag_background"
+            android:drawableLeft="@drawable/ic_plus"
+            android:drawablePadding="@dimen/internalPadding"
+            android:drawableStart="@drawable/ic_plus"
+            android:paddingBottom="@dimen/internalPadding"
+            android:paddingLeft="@dimen/externalPadding"
+            android:paddingRight="@dimen/externalPadding"
+            android:paddingTop="@dimen/internalPadding"
+            android:text="@string/add_tag" />
+
+        <TextView
+            android:id="@+id/fmt_post_search_tv_publication"
+            style="@style/TitleText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/fmt_post_search_et_search"
+            android:layout_alignStart="@+id/fmt_post_search_et_search"
+            android:layout_below="@+id/fmt_post_search_tv_add_tag"
+            android:layout_marginLeft="@dimen/externalPadding"
+            android:layout_marginStart="@dimen/externalPadding"
+            android:layout_marginTop="30dp"
+            android:text="@string/publications" />
+
+        <android.support.v7.widget.AppCompatCheckBox
+            android:id="@+id/fmt_post_search_chb_any_publication"
+            style="@style/SmallText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/fmt_post_search_et_search"
+            android:layout_alignStart="@+id/fmt_post_search_et_search"
+            android:layout_below="@+id/fmt_post_search_tv_publication"
+            android:layout_marginTop="23dp"
+            android:text="@string/any" />
+
+        <android.support.v7.widget.AppCompatCheckBox
+            android:id="@+id/fmt_post_search_chb_only_text_publication"
+            style="@style/SmallText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/fmt_post_search_et_search"
+            android:layout_alignStart="@+id/fmt_post_search_et_search"
+            android:layout_below="@+id/fmt_post_search_chb_any_publication"
+            android:layout_marginTop="@dimen/externalPadding"
+            android:text="@string/only_text" />
+
+        <android.support.v7.widget.AppCompatCheckBox
+            android:id="@+id/fmt_post_search_chb_with_document_publication"
+            style="@style/SmallText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/fmt_post_search_et_search"
+            android:layout_alignStart="@+id/fmt_post_search_et_search"
+            android:layout_below="@+id/fmt_post_search_chb_only_text_publication"
+            android:layout_marginTop="@dimen/externalPadding"
+            android:text="@string/with_document" />
+
+        <android.support.v7.widget.AppCompatButton
+            android:id="@+id/ac_post_search_btn_find"
+            style="@style/Button"
+            android:layout_width="@dimen/buttonAndTextWidth"
+            android:layout_height="@dimen/normalControlsHeight"
+            android:layout_below="@+id/fmt_post_search_chb_with_document_publication"
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="center"
+            android:layout_marginTop="30dp"
+            android:text="@string/find"
+            android:textAllCaps="false"
+            app:backgroundTint="@color/orange" />
+    </RelativeLayout>
+
+    <ProgressBar
+        android:id="@+id/ac_post_search_progress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:visibility="gone" />
+</RelativeLayout>
+

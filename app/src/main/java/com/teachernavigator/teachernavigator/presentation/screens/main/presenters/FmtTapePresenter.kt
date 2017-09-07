@@ -5,15 +5,23 @@ import android.arch.lifecycle.OnLifecycleEvent
 import com.example.root.androidtest.application.utils.Logger
 import com.teachernavigator.teachernavigator.BuildConfig
 import com.teachernavigator.teachernavigator.R
-import com.teachernavigator.teachernavigator.presentation.factories.TapeFragmentsFactory
+import com.teachernavigator.teachernavigator.domain.interactors.abstractions.IAuthInteractor
+import com.teachernavigator.teachernavigator.presentation.factories.PostsFragmentsFactory
+import com.teachernavigator.teachernavigator.presentation.models.ViewPagerItemContainer
 import com.teachernavigator.teachernavigator.presentation.screens.base.BasePresenter
 import com.teachernavigator.teachernavigator.presentation.screens.main.fragments.abstractions.TapeView
 import com.teachernavigator.teachernavigator.presentation.screens.main.presenters.abstractions.ITapePresenter
+import com.teachernavigator.teachernavigator.presentation.screens.tape.activities.PostSearchActivity
+import com.teachernavigator.teachernavigator.presentation.utils.ActivityRouter
+import javax.inject.Inject
 
 /**
  * Created by root on 17.08.17.
  */
 class FmtTapePresenter : BasePresenter<TapeView>(), ITapePresenter {
+
+    @Inject
+    lateinit var mAuthInteractor: IAuthInteractor
 
     init {
         if (BuildConfig.DEBUG) Logger.logDebug("created PRESENTER FmtTapePresenter")
@@ -34,8 +42,29 @@ class FmtTapePresenter : BasePresenter<TapeView>(), ITapePresenter {
         inject()
     }
 
+    override fun doOnError(error: Throwable) {
+        super.doOnError(error)
+        mView!!.getParentView().stopProgress()
+    }
+
     override fun loadFragments() {
-        mView!!.loadOrdersFragments(TapeFragmentsFactory.createItems(mView!!.getParentView().getActivity()))
+        addDissposable(mAuthInteractor.isAuth()
+                .doOnSubscribe { mView!!.getParentView().startProgress() }
+                .subscribe({ doOnGetIsUserAuthInfo(it)}, this::doOnError))
+    }
+
+    override fun openPostSearchScreen() {
+        ActivityRouter.openActivity(mView!!.getParentView().getActivity(), PostSearchActivity::class.java)
+    }
+
+    private fun doOnGetIsUserAuthInfo(isAuth: Boolean) {
+        mView!!.getParentView().stopProgress()
+        val fragmentsContainer: List<ViewPagerItemContainer>
+        if (isAuth)
+            fragmentsContainer = PostsFragmentsFactory.createItems(getContext())
+        else
+            fragmentsContainer = PostsFragmentsFactory.createForUnregisterUserItems(getContext())
+        mView!!.loadOrdersFragments(fragmentsContainer)
     }
 
     private fun inject() {

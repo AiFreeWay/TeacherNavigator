@@ -1,6 +1,7 @@
 package com.teachernavigator.teachernavigator.presentation.screens.auth.fragments
 
 import android.os.Bundle
+import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -65,9 +66,11 @@ class AuthFragment : BaseFragment(), AuthView {
         mIvGp.setOnClickListener { mPresenter.singInViaGooglePlus() }
         mTvRestorePassword.setOnClickListener { mPresenter.openRestorePasswordScreen() }
         mBtnSingIn.setOnClickListener {
-            val login = mEtLogin.text.toString()
-            val pasword = mTvSingUp.text.toString()
-            mPresenter.singIn(login, pasword)
+            if (checkLoginFields()) {
+                val login = mEtLogin.text.toString()
+                val pasword = mEtPassword.text.toString()
+                mPresenter.singIn(login, pasword)
+            }
         }
         mTvSingUp.setOnClickListener { mPresenter.openSingUpScreen() }
     }
@@ -86,16 +89,28 @@ class AuthFragment : BaseFragment(), AuthView {
     }
     
     private fun setEnabledViews(enabled: Boolean) {
-        mIvVk.isClickable = enabled
-        mIvFb.isClickable = enabled
-        mIvTw.isClickable = enabled
-        mIvGp.isClickable = enabled
+        mIvVk.isEnabled = enabled
+        mIvFb.isEnabled = enabled
+        mIvTw.isEnabled = enabled
+        mIvGp.isEnabled = enabled
 
         mEtLogin.isEnabled = enabled
         mEtPassword.isEnabled = enabled
 
-        mTvRestorePassword.isClickable = enabled
-        mBtnSingIn.isClickable = enabled
-        mTvSingUp.isClickable = enabled
+        mTvRestorePassword.isEnabled = enabled
+        mBtnSingIn.isEnabled = enabled
+        mTvSingUp.isEnabled = enabled
+    }
+
+    private fun checkLoginFields(): Boolean {
+        if (TextUtils.isEmpty(mEtLogin.text.toString())) {
+            showToast(getString(R.string.indicate_login))
+            return false
+        }
+        if (TextUtils.isEmpty(mEtPassword.text.toString())) {
+            showToast(getString(R.string.indicate_password))
+            return false
+        }
+        return true
     }
 }

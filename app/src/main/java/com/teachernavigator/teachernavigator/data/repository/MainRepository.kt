@@ -1,68 +1,76 @@
 package com.teachernavigator.teachernavigator.data.repository
 
+import android.content.Context
 import com.example.root.androidtest.application.utils.Logger
 import com.teachernavigator.teachernavigator.BuildConfig
+import com.teachernavigator.teachernavigator.R
 import com.teachernavigator.teachernavigator.data.cache.CacheController
+import com.teachernavigator.teachernavigator.data.models.PostNetwork
 import com.teachernavigator.teachernavigator.data.network.NetworkController
+import com.teachernavigator.teachernavigator.data.network.requests.RestorePasswordRequest
+import com.teachernavigator.teachernavigator.data.network.requests.SingInRequest
+import com.teachernavigator.teachernavigator.data.network.requests.SingUpRequest
+import com.teachernavigator.teachernavigator.data.network.responses.BaseResponse
+import com.teachernavigator.teachernavigator.data.network.responses.SingInResponse
 import com.teachernavigator.teachernavigator.data.repository.abstractions.IMainRepository
+import com.teachernavigator.teachernavigator.domain.models.AuthCredentials
 import com.teachernavigator.teachernavigator.domain.models.Monade
-import com.teachernavigator.teachernavigator.domain.models.Post
-import com.teachernavigator.teachernavigator.domain.models.SingUpData
+import com.teachernavigator.teachernavigator.domain.models.Token
 import io.reactivex.Observable
 import javax.inject.Inject
 
 /**
  * Created by root on 22.08.17.
  */
-class MainRepository @Inject constructor(private val mNetwokController: NetworkController) : IMainRepository {
+class MainRepository @Inject constructor(private val mNetwokController: NetworkController,
+                                         private val mContext: Context) : IMainRepository {
 
     init {
         if (BuildConfig.DEBUG) Logger.logDebug("created REPOSITORY MainRepository")
     }
 
-    override fun isAuth(): Observable<Boolean> = Observable.just(CacheController.getData(CacheController.TOKEN_KEY, false))
+    // ------------------------------- Auth methods --------------------------------
 
-    override fun singInViaVkontakte(): Observable<Monade> = Observable.just(Monade("", ""))
+    override fun getToken(): Observable<Token> =
+            Observable.just(CacheController.getData(CacheController.TOKEN_KEY, Token.EMPTY_TOKEN))
 
-    override fun singInViaFacebook(): Observable<Monade> = Observable.just(Monade("", ""))
-
-    override fun singInViaTwitter(): Observable<Monade> = Observable.just(Monade("", ""))
-
-    override fun singInViaGooglePlus(): Observable<Monade> = Observable.just(Monade("", ""))
-
-    override fun singIn(login: String, password: String): Observable<Monade> = Observable.just(Monade("", ""))
-
-    override fun singUp(singUpData: SingUpData): Observable<Monade> = Observable.just(Monade("", ""))
-
-    override fun restorePassword(login: String): Observable<Monade> = Observable.just(Monade("", ""))
-
-    override fun getBestPosts(): Observable<List<Post>> {
-        val posts = ArrayList<Post>()
-        posts.add(Post())
-        return Observable.just(posts)
+    override fun saveToken(token: Token) {
+        CacheController.putData(CacheController.TOKEN_KEY, token)
     }
 
-    override fun getInterviewsPosts(): Observable<List<Post>> {
-        val posts = ArrayList<Post>()
-        posts.add(Post())
-        posts.add(Post())
-        return Observable.just(posts)
+    override fun singInViaVkontakte(): Observable<Monade> = Observable.just(Monade(false))
+
+    override fun singInViaFacebook(): Observable<Monade> = Observable.just(Monade(false))
+
+    override fun singInViaTwitter(): Observable<Monade> = Observable.just(Monade(false))
+
+    override fun singInViaGooglePlus(): Observable<Monade> = Observable.just(Monade(false))
+
+    override fun singIn(request: SingInRequest): Observable<SingInResponse> =
+            mNetwokController.singIn(request)
+
+    override fun singUp(request: SingUpRequest): Observable<BaseResponse> =
+            mNetwokController.singUp(request)
+
+    override fun getAuthCredentials(): AuthCredentials {
+        val clientId = mContext.getString(R.string.client_id)
+        val clientSecret = mContext.getString(R.string.client_secret)
+        val grantType = mContext.getString(R.string.grant_type)
+        return AuthCredentials(clientId, clientSecret, grantType)
     }
 
-    override fun getLastPosts(): Observable<List<Post>> {
-        val posts = ArrayList<Post>()
-        posts.add(Post())
-        posts.add(Post())
-        posts.add(Post())
-        return Observable.just(posts)
-    }
+    override fun restorePassword(request: RestorePasswordRequest): Observable<BaseResponse> =
+            mNetwokController.restorePassword(request)
 
-    override fun getNewsPosts(): Observable<List<Post>> {
-        val posts = ArrayList<Post>()
-        posts.add(Post())
-        posts.add(Post())
-        posts.add(Post())
-        posts.add(Post())
-        return Observable.just(posts)
-    }
+    // ------------------------------- Posts methods --------------------------------
+
+    override fun getBestPosts(): Observable<Array<PostNetwork>> = mNetwokController.getBestPosts()
+
+    override fun getInterviewsPosts(): Observable<Array<PostNetwork>> = mNetwokController.getInterviewsPosts()
+
+    override fun getLatestPosts(): Observable<Array<PostNetwork>> = mNetwokController.getLatestPosts()
+
+    override fun getNewsPosts(): Observable<Array<PostNetwork>> = mNetwokController.getNewsPosts()
+
+    override fun getPostById(postId: Int): Observable<PostNetwork> = mNetwokController.getPost(postId)
 }

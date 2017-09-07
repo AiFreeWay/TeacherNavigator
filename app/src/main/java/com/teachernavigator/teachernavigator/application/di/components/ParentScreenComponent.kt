@@ -5,13 +5,18 @@ import com.teachernavigator.teachernavigator.application.di.modules.ParentScreen
 import com.teachernavigator.teachernavigator.application.di.scopes.PerParentScreen
 import com.teachernavigator.teachernavigator.data.repository.abstractions.IAuthRepository
 import com.teachernavigator.teachernavigator.data.repository.abstractions.ITapeRepository
+import com.teachernavigator.teachernavigator.domain.controllers.IPostController
+import com.teachernavigator.teachernavigator.domain.interactors.abstractions.IAuthInteractor
 import com.teachernavigator.teachernavigator.presentation.screens.auth.presenters.AcAuthParentPresenter
 import com.teachernavigator.teachernavigator.presentation.screens.main.presenters.AcMainPresenter
 import com.teachernavigator.teachernavigator.presentation.screens.auth.presenters.FmtAuthPresenter
 import com.teachernavigator.teachernavigator.presentation.screens.auth.presenters.FmtRegistrationPresenter
 import com.teachernavigator.teachernavigator.presentation.screens.auth.presenters.FmtRestorePasswordPresenter
+import com.teachernavigator.teachernavigator.presentation.screens.base.ParentView
 import com.teachernavigator.teachernavigator.presentation.screens.main.presenters.FmtTapePresenter
-import com.teachernavigator.teachernavigator.presentation.screens.tape.presenters.FmtTapeListPresenter
+import com.teachernavigator.teachernavigator.presentation.screens.tape.presenters.AcPostDetailPresenter
+import com.teachernavigator.teachernavigator.presentation.screens.tape.presenters.AcPostSearchPresenter
+import com.teachernavigator.teachernavigator.presentation.screens.tape.presenters.FmtPostsListPresenter
 import dagger.Component
 
 /**
@@ -23,10 +28,16 @@ interface ParentScreenComponent {
 
     fun provideTapeRepository() : ITapeRepository
     fun provideAuthRepository() : IAuthRepository
+    fun provideInteractor() : IAuthInteractor
+    fun providePostController() : IPostController
+    fun provideParentView() : ParentView
 
     fun inject(presenter: AcMainPresenter)
     fun inject(presenter: FmtTapePresenter)
-    fun inject(presenter: FmtTapeListPresenter)
+
+    fun inject(presenter: AcPostSearchPresenter)
+    fun inject(presenter: AcPostDetailPresenter)
+    fun inject(presenter: FmtPostsListPresenter)
 
     fun inject(presenter: AcAuthParentPresenter)
     fun inject(presenter: FmtAuthPresenter)

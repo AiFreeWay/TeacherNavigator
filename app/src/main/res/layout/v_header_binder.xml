@@ -41,22 +41,28 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="23dp"
-        android:gravity="center_horizontal"
-        android:layout_below="@+id/v_header_binder_tv_title"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true">
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/v_header_binder_tv_title"
+        android:layout_marginBottom="23dp"
+        android:layout_marginTop="16dp"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal">
 
         <TextView
             android:id="@+id/v_header_binder_tv_rating"
             style="@style/Text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginRight="8dp"
             android:layout_marginEnd="8dp"
-            android:text="aw 0 dc"/>
+            android:layout_marginRight="8dp"
+            android:drawableLeft="@drawable/ic_rating"
+            android:drawablePadding="@dimen/internalPadding"
+            android:drawableStart="@drawable/ic_rating"
+            android:fontFamily="sans-serif-medium"
+            android:gravity="center_vertical"
+            android:text="0"
+            android:textColor="@color/colorAccent" />
 
         <TextView
             android:id="@+id/v_header_binder_tv_subscribers"
@@ -65,6 +71,12 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="8dp"
             android:layout_marginStart="8dp"
-            android:text="dc 0 aw"/>
+            android:drawableLeft="@drawable/ic_subscribers"
+            android:drawablePadding="@dimen/internalPadding"
+            android:drawableStart="@drawable/ic_subscribers"
+            android:fontFamily="sans-serif-medium"
+            android:gravity="center_vertical"
+            android:text="0"
+            android:textColor="@color/colorAccent" />
     </LinearLayout>
 </RelativeLayout>

@@ -13,6 +13,8 @@ import com.teachernavigator.teachernavigator.presentation.screens.auth.fragments
 import com.teachernavigator.teachernavigator.presentation.screens.base.BasePresenter
 import com.teachernavigator.teachernavigator.presentation.screens.auth.fragments.abstractions.AuthView
 import com.teachernavigator.teachernavigator.presentation.screens.auth.presenters.abstractions.IAuthPresenter
+import com.teachernavigator.teachernavigator.presentation.screens.main.activities.MainActivity
+import com.teachernavigator.teachernavigator.presentation.utils.ActivityRouter
 import ru.terrakok.cicerone.Router
 import javax.inject.Inject
 
@@ -49,30 +51,35 @@ class FmtAuthPresenter : BasePresenter<AuthView>(), IAuthPresenter {
     override fun doOnError(error: Throwable) {
         super.doOnError(error)
         stopProgress()
+        mView!!.showToast(getContext().getString(R.string.auth_error))
     }
 
     override fun singInViaVkontakte() {
-        addDissposable(mAuthInteractor.singInViaVkontakte()
+        mView!!.showToast("Проявите терпение, Алексей, я скоро заработаю!")
+        /*addDissposable(mAuthInteractor.singInViaVkontakte()
                 .doOnSubscribe { startProgress() }
-                .subscribe(this::doOnSingIn, this::doOnError))
+                .subscribe(this::doOnSingIn, this::doOnError))*/
     }
 
     override fun singInViaFacebook() {
-        addDissposable(mAuthInteractor.singInViaFacebook()
+        mView!!.showToast("Проявите терпение, Алексей, я скоро заработаю!")
+        /*addDissposable(mAuthInteractor.singInViaFacebook()
                 .doOnSubscribe { startProgress() }
-                .subscribe(this::doOnSingIn, this::doOnError))
+                .subscribe(this::doOnSingIn, this::doOnError))*/
     }
 
     override fun singInViaTwitter() {
-        addDissposable(mAuthInteractor.singInViaTwitter()
+        mView!!.showToast("Проявите терпение, Алексей, я скоро заработаю!")
+        /*addDissposable(mAuthInteractor.singInViaTwitter()
                 .doOnSubscribe { startProgress() }
-                .subscribe(this::doOnSingIn, this::doOnError))
+                .subscribe(this::doOnSingIn, this::doOnError))*/
     }
 
     override fun singInViaGooglePlus() {
-        addDissposable(mAuthInteractor.singInViaGooglePlus()
+        mView!!.showToast("Проявите терпение, Алексей, я скоро заработаю!")
+        /*addDissposable(mAuthInteractor.singInViaGooglePlus()
                 .doOnSubscribe { startProgress() }
-                .subscribe(this::doOnSingIn, this::doOnError))
+                .subscribe(this::doOnSingIn, this::doOnError))*/
     }
 
     override fun singIn(login: String, password: String) {
@@ -89,8 +96,10 @@ class FmtAuthPresenter : BasePresenter<AuthView>(), IAuthPresenter {
         mRouter.navigateTo(RestorePasswordFragment.FRAGMENT_KEY)
     }
 
-    private fun doOnSingIn(monade: Monade) {
+    private fun doOnSingIn(result: Monade) {
         stopProgress()
+        if (!result.isError)
+            ActivityRouter.openActivityAndClosePrevent(mView!!.getParentView().getActivity(), MainActivity::class.java)
     }
 
     private fun inject() {

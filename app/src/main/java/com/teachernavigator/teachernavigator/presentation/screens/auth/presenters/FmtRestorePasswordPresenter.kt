@@ -44,6 +44,7 @@ class FmtRestorePasswordPresenter : BasePresenter<RestorePasswordView>(), IResto
     override fun doOnError(error: Throwable) {
         super.doOnError(error)
         stopProgress()
+        mView!!.showToast(getContext().getString(R.string.restore_password_error))
     }
 
     override fun restorePassword(login: String) {
@@ -52,8 +53,10 @@ class FmtRestorePasswordPresenter : BasePresenter<RestorePasswordView>(), IResto
                 .subscribe(this::doOnSingRestore, this::doOnError))
     }
 
-    private fun doOnSingRestore(monade: Monade) {
+    private fun doOnSingRestore(result: Monade) {
         stopProgress()
+        if (!result.isError)
+            mView!!.showToast(getContext().getString(R.string.account_created_text))
     }
 
     private fun inject() {

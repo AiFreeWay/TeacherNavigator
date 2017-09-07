@@ -6,10 +6,14 @@ import com.teachernavigator.teachernavigator.application.di.scopes.PerParentScre
 import com.teachernavigator.teachernavigator.data.repository.abstractions.IAuthRepository
 import com.teachernavigator.teachernavigator.data.repository.abstractions.IMainRepository
 import com.teachernavigator.teachernavigator.data.repository.abstractions.ITapeRepository
+import com.teachernavigator.teachernavigator.domain.controllers.IPostController
+import com.teachernavigator.teachernavigator.domain.controllers.PostController
 import com.teachernavigator.teachernavigator.domain.interactors.AuthInteractor
-import com.teachernavigator.teachernavigator.domain.interactors.TapeInteractor
+import com.teachernavigator.teachernavigator.domain.interactors.PostsInteractor
 import com.teachernavigator.teachernavigator.domain.interactors.abstractions.IAuthInteractor
-import com.teachernavigator.teachernavigator.domain.interactors.abstractions.ITapeInteractor
+import com.teachernavigator.teachernavigator.domain.interactors.abstractions.IPostsInteractor
+import com.teachernavigator.teachernavigator.presentation.facades.PostControllerFacade
+import com.teachernavigator.teachernavigator.presentation.facades.abstractions.IPostControllerFacade
 import com.teachernavigator.teachernavigator.presentation.screens.base.ParentView
 import com.teachernavigator.teachernavigator.presentation.utils.FragmentNavigator
 import dagger.Module
@@ -21,7 +25,7 @@ import ru.terrakok.cicerone.Router
  * Created by root on 14.08.17.
  */
 @Module
-class ParentScreenModule(viewScreens: ParentView) {
+class ParentScreenModule(private val mParentView: ParentView) {
 
     private val mCicerone: Cicerone<Router>
 
@@ -29,9 +33,9 @@ class ParentScreenModule(viewScreens: ParentView) {
         if (BuildConfig.DEBUG) Logger.logDebug("created MODULE ParentScreenModule")
 
         mCicerone = Cicerone.create()
-        mCicerone.navigatorHolder.setNavigator(FragmentNavigator(viewScreens.getActivity(),
-                viewScreens.getSupportFragmentManager(),
-                viewScreens.getFragmentLayoutId()))
+        mCicerone.navigatorHolder.setNavigator(FragmentNavigator(mParentView.getActivity(),
+                mParentView.getSupportFragmentManager(),
+                mParentView.getFragmentLayoutId()))
     }
 
     @Provides
@@ -52,5 +56,17 @@ class ParentScreenModule(viewScreens: ParentView) {
 
     @Provides
     @PerParentScreen
-    fun provideTapeInteractor(interactor : TapeInteractor): ITapeInteractor = interactor
+    fun provideTapeInteractor(interactor : PostsInteractor): IPostsInteractor = interactor
+
+    @Provides
+    @PerParentScreen
+    fun providePostController(controller : PostController): IPostController = controller
+
+    @Provides
+    @PerParentScreen
+    fun provideParentView(): ParentView = mParentView
+
+    @Provides
+    @PerParentScreen
+    fun providePostControllerFacade(controller : PostControllerFacade): IPostControllerFacade = controller
 }

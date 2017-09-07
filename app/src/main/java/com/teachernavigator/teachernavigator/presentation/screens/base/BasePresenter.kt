@@ -2,6 +2,7 @@ package com.teachernavigator.teachernavigator.presentation.screens.base
 
 import android.app.Activity
 import android.arch.lifecycle.LifecycleObserver
+import android.content.Context
 import com.example.root.androidtest.application.di.components.RootComponent
 import com.example.root.androidtest.application.utils.Logger
 import com.teachernavigator.teachernavigator.BuildConfig
@@ -39,4 +40,6 @@ abstract class BasePresenter<V : BaseView> : LifecycleObserver, ViewAttacher<V> 
     protected fun getRootComponent(activity: Activity) : RootComponent {
         return (activity.application as TeacherNavigatopApp).getRootComponent()
     }
+
+    protected fun getContext(): Context = mView!!.getContext()
 }

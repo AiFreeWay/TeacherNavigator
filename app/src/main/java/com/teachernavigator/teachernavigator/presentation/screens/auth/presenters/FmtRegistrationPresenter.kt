@@ -2,6 +2,7 @@ package com.teachernavigator.teachernavigator.presentation.screens.auth.presente
 
 import android.arch.lifecycle.Lifecycle
 import android.arch.lifecycle.OnLifecycleEvent
+import android.text.TextUtils
 import com.example.root.androidtest.application.utils.Logger
 import com.teachernavigator.teachernavigator.BuildConfig
 import com.teachernavigator.teachernavigator.R
@@ -45,6 +46,7 @@ class FmtRegistrationPresenter : BasePresenter<RegistrationView>(), IRegistratio
     override fun doOnError(error: Throwable) {
         super.doOnError(error)
         stopProgress()
+        mView!!.showToast(getContext().getString(R.string.registration_error))
     }
 
     override fun singUp() {
@@ -55,11 +57,41 @@ class FmtRegistrationPresenter : BasePresenter<RegistrationView>(), IRegistratio
                     .subscribe(this::doOnSingUp, this::doOnError))
     }
 
-    private fun doOnSingUp(monade: Monade) {
+    private fun doOnSingUp(result: Monade) {
         stopProgress()
+        if (result.isError)
+            mView!!.showAccountCreatedDilog()
     }
 
     private fun checkSingUpData(singUpData: SingUpData): Boolean {
+        if (TextUtils.isEmpty(singUpData.email)) {
+            mView!!.showToast(getContext().getString(R.string.indicate_email))
+            return false
+        }
+        if (TextUtils.isEmpty(singUpData.password)) {
+            mView!!.showToast(getContext().getString(R.string.indicate_password))
+            return false
+        }
+        if (TextUtils.isEmpty(singUpData.full_name)) {
+            mView!!.showToast(getContext().getString(R.string.indicate_full_name))
+            return false
+        }
+        if (TextUtils.isEmpty(singUpData.birthday)) {
+            mView!!.showToast(getContext().getString(R.string.indicate_birthday))
+            return false
+        }
+        if (TextUtils.isEmpty(singUpData.work_or_learn_place)) {
+            mView!!.showToast(getContext().getString(R.string.indicate_work_or_learn_place))
+            return false
+        }
+        if (TextUtils.isEmpty(singUpData.experience)) {
+            mView!!.showToast(getContext().getString(R.string.indicate_experience))
+            return false
+        }
+        if (singUpData.unionist && TextUtils.isEmpty(singUpData.number_of_union_ticket)) {
+            mView!!.showToast(getContext().getString(R.string.indicate_number_of_unionist_ticket))
+            return false
+        }
         return true
     }
 

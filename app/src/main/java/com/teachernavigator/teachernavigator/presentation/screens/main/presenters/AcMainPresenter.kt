@@ -68,9 +68,9 @@ class AcMainPresenter : BasePresenter<MainView>(), IMainPresenter {
 
     private fun doOnGetDataForMenu(isAuthorized: Boolean, viewGroup: ViewGroup) {
         if (isAuthorized)
-            mMenuController = MenuController.createControllerForAuthorizationUser(mView!!, mView!!.getActivity())
+            mMenuController = MenuController.createControllerForAuthorizationUser(mView!!, getContext())
         else
-            mMenuController = MenuController.createControllerForNotAuthorizationUser(mView!!, mView!!.getActivity())
+            mMenuController = MenuController.createControllerForNotAuthorizationUser(mView!!, getContext())
         mMenuController!!.loadMenuItemsToViewGroup(viewGroup)
 
         mMenuController!!.getPresenterChannel().getInputChannel()

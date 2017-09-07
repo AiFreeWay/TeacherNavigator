@@ -3,11 +3,10 @@ package com.teachernavigator.teachernavigator.presentation.screens.main.fragment
 import android.os.Bundle
 import android.support.design.widget.TabLayout
 import android.support.v4.view.ViewPager
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import butterknife.BindView
 import butterknife.ButterKnife
+import com.example.root.androidtest.application.utils.Logger
 import com.teachernavigator.teachernavigator.R
 import com.teachernavigator.teachernavigator.presentation.adapters.ViewpagerAdapter
 import com.teachernavigator.teachernavigator.presentation.models.ViewPagerItemContainer
@@ -15,6 +14,7 @@ import com.teachernavigator.teachernavigator.presentation.screens.base.BaseFragm
 import com.teachernavigator.teachernavigator.presentation.screens.main.fragments.abstractions.TapeView
 import com.teachernavigator.teachernavigator.presentation.screens.main.presenters.FmtTapePresenter
 import com.teachernavigator.teachernavigator.presentation.screens.main.presenters.abstractions.ITapePresenter
+
 
 /**
  * Created by root on 14.08.17.
@@ -33,6 +33,7 @@ class TapeFragment : BaseFragment(), TapeView {
 
     private lateinit var mAdapter: ViewpagerAdapter
     private val mPresenter: ITapePresenter = FmtTapePresenter()
+    private var mLastViewPagerPosition = 0
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view: View = inflater!!.inflate(R.layout.fmt_view_pager, container, false)
@@ -42,6 +43,7 @@ class TapeFragment : BaseFragment(), TapeView {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+        setHasOptionsMenu(true)
         mPresenter.attachView(this)
         mTbTabs.setupWithViewPager(mVpTapeItems)
         mAdapter = ViewpagerAdapter(childFragmentManager)
@@ -62,10 +64,24 @@ class TapeFragment : BaseFragment(), TapeView {
     override fun onViewStateRestored(savedInstanceState: Bundle?) {
         super.onViewStateRestored(savedInstanceState)
         if (savedInstanceState != null)
-            mVpTapeItems.currentItem = savedInstanceState.getInt(LAST_VIEW_PAGER_POSITION, 0)
+            mLastViewPagerPosition = savedInstanceState.getInt(LAST_VIEW_PAGER_POSITION, 0)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when(item.itemId) {
+            R.id.action_search -> { mPresenter.openPostSearchScreen() }
+            R.id.action_refresh -> {}
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.tape_menu, menu)
+        super.onCreateOptionsMenu(menu, inflater)
     }
 
     override fun loadOrdersFragments(data: List<ViewPagerItemContainer>) {
         mAdapter.loadData(data)
+        mVpTapeItems.currentItem = mLastViewPagerPosition
     }
 }

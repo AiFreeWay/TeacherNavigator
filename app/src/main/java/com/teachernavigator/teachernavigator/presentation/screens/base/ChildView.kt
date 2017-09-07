@@ -6,4 +6,6 @@ package com.teachernavigator.teachernavigator.presentation.screens.base
 interface ChildView : BaseView {
 
     fun getParentView(): ParentView
+    fun showToast(text: String)
+    fun showToast(textRes: Int)
 }

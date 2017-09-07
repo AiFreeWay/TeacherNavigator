@@ -1,6 +1,7 @@
 package com.teachernavigator.teachernavigator.presentation.screens.auth.activities
 
 import android.arch.lifecycle.LifecycleRegistry
+import android.content.Context
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
@@ -44,7 +45,7 @@ class AuthActivity : AppCompatActivity(), AuthParentView {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (item.getItemId() == android.R.id.home) {
-            mPresenter.navigateBack()
+            navigateBack()
             return true
         }
         return super.onOptionsItemSelected(item)
@@ -81,6 +82,12 @@ class AuthActivity : AppCompatActivity(), AuthParentView {
     override fun hightActionBar() {
         mToolbar.visibility = View.GONE
     }
+
+    override fun navigateBack() {
+        mPresenter.navigateBack()
+    }
+
+    override fun getContext(): Context = this
 
     private fun initToolbar() {
         setSupportActionBar(mToolbar)

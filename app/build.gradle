@@ -1,3 +1,7 @@
+def keystorePropertiesFile = rootProject.file("keystore.properties")
+def keystoreProperties = new Properties()
+keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
+
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
@@ -17,6 +21,11 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+        all {
+            resValue "string", "client_id", keystoreProperties['ClientId']
+            resValue "string", "client_secret", keystoreProperties['ClientSecret']
+            resValue "string", "grant_type", keystoreProperties['GrantType']
         }
     }
 }

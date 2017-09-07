@@ -9,4 +9,5 @@ interface AuthParentView : ParentView {
 
     fun showActionBar()
     fun hightActionBar()
+    fun navigateBack()
 }

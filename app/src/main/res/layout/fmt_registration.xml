@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@android:color/white">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -13,91 +13,126 @@
         <android.support.design.widget.TextInputEditText
             android:id="@+id/fmt_registration_et_full_name"
             style="@style/EditText"
-            android:lines="1"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/normalButtonHeight"
+            android:layout_height="@dimen/normalControlsHeight"
             android:layout_marginEnd="@dimen/externalPadding"
             android:layout_marginStart="@dimen/externalPadding"
             android:layout_marginTop="@dimen/externalPadding"
-            android:hint="@string/full_name" />
+            android:hint="@string/full_name"
+            android:lines="1" />
 
         <android.support.design.widget.TextInputEditText
             android:id="@+id/fmt_registration_et_birthday"
             style="@style/EditText"
-            android:lines="1"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/normalButtonHeight"
+            android:layout_height="@dimen/normalControlsHeight"
             android:layout_marginEnd="@dimen/externalPadding"
             android:layout_marginStart="@dimen/externalPadding"
             android:layout_marginTop="@dimen/internalPadding"
-            android:hint="@string/birthday" />
+            android:hint="@string/birthday"
+            android:lines="1" />
 
         <android.support.design.widget.TextInputEditText
             android:id="@+id/fmt_registration_et_work_place"
             style="@style/EditText"
-            android:lines="1"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/normalButtonHeight"
+            android:layout_height="@dimen/normalControlsHeight"
             android:layout_marginEnd="@dimen/externalPadding"
             android:layout_marginStart="@dimen/externalPadding"
             android:layout_marginTop="@dimen/internalPadding"
-            android:hint="@string/work_place" />
+            android:hint="@string/work_place"
+            android:lines="1" />
 
         <android.support.design.widget.TextInputEditText
             android:id="@+id/fmt_registration_et_position"
             style="@style/EditText"
-            android:lines="1"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/normalButtonHeight"
+            android:layout_height="@dimen/normalControlsHeight"
             android:layout_marginEnd="@dimen/externalPadding"
             android:layout_marginStart="@dimen/externalPadding"
             android:layout_marginTop="@dimen/internalPadding"
-            android:hint="@string/position" />
+            android:hint="@string/position"
+            android:lines="1" />
 
         <android.support.design.widget.TextInputEditText
             android:id="@+id/fmt_registration_et_experience"
             style="@style/EditText"
-            android:lines="1"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/normalButtonHeight"
+            android:layout_height="@dimen/normalControlsHeight"
             android:layout_marginEnd="@dimen/externalPadding"
             android:layout_marginStart="@dimen/externalPadding"
             android:layout_marginTop="@dimen/internalPadding"
-            android:hint="@string/experience" />
+            android:hint="@string/experience"
+            android:inputType="number"
+            android:lines="1" />
 
-        <android.support.design.widget.TextInputEditText
-            android:id="@+id/fmt_registration_et_trade_unionist"
-            style="@style/EditText"
-            android:lines="1"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="@dimen/normalButtonHeight"
+            android:layout_height="@dimen/normalControlsHeight"
             android:layout_marginEnd="@dimen/externalPadding"
             android:layout_marginStart="@dimen/externalPadding"
             android:layout_marginTop="@dimen/internalPadding"
-            android:hint="@string/trade_unionist" />
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingLeft="@dimen/externalPadding"
+            android:paddingRight="@dimen/externalPadding">
+
+            <TextView
+                android:id="@+id/fmt_registration_tv_trade_unionist"
+                style="@style/Text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:lines="1"
+                android:text="@string/is_trade_unionist" />
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.3" />
+
+            <android.support.v7.widget.AppCompatCheckBox
+                android:id="@+id/fmt_registration_chb_trade_unionist_yes"
+                style="@style/SmallText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.1"
+                android:checked="true"
+                android:text="@string/yes" />
+
+            <android.support.v7.widget.AppCompatCheckBox
+                android:id="@+id/fmt_registration_chb_trade_unionist_no"
+                style="@style/SmallText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.1"
+                android:text="@string/no" />
+        </LinearLayout>
 
         <android.support.design.widget.TextInputEditText
             android:id="@+id/fmt_registration_et_trade_union_ticket_number"
             style="@style/EditText"
-            android:lines="1"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/normalButtonHeight"
+            android:layout_height="@dimen/normalControlsHeight"
             android:layout_marginEnd="@dimen/externalPadding"
             android:layout_marginStart="@dimen/externalPadding"
             android:layout_marginTop="@dimen/internalPadding"
-            android:hint="@string/trade_union_ticket_number" />
+            android:hint="@string/trade_union_ticket_number"
+            android:inputType="number"
+            android:lines="1" />
 
         <android.support.design.widget.TextInputEditText
             android:id="@+id/fmt_registration_et_email"
             style="@style/EditText"
-            android:lines="1"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/normalButtonHeight"
+            android:layout_height="@dimen/normalControlsHeight"
             android:layout_marginBottom="@dimen/internalPadding"
             android:layout_marginEnd="@dimen/externalPadding"
             android:layout_marginStart="@dimen/externalPadding"
             android:layout_marginTop="@dimen/internalPadding"
-            android:hint="@string/email" />
+            android:hint="@string/email"
+            android:inputType="textWebEmailAddress"
+            android:lines="1" />
 
         <TextView
             style="@style/Text"
@@ -113,24 +148,26 @@
         <android.support.design.widget.TextInputEditText
             android:id="@+id/fmt_registration_et_phone"
             style="@style/EditText"
-            android:lines="1"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/normalButtonHeight"
+            android:layout_height="@dimen/normalControlsHeight"
             android:layout_marginEnd="@dimen/externalPadding"
             android:layout_marginStart="@dimen/externalPadding"
             android:layout_marginTop="@dimen/internalPadding"
-            android:hint="@string/phone" />
+            android:hint="@string/phone"
+            android:inputType="phone"
+            android:lines="1" />
 
         <android.support.design.widget.TextInputEditText
             android:id="@+id/fmt_registration_et_password"
             style="@style/EditText"
-            android:lines="1"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/normalButtonHeight"
+            android:layout_height="@dimen/normalControlsHeight"
             android:layout_marginEnd="@dimen/externalPadding"
             android:layout_marginStart="@dimen/externalPadding"
             android:layout_marginTop="@dimen/internalPadding"
-            android:hint="@string/password" />
+            android:hint="@string/password"
+            android:inputType="textPassword"
+            android:lines="1" />
 
         <android.support.v7.widget.AppCompatCheckBox
             android:id="@+id/fmt_registration_chb_agreement"
@@ -141,7 +178,7 @@
             android:layout_marginBottom="@dimen/internalPadding"
             android:layout_marginEnd="@dimen/externalPadding"
             android:layout_marginStart="@dimen/externalPadding"
-            android:layout_marginTop="@dimen/internalPadding"
+            android:layout_marginTop="@dimen/externalPadding"
             android:checked="true"
             android:text="@string/agreement" />
 
@@ -149,10 +186,10 @@
             android:id="@+id/fmt_registration_btn_sing_up"
             style="@style/Button"
             android:layout_width="@dimen/buttonAndTextWidth"
-            android:layout_height="@dimen/normalButtonHeight"
+            android:layout_height="@dimen/normalControlsHeight"
             android:layout_gravity="center"
-            android:layout_marginTop="@dimen/externalPadding"
             android:layout_marginBottom="@dimen/externalPadding"
+            android:layout_marginTop="@dimen/externalPadding"
             android:text="@string/create_account"
             android:textAllCaps="false"
             app:backgroundTint="@color/orange" />

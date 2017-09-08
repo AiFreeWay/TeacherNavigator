@@ -5,4 +5,7 @@ import com.teachernavigator.teachernavigator.presentation.screens.base.ParentVie
 /**
  * Created by root on 30.08.17.
  */
-interface PostDetailView : ParentView
+interface PostDetailView : ParentView {
+
+    fun loadLikes(vote: Boolean?)
+}

@@ -3,6 +3,7 @@ package com.teachernavigator.teachernavigator.presentation.screens.tape.activiti
 import android.arch.lifecycle.LifecycleRegistry
 import android.content.Context
 import android.os.Bundle
+import android.support.v4.content.ContextCompat
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
 import android.view.MenuItem
@@ -111,6 +112,25 @@ class PostDetailActivity: AppCompatActivity(), PostDetailView {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
+    override fun loadLikes(vote: Boolean?) {
+        if (vote != null && vote) {
+            val like = ContextCompat.getDrawable(getContext(), R.drawable.ic_like_active)
+            mTvLike.setCompoundDrawablesWithIntrinsicBounds(like, null, null, null)
+            val dislike = ContextCompat.getDrawable(getContext(), R.drawable.ic_dislike)
+            mTvDislike.setCompoundDrawablesWithIntrinsicBounds(dislike, null, null, null)
+        } else if (vote != null && !vote) {
+            val like = ContextCompat.getDrawable(getContext(), R.drawable.ic_like)
+            mTvLike.setCompoundDrawablesWithIntrinsicBounds(like, null, null, null)
+            val dislike = ContextCompat.getDrawable(getContext(), R.drawable.ic_dislike_active)
+            mTvDislike.setCompoundDrawablesWithIntrinsicBounds(dislike, null, null, null)
+        } else {
+            val like = ContextCompat.getDrawable(getContext(), R.drawable.ic_like)
+            mTvLike.setCompoundDrawablesWithIntrinsicBounds(like, null, null, null)
+            val dislike = ContextCompat.getDrawable(getContext(), R.drawable.ic_dislike)
+            mTvDislike.setCompoundDrawablesWithIntrinsicBounds(dislike, null, null, null)
+        }
+    }
+
     override fun getFragmentLayoutId(): Int = 0
 
     private fun loadPost(post: Post) {
@@ -126,6 +146,8 @@ class PostDetailActivity: AppCompatActivity(), PostDetailView {
         mTvLike.setText(post.countLikes.toString())
         mTvDislike.setText(post.countDislikes.toString())
         mTvComments.setText(post.countComments.toString())
+
+        loadLikes(post.vote)
     }
 
     private fun setClickListeners(post: Post) {

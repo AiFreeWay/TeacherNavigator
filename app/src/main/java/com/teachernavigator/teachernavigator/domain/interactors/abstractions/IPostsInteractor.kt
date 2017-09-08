@@ -13,4 +13,5 @@ interface IPostsInteractor {
     fun getLatestPosts(): Observable<List<Post>>
     fun getNewsPosts(): Observable<List<Post>>
     fun getPostById(postId: Int): Observable<Post>
+    fun getSavedPosts(): Observable<List<Post>>
 }

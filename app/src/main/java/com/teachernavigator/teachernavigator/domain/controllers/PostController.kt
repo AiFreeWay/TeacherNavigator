@@ -27,7 +27,10 @@ class PostController @Inject constructor(private val mRepository: IMainRepositor
 
     override fun like(post: Post, doOnUserNotAuth: () -> Unit): Observable<Monade> {
         if (mRepository.isAuth())
-            return return Observable.just(Monade.SUCCESSFULLY_MONADE)
+            return mRepository.vote(PostsMapper.mapPostToVoteRequest(post))
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribeOn(Schedulers.newThread())
+                    .map { BaseMapper.mapBaseResponse(it) }
         else
             doOnUserNotAuth.invoke()
         return Observable.just(Monade.FAILARY_MONADE)
@@ -35,7 +38,10 @@ class PostController @Inject constructor(private val mRepository: IMainRepositor
 
     override fun dislike(post: Post, doOnUserNotAuth: () -> Unit): Observable<Monade> {
         if (mRepository.isAuth())
-            return return Observable.just(Monade.SUCCESSFULLY_MONADE)
+            return mRepository.vote(PostsMapper.mapPostToVoteRequest(post))
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribeOn(Schedulers.newThread())
+                    .map { BaseMapper.mapBaseResponse(it) }
         else
             doOnUserNotAuth.invoke()
         return Observable.just(Monade.FAILARY_MONADE)
@@ -43,7 +49,7 @@ class PostController @Inject constructor(private val mRepository: IMainRepositor
 
     override fun save(post: Post, doOnUserNotAuth: () -> Unit): Observable<Monade> {
         if (mRepository.isAuth())
-            return mRepository.savePost(PostsMapper.mapPostToSavePostFieldMap(post))
+            return mRepository.savePost(PostsMapper.mapPostToSavePostRequest(post))
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribeOn(Schedulers.newThread())
                     .map { BaseMapper.mapBaseResponse(it) }

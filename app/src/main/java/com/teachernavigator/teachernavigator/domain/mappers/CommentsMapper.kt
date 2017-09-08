@@ -1,7 +1,9 @@
 package com.teachernavigator.teachernavigator.domain.mappers
 
 import com.teachernavigator.teachernavigator.data.models.CommentNetwork
+import com.teachernavigator.teachernavigator.data.network.requests.CommentRequest
 import com.teachernavigator.teachernavigator.domain.models.Comment
+import com.teachernavigator.teachernavigator.domain.models.Post
 import java.util.ArrayList
 
 /**
@@ -13,9 +15,11 @@ class CommentsMapper {
 
         fun mapComments(comments: List<CommentNetwork>?): List<Comment> {
             val mappedComments = ArrayList<Comment>()
-            comments?.forEach { mappedComments.add(Comment(it.id, it.message, mapCommentUser(it.user))) }
+            comments?.forEach { mappedComments.add(mapComment(it)) }
             return mappedComments
         }
+
+        fun mapComment(comment: CommentNetwork): Comment=  Comment(comment.id, comment.message, mapCommentUser(comment.user))
 
         fun mapCommentUser(userInComment: CommentNetwork.UserInComment?): Comment.UserInComment? {
             if (userInComment != null) {
@@ -30,5 +34,7 @@ class CommentsMapper {
                 return Comment.UserInComment.Avatars(userAvatars.id, userAvatars.avatar)
             return null
         }
+
+        fun mapCommentDataToRequest(post: Post, text: String): CommentRequest = CommentRequest(post.id!!, text)
     }
 }

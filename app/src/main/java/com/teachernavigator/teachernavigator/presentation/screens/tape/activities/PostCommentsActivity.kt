@@ -8,14 +8,10 @@ import android.support.v7.widget.Toolbar
 import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
-import android.widget.ImageView
-import android.widget.LinearLayout
-import android.widget.ProgressBar
-import android.widget.TextView
+import android.widget.*
 import butterknife.BindView
 import butterknife.ButterKnife
 import com.greenfrvr.hashtagview.HashtagView
-import com.squareup.picasso.Picasso
 import com.teachernavigator.teachernavigator.R
 import com.teachernavigator.teachernavigator.application.di.components.ParentScreenComponent
 import com.teachernavigator.teachernavigator.domain.models.Comment
@@ -24,6 +20,8 @@ import com.teachernavigator.teachernavigator.presentation.screens.tape.activitie
 import com.teachernavigator.teachernavigator.presentation.screens.tape.presenters.AcPostCommentsPresenter
 import com.teachernavigator.teachernavigator.presentation.screens.tape.presenters.abstractions.IPostCommentsPresenter
 import com.teachernavigator.teachernavigator.presentation.utils.ImageLoader
+import android.support.v4.content.ContextCompat
+
 
 /**
  * Created by root on 07.09.17.
@@ -59,6 +57,13 @@ class PostCommentsActivity: AppCompatActivity(), PostCommentsView {
     
     @BindView(R.id.ac_post_comments_ll_comments)
     lateinit var mLlComments: LinearLayout
+    @BindView(R.id.ac_post_comments_sv_comments)
+    lateinit var mSvComments: ScrollView
+
+    @BindView(R.id.ac_post_comments_et_comment_text)
+    lateinit var mEtCommentText: EditText
+    @BindView(R.id.ac_post_comments_iv_do_comment)
+    lateinit var mIvDoComment: ImageView
     
     @BindView(R.id.ac_post_comments_toolbar)
     lateinit var mToolbar: Toolbar
@@ -116,7 +121,41 @@ class PostCommentsActivity: AppCompatActivity(), PostCommentsView {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
+    override fun loadComment(comment: Comment) {
+        mEtCommentText.setText("")
+        val inflater = LayoutInflater.from(this)
+        mLlComments.addView(createCommentView(comment, "", inflater))
+        mSvComments.post({ mSvComments.fullScroll(ScrollView.FOCUS_DOWN) })
+    }
+
     override fun getFragmentLayoutId(): Int = 0
+
+    override fun loadLikes(vote: Boolean?) {
+        if (vote != null && vote) {
+            val like = ContextCompat.getDrawable(getContext(), R.drawable.ic_like_active)
+            mTvLike.setCompoundDrawablesWithIntrinsicBounds(like, null, null, null)
+            val dislike = ContextCompat.getDrawable(getContext(), R.drawable.ic_dislike)
+            mTvDislike.setCompoundDrawablesWithIntrinsicBounds(dislike, null, null, null)
+        } else if (vote != null && !vote) {
+            val like = ContextCompat.getDrawable(getContext(), R.drawable.ic_like)
+            mTvLike.setCompoundDrawablesWithIntrinsicBounds(like, null, null, null)
+            val dislike = ContextCompat.getDrawable(getContext(), R.drawable.ic_dislike_active)
+            mTvDislike.setCompoundDrawablesWithIntrinsicBounds(dislike, null, null, null)
+        } else {
+            val like = ContextCompat.getDrawable(getContext(), R.drawable.ic_like)
+            mTvLike.setCompoundDrawablesWithIntrinsicBounds(like, null, null, null)
+            val dislike = ContextCompat.getDrawable(getContext(), R.drawable.ic_dislike)
+            mTvDislike.setCompoundDrawablesWithIntrinsicBounds(dislike, null, null, null)
+        }
+    }
+
+    override fun lockUi() {
+        mIvDoComment.isEnabled = false
+    }
+
+    override fun unlockUi() {
+        mIvDoComment.isEnabled = true
+    }
 
     private fun loadPost(post: Post) {
         setToolbarTitle(post.title!!)
@@ -131,7 +170,11 @@ class PostCommentsActivity: AppCompatActivity(), PostCommentsView {
         mTvLike.setText(post.countLikes.toString())
         mTvDislike.setText(post.countDislikes.toString())
         mTvComments.setText(post.countComments.toString())
+
+        loadLikes(post.vote)
+
         loadComments(post)
+        mIvDoComment.setOnClickListener { mPresenter.doComment(post, mEtCommentText.text.toString()) }
     }
 
     private fun setClickListeners(post: Post) {
@@ -154,8 +197,6 @@ class PostCommentsActivity: AppCompatActivity(), PostCommentsView {
         post.comments?.forEach {
             mLlComments.addView(createCommentView(it, "", inflater))
         }
-
-
     }
 
     private fun createCommentView(comment: Comment, postAuthorName: String, inflater: LayoutInflater): View {

@@ -1,9 +1,8 @@
 package com.teachernavigator.teachernavigator.data.network
 
+import com.teachernavigator.teachernavigator.data.models.CommentNetwork
 import com.teachernavigator.teachernavigator.data.models.PostNetwork
-import com.teachernavigator.teachernavigator.data.network.requests.RestorePasswordRequest
-import com.teachernavigator.teachernavigator.data.network.requests.SingInRequest
-import com.teachernavigator.teachernavigator.data.network.requests.SingUpRequest
+import com.teachernavigator.teachernavigator.data.network.requests.*
 import com.teachernavigator.teachernavigator.data.network.responses.BaseResponse
 import com.teachernavigator.teachernavigator.data.network.responses.GetMyCommentsResponse
 import com.teachernavigator.teachernavigator.data.network.responses.SingInResponse
@@ -37,6 +36,18 @@ interface ApiController {
     @GET("/api/v0/me/comments/")
     fun getMyComments(@Header("Authorization") accessToken: String): Observable<GetMyCommentsResponse>
 
-    @GET("/api/v0/save/post/")
-    fun savePost(@Header("Authorization") accessToken: String, @FieldMap filedMap: Map<String, String>): Observable<BaseResponse>
+    @POST("/api/v0/save/post/")
+    fun savePost(@Header("Authorization") accessToken: String, @Body request: SavePostRequest): Observable<BaseResponse>
+
+    @GET("/api/v0/me/saved/")
+    fun getSavedPosts(@Header("Authorization") accessToken: String): Observable<Array<PostNetwork>>
+
+    @POST("/api/v0/comment/")
+    fun comment(@Header("Authorization") accessToken: String, @Body request: CommentRequest): Observable<CommentNetwork>
+
+    //@POST("/api/v0/votes/up/")
+    //fun vote(@Header("Authorization") accessToken: String, @Body request: VoteRequest): Observable<BaseResponse>
+
+    @GET("/api/v0/votes/up/")
+    fun vote(@Header("Authorization") accessToken: String, @QueryMap map: Map<String, String>): Observable<BaseResponse>
 }

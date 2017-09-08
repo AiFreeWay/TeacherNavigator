@@ -39,6 +39,9 @@ class PostsInteractor @Inject constructor(private val mRepository: ITapeReposito
                     .subscribeOn(Schedulers.newThread())
                     .map { PostsMapper.mapPost(it) }
 
+    override fun getSavedPosts(): Observable<List<Post>> =
+            configePostsObservable(mRepository.getSavedPosts())
+
     private fun configePostsObservable(observable: Observable<Array<PostNetwork>>) : Observable<List<Post>> =
             observable.observeOn(AndroidSchedulers.mainThread())
                     .subscribeOn(Schedulers.newThread())

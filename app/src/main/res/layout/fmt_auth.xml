@@ -100,6 +100,7 @@
             android:layout_marginStart="@dimen/externalPadding"
             android:layout_marginTop="@dimen/internalPadding"
             android:background="@drawable/oval_edit_text_backgroud"
+            android:inputType="textPassword"
             android:hint="@string/password"
             android:lines="1" />
 

@@ -3,11 +3,9 @@ package com.teachernavigator.teachernavigator.data.network
 import com.example.root.androidtest.application.utils.Logger
 import com.google.gson.GsonBuilder
 import com.teachernavigator.teachernavigator.BuildConfig
+import com.teachernavigator.teachernavigator.data.models.CommentNetwork
 import com.teachernavigator.teachernavigator.data.models.PostNetwork
-import com.teachernavigator.teachernavigator.data.network.requests.RestorePasswordRequest
-import com.teachernavigator.teachernavigator.data.network.fieldmapskeys.SavePostFieldKeys
-import com.teachernavigator.teachernavigator.data.network.requests.SingInRequest
-import com.teachernavigator.teachernavigator.data.network.requests.SingUpRequest
+import com.teachernavigator.teachernavigator.data.network.requests.*
 import com.teachernavigator.teachernavigator.data.network.responses.BaseResponse
 import com.teachernavigator.teachernavigator.data.network.responses.GetMyCommentsResponse
 import com.teachernavigator.teachernavigator.data.network.responses.SingInResponse
@@ -73,5 +71,19 @@ class NetworkController {
 
     fun getMyComments(token: String): Observable<GetMyCommentsResponse> = mApiController.getMyComments(token)
 
-    fun savePost(token: String, filedMap: Map<String, String>): Observable<BaseResponse> = mApiController.savePost(token, filedMap)
+    fun savePost(token: String, request: SavePostRequest): Observable<BaseResponse> = mApiController.savePost(token, request)
+
+    fun getSavedPosts(token: String): Observable<Array<PostNetwork>> = mApiController.getSavedPosts(token)
+
+    fun comment(token: String, request: CommentRequest): Observable<CommentNetwork> = mApiController.comment(token, request)
+
+    //fun vote(token: String, request: VoteRequest): Observable<BaseResponse> = mApiController.vote(token, request)
+
+    fun vote(token: String, request: VoteRequest): Observable<BaseResponse> {
+        val map = HashMap<String, String>()
+        map.put("model", "post")
+        map.put("id", request.id.toString())
+        map.put("vote", request.like.toString())
+        return mApiController.vote(token, map)
+    }
 }

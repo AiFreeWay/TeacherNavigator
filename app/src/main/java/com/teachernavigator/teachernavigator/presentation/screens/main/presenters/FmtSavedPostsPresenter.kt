@@ -1,4 +1,4 @@
-package com.teachernavigator.teachernavigator.presentation.screens.tape.presenters
+package com.teachernavigator.teachernavigator.presentation.screens.main.presenters
 
 import android.arch.lifecycle.Lifecycle
 import android.arch.lifecycle.OnLifecycleEvent
@@ -9,30 +9,29 @@ import com.teachernavigator.teachernavigator.domain.interactors.abstractions.IPo
 import com.teachernavigator.teachernavigator.domain.models.Post
 import com.teachernavigator.teachernavigator.presentation.facades.abstractions.IPostControllerFacade
 import com.teachernavigator.teachernavigator.presentation.screens.base.BasePresenter
-import com.teachernavigator.teachernavigator.presentation.screens.tape.fragments.abstractions.PostsListView
-import com.teachernavigator.teachernavigator.presentation.screens.tape.presenters.abstractions.IPostsListPresenter
-import com.teachernavigator.teachernavigator.presentation.utils.TapeStrategy
+import com.teachernavigator.teachernavigator.presentation.screens.main.fragments.abstractions.SavedPostsView
+import com.teachernavigator.teachernavigator.presentation.screens.main.presenters.abstractions.ISavedPostsPresenter
+import com.teachernavigator.teachernavigator.presentation.screens.tape.activities.PostSearchActivity
+import com.teachernavigator.teachernavigator.presentation.utils.ActivityRouter
 import javax.inject.Inject
 
 /**
- * Created by root on 18.08.17.
+ * Created by root on 08.09.17.
  */
-class FmtPostsListPresenter : BasePresenter<PostsListView>(), IPostsListPresenter {
+class FmtSavedPostsPresenter : BasePresenter<SavedPostsView>(), ISavedPostsPresenter {
 
     @Inject
     lateinit var mPostInteractor: IPostsInteractor
     @Inject
     lateinit var mPostControllerFacade: IPostControllerFacade
 
-    private var mTapeType: Int = -1
-
     init {
-        Logger.logDebug("created PRESENTER FmtPostsListPresenter")
+        Logger.logDebug("created PRESENTER FmtSavedPostsPresenter")
     }
 
     @OnLifecycleEvent(Lifecycle.Event.ON_START)
     private fun onStart() {
-        getPosts()
+        mView!!.getParentView().setToolbarTitle(R.string.saved)
     }
 
     @OnLifecycleEvent(Lifecycle.Event.ON_STOP)
@@ -40,7 +39,7 @@ class FmtPostsListPresenter : BasePresenter<PostsListView>(), IPostsListPresente
         mDisposables.clear()
     }
 
-    override fun attachView(view: PostsListView) {
+    override fun attachView(view: SavedPostsView) {
         super.attachView(view)
         inject()
     }
@@ -52,16 +51,20 @@ class FmtPostsListPresenter : BasePresenter<PostsListView>(), IPostsListPresente
         Toast.makeText(mView!!.getContext(), mView!!.getContext().getString(R.string.error_throwed), Toast.LENGTH_SHORT).show()
     }
 
-    override fun setTapeType(tapeType: Int) {
-        mTapeType = tapeType
-    }
-
     override fun getPostControllerFacade(): IPostControllerFacade = mPostControllerFacade
 
     override fun getPosts() {
-        addDissposable(TapeStrategy.getPostByType(mTapeType, mPostInteractor)
+        addDissposable(mPostInteractor.getSavedPosts()
                 .doOnSubscribe { this::doOnSubscribeOnGetPosts }
                 .subscribe(this::doOnGetPosts, this::doOnError))
+    }
+
+    override fun openPostSearchScreen() {
+        ActivityRouter.openActivity(mView!!.getParentView().getActivity(), PostSearchActivity::class.java)
+    }
+
+    override fun refresh() {
+        getPosts()
     }
 
     private fun doOnGetPosts(posts: List<Post>) {

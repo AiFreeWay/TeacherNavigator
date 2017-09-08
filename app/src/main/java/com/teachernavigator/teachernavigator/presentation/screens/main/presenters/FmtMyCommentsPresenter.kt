@@ -2,6 +2,7 @@ package com.teachernavigator.teachernavigator.presentation.screens.main.presente
 
 import android.arch.lifecycle.Lifecycle
 import android.arch.lifecycle.OnLifecycleEvent
+import android.widget.Toast
 import com.example.root.androidtest.application.utils.Logger
 import com.teachernavigator.teachernavigator.R
 import com.teachernavigator.teachernavigator.domain.interactors.abstractions.ICommentsInteractor
@@ -45,6 +46,7 @@ class FmtMyCommentsPresenter : BasePresenter<MyCommentsView>(), IMyCommentsPrese
         super.doOnError(error)
         mView!!.getParentView().stopProgress()
         mView!!.showNoDataText()
+        Toast.makeText(mView!!.getContext(), mView!!.getContext().getString(R.string.error_throwed), Toast.LENGTH_SHORT).show()
     }
 
     override fun openPost(postId: Int) {
@@ -52,9 +54,9 @@ class FmtMyCommentsPresenter : BasePresenter<MyCommentsView>(), IMyCommentsPrese
     }
 
     override fun loadComments() {
-        mCommentsInteractor.getMyComments()
+        addDissposable(mCommentsInteractor.getMyComments()
                 .doOnSubscribe { this::doOnSubscribeOnGetPosts }
-                .subscribe(this::doOnGetComments, this::doOnError)
+                .subscribe(this::doOnGetComments, this::doOnError))
     }
 
     private fun doOnGetComments(comments: List<Comment>) {

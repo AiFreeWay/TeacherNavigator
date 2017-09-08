@@ -1,5 +1,6 @@
 package com.teachernavigator.teachernavigator.presentation.screens.tape.presenters.abstractions
 
+import com.teachernavigator.teachernavigator.domain.models.Post
 import com.teachernavigator.teachernavigator.presentation.facades.abstractions.IPostControllerFacade
 import com.teachernavigator.teachernavigator.presentation.facades.abstractions.IPostControllerFacadeCallback
 import com.teachernavigator.teachernavigator.presentation.screens.base.ViewAttacher
@@ -12,4 +13,5 @@ interface IPostCommentsPresenter : ViewAttacher<PostCommentsView>, IPostControll
 
     fun navigateBack()
     fun getIPostControllerFacade(): IPostControllerFacade
+    fun doComment(post: Post, text: String)
 }

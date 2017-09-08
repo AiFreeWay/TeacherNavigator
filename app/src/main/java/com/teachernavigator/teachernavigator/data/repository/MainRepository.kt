@@ -5,12 +5,10 @@ import android.text.TextUtils
 import com.example.root.androidtest.application.utils.Logger
 import com.teachernavigator.teachernavigator.R
 import com.teachernavigator.teachernavigator.data.cache.CacheController
+import com.teachernavigator.teachernavigator.data.models.CommentNetwork
 import com.teachernavigator.teachernavigator.data.models.PostNetwork
 import com.teachernavigator.teachernavigator.data.network.NetworkController
-import com.teachernavigator.teachernavigator.data.network.requests.RestorePasswordRequest
-import com.teachernavigator.teachernavigator.data.network.fieldmapskeys.SavePostFieldKeys
-import com.teachernavigator.teachernavigator.data.network.requests.SingInRequest
-import com.teachernavigator.teachernavigator.data.network.requests.SingUpRequest
+import com.teachernavigator.teachernavigator.data.network.requests.*
 import com.teachernavigator.teachernavigator.data.network.responses.BaseResponse
 import com.teachernavigator.teachernavigator.data.network.responses.GetMyCommentsResponse
 import com.teachernavigator.teachernavigator.data.network.responses.SingInResponse
@@ -84,6 +82,15 @@ class MainRepository @Inject constructor(private val mNetwokController: NetworkC
     override fun getMyComments(): Observable<GetMyCommentsResponse>
             = mNetwokController.getMyComments(getAccessToken())
 
-    override fun savePost(filedMap: Map<String, String>): Observable<BaseResponse> =
-            mNetwokController.savePost(getAccessToken(), filedMap)
+    override fun getSavedPosts(): Observable<Array<PostNetwork>>
+            = mNetwokController.getSavedPosts(getAccessToken())
+
+    override fun savePost(request: SavePostRequest): Observable<BaseResponse> =
+            mNetwokController.savePost(getAccessToken(), request)
+
+    override fun comment(request: CommentRequest): Observable<CommentNetwork> =
+            mNetwokController.comment(getAccessToken(), request)
+
+    override fun vote(request: VoteRequest): Observable<BaseResponse> =
+            mNetwokController.vote(getAccessToken(), request)
 }

@@ -49,11 +49,13 @@ class AcPostDetailPresenter : BasePresenter<PostDetailView>(), IPostDetailPresen
     override fun getIPostControllerFacade(): IPostControllerFacade = mPostControllerFacade
 
     override fun onLike(result: Monade) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        if (!result.isError)
+            mView!!.loadLikes(true)
     }
 
     override fun onDislike(result: Monade) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        if (!result.isError)
+            mView!!.loadLikes(true)
     }
 
     override fun onSave(result: Monade) {

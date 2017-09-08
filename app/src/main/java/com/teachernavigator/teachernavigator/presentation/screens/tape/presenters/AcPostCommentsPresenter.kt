@@ -2,13 +2,17 @@ package com.teachernavigator.teachernavigator.presentation.screens.tape.presente
 
 import android.arch.lifecycle.Lifecycle
 import android.arch.lifecycle.OnLifecycleEvent
+import android.text.TextUtils
 import android.widget.Toast
 import com.example.root.androidtest.application.utils.Logger
 import com.teachernavigator.teachernavigator.R
 import com.teachernavigator.teachernavigator.application.di.components.DaggerParentScreenComponent
 import com.teachernavigator.teachernavigator.application.di.modules.ParentScreenModule
+import com.teachernavigator.teachernavigator.domain.interactors.abstractions.ICommentsInteractor
 import com.teachernavigator.teachernavigator.domain.interactors.abstractions.IPostsInteractor
+import com.teachernavigator.teachernavigator.domain.models.Comment
 import com.teachernavigator.teachernavigator.domain.models.Monade
+import com.teachernavigator.teachernavigator.domain.models.Post
 import com.teachernavigator.teachernavigator.presentation.facades.abstractions.IPostControllerFacade
 import com.teachernavigator.teachernavigator.presentation.screens.base.BasePresenter
 import com.teachernavigator.teachernavigator.presentation.screens.tape.activities.absctraction.PostCommentsView
@@ -21,7 +25,7 @@ import javax.inject.Inject
 class AcPostCommentsPresenter : BasePresenter<PostCommentsView>(), IPostCommentsPresenter {
 
     @Inject
-    lateinit var mPostInteractor: IPostsInteractor
+    lateinit var mCommentsInteractor: ICommentsInteractor
     @Inject
     lateinit var mPostControllerFacade: IPostControllerFacade
 
@@ -42,6 +46,7 @@ class AcPostCommentsPresenter : BasePresenter<PostCommentsView>(), IPostComments
     override fun doOnError(error: Throwable) {
         super.doOnError(error)
         mView!!.stopProgress()
+        mView!!.unlockUi()
         Toast.makeText(mView!!.getActivity(), mView!!.getActivity().getString(R.string.error_throwed), Toast.LENGTH_SHORT).show()
     }
 
@@ -51,12 +56,21 @@ class AcPostCommentsPresenter : BasePresenter<PostCommentsView>(), IPostComments
 
     override fun getIPostControllerFacade(): IPostControllerFacade = mPostControllerFacade
 
+    override fun doComment(post: Post, text: String) {
+        if (!TextUtils.isEmpty(text))
+            addDissposable(mCommentsInteractor.comment(post, text)
+                    .doOnSubscribe { this::doOnSubscribeOnSendPost }
+                    .subscribe(this::doOnCommented, this::doOnError))
+    }
+
     override fun onLike(result: Monade) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        if (!result.isError)
+            mView!!.loadLikes(true)
     }
 
     override fun onDislike(result: Monade) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        if (!result.isError)
+            mView!!.loadLikes(true)
     }
 
     override fun onSave(result: Monade) {
@@ -74,6 +88,18 @@ class AcPostCommentsPresenter : BasePresenter<PostCommentsView>(), IPostComments
 
     override fun onError(error: Throwable) {
         doOnError(error)
+    }
+
+    private fun doOnSubscribeOnSendPost() {
+        mView!!.startProgress()
+        mView!!.lockUi()
+    }
+
+    private fun doOnCommented(comment: Comment) {
+        Logger.testLog("doOnCommented")
+        mView!!.stopProgress()
+        mView!!.loadComment(comment)
+        mView!!.unlockUi()
     }
 
     private fun inject() {

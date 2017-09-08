@@ -5,6 +5,7 @@ import com.teachernavigator.teachernavigator.data.repository.abstractions.ITapeR
 import com.teachernavigator.teachernavigator.domain.interactors.abstractions.ICommentsInteractor
 import com.teachernavigator.teachernavigator.domain.mappers.CommentsMapper
 import com.teachernavigator.teachernavigator.domain.models.Comment
+import com.teachernavigator.teachernavigator.domain.models.Post
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
@@ -25,4 +26,9 @@ class CommentsInteractor  @Inject constructor(private val mRepository: ITapeRepo
                     .subscribeOn(Schedulers.newThread())
                     .map { CommentsMapper.mapComments(it.results) }
 
+    override fun comment(post: Post, text: String): Observable<Comment> =
+            mRepository.comment(CommentsMapper.mapCommentDataToRequest(post, text))
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribeOn(Schedulers.newThread())
+                    .map { CommentsMapper.mapComment(it) }
 }

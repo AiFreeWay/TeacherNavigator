@@ -1,10 +1,11 @@
 package com.teachernavigator.teachernavigator.domain.mappers
 
 import com.teachernavigator.teachernavigator.data.models.PostNetwork
-import com.teachernavigator.teachernavigator.data.network.fieldmapskeys.SavePostFieldKeys
+import com.teachernavigator.teachernavigator.data.network.requests.SavePostRequest
+import com.teachernavigator.teachernavigator.data.network.requests.VoteRequest
 import com.teachernavigator.teachernavigator.domain.models.Post
 import v_aniskin.com.trucktaxi.application.utils.DateMapper
-import java.util.ArrayList
+import java.util.*
 
 /**
  * Created by root on 07.09.17.
@@ -37,11 +38,8 @@ class PostsMapper {
             return mappedPost
         }
 
-        fun mapPostToSavePostFieldMap(post: Post): Map<String, String> {
-            val filedMap = HashMap<String, String>()
-            filedMap.put(SavePostFieldKeys.POST_ID_KEY, post.id.toString())
-            filedMap.put(SavePostFieldKeys.USER_ID_KEY, "mock")
-            return filedMap
-        }
+        fun mapPostToSavePostRequest(post: Post): SavePostRequest = SavePostRequest(post.id!!, "mock")
+
+        fun mapPostToVoteRequest(post: Post): VoteRequest = VoteRequest(post.id!!, true, "mock")
     }
 }

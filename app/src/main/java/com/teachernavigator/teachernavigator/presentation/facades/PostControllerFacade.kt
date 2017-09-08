@@ -22,38 +22,38 @@ class PostControllerFacade @Inject constructor(private val mPostController: IPos
 
     override fun like(post: Post, callbak: IPostControllerFacadeCallback) {
         mPostController.like(post, { doOnUserNotAuth() })
-                .subscribe({ callbak.onLike(it) }, { this::doOnError })
+                .subscribe({ callbak.onLike(it) }, { doOnError(it, callbak) })
     }
 
     override fun dislike(post: Post, callbak: IPostControllerFacadeCallback) {
         mPostController.dislike(post, { doOnUserNotAuth() })
-                .subscribe({ callbak.onDislike(it) }, { this::doOnError })
+                .subscribe({ callbak.onDislike(it) }, { doOnError(it, callbak) })
     }
 
     override fun save(post: Post, callbak: IPostControllerFacadeCallback) {
         mPostController.save(post, { doOnUserNotAuth() })
-                .subscribe({ callbak.onSave(it) }, { this::doOnError })
+                .subscribe({ callbak.onSave(it) }, { doOnError(it, callbak) })
     }
 
     override fun subscribe(post: Post, callbak: IPostControllerFacadeCallback) {
         mPostController.subscribe(post, { doOnUserNotAuth() })
-                .subscribe({ callbak.onSubscribe(it) }, { this::doOnError })
+                .subscribe({ callbak.onSubscribe(it) }, { doOnError(it, callbak) })
     }
 
     override fun complain(post: Post, callbak: IPostControllerFacadeCallback) {
         mPostController.complain(post, { doOnUserNotAuth() })
-                .subscribe({ callbak.onComplain(it) }, { this::doOnError })
+                .subscribe({ callbak.onComplain(it) }, { doOnError(it, callbak) })
     }
 
     override fun openCommentsScreen(post: Post, callbak: IPostControllerFacadeCallback) {
         if (post.comments != null && post.comments!!.isNotEmpty())
             mPostController.openCommentsScreen(post, mParentView.getActivity(), { doOnUserNotAuth() })
-                    .subscribe({}, { this::doOnError })
+                    .subscribe({}, { doOnError(it, callbak) })
     }
 
     override fun openProfileScreen(post: Post, callbak: IPostControllerFacadeCallback) {
         mPostController.openProfileScreen(post, mParentView.getActivity(), { doOnUserNotAuth() })
-                .subscribe({}, { this::doOnError })
+                .subscribe({}, { doOnError(it, callbak) })
     }
 
     override fun openPostDetailScreen(post: Post) {

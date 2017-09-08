@@ -8,7 +8,7 @@ import android.support.v4.widget.DrawerLayout
 import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.widget.Toolbar
 import android.view.Gravity
-import android.view.MenuItem
+import android.view.KeyEvent
 import android.view.View
 import android.widget.LinearLayout
 import android.widget.ProgressBar
@@ -20,6 +20,7 @@ import com.teachernavigator.teachernavigator.application.di.components.ParentScr
 import com.teachernavigator.teachernavigator.presentation.screens.main.activities.abstractions.MainView
 import com.teachernavigator.teachernavigator.presentation.screens.main.presenters.AcMainPresenter
 import com.teachernavigator.teachernavigator.presentation.screens.main.presenters.abstractions.IMainPresenter
+
 
 class MainActivity : AppCompatActivity(), MainView {
 
@@ -50,12 +51,12 @@ class MainActivity : AppCompatActivity(), MainView {
         mPresenter.detachView()
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if (item.getItemId() == android.R.id.home) {
+    override fun onKeyDown(keyCode: Int, event: KeyEvent): Boolean {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
             mPresenter.navigateBack()
             return true
         }
-        return super.onOptionsItemSelected(item)
+        return false
     }
 
     override fun getLifecycle(): LifecycleRegistry = mLifecycle

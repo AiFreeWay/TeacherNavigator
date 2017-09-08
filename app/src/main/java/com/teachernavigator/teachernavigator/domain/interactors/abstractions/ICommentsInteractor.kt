@@ -1,6 +1,7 @@
 package com.teachernavigator.teachernavigator.domain.interactors.abstractions
 
 import com.teachernavigator.teachernavigator.domain.models.Comment
+import com.teachernavigator.teachernavigator.domain.models.Post
 import io.reactivex.Observable
 
 /**
@@ -9,4 +10,5 @@ import io.reactivex.Observable
 interface ICommentsInteractor {
 
     fun getMyComments(): Observable<List<Comment>>
+    fun comment(post: Post, text: String): Observable<Comment>
 }

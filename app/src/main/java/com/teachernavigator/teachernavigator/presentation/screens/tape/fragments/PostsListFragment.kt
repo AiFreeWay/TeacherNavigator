@@ -48,7 +48,6 @@ class PostsListFragment : BaseFragment(), PostsListView {
         mAdapter = MultyRvAdapter(PostHolder(context, mPresenter.getPostControllerFacade()))
         mRvList.layoutManager = LinearLayoutManager(context)
         mRvList.adapter = mAdapter
-        mPresenter.getPosts()
     }
 
     override fun onDestroyView() {
@@ -66,5 +65,9 @@ class PostsListFragment : BaseFragment(), PostsListView {
 
     override fun hideNoDataText() {
         mTvNoData.visibility = View.GONE
+    }
+
+    override fun refresh() {
+        mPresenter.getPosts()
     }
 }

@@ -70,7 +70,7 @@ class TapeFragment : BaseFragment(), TapeView {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when(item.itemId) {
             R.id.action_search -> { mPresenter.openPostSearchScreen() }
-            R.id.action_refresh -> {}
+            R.id.action_refresh -> { mPresenter.refresh(mAdapter.currentFragment(mVpTapeItems.currentItem)) }
         }
         return super.onOptionsItemSelected(item)
     }

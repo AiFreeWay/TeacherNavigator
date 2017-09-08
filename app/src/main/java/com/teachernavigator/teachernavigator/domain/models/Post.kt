@@ -1,9 +1,11 @@
 package com.teachernavigator.teachernavigator.domain.models
 
+import java.io.Serializable
+
 /**
  * Created by root on 22.08.17.
  */
-class Post {
+class Post : Serializable {
 
     var id: Int? = null
     var title: String? = null

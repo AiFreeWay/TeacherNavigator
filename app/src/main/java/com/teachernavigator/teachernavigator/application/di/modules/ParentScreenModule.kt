@@ -1,7 +1,6 @@
 package com.teachernavigator.teachernavigator.application.di.modules
 
 import com.example.root.androidtest.application.utils.Logger
-import com.teachernavigator.teachernavigator.BuildConfig
 import com.teachernavigator.teachernavigator.application.di.scopes.PerParentScreen
 import com.teachernavigator.teachernavigator.data.repository.abstractions.IAuthRepository
 import com.teachernavigator.teachernavigator.data.repository.abstractions.IMainRepository
@@ -9,8 +8,10 @@ import com.teachernavigator.teachernavigator.data.repository.abstractions.ITapeR
 import com.teachernavigator.teachernavigator.domain.controllers.IPostController
 import com.teachernavigator.teachernavigator.domain.controllers.PostController
 import com.teachernavigator.teachernavigator.domain.interactors.AuthInteractor
+import com.teachernavigator.teachernavigator.domain.interactors.CommentsInteractor
 import com.teachernavigator.teachernavigator.domain.interactors.PostsInteractor
 import com.teachernavigator.teachernavigator.domain.interactors.abstractions.IAuthInteractor
+import com.teachernavigator.teachernavigator.domain.interactors.abstractions.ICommentsInteractor
 import com.teachernavigator.teachernavigator.domain.interactors.abstractions.IPostsInteractor
 import com.teachernavigator.teachernavigator.presentation.facades.PostControllerFacade
 import com.teachernavigator.teachernavigator.presentation.facades.abstractions.IPostControllerFacade
@@ -30,7 +31,7 @@ class ParentScreenModule(private val mParentView: ParentView) {
     private val mCicerone: Cicerone<Router>
 
     init {
-        if (BuildConfig.DEBUG) Logger.logDebug("created MODULE ParentScreenModule")
+        Logger.logDebug("created MODULE ParentScreenModule")
 
         mCicerone = Cicerone.create()
         mCicerone.navigatorHolder.setNavigator(FragmentNavigator(mParentView.getActivity(),
@@ -56,7 +57,11 @@ class ParentScreenModule(private val mParentView: ParentView) {
 
     @Provides
     @PerParentScreen
-    fun provideTapeInteractor(interactor : PostsInteractor): IPostsInteractor = interactor
+    fun providePostsInteractor(interactor : PostsInteractor): IPostsInteractor = interactor
+
+    @Provides
+    @PerParentScreen
+    fun provideCommentsInteractor(interactor : CommentsInteractor): ICommentsInteractor = interactor
 
     @Provides
     @PerParentScreen

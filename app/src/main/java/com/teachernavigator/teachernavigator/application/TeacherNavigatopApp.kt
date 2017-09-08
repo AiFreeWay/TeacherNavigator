@@ -19,7 +19,6 @@ class TeacherNavigatopApp :Application() {
         mRootComponent = DaggerRootComponent.builder()
                 .rootModule(RootModule(this))
                 .build()
-        //LeakCanary.install(this)
     }
 
     fun getRootComponent(): RootComponent {

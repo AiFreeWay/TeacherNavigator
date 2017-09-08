@@ -36,10 +36,6 @@ class AuthMapper {
                     singUpData.phone_number)
         }
 
-        fun mapSingUpResponse(response: BaseResponse): Monade {
-            return Monade(response.is_error)
-        }
-
         fun mapSingInDataToRequest(login: String, password: String, authCredentials: AuthCredentials): SingInRequest =
                 SingInRequest(login, password,
                         authCredentials.clientId,

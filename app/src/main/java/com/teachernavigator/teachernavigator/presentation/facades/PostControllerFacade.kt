@@ -1,15 +1,13 @@
 package com.teachernavigator.teachernavigator.presentation.facades
 
 import com.example.root.androidtest.application.utils.Logger
-import com.teachernavigator.teachernavigator.BuildConfig
 import com.teachernavigator.teachernavigator.domain.controllers.IPostController
-import com.teachernavigator.teachernavigator.domain.models.Monade
 import com.teachernavigator.teachernavigator.domain.models.Post
 import com.teachernavigator.teachernavigator.presentation.facades.abstractions.IPostControllerFacade
+import com.teachernavigator.teachernavigator.presentation.facades.abstractions.IPostControllerFacadeCallback
 import com.teachernavigator.teachernavigator.presentation.screens.auth.activities.AuthActivity
 import com.teachernavigator.teachernavigator.presentation.screens.base.ParentView
 import com.teachernavigator.teachernavigator.presentation.utils.ActivityRouter
-import io.reactivex.Observable
 import javax.inject.Inject
 
 /**
@@ -19,25 +17,43 @@ class PostControllerFacade @Inject constructor(private val mPostController: IPos
                                                private val mParentView: ParentView) : IPostControllerFacade {
 
     init {
-        if (BuildConfig.DEBUG) Logger.logDebug("created Facade PostControllerFacade")
+        Logger.logDebug("created Facade PostControllerFacade")
     }
 
-    override fun like(post: Post): Observable<Monade> = mPostController.like(post, { doOnUserNotAuth() })
-
-    override fun dislike(post: Post): Observable<Monade> = mPostController.dislike(post, { doOnUserNotAuth() })
-
-    override fun save(post: Post): Observable<Monade> = mPostController.save(post, { doOnUserNotAuth() })
-
-    override fun subscribe(post: Post): Observable<Monade> = mPostController.subscribe(post, { doOnUserNotAuth() })
-
-    override fun complain(post: Post): Observable<Monade> = mPostController.complain(post, { doOnUserNotAuth() })
-
-    override fun openCommentsScreen(post: Post) {
-        mPostController.openCommentsScreen(post, mParentView.getActivity(), { doOnUserNotAuth() })
+    override fun like(post: Post, callbak: IPostControllerFacadeCallback) {
+        mPostController.like(post, { doOnUserNotAuth() })
+                .subscribe({ callbak.onLike(it) }, { this::doOnError })
     }
 
-    override fun openProfileScreen(post: Post) {
+    override fun dislike(post: Post, callbak: IPostControllerFacadeCallback) {
+        mPostController.dislike(post, { doOnUserNotAuth() })
+                .subscribe({ callbak.onDislike(it) }, { this::doOnError })
+    }
+
+    override fun save(post: Post, callbak: IPostControllerFacadeCallback) {
+        mPostController.save(post, { doOnUserNotAuth() })
+                .subscribe({ callbak.onSave(it) }, { this::doOnError })
+    }
+
+    override fun subscribe(post: Post, callbak: IPostControllerFacadeCallback) {
+        mPostController.subscribe(post, { doOnUserNotAuth() })
+                .subscribe({ callbak.onSubscribe(it) }, { this::doOnError })
+    }
+
+    override fun complain(post: Post, callbak: IPostControllerFacadeCallback) {
+        mPostController.complain(post, { doOnUserNotAuth() })
+                .subscribe({ callbak.onComplain(it) }, { this::doOnError })
+    }
+
+    override fun openCommentsScreen(post: Post, callbak: IPostControllerFacadeCallback) {
+        if (post.comments != null && post.comments!!.isNotEmpty())
+            mPostController.openCommentsScreen(post, mParentView.getActivity(), { doOnUserNotAuth() })
+                    .subscribe({}, { this::doOnError })
+    }
+
+    override fun openProfileScreen(post: Post, callbak: IPostControllerFacadeCallback) {
         mPostController.openProfileScreen(post, mParentView.getActivity(), { doOnUserNotAuth() })
+                .subscribe({}, { this::doOnError })
     }
 
     override fun openPostDetailScreen(post: Post) {
@@ -46,5 +62,15 @@ class PostControllerFacade @Inject constructor(private val mPostController: IPos
 
     private fun doOnUserNotAuth() {
         ActivityRouter.openActivity(mParentView.getActivity(), AuthActivity::class.java)
+    }
+
+    private fun doOnError(error: Throwable, callbak: IPostControllerFacadeCallback) {
+        try {
+            callbak.onError(error)
+        } catch (e: Exception) {
+            // -> @.@ <-
+        } finally {
+            Logger.logError(error)
+        }
     }
 }

@@ -26,6 +26,8 @@
             android:windowSoftInputMode="adjustPan"/>
         <activity android:name=".presentation.screens.tape.activities.PostDetailActivity"
             android:windowSoftInputMode="adjustPan"/>
+        <activity android:name=".presentation.screens.tape.activities.PostCommentsActivity"
+            android:windowSoftInputMode="adjustPan"/>
     </application>
 
 </manifest>

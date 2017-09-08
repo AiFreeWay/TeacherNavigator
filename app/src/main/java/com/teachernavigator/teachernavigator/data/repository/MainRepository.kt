@@ -1,16 +1,18 @@
 package com.teachernavigator.teachernavigator.data.repository
 
 import android.content.Context
+import android.text.TextUtils
 import com.example.root.androidtest.application.utils.Logger
-import com.teachernavigator.teachernavigator.BuildConfig
 import com.teachernavigator.teachernavigator.R
 import com.teachernavigator.teachernavigator.data.cache.CacheController
 import com.teachernavigator.teachernavigator.data.models.PostNetwork
 import com.teachernavigator.teachernavigator.data.network.NetworkController
 import com.teachernavigator.teachernavigator.data.network.requests.RestorePasswordRequest
+import com.teachernavigator.teachernavigator.data.network.fieldmapskeys.SavePostFieldKeys
 import com.teachernavigator.teachernavigator.data.network.requests.SingInRequest
 import com.teachernavigator.teachernavigator.data.network.requests.SingUpRequest
 import com.teachernavigator.teachernavigator.data.network.responses.BaseResponse
+import com.teachernavigator.teachernavigator.data.network.responses.GetMyCommentsResponse
 import com.teachernavigator.teachernavigator.data.network.responses.SingInResponse
 import com.teachernavigator.teachernavigator.data.repository.abstractions.IMainRepository
 import com.teachernavigator.teachernavigator.domain.models.AuthCredentials
@@ -26,13 +28,20 @@ class MainRepository @Inject constructor(private val mNetwokController: NetworkC
                                          private val mContext: Context) : IMainRepository {
 
     init {
-        if (BuildConfig.DEBUG) Logger.logDebug("created REPOSITORY MainRepository")
+        Logger.logDebug("created REPOSITORY MainRepository")
+    }
+
+    override fun getAccessToken(): String {
+        val token = (CacheController.getData(CacheController.TOKEN_KEY, Token.EMPTY_TOKEN) as Token)
+        return token.tokenType+" "+token.accessToken
     }
 
     // ------------------------------- Auth methods --------------------------------
 
-    override fun getToken(): Observable<Token> =
+    override fun getTokenAsynch(): Observable<Token> =
             Observable.just(CacheController.getData(CacheController.TOKEN_KEY, Token.EMPTY_TOKEN))
+
+    override fun isAuth(): Boolean = !TextUtils.isEmpty(getAccessToken())
 
     override fun saveToken(token: Token) {
         CacheController.putData(CacheController.TOKEN_KEY, token)
@@ -64,13 +73,17 @@ class MainRepository @Inject constructor(private val mNetwokController: NetworkC
 
     // ------------------------------- Posts methods --------------------------------
 
-    override fun getBestPosts(): Observable<Array<PostNetwork>> = mNetwokController.getBestPosts()
-
     override fun getInterviewsPosts(): Observable<Array<PostNetwork>> = mNetwokController.getInterviewsPosts()
-
-    override fun getLatestPosts(): Observable<Array<PostNetwork>> = mNetwokController.getLatestPosts()
 
     override fun getNewsPosts(): Observable<Array<PostNetwork>> = mNetwokController.getNewsPosts()
 
+    override fun getPosts(): Observable<Array<PostNetwork>> = mNetwokController.getPosts()
+
     override fun getPostById(postId: Int): Observable<PostNetwork> = mNetwokController.getPost(postId)
+
+    override fun getMyComments(): Observable<GetMyCommentsResponse>
+            = mNetwokController.getMyComments(getAccessToken())
+
+    override fun savePost(filedMap: Map<String, String>): Observable<BaseResponse> =
+            mNetwokController.savePost(getAccessToken(), filedMap)
 }

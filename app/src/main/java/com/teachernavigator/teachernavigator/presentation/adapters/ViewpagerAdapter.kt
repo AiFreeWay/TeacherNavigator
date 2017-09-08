@@ -11,7 +11,7 @@ import com.teachernavigator.teachernavigator.presentation.models.ViewPagerItemCo
  */
 class ViewpagerAdapter(fragmentManager: FragmentManager) : FragmentStatePagerAdapter(fragmentManager) {
 
-    private var mData: List<ViewPagerItemContainer> = emptyList<ViewPagerItemContainer>()
+    private var mData: List<ViewPagerItemContainer> = emptyList()
 
     override fun getItem(position: Int): Fragment? {
         return mData.get(position).mFragment
@@ -28,6 +28,12 @@ class ViewpagerAdapter(fragmentManager: FragmentManager) : FragmentStatePagerAda
     fun loadData(data: List<ViewPagerItemContainer>) {
         mData = data
         notifyDataSetChanged()
+    }
+
+    fun currentFragment(currentPosition: Int): Fragment? {
+        if (currentPosition > -1)
+            return getItem(currentPosition)
+        return null
     }
 }
 

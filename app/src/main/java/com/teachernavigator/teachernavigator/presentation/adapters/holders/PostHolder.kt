@@ -6,19 +6,22 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import butterknife.BindView
 import butterknife.ButterKnife
 import com.greenfrvr.hashtagview.HashtagView
 import com.squareup.picasso.Picasso
 import com.teachernavigator.teachernavigator.R
+import com.teachernavigator.teachernavigator.domain.models.Monade
 import com.teachernavigator.teachernavigator.domain.models.Post
 import com.teachernavigator.teachernavigator.presentation.facades.abstractions.IPostControllerFacade
-import com.teachernavigator.teachernavigator.presentation.utils.CircleTransform
+import com.teachernavigator.teachernavigator.presentation.facades.abstractions.IPostControllerFacadeCallback
+import com.teachernavigator.teachernavigator.presentation.utils.ImageLoader
 
 /**
  * Created by root on 18.08.17.
  */
-class PostHolder: BaseHolder<Post> {
+class PostHolder: BaseHolder<Post>, IPostControllerFacadeCallback {
 
     @BindView(R.id.v_post_holder_iv_avatar)
     lateinit var mIvAvatar: ImageView
@@ -70,11 +73,7 @@ class PostHolder: BaseHolder<Post> {
         mTvPostime.setText(dataModel.created)
         mTvText.setText(dataModel.text)
 
-        Picasso.with(itemView.context)
-                .load("http://mock.com")
-                .placeholder(R.drawable.ic_avatar)
-                .error(R.drawable.ic_avatar)
-                .into(mIvAvatar)
+        ImageLoader.load(getContext(), "http://mock.com", mIvAvatar)
 
         mHvHashTags.setData(dataModel.tags!!)
         mTvLike.setText(dataModel.countLikes.toString())
@@ -83,34 +82,45 @@ class PostHolder: BaseHolder<Post> {
     }
 
     private fun setClickListeners(dataModel: Post) {
-        mIvSubscribe.setOnClickListener { subscribe(dataModel) }
-        mTvComplain.setOnClickListener { complain(dataModel) }
-        mTvLike.setOnClickListener { like(dataModel) }
-        mTvDislike.setOnClickListener { dislike(dataModel) }
-        mIvSave.setOnClickListener { save(dataModel) }
+        mIvSubscribe.setOnClickListener { mPostControllerFacade.subscribe(dataModel, this) }
+        mTvComplain.setOnClickListener { mPostControllerFacade.complain(dataModel, this) }
+        mTvLike.setOnClickListener { mPostControllerFacade.like(dataModel, this) }
+        mTvDislike.setOnClickListener { mPostControllerFacade.dislike(dataModel, this) }
+        mIvSave.setOnClickListener { mPostControllerFacade.save(dataModel, this) }
 
-        mIvAvatar.setOnClickListener { mPostControllerFacade.openProfileScreen(dataModel) }
+        mIvAvatar.setOnClickListener { mPostControllerFacade.openProfileScreen(dataModel, this) }
         mBtnMore.setOnClickListener { mPostControllerFacade.openPostDetailScreen(dataModel) }
-        mTvComments.setOnClickListener { mPostControllerFacade.openCommentsScreen(dataModel) }
+        mTvComments.setOnClickListener { mPostControllerFacade.openCommentsScreen(dataModel, this) }
     }
 
-    private fun subscribe(dataModel: Post) {
-        mPostControllerFacade.subscribe(dataModel)
+    override fun onLike(result: Monade) {
+
     }
 
-    private fun complain(dataModel: Post) {
-        mPostControllerFacade.complain(dataModel)
+    override fun onDislike(result: Monade) {
+
     }
 
-    private fun like(dataModel: Post) {
-        mPostControllerFacade.like(dataModel)
+    override fun onSave(result: Monade) {
+        if (!result.isError)
+            showToast(R.string.added)
     }
 
-    private fun dislike(dataModel: Post) {
-        mPostControllerFacade.dislike(dataModel)
+    override fun onSubscribe(result: Monade) {
+
     }
 
-    private fun save(dataModel: Post) {
-        mPostControllerFacade.save(dataModel)
+    override fun onComplain(result: Monade) {
+
     }
+
+    override fun onError(error: Throwable) {
+        showToast(R.string.error_throwed)
+    }
+
+    private fun showToast(strRest: Int) {
+        Toast.makeText(getContext(), getContext().getString(strRest), Toast.LENGTH_SHORT).show()
+    }
+
+    private fun getContext() = itemView.context
 }

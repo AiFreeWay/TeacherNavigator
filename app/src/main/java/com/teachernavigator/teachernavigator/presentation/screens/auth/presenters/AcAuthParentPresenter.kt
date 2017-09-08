@@ -4,7 +4,6 @@ import android.arch.lifecycle.Lifecycle
 import android.arch.lifecycle.OnLifecycleEvent
 import android.os.Bundle
 import com.example.root.androidtest.application.utils.Logger
-import com.teachernavigator.teachernavigator.BuildConfig
 import com.teachernavigator.teachernavigator.application.di.components.DaggerParentScreenComponent
 import com.teachernavigator.teachernavigator.application.di.components.ParentScreenComponent
 import com.teachernavigator.teachernavigator.application.di.modules.ParentScreenModule
@@ -26,7 +25,7 @@ class AcAuthParentPresenter : BasePresenter<AuthParentView>(), IAuthParentPresen
     private lateinit var mParentScreenComponent: ParentScreenComponent
 
     init {
-        if (BuildConfig.DEBUG) Logger.logDebug("created PRESENTER AcAuthParentPresenter")
+        Logger.logDebug("created PRESENTER AcAuthParentPresenter")
     }
 
     @OnLifecycleEvent(Lifecycle.Event.ON_STOP)

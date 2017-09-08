@@ -4,7 +4,6 @@ import android.arch.lifecycle.*
 import android.content.Context
 import android.view.ViewGroup
 import com.example.root.androidtest.application.utils.Logger
-import com.teachernavigator.teachernavigator.BuildConfig
 import com.teachernavigator.teachernavigator.presentation.factories.MenuItemsFactory
 import com.teachernavigator.teachernavigator.presentation.menu.bind_strategy.BindStrategy
 import com.teachernavigator.teachernavigator.presentation.menu.bind_strategy.MenuBindStrategy
@@ -15,7 +14,6 @@ import com.teachernavigator.teachernavigator.presentation.menu.channels.Presente
 import com.teachernavigator.teachernavigator.presentation.models.MenuData
 import com.teachernavigator.teachernavigator.presentation.models.MenuItem
 import io.reactivex.subjects.PublishSubject
-
 
 /**
  * Created by root on 15.08.17.
@@ -42,7 +40,7 @@ class MenuController private constructor(lifeCycle: LifecycleRegistry, private v
     }
 
     init {
-        if (BuildConfig.DEBUG) Logger.logDebug("create CONTROLLER MenuController")
+        Logger.logDebug("create CONTROLLER MenuController")
         lifeCycle.addObserver(this)
         val inHolderFromPresenter = PublishSubject.create<MenuData<*>>()
         val inPresenterFromHolder = PublishSubject.create<MenuData<*>>()

@@ -1,5 +1,6 @@
 package com.teachernavigator.teachernavigator.presentation.screens.main.presenters.abstractions
 
+import android.support.v4.app.Fragment
 import com.teachernavigator.teachernavigator.presentation.screens.base.ViewAttacher
 import com.teachernavigator.teachernavigator.presentation.screens.main.fragments.abstractions.TapeView
 
@@ -10,4 +11,5 @@ interface ITapePresenter : ViewAttacher<TapeView> {
 
     fun loadFragments()
     fun openPostSearchScreen()
+    fun refresh(fragment: Fragment?)
 }

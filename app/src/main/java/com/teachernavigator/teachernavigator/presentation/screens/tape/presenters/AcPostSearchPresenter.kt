@@ -3,9 +3,7 @@ package com.teachernavigator.teachernavigator.presentation.screens.tape.presente
 import android.arch.lifecycle.Lifecycle
 import android.arch.lifecycle.OnLifecycleEvent
 import com.example.root.androidtest.application.utils.Logger
-import com.teachernavigator.teachernavigator.BuildConfig
 import com.teachernavigator.teachernavigator.application.di.components.DaggerParentScreenComponent
-import com.teachernavigator.teachernavigator.application.di.components.ParentScreenComponent
 import com.teachernavigator.teachernavigator.application.di.modules.ParentScreenModule
 import com.teachernavigator.teachernavigator.presentation.screens.base.BasePresenter
 import com.teachernavigator.teachernavigator.presentation.screens.tape.activities.absctraction.PostSearchView
@@ -16,10 +14,8 @@ import com.teachernavigator.teachernavigator.presentation.screens.tape.presenter
  */
 class AcPostSearchPresenter : BasePresenter<PostSearchView>(), IPostSearchPresenter {
 
-    private lateinit var mParentScreenComponent: ParentScreenComponent
-
     init {
-        if (BuildConfig.DEBUG) Logger.logDebug("created PRESENTER AcPostSearchPresenter")
+        Logger.logDebug("created PRESENTER AcPostSearchPresenter")
     }
 
     @OnLifecycleEvent(Lifecycle.Event.ON_STOP)
@@ -42,11 +38,10 @@ class AcPostSearchPresenter : BasePresenter<PostSearchView>(), IPostSearchPresen
     }
 
     private fun inject() {
-        mParentScreenComponent = DaggerParentScreenComponent.builder()
+        DaggerParentScreenComponent.builder()
                 .rootComponent(getRootComponent(mView!!.getActivity()))
                 .parentScreenModule(ParentScreenModule(mView!!))
                 .build()
-
-        mParentScreenComponent.inject(this)
+                .inject(this)
     }
 }

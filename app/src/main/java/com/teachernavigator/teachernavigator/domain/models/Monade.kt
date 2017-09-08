@@ -5,4 +5,9 @@ package com.teachernavigator.teachernavigator.domain.models
  */
 open class Monade (var isError: Boolean) {
 
+    companion object {
+
+        val SUCCESSFULLY_MONADE = Monade(false)
+        val FAILARY_MONADE = Monade(true)
+    }
 }

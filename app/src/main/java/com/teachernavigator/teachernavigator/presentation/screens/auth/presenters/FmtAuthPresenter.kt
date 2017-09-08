@@ -3,7 +3,6 @@ package com.teachernavigator.teachernavigator.presentation.screens.auth.presente
 import android.arch.lifecycle.Lifecycle
 import android.arch.lifecycle.OnLifecycleEvent
 import com.example.root.androidtest.application.utils.Logger
-import com.teachernavigator.teachernavigator.BuildConfig
 import com.teachernavigator.teachernavigator.R
 import com.teachernavigator.teachernavigator.domain.interactors.abstractions.IAuthInteractor
 import com.teachernavigator.teachernavigator.domain.models.Monade
@@ -29,7 +28,7 @@ class FmtAuthPresenter : BasePresenter<AuthView>(), IAuthPresenter {
     lateinit var mAuthInteractor: IAuthInteractor
 
     init {
-        if (BuildConfig.DEBUG) Logger.logDebug("created PRESENTER FmtAuthPresenter")
+        Logger.logDebug("created PRESENTER FmtAuthPresenter")
     }
 
     @OnLifecycleEvent(Lifecycle.Event.ON_START)

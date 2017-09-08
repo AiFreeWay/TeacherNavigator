@@ -11,4 +11,5 @@ interface PostsListView : ChildView {
     fun loadPosts(posts: List<Post>)
     fun showNoDataText()
     fun hideNoDataText()
+    fun refresh()
 }

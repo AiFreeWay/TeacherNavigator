@@ -3,7 +3,6 @@ package com.teachernavigator.teachernavigator.presentation.screens.tape.presente
 import android.arch.lifecycle.Lifecycle
 import android.arch.lifecycle.OnLifecycleEvent
 import com.example.root.androidtest.application.utils.Logger
-import com.teachernavigator.teachernavigator.BuildConfig
 import com.teachernavigator.teachernavigator.domain.interactors.abstractions.IPostsInteractor
 import com.teachernavigator.teachernavigator.domain.models.Post
 import com.teachernavigator.teachernavigator.presentation.facades.abstractions.IPostControllerFacade
@@ -26,7 +25,12 @@ class FmtPostsListPresenter : BasePresenter<PostsListView>(), IPostsListPresente
     private var mTapeType: Int = -1
 
     init {
-        if (BuildConfig.DEBUG) Logger.logDebug("created PRESENTER FmtPostsListPresenter")
+        Logger.logDebug("created PRESENTER FmtPostsListPresenter")
+    }
+
+    @OnLifecycleEvent(Lifecycle.Event.ON_START)
+    private fun onStart() {
+        getPosts()
     }
 
     @OnLifecycleEvent(Lifecycle.Event.ON_STOP)

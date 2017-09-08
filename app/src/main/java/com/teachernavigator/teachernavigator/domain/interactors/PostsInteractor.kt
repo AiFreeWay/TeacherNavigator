@@ -1,7 +1,6 @@
 package com.teachernavigator.teachernavigator.domain.interactors
 
 import com.example.root.androidtest.application.utils.Logger
-import com.teachernavigator.teachernavigator.BuildConfig
 import com.teachernavigator.teachernavigator.data.models.PostNetwork
 import com.teachernavigator.teachernavigator.data.repository.abstractions.ITapeRepository
 import com.teachernavigator.teachernavigator.domain.interactors.abstractions.IPostsInteractor
@@ -18,16 +17,21 @@ import javax.inject.Inject
 class PostsInteractor @Inject constructor(private val mRepository: ITapeRepository) : IPostsInteractor {
 
     init {
-        if (BuildConfig.DEBUG) Logger.logDebug("created INTERACTOR PostsInteractor")
+        Logger.logDebug("created INTERACTOR PostsInteractor")
     }
 
-    override fun getBestPosts(): Observable<List<Post>> = configePostsObservable(mRepository.getBestPosts())
+    override fun getBestPosts(): Observable<List<Post>> =
+            configePostsObservable(mRepository.getPosts())
+                    .map { sortAsBestPosts(it) }
 
-    override fun getInterviewsPosts(): Observable<List<Post>> = configePostsObservable(mRepository.getInterviewsPosts())
+    override fun getInterviewsPosts(): Observable<List<Post>> =
+            configePostsObservable(mRepository.getInterviewsPosts())
 
-    override fun getLatestPosts(): Observable<List<Post>> = configePostsObservable(mRepository.getLatestPosts())
+    override fun getLatestPosts(): Observable<List<Post>> =
+            configePostsObservable(mRepository.getPosts())
 
-    override fun getNewsPosts(): Observable<List<Post>> = configePostsObservable(mRepository.getNewsPosts())
+    override fun getNewsPosts(): Observable<List<Post>> =
+            configePostsObservable(mRepository.getNewsPosts())
 
     override fun getPostById(postId: Int): Observable<Post> =
             mRepository.getPostById(postId)
@@ -40,4 +44,5 @@ class PostsInteractor @Inject constructor(private val mRepository: ITapeReposito
                     .subscribeOn(Schedulers.newThread())
                     .map { PostsMapper.mapPosts(it) }
 
+    private fun sortAsBestPosts(posts: List<Post>): List<Post> = posts.sortedBy { it.countDislikes!! - it.countLikes!! }
 }

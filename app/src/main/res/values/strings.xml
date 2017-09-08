@@ -70,4 +70,8 @@
     <string name="auth_error">Ошибка авторизации</string>
     <string name="restore_password_error">Ошибка восстановления пароля</string>
     <string name="no_data">Не данных</string>
+    <string name="error_throwed">Произошла ошибка</string>
+    <string name="comments">Комментарии</string>
+    <string name="open_branch">Открыть ветвь</string>
+    <string name="added">Добавлено</string>
 </resources>

@@ -13,7 +13,9 @@ import com.teachernavigator.teachernavigator.presentation.screens.auth.presenter
 import com.teachernavigator.teachernavigator.presentation.screens.auth.presenters.FmtRegistrationPresenter
 import com.teachernavigator.teachernavigator.presentation.screens.auth.presenters.FmtRestorePasswordPresenter
 import com.teachernavigator.teachernavigator.presentation.screens.base.ParentView
+import com.teachernavigator.teachernavigator.presentation.screens.main.presenters.FmtMyCommentsPresenter
 import com.teachernavigator.teachernavigator.presentation.screens.main.presenters.FmtTapePresenter
+import com.teachernavigator.teachernavigator.presentation.screens.tape.presenters.AcPostCommentsPresenter
 import com.teachernavigator.teachernavigator.presentation.screens.tape.presenters.AcPostDetailPresenter
 import com.teachernavigator.teachernavigator.presentation.screens.tape.presenters.AcPostSearchPresenter
 import com.teachernavigator.teachernavigator.presentation.screens.tape.presenters.FmtPostsListPresenter
@@ -28,15 +30,16 @@ interface ParentScreenComponent {
 
     fun provideTapeRepository() : ITapeRepository
     fun provideAuthRepository() : IAuthRepository
-    fun provideInteractor() : IAuthInteractor
     fun providePostController() : IPostController
     fun provideParentView() : ParentView
 
     fun inject(presenter: AcMainPresenter)
     fun inject(presenter: FmtTapePresenter)
+    fun inject(presenter: FmtMyCommentsPresenter)
 
     fun inject(presenter: AcPostSearchPresenter)
     fun inject(presenter: AcPostDetailPresenter)
+    fun inject(presenter: AcPostCommentsPresenter)
     fun inject(presenter: FmtPostsListPresenter)
 
     fun inject(presenter: AcAuthParentPresenter)

@@ -2,8 +2,8 @@ package com.teachernavigator.teachernavigator.presentation.screens.main.presente
 
 import android.arch.lifecycle.Lifecycle
 import android.arch.lifecycle.OnLifecycleEvent
+import android.support.v4.app.Fragment
 import com.example.root.androidtest.application.utils.Logger
-import com.teachernavigator.teachernavigator.BuildConfig
 import com.teachernavigator.teachernavigator.R
 import com.teachernavigator.teachernavigator.domain.interactors.abstractions.IAuthInteractor
 import com.teachernavigator.teachernavigator.presentation.factories.PostsFragmentsFactory
@@ -12,6 +12,7 @@ import com.teachernavigator.teachernavigator.presentation.screens.base.BasePrese
 import com.teachernavigator.teachernavigator.presentation.screens.main.fragments.abstractions.TapeView
 import com.teachernavigator.teachernavigator.presentation.screens.main.presenters.abstractions.ITapePresenter
 import com.teachernavigator.teachernavigator.presentation.screens.tape.activities.PostSearchActivity
+import com.teachernavigator.teachernavigator.presentation.screens.tape.fragments.PostsListFragment
 import com.teachernavigator.teachernavigator.presentation.utils.ActivityRouter
 import javax.inject.Inject
 
@@ -24,7 +25,7 @@ class FmtTapePresenter : BasePresenter<TapeView>(), ITapePresenter {
     lateinit var mAuthInteractor: IAuthInteractor
 
     init {
-        if (BuildConfig.DEBUG) Logger.logDebug("created PRESENTER FmtTapePresenter")
+        Logger.logDebug("created PRESENTER FmtTapePresenter")
     }
 
     @OnLifecycleEvent(Lifecycle.Event.ON_START)
@@ -48,13 +49,19 @@ class FmtTapePresenter : BasePresenter<TapeView>(), ITapePresenter {
     }
 
     override fun loadFragments() {
-        addDissposable(mAuthInteractor.isAuth()
+        addDissposable(mAuthInteractor.isAuthAsynch()
                 .doOnSubscribe { mView!!.getParentView().startProgress() }
                 .subscribe({ doOnGetIsUserAuthInfo(it)}, this::doOnError))
     }
 
     override fun openPostSearchScreen() {
         ActivityRouter.openActivity(mView!!.getParentView().getActivity(), PostSearchActivity::class.java)
+    }
+
+    override fun refresh(fragment: Fragment?) {
+        if (fragment != null) {
+            (fragment as PostsListFragment).refresh()
+        }
     }
 
     private fun doOnGetIsUserAuthInfo(isAuth: Boolean) {

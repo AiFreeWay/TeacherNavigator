@@ -25,7 +25,6 @@ class AccountCreatedDialog: DialogFragment() {
         }
     }
 
-
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog =
         AlertDialog.Builder(activity)
                 .setTitle(getString(R.string.your_account_succesfuly_created))
@@ -33,5 +32,4 @@ class AccountCreatedDialog: DialogFragment() {
                 .setPositiveButton(getString(R.string.do_auth), { dialog, whichButton ->  mOnPositiveClick.invoke() })
                 .setCancelable(false)
                 .create()
-
 }

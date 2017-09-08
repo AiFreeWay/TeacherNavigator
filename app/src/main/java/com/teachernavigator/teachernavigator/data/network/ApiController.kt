@@ -5,12 +5,10 @@ import com.teachernavigator.teachernavigator.data.network.requests.RestorePasswo
 import com.teachernavigator.teachernavigator.data.network.requests.SingInRequest
 import com.teachernavigator.teachernavigator.data.network.requests.SingUpRequest
 import com.teachernavigator.teachernavigator.data.network.responses.BaseResponse
+import com.teachernavigator.teachernavigator.data.network.responses.GetMyCommentsResponse
 import com.teachernavigator.teachernavigator.data.network.responses.SingInResponse
 import io.reactivex.Observable
-import retrofit2.http.Body
-import retrofit2.http.GET
-import retrofit2.http.POST
-import retrofit2.http.Path
+import retrofit2.http.*
 
 /**
  * Created by root on 11.08.17.
@@ -35,4 +33,10 @@ interface ApiController {
 
     @GET("/api/v0/post/{postId}")
     fun getPost(@Path("postId") postId: Int): Observable<PostNetwork>
+
+    @GET("/api/v0/me/comments/")
+    fun getMyComments(@Header("Authorization") accessToken: String): Observable<GetMyCommentsResponse>
+
+    @GET("/api/v0/save/post/")
+    fun savePost(@Header("Authorization") accessToken: String, @FieldMap filedMap: Map<String, String>): Observable<BaseResponse>
 }

@@ -3,9 +3,9 @@ package com.teachernavigator.teachernavigator.presentation.screens.main.presente
 import android.arch.lifecycle.Lifecycle
 import android.arch.lifecycle.OnLifecycleEvent
 import android.os.Bundle
+import android.text.TextUtils
 import android.view.ViewGroup
 import com.example.root.androidtest.application.utils.Logger
-import com.teachernavigator.teachernavigator.BuildConfig
 import com.teachernavigator.teachernavigator.application.di.components.DaggerParentScreenComponent
 import com.teachernavigator.teachernavigator.application.di.components.ParentScreenComponent
 import com.teachernavigator.teachernavigator.application.di.modules.ParentScreenModule
@@ -16,6 +16,7 @@ import com.teachernavigator.teachernavigator.presentation.models.MenuData
 import com.teachernavigator.teachernavigator.presentation.screens.auth.activities.AuthActivity
 import com.teachernavigator.teachernavigator.presentation.screens.base.BasePresenter
 import com.teachernavigator.teachernavigator.presentation.screens.main.activities.abstractions.MainView
+import com.teachernavigator.teachernavigator.presentation.screens.main.fragments.MyCommentsFragment
 import com.teachernavigator.teachernavigator.presentation.screens.main.fragments.TapeFragment
 import com.teachernavigator.teachernavigator.presentation.screens.main.presenters.abstractions.IMainPresenter
 import com.teachernavigator.teachernavigator.presentation.utils.ActivityRouter
@@ -34,9 +35,10 @@ class AcMainPresenter : BasePresenter<MainView>(), IMainPresenter {
 
     private lateinit var mParentScreenComponent: ParentScreenComponent
     private var mMenuController: MenuController? = null
+    private var mLastScreenKey: String? = TapeFragment.FRAGMENT_KEY
 
     init {
-        if (BuildConfig.DEBUG) Logger.logDebug("created PRESENTER AcMainPresenter")
+        Logger.logDebug("created PRESENTER AcMainPresenter")
     }
 
     @OnLifecycleEvent(Lifecycle.Event.ON_STOP)
@@ -49,8 +51,13 @@ class AcMainPresenter : BasePresenter<MainView>(), IMainPresenter {
         inject()
     }
 
+    override fun navigateBack() {
+        mRouter.exit()
+        mLastScreenKey = ""
+    }
+
     override fun loadMenuItemsToViewGroup(viewGroup: ViewGroup) {
-        addDissposable(mAuthInteractor.isAuth()
+        addDissposable(mAuthInteractor.isAuthAsynch()
                 .subscribe({ doOnGetDataForMenu(it, viewGroup)}, this::doOnError))
     }
 
@@ -80,6 +87,8 @@ class AcMainPresenter : BasePresenter<MainView>(), IMainPresenter {
     private fun onMenuItemClick(item: MenuData<*>) {
         when(item.mType) {
             MenuItemsFactory.MenuItemTypes.LOGIN.id -> ActivityRouter.openActivity(mView!!.getActivity(), AuthActivity::class.java)
+            MenuItemsFactory.MenuItemTypes.TAPE.id -> navigateToFragment(TapeFragment.FRAGMENT_KEY)
+            MenuItemsFactory.MenuItemTypes.MY_COMMENTS.id -> navigateToFragment(MyCommentsFragment.FRAGMENT_KEY)
         }
         mView!!.closeSideMenu()
     }
@@ -91,5 +100,12 @@ class AcMainPresenter : BasePresenter<MainView>(), IMainPresenter {
                 .build()
 
         mParentScreenComponent.inject(this)
+    }
+
+    private fun navigateToFragment(screenKey: String) {
+        if (!TextUtils.equals(screenKey, mLastScreenKey)) {
+            mLastScreenKey = screenKey
+            mRouter.navigateTo(screenKey)
+        }
     }
 }

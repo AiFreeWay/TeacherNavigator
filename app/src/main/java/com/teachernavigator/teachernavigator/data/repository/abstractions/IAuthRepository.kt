@@ -15,7 +15,8 @@ import io.reactivex.Observable
  */
 interface IAuthRepository {
 
-    fun getToken(): Observable<Token>
+    fun getTokenAsynch(): Observable<Token>
+    fun isAuth(): Boolean
     fun saveToken(token: Token)
     fun singInViaVkontakte(): Observable<Monade>
     fun singInViaFacebook(): Observable<Monade>

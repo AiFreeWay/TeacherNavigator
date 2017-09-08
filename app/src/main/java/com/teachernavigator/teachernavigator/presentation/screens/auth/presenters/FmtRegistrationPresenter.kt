@@ -4,7 +4,6 @@ import android.arch.lifecycle.Lifecycle
 import android.arch.lifecycle.OnLifecycleEvent
 import android.text.TextUtils
 import com.example.root.androidtest.application.utils.Logger
-import com.teachernavigator.teachernavigator.BuildConfig
 import com.teachernavigator.teachernavigator.R
 import com.teachernavigator.teachernavigator.domain.interactors.abstractions.IAuthInteractor
 import com.teachernavigator.teachernavigator.domain.models.Monade
@@ -24,7 +23,7 @@ class FmtRegistrationPresenter : BasePresenter<RegistrationView>(), IRegistratio
     lateinit var mAuthInteractor: IAuthInteractor
 
     init {
-        if (BuildConfig.DEBUG) Logger.logDebug("created PRESENTER FmtRegistrationPresenter")
+        Logger.logDebug("created PRESENTER FmtRegistrationPresenter")
     }
 
     @OnLifecycleEvent(Lifecycle.Event.ON_START)

@@ -1,21 +1,19 @@
 package com.teachernavigator.teachernavigator.presentation.facades.abstractions
 
-import com.teachernavigator.teachernavigator.domain.models.Monade
 import com.teachernavigator.teachernavigator.domain.models.Post
-import io.reactivex.Observable
 
 /**
  * Created by root on 07.09.17.
  */
 interface IPostControllerFacade {
 
-    fun like(post: Post): Observable<Monade>
-    fun dislike(post: Post): Observable<Monade>
-    fun save(post: Post): Observable<Monade>
-    fun subscribe(post: Post): Observable<Monade>
-    fun complain(post: Post): Observable<Monade>
+    fun like(post: Post, callbak: IPostControllerFacadeCallback)
+    fun dislike(post: Post, callbak: IPostControllerFacadeCallback)
+    fun save(post: Post, callbak: IPostControllerFacadeCallback)
+    fun subscribe(post: Post, callbak: IPostControllerFacadeCallback)
+    fun complain(post: Post, callbak: IPostControllerFacadeCallback)
 
-    fun openCommentsScreen(post: Post)
-    fun openProfileScreen(post: Post)
+    fun openCommentsScreen(post: Post, callbak: IPostControllerFacadeCallback)
+    fun openProfileScreen(post: Post, callbak: IPostControllerFacadeCallback)
     fun openPostDetailScreen(post: Post)
 }

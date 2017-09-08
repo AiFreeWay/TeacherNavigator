@@ -16,4 +16,5 @@ interface IMainPresenter : ViewAttacher<MainView> {
     fun loadMenuItemsToViewGroup(viewGroup: ViewGroup)
     fun openStartFragment(savedState: Bundle?)
     fun getParentScreenComponent(): ParentScreenComponent
+    fun navigateBack()
 }

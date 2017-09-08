@@ -5,9 +5,11 @@ import com.google.gson.GsonBuilder
 import com.teachernavigator.teachernavigator.BuildConfig
 import com.teachernavigator.teachernavigator.data.models.PostNetwork
 import com.teachernavigator.teachernavigator.data.network.requests.RestorePasswordRequest
+import com.teachernavigator.teachernavigator.data.network.fieldmapskeys.SavePostFieldKeys
 import com.teachernavigator.teachernavigator.data.network.requests.SingInRequest
 import com.teachernavigator.teachernavigator.data.network.requests.SingUpRequest
 import com.teachernavigator.teachernavigator.data.network.responses.BaseResponse
+import com.teachernavigator.teachernavigator.data.network.responses.GetMyCommentsResponse
 import com.teachernavigator.teachernavigator.data.network.responses.SingInResponse
 import io.reactivex.Observable
 import okhttp3.OkHttpClient
@@ -25,7 +27,7 @@ class NetworkController {
     private val mApiController: ApiController
 
     init {
-        if (BuildConfig.DEBUG) Logger.logDebug("created CONTROLLER NetworkController")
+        Logger.logDebug("created CONTROLLER NetworkController")
 
         val gson = GsonBuilder()
                 .setLenient()
@@ -61,13 +63,15 @@ class NetworkController {
 
     // ------------------------------- Posts methods --------------------------------
 
-    fun getBestPosts(): Observable<Array<PostNetwork>> = Observable.just(emptyArray())
-
     fun getInterviewsPosts(): Observable<Array<PostNetwork>> = Observable.just(emptyArray())
 
-    fun getLatestPosts(): Observable<Array<PostNetwork>> = Observable.just(emptyArray())
+    fun getNewsPosts(): Observable<Array<PostNetwork>> = Observable.just(emptyArray())
 
-    fun getNewsPosts(): Observable<Array<PostNetwork>> = mApiController.getPosts()
+    fun getPosts(): Observable<Array<PostNetwork>> = mApiController.getPosts()
 
     fun getPost(postId: Int): Observable<PostNetwork> = mApiController.getPost(postId)
+
+    fun getMyComments(token: String): Observable<GetMyCommentsResponse> = mApiController.getMyComments(token)
+
+    fun savePost(token: String, filedMap: Map<String, String>): Observable<BaseResponse> = mApiController.savePost(token, filedMap)
 }

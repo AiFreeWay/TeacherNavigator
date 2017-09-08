@@ -1,11 +1,11 @@
 package com.teachernavigator.teachernavigator.domain.interactors
 
 import com.example.root.androidtest.application.utils.Logger
-import com.teachernavigator.teachernavigator.BuildConfig
 import com.teachernavigator.teachernavigator.data.network.responses.SingInResponse
 import com.teachernavigator.teachernavigator.data.repository.abstractions.IAuthRepository
 import com.teachernavigator.teachernavigator.domain.interactors.abstractions.IAuthInteractor
 import com.teachernavigator.teachernavigator.domain.mappers.AuthMapper
+import com.teachernavigator.teachernavigator.domain.mappers.BaseMapper
 import com.teachernavigator.teachernavigator.domain.models.Monade
 import com.teachernavigator.teachernavigator.domain.models.SingUpData
 import io.reactivex.Observable
@@ -19,11 +19,11 @@ import javax.inject.Inject
 class AuthInteractor @Inject constructor(private val mRepository: IAuthRepository) : IAuthInteractor {
 
     init {
-        if (BuildConfig.DEBUG) Logger.logDebug("created INTERACTOR AuthInteractor")
+        Logger.logDebug("created INTERACTOR AuthInteractor")
     }
 
-    override fun isAuth(): Observable<Boolean> =
-            mRepository.getToken()
+    override fun isAuthAsynch(): Observable<Boolean> =
+            mRepository.getTokenAsynch()
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribeOn(Schedulers.newThread())
                     .map { it.isExists() }
@@ -58,7 +58,7 @@ class AuthInteractor @Inject constructor(private val mRepository: IAuthRepositor
             mRepository.singUp(AuthMapper.mapSingUpDataToRequest(singUpData))
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribeOn(Schedulers.newThread())
-                    .map { AuthMapper.mapSingUpResponse(it) }
+                    .map { BaseMapper.mapBaseResponse(it) }
 
     override fun restorePassword(login: String): Observable<Monade> =
             mRepository.restorePassword(AuthMapper.mapRestorePasswordDataRequest(login))

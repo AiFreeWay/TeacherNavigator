@@ -2,7 +2,6 @@ package com.example.root.androidtest.application.di.modules
 
 import android.content.Context
 import com.example.root.androidtest.application.utils.Logger
-import com.teachernavigator.teachernavigator.BuildConfig
 import com.teachernavigator.teachernavigator.data.network.NetworkController
 import com.teachernavigator.teachernavigator.data.repository.MainRepository
 import com.teachernavigator.teachernavigator.data.repository.abstractions.IMainRepository
@@ -17,7 +16,7 @@ import javax.inject.Singleton
 class RootModule(private val mContext: Context) {
 
     init {
-        if (BuildConfig.DEBUG) Logger.logDebug("created MODULE RootModule")
+        Logger.logDebug("created MODULE RootModule")
     }
 
     @Provides

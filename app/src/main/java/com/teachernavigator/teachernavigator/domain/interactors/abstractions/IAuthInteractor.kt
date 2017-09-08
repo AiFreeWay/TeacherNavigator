@@ -9,7 +9,7 @@ import io.reactivex.Observable
  */
 interface IAuthInteractor {
 
-    fun isAuth(): Observable<Boolean>
+    fun isAuthAsynch(): Observable<Boolean>
 
     fun singInViaVkontakte(): Observable<Monade>
     fun singInViaFacebook(): Observable<Monade>

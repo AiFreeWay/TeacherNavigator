@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
 import android.view.MenuItem
 import android.view.View
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
@@ -20,6 +21,7 @@ import com.teachernavigator.teachernavigator.domain.models.Post
 import com.teachernavigator.teachernavigator.presentation.screens.tape.activities.absctraction.PostDetailView
 import com.teachernavigator.teachernavigator.presentation.screens.tape.presenters.AcPostDetailPresenter
 import com.teachernavigator.teachernavigator.presentation.screens.tape.presenters.abstractions.IPostDetailPresenter
+import com.teachernavigator.teachernavigator.presentation.utils.ImageLoader
 
 /**
  * Created by root on 30.08.17.
@@ -27,17 +29,36 @@ import com.teachernavigator.teachernavigator.presentation.screens.tape.presenter
 class PostDetailActivity: AppCompatActivity(), PostDetailView {
 
     companion object {
-        val POST_ID_KEY: String = "post_id_key_post_detail_activity"
-        val POST_TITLE_KEY: String = "post_title_key_post_detail_activity"
+        val POST_KEY: String = "post_key_post_detail_activity"
     }
+
+    @BindView(R.id.ac_post_detail_iv_avatar)
+    lateinit var mIvAvatar: ImageView
+    @BindView(R.id.ac_post_detail_iv_subscribe)
+    lateinit var mIvSubscribe: ImageView
+    @BindView(R.id.ac_post_detail_tv_author_name)
+    lateinit var mTvAuthorName: TextView
+    @BindView(R.id.ac_post_detail_tv_post_time)
+    lateinit var mTvPostime: TextView
+    @BindView(R.id.ac_post_detail_tv_text)
+    lateinit var mTvText: TextView
+    @BindView(R.id.ac_post_detail_tv_complain)
+    lateinit var mTvComplain: TextView
+    @BindView(R.id.ac_post_detail_tv_like)
+    lateinit var mTvLike: TextView
+    @BindView(R.id.ac_post_detail_tv_dislike)
+    lateinit var mTvDislike: TextView
+    @BindView(R.id.ac_post_detail_tv_comments)
+    lateinit var mTvComments: TextView
+    @BindView(R.id.ac_post_detail_iv_save)
+    lateinit var mIvSave: ImageView
+    @BindView(R.id.ac_post_detail_hv_hasttags)
+    lateinit var mHvHashTags: HashtagView
     
     @BindView(R.id.ac_post_detail_toolbar)
     lateinit var mToolbar: Toolbar
     @BindView(R.id.ac_post_detail_progress)
     lateinit var mProgressBar: ProgressBar
-
-    @BindView(R.id.ac_post_detail_tv_text)
-    lateinit var mTvText: TextView
 
     private val mLifecycle: LifecycleRegistry = LifecycleRegistry(this)
     private val mPresenter: IPostDetailPresenter = AcPostDetailPresenter()
@@ -48,8 +69,7 @@ class PostDetailActivity: AppCompatActivity(), PostDetailView {
         ButterKnife.bind(this)
         initToolbar()
         mPresenter.attachView(this)
-        mPresenter.putPostId(intent.getIntExtra(POST_ID_KEY, -1))
-        setToolbarTitle(intent.getStringExtra(POST_TITLE_KEY))
+        loadPost(intent.getSerializableExtra(POST_KEY) as Post)
     }
 
     override fun onDestroy() {
@@ -68,8 +88,6 @@ class PostDetailActivity: AppCompatActivity(), PostDetailView {
     override fun getLifecycle(): LifecycleRegistry = mLifecycle
 
     override fun getActivity(): AppCompatActivity = this
-
-    override fun getFragmentLayoutId(): Int = R.id.ac_main_fl_body
 
     override fun startProgress() {
         mProgressBar.visibility = View.VISIBLE
@@ -93,8 +111,32 @@ class PostDetailActivity: AppCompatActivity(), PostDetailView {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
-    override fun loadPost(post: Post) {
+    override fun getFragmentLayoutId(): Int = 0
+
+    private fun loadPost(post: Post) {
+        setToolbarTitle(post.title!!)
+        setClickListeners(post)
+
+        mTvPostime.setText(post.created)
         mTvText.setText(post.text)
+
+        ImageLoader.load(this, "http://mock.com", mIvAvatar)
+
+        mHvHashTags.setData(post.tags!!)
+        mTvLike.setText(post.countLikes.toString())
+        mTvDislike.setText(post.countDislikes.toString())
+        mTvComments.setText(post.countComments.toString())
+    }
+
+    private fun setClickListeners(post: Post) {
+        mIvSubscribe.setOnClickListener { mPresenter.getIPostControllerFacade().subscribe(post, mPresenter) }
+        mTvComplain.setOnClickListener { mPresenter.getIPostControllerFacade().complain(post, mPresenter) }
+        mTvLike.setOnClickListener { mPresenter.getIPostControllerFacade().like(post, mPresenter) }
+        mTvDislike.setOnClickListener { mPresenter.getIPostControllerFacade().dislike(post, mPresenter) }
+        mIvSave.setOnClickListener { mPresenter.getIPostControllerFacade().save(post, mPresenter) }
+
+        mIvAvatar.setOnClickListener { mPresenter.getIPostControllerFacade().openProfileScreen(post, mPresenter) }
+        mTvComments.setOnClickListener { mPresenter.getIPostControllerFacade().openCommentsScreen(post, mPresenter) }
     }
 
     private fun initToolbar() {

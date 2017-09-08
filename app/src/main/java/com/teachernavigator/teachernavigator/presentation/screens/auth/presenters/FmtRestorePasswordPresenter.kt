@@ -3,7 +3,6 @@ package com.teachernavigator.teachernavigator.presentation.screens.auth.presente
 import android.arch.lifecycle.Lifecycle
 import android.arch.lifecycle.OnLifecycleEvent
 import com.example.root.androidtest.application.utils.Logger
-import com.teachernavigator.teachernavigator.BuildConfig
 import com.teachernavigator.teachernavigator.R
 import com.teachernavigator.teachernavigator.domain.interactors.abstractions.IAuthInteractor
 import com.teachernavigator.teachernavigator.domain.models.Monade
@@ -22,7 +21,7 @@ class FmtRestorePasswordPresenter : BasePresenter<RestorePasswordView>(), IResto
     lateinit var mAuthInteractor: IAuthInteractor
 
     init {
-        if (BuildConfig.DEBUG) Logger.logDebug("created PRESENTER FmtRestorePasswordPresenter")
+        Logger.logDebug("created PRESENTER FmtRestorePasswordPresenter")
     }
 
     @OnLifecycleEvent(Lifecycle.Event.ON_START)

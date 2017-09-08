@@ -58,8 +58,6 @@ class PostSearchActivity: AppCompatActivity(), PostSearchView {
 
     override fun getActivity(): AppCompatActivity = this
 
-    override fun getFragmentLayoutId(): Int = R.id.ac_main_fl_body
-
     override fun startProgress() {
         mProgressBar.visibility = View.VISIBLE
     }
@@ -81,6 +79,8 @@ class PostSearchActivity: AppCompatActivity(), PostSearchView {
     override fun getParentScreenComponent(): ParentScreenComponent {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
+
+    override fun getFragmentLayoutId(): Int = 0
 
     private fun initToolbar() {
         setSupportActionBar(mToolbar)

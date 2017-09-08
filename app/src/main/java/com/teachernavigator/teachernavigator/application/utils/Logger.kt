@@ -1,6 +1,7 @@
 package com.example.root.androidtest.application.utils
 
 import android.util.Log
+import com.teachernavigator.teachernavigator.BuildConfig
 import java.io.PrintWriter
 import java.io.StringWriter
 
@@ -16,13 +17,15 @@ class Logger {
         private val PRINT_WRITER : PrintWriter = PrintWriter(STRING_WRITER)
 
         fun logError(e: Throwable) {
-            e.printStackTrace(PRINT_WRITER)
-            PRINT_WRITER.flush()
-            Log.e(LOG_TAG, STRING_WRITER.toString())
+            if (BuildConfig.DEBUG) {
+                e.printStackTrace(PRINT_WRITER)
+                PRINT_WRITER.flush()
+                Log.e(LOG_TAG, STRING_WRITER.toString())
+            }
         }
 
         fun logDebug(message: String?) {
-            Log.d(LOG_TAG, message)
+            if (BuildConfig.DEBUG) Log.d(LOG_TAG, message)
         }
 
         fun testLog(message: String) {

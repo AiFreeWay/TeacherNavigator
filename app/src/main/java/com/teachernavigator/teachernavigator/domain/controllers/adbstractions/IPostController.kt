@@ -16,7 +16,7 @@ interface IPostController {
     fun subscribe(post: Post, doOnUserNotAuth: () -> Unit): Observable<Monade>
     fun complain(post: Post, doOnUserNotAuth: () -> Unit): Observable<Monade>
 
-    fun openCommentsScreen(post: Post, activity: Activity, doOnUserNotAuth: () -> Unit)
-    fun openProfileScreen(post: Post, activity: Activity, doOnUserNotAuth: () -> Unit)
+    fun openCommentsScreen(post: Post, activity: Activity, doOnUserNotAuth: () -> Unit): Observable<Monade>
+    fun openProfileScreen(post: Post, activity: Activity, doOnUserNotAuth: () -> Unit): Observable<Monade>
     fun openPostDetailScreen(post: Post, activity: Activity)
 }

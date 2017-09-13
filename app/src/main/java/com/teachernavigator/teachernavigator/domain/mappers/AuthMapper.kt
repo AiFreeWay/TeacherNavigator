@@ -18,12 +18,8 @@ class AuthMapper {
 
     companion object Auth {
 
-        fun mapSingUpDataToRequest(singUpData: SingUpData): SingUpRequest {
-            var unionTicket: Int? = null
-            if (singUpData.unionist)
-                unionTicket = singUpData.number_of_union_ticket.toInt()
-
-            return SingUpRequest(singUpData.email,
+        fun mapSingUpDataToRequest(singUpData: SingUpData): SingUpRequest =
+                SingUpRequest(singUpData.email,
                     singUpData.password,
                     singUpData.full_name,
                     singUpData.birthday,
@@ -32,9 +28,8 @@ class AuthMapper {
                     singUpData.position,
                     singUpData.experience.toInt(),
                     singUpData.unionist,
-                    unionTicket,
-                    singUpData.phone_number)
-        }
+                    singUpData.number_of_union_ticket,
+                    mapPhoneNumber(singUpData.phone_number))
 
         fun mapSingInDataToRequest(login: String, password: String, authCredentials: AuthCredentials): SingInRequest =
                 SingInRequest(login, password,
@@ -57,6 +52,14 @@ class AuthMapper {
 
         fun mapRestorePasswordDataResponse(response: BaseResponse): Monade {
             return Monade(response.is_error)
+        }
+
+        private fun mapPhoneNumber(number: String?): String? {
+            if (number == null)
+                return null
+            if (number.get(0) == '8')
+                return number.replaceFirst("8", "+7", true)
+            return number
         }
     }
 }

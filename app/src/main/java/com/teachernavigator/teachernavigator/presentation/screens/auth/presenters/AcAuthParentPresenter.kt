@@ -10,7 +10,7 @@ import com.teachernavigator.teachernavigator.application.di.modules.ParentScreen
 import com.teachernavigator.teachernavigator.presentation.screens.auth.activities.abstractions.AuthParentView
 import com.teachernavigator.teachernavigator.presentation.screens.auth.fragments.AuthFragment
 import com.teachernavigator.teachernavigator.presentation.screens.auth.presenters.abstractions.IAuthParentPresenter
-import com.teachernavigator.teachernavigator.presentation.screens.base.BasePresenter
+import com.teachernavigator.teachernavigator.presentation.screens.common.BasePresenter
 import ru.terrakok.cicerone.Router
 import javax.inject.Inject
 

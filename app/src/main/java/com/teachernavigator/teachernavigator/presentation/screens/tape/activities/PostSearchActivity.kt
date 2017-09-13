@@ -22,12 +22,9 @@ import com.teachernavigator.teachernavigator.presentation.screens.tape.presenter
  */
 class PostSearchActivity: AppCompatActivity(), PostSearchView {
 
-    @BindView(R.id.ac_post_search_toolbar)
-    lateinit var mToolbar: Toolbar
-    @BindView(R.id.ac_post_search_progress)
-    lateinit var mProgressBar: ProgressBar
-    @BindView(R.id.ac_post_search_btn_find)
-    lateinit var mBtnFind: Button
+    @BindView(R.id.ac_post_search_toolbar) lateinit var mToolbar: Toolbar
+    @BindView(R.id.ac_post_search_progress) lateinit var mProgressBar: ProgressBar
+    @BindView(R.id.ac_post_search_btn_find) lateinit var mBtnFind: Button
 
     private val mLifecycle: LifecycleRegistry = LifecycleRegistry(this)
     private val mPresenter: IPostSearchPresenter = AcPostSearchPresenter()

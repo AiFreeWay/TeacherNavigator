@@ -1,4 +1,4 @@
-package com.teachernavigator.teachernavigator.presentation.screens.base
+package com.teachernavigator.teachernavigator.presentation.screens.common
 
 import android.app.Activity
 import android.arch.lifecycle.LifecycleObserver

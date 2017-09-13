@@ -14,7 +14,7 @@ import com.teachernavigator.teachernavigator.presentation.factories.MenuItemsFac
 import com.teachernavigator.teachernavigator.presentation.menu.MenuController
 import com.teachernavigator.teachernavigator.presentation.models.MenuData
 import com.teachernavigator.teachernavigator.presentation.screens.auth.activities.AuthActivity
-import com.teachernavigator.teachernavigator.presentation.screens.base.BasePresenter
+import com.teachernavigator.teachernavigator.presentation.screens.common.BasePresenter
 import com.teachernavigator.teachernavigator.presentation.screens.main.activities.abstractions.MainView
 import com.teachernavigator.teachernavigator.presentation.screens.main.fragments.MyCommentsFragment
 import com.teachernavigator.teachernavigator.presentation.screens.main.fragments.SavedPostsFragment

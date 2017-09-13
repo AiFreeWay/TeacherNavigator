@@ -11,7 +11,7 @@ import com.teachernavigator.teachernavigator.R
 import com.teachernavigator.teachernavigator.domain.models.Post
 import com.teachernavigator.teachernavigator.presentation.adapters.MultyRvAdapter
 import com.teachernavigator.teachernavigator.presentation.adapters.holders.SavedPostHolder
-import com.teachernavigator.teachernavigator.presentation.screens.base.BaseFragment
+import com.teachernavigator.teachernavigator.presentation.screens.common.BaseFragment
 import com.teachernavigator.teachernavigator.presentation.screens.main.fragments.abstractions.SavedPostsView
 import com.teachernavigator.teachernavigator.presentation.screens.main.presenters.FmtSavedPostsPresenter
 import com.teachernavigator.teachernavigator.presentation.screens.main.presenters.abstractions.ISavedPostsPresenter
@@ -25,10 +25,8 @@ class SavedPostsFragment : BaseFragment(), SavedPostsView {
         val FRAGMENT_KEY = "saved_posts_fragment"
     }
 
-    @BindView(R.id.fmt_list_rv_list)
-    lateinit var mRvList: RecyclerView
-    @BindView(R.id.fmt_list_tv_no_data)
-    lateinit var mTvNoData: TextView
+    @BindView(R.id.fmt_list_rv_list) lateinit var mRvList: RecyclerView
+    @BindView(R.id.fmt_list_tv_no_data) lateinit var mTvNoData: TextView
 
     private val mPresenter: ISavedPostsPresenter = FmtSavedPostsPresenter()
     private lateinit var mAdapter: MultyRvAdapter<Post>

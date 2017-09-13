@@ -8,7 +8,7 @@ import com.teachernavigator.teachernavigator.R
 import com.teachernavigator.teachernavigator.domain.interactors.abstractions.IPostsInteractor
 import com.teachernavigator.teachernavigator.domain.models.Post
 import com.teachernavigator.teachernavigator.presentation.facades.abstractions.IPostControllerFacade
-import com.teachernavigator.teachernavigator.presentation.screens.base.BasePresenter
+import com.teachernavigator.teachernavigator.presentation.screens.common.BasePresenter
 import com.teachernavigator.teachernavigator.presentation.screens.main.fragments.abstractions.SavedPostsView
 import com.teachernavigator.teachernavigator.presentation.screens.main.presenters.abstractions.ISavedPostsPresenter
 import com.teachernavigator.teachernavigator.presentation.screens.tape.activities.PostSearchActivity

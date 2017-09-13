@@ -9,7 +9,7 @@ import com.teachernavigator.teachernavigator.domain.models.Monade
 import com.teachernavigator.teachernavigator.presentation.screens.auth.activities.abstractions.AuthParentView
 import com.teachernavigator.teachernavigator.presentation.screens.auth.fragments.RegistrationFragment
 import com.teachernavigator.teachernavigator.presentation.screens.auth.fragments.RestorePasswordFragment
-import com.teachernavigator.teachernavigator.presentation.screens.base.BasePresenter
+import com.teachernavigator.teachernavigator.presentation.screens.common.BasePresenter
 import com.teachernavigator.teachernavigator.presentation.screens.auth.fragments.abstractions.AuthView
 import com.teachernavigator.teachernavigator.presentation.screens.auth.presenters.abstractions.IAuthPresenter
 import com.teachernavigator.teachernavigator.presentation.screens.main.activities.MainActivity

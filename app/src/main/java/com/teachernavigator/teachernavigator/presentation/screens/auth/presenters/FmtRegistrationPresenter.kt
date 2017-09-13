@@ -11,7 +11,7 @@ import com.teachernavigator.teachernavigator.domain.models.SingUpData
 import com.teachernavigator.teachernavigator.presentation.screens.auth.activities.abstractions.AuthParentView
 import com.teachernavigator.teachernavigator.presentation.screens.auth.fragments.abstractions.RegistrationView
 import com.teachernavigator.teachernavigator.presentation.screens.auth.presenters.abstractions.IRegistrationPresenter
-import com.teachernavigator.teachernavigator.presentation.screens.base.BasePresenter
+import com.teachernavigator.teachernavigator.presentation.screens.common.BasePresenter
 import javax.inject.Inject
 
 /**
@@ -58,7 +58,7 @@ class FmtRegistrationPresenter : BasePresenter<RegistrationView>(), IRegistratio
 
     private fun doOnSingUp(result: Monade) {
         stopProgress()
-        if (result.isError)
+        if (!result.isError)
             mView!!.showAccountCreatedDilog()
     }
 

@@ -42,7 +42,6 @@
     <string name="more">Читать далее...</string>
     <string name="complain">Пожаловаться</string>
     <string name="minus">-</string>
-    <string name="default_likes_count">0</string>
     <string name="plus">+</string>
     <string name="no">Нет</string>
     <string name="yes">Да</string>
@@ -75,4 +74,5 @@
     <string name="open_branch">Открыть ветвь</string>
     <string name="added">Добавлено</string>
     <string name="comment_text">Текст комментария</string>
+    <string name="zero">0</string>
 </resources>

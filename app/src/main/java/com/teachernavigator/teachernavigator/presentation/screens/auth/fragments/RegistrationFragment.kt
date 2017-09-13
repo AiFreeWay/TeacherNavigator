@@ -16,7 +16,7 @@ import com.teachernavigator.teachernavigator.presentation.screens.auth.activitie
 import com.teachernavigator.teachernavigator.presentation.screens.auth.fragments.abstractions.RegistrationView
 import com.teachernavigator.teachernavigator.presentation.screens.auth.presenters.FmtRegistrationPresenter
 import com.teachernavigator.teachernavigator.presentation.screens.auth.presenters.abstractions.IRegistrationPresenter
-import com.teachernavigator.teachernavigator.presentation.screens.base.BaseFragment
+import com.teachernavigator.teachernavigator.presentation.screens.common.BaseFragment
 
 /**
  * Created by root on 24.08.17.
@@ -27,32 +27,19 @@ class RegistrationFragment : BaseFragment(), RegistrationView {
         val FRAGMENT_KEY = "registration_fragment"
     }
 
-    @BindView(R.id.fmt_registration_et_full_name)
-    lateinit var mEtFullName: EditText
-    @BindView(R.id.fmt_registration_et_birthday)
-    lateinit var mEtBirthday: EditText
-    @BindView(R.id.fmt_registration_et_work_place)
-    lateinit var mEtWorkPlace: EditText
-    @BindView(R.id.fmt_registration_et_position)
-    lateinit var mEtPosition: EditText
-    @BindView(R.id.fmt_registration_et_experience)
-    lateinit var mEtExperience: EditText
-    @BindView(R.id.fmt_registration_chb_trade_unionist_yes)
-    lateinit var mChbTradeUnionistYes: CheckBox
-    @BindView(R.id.fmt_registration_chb_trade_unionist_no)
-    lateinit var mChbTradeUnionistNo: CheckBox
-    @BindView(R.id.fmt_registration_et_trade_union_ticket_number)
-    lateinit var mEtTradeUnionTicketNumber: EditText
-    @BindView(R.id.fmt_registration_et_email)
-    lateinit var mEtEmail: EditText
-    @BindView(R.id.fmt_registration_et_phone)
-    lateinit var mEtPhone: EditText
-    @BindView(R.id.fmt_registration_et_password)
-    lateinit var mEtPassword: EditText
-    @BindView(R.id.fmt_registration_chb_agreement)
-    lateinit var mChbAgreement: CheckBox
-    @BindView(R.id.fmt_registration_btn_sing_up)
-    lateinit var mBtnSingUp: Button
+    @BindView(R.id.fmt_registration_et_full_name) lateinit var mEtFullName: EditText
+    @BindView(R.id.fmt_registration_et_birthday) lateinit var mEtBirthday: EditText
+    @BindView(R.id.fmt_registration_et_work_place) lateinit var mEtWorkPlace: EditText
+    @BindView(R.id.fmt_registration_et_position) lateinit var mEtPosition: EditText
+    @BindView(R.id.fmt_registration_et_experience) lateinit var mEtExperience: EditText
+    @BindView(R.id.fmt_registration_chb_trade_unionist_yes) lateinit var mChbTradeUnionistYes: CheckBox
+    @BindView(R.id.fmt_registration_chb_trade_unionist_no) lateinit var mChbTradeUnionistNo: CheckBox
+    @BindView(R.id.fmt_registration_et_trade_union_ticket_number) lateinit var mEtTradeUnionTicketNumber: EditText
+    @BindView(R.id.fmt_registration_et_email) lateinit var mEtEmail: EditText
+    @BindView(R.id.fmt_registration_et_phone) lateinit var mEtPhone: EditText
+    @BindView(R.id.fmt_registration_et_password) lateinit var mEtPassword: EditText
+    @BindView(R.id.fmt_registration_chb_agreement) lateinit var mChbAgreement: CheckBox
+    @BindView(R.id.fmt_registration_btn_sing_up) lateinit var mBtnSingUp: Button
 
     private val mPresenter: IRegistrationPresenter = FmtRegistrationPresenter()
 

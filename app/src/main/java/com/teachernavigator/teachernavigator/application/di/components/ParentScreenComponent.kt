@@ -6,13 +6,12 @@ import com.teachernavigator.teachernavigator.application.di.scopes.PerParentScre
 import com.teachernavigator.teachernavigator.data.repository.abstractions.IAuthRepository
 import com.teachernavigator.teachernavigator.data.repository.abstractions.ITapeRepository
 import com.teachernavigator.teachernavigator.domain.controllers.IPostController
-import com.teachernavigator.teachernavigator.domain.interactors.abstractions.IAuthInteractor
 import com.teachernavigator.teachernavigator.presentation.screens.auth.presenters.AcAuthParentPresenter
 import com.teachernavigator.teachernavigator.presentation.screens.main.presenters.AcMainPresenter
 import com.teachernavigator.teachernavigator.presentation.screens.auth.presenters.FmtAuthPresenter
 import com.teachernavigator.teachernavigator.presentation.screens.auth.presenters.FmtRegistrationPresenter
 import com.teachernavigator.teachernavigator.presentation.screens.auth.presenters.FmtRestorePasswordPresenter
-import com.teachernavigator.teachernavigator.presentation.screens.base.ParentView
+import com.teachernavigator.teachernavigator.presentation.screens.common.ParentView
 import com.teachernavigator.teachernavigator.presentation.screens.main.presenters.FmtMyCommentsPresenter
 import com.teachernavigator.teachernavigator.presentation.screens.main.presenters.FmtSavedPostsPresenter
 import com.teachernavigator.teachernavigator.presentation.screens.main.presenters.FmtTapePresenter

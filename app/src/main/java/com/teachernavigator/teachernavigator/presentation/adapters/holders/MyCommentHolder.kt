@@ -3,52 +3,38 @@ package com.teachernavigator.teachernavigator.presentation.adapters.holders
 import android.content.Context
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.ImageView
-import android.widget.TextView
 import butterknife.BindView
 import butterknife.ButterKnife
 import com.teachernavigator.teachernavigator.R
 import com.teachernavigator.teachernavigator.domain.models.Comment
-import com.teachernavigator.teachernavigator.presentation.utils.ImageLoader
+import com.teachernavigator.teachernavigator.presentation.facades.abstractions.IPostControllerFacade
+import com.teachernavigator.teachernavigator.presentation.screens.common.comment.MyCommentView
 
 /**
  * Created by root on 08.09.17.
  */
 class  MyCommentHolder: BaseHolder<Comment> {
 
-    @BindView(R.id.v_my_comment_iv_avatar)
-    lateinit var mIvAvatar: ImageView
-    @BindView(R.id.v_my_comment_iv_subscribe)
-    lateinit var mIvSubscribe: ImageView
-    @BindView(R.id.v_my_comment_tv_author_name)
-    lateinit var mTvAuthorName: TextView
-    @BindView(R.id.v_my_comment_tv_post_time)
-    lateinit var mTvPostTime: TextView
-    @BindView(R.id.v_my_comment_tv_text)
-    lateinit var mTvText: TextView
-    @BindView(R.id.v_my_comment_holder_btn_open_branch)
-    lateinit var mBtnOpenBranch: Button
+    @BindView(R.id.v_my_post_holder_comment_comment) lateinit var mCommentView: MyCommentView
 
-    constructor(context: Context) : super(context, null)
+    val mPostControllerFacade: IPostControllerFacade
 
-    constructor(view: View) : super(view, null) {
+    constructor(context: Context, postController: IPostControllerFacade) : super(context, null) {
+        mPostControllerFacade = postController
+    }
+
+    constructor(view: View, postController: IPostControllerFacade) : super(view, null) {
+        mPostControllerFacade = postController
         ButterKnife.bind(this, itemView)
+        mCommentView.setPostControllerFacade(mPostControllerFacade)
     }
 
     override fun create(viewGroup: ViewGroup): BaseHolder<Comment> {
         val view = viewInflater(viewGroup, R.layout.v_my_comment_holder)
-        return MyCommentHolder(view)
+        return MyCommentHolder(view, mPostControllerFacade)
     }
 
     override fun bind(dataModel: Comment) {
-        mTvPostTime.setText("")
-        mTvText.setText(dataModel.message)
-
-        if (dataModel.user != null) {
-            mTvAuthorName.setText(dataModel.user!!.full_name)
-            if (dataModel.user!!.avatars != null)
-                ImageLoader.load(itemView.context, dataModel.user!!.avatars!!.avatar, mIvAvatar)
-        }
+        mCommentView.loadData(dataModel)
     }
 }

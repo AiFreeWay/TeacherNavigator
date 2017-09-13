@@ -15,7 +15,7 @@ import com.teachernavigator.teachernavigator.domain.interactors.abstractions.ICo
 import com.teachernavigator.teachernavigator.domain.interactors.abstractions.IPostsInteractor
 import com.teachernavigator.teachernavigator.presentation.facades.PostControllerFacade
 import com.teachernavigator.teachernavigator.presentation.facades.abstractions.IPostControllerFacade
-import com.teachernavigator.teachernavigator.presentation.screens.base.ParentView
+import com.teachernavigator.teachernavigator.presentation.screens.common.ParentView
 import com.teachernavigator.teachernavigator.presentation.utils.FragmentNavigator
 import dagger.Module
 import dagger.Provides

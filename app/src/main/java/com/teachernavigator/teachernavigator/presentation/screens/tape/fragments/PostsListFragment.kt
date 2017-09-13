@@ -13,7 +13,7 @@ import com.teachernavigator.teachernavigator.R
 import com.teachernavigator.teachernavigator.domain.models.Post
 import com.teachernavigator.teachernavigator.presentation.adapters.MultyRvAdapter
 import com.teachernavigator.teachernavigator.presentation.adapters.holders.PostHolder
-import com.teachernavigator.teachernavigator.presentation.screens.base.BaseFragment
+import com.teachernavigator.teachernavigator.presentation.screens.common.BaseFragment
 import com.teachernavigator.teachernavigator.presentation.screens.tape.fragments.abstractions.PostsListView
 import com.teachernavigator.teachernavigator.presentation.screens.tape.presenters.FmtPostsListPresenter
 import com.teachernavigator.teachernavigator.presentation.screens.tape.presenters.abstractions.IPostsListPresenter
@@ -27,10 +27,8 @@ class PostsListFragment : BaseFragment(), PostsListView {
         val POSTS_TYPE_KEY = "tape_type_key"
     }
 
-    @BindView(R.id.fmt_list_rv_list)
-    lateinit var mRvList: RecyclerView
-    @BindView(R.id.fmt_list_tv_no_data)
-    lateinit var mTvNoData: TextView
+    @BindView(R.id.fmt_list_rv_list) lateinit var mRvList: RecyclerView
+    @BindView(R.id.fmt_list_tv_no_data) lateinit var mTvNoData: TextView
 
     private val mPresenter: IPostsListPresenter = FmtPostsListPresenter()
     private lateinit var mAdapter: MultyRvAdapter<Post>

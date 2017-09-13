@@ -1,4 +1,4 @@
-package com.teachernavigator.teachernavigator.presentation.screens.base
+package com.teachernavigator.teachernavigator.presentation.screens.common
 
 import android.support.v4.app.FragmentManager
 import android.support.v7.app.AppCompatActivity

@@ -1,7 +1,7 @@
 package com.teachernavigator.teachernavigator.presentation.screens.tape.fragments.abstractions
 
 import com.teachernavigator.teachernavigator.domain.models.Post
-import com.teachernavigator.teachernavigator.presentation.screens.base.ChildView
+import com.teachernavigator.teachernavigator.presentation.screens.common.ChildView
 
 /**
  * Created by root on 18.08.17.

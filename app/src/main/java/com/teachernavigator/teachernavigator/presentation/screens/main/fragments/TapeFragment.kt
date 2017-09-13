@@ -6,11 +6,10 @@ import android.support.v4.view.ViewPager
 import android.view.*
 import butterknife.BindView
 import butterknife.ButterKnife
-import com.example.root.androidtest.application.utils.Logger
 import com.teachernavigator.teachernavigator.R
 import com.teachernavigator.teachernavigator.presentation.adapters.ViewpagerAdapter
 import com.teachernavigator.teachernavigator.presentation.models.ViewPagerItemContainer
-import com.teachernavigator.teachernavigator.presentation.screens.base.BaseFragment
+import com.teachernavigator.teachernavigator.presentation.screens.common.BaseFragment
 import com.teachernavigator.teachernavigator.presentation.screens.main.fragments.abstractions.TapeView
 import com.teachernavigator.teachernavigator.presentation.screens.main.presenters.FmtTapePresenter
 import com.teachernavigator.teachernavigator.presentation.screens.main.presenters.abstractions.ITapePresenter
@@ -26,10 +25,8 @@ class TapeFragment : BaseFragment(), TapeView {
         val LAST_VIEW_PAGER_POSITION = "last_view_pager_position"
     }
 
-    @BindView(R.id.fmt_view_pager_tb_tabs)
-    lateinit var mTbTabs: TabLayout
-    @BindView(R.id.fmt_view_pager_vp_body)
-    lateinit var mVpTapeItems: ViewPager
+    @BindView(R.id.fmt_view_pager_tb_tabs) lateinit var mTbTabs: TabLayout
+    @BindView(R.id.fmt_view_pager_vp_body) lateinit var mVpTapeItems: ViewPager
 
     private lateinit var mAdapter: ViewpagerAdapter
     private val mPresenter: ITapePresenter = FmtTapePresenter()

@@ -1,7 +1,7 @@
 package com.teachernavigator.teachernavigator.presentation.screens.main.fragments.abstractions
 
 import com.teachernavigator.teachernavigator.domain.models.Comment
-import com.teachernavigator.teachernavigator.presentation.screens.base.ChildView
+import com.teachernavigator.teachernavigator.presentation.screens.common.ChildView
 
 /**
  * Created by root on 08.09.17.

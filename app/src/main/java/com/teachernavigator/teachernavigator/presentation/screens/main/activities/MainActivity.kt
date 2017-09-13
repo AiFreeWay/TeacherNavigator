@@ -24,14 +24,10 @@ import com.teachernavigator.teachernavigator.presentation.screens.main.presenter
 
 class MainActivity : AppCompatActivity(), MainView {
 
-    @BindView(R.id.ac_main_toolbar)
-    lateinit var mToolbar: Toolbar
-    @BindView(R.id.ac_main_drawer)
-    lateinit var mDrawer: DrawerLayout
-    @BindView(R.id.ac_main_ll_menu)
-    lateinit var mLlMenu: LinearLayout
-    @BindView(R.id.ac_main_progress)
-    lateinit var mProgressBar: ProgressBar
+    @BindView(R.id.ac_main_toolbar) lateinit var mToolbar: Toolbar
+    @BindView(R.id.ac_main_drawer) lateinit var mDrawer: DrawerLayout
+    @BindView(R.id.ac_main_ll_menu) lateinit var mLlMenu: LinearLayout
+    @BindView(R.id.ac_main_progress) lateinit var mProgressBar: ProgressBar
 
     private val mLifecycle: LifecycleRegistry = LifecycleRegistry(this)
     private val mPresenter: IMainPresenter = AcMainPresenter()

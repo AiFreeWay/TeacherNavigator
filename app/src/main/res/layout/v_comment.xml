@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingLeft="@dimen/externalPadding"
+    android:paddingRight="@dimen/externalPadding"
+    android:paddingTop="@dimen/externalPadding"
+    android:paddingBottom="@dimen/externalPadding">
+
+    <android.support.v7.widget.AppCompatImageView
+        android:id="@+id/v_comment_iv_avatar"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:src="@drawable/ic_avatar" />
+
+    <TextView
+        android:id="@+id/v_comment_tv_post_author_name"
+        style="@style/Text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="@dimen/externalPadding"
+        android:layout_marginStart="@dimen/externalPadding"
+        android:layout_marginTop="@dimen/internalPadding"
+        android:layout_toEndOf="@+id/v_comment_iv_avatar"
+        android:layout_toRightOf="@+id/v_comment_iv_avatar"
+        android:drawableLeft="@drawable/ic_user_link"
+        android:drawablePadding="@dimen/internalPadding"
+        android:drawableStart="@drawable/ic_user_link"
+        android:fontFamily="sans-serif-medium"
+        android:gravity="center"
+        android:textColor="@color/colorAccent" />
+
+    <TextView
+        android:id="@+id/v_comment_tv_author_name"
+        style="@style/Text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginEnd="@dimen/externalPadding"
+        android:layout_marginLeft="@dimen/externalPadding"
+        android:layout_marginRight="@dimen/externalPadding"
+        android:layout_marginStart="@dimen/externalPadding"
+        android:layout_marginTop="@dimen/internalPadding"
+        android:layout_toEndOf="@+id/v_comment_tv_post_author_name"
+        android:layout_toRightOf="@+id/v_comment_tv_post_author_name" />
+
+    <TextView
+        android:id="@+id/v_comment_tv_post_time"
+        style="@style/SmallText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/v_comment_tv_post_author_name"
+        android:layout_alignStart="@+id/v_comment_tv_post_author_name"
+        android:layout_below="@+id/v_comment_tv_author_name"
+        android:textColor="@color/lightTextColor" />
+
+    <ImageView
+        android:id="@+id/v_comment_iv_subscribe"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignTop="@+id/v_comment_tv_author_name"
+        android:src="@drawable/ic_subscribe" />
+
+    <TextView
+        android:id="@+id/v_comment_tv_text"
+        style="@style/Text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/v_comment_tv_post_time"
+        android:layout_alignStart="@+id/v_comment_tv_post_time"
+        android:layout_below="@+id/v_comment_tv_post_time"
+        android:layout_marginTop="@dimen/externalPadding" />
+
+    <LinearLayout
+        android:id="@+id/v_comment_ll_open_branch"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/normalControlsHeight"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/v_comment_tv_text"
+        android:layout_marginTop="@dimen/externalPadding"
+        android:gravity="end"
+        android:orientation="horizontal">
+
+        <android.support.v7.widget.AppCompatButton
+            android:id="@+id/v_comment_btn_open_branch"
+            style="@style/Button"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/miniControlsHeight"
+
+            android:text="@string/open_branch"
+            android:textAllCaps="false"
+            app:backgroundTint="@color/colorAccent" />
+    </LinearLayout>
+</RelativeLayout>

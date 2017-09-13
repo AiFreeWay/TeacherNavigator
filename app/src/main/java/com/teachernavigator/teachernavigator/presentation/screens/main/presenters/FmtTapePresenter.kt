@@ -8,7 +8,7 @@ import com.teachernavigator.teachernavigator.R
 import com.teachernavigator.teachernavigator.domain.interactors.abstractions.IAuthInteractor
 import com.teachernavigator.teachernavigator.presentation.factories.PostsFragmentsFactory
 import com.teachernavigator.teachernavigator.presentation.models.ViewPagerItemContainer
-import com.teachernavigator.teachernavigator.presentation.screens.base.BasePresenter
+import com.teachernavigator.teachernavigator.presentation.screens.common.BasePresenter
 import com.teachernavigator.teachernavigator.presentation.screens.main.fragments.abstractions.TapeView
 import com.teachernavigator.teachernavigator.presentation.screens.main.presenters.abstractions.ITapePresenter
 import com.teachernavigator.teachernavigator.presentation.screens.tape.activities.PostSearchActivity

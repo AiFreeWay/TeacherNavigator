@@ -1,4 +1,4 @@
-package com.teachernavigator.teachernavigator.presentation.screens.base
+package com.teachernavigator.teachernavigator.presentation.screens.common
 
 import android.arch.lifecycle.LifecycleRegistry
 import android.support.v4.app.Fragment

@@ -7,7 +7,8 @@ import com.example.root.androidtest.application.utils.Logger
 import com.teachernavigator.teachernavigator.R
 import com.teachernavigator.teachernavigator.domain.interactors.abstractions.ICommentsInteractor
 import com.teachernavigator.teachernavigator.domain.models.Comment
-import com.teachernavigator.teachernavigator.presentation.screens.base.BasePresenter
+import com.teachernavigator.teachernavigator.presentation.facades.abstractions.IPostControllerFacade
+import com.teachernavigator.teachernavigator.presentation.screens.common.BasePresenter
 import com.teachernavigator.teachernavigator.presentation.screens.main.fragments.abstractions.MyCommentsView
 import com.teachernavigator.teachernavigator.presentation.screens.main.presenters.abstractions.IMyCommentsPresenter
 import javax.inject.Inject
@@ -19,6 +20,8 @@ class FmtMyCommentsPresenter : BasePresenter<MyCommentsView>(), IMyCommentsPrese
 
     @Inject
     lateinit var mCommentsInteractor: ICommentsInteractor
+    @Inject
+    lateinit var mPostControllerFacade: IPostControllerFacade
 
     private var mTapeType: Int = -1
 
@@ -58,6 +61,8 @@ class FmtMyCommentsPresenter : BasePresenter<MyCommentsView>(), IMyCommentsPrese
                 .doOnSubscribe { this::doOnSubscribeOnGetPosts }
                 .subscribe(this::doOnGetComments, this::doOnError))
     }
+
+    override fun getIPostControllerFacade(): IPostControllerFacade = mPostControllerFacade
 
     private fun doOnGetComments(comments: List<Comment>) {
         mView!!.getParentView().stopProgress()

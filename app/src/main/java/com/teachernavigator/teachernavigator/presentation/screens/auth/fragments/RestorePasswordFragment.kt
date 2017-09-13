@@ -13,7 +13,7 @@ import com.teachernavigator.teachernavigator.R
 import com.teachernavigator.teachernavigator.presentation.screens.auth.fragments.abstractions.RestorePasswordView
 import com.teachernavigator.teachernavigator.presentation.screens.auth.presenters.FmtRestorePasswordPresenter
 import com.teachernavigator.teachernavigator.presentation.screens.auth.presenters.abstractions.IRestorePasswordPresenter
-import com.teachernavigator.teachernavigator.presentation.screens.base.BaseFragment
+import com.teachernavigator.teachernavigator.presentation.screens.common.BaseFragment
 
 /**
  * Created by root on 28.08.17.
@@ -24,10 +24,8 @@ class RestorePasswordFragment : BaseFragment(), RestorePasswordView {
         val FRAGMENT_KEY = "restore_password_fragment"
     }
 
-    @BindView(R.id.fmt_restore_password_et_login)
-    lateinit var mEtLogin: EditText
-    @BindView(R.id.fmt_restore_password_btn_restore)
-    lateinit var mBtnRestore: Button
+    @BindView(R.id.fmt_restore_password_et_login) lateinit var mEtLogin: EditText
+    @BindView(R.id.fmt_restore_password_btn_restore) lateinit var mBtnRestore: Button
 
     private val mPresenter: IRestorePasswordPresenter = FmtRestorePasswordPresenter()
 

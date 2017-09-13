@@ -6,7 +6,7 @@ import com.teachernavigator.teachernavigator.domain.models.Post
 import com.teachernavigator.teachernavigator.presentation.facades.abstractions.IPostControllerFacade
 import com.teachernavigator.teachernavigator.presentation.facades.abstractions.IPostControllerFacadeCallback
 import com.teachernavigator.teachernavigator.presentation.screens.auth.activities.AuthActivity
-import com.teachernavigator.teachernavigator.presentation.screens.base.ParentView
+import com.teachernavigator.teachernavigator.presentation.screens.common.ParentView
 import com.teachernavigator.teachernavigator.presentation.utils.ActivityRouter
 import javax.inject.Inject
 

@@ -1,4 +1,4 @@
-package com.teachernavigator.teachernavigator.presentation.screens.base
+package com.teachernavigator.teachernavigator.presentation.screens.common
 
 /**
  * Created by root on 15.08.17.

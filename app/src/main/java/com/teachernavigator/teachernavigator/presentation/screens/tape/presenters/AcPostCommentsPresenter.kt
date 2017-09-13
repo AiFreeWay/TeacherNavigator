@@ -9,12 +9,10 @@ import com.teachernavigator.teachernavigator.R
 import com.teachernavigator.teachernavigator.application.di.components.DaggerParentScreenComponent
 import com.teachernavigator.teachernavigator.application.di.modules.ParentScreenModule
 import com.teachernavigator.teachernavigator.domain.interactors.abstractions.ICommentsInteractor
-import com.teachernavigator.teachernavigator.domain.interactors.abstractions.IPostsInteractor
 import com.teachernavigator.teachernavigator.domain.models.Comment
-import com.teachernavigator.teachernavigator.domain.models.Monade
 import com.teachernavigator.teachernavigator.domain.models.Post
 import com.teachernavigator.teachernavigator.presentation.facades.abstractions.IPostControllerFacade
-import com.teachernavigator.teachernavigator.presentation.screens.base.BasePresenter
+import com.teachernavigator.teachernavigator.presentation.screens.common.BasePresenter
 import com.teachernavigator.teachernavigator.presentation.screens.tape.activities.absctraction.PostCommentsView
 import com.teachernavigator.teachernavigator.presentation.screens.tape.presenters.abstractions.IPostCommentsPresenter
 import javax.inject.Inject
@@ -61,33 +59,6 @@ class AcPostCommentsPresenter : BasePresenter<PostCommentsView>(), IPostComments
             addDissposable(mCommentsInteractor.comment(post, text)
                     .doOnSubscribe { this::doOnSubscribeOnSendPost }
                     .subscribe(this::doOnCommented, this::doOnError))
-    }
-
-    override fun onLike(result: Monade) {
-        if (!result.isError)
-            mView!!.loadLikes(true)
-    }
-
-    override fun onDislike(result: Monade) {
-        if (!result.isError)
-            mView!!.loadLikes(true)
-    }
-
-    override fun onSave(result: Monade) {
-        if (!result.isError)
-            Toast.makeText(getContext(), getContext().getString(R.string.added), Toast.LENGTH_SHORT).show()
-    }
-
-    override fun onSubscribe(result: Monade) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
-
-    override fun onComplain(result: Monade) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
-
-    override fun onError(error: Throwable) {
-        doOnError(error)
     }
 
     private fun doOnSubscribeOnSendPost() {

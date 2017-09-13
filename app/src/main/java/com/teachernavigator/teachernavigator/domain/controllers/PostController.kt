@@ -6,6 +6,7 @@ import com.example.root.androidtest.application.utils.Logger
 import com.teachernavigator.teachernavigator.data.repository.abstractions.IMainRepository
 import com.teachernavigator.teachernavigator.domain.mappers.BaseMapper
 import com.teachernavigator.teachernavigator.domain.mappers.PostsMapper
+import com.teachernavigator.teachernavigator.domain.models.Comment
 import com.teachernavigator.teachernavigator.domain.models.Monade
 import com.teachernavigator.teachernavigator.domain.models.Post
 import com.teachernavigator.teachernavigator.presentation.screens.tape.activities.PostCommentsActivity
@@ -66,6 +67,15 @@ class PostController @Inject constructor(private val mRepository: IMainRepositor
         return Observable.just(Monade.FAILARY_MONADE)
     }
 
+    override fun subscribe(comment: Comment, doOnUserNotAuth: () -> Unit): Observable<Monade> {
+        if (mRepository.isAuth())
+            return Observable.just(Monade.SUCCESSFULLY_MONADE)
+        else
+            doOnUserNotAuth.invoke()
+        return Observable.just(Monade.FAILARY_MONADE)
+    }
+
+
     override fun complain(post: Post, doOnUserNotAuth: () -> Unit): Observable<Monade> {
         if (mRepository.isAuth())
             return Observable.just(Monade.SUCCESSFULLY_MONADE)
@@ -77,7 +87,7 @@ class PostController @Inject constructor(private val mRepository: IMainRepositor
     override fun openCommentsScreen(post: Post, activity: Activity, doOnUserNotAuth: () -> Unit): Observable<Monade> {
             if (mRepository.isAuth()) {
                 val bundle = Bundle()
-                bundle.putSerializable(PostCommentsActivity.POST_KEY, post)
+                bundle.putSerializable(PostCommentsActivity.POST_ID_KEY, post)
                 ActivityRouter.openActivity(activity, bundle, PostCommentsActivity::class.java)
             } else
                 doOnUserNotAuth.invoke()
@@ -85,18 +95,37 @@ class PostController @Inject constructor(private val mRepository: IMainRepositor
     }
 
     override fun openProfileScreen(post: Post, activity: Activity, doOnUserNotAuth: () -> Unit): Observable<Monade> {
+        //TODO: mock
         if (mRepository.isAuth()) {
             val bundle = Bundle()
-            bundle.putSerializable(PostCommentsActivity.POST_KEY, post)
+            bundle.putInt(PostCommentsActivity.POST_ID_KEY, post.id!!)
             ActivityRouter.openActivity(activity, bundle, PostCommentsActivity::class.java)
         } else
             doOnUserNotAuth.invoke()
         return Observable.just(Monade.FAILARY_MONADE)
     }
 
+    override fun openProfileScreen(comment: Comment, activity: Activity, doOnUserNotAuth: () -> Unit): Observable<Monade> {
+        //TODO: mock
+        if (mRepository.isAuth()) {
+            val bundle = Bundle()
+            bundle.putInt(PostCommentsActivity.POST_ID_KEY, 0)
+            ActivityRouter.openActivity(activity, bundle, PostCommentsActivity::class.java)
+        } else
+            doOnUserNotAuth.invoke()
+        return Observable.just(Monade.FAILARY_MONADE)
+    }
+
+    override fun openBranch(comment: Comment, activity: Activity) {
+        //TODO: mock
+        val bundle = Bundle()
+        bundle.putInt(PostCommentsActivity.POST_ID_KEY, 0)
+        ActivityRouter.openActivity(activity, bundle, PostCommentsActivity::class.java)
+    }
+
     override fun openPostDetailScreen(post: Post, activity: Activity) {
         val bundle = Bundle()
-        bundle.putSerializable(PostDetailActivity.POST_KEY, post)
+        bundle.putInt(PostDetailActivity.POST_ID_KEY, post.id!!)
         ActivityRouter.openActivity(activity, bundle, PostDetailActivity::class.java)
     }
 }

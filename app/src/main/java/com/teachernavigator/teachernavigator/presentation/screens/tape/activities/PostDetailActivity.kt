@@ -24,7 +24,7 @@ import com.teachernavigator.teachernavigator.presentation.screens.tape.presenter
 class PostDetailActivity: AppCompatActivity(), PostDetailView {
 
     companion object {
-        val POST_KEY: String = "post_key_post_detail_activity"
+        val POST_ID_KEY: String = "post_key_post_detail_activity"
     }
 
     @BindView(R.id.ac_post_detail_postview) lateinit var mPostview: PostView
@@ -41,8 +41,9 @@ class PostDetailActivity: AppCompatActivity(), PostDetailView {
         ButterKnife.bind(this)
         initToolbar()
         mPresenter.attachView(this)
-        mPostview.setPostControllerFacade(mPresenter.getIPostControllerFacade())
-        loadPost(intent.getSerializableExtra(POST_KEY) as Post)
+        mPostview.setPostControllerFacade(mPresenter.getPostControllerFacade())
+        mPresenter.putPostId(intent.getIntExtra(POST_ID_KEY, -1))
+        mPresenter.loadData()
     }
 
     override fun onDestroy() {
@@ -86,7 +87,7 @@ class PostDetailActivity: AppCompatActivity(), PostDetailView {
 
     override fun getFragmentLayoutId(): Int = 0
 
-    private fun loadPost(post: Post) {
+    override fun loadPost(post: Post) {
         setToolbarTitle(post.title!!)
         mPostview.loadData(post)
     }

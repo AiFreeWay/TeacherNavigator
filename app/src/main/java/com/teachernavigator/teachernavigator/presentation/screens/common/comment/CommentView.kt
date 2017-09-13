@@ -8,13 +8,18 @@ import butterknife.BindView
 import butterknife.ButterKnife
 import com.teachernavigator.teachernavigator.R
 import com.teachernavigator.teachernavigator.domain.models.Comment
+import com.teachernavigator.teachernavigator.domain.models.Monade
+import com.teachernavigator.teachernavigator.domain.models.Post
+import com.teachernavigator.teachernavigator.presentation.facades.abstractions.ICommentControllerFacade
+import com.teachernavigator.teachernavigator.presentation.facades.abstractions.ICommentControllerFacadeCallback
 import com.teachernavigator.teachernavigator.presentation.facades.abstractions.IPostControllerFacade
+import com.teachernavigator.teachernavigator.presentation.facades.abstractions.IPostControllerFacadeCallback
 import com.teachernavigator.teachernavigator.presentation.utils.ImageLoader
 
 /**
  * Created by root on 13.09.17.
  */
-open class CommentView : RelativeLayout {
+open class CommentView : RelativeLayout, ICommentControllerFacadeCallback {
 
     @BindView(R.id.v_comment_iv_avatar) lateinit var mIvAvatar: ImageView
     @BindView(R.id.v_comment_iv_subscribe) lateinit var mIvSubscribe: ImageView
@@ -25,12 +30,12 @@ open class CommentView : RelativeLayout {
     @BindView(R.id.v_comment_ll_open_branch) lateinit var mLlOpenBranch: LinearLayout
     @BindView(R.id.v_comment_btn_open_branch) lateinit var mBtnOpenBranch: Button
 
-    private lateinit var mPostControllerFacade: IPostControllerFacade
+    private lateinit var mCommentControllerFacade: ICommentControllerFacade
 
     constructor(context: Context, attrs: AttributeSet) : super(context, attrs)
 
-    constructor(context: Context, postControllerFacade: IPostControllerFacade) : super(context) {
-        mPostControllerFacade = postControllerFacade
+    constructor(context: Context, commentControllerFacade: ICommentControllerFacade) : super(context) {
+        mCommentControllerFacade = commentControllerFacade
     }
 
     init {
@@ -38,8 +43,8 @@ open class CommentView : RelativeLayout {
         ButterKnife.bind(this, view)
     }
 
-    fun setPostControllerFacade(postControllerFacade: IPostControllerFacade) {
-        mPostControllerFacade = postControllerFacade
+    fun setPostControllerFacade(commentControllerFacade: ICommentControllerFacade) {
+        mCommentControllerFacade = commentControllerFacade
     }
 
     fun loadData(comment: Comment) {
@@ -52,5 +57,22 @@ open class CommentView : RelativeLayout {
             if (comment.user!!.avatars != null)
                 ImageLoader.load(context, comment.user!!.avatars!!.avatar, mIvAvatar)
         }
+        setClickListeners(comment)
+    }
+
+    override fun onSubscribe(result: Monade) {}
+
+    override fun onError(error: Throwable) {
+        showToast(R.string.error_throwed)
+    }
+
+    protected fun showToast(strRest: Int) {
+        Toast.makeText(getContext(), getContext().getString(strRest), Toast.LENGTH_SHORT).show()
+    }
+
+    protected fun setClickListeners(comment: Comment) {
+        mIvAvatar.setOnClickListener { mCommentControllerFacade.openProfileScreen(comment, this) }
+        mIvSubscribe.setOnClickListener { mCommentControllerFacade.subscribe(comment, this) }
+        mBtnOpenBranch.setOnClickListener { mCommentControllerFacade.openBranch(comment, this) }
     }
 }

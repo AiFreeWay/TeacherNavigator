@@ -42,7 +42,7 @@ class MyCommentsFragment : BaseFragment(), MyCommentsView {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         mPresenter.attachView(this)
-        mAdapter = MultyRvAdapter(MyCommentHolder(context, mPresenter.getIPostControllerFacade()))
+        mAdapter = MultyRvAdapter(MyCommentHolder(context, mPresenter.getCommentControllerFacade()))
         mRvList.layoutManager = LinearLayoutManager(context)
         mRvList.adapter = mAdapter
     }

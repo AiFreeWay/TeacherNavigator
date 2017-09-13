@@ -1,6 +1,7 @@
 package com.teachernavigator.teachernavigator.presentation.screens.tape.activities.absctraction
 
 import com.teachernavigator.teachernavigator.domain.models.Comment
+import com.teachernavigator.teachernavigator.domain.models.Post
 import com.teachernavigator.teachernavigator.presentation.screens.common.ParentView
 
 /**
@@ -8,7 +9,8 @@ import com.teachernavigator.teachernavigator.presentation.screens.common.ParentV
  */
 interface PostCommentsView : ParentView {
 
-    fun loadComment(comment: Comment)
+    fun addComment(comment: Comment)
     fun lockUi()
     fun unlockUi()
+    fun loadPost(post: Post)
 }

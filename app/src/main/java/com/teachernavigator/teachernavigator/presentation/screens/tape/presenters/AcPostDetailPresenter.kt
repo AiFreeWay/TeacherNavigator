@@ -7,7 +7,9 @@ import com.example.root.androidtest.application.utils.Logger
 import com.teachernavigator.teachernavigator.R
 import com.teachernavigator.teachernavigator.application.di.components.DaggerParentScreenComponent
 import com.teachernavigator.teachernavigator.application.di.modules.ParentScreenModule
+import com.teachernavigator.teachernavigator.domain.interactors.abstractions.IPostsInteractor
 import com.teachernavigator.teachernavigator.domain.models.Monade
+import com.teachernavigator.teachernavigator.domain.models.Post
 import com.teachernavigator.teachernavigator.presentation.facades.abstractions.IPostControllerFacade
 import com.teachernavigator.teachernavigator.presentation.screens.common.BasePresenter
 import com.teachernavigator.teachernavigator.presentation.screens.tape.activities.absctraction.PostDetailView
@@ -21,6 +23,10 @@ class AcPostDetailPresenter : BasePresenter<PostDetailView>(), IPostDetailPresen
 
     @Inject
     lateinit var mPostControllerFacade: IPostControllerFacade
+    @Inject
+    lateinit var mPostsInteractor: IPostsInteractor
+
+    private var mPostId: Int = -1
 
     init {
         Logger.logDebug("created PRESENTER AcPostDetailPresenter")
@@ -37,6 +43,16 @@ class AcPostDetailPresenter : BasePresenter<PostDetailView>(), IPostDetailPresen
         inject()
     }
 
+    override fun putPostId(postId: Int) {
+        mPostId = postId
+    }
+
+    override fun loadData() {
+        addDissposable(mPostsInteractor.getPostById(mPostId)
+                .doOnSubscribe { mView!!.startProgress() }
+                .subscribe(this::doOnGetPost, this::doOnError))
+    }
+
     override fun doOnError(error: Throwable) {
         super.doOnError(error)
         mView!!.stopProgress()
@@ -47,7 +63,12 @@ class AcPostDetailPresenter : BasePresenter<PostDetailView>(), IPostDetailPresen
         mView!!.getActivity().finish()
     }
 
-    override fun getIPostControllerFacade(): IPostControllerFacade = mPostControllerFacade
+    override fun getPostControllerFacade(): IPostControllerFacade = mPostControllerFacade
+
+    private fun doOnGetPost(post: Post) {
+        mView!!.stopProgress()
+        mView!!.loadPost(post)
+    }
 
     private fun inject() {
         DaggerParentScreenComponent.builder()

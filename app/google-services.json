@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "929070940817",
+    "firebase_url": "https://teachernavigator.firebaseio.com",
+    "project_id": "teachernavigator",
+    "storage_bucket": "teachernavigator.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:929070940817:android:20b8265e045abe20",
+        "android_client_info": {
+          "package_name": "com.teachernavigator.teachernavigator"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "929070940817-remme4p4jouuc71ddfdrlk03ud32884i.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.teachernavigator.teachernavigator",
+            "certificate_hash": "aa20eb9db56d7e5b414804d39e61c015f24672c9"
+          }
+        },
+        {
+          "client_id": "929070940817-9gmvve8dt9v9g3eaafprqk8ubjb8lern.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAmGuCG-7wu9t8tj8AOhnk2m58cTQvxsyM"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "929070940817-9gmvve8dt9v9g3eaafprqk8ubjb8lern.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

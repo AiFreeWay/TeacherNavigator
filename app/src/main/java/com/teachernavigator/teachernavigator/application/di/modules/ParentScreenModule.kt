@@ -13,7 +13,9 @@ import com.teachernavigator.teachernavigator.domain.interactors.PostsInteractor
 import com.teachernavigator.teachernavigator.domain.interactors.abstractions.IAuthInteractor
 import com.teachernavigator.teachernavigator.domain.interactors.abstractions.ICommentsInteractor
 import com.teachernavigator.teachernavigator.domain.interactors.abstractions.IPostsInteractor
+import com.teachernavigator.teachernavigator.presentation.facades.CommentControllerFacade
 import com.teachernavigator.teachernavigator.presentation.facades.PostControllerFacade
+import com.teachernavigator.teachernavigator.presentation.facades.abstractions.ICommentControllerFacade
 import com.teachernavigator.teachernavigator.presentation.facades.abstractions.IPostControllerFacade
 import com.teachernavigator.teachernavigator.presentation.screens.common.ParentView
 import com.teachernavigator.teachernavigator.presentation.utils.FragmentNavigator
@@ -74,4 +76,8 @@ class ParentScreenModule(private val mParentView: ParentView) {
     @Provides
     @PerParentScreen
     fun providePostControllerFacade(controller : PostControllerFacade): IPostControllerFacade = controller
+
+    @Provides
+    @PerParentScreen
+    fun provideCommentControllerFacade(controller : CommentControllerFacade): ICommentControllerFacade = controller
 }

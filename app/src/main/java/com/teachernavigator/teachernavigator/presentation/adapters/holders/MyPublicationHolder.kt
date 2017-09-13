@@ -11,11 +11,11 @@ import com.teachernavigator.teachernavigator.presentation.facades.abstractions.I
 import com.teachernavigator.teachernavigator.presentation.screens.common.post.PostView
 
 /**
- * Created by root on 08.09.17.
+ * Created by root on 13.09.17.
  */
-class SavedPostHolder: BaseHolder<Post> {
+class MyPublicationHolder: BaseHolder<Post> {
 
-    @BindView(R.id.v_saved_post_holder_detail_postview) lateinit var mPostView: PostView
+    @BindView(R.id.v_my_publication_holder_detail_postview) lateinit var mPostView: PostView
 
     val mPostControllerFacade: IPostControllerFacade
 
@@ -30,7 +30,7 @@ class SavedPostHolder: BaseHolder<Post> {
     }
 
     override fun create(viewGroup: ViewGroup): BaseHolder<Post> {
-        val view = viewInflater(viewGroup, R.layout.v_saved_post_holder)
+        val view = viewInflater(viewGroup, R.layout.v_my_publication_holder)
         return SavedPostHolder(view, mPostControllerFacade)
     }
 

@@ -7,6 +7,7 @@ import butterknife.BindView
 import butterknife.ButterKnife
 import com.teachernavigator.teachernavigator.R
 import com.teachernavigator.teachernavigator.domain.models.Comment
+import com.teachernavigator.teachernavigator.presentation.facades.abstractions.ICommentControllerFacade
 import com.teachernavigator.teachernavigator.presentation.facades.abstractions.IPostControllerFacade
 import com.teachernavigator.teachernavigator.presentation.screens.common.comment.MyCommentView
 
@@ -17,21 +18,21 @@ class  MyCommentHolder: BaseHolder<Comment> {
 
     @BindView(R.id.v_my_post_holder_comment_comment) lateinit var mCommentView: MyCommentView
 
-    val mPostControllerFacade: IPostControllerFacade
+    val mCommentControllerFacade: ICommentControllerFacade
 
-    constructor(context: Context, postController: IPostControllerFacade) : super(context, null) {
-        mPostControllerFacade = postController
+    constructor(context: Context, commentControllerFacade: ICommentControllerFacade) : super(context, null) {
+        mCommentControllerFacade = commentControllerFacade
     }
 
-    constructor(view: View, postController: IPostControllerFacade) : super(view, null) {
-        mPostControllerFacade = postController
+    constructor(view: View, commentControllerFacade: ICommentControllerFacade) : super(view, null) {
+        mCommentControllerFacade = commentControllerFacade
         ButterKnife.bind(this, itemView)
-        mCommentView.setPostControllerFacade(mPostControllerFacade)
+        mCommentView.setPostControllerFacade(mCommentControllerFacade)
     }
 
     override fun create(viewGroup: ViewGroup): BaseHolder<Comment> {
         val view = viewInflater(viewGroup, R.layout.v_my_comment_holder)
-        return MyCommentHolder(view, mPostControllerFacade)
+        return MyCommentHolder(view, mCommentControllerFacade)
     }
 
     override fun bind(dataModel: Comment) {

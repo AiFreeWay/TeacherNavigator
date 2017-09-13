@@ -6,6 +6,7 @@ import com.teachernavigator.teachernavigator.presentation.screens.auth.fragments
 import com.teachernavigator.teachernavigator.presentation.screens.auth.fragments.RegistrationFragment
 import com.teachernavigator.teachernavigator.presentation.screens.auth.fragments.RestorePasswordFragment
 import com.teachernavigator.teachernavigator.presentation.screens.main.fragments.MyCommentsFragment
+import com.teachernavigator.teachernavigator.presentation.screens.main.fragments.MyPublicationsFragment
 import com.teachernavigator.teachernavigator.presentation.screens.main.fragments.SavedPostsFragment
 import com.teachernavigator.teachernavigator.presentation.screens.main.fragments.TapeFragment
 
@@ -27,6 +28,7 @@ class FragmentsFactory {
                 RestorePasswordFragment.FRAGMENT_KEY -> addBundle(RestorePasswordFragment(), bundle)
                 MyCommentsFragment.FRAGMENT_KEY -> addBundle(MyCommentsFragment(), bundle)
                 SavedPostsFragment.FRAGMENT_KEY -> addBundle(SavedPostsFragment(), bundle)
+                MyPublicationsFragment.FRAGMENT_KEY -> addBundle(MyPublicationsFragment(), bundle)
                 else -> throw Exception("Invalid fragment key $screenKey FragmentsFactory.createFragment(screenKey: String?)")
             }
 

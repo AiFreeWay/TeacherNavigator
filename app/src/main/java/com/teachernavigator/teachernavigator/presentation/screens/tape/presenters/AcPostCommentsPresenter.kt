@@ -9,8 +9,10 @@ import com.teachernavigator.teachernavigator.R
 import com.teachernavigator.teachernavigator.application.di.components.DaggerParentScreenComponent
 import com.teachernavigator.teachernavigator.application.di.modules.ParentScreenModule
 import com.teachernavigator.teachernavigator.domain.interactors.abstractions.ICommentsInteractor
+import com.teachernavigator.teachernavigator.domain.interactors.abstractions.IPostsInteractor
 import com.teachernavigator.teachernavigator.domain.models.Comment
 import com.teachernavigator.teachernavigator.domain.models.Post
+import com.teachernavigator.teachernavigator.presentation.facades.abstractions.ICommentControllerFacade
 import com.teachernavigator.teachernavigator.presentation.facades.abstractions.IPostControllerFacade
 import com.teachernavigator.teachernavigator.presentation.screens.common.BasePresenter
 import com.teachernavigator.teachernavigator.presentation.screens.tape.activities.absctraction.PostCommentsView
@@ -25,7 +27,13 @@ class AcPostCommentsPresenter : BasePresenter<PostCommentsView>(), IPostComments
     @Inject
     lateinit var mCommentsInteractor: ICommentsInteractor
     @Inject
+    lateinit var mPostsInteractor: IPostsInteractor
+    @Inject
     lateinit var mPostControllerFacade: IPostControllerFacade
+    @Inject
+    lateinit var mCommentControllerFacade: ICommentControllerFacade
+
+    private var mPostId: Int = -1
 
     init {
         Logger.logDebug("created PRESENTER AcPostCommentsPresenter")
@@ -41,6 +49,16 @@ class AcPostCommentsPresenter : BasePresenter<PostCommentsView>(), IPostComments
         inject()
     }
 
+    override fun putPostId(postId: Int) {
+        mPostId = postId
+    }
+
+    override fun loadData() {
+        addDissposable(mPostsInteractor.getPostById(mPostId)
+                .doOnSubscribe { mView!!.startProgress() }
+                .subscribe(this::doOnGetPost, this::doOnError))
+    }
+
     override fun doOnError(error: Throwable) {
         super.doOnError(error)
         mView!!.stopProgress()
@@ -52,13 +70,20 @@ class AcPostCommentsPresenter : BasePresenter<PostCommentsView>(), IPostComments
         mView!!.getActivity().finish()
     }
 
-    override fun getIPostControllerFacade(): IPostControllerFacade = mPostControllerFacade
+    override fun getPostControllerFacade(): IPostControllerFacade = mPostControllerFacade
+
+    override fun getCommentControllerFacade(): ICommentControllerFacade = mCommentControllerFacade
 
     override fun doComment(post: Post, text: String) {
         if (!TextUtils.isEmpty(text))
             addDissposable(mCommentsInteractor.comment(post, text)
                     .doOnSubscribe { this::doOnSubscribeOnSendPost }
                     .subscribe(this::doOnCommented, this::doOnError))
+    }
+
+    private fun doOnGetPost(post: Post) {
+        mView!!.stopProgress()
+        mView!!.loadPost(post)
     }
 
     private fun doOnSubscribeOnSendPost() {
@@ -69,7 +94,7 @@ class AcPostCommentsPresenter : BasePresenter<PostCommentsView>(), IPostComments
     private fun doOnCommented(comment: Comment) {
         Logger.testLog("doOnCommented")
         mView!!.stopProgress()
-        mView!!.loadComment(comment)
+        mView!!.addComment(comment)
         mView!!.unlockUi()
     }
 

@@ -2,15 +2,14 @@ package com.teachernavigator.teachernavigator.presentation.screens.main.presente
 
 import com.teachernavigator.teachernavigator.presentation.facades.abstractions.IPostControllerFacade
 import com.teachernavigator.teachernavigator.presentation.screens.common.ViewAttacher
-import com.teachernavigator.teachernavigator.presentation.screens.main.fragments.abstractions.SavedPostsView
+import com.teachernavigator.teachernavigator.presentation.screens.main.fragments.abstractions.MyPublicationsView
 
 /**
- * Created by root on 08.09.17.
+ * Created by root on 13.09.17.
  */
-interface ISavedPostsPresenter : ViewAttacher<SavedPostsView> {
+interface IMyPublicationsPresenter : ViewAttacher<MyPublicationsView> {
 
     fun getPostControllerFacade(): IPostControllerFacade
-    fun getSavedPosts()
-    fun openPostSearchScreen()
+    fun getMyPublications()
     fun refresh()
 }

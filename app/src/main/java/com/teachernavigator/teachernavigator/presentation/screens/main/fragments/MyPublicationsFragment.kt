@@ -10,25 +10,25 @@ import butterknife.ButterKnife
 import com.teachernavigator.teachernavigator.R
 import com.teachernavigator.teachernavigator.domain.models.Post
 import com.teachernavigator.teachernavigator.presentation.adapters.MultyRvAdapter
-import com.teachernavigator.teachernavigator.presentation.adapters.holders.SavedPostHolder
+import com.teachernavigator.teachernavigator.presentation.adapters.holders.MyPublicationHolder
 import com.teachernavigator.teachernavigator.presentation.screens.common.BaseFragment
-import com.teachernavigator.teachernavigator.presentation.screens.main.fragments.abstractions.SavedPostsView
-import com.teachernavigator.teachernavigator.presentation.screens.main.presenters.FmtSavedPostsPresenter
-import com.teachernavigator.teachernavigator.presentation.screens.main.presenters.abstractions.ISavedPostsPresenter
+import com.teachernavigator.teachernavigator.presentation.screens.main.fragments.abstractions.MyPublicationsView
+import com.teachernavigator.teachernavigator.presentation.screens.main.presenters.FmtMyPublicationsPresenter
+import com.teachernavigator.teachernavigator.presentation.screens.main.presenters.abstractions.IMyPublicationsPresenter
 
 /**
- * Created by root on 08.09.17.
+ * Created by root on 13.09.17.
  */
-class SavedPostsFragment : BaseFragment(), SavedPostsView {
+class MyPublicationsFragment : BaseFragment(), MyPublicationsView {
 
     companion object {
-        val FRAGMENT_KEY = "saved_posts_fragment"
+        val FRAGMENT_KEY = "my_publications_fragment"
     }
 
     @BindView(R.id.fmt_list_rv_list) lateinit var mRvList: RecyclerView
     @BindView(R.id.fmt_list_tv_no_data) lateinit var mTvNoData: TextView
 
-    private val mPresenter: ISavedPostsPresenter = FmtSavedPostsPresenter()
+    private val mPresenter: IMyPublicationsPresenter = FmtMyPublicationsPresenter()
     private lateinit var mAdapter: MultyRvAdapter<Post>
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -41,10 +41,10 @@ class SavedPostsFragment : BaseFragment(), SavedPostsView {
         super.onActivityCreated(savedInstanceState)
         setHasOptionsMenu(true)
         mPresenter.attachView(this)
-        mAdapter = MultyRvAdapter(SavedPostHolder(context, mPresenter.getPostControllerFacade()))
+        mAdapter = MultyRvAdapter(MyPublicationHolder(context, mPresenter.getPostControllerFacade()))
         mRvList.layoutManager = LinearLayoutManager(context)
         mRvList.adapter = mAdapter
-        mPresenter.getSavedPosts()
+        mPresenter.getMyPublications()
     }
 
     override fun onDestroyView() {
@@ -52,7 +52,7 @@ class SavedPostsFragment : BaseFragment(), SavedPostsView {
         mPresenter.detachView()
     }
 
-    override fun loadSavedPosts(posts: List<Post>) {
+    override fun loadMyPublications(posts: List<Post>) {
         mAdapter.loadData(posts)
     }
 
@@ -65,13 +65,12 @@ class SavedPostsFragment : BaseFragment(), SavedPostsView {
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.search_refresh_menu, menu)
+        inflater.inflate(R.menu.refresh_menu, menu)
         super.onCreateOptionsMenu(menu, inflater)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when(item.itemId) {
-            R.id.action_search -> { mPresenter.openPostSearchScreen() }
             R.id.action_refresh -> { mPresenter.refresh() }
         }
         return super.onOptionsItemSelected(item)

@@ -22,27 +22,27 @@ class PostControllerFacade @Inject constructor(private val mPostController: IPos
 
     override fun like(post: Post, callbak: IPostControllerFacadeCallback) {
         mPostController.like(post, { doOnUserNotAuth() })
-                .subscribe({ callbak.onLike(it) }, { doOnError(it, callbak) })
+                .subscribe({ callbak.onLike() }, { doOnError(it, callbak) })
     }
 
     override fun dislike(post: Post, callbak: IPostControllerFacadeCallback) {
         mPostController.dislike(post, { doOnUserNotAuth() })
-                .subscribe({ callbak.onDislike(it) }, { doOnError(it, callbak) })
+                .subscribe({ callbak.onDislike() }, { doOnError(it, callbak) })
     }
 
     override fun save(post: Post, callbak: IPostControllerFacadeCallback) {
         mPostController.save(post, { doOnUserNotAuth() })
-                .subscribe({ callbak.onSave(it) }, { doOnError(it, callbak) })
+                .subscribe({ callbak.onSave() }, { doOnError(it, callbak) })
     }
 
     override fun subscribe(post: Post, callbak: IPostControllerFacadeCallback) {
         mPostController.subscribe(post, { doOnUserNotAuth() })
-                .subscribe({ callbak.onSubscribe(it) }, { doOnError(it, callbak) })
+                .subscribe({ callbak.onSubscribe() }, { doOnError(it, callbak) })
     }
 
     override fun complain(post: Post, callbak: IPostControllerFacadeCallback) {
         mPostController.complain(post, { doOnUserNotAuth() })
-                .subscribe({ callbak.onComplain(it) }, { doOnError(it, callbak) })
+                .subscribe({ callbak.onComplain() }, { doOnError(it, callbak) })
     }
 
     override fun openCommentsScreen(post: Post, callbak: IPostControllerFacadeCallback) {

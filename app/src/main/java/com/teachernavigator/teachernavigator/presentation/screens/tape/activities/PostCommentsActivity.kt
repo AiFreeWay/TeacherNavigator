@@ -19,7 +19,6 @@ import com.teachernavigator.teachernavigator.presentation.screens.common.comment
 import com.teachernavigator.teachernavigator.presentation.screens.tape.activities.absctraction.PostCommentsView
 import com.teachernavigator.teachernavigator.presentation.screens.tape.presenters.AcPostCommentsPresenter
 import com.teachernavigator.teachernavigator.presentation.screens.tape.presenters.abstractions.IPostCommentsPresenter
-import com.teachernavigator.teachernavigator.presentation.utils.ImageLoader
 import com.teachernavigator.teachernavigator.presentation.screens.common.post.PostView
 
 
@@ -29,7 +28,7 @@ import com.teachernavigator.teachernavigator.presentation.screens.common.post.Po
 class PostCommentsActivity: AppCompatActivity(), PostCommentsView {
 
     companion object {
-        val POST_KEY: String = "post_key_post_comments_activity"
+        val POST_ID_KEY: String = "post_key_post_comments_activity"
     }
 
     @BindView(R.id.ac_post_comments_postview) lateinit var mPostview: PostView
@@ -52,8 +51,9 @@ class PostCommentsActivity: AppCompatActivity(), PostCommentsView {
         ButterKnife.bind(this)
         initToolbar()
         mPresenter.attachView(this)
-        mPostview.setPostControllerFacade(mPresenter.getIPostControllerFacade())
-        loadPost(intent.getSerializableExtra(POST_KEY) as Post)
+        mPostview.setPostControllerFacade(mPresenter.getPostControllerFacade())
+        mPresenter.putPostId(intent.getIntExtra(POST_ID_KEY, -1))
+        mPresenter.loadData()
     }
 
     override fun onDestroy() {
@@ -95,7 +95,7 @@ class PostCommentsActivity: AppCompatActivity(), PostCommentsView {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
-    override fun loadComment(comment: Comment) {
+    override fun addComment(comment: Comment) {
         mEtCommentText.setText("")
         val inflater = LayoutInflater.from(this)
         mLlComments.addView(createCommentView(comment, inflater))
@@ -112,7 +112,7 @@ class PostCommentsActivity: AppCompatActivity(), PostCommentsView {
         mIvDoComment.isEnabled = true
     }
 
-    private fun loadPost(post: Post) {
+    override fun loadPost(post: Post) {
         setToolbarTitle(post.title!!)
         mPostview.loadData(post)
         loadComments(post)
@@ -131,8 +131,10 @@ class PostCommentsActivity: AppCompatActivity(), PostCommentsView {
     }
 
     private fun createCommentView(comment: Comment, inflater: LayoutInflater): View {
-        val commentView = inflater.inflate(R.layout.v_post_comment, mLlComments, false)
-        commentView.findViewById<CommentView>(R.id.v_post_comment_comment).loadData(comment)
+        val view = inflater.inflate(R.layout.v_post_comment, mLlComments, false)
+        val commentView = view.findViewById<CommentView>(R.id.v_post_comment_comment)
+        commentView.setPostControllerFacade(mPresenter.getCommentControllerFacade())
+        commentView.loadData(comment)
         return commentView
     }
 

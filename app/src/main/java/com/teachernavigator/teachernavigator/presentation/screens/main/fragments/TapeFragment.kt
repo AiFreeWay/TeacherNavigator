@@ -73,7 +73,7 @@ class TapeFragment : BaseFragment(), TapeView {
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.tape_menu, menu)
+        inflater.inflate(R.menu.search_refresh_menu, menu)
         super.onCreateOptionsMenu(menu, inflater)
     }
 

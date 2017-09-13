@@ -7,8 +7,8 @@
     android:layout_marginTop="@dimen/externalPadding">
 
 
-    <com.teachernavigator.teachernavigator.presentation.screens.common.post.PostSavedView
-        android:id="@+id/v_saved_post_holder_detail_postview"
+    <com.teachernavigator.teachernavigator.presentation.screens.common.post.MyPublicationView
+        android:id="@+id/v_my_publication_holder_detail_postview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 </android.support.v7.widget.CardView>

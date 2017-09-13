@@ -17,6 +17,7 @@ import com.teachernavigator.teachernavigator.presentation.screens.auth.activitie
 import com.teachernavigator.teachernavigator.presentation.screens.common.BasePresenter
 import com.teachernavigator.teachernavigator.presentation.screens.main.activities.abstractions.MainView
 import com.teachernavigator.teachernavigator.presentation.screens.main.fragments.MyCommentsFragment
+import com.teachernavigator.teachernavigator.presentation.screens.main.fragments.MyPublicationsFragment
 import com.teachernavigator.teachernavigator.presentation.screens.main.fragments.SavedPostsFragment
 import com.teachernavigator.teachernavigator.presentation.screens.main.fragments.TapeFragment
 import com.teachernavigator.teachernavigator.presentation.screens.main.presenters.abstractions.IMainPresenter
@@ -91,6 +92,7 @@ class AcMainPresenter : BasePresenter<MainView>(), IMainPresenter {
             MenuItemsFactory.MenuItemTypes.TAPE.id -> navigateToFragment(TapeFragment.FRAGMENT_KEY)
             MenuItemsFactory.MenuItemTypes.MY_COMMENTS.id -> navigateToFragment(MyCommentsFragment.FRAGMENT_KEY)
             MenuItemsFactory.MenuItemTypes.SAVED.id -> navigateToFragment(SavedPostsFragment.FRAGMENT_KEY)
+            MenuItemsFactory.MenuItemTypes.MY_PUBLICATION.id -> navigateToFragment(MyPublicationsFragment.FRAGMENT_KEY)
         }
         mView!!.closeSideMenu()
     }

@@ -10,5 +10,7 @@ import com.teachernavigator.teachernavigator.presentation.screens.tape.activitie
 interface IPostDetailPresenter : ViewAttacher<PostDetailView> {
 
     fun navigateBack()
-    fun getIPostControllerFacade(): IPostControllerFacade
+    fun putPostId(postId: Int)
+    fun loadData()
+    fun getPostControllerFacade(): IPostControllerFacade
 }

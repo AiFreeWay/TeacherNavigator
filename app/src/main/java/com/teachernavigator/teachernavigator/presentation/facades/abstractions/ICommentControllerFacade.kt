@@ -7,7 +7,7 @@ import com.teachernavigator.teachernavigator.domain.models.Comment
  */
 interface ICommentControllerFacade {
 
-    fun openBranch(comment: Comment, callbak: ICommentControllerFacadeCallback)
     fun subscribe(comment: Comment, callbak: ICommentControllerFacadeCallback)
+    fun openBranch(comment: Comment, callbak: ICommentControllerFacadeCallback)
     fun openProfileScreen(comment: Comment, callbak: ICommentControllerFacadeCallback)
 }

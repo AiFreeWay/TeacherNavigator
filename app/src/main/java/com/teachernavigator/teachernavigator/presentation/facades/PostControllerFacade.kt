@@ -22,27 +22,27 @@ class PostControllerFacade @Inject constructor(private val mPostController: IPos
 
     override fun like(post: Post, callbak: IPostControllerFacadeCallback) {
         mPostController.like(post, { doOnUserNotAuth() })
-                .subscribe({ callbak.onLike() }, { doOnError(it, callbak) })
+                .subscribe({ onSubscribe { callbak.onLike() } }, { doOnError(it, callbak) })
     }
 
     override fun dislike(post: Post, callbak: IPostControllerFacadeCallback) {
         mPostController.dislike(post, { doOnUserNotAuth() })
-                .subscribe({ callbak.onDislike() }, { doOnError(it, callbak) })
+                .subscribe({ onSubscribe { callbak.onDislike() } }, { doOnError(it, callbak) })
     }
 
     override fun save(post: Post, callbak: IPostControllerFacadeCallback) {
         mPostController.save(post, { doOnUserNotAuth() })
-                .subscribe({ callbak.onSave() }, { doOnError(it, callbak) })
+                .subscribe({ onSubscribe { callbak.onSave() } }, { doOnError(it, callbak) })
     }
 
     override fun subscribe(post: Post, callbak: IPostControllerFacadeCallback) {
         mPostController.subscribe(post, { doOnUserNotAuth() })
-                .subscribe({ callbak.onSubscribe() }, { doOnError(it, callbak) })
+                .subscribe({ onSubscribe { callbak.onSubscribe() } }, { doOnError(it, callbak) })
     }
 
     override fun complain(post: Post, callbak: IPostControllerFacadeCallback) {
         mPostController.complain(post, { doOnUserNotAuth() })
-                .subscribe({ callbak.onComplain() }, { doOnError(it, callbak) })
+                .subscribe({ onSubscribe { callbak.onComplain() } }, { doOnError(it, callbak) })
     }
 
     override fun openCommentsScreen(post: Post, callbak: IPostControllerFacadeCallback) {
@@ -71,6 +71,14 @@ class PostControllerFacade @Inject constructor(private val mPostController: IPos
             // -> @.@ <-
         } finally {
             Logger.logError(error)
+        }
+    }
+
+    private fun onSubscribe(onSubscribe: () -> Unit) {
+        try {
+            onSubscribe.invoke()
+        } catch (e: Exception) {
+            // -> ^.^ <-
         }
     }
 }

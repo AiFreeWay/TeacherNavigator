@@ -20,13 +20,13 @@ class CommentControllerFacade @Inject constructor(private val mPostController: I
         Logger.logDebug("created Facade CommentControllerFacade")
     }
 
-    override fun openBranch(comment: Comment, callbak: ICommentControllerFacadeCallback) {
-        mPostController.openBranch(comment, mParentView.getActivity())
-    }
-
     override fun subscribe(comment: Comment, callbak: ICommentControllerFacadeCallback) {
         mPostController.subscribe(comment, { doOnUserNotAuth() })
-                .subscribe({ callbak.onSubscribe() }, { doOnError(it, callbak) })
+                .subscribe({ onSubscribe { callbak.onSubscribe() } }, { doOnError(it, callbak) })
+    }
+
+    override fun openBranch(comment: Comment, callbak: ICommentControllerFacadeCallback) {
+        mPostController.openBranch(comment, mParentView.getActivity())
     }
 
     override fun openProfileScreen(comment: Comment, callbak: ICommentControllerFacadeCallback) {
@@ -44,6 +44,14 @@ class CommentControllerFacade @Inject constructor(private val mPostController: I
             // -> @.@ <-
         } finally {
             Logger.logError(error)
+        }
+    }
+
+    private fun onSubscribe(onSubscribe: () -> Unit) {
+        try {
+            onSubscribe.invoke()
+        } catch (e: Exception) {
+            // -> ^.^ <-
         }
     }
 }

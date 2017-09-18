@@ -11,10 +11,12 @@ import com.teachernavigator.teachernavigator.data.network.NetworkController
 import com.teachernavigator.teachernavigator.data.network.requests.*
 import com.teachernavigator.teachernavigator.data.network.responses.BaseResponse
 import com.teachernavigator.teachernavigator.data.network.responses.GetMyCommentsResponse
+import com.teachernavigator.teachernavigator.data.network.responses.ProfileResponse
 import com.teachernavigator.teachernavigator.data.network.responses.SingInResponse
 import com.teachernavigator.teachernavigator.data.repository.abstractions.IMainRepository
 import com.teachernavigator.teachernavigator.domain.models.AuthCredentials
 import com.teachernavigator.teachernavigator.domain.models.Monade
+import com.teachernavigator.teachernavigator.domain.models.Settings
 import com.teachernavigator.teachernavigator.domain.models.Token
 import io.reactivex.Observable
 import javax.inject.Inject
@@ -93,4 +95,22 @@ class MainRepository @Inject constructor(private val mNetwokController: NetworkC
 
     override fun vote(request: VoteRequest): Observable<BaseResponse> =
             mNetwokController.vote(getAccessToken(), request)
+
+    override fun getMyPublications(): Observable<Array<PostNetwork>> =
+            mNetwokController.getMyPublications(getAccessToken())
+
+    // ------------------------------- Settings methods --------------------------------
+
+    override fun getSettings(): Observable<Settings> {
+        val settings = CacheController.getData(CacheController.SETTINGS_KEY, Settings())
+        return Observable.just(settings)
+    }
+
+    override fun putSettings(settings: Settings) {
+        CacheController.putData(CacheController.SETTINGS_KEY, settings)
+    }
+
+    // ------------------------------- Profile methods --------------------------------
+
+    override fun getProfile(): Observable<ProfileResponse> = mNetwokController.getProfile(getAccessToken())
 }

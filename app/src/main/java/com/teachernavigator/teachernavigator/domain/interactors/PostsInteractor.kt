@@ -42,6 +42,9 @@ class PostsInteractor @Inject constructor(private val mRepository: ITapeReposito
     override fun getSavedPosts(): Observable<List<Post>> =
             configePostsObservable(mRepository.getSavedPosts())
 
+    override fun getMyPublications(): Observable<List<Post>> =
+            configePostsObservable(mRepository.getMyPublications())
+
     private fun configePostsObservable(observable: Observable<Array<PostNetwork>>) : Observable<List<Post>> =
             observable.observeOn(AndroidSchedulers.mainThread())
                     .subscribeOn(Schedulers.newThread())

@@ -60,7 +60,7 @@ open class CommentView : RelativeLayout, ICommentControllerFacadeCallback {
         setClickListeners(comment)
     }
 
-    override fun onSubscribe(result: Monade) {}
+    override fun onSubscribe() {}
 
     override fun onError(error: Throwable) {
         showToast(R.string.error_throwed)

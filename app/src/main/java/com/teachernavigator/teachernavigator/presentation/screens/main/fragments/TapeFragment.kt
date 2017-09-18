@@ -7,7 +7,7 @@ import android.view.*
 import butterknife.BindView
 import butterknife.ButterKnife
 import com.teachernavigator.teachernavigator.R
-import com.teachernavigator.teachernavigator.presentation.adapters.ViewpagerAdapter
+import com.teachernavigator.teachernavigator.presentation.adapters.ViewPagerAdapter
 import com.teachernavigator.teachernavigator.presentation.models.ViewPagerItemContainer
 import com.teachernavigator.teachernavigator.presentation.screens.common.BaseFragment
 import com.teachernavigator.teachernavigator.presentation.screens.main.fragments.abstractions.TapeView
@@ -28,7 +28,7 @@ class TapeFragment : BaseFragment(), TapeView {
     @BindView(R.id.fmt_view_pager_tb_tabs) lateinit var mTbTabs: TabLayout
     @BindView(R.id.fmt_view_pager_vp_body) lateinit var mVpTapeItems: ViewPager
 
-    private lateinit var mAdapter: ViewpagerAdapter
+    private lateinit var mAdapter: ViewPagerAdapter
     private val mPresenter: ITapePresenter = FmtTapePresenter()
     private var mLastViewPagerPosition = 0
 
@@ -43,7 +43,7 @@ class TapeFragment : BaseFragment(), TapeView {
         setHasOptionsMenu(true)
         mPresenter.attachView(this)
         mTbTabs.setupWithViewPager(mVpTapeItems)
-        mAdapter = ViewpagerAdapter(childFragmentManager)
+        mAdapter = ViewPagerAdapter(childFragmentManager)
         mVpTapeItems.adapter = mAdapter
         mPresenter.loadFragments()
     }

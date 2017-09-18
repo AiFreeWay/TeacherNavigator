@@ -52,7 +52,7 @@ class FmtMyPublicationsPresenter : BasePresenter<MyPublicationsView>(), IMyPubli
     override fun getPostControllerFacade(): IPostControllerFacade = mPostControllerFacade
 
     override fun getMyPublications() {
-        addDissposable(mPostInteractor.getSavedPosts()
+        addDissposable(mPostInteractor.getMyPublications()
                 .doOnSubscribe { this::doOnSubscribeOnGetPosts }
                 .subscribe(this::doOnGetMyPublications, this::doOnError))
     }

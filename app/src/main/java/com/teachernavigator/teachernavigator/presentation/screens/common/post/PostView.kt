@@ -87,26 +87,20 @@ open class PostView : RelativeLayout, IPostControllerFacadeCallback {
         }
     }
 
-    override fun onLike(result: Monade) {
-        if (!result.isError)
-            loadLikes(true)
+    override fun onLike() {
     }
 
-    override fun onDislike(result: Monade) {
-        if (!result.isError)
-            loadLikes(false)
+    override fun onDislike() {
     }
 
-    override fun onSave(result: Monade) {
-        if (!result.isError)
-            showToast(R.string.added)
+    override fun onSave() {
     }
 
-    override fun onSubscribe(result: Monade) {
+    override fun onSubscribe() {
 
     }
 
-    override fun onComplain(result: Monade) {
+    override fun onComplain() {
 
     }
 

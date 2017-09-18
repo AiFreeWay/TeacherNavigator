@@ -21,6 +21,7 @@ interface ITapeRepository {
 
     fun getMyComments(): Observable<GetMyCommentsResponse>
     fun getSavedPosts(): Observable<Array<PostNetwork>>
+    fun getMyPublications(): Observable<Array<PostNetwork>>
 
     fun savePost(request: SavePostRequest): Observable<BaseResponse>
     fun comment(request: CommentRequest): Observable<CommentNetwork>

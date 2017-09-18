@@ -16,10 +16,7 @@ import com.teachernavigator.teachernavigator.presentation.models.MenuData
 import com.teachernavigator.teachernavigator.presentation.screens.auth.activities.AuthActivity
 import com.teachernavigator.teachernavigator.presentation.screens.common.BasePresenter
 import com.teachernavigator.teachernavigator.presentation.screens.main.activities.abstractions.MainView
-import com.teachernavigator.teachernavigator.presentation.screens.main.fragments.MyCommentsFragment
-import com.teachernavigator.teachernavigator.presentation.screens.main.fragments.MyPublicationsFragment
-import com.teachernavigator.teachernavigator.presentation.screens.main.fragments.SavedPostsFragment
-import com.teachernavigator.teachernavigator.presentation.screens.main.fragments.TapeFragment
+import com.teachernavigator.teachernavigator.presentation.screens.main.fragments.*
 import com.teachernavigator.teachernavigator.presentation.screens.main.presenters.abstractions.IMainPresenter
 import com.teachernavigator.teachernavigator.presentation.utils.ActivityRouter
 import ru.terrakok.cicerone.Router
@@ -88,11 +85,14 @@ class AcMainPresenter : BasePresenter<MainView>(), IMainPresenter {
 
     private fun onMenuItemClick(item: MenuData<*>) {
         when(item.mType) {
-            MenuItemsFactory.MenuItemTypes.LOGIN.id -> ActivityRouter.openActivity(mView!!.getActivity(), AuthActivity::class.java)
             MenuItemsFactory.MenuItemTypes.TAPE.id -> navigateToFragment(TapeFragment.FRAGMENT_KEY)
             MenuItemsFactory.MenuItemTypes.MY_COMMENTS.id -> navigateToFragment(MyCommentsFragment.FRAGMENT_KEY)
             MenuItemsFactory.MenuItemTypes.SAVED.id -> navigateToFragment(SavedPostsFragment.FRAGMENT_KEY)
             MenuItemsFactory.MenuItemTypes.MY_PUBLICATION.id -> navigateToFragment(MyPublicationsFragment.FRAGMENT_KEY)
+
+            MenuItemsFactory.MenuItemTypes.LOGIN.id -> ActivityRouter.openActivity(mView!!.getActivity(), AuthActivity::class.java)
+            MenuItemsFactory.MenuItemTypes.SETTINGS.id -> navigateToFragment(SettingsFragment.FRAGMENT_KEY)
+            MenuItemsFactory.MenuItemTypes.PROFILE_HEADER.id -> navigateToFragment(ProfileFragment.FRAGMENT_KEY)
         }
         mView!!.closeSideMenu()
     }

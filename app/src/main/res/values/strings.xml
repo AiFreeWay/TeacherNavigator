@@ -2,7 +2,7 @@
     <!-- Menu items -->
     <string name="enter">Войти</string>
     <string name="information_tape">Информационная лента</string>
-    <string name="Settings">Настройки</string>
+    <string name="settings">Настройки</string>
     <string name="tags">Тэги</string>
     <string name="about">О нас</string>
     <string name="add_publication">Добавить публикацию</string>
@@ -75,4 +75,16 @@
     <string name="added">Добавлено</string>
     <string name="comment_text">Текст комментария</string>
     <string name="zero">0</string>
+    <string name="application">Приложение</string>
+    <string name="profile">Профиль</string>
+    <string name="night_theme">Ночная тема</string>
+    <string name="push_notification">PUSH-уведомления</string>
+    <string name="sound">Звук</string>
+    <string name="a">A</string>
+    <string name="example_publication_and_comment">Пример публикации и комментария</string>
+    <string name="name">Имя</string>
+    <string name="publication_time">Время публикации</string>
+    <string name="title_example">Пример заголовка</string>
+    <string name="text_example">Пример текста</string>
+    <string name="save">Сохранить</string>
 </resources>

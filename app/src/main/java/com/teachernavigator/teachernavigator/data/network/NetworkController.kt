@@ -8,6 +8,7 @@ import com.teachernavigator.teachernavigator.data.models.PostNetwork
 import com.teachernavigator.teachernavigator.data.network.requests.*
 import com.teachernavigator.teachernavigator.data.network.responses.BaseResponse
 import com.teachernavigator.teachernavigator.data.network.responses.GetMyCommentsResponse
+import com.teachernavigator.teachernavigator.data.network.responses.ProfileResponse
 import com.teachernavigator.teachernavigator.data.network.responses.SingInResponse
 import io.reactivex.Observable
 import okhttp3.OkHttpClient
@@ -77,6 +78,8 @@ class NetworkController {
 
     fun comment(token: String, request: CommentRequest): Observable<CommentNetwork> = mApiController.comment(token, request)
 
+    fun getMyPublications(token: String): Observable<Array<PostNetwork>> = mApiController.getMyPublications(token)
+
     //fun vote(token: String, request: VoteRequest): Observable<BaseResponse> = mApiController.vote(token, request)
 
     fun vote(token: String, request: VoteRequest): Observable<BaseResponse> {
@@ -86,4 +89,8 @@ class NetworkController {
         map.put("vote", request.like.toString())
         return mApiController.vote(token, map)
     }
+
+    // ------------------------------- Profile methods --------------------------------
+
+    fun getProfile(token: String): Observable<ProfileResponse> = mApiController.getProfile(token)
 }

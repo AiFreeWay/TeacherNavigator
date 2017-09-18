@@ -2,17 +2,11 @@ package com.teachernavigator.teachernavigator.application.di.modules
 
 import com.example.root.androidtest.application.utils.Logger
 import com.teachernavigator.teachernavigator.application.di.scopes.PerParentScreen
-import com.teachernavigator.teachernavigator.data.repository.abstractions.IAuthRepository
-import com.teachernavigator.teachernavigator.data.repository.abstractions.IMainRepository
-import com.teachernavigator.teachernavigator.data.repository.abstractions.ITapeRepository
+import com.teachernavigator.teachernavigator.data.repository.abstractions.*
 import com.teachernavigator.teachernavigator.domain.controllers.IPostController
 import com.teachernavigator.teachernavigator.domain.controllers.PostController
-import com.teachernavigator.teachernavigator.domain.interactors.AuthInteractor
-import com.teachernavigator.teachernavigator.domain.interactors.CommentsInteractor
-import com.teachernavigator.teachernavigator.domain.interactors.PostsInteractor
-import com.teachernavigator.teachernavigator.domain.interactors.abstractions.IAuthInteractor
-import com.teachernavigator.teachernavigator.domain.interactors.abstractions.ICommentsInteractor
-import com.teachernavigator.teachernavigator.domain.interactors.abstractions.IPostsInteractor
+import com.teachernavigator.teachernavigator.domain.interactors.*
+import com.teachernavigator.teachernavigator.domain.interactors.abstractions.*
 import com.teachernavigator.teachernavigator.presentation.facades.CommentControllerFacade
 import com.teachernavigator.teachernavigator.presentation.facades.PostControllerFacade
 import com.teachernavigator.teachernavigator.presentation.facades.abstractions.ICommentControllerFacade
@@ -47,15 +41,23 @@ class ParentScreenModule(private val mParentView: ParentView) {
 
     @Provides
     @PerParentScreen
+    fun provideTapeRepository(repository: IMainRepository): ITapeRepository = repository
+
+    @Provides
+    @PerParentScreen
+    fun provideSettingsRepository(repository: IMainRepository): ISettingsRepository = repository
+
+    @Provides
+    @PerParentScreen
     fun provideAuthRepository(repository: IMainRepository): IAuthRepository = repository
 
     @Provides
     @PerParentScreen
-    fun provideAuthInteractor(interactor : AuthInteractor): IAuthInteractor = interactor
+    fun provideProfileRepository(repository: IMainRepository): IProfileRepository = repository
 
     @Provides
     @PerParentScreen
-    fun provideTapeRepository(repository: IMainRepository): ITapeRepository = repository
+    fun provideAuthInteractor(interactor : AuthInteractor): IAuthInteractor = interactor
 
     @Provides
     @PerParentScreen
@@ -80,4 +82,12 @@ class ParentScreenModule(private val mParentView: ParentView) {
     @Provides
     @PerParentScreen
     fun provideCommentControllerFacade(controller : CommentControllerFacade): ICommentControllerFacade = controller
+
+    @Provides
+    @PerParentScreen
+    fun provideSettingsInteractor(interactor : SettingsInteractor): ISettingsInteractor = interactor
+
+    @Provides
+    @PerParentScreen
+    fun provideProfileInteractor(interactor : ProfileInteractor): IProfileInteractor = interactor
 }

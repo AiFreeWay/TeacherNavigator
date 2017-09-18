@@ -31,7 +31,7 @@ class PostsFragmentsFactory {
             return itemContainers
         }
 
-        fun addPostsType(tapeType: Int, fagment: Fragment): Fragment {
+        private fun addPostsType(tapeType: Int, fagment: Fragment): Fragment {
             val bundle = Bundle()
             bundle.putInt(PostsListFragment.POSTS_TYPE_KEY, tapeType)
             fagment.arguments = bundle

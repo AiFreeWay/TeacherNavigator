@@ -5,6 +5,7 @@ import com.teachernavigator.teachernavigator.data.models.PostNetwork
 import com.teachernavigator.teachernavigator.data.network.requests.*
 import com.teachernavigator.teachernavigator.data.network.responses.BaseResponse
 import com.teachernavigator.teachernavigator.data.network.responses.GetMyCommentsResponse
+import com.teachernavigator.teachernavigator.data.network.responses.ProfileResponse
 import com.teachernavigator.teachernavigator.data.network.responses.SingInResponse
 import io.reactivex.Observable
 import retrofit2.http.*
@@ -50,4 +51,12 @@ interface ApiController {
 
     @GET("/api/v0/votes/up/")
     fun vote(@Header("Authorization") accessToken: String, @QueryMap map: Map<String, String>): Observable<BaseResponse>
+
+    @GET("/api/v0/me/my_publications/")
+    fun getMyPublications(@Header("Authorization") accessToken: String): Observable<Array<PostNetwork>>
+
+    // ------------------------------- Profile methods --------------------------------
+
+    @GET("/api/v0/me/ ")
+    fun getProfile(@Header("Authorization") accessToken: String): Observable<ProfileResponse>
 }

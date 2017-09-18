@@ -10,6 +10,7 @@ class CacheController {
     companion object {
 
         val TOKEN_KEY = "token"
+        val SETTINGS_KEY = "settings"
 
         fun putData(key: String, data: Any) {
             Hawk.put(key, data)

@@ -9,7 +9,7 @@ import com.teachernavigator.teachernavigator.presentation.models.ViewPagerItemCo
 /**
  * Created by root on 17.08.17.
  */
-class ViewpagerAdapter(fragmentManager: FragmentManager) : FragmentStatePagerAdapter(fragmentManager) {
+class ViewPagerAdapter(fragmentManager: FragmentManager) : FragmentStatePagerAdapter(fragmentManager) {
 
     private var mData: List<ViewPagerItemContainer> = emptyList()
 

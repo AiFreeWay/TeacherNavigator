@@ -1,6 +1,7 @@
 package com.teachernavigator.teachernavigator.presentation.screens.main.views
 
 import android.content.Context
+import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.ImageView
@@ -36,7 +37,7 @@ class ProfileHeaderView(facade: IProfileFacade, isMyProfile: Boolean, context: C
             mIvExit.visibility = View.VISIBLE
             mIvUploadPhoto.visibility = View.VISIBLE
 
-            mIvUploadPhoto.setOnClickListener { facade.onChangePhoto(mIvUploadPhoto) }
+            mIvUploadPhoto.setOnClickListener { facade.onChangePhoto(mIvAvatar) }
         } else {
             mIvUploadPhoto.visibility = View.GONE
 
@@ -50,7 +51,7 @@ class ProfileHeaderView(facade: IProfileFacade, isMyProfile: Boolean, context: C
         if (profile.avatars != null && profile.avatars.isNotEmpty())
             ImageLoader.load(context, profile.avatars.get(0).avatar, mIvAvatar)
 
-        if (profile.full_name != null)
+        if (!TextUtils.isEmpty(profile.full_name))
             mTvName.setText(profile.full_name)
         else
             mTvName.setText(context.getString(R.string.not_define))

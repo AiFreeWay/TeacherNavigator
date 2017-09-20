@@ -16,6 +16,7 @@ import android.widget.ImageView
 import android.widget.ProgressBar
 import butterknife.BindView
 import butterknife.ButterKnife
+import com.example.root.androidtest.application.utils.Logger
 import com.teachernavigator.teachernavigator.R
 import com.teachernavigator.teachernavigator.application.di.components.ParentScreenComponent
 import com.teachernavigator.teachernavigator.presentation.adapters.ProfileAdapterStrategy
@@ -89,7 +90,7 @@ class ProfileActivity : AppCompatActivity(), ProfileView {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (resultCode == Activity.RESULT_OK && requestCode == GET_PHOTO_REQUEST_CODE && mAvatar != null) {
-            val imageUri = intent!!.data
+            val imageUri = data!!.data
             mPresenter.uploadPhoto(mAvatar!!, File(imageUri.toString()))
         }
     }

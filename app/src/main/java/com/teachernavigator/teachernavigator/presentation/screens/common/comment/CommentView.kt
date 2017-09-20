@@ -1,6 +1,7 @@
 package com.teachernavigator.teachernavigator.presentation.screens.common.comment
 
 import android.content.Context
+import android.text.TextUtils
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.widget.*
@@ -49,7 +50,11 @@ open class CommentView : RelativeLayout, ICommentControllerFacadeCallback {
         mTvText.setText(comment.message)
 
         if (comment.user != null) {
-            mTvAuthorName.setText(comment.user!!.full_name)
+            if (!TextUtils.isEmpty(comment.user!!.full_name))
+                mTvAuthorName.setText(comment.user!!.full_name)
+            else
+                mTvAuthorName.text = context.getString(R.string.not_define)
+
             if (comment.user!!.avatars != null)
                 ImageLoader.load(context, comment.user!!.avatars!!.avatar, mIvAvatar)
         } else

@@ -21,7 +21,7 @@ import com.teachernavigator.teachernavigator.presentation.screens.tape.presenter
 /**
  * Created by root on 30.08.17.
  */
-class PostDetailActivity: AppCompatActivity(), PostDetailView {
+class PostDetailActivity : AppCompatActivity(), PostDetailView {
 
     companion object {
         val POST_ID_KEY: String = "post_key_post_detail_activity"

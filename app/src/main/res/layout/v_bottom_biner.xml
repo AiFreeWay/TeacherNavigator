@@ -39,6 +39,7 @@
         android:layout_centerHorizontal="true">
 
         <android.support.v7.widget.AppCompatButton
+            android:id="@+id/v_bottom_binder_btn_add_publication"
             style="@style/Button"
             android:layout_width="wrap_content"
             android:layout_height="@dimen/normalControlsHeight"

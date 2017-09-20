@@ -38,7 +38,7 @@ open class PostView : RelativeLayout, IPostControllerFacadeCallback {
     @BindView(R.id.v_post_iv_save) lateinit var mIvSave: ImageView
     @BindView(R.id.v_post_hv_hasttags) lateinit var mHvHashTags: HashtagView
 
-    protected lateinit var mPostControllerFacade: IPostControllerFacade
+    protected var mPostControllerFacade: IPostControllerFacade? = null
     protected lateinit var mPost: Post
 
     constructor(context: Context, attrs: AttributeSet) : super(context, attrs)
@@ -78,7 +78,7 @@ open class PostView : RelativeLayout, IPostControllerFacadeCallback {
             if (post.author!!.id == null)
                 mIvSubscribe.setOnClickListener { }
             else
-                mIvSubscribe.setOnClickListener { mPostControllerFacade.subscribe(post, this) }
+                mIvSubscribe.setOnClickListener { mPostControllerFacade?.subscribe(post, this) }
 
         } else {
             mIvSubscribe.visibility = GONE
@@ -147,14 +147,14 @@ open class PostView : RelativeLayout, IPostControllerFacadeCallback {
     }
 
     protected fun setClickListeners(dataModel: Post) {
-        mTvComplain.setOnClickListener { mPostControllerFacade.complain(dataModel, this) }
-        mTvLike.setOnClickListener { mPostControllerFacade.like(true, dataModel, this) }
-        mTvDislike.setOnClickListener { mPostControllerFacade.like(false, dataModel, this) }
-        mIvSave.setOnClickListener { mPostControllerFacade.save(dataModel, this) }
+        mTvComplain.setOnClickListener { mPostControllerFacade?.complain(dataModel, this) }
+        mTvLike.setOnClickListener { mPostControllerFacade?.like(true, dataModel, this) }
+        mTvDislike.setOnClickListener { mPostControllerFacade?.like(false, dataModel, this) }
+        mIvSave.setOnClickListener { mPostControllerFacade?.save(dataModel, this) }
 
-        mIvAvatar.setOnClickListener { mPostControllerFacade.openProfileScreen(dataModel, this) }
-        mBtnMore.setOnClickListener { mPostControllerFacade.openPostDetailScreen(dataModel) }
-        mTvComments.setOnClickListener { mPostControllerFacade.openCommentsScreen(dataModel, this) }
+        mIvAvatar.setOnClickListener { mPostControllerFacade?.openProfileScreen(dataModel, this) }
+        mBtnMore.setOnClickListener { mPostControllerFacade?.openPostDetailScreen(dataModel) }
+        mTvComments.setOnClickListener { mPostControllerFacade?.openCommentsScreen(dataModel, this) }
     }
 
     protected fun changeLikesDislikesCount(isLike: Boolean) {

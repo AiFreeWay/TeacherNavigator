@@ -107,6 +107,7 @@ class AcMainPresenter : BasePresenter<MainView>(), IMainPresenter {
                 bundle.putBoolean(ProfileActivity.IS_MY_PROFILE_KEY, true)
                 ActivityRouter.openActivity(mView!!.getActivity(), bundle, ProfileActivity::class.java)
             }
+            MenuItemsFactory.MenuItemTypes.ADD_PUBLICATION.id -> navigateToFragment(AddPublicationFragment.FRAGMENT_KEY)
         }
         mView!!.closeSideMenu()
     }

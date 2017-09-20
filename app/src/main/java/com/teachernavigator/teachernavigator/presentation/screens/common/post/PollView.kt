@@ -39,7 +39,7 @@ class PollView : PostView {
                 val uri = post.author!!.avatars.get(0).avatar
                 ImageLoader.load(getContext(), uri, mIvAvatar)
             }
-            mPostControllerFacade.subscribe(post, this)
+            mPostControllerFacade?.subscribe(post, this)
         } else {
             mIvSubscribe.setOnClickListener { null }
             mTvAuthorName.text = context.getString(R.string.not_define)

@@ -41,6 +41,10 @@
         <activity android:name=".presentation.screens.main.activities.ProfileActivity"
             android:windowSoftInputMode="adjustPan"
             android:screenOrientation="portrait"/>
+
+        <activity android:name=".presentation.screens.main.activities.PreviewPostActivity"
+            android:windowSoftInputMode="adjustPan"
+            android:screenOrientation="portrait"/>
     </application>
 
 </manifest>

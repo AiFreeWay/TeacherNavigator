@@ -95,4 +95,10 @@
     <string name="you_want_exit">Вы хотите выйти?</string>
     <string name="subscribed">Подписано</string>
     <string name="not_define">Не указано</string>
+    <string name="title">Заголовок</string>
+    <string name="publication_text">Текст публикации</string>
+    <string name="preview">Предпросмотр</string>
+    <string name="do_public">Опубликовать</string>
+    <string name="will_set_current_time">Будет указано текущее время</string>
+    <string name="you">Вы</string>
 </resources>

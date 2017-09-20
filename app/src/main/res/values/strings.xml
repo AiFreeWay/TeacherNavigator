@@ -9,6 +9,7 @@
     <string name="my_publication">Мои публикации</string>
     <string name="my_comments">Мои комментарии</string>
     <string name="saved">Сохранённое</string>
+    <string name="do_saved">Сохраненое</string>
     <string name="chat">Чат</string>
     <string name="support">Поддержка</string>
     <string name="important_to_know">Важно знать</string>
@@ -87,4 +88,11 @@
     <string name="title_example">Пример заголовка</string>
     <string name="text_example">Пример текста</string>
     <string name="save">Сохранить</string>
+    <string name="rating">Рэйтинг</string>
+    <string name="subscribers">Подписч.</string>
+    <string name="pubicationss">Публикаций</string>
+    <string name="commentaries">Коммент.</string>
+    <string name="you_want_exit">Вы хотите выйти?</string>
+    <string name="subscribed">Подписано</string>
+    <string name="not_define">Не указано</string>
 </resources>

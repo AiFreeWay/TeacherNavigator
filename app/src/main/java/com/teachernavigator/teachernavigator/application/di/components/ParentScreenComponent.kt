@@ -43,7 +43,7 @@ interface ParentScreenComponent {
     fun inject(presenter: FmtSavedPostsPresenter)
     fun inject(presenter: FmtMyPublicationsPresenter)
     fun inject(presenter: FmtSettingsPresenter)
-    fun inject(presenter: FmtProfilePresenter)
+    fun inject(presenter: AcProfilePresenter)
 
     //Tape presenters
     fun inject(presenter: AcPostSearchPresenter)

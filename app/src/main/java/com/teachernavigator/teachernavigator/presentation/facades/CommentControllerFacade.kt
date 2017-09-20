@@ -3,6 +3,7 @@ package com.teachernavigator.teachernavigator.presentation.facades
 import com.example.root.androidtest.application.utils.Logger
 import com.teachernavigator.teachernavigator.domain.controllers.IPostController
 import com.teachernavigator.teachernavigator.domain.models.Comment
+import com.teachernavigator.teachernavigator.domain.models.Monade
 import com.teachernavigator.teachernavigator.presentation.facades.abstractions.ICommentControllerFacade
 import com.teachernavigator.teachernavigator.presentation.facades.abstractions.ICommentControllerFacadeCallback
 import com.teachernavigator.teachernavigator.presentation.screens.auth.activities.AuthActivity
@@ -22,7 +23,7 @@ class CommentControllerFacade @Inject constructor(private val mPostController: I
 
     override fun subscribe(comment: Comment, callbak: ICommentControllerFacadeCallback) {
         mPostController.subscribe(comment, { doOnUserNotAuth() })
-                .subscribe({ onSubscribe { callbak.onSubscribe() } }, { doOnError(it, callbak) })
+                .subscribe({ onSubscribe(it, { callbak.onSubscribe() }) }, { doOnError(it, callbak) })
     }
 
     override fun openBranch(comment: Comment, callbak: ICommentControllerFacadeCallback) {
@@ -47,9 +48,10 @@ class CommentControllerFacade @Inject constructor(private val mPostController: I
         }
     }
 
-    private fun onSubscribe(onSubscribe: () -> Unit) {
+    private fun onSubscribe(monade: Monade, onSubscribe: () -> Unit) {
         try {
-            onSubscribe.invoke()
+            if (!monade.isError)
+                onSubscribe.invoke()
         } catch (e: Exception) {
             // -> ^.^ <-
         }

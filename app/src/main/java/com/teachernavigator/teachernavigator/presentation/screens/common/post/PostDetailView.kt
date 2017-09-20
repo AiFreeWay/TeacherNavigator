@@ -15,7 +15,7 @@ class PostDetailView : PostView {
     constructor(context: Context, postControllerFacade: IPostControllerFacade) : super(context, postControllerFacade)
 
     init {
-        mBtnMore.visibility = View.INVISIBLE
         mTvComments.visibility = View.INVISIBLE
+        mTvText.maxLines = 4
     }
 }

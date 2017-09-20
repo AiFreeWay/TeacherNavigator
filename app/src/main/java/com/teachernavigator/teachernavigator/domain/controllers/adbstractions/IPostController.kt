@@ -11,8 +11,7 @@ import io.reactivex.Observable
  */
 interface IPostController {
 
-    fun like(post: Post, doOnUserNotAuth: () -> Unit): Observable<Monade>
-    fun dislike(post: Post, doOnUserNotAuth: () -> Unit): Observable<Monade>
+    fun like(vote: Boolean, post: Post, doOnUserNotAuth: () -> Unit): Observable<Monade>
     fun save(post: Post, doOnUserNotAuth: () -> Unit): Observable<Monade>
     fun subscribe(post: Post, doOnUserNotAuth: () -> Unit): Observable<Monade>
     fun subscribe(comment: Comment, doOnUserNotAuth: () -> Unit): Observable<Monade>

@@ -1,5 +1,8 @@
 package com.teachernavigator.teachernavigator.data.models
 
+import com.teachernavigator.teachernavigator.domain.models.Author
+import com.teachernavigator.teachernavigator.domain.models.Choice
+
 /**
  * Created by root on 07.09.17.
  */
@@ -16,4 +19,6 @@ class PostNetwork {
     var vote: Boolean? = null
     var count_comments: Int? = null
     var comments: List<CommentNetwork>? = null
+    var author: Author? = null
+    var choices: List<Choice>? = null
 }

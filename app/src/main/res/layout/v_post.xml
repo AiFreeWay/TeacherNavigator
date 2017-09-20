@@ -5,7 +5,7 @@
     android:layout_height="wrap_content"
     android:padding="@dimen/externalPadding">
 
-    <ImageView
+    <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/v_post_iv_avatar"
         android:layout_width="40dp"
         android:layout_height="40dp"
@@ -67,8 +67,7 @@
         android:layout_alignStart="@+id/v_post_tv_title"
         android:layout_below="@+id/v_post_tv_title"
         android:layout_marginTop="@dimen/externalPadding"
-        android:ellipsize="end"
-        android:maxLines="4" />
+        android:ellipsize="end" />
 
     <LinearLayout
         android:id="@+id/v_post_ll_more_and_complain"
@@ -101,13 +100,24 @@
             android:textColor="@color/greyTextColor" />
     </LinearLayout>
 
+    <LinearLayout
+        android:id="@+id/v_post_ll_choices"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/v_post_ll_more_and_complain"
+        android:layout_alignStart="@+id/v_post_ll_more_and_complain"
+        android:layout_below="@+id/v_post_ll_more_and_complain"
+        android:layout_marginTop="@dimen/externalPadding"
+        android:orientation="vertical"
+        android:visibility="gone"/>
+
     <com.greenfrvr.hashtagview.HashtagView
         android:id="@+id/v_post_hv_hasttags"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_below="@+id/v_post_ll_more_and_complain"
+        android:layout_below="@+id/v_post_ll_choices"
         android:paddingTop="@dimen/externalPadding"
         app:rowGravity="left"
         app:tagBackground="@drawable/hash_tag_background"

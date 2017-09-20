@@ -1,6 +1,7 @@
 package com.teachernavigator.teachernavigator.presentation.screens.tape.fragments
 
 import android.os.Bundle
+import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
@@ -12,6 +13,7 @@ import butterknife.ButterKnife
 import com.teachernavigator.teachernavigator.R
 import com.teachernavigator.teachernavigator.domain.models.Post
 import com.teachernavigator.teachernavigator.presentation.adapters.MultyRvAdapter
+import com.teachernavigator.teachernavigator.presentation.adapters.holders.BaseHolder
 import com.teachernavigator.teachernavigator.presentation.adapters.holders.PostHolder
 import com.teachernavigator.teachernavigator.presentation.screens.common.BaseFragment
 import com.teachernavigator.teachernavigator.presentation.screens.tape.fragments.abstractions.PostsListView
@@ -25,6 +27,12 @@ class PostsListFragment : BaseFragment(), PostsListView {
 
     companion object {
         val POSTS_TYPE_KEY = "tape_type_key"
+
+        fun getInstance(holder: BaseHolder<Post>): Fragment {
+            val fragment = PostsListFragment()
+            fragment.mHolder = holder
+            return fragment
+        }
     }
 
     @BindView(R.id.fmt_list_rv_list) lateinit var mRvList: RecyclerView
@@ -32,6 +40,7 @@ class PostsListFragment : BaseFragment(), PostsListView {
 
     private val mPresenter: IPostsListPresenter = FmtPostsListPresenter()
     private lateinit var mAdapter: MultyRvAdapter<Post>
+    private lateinit var mHolder: BaseHolder<Post>
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view: View = inflater!!.inflate(R.layout.fmt_list, container, false)
@@ -43,7 +52,7 @@ class PostsListFragment : BaseFragment(), PostsListView {
         super.onActivityCreated(savedInstanceState)
         mPresenter.setTapeType(arguments.getInt(POSTS_TYPE_KEY))
         mPresenter.attachView(this)
-        mAdapter = MultyRvAdapter(PostHolder(context, mPresenter.getPostControllerFacade()))
+        mAdapter = MultyRvAdapter(mHolder)
         mRvList.layoutManager = LinearLayoutManager(context)
         mRvList.adapter = mAdapter
     }

@@ -15,6 +15,7 @@ import com.teachernavigator.teachernavigator.presentation.menu.MenuController
 import com.teachernavigator.teachernavigator.presentation.models.MenuData
 import com.teachernavigator.teachernavigator.presentation.screens.auth.activities.AuthActivity
 import com.teachernavigator.teachernavigator.presentation.screens.common.BasePresenter
+import com.teachernavigator.teachernavigator.presentation.screens.jobs.fragments.JobsBankFragment
 import com.teachernavigator.teachernavigator.presentation.screens.main.activities.abstractions.MainView
 import com.teachernavigator.teachernavigator.presentation.screens.main.fragments.*
 import com.teachernavigator.teachernavigator.presentation.screens.main.presenters.abstractions.IMainPresenter
@@ -93,6 +94,8 @@ class AcMainPresenter : BasePresenter<MainView>(), IMainPresenter {
             MenuItemsFactory.MenuItemTypes.LOGIN.id -> ActivityRouter.openActivity(mView!!.getActivity(), AuthActivity::class.java)
             MenuItemsFactory.MenuItemTypes.SETTINGS.id -> navigateToFragment(SettingsFragment.FRAGMENT_KEY)
             MenuItemsFactory.MenuItemTypes.PROFILE_HEADER.id -> navigateToFragment(ProfileFragment.FRAGMENT_KEY)
+
+            MenuItemsFactory.MenuItemTypes.BAKN_OF_VACANCY.id -> navigateToFragment(JobsBankFragment.FRAGMENT_KEY)
         }
         mView!!.closeSideMenu()
     }

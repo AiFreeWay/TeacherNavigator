@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="@dimen/spacingLarge">
+
+
+    <TextView
+        android:id="@+id/jobsBankCardProposal"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="@dimen/spacingLarge"
+        android:background="@drawable/bg_card"
+        android:drawablePadding="@dimen/spacingLarge"
+        android:gravity="center"
+        android:padding="@dimen/spacingXXLarge"
+        android:text="@string/proposal"
+        android:textSize="@dimen/titleTextSize"
+
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:drawableTop="@drawable/ic_briefcase" />
+
+
+    <TextView
+        android:id="@+id/jobsBankCardApplicant"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/spacingLarge"
+        android:background="@drawable/bg_card"
+        android:drawablePadding="@dimen/spacingLarge"
+        android:gravity="center"
+        android:padding="@dimen/spacingXXLarge"
+        android:text="@string/applicant"
+        android:textSize="@dimen/titleTextSize"
+
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/jobsBankCardProposal"
+        tools:drawableTop="@drawable/ic_applicant" />
+
+
+    <TextView
+        android:id="@+id/jobsBankPostJob"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/spacingXXLarge"
+        android:background="?attr/selectableItemBackground"
+
+        android:paddingBottom="@dimen/spacingMedium"
+        android:paddingLeft="@dimen/spacingXLarge"
+        android:paddingRight="@dimen/spacingXLarge"
+        android:paddingTop="@dimen/spacingMedium"
+        android:text="@string/post_vacancy"
+        android:textSize="@dimen/titleTextSize"
+
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/jobsBankCardApplicant" />
+
+    <TextView
+        android:id="@+id/jobsBankMyJobs"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="?attr/selectableItemBackground"
+        android:paddingBottom="@dimen/spacingMedium"
+        android:paddingLeft="@dimen/spacingXLarge"
+
+        android:paddingRight="@dimen/spacingXLarge"
+        android:paddingTop="@dimen/spacingMedium"
+        android:text="@string/my_vacancy"
+        android:textSize="@dimen/titleTextSize"
+
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/jobsBankPostJob"
+
+        />
+
+    <TextView
+        android:id="@+id/jobsBankViewResume"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="?attr/selectableItemBackground"
+        android:paddingBottom="@dimen/spacingMedium"
+        android:paddingLeft="@dimen/spacingXLarge"
+
+        android:paddingRight="@dimen/spacingXLarge"
+        android:paddingTop="@dimen/spacingMedium"
+        android:text="@string/view_resume"
+        android:textSize="@dimen/titleTextSize"
+
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/jobsBankMyJobs" />
+
+    <TextView
+        android:id="@+id/jobsBankMyResume"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/spacingXXLarge"
+        android:background="?attr/selectableItemBackground"
+        android:paddingBottom="@dimen/spacingMedium"
+        android:paddingLeft="@dimen/spacingXLarge"
+
+        android:paddingRight="@dimen/spacingXLarge"
+        android:paddingTop="@dimen/spacingMedium"
+        android:text="@string/my_resume"
+        android:textSize="@dimen/titleTextSize"
+
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/jobsBankCardApplicant" />
+
+    <TextView
+        android:id="@+id/jobsBankViewProposals"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="?attr/selectableItemBackground"
+        android:paddingBottom="@dimen/spacingMedium"
+        android:paddingLeft="@dimen/spacingXLarge"
+
+        android:paddingRight="@dimen/spacingXLarge"
+        android:paddingTop="@dimen/spacingMedium"
+        android:text="@string/view_proposals"
+        android:textSize="@dimen/titleTextSize"
+
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/jobsBankMyResume" />
+
+    <ImageButton
+        android:id="@+id/jobsBankBtnProposalChosen"
+
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginEnd="@dimen/spacingXXLarge"
+        android:layout_marginRight="@dimen/spacingXXLarge"
+        android:background="@drawable/ic_circle_orange"
+
+        app:layout_constraintBottom_toBottomOf="@+id/jobsBankCardProposal"
+        app:layout_constraintRight_toRightOf="@+id/jobsBankCardProposal"
+        app:srcCompat="@drawable/ic_chosen"
+
+        tools:ignore="ContentDescription" />
+
+    <ImageButton
+        android:id="@+id/jobsBankBtnApplicantChosen"
+
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+
+        android:layout_marginEnd="@dimen/spacingXXLarge"
+        android:layout_marginRight="@dimen/spacingXXLarge"
+
+        android:background="@drawable/ic_circle_orange"
+        app:srcCompat="@drawable/ic_chosen"
+
+        app:layout_constraintBottom_toBottomOf="@+id/jobsBankCardApplicant"
+        app:layout_constraintRight_toRightOf="@+id/jobsBankCardApplicant"
+
+        tools:ignore="ContentDescription"
+
+        />
+
+</android.support.constraint.ConstraintLayout>

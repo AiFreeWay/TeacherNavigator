@@ -2,6 +2,7 @@ package com.teachernavigator.teachernavigator.application.di.components
 
 import com.example.root.androidtest.application.di.components.RootComponent
 import com.teachernavigator.teachernavigator.application.di.modules.ParentScreenModule
+import com.teachernavigator.teachernavigator.application.di.modules.PresentersModule
 import com.teachernavigator.teachernavigator.application.di.scopes.PerParentScreen
 import com.teachernavigator.teachernavigator.data.repository.abstractions.IAuthRepository
 import com.teachernavigator.teachernavigator.data.repository.abstractions.IProfileRepository
@@ -13,6 +14,7 @@ import com.teachernavigator.teachernavigator.presentation.screens.auth.presenter
 import com.teachernavigator.teachernavigator.presentation.screens.auth.presenters.FmtRegistrationPresenter
 import com.teachernavigator.teachernavigator.presentation.screens.auth.presenters.FmtRestorePasswordPresenter
 import com.teachernavigator.teachernavigator.presentation.screens.common.ParentView
+import com.teachernavigator.teachernavigator.presentation.screens.jobs.fragments.JobsBankFragment
 import com.teachernavigator.teachernavigator.presentation.screens.main.presenters.*
 import com.teachernavigator.teachernavigator.presentation.screens.settings.presenters.FmtAppSettingsPresenter
 import com.teachernavigator.teachernavigator.presentation.screens.settings.presenters.FmtProfileSettingsPresenter
@@ -26,7 +28,7 @@ import dagger.Component
  * Created by root on 14.08.17.
  */
 @PerParentScreen
-@Component(modules = arrayOf(ParentScreenModule::class), dependencies = arrayOf(RootComponent::class))
+@Component(modules = arrayOf(ParentScreenModule::class, PresentersModule::class), dependencies = arrayOf(RootComponent::class))
 interface ParentScreenComponent {
 
     fun provideTapeRepository() : ITapeRepository
@@ -60,4 +62,7 @@ interface ParentScreenComponent {
     //Settings presenters
     fun inject(presenter: FmtAppSettingsPresenter)
     fun inject(presenter: FmtProfileSettingsPresenter)
+
+    //Job fragments
+    fun inject(jobsBankFragment: JobsBankFragment)
 }

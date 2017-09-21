@@ -3,10 +3,8 @@ package com.teachernavigator.teachernavigator.data.network
 import com.teachernavigator.teachernavigator.data.models.CommentNetwork
 import com.teachernavigator.teachernavigator.data.models.PostNetwork
 import com.teachernavigator.teachernavigator.data.network.requests.*
-import com.teachernavigator.teachernavigator.data.network.responses.BaseResponse
-import com.teachernavigator.teachernavigator.data.network.responses.GetMyCommentsResponse
-import com.teachernavigator.teachernavigator.data.network.responses.ProfileResponse
-import com.teachernavigator.teachernavigator.data.network.responses.SingInResponse
+import com.teachernavigator.teachernavigator.data.network.responses.*
+import com.teachernavigator.teachernavigator.domain.models.Profile
 import io.reactivex.Observable
 import retrofit2.http.*
 
@@ -29,10 +27,19 @@ interface ApiController {
     // ------------------------------- Posts methods --------------------------------
 
     @GET("/api/v0/feed/")
-    fun getPosts(): Observable<Array<PostNetwork>>
+    fun getPosts(): Observable<PostsResponse>
+
+    @GET("/api/v0/feed/")
+    fun getPosts(@Header("Authorization") accessToken: String): Observable<PostsResponse>
+
+    @GET("/api/v0/newses/")
+    fun getNews(@Header("Authorization") accessToken: String): Observable<PostsResponse>
+
+    @GET("/api/v0/polls/")
+    fun getPools(@Header("Authorization") accessToken: String): Observable<PostsResponse>
 
     @GET("/api/v0/post/{postId}")
-    fun getPost(@Path("postId") postId: Int): Observable<PostNetwork>
+    fun getPost(@Header("Authorization") accessToken: String, @Path("postId") postId: Int): Observable<PostNetwork>
 
     @GET("/api/v0/me/comments/")
     fun getMyComments(@Header("Authorization") accessToken: String): Observable<GetMyCommentsResponse>
@@ -41,10 +48,13 @@ interface ApiController {
     fun savePost(@Header("Authorization") accessToken: String, @Body request: SavePostRequest): Observable<BaseResponse>
 
     @GET("/api/v0/me/saved/")
-    fun getSavedPosts(@Header("Authorization") accessToken: String): Observable<Array<PostNetwork>>
+    fun getSavedPosts(@Header("Authorization") accessToken: String): Observable<PostsResponse>
 
     @POST("/api/v0/comment/")
     fun comment(@Header("Authorization") accessToken: String, @Body request: CommentRequest): Observable<CommentNetwork>
+
+    @POST("/api/v0/me/subscribe/")
+    fun subscribe(@Header("Authorization") accessToken: String, @Body request: SubscribeRequest): Observable<BaseResponse>
 
     //@POST("/api/v0/votes/up/")
     //fun vote(@Header("Authorization") accessToken: String, @Body request: VoteRequest): Observable<BaseResponse>
@@ -52,11 +62,17 @@ interface ApiController {
     @GET("/api/v0/votes/up/")
     fun vote(@Header("Authorization") accessToken: String, @QueryMap map: Map<String, String>): Observable<BaseResponse>
 
-    @GET("/api/v0/me/my_publications/")
+    @GET("/api/v0/me/posts/")
     fun getMyPublications(@Header("Authorization") accessToken: String): Observable<Array<PostNetwork>>
+
+    @GET("/api/v0/profile/{userId}/posts/ ")
+    fun getUserPost(@Header("Authorization") accessToken: String, @Path("userId") userId: Int): Observable<Array<PostNetwork>>
 
     // ------------------------------- Profile methods --------------------------------
 
-    @GET("/api/v0/me/ ")
-    fun getProfile(@Header("Authorization") accessToken: String): Observable<ProfileResponse>
+    @GET("/api/v0/me/")
+    fun getProfile(@Header("Authorization") accessToken: String): Observable<Profile>
+
+    @GET("/api/v0/profile/{userId}/")
+    fun getProfile(@Header("Authorization") accessToken: String, @Path("userId") userId: Int): Observable<Profile>
 }

@@ -15,4 +15,5 @@ interface IMainPresenter : ViewAttacher<MainView> {
     fun openStartFragment(savedState: Bundle?)
     fun getParentScreenComponent(): ParentScreenComponent
     fun navigateBack()
+    fun loadProfile()
 }

@@ -10,11 +10,14 @@ import com.teachernavigator.teachernavigator.application.di.components.DaggerPar
 import com.teachernavigator.teachernavigator.application.di.components.ParentScreenComponent
 import com.teachernavigator.teachernavigator.application.di.modules.ParentScreenModule
 import com.teachernavigator.teachernavigator.domain.interactors.abstractions.IAuthInteractor
+import com.teachernavigator.teachernavigator.domain.interactors.abstractions.IProfileInteractor
+import com.teachernavigator.teachernavigator.domain.models.Profile
 import com.teachernavigator.teachernavigator.presentation.factories.MenuItemsFactory
 import com.teachernavigator.teachernavigator.presentation.menu.MenuController
 import com.teachernavigator.teachernavigator.presentation.models.MenuData
 import com.teachernavigator.teachernavigator.presentation.screens.auth.activities.AuthActivity
 import com.teachernavigator.teachernavigator.presentation.screens.common.BasePresenter
+import com.teachernavigator.teachernavigator.presentation.screens.main.activities.ProfileActivity
 import com.teachernavigator.teachernavigator.presentation.screens.main.activities.abstractions.MainView
 import com.teachernavigator.teachernavigator.presentation.screens.main.fragments.*
 import com.teachernavigator.teachernavigator.presentation.screens.main.presenters.abstractions.IMainPresenter
@@ -31,6 +34,8 @@ class AcMainPresenter : BasePresenter<MainView>(), IMainPresenter {
     lateinit var mRouter: Router
     @Inject
     lateinit var mAuthInteractor: IAuthInteractor
+    @Inject
+    lateinit var mProfileInteractor: IProfileInteractor
 
     private lateinit var mParentScreenComponent: ParentScreenComponent
     private var mMenuController: MenuController? = null
@@ -58,6 +63,11 @@ class AcMainPresenter : BasePresenter<MainView>(), IMainPresenter {
     override fun loadMenuItemsToViewGroup(viewGroup: ViewGroup) {
         addDissposable(mAuthInteractor.isAuthAsynch()
                 .subscribe({ doOnGetDataForMenu(it, viewGroup)}, this::doOnError))
+    }
+
+    override fun loadProfile() {
+        addDissposable(mAuthInteractor.isAuthAsynch()
+                .subscribe(this::loadProfileIsAuth, this::doOnError))
     }
 
     override fun doOnError(error: Throwable) {
@@ -92,7 +102,12 @@ class AcMainPresenter : BasePresenter<MainView>(), IMainPresenter {
 
             MenuItemsFactory.MenuItemTypes.LOGIN.id -> ActivityRouter.openActivity(mView!!.getActivity(), AuthActivity::class.java)
             MenuItemsFactory.MenuItemTypes.SETTINGS.id -> navigateToFragment(SettingsFragment.FRAGMENT_KEY)
-            MenuItemsFactory.MenuItemTypes.PROFILE_HEADER.id -> navigateToFragment(ProfileFragment.FRAGMENT_KEY)
+            MenuItemsFactory.MenuItemTypes.PROFILE_HEADER.id -> {
+                val bundle = Bundle()
+                bundle.putBoolean(ProfileActivity.IS_MY_PROFILE_KEY, true)
+                ActivityRouter.openActivity(mView!!.getActivity(), bundle, ProfileActivity::class.java)
+            }
+            MenuItemsFactory.MenuItemTypes.ADD_PUBLICATION.id -> navigateToFragment(AddPublicationFragment.FRAGMENT_KEY)
         }
         mView!!.closeSideMenu()
     }
@@ -111,5 +126,18 @@ class AcMainPresenter : BasePresenter<MainView>(), IMainPresenter {
             mLastScreenKey = screenKey
             mRouter.navigateTo(screenKey)
         }
+    }
+
+    private fun loadProfileIsAuth(isAuthorized: Boolean) {
+        if (isAuthorized) {
+            addDissposable(mProfileInteractor.getProfile()
+                    .subscribe(this::sendProfile, this::doOnError))
+        }
+    }
+
+    private fun sendProfile(profile: Profile) {
+        Logger.testLog("Get profile "+profile.full_name)
+        val data = MenuData(MenuItemsFactory.MenuItemTypes.PROFILE_HEADER.id, profile)
+        mMenuController!!.getPresenterChannel().getOutputChannel().onNext(data)
     }
 }

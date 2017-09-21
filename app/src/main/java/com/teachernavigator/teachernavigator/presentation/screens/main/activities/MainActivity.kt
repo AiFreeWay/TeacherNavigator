@@ -42,6 +42,11 @@ class MainActivity : AppCompatActivity(), MainView {
         mPresenter.openStartFragment(savedInstanceState)
     }
 
+    override fun onStart() {
+        super.onStart()
+        mPresenter.loadProfile()
+    }
+
     override fun onDestroy() {
         super.onDestroy()
         mPresenter.detachView()

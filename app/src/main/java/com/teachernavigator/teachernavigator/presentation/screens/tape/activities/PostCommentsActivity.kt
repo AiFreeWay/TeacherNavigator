@@ -135,7 +135,7 @@ class PostCommentsActivity: AppCompatActivity(), PostCommentsView {
         val commentView = view.findViewById<CommentView>(R.id.v_post_comment_comment)
         commentView.setPostControllerFacade(mPresenter.getCommentControllerFacade())
         commentView.loadData(comment)
-        return commentView
+        return view
     }
 
     private fun initToolbar() {

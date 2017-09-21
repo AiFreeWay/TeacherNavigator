@@ -17,5 +17,6 @@ class PostSavedView : PostView {
     init {
         mTvComplain.visibility = View.GONE
         mIvSave.visibility = View.INVISIBLE
+        mTvText.maxLines = 4
     }
 }

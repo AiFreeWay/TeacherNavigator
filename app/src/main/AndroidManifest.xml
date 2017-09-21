@@ -3,6 +3,7 @@
     package="com.teachernavigator.teachernavigator">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="Manifest.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:name=".application.TeacherNavigatopApp"
@@ -34,6 +35,14 @@
             android:screenOrientation="portrait"/>
 
         <activity android:name=".presentation.screens.tape.activities.PostCommentsActivity"
+            android:windowSoftInputMode="adjustPan"
+            android:screenOrientation="portrait"/>
+
+        <activity android:name=".presentation.screens.main.activities.ProfileActivity"
+            android:windowSoftInputMode="adjustPan"
+            android:screenOrientation="portrait"/>
+
+        <activity android:name=".presentation.screens.main.activities.PreviewPostActivity"
             android:windowSoftInputMode="adjustPan"
             android:screenOrientation="portrait"/>
     </application>

@@ -6,10 +6,8 @@ import com.teachernavigator.teachernavigator.BuildConfig
 import com.teachernavigator.teachernavigator.data.models.CommentNetwork
 import com.teachernavigator.teachernavigator.data.models.PostNetwork
 import com.teachernavigator.teachernavigator.data.network.requests.*
-import com.teachernavigator.teachernavigator.data.network.responses.BaseResponse
-import com.teachernavigator.teachernavigator.data.network.responses.GetMyCommentsResponse
-import com.teachernavigator.teachernavigator.data.network.responses.ProfileResponse
-import com.teachernavigator.teachernavigator.data.network.responses.SingInResponse
+import com.teachernavigator.teachernavigator.data.network.responses.*
+import com.teachernavigator.teachernavigator.domain.models.Profile
 import io.reactivex.Observable
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -62,23 +60,29 @@ class NetworkController {
 
     // ------------------------------- Posts methods --------------------------------
 
-    fun getInterviewsPosts(): Observable<Array<PostNetwork>> = Observable.just(emptyArray())
+    fun getInterviewsPosts(token: String): Observable<PostsResponse> = mApiController.getPools(token)
 
-    fun getNewsPosts(): Observable<Array<PostNetwork>> = Observable.just(emptyArray())
+    fun getNewsPosts(token: String): Observable<PostsResponse> = mApiController.getNews(token)
 
-    fun getPosts(): Observable<Array<PostNetwork>> = mApiController.getPosts()
+    fun getPosts(): Observable<PostsResponse> = mApiController.getPosts()
 
-    fun getPost(postId: Int): Observable<PostNetwork> = mApiController.getPost(postId)
+    fun getPosts(token: String): Observable<PostsResponse> = mApiController.getPosts(token)
+
+    fun getPost(token: String, postId: Int): Observable<PostNetwork> = mApiController.getPost(token, postId)
 
     fun getMyComments(token: String): Observable<GetMyCommentsResponse> = mApiController.getMyComments(token)
 
     fun savePost(token: String, request: SavePostRequest): Observable<BaseResponse> = mApiController.savePost(token, request)
 
-    fun getSavedPosts(token: String): Observable<Array<PostNetwork>> = mApiController.getSavedPosts(token)
+    fun getSavedPosts(token: String): Observable<PostsResponse> = mApiController.getSavedPosts(token)
 
     fun comment(token: String, request: CommentRequest): Observable<CommentNetwork> = mApiController.comment(token, request)
 
+    fun subscribe(token: String, request: SubscribeRequest): Observable<BaseResponse> = mApiController.subscribe(token, request)
+
     fun getMyPublications(token: String): Observable<Array<PostNetwork>> = mApiController.getMyPublications(token)
+
+    fun getUserPost(token: String, userId: Int): Observable<Array<PostNetwork>> = mApiController.getUserPost(token, userId)
 
     //fun vote(token: String, request: VoteRequest): Observable<BaseResponse> = mApiController.vote(token, request)
 
@@ -92,5 +96,7 @@ class NetworkController {
 
     // ------------------------------- Profile methods --------------------------------
 
-    fun getProfile(token: String): Observable<ProfileResponse> = mApiController.getProfile(token)
+    fun getProfile(token: String): Observable<Profile> = mApiController.getProfile(token)
+
+    fun getProfile(token: String, userId: Int): Observable<Profile> = mApiController.getProfile(token, userId)
 }

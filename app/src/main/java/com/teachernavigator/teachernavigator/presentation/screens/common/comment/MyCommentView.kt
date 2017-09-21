@@ -15,6 +15,7 @@ class MyCommentView : CommentView {
     constructor(context: Context, commentControllerFacade: ICommentControllerFacade) : super(context, commentControllerFacade)
 
     init {
-        mTvPostAuthorName.visibility = View.INVISIBLE
+        mTvPostAuthorName.visibility = View.GONE
+        mIvSubscribe.visibility = View.GONE
     }
 }

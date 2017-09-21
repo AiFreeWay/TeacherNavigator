@@ -16,6 +16,11 @@ class CacheController {
             Hawk.put(key, data)
         }
 
+        fun removeData(key: String) {
+            if (Hawk.contains(key))
+                Hawk.delete(key)
+        }
+
         fun <T> getData(key: String, default: T?): T? {
             if (Hawk.contains(key))
                 return Hawk.get(key)

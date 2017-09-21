@@ -7,8 +7,7 @@ import com.teachernavigator.teachernavigator.domain.models.Post
  */
 interface IPostControllerFacade {
 
-    fun like(post: Post, callbak: IPostControllerFacadeCallback)
-    fun dislike(post: Post, callbak: IPostControllerFacadeCallback)
+    fun like(vote: Boolean, post: Post, callbak: IPostControllerFacadeCallback)
     fun save(post: Post, callbak: IPostControllerFacadeCallback)
     fun subscribe(post: Post, callbak: IPostControllerFacadeCallback)
     fun complain(post: Post, callbak: IPostControllerFacadeCallback)

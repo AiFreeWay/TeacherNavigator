@@ -31,7 +31,7 @@ class MyPublicationHolder: BaseHolder<Post> {
 
     override fun create(viewGroup: ViewGroup): BaseHolder<Post> {
         val view = viewInflater(viewGroup, R.layout.v_my_publication_holder)
-        return SavedPostHolder(view, mPostControllerFacade)
+        return MyPublicationHolder(view, mPostControllerFacade)
     }
 
     override fun bind(dataModel: Post) {

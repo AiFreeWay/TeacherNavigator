@@ -87,4 +87,11 @@
     <string name="title_example">Пример заголовка</string>
     <string name="text_example">Пример текста</string>
     <string name="save">Сохранить</string>
+    <string name="proposal">Предложения</string>
+    <string name="applicant">Я соискатель</string>
+    <string name="post_vacancy">Разместить вакансию</string>
+    <string name="my_vacancy">Мои вакансии</string>
+    <string name="view_resume">Просмотреть резюме</string>
+    <string name="my_resume">Моё резюме</string>
+    <string name="view_proposals">Посмотреть предложения</string>
 </resources>

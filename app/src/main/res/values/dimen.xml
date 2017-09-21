@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="titleTextSize">20dp</dimen>
-    <dimen name="normalTextSize">14dp</dimen>
-    <dimen name="smallTextSize">12dp</dimen>
+    <dimen name="titleTextSize">20sp</dimen>
+    <dimen name="normalTextSize">14sp</dimen>
+    <dimen name="smallTextSize">12sp</dimen>
     <dimen name="externalPadding">16dp</dimen>
     <dimen name="internalPadding">8dp</dimen>
     <dimen name="miniPadding">4dp</dimen>
@@ -11,4 +11,14 @@
     <dimen name="miniControlsHeight">40dp</dimen>
     <dimen name="normalControlsHeight">48dp</dimen>
     <dimen name="buttonAndTextWidth">250dp</dimen>
+
+    <dimen name="spacingXXXLarge">32dp</dimen>
+    <dimen name="spacingXXLarge">24dp</dimen>
+    <dimen name="spacingXLarge">16dp</dimen>
+    <dimen name="spacingLarge">12dp</dimen>
+    <dimen name="spacingMedium">8dp</dimen>
+
+    <dimen name="cardCornerMedium">12dp</dimen>
+    <dimen name="cardElevationMedium">10dp</dimen>
+    <dimen name="cardElevationNone">0px</dimen>
 </resources>

@@ -1,6 +1,7 @@
 package com.teachernavigator.teachernavigator.presentation.screens.common.comment
 
 import android.content.Context
+import android.text.TextUtils
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.widget.*
@@ -8,20 +9,17 @@ import butterknife.BindView
 import butterknife.ButterKnife
 import com.teachernavigator.teachernavigator.R
 import com.teachernavigator.teachernavigator.domain.models.Comment
-import com.teachernavigator.teachernavigator.domain.models.Monade
-import com.teachernavigator.teachernavigator.domain.models.Post
 import com.teachernavigator.teachernavigator.presentation.facades.abstractions.ICommentControllerFacade
 import com.teachernavigator.teachernavigator.presentation.facades.abstractions.ICommentControllerFacadeCallback
-import com.teachernavigator.teachernavigator.presentation.facades.abstractions.IPostControllerFacade
-import com.teachernavigator.teachernavigator.presentation.facades.abstractions.IPostControllerFacadeCallback
 import com.teachernavigator.teachernavigator.presentation.utils.ImageLoader
+import de.hdodenhof.circleimageview.CircleImageView
 
 /**
  * Created by root on 13.09.17.
  */
 open class CommentView : RelativeLayout, ICommentControllerFacadeCallback {
 
-    @BindView(R.id.v_comment_iv_avatar) lateinit var mIvAvatar: ImageView
+    @BindView(R.id.v_comment_iv_avatar) lateinit var mIvAvatar: CircleImageView
     @BindView(R.id.v_comment_iv_subscribe) lateinit var mIvSubscribe: ImageView
     @BindView(R.id.v_comment_tv_author_name) lateinit var mTvAuthorName: TextView
     @BindView(R.id.v_comment_tv_post_author_name) lateinit var mTvPostAuthorName: TextView
@@ -49,14 +47,24 @@ open class CommentView : RelativeLayout, ICommentControllerFacadeCallback {
 
     fun loadData(comment: Comment) {
         mTvPostTime.setText("")
-        mTvPostAuthorName.setText("")
         mTvText.setText(comment.message)
 
         if (comment.user != null) {
-            mTvAuthorName.setText(comment.user!!.full_name)
+            if (!TextUtils.isEmpty(comment.user!!.full_name))
+                mTvAuthorName.setText(comment.user!!.full_name)
+            else
+                mTvAuthorName.text = context.getString(R.string.not_define)
+
             if (comment.user!!.avatars != null)
                 ImageLoader.load(context, comment.user!!.avatars!!.avatar, mIvAvatar)
-        }
+        } else
+            mTvAuthorName.text = context.getString(R.string.not_define)
+
+        if (comment.author != null)
+            mTvPostAuthorName.setText(comment.author!!.full_name)
+        else
+            mTvPostAuthorName.text = context.getString(R.string.not_define)
+
         setClickListeners(comment)
     }
 

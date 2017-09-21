@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <android.support.design.widget.TextInputEditText
+            android:id="@+id/fmt_add_publication_et_title"
+            style="@style/EditText"
+            android:layout_width="@dimen/buttonAndTextWidth"
+            android:layout_height="@dimen/normalControlsHeight"
+            android:layout_gravity="center"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="@dimen/internalPadding"
+            android:layout_marginEnd="@dimen/externalPadding"
+            android:layout_marginStart="@dimen/externalPadding"
+            android:layout_marginTop="@dimen/externalPadding"
+            android:background="@drawable/oval_edit_text_backgroud"
+            android:hint="@string/title"
+            android:lines="1" />
+
+        <TextView
+            style="@style/TitleText"
+            android:id="@+id/fmt_add_publication_tv_title"
+            android:layout_width="@dimen/buttonAndTextWidth"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/externalPadding"
+            android:layout_alignLeft="@+id/fmt_add_publication_et_title"
+            android:layout_alignStart="@+id/fmt_add_publication_et_title"
+            android:layout_below="@+id/fmt_add_publication_et_title"
+            android:text="@string/publication_text" />
+
+        <android.support.design.widget.TextInputEditText
+            android:id="@+id/fmt_add_publication_et_text"
+            android:layout_width="@dimen/buttonAndTextWidth"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="top"
+            android:layout_marginTop="@dimen/externalPadding"
+            android:padding="@dimen/internalPadding"
+            android:layout_alignLeft="@+id/fmt_add_publication_tv_title"
+            android:layout_alignStart="@+id/fmt_add_publication_tv_title"
+            android:layout_below="@+id/fmt_add_publication_tv_title"
+            android:background="@drawable/oval_text_backgroud"
+            android:minLines="5" />
+
+        <TextView
+            android:id="@+id/fmt_add_publication_tv_add_tag"
+            style="@style/SmallText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/fmt_add_publication_et_text"
+            android:layout_alignStart="@+id/fmt_add_publication_et_text"
+            android:layout_below="@+id/fmt_add_publication_et_text"
+            android:layout_marginTop="@dimen/externalPadding"
+            android:background="@drawable/hash_tag_background"
+            android:drawableLeft="@drawable/ic_plus"
+            android:drawablePadding="@dimen/internalPadding"
+            android:drawableStart="@drawable/ic_plus"
+            android:paddingBottom="@dimen/internalPadding"
+            android:paddingLeft="@dimen/externalPadding"
+            android:paddingRight="@dimen/externalPadding"
+            android:paddingTop="@dimen/internalPadding"
+            android:text="@string/add_tag" />
+
+        <com.greenfrvr.hashtagview.HashtagView
+            android:id="@+id/fmt_add_publication_hv_hashtags"
+            android:layout_width="@dimen/buttonAndTextWidth"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/fmt_add_publication_tv_add_tag"
+            android:layout_alignStart="@+id/fmt_add_publication_tv_add_tag"
+            android:layout_below="@+id/fmt_add_publication_tv_add_tag"
+            android:layout_marginTop="@dimen/externalPadding"
+            app:rowGravity="left"
+            app:tagBackground="@drawable/hash_tag_background"
+            app:tagPaddingLeft="12dp"
+            app:tagPaddingRight="12dp"
+            app:tagTextColor="@color/greyTextColor"
+            app:tagTextSize="@dimen/normalTextSize" />
+
+        <android.support.v7.widget.AppCompatButton
+            android:id="@+id/fmt_add_publication_btn_public"
+            style="@style/Button"
+            android:layout_width="@dimen/buttonAndTextWidth"
+            android:layout_height="@dimen/normalControlsHeight"
+            android:layout_alignLeft="@+id/fmt_add_publication_hv_hashtags"
+            android:layout_alignStart="@+id/fmt_add_publication_hv_hashtags"
+            android:layout_below="@+id/fmt_add_publication_hv_hashtags"
+            android:layout_marginTop="@dimen/externalPadding"
+            android:text="@string/do_public"
+            android:textAllCaps="false"
+            app:backgroundTint="@color/orange"/>
+
+        <android.support.v7.widget.AppCompatButton
+            android:id="@+id/fmt_add_publication_btn_preview"
+            style="@style/Button"
+            android:layout_width="@dimen/buttonAndTextWidth"
+            android:layout_height="@dimen/normalControlsHeight"
+            android:layout_alignLeft="@+id/fmt_add_publication_btn_public"
+            android:layout_alignStart="@+id/fmt_add_publication_btn_public"
+            android:layout_below="@+id/fmt_add_publication_btn_public"
+            android:layout_marginTop="@dimen/externalPadding"
+            android:layout_marginBottom="@dimen/externalPadding"
+            android:text="@string/preview"
+            android:textAllCaps="false"
+            android:textColor="@color/greyTextColor"
+            app:backgroundTint="@color/lightGrey" />
+    </RelativeLayout>
+</ScrollView>

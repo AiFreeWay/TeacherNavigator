@@ -2,6 +2,7 @@ package com.teachernavigator.teachernavigator.presentation.facades
 
 import com.example.root.androidtest.application.utils.Logger
 import com.teachernavigator.teachernavigator.domain.controllers.IPostController
+import com.teachernavigator.teachernavigator.domain.models.Monade
 import com.teachernavigator.teachernavigator.domain.models.Post
 import com.teachernavigator.teachernavigator.presentation.facades.abstractions.IPostControllerFacade
 import com.teachernavigator.teachernavigator.presentation.facades.abstractions.IPostControllerFacadeCallback
@@ -20,35 +21,29 @@ class PostControllerFacade @Inject constructor(private val mPostController: IPos
         Logger.logDebug("created Facade PostControllerFacade")
     }
 
-    override fun like(post: Post, callbak: IPostControllerFacadeCallback) {
-        mPostController.like(post, { doOnUserNotAuth() })
-                .subscribe({ onSubscribe { callbak.onLike() } }, { doOnError(it, callbak) })
-    }
-
-    override fun dislike(post: Post, callbak: IPostControllerFacadeCallback) {
-        mPostController.dislike(post, { doOnUserNotAuth() })
-                .subscribe({ onSubscribe { callbak.onDislike() } }, { doOnError(it, callbak) })
+    override fun like(vote: Boolean, post: Post, callbak: IPostControllerFacadeCallback) {
+        mPostController.like(vote, post, { doOnUserNotAuth() })
+                .subscribe({ onSubscribe(it,  { if (vote) callbak.onLike() else callbak.onDislike() }) }, { doOnError(it, callbak) })
     }
 
     override fun save(post: Post, callbak: IPostControllerFacadeCallback) {
         mPostController.save(post, { doOnUserNotAuth() })
-                .subscribe({ onSubscribe { callbak.onSave() } }, { doOnError(it, callbak) })
+                .subscribe({ onSubscribe(it,  { callbak.onSave() }) }, { doOnError(it, callbak) })
     }
 
     override fun subscribe(post: Post, callbak: IPostControllerFacadeCallback) {
         mPostController.subscribe(post, { doOnUserNotAuth() })
-                .subscribe({ onSubscribe { callbak.onSubscribe() } }, { doOnError(it, callbak) })
+                .subscribe({ onSubscribe(it,  { callbak.onSubscribe() }) }, { doOnError(it, callbak) })
     }
 
     override fun complain(post: Post, callbak: IPostControllerFacadeCallback) {
         mPostController.complain(post, { doOnUserNotAuth() })
-                .subscribe({ onSubscribe { callbak.onComplain() } }, { doOnError(it, callbak) })
+                .subscribe({ onSubscribe(it,  { callbak.onComplain() }) }, { doOnError(it, callbak) })
     }
 
     override fun openCommentsScreen(post: Post, callbak: IPostControllerFacadeCallback) {
-        if (post.comments != null && post.comments!!.isNotEmpty())
-            mPostController.openCommentsScreen(post, mParentView.getActivity(), { doOnUserNotAuth() })
-                    .subscribe({}, { doOnError(it, callbak) })
+        mPostController.openCommentsScreen(post, mParentView.getActivity(), { doOnUserNotAuth() })
+                .subscribe({}, { doOnError(it, callbak) })
     }
 
     override fun openProfileScreen(post: Post, callbak: IPostControllerFacadeCallback) {
@@ -74,9 +69,10 @@ class PostControllerFacade @Inject constructor(private val mPostController: IPos
         }
     }
 
-    private fun onSubscribe(onSubscribe: () -> Unit) {
+    private fun onSubscribe(monade: Monade, onSubscribe: () -> Unit) {
         try {
-            onSubscribe.invoke()
+            if (!monade.isError)
+                onSubscribe.invoke()
         } catch (e: Exception) {
             // -> ^.^ <-
         }

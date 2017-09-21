@@ -8,7 +8,7 @@
     android:paddingTop="@dimen/externalPadding"
     android:paddingBottom="@dimen/externalPadding">
 
-    <android.support.v7.widget.AppCompatImageView
+    <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/v_comment_iv_avatar"
         android:layout_width="40dp"
         android:layout_height="40dp"
@@ -33,6 +33,7 @@
         android:drawableStart="@drawable/ic_user_link"
         android:fontFamily="sans-serif-medium"
         android:gravity="center"
+        android:visibility="gone"
         android:textColor="@color/colorAccent" />
 
     <TextView

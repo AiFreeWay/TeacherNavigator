@@ -26,8 +26,8 @@ class FragmentsFactory {
                 SavedPostsFragment.FRAGMENT_KEY -> addBundle(SavedPostsFragment(), bundle)
                 MyPublicationsFragment.FRAGMENT_KEY -> addBundle(MyPublicationsFragment(), bundle)
                 SettingsFragment.FRAGMENT_KEY -> addBundle(SettingsFragment(), bundle)
-                ProfileFragment.FRAGMENT_KEY -> addBundle(ProfileFragment(), bundle)
                 JobsBankFragment.FRAGMENT_KEY -> addBundle(JobsBankFragment(), bundle)
+                AddPublicationFragment.FRAGMENT_KEY -> addBundle(AddPublicationFragment(), bundle)
                 else -> throw Exception("Invalid fragment key $screenKey FragmentsFactory.createFragment(screenKey: String?)")
             }
 

@@ -6,7 +6,7 @@
     android:layout_marginRight="@dimen/externalPadding"
     android:layout_marginTop="@dimen/externalPadding">
 
-    <com.teachernavigator.teachernavigator.presentation.screens.common.post.PostView
+    <com.teachernavigator.teachernavigator.presentation.screens.common.post.PostShortView
         android:id="@+id/v_post_holder_detail_postview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />

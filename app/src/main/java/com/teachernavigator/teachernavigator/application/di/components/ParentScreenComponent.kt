@@ -40,12 +40,13 @@ interface ParentScreenComponent {
 
     //Main presenters
     fun inject(presenter: AcMainPresenter)
+    fun inject(presenter: AcProfilePresenter)
     fun inject(presenter: FmtTapePresenter)
     fun inject(presenter: FmtMyCommentsPresenter)
     fun inject(presenter: FmtSavedPostsPresenter)
     fun inject(presenter: FmtMyPublicationsPresenter)
     fun inject(presenter: FmtSettingsPresenter)
-    fun inject(presenter: FmtProfilePresenter)
+    fun inject(presenter: FmtAddPublicationPresenter)
 
     //Tape presenters
     fun inject(presenter: AcPostSearchPresenter)

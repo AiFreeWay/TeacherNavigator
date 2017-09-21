@@ -15,6 +15,8 @@ class MyPublicationView : PostView {
     constructor(context: Context, postControllerFacade: IPostControllerFacade) : super(context, postControllerFacade)
 
     init {
-        mIvSubscribe.visibility = View.INVISIBLE
+        mIvSubscribe.visibility = View.GONE
+        mIvSave.visibility = View.GONE
+        mTvText.maxLines = 4
     }
 }

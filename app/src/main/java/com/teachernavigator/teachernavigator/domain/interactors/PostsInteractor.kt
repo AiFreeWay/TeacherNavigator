@@ -2,6 +2,7 @@ package com.teachernavigator.teachernavigator.domain.interactors
 
 import com.example.root.androidtest.application.utils.Logger
 import com.teachernavigator.teachernavigator.data.models.PostNetwork
+import com.teachernavigator.teachernavigator.data.network.responses.PostsResponse
 import com.teachernavigator.teachernavigator.data.repository.abstractions.ITapeRepository
 import com.teachernavigator.teachernavigator.domain.interactors.abstractions.IPostsInteractor
 import com.teachernavigator.teachernavigator.domain.mappers.PostsMapper
@@ -43,12 +44,20 @@ class PostsInteractor @Inject constructor(private val mRepository: ITapeReposito
             configePostsObservable(mRepository.getSavedPosts())
 
     override fun getMyPublications(): Observable<List<Post>> =
-            configePostsObservable(mRepository.getMyPublications())
+            configeArrayPostsObservable(mRepository.getMyPublications())
 
-    private fun configePostsObservable(observable: Observable<Array<PostNetwork>>) : Observable<List<Post>> =
+    override fun getUserPost(userId: Int): Observable<List<Post>> =
+            configeArrayPostsObservable(mRepository.getUserPost(userId))
+
+    private fun configePostsObservable(observable: Observable<PostsResponse>) : Observable<List<Post>> =
             observable.observeOn(AndroidSchedulers.mainThread())
                     .subscribeOn(Schedulers.newThread())
                     .map { PostsMapper.mapPosts(it) }
+
+    private fun configeArrayPostsObservable(observable: Observable<Array<PostNetwork>>) : Observable<List<Post>> =
+            observable.observeOn(AndroidSchedulers.mainThread())
+                    .subscribeOn(Schedulers.newThread())
+                    .map { PostsMapper.mapPostsFromArray(it) }
 
     private fun sortAsBestPosts(posts: List<Post>): List<Post> = posts.sortedBy { it.countDislikes!! - it.countLikes!! }
 }

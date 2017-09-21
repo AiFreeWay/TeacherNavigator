@@ -6,6 +6,7 @@ import android.support.v4.app.Fragment
 import com.example.root.androidtest.application.utils.Logger
 import com.teachernavigator.teachernavigator.R
 import com.teachernavigator.teachernavigator.domain.interactors.abstractions.IAuthInteractor
+import com.teachernavigator.teachernavigator.presentation.facades.abstractions.IPostControllerFacade
 import com.teachernavigator.teachernavigator.presentation.factories.PostsFragmentsFactory
 import com.teachernavigator.teachernavigator.presentation.models.ViewPagerItemContainer
 import com.teachernavigator.teachernavigator.presentation.screens.common.BasePresenter
@@ -23,6 +24,8 @@ class FmtTapePresenter : BasePresenter<TapeView>(), ITapePresenter {
 
     @Inject
     lateinit var mAuthInteractor: IAuthInteractor
+    @Inject
+    lateinit var mPostControllerFacade: IPostControllerFacade
 
     init {
         Logger.logDebug("created PRESENTER FmtTapePresenter")
@@ -68,9 +71,9 @@ class FmtTapePresenter : BasePresenter<TapeView>(), ITapePresenter {
         mView!!.getParentView().stopProgress()
         val fragmentsContainer: List<ViewPagerItemContainer>
         if (isAuth)
-            fragmentsContainer = PostsFragmentsFactory.createItems(getContext())
+            fragmentsContainer = PostsFragmentsFactory.createItems(getContext(), mPostControllerFacade)
         else
-            fragmentsContainer = PostsFragmentsFactory.createForUnregisterUserItems(getContext())
+            fragmentsContainer = PostsFragmentsFactory.createForUnregisterUserItems(getContext(), mPostControllerFacade)
         mView!!.loadOrdersFragments(fragmentsContainer)
     }
 

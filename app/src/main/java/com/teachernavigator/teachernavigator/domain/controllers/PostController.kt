@@ -9,6 +9,7 @@ import com.teachernavigator.teachernavigator.domain.mappers.PostsMapper
 import com.teachernavigator.teachernavigator.domain.models.Comment
 import com.teachernavigator.teachernavigator.domain.models.Monade
 import com.teachernavigator.teachernavigator.domain.models.Post
+import com.teachernavigator.teachernavigator.presentation.screens.main.activities.ProfileActivity
 import com.teachernavigator.teachernavigator.presentation.screens.tape.activities.PostCommentsActivity
 import com.teachernavigator.teachernavigator.presentation.screens.tape.activities.PostDetailActivity
 import com.teachernavigator.teachernavigator.presentation.utils.ActivityRouter
@@ -26,20 +27,9 @@ class PostController @Inject constructor(private val mRepository: IMainRepositor
         Logger.logDebug("created CONTROLLER PostController")
     }
 
-    override fun like(post: Post, doOnUserNotAuth: () -> Unit): Observable<Monade> {
+    override fun like(vote: Boolean, post: Post, doOnUserNotAuth: () -> Unit): Observable<Monade> {
         if (mRepository.isAuth())
-            return mRepository.vote(PostsMapper.mapPostToVoteRequest(post))
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribeOn(Schedulers.newThread())
-                    .map { BaseMapper.mapBaseResponse(it) }
-        else
-            doOnUserNotAuth.invoke()
-        return Observable.just(Monade.FAILARY_MONADE)
-    }
-
-    override fun dislike(post: Post, doOnUserNotAuth: () -> Unit): Observable<Monade> {
-        if (mRepository.isAuth())
-            return mRepository.vote(PostsMapper.mapPostToVoteRequest(post))
+            return mRepository.vote(PostsMapper.mapPostToVoteRequest(vote, post))
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribeOn(Schedulers.newThread())
                     .map { BaseMapper.mapBaseResponse(it) }
@@ -61,7 +51,10 @@ class PostController @Inject constructor(private val mRepository: IMainRepositor
 
     override fun subscribe(post: Post, doOnUserNotAuth: () -> Unit): Observable<Monade> {
         if (mRepository.isAuth())
-            return Observable.just(Monade.SUCCESSFULLY_MONADE)
+            return mRepository.subscribe(PostsMapper.mapPostToSubscribeRequesttRequest(post))
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribeOn(Schedulers.newThread())
+                    .map { BaseMapper.mapBaseResponse(it) }
         else
             doOnUserNotAuth.invoke()
         return Observable.just(Monade.FAILARY_MONADE)
@@ -87,7 +80,7 @@ class PostController @Inject constructor(private val mRepository: IMainRepositor
     override fun openCommentsScreen(post: Post, activity: Activity, doOnUserNotAuth: () -> Unit): Observable<Monade> {
             if (mRepository.isAuth()) {
                 val bundle = Bundle()
-                bundle.putSerializable(PostCommentsActivity.POST_ID_KEY, post)
+                bundle.putSerializable(PostCommentsActivity.POST_ID_KEY, post.id!!)
                 ActivityRouter.openActivity(activity, bundle, PostCommentsActivity::class.java)
             } else
                 doOnUserNotAuth.invoke()
@@ -95,11 +88,10 @@ class PostController @Inject constructor(private val mRepository: IMainRepositor
     }
 
     override fun openProfileScreen(post: Post, activity: Activity, doOnUserNotAuth: () -> Unit): Observable<Monade> {
-        //TODO: mock
-        if (mRepository.isAuth()) {
+        if (mRepository.isAuth() && post.author != null && post.author!!.id != null) {
             val bundle = Bundle()
-            bundle.putInt(PostCommentsActivity.POST_ID_KEY, post.id!!)
-            ActivityRouter.openActivity(activity, bundle, PostCommentsActivity::class.java)
+            bundle.putInt(ProfileActivity.USER_ID_KEY, post.author!!.id!!)
+            ActivityRouter.openActivity(activity, bundle, ProfileActivity::class.java)
         } else
             doOnUserNotAuth.invoke()
         return Observable.just(Monade.FAILARY_MONADE)

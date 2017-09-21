@@ -18,4 +18,6 @@ class Post : Serializable {
     var vote: Boolean? = null
     var countComments: Int? = null
     var comments: List<Comment>? = null
+    var author: Author? = null
+    var choices: List<Choice>? = null
 }

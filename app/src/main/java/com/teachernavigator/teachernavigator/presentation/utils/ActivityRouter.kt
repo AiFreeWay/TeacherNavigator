@@ -13,11 +13,13 @@ class ActivityRouter {
 
         fun openActivity(activity: Activity, classType: Class<*>) {
             val intent = Intent(activity, classType)
+            intent.flags = Intent.FLAG_ACTIVITY_SINGLE_TOP
             activity.startActivity(intent)
         }
 
         fun openActivity(activity: Activity, bundle: Bundle, classType: Class<*>) {
             val intent = Intent(activity, classType)
+            intent.flags = Intent.FLAG_ACTIVITY_SINGLE_TOP
             intent.putExtras(bundle)
             activity.startActivity(intent)
         }

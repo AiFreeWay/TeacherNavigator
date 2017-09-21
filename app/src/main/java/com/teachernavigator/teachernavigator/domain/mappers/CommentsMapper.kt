@@ -19,7 +19,7 @@ class CommentsMapper {
             return mappedComments
         }
 
-        fun mapComment(comment: CommentNetwork): Comment=  Comment(comment.id, comment.message, mapCommentUser(comment.user))
+        fun mapComment(comment: CommentNetwork): Comment=  Comment(comment.id, comment.message, mapCommentUser(comment.user), comment.author)
 
         fun mapCommentUser(userInComment: CommentNetwork.UserInComment?): Comment.UserInComment? {
             if (userInComment != null) {

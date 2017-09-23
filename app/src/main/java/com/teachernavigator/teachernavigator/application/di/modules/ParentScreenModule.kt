@@ -53,6 +53,10 @@ class ParentScreenModule(private val mParentView: ParentView) {
 
     @Provides
     @PerParentScreen
+    fun provideJobRepository(repository: IMainRepository): IJobRepository = repository
+
+    @Provides
+    @PerParentScreen
     fun provideProfileRepository(repository: IMainRepository): IProfileRepository = repository
 
     @Provides
@@ -62,6 +66,10 @@ class ParentScreenModule(private val mParentView: ParentView) {
     @Provides
     @PerParentScreen
     fun providePostsInteractor(interactor : PostsInteractor): IPostsInteractor = interactor
+
+    @Provides
+    @PerParentScreen
+    fun provideJobInteractor(interactor : JobInteractor): IJobInteractor = interactor
 
     @Provides
     @PerParentScreen

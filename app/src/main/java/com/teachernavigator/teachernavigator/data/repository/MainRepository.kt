@@ -9,10 +9,14 @@ import com.teachernavigator.teachernavigator.data.models.CommentNetwork
 import com.teachernavigator.teachernavigator.data.models.PostNetwork
 import com.teachernavigator.teachernavigator.data.network.NetworkController
 import com.teachernavigator.teachernavigator.data.network.requests.*
-import com.teachernavigator.teachernavigator.data.network.responses.*
+import com.teachernavigator.teachernavigator.data.network.responses.BaseResponse
+import com.teachernavigator.teachernavigator.data.network.responses.GetMyCommentsResponse
+import com.teachernavigator.teachernavigator.data.network.responses.PostsResponse
+import com.teachernavigator.teachernavigator.data.network.responses.SingInResponse
 import com.teachernavigator.teachernavigator.data.repository.abstractions.IMainRepository
 import com.teachernavigator.teachernavigator.domain.models.*
 import io.reactivex.Observable
+import io.reactivex.Single
 import java.io.File
 import javax.inject.Inject
 
@@ -28,8 +32,8 @@ class MainRepository @Inject constructor(private val mNetwokController: NetworkC
 
     override fun getAccessToken(): String {
         val token = (CacheController.getData(CacheController.TOKEN_KEY, Token.EMPTY_TOKEN) as Token)
-        token.tokenType+" "+token.accessToken
-        return token.tokenType+" "+token.accessToken
+        token.tokenType + " " + token.accessToken
+        return token.tokenType + " " + token.accessToken
     }
 
     // ------------------------------- Auth methods --------------------------------
@@ -132,4 +136,13 @@ class MainRepository @Inject constructor(private val mNetwokController: NetworkC
     override fun uploadPhoto(file: File): Observable<File> {
         return Observable.just(file)
     }
+
+    // ------------------------------- Job methods --------------------------------
+    override fun createVacancy(vacancyRequest: VacancyRequest): Single<Vacancy> =
+            mNetwokController.createVacancy(getAccessToken(), vacancyRequest)
+
+    override fun getTypesOfEmployment(): List<TypeOfEmployment> =
+            mContext.resources.getStringArray(R.array.types_of_employment)
+                    .mapIndexed { index, resId -> TypeOfEmployment(index, resId) }
+
 }

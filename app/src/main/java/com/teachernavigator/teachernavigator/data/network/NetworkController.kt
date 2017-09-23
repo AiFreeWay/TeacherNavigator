@@ -7,8 +7,11 @@ import com.teachernavigator.teachernavigator.data.models.CommentNetwork
 import com.teachernavigator.teachernavigator.data.models.PostNetwork
 import com.teachernavigator.teachernavigator.data.network.requests.*
 import com.teachernavigator.teachernavigator.data.network.responses.*
+import com.teachernavigator.teachernavigator.domain.models.Monade
 import com.teachernavigator.teachernavigator.domain.models.Profile
+import com.teachernavigator.teachernavigator.domain.models.Vacancy
 import io.reactivex.Observable
+import io.reactivex.Single
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -99,4 +102,7 @@ class NetworkController {
     fun getProfile(token: String): Observable<Profile> = mApiController.getProfile(token)
 
     fun getProfile(token: String, userId: Int): Observable<Profile> = mApiController.getProfile(token, userId)
+
+    fun createVacancy(token: String, vacancyRequest: VacancyRequest): Single<Vacancy> =
+            mApiController.createVacancy(token, vacancyRequest)
 }

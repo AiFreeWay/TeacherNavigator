@@ -108,4 +108,25 @@
     <string name="do_public">Опубликовать</string>
     <string name="will_set_current_time">Будет указано текущее время</string>
     <string name="you">Вы</string>
+    <string name="organization_name">Название организации</string>
+    <string name="vacancy">Вакансия</string>
+    <string name="salary">Размер заработной платы</string>
+    <string name="city">Город</string>
+    <string name="required_experience">Требуемый опыт</string>
+    <string name="type_of_employment">Тип занятости</string>
+    <string name="responsibilities">Обязанности</string>
+    <string name="choose_type_of_institution">Выберите тип учреждения</string>
+    <string name="school">Школа</string>
+    <string name="college">Колледж</string>
+    <string name="university">ВУЗ</string>
+    <string name="create_vacancy">Создать вакансию</string>
+    <string name="full">Полная</string>
+    <string name="partial">Частичная</string>
+    <string name="validation_empty_field">Поле \"%1$s\" должно быть заполнено</string>
+    <string name="validation_only_numbers">Поле \"%1$s\" должно содержать только числовые значения</string>
+    <string name="validation_empty">%1$s</string>
+    <string-array name="types_of_employment">
+        <item>@string/full</item>
+        <item>@string/partial</item>
+    </string-array>
 </resources>

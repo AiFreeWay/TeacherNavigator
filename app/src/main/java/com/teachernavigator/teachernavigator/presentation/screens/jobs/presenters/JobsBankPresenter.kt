@@ -1,7 +1,11 @@
 package com.teachernavigator.teachernavigator.presentation.screens.jobs.presenters
 
+import android.arch.lifecycle.Lifecycle
+import android.arch.lifecycle.OnLifecycleEvent
+import com.teachernavigator.teachernavigator.R
 import com.teachernavigator.teachernavigator.application.di.scopes.PerParentScreen
 import com.teachernavigator.teachernavigator.presentation.screens.common.BasePresenter
+import com.teachernavigator.teachernavigator.presentation.screens.jobs.fragments.CreateJobFragment
 import com.teachernavigator.teachernavigator.presentation.screens.jobs.fragments.abstractions.JobsBankView
 import com.teachernavigator.teachernavigator.presentation.screens.jobs.presenters.abstractions.IJobsBankPresenter
 import ru.terrakok.cicerone.Router
@@ -14,16 +18,17 @@ import javax.inject.Inject
 class JobsBankPresenter
 @Inject constructor(val router: Router) : BasePresenter<JobsBankView>(), IJobsBankPresenter {
 
-    var isApplicant = false
+    private var isApplicant = false
 
     override fun attachView(view: JobsBankView) {
         super.attachView(view)
         mView?.setState(isApplicant, true)
     }
 
-    override fun navigateToJobs() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
+    @OnLifecycleEvent(Lifecycle.Event.ON_START)
+    private fun onStart() =
+            mView?.getParentView()?.setToolbarTitle(R.string.bank_of_vacancy)
+
 
     override fun setApplicant() {
         isApplicant = true
@@ -39,7 +44,12 @@ class JobsBankPresenter
     }
 
     override fun navigateToPostJob() {
+        router.navigateTo(CreateJobFragment.FRAGMENT_KEY)
     }
+
+    override fun navigateToJobs() {
+    }
+
 
     override fun navigateToViewResume() {
     }

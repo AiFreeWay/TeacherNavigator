@@ -3,7 +3,7 @@ package com.teachernavigator.teachernavigator.presentation.screens.jobs.fragment
 import com.teachernavigator.teachernavigator.presentation.screens.common.ChildView
 
 interface JobsBankView : ChildView {
-    fun setState(applicant: Boolean, initial: Boolean)
 
+    fun setState(applicant: Boolean, initial: Boolean)
 
 }

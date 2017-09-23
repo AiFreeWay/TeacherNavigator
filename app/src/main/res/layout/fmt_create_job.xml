@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <android.support.design.widget.TextInputEditText
+            android:id="@+id/createJobEtOrganizationName"
+            style="@style/EditText"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/normalControlsHeight"
+            android:layout_marginEnd="@dimen/externalPadding"
+            android:layout_marginStart="@dimen/externalPadding"
+            android:layout_marginTop="@dimen/externalPadding"
+            android:hint="@string/organization_name"
+            android:lines="1" />
+
+        <android.support.design.widget.TextInputEditText
+            android:id="@+id/createJobEtJob"
+            style="@style/EditText"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/normalControlsHeight"
+            android:layout_marginEnd="@dimen/externalPadding"
+            android:layout_marginStart="@dimen/externalPadding"
+            android:layout_marginTop="@dimen/externalPadding"
+            android:hint="@string/vacancy"
+            android:lines="1" />
+
+        <android.support.design.widget.TextInputEditText
+            android:id="@+id/createJobEtSalary"
+            style="@style/EditText"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/normalControlsHeight"
+            android:layout_marginEnd="@dimen/externalPadding"
+            android:layout_marginStart="@dimen/externalPadding"
+            android:layout_marginTop="@dimen/externalPadding"
+            android:hint="@string/salary"
+            android:inputType="number"
+            android:lines="1" />
+
+        <android.support.design.widget.TextInputEditText
+            android:id="@+id/createJobEtCity"
+            style="@style/EditText"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/normalControlsHeight"
+            android:layout_marginEnd="@dimen/externalPadding"
+            android:layout_marginStart="@dimen/externalPadding"
+            android:layout_marginTop="@dimen/externalPadding"
+            android:hint="@string/city"
+            android:lines="1" />
+
+        <android.support.design.widget.TextInputEditText
+            android:id="@+id/createJobEtRequiredExperience"
+            style="@style/EditText"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/normalControlsHeight"
+            android:layout_marginEnd="@dimen/externalPadding"
+            android:layout_marginStart="@dimen/externalPadding"
+            android:layout_marginTop="@dimen/externalPadding"
+            android:hint="@string/required_experience"
+            android:lines="1" />
+
+        <TextView
+            android:id="@+id/createJobEtTypeOfEmployment"
+            style="@style/EditText"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/normalControlsHeight"
+            android:layout_marginEnd="@dimen/externalPadding"
+            android:layout_marginStart="@dimen/externalPadding"
+            android:layout_marginTop="@dimen/externalPadding"
+            android:clickable="true"
+            android:gravity="center_vertical|start"
+            android:hint="@string/type_of_employment"
+            android:lines="1" />
+
+        <android.support.design.widget.TextInputEditText
+            android:id="@+id/createJobEtResponsibilities"
+            style="@style/EditText"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/largeControlsHeight"
+            android:layout_marginBottom="@dimen/spacingXXLarge"
+            android:layout_marginEnd="@dimen/externalPadding"
+            android:layout_marginStart="@dimen/externalPadding"
+            android:layout_marginTop="@dimen/externalPadding"
+            android:background="@drawable/rounded_edit_text_backgroud"
+            android:gravity="top"
+            android:hint="@string/responsibilities"
+            android:inputType="textMultiLine"
+            android:lines="4"
+            android:padding="@dimen/spacingLarge" />
+
+        <TextView
+            android:id="@+id/createJobTvTypeOfInstitution"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:padding="@dimen/spacingMedium"
+            android:text="@string/choose_type_of_institution"
+            android:textSize="@dimen/titleTextSize" />
+
+        <RadioGroup
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/createJobChSchool"
+                style="@style/SmallText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="true"
+                android:padding="@dimen/spacingLarge"
+                android:text="@string/school" />
+
+            <RadioButton
+                android:id="@+id/createJobChCollege"
+                style="@style/SmallText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="true"
+                android:padding="@dimen/spacingLarge"
+                android:text="@string/college" />
+
+            <RadioButton
+                android:id="@+id/createJobChUniversity"
+                style="@style/SmallText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="true"
+                android:padding="@dimen/spacingLarge"
+                android:text="@string/university" />
+        </RadioGroup>
+
+        <android.support.v7.widget.AppCompatButton
+            android:id="@+id/createJobBtnCreateJob"
+            style="@style/Button"
+            android:layout_width="@dimen/buttonAndTextWidth"
+            android:layout_height="@dimen/normalControlsHeight"
+            android:layout_gravity="center"
+            android:layout_margin="@dimen/spacingXXXLarge"
+            android:text="@string/create_vacancy"
+            android:textAllCaps="false"
+            app:backgroundTint="@color/orange" />
+
+
+    </LinearLayout>
+
+</ScrollView>

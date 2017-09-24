@@ -79,6 +79,8 @@ dependencies {
     compile "com.orhanobut:hawk:$hawk"
     compile "de.hdodenhof:circleimageview:$circleView"
     compile "com.github.greenfrvr:hashtag-view:$hashtagView"
+    compile "com.github.lliepmah:library:$universalAdapterVersion"
+    kapt "com.github.lliepmah:compiler:$universalAdapterVersion"
 
     //Crash Reporting
     compile "com.google.firebase:firebase-crash:$firebaseCrash"

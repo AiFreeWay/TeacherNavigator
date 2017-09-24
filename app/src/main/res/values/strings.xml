@@ -125,6 +125,12 @@
     <string name="validation_empty_field">Поле \"%1$s\" должно быть заполнено</string>
     <string name="validation_only_numbers">Поле \"%1$s\" должно содержать только числовые значения</string>
     <string name="validation_empty">%1$s</string>
+    <string name="delete">Удалить</string>
+    <string name="prolong">Продлить</string>
+    <string name="cost_roubles"><![CDATA[<b>%d</b> рублей]]></string>
+    <string name="responsibilities_text"><![CDATA[<b>Обязанности: </b> %1$s]]></string>
+    <string name="remains_days_format"><![CDATA[Осталось: <b>%1$d дней</b> ]]></string>
+    <string name="type_of_employment_formatted"><![CDATA[%1$s занятость]]></string>
     <string-array name="types_of_employment">
         <item>@string/full</item>
         <item>@string/partial</item>

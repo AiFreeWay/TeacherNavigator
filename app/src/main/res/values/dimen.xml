@@ -18,6 +18,7 @@
     <dimen name="spacingXLarge">16dp</dimen>
     <dimen name="spacingLarge">12dp</dimen>
     <dimen name="spacingMedium">8dp</dimen>
+    <dimen name="spacingSmall">4dp</dimen>
 
     <dimen name="cardCornerMedium">12dp</dimen>
     <dimen name="cardElevationMedium">10dp</dimen>

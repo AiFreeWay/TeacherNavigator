@@ -6,6 +6,7 @@ import com.teachernavigator.teachernavigator.R
 import com.teachernavigator.teachernavigator.application.di.scopes.PerParentScreen
 import com.teachernavigator.teachernavigator.presentation.screens.common.BasePresenter
 import com.teachernavigator.teachernavigator.presentation.screens.jobs.fragments.CreateJobFragment
+import com.teachernavigator.teachernavigator.presentation.screens.jobs.fragments.MyJobsFragment
 import com.teachernavigator.teachernavigator.presentation.screens.jobs.fragments.abstractions.JobsBankView
 import com.teachernavigator.teachernavigator.presentation.screens.jobs.presenters.abstractions.IJobsBankPresenter
 import ru.terrakok.cicerone.Router
@@ -40,12 +41,11 @@ class JobsBankPresenter
         mView?.setState(isApplicant, false)
     }
 
-    override fun navigateToMyJobs() {
-    }
+    override fun navigateToMyJobs() =
+            router.navigateTo(MyJobsFragment.FRAGMENT_KEY)
 
-    override fun navigateToPostJob() {
-        router.navigateTo(CreateJobFragment.FRAGMENT_KEY)
-    }
+    override fun navigateToPostJob() =
+            router.navigateTo(CreateJobFragment.FRAGMENT_KEY)
 
     override fun navigateToJobs() {
     }

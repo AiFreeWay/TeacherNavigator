@@ -33,7 +33,7 @@ class CreateJobPresenter
 
     @OnLifecycleEvent(Lifecycle.Event.ON_START)
     private fun onStart() =
-        mView?.getParentView()?.setToolbarTitle(R.string.create_vacancy)
+            mView?.getParentView()?.setToolbarTitle(R.string.create_vacancy)
 
     override fun chooseTypeOfEmployment() {
 
@@ -110,9 +110,9 @@ class CreateJobPresenter
 
     private fun getTypeNumber(school: Boolean, college: Boolean, university: Boolean) =
             when {
-                school -> 0
-                college -> 1
-                university -> 2
+                school -> Vacancy.INSTITUTION_SCHOOL
+                college -> Vacancy.INSTITUTION_COLLEDGE
+                university -> Vacancy.INSTITUTION_UNIVERSITY
                 else -> -1
             }
 

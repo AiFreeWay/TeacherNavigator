@@ -3,8 +3,10 @@ package com.teachernavigator.teachernavigator.application.di.modules
 import com.teachernavigator.teachernavigator.application.di.scopes.PerParentScreen
 import com.teachernavigator.teachernavigator.presentation.screens.jobs.presenters.CreateJobPresenter
 import com.teachernavigator.teachernavigator.presentation.screens.jobs.presenters.JobsBankPresenter
+import com.teachernavigator.teachernavigator.presentation.screens.jobs.presenters.MyJobsPresenter
 import com.teachernavigator.teachernavigator.presentation.screens.jobs.presenters.abstractions.ICreateJobPresenter
 import com.teachernavigator.teachernavigator.presentation.screens.jobs.presenters.abstractions.IJobsBankPresenter
+import com.teachernavigator.teachernavigator.presentation.screens.jobs.presenters.abstractions.IMyJobsPresenter
 import dagger.Module
 import dagger.Provides
 
@@ -22,5 +24,9 @@ class PresentersModule {
     @Provides
     @PerParentScreen
     fun provideCreateJobsPresenter(presenter: CreateJobPresenter): ICreateJobPresenter = presenter
+
+    @Provides
+    @PerParentScreen
+    fun provideMyJobsPresenter(presenter: MyJobsPresenter): IMyJobsPresenter = presenter
 
 }

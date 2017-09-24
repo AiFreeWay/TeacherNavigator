@@ -5,6 +5,7 @@ import com.teachernavigator.teachernavigator.data.models.PostNetwork
 import com.teachernavigator.teachernavigator.data.network.requests.*
 import com.teachernavigator.teachernavigator.data.network.responses.*
 import com.teachernavigator.teachernavigator.domain.models.Profile
+import com.teachernavigator.teachernavigator.domain.models.Resume
 import com.teachernavigator.teachernavigator.domain.models.Vacancy
 import io.reactivex.Observable
 import io.reactivex.Single
@@ -83,4 +84,7 @@ interface ApiController {
 
     @GET("/api/v0/me/vacancies/")
     fun myVacancies(@Header("Authorization") accessToken: String): Single<BaseListResponse<Vacancy>>
+
+    @GET("/api/v0/me/resumes/")
+    fun myResume(@Header("Authorization") accessToken: String): Single<BaseListResponse<Resume>>
 }

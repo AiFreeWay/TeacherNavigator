@@ -11,6 +11,7 @@ import com.teachernavigator.teachernavigator.data.network.responses.GetMyComment
 import com.teachernavigator.teachernavigator.data.network.responses.PostsResponse
 import com.teachernavigator.teachernavigator.data.network.responses.SingInResponse
 import com.teachernavigator.teachernavigator.domain.models.Profile
+import com.teachernavigator.teachernavigator.domain.models.Resume
 import com.teachernavigator.teachernavigator.domain.models.Vacancy
 import io.reactivex.Observable
 import io.reactivex.Single
@@ -112,4 +113,22 @@ class NetworkController {
     fun loadMyVacancies(accessToken: String): Single<List<Vacancy>> =
             mApiController.myVacancies(accessToken)
                     .map { it.results }
+
+    fun loadMyResume(accessToken: String): Single<List<Resume>> =
+            mApiController.myResume(accessToken)
+                    .flatMap {
+                        Observable.fromIterable(it.results)
+                                .map { it.user }
+                                .distinct()
+                                .flatMap { userId -> getProfile(accessToken, userId) }
+                                .toList()
+                                .map { users ->
+                                    it.results.map { resume ->
+                                        resume.copy(
+                                                userObject = users.find { it.id == resume.user },
+                                                isMine = true)
+                                    }
+
+                                }
+                    }
 }

@@ -14,8 +14,8 @@ import ru.lliepmah.lib.DefaultViewHolder
  */
 @HolderBuilder(R.layout.v_vacancy)
 class VacancyHolder(itemView: View,
-                    val onProlongListener: OnProlongListener,
-                    val onDeleteListener: OnDeleteListener) : DefaultViewHolder<VacancyModel>(itemView) {
+                    val onProlongListener: OnProlongVacancyListener,
+                    val onDeleteListener: OnDeleteVacancyListener) : DefaultViewHolder<VacancyModel>(itemView) {
 
     private var mVacancy: VacancyModel? = null
 
@@ -57,5 +57,5 @@ class VacancyHolder(itemView: View,
 
 }
 
-typealias OnProlongListener = (VacancyModel) -> Unit
-typealias OnDeleteListener = (VacancyModel) -> Unit
+typealias OnProlongVacancyListener = (VacancyModel) -> Unit
+typealias OnDeleteVacancyListener = (VacancyModel) -> Unit

@@ -131,6 +131,8 @@
     <string name="responsibilities_text"><![CDATA[<b>Обязанности: </b> %1$s]]></string>
     <string name="remains_days_format"><![CDATA[Осталось: <b>%1$d дней</b> ]]></string>
     <string name="type_of_employment_formatted"><![CDATA[%1$s занятость]]></string>
+    <string name="district_council_number"><![CDATA[Межрайонный совет № %1$d]]></string>
+    <string name="unknown">Неизвестный</string>
     <string-array name="types_of_employment">
         <item>@string/full</item>
         <item>@string/partial</item>

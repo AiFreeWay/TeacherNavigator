@@ -1,14 +1,8 @@
 package com.teachernavigator.teachernavigator.application.di.modules
 
 import com.teachernavigator.teachernavigator.application.di.scopes.PerParentScreen
-import com.teachernavigator.teachernavigator.presentation.screens.jobs.presenters.CreateJobPresenter
-import com.teachernavigator.teachernavigator.presentation.screens.jobs.presenters.JobsBankPresenter
-import com.teachernavigator.teachernavigator.presentation.screens.jobs.presenters.MyJobsPresenter
-import com.teachernavigator.teachernavigator.presentation.screens.jobs.presenters.MyResumePresenter
-import com.teachernavigator.teachernavigator.presentation.screens.jobs.presenters.abstractions.ICreateJobPresenter
-import com.teachernavigator.teachernavigator.presentation.screens.jobs.presenters.abstractions.IJobsBankPresenter
-import com.teachernavigator.teachernavigator.presentation.screens.jobs.presenters.abstractions.IMyJobsPresenter
-import com.teachernavigator.teachernavigator.presentation.screens.jobs.presenters.abstractions.IMyResumePresenter
+import com.teachernavigator.teachernavigator.presentation.screens.jobs.presenters.*
+import com.teachernavigator.teachernavigator.presentation.screens.jobs.presenters.abstractions.*
 import dagger.Module
 import dagger.Provides
 
@@ -34,4 +28,9 @@ class PresentersModule {
     @Provides
     @PerParentScreen
     fun provideMyResumePresenter(presenter: MyResumePresenter): IMyResumePresenter = presenter
+
+    @Provides
+    @PerParentScreen
+    fun provideCreateResumePresenter(presenter: CreateResumePresenter): ICreateResumePresenter = presenter
+
 }

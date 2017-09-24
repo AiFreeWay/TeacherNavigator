@@ -1,5 +1,6 @@
 package com.teachernavigator.teachernavigator.data.repository.abstractions
 
+import com.teachernavigator.teachernavigator.data.network.requests.ResumeRequest
 import com.teachernavigator.teachernavigator.data.network.requests.VacancyRequest
 import com.teachernavigator.teachernavigator.domain.models.Resume
 import com.teachernavigator.teachernavigator.domain.models.TypeOfEmployment
@@ -14,6 +15,7 @@ interface IJobRepository {
     fun createVacancy(vacancyRequest: VacancyRequest): Single<Vacancy>
     fun loadMyVacancies(): Single<List<Vacancy>>
     fun loadMyResume(): Single<List<Resume>>
+    fun createResume(resumeRequest: ResumeRequest): Single<Resume>
 
     fun getTypesOfEmployment(): List<TypeOfEmployment>
 
@@ -26,6 +28,7 @@ interface IJobRepository {
                 .find { it.id == id }
                 ?: TypeOfEmployment.dummy
     }
+
 
 
 }

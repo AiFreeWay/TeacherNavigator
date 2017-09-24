@@ -13,4 +13,5 @@ interface IMyResumePresenter : ViewAttacher<MyResumeView> {
 
     fun onProlong(resume : ResumeModel)
     fun onDelete(resume : ResumeModel)
+    fun createResume()
 }

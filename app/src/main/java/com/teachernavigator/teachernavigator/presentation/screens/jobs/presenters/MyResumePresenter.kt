@@ -7,6 +7,7 @@ import com.teachernavigator.teachernavigator.application.di.scopes.PerParentScre
 import com.teachernavigator.teachernavigator.domain.interactors.abstractions.IJobInteractor
 import com.teachernavigator.teachernavigator.presentation.models.ResumeModel
 import com.teachernavigator.teachernavigator.presentation.screens.common.BasePresenter
+import com.teachernavigator.teachernavigator.presentation.screens.jobs.fragments.CreateResumeFragment
 import com.teachernavigator.teachernavigator.presentation.screens.jobs.fragments.abstractions.MyResumeView
 import com.teachernavigator.teachernavigator.presentation.screens.jobs.presenters.abstractions.IMyResumePresenter
 import com.teachernavigator.teachernavigator.presentation.transformers.ResumeTransformer
@@ -59,6 +60,9 @@ class MyResumePresenter
         mView?.hideRefresh()
     }
 
+    override fun createResume() {
+        router.navigateTo(CreateResumeFragment.FRAGMENT_KEY)
+    }
 
     override fun onProlong(resume: ResumeModel) {
     }

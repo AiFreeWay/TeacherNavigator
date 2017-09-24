@@ -60,6 +60,7 @@ class MyJobsFragment : BaseFragment(), MyJobsView {
     }
 
     override fun setJobs(jobsList: List<VacancyModel>) {
+        adapter.clear()
         adapter.addAll(jobsList)
         adapter.notifyDataSetChanged()
     }

@@ -14,10 +14,7 @@ import com.teachernavigator.teachernavigator.presentation.screens.auth.presenter
 import com.teachernavigator.teachernavigator.presentation.screens.auth.presenters.FmtRegistrationPresenter
 import com.teachernavigator.teachernavigator.presentation.screens.auth.presenters.FmtRestorePasswordPresenter
 import com.teachernavigator.teachernavigator.presentation.screens.common.ParentView
-import com.teachernavigator.teachernavigator.presentation.screens.jobs.fragments.CreateJobFragment
-import com.teachernavigator.teachernavigator.presentation.screens.jobs.fragments.JobsBankFragment
-import com.teachernavigator.teachernavigator.presentation.screens.jobs.fragments.MyJobsFragment
-import com.teachernavigator.teachernavigator.presentation.screens.jobs.fragments.MyResumeFragment
+import com.teachernavigator.teachernavigator.presentation.screens.jobs.fragments.*
 import com.teachernavigator.teachernavigator.presentation.screens.main.presenters.*
 import com.teachernavigator.teachernavigator.presentation.screens.settings.presenters.FmtAppSettingsPresenter
 import com.teachernavigator.teachernavigator.presentation.screens.settings.presenters.FmtProfileSettingsPresenter
@@ -72,4 +69,5 @@ interface ParentScreenComponent {
     fun inject(createJobFragment: CreateJobFragment)
     fun inject(myJobsFragment: MyJobsFragment)
     fun inject(myResumeFragment: MyResumeFragment)
+    fun inject(createResumeFragment: CreateResumeFragment)
 }

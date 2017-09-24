@@ -133,6 +133,13 @@
     <string name="type_of_employment_formatted"><![CDATA[%1$s занятость]]></string>
     <string name="district_council_number"><![CDATA[Межрайонный совет № %1$d]]></string>
     <string name="unknown">Неизвестный</string>
+    <string name="create_resume">Создать резюме</string>
+    <string name="career_objective">Желаемая должность</string>
+    <string name="district_council">Межрайонный совет</string>
+    <string name="education">Образование</string>
+    <string name="attach_resume">Прикрепить резюме</string>
+    <string name="resume_successfully_created">Резюме успешно создано</string>
+    <string name="vacancy_successfully_created">Вакансия успешно создана</string>
     <string-array name="types_of_employment">
         <item>@string/full</item>
         <item>@string/partial</item>

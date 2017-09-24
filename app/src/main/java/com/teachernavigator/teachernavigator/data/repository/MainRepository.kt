@@ -25,6 +25,7 @@ import javax.inject.Inject
  */
 class MainRepository @Inject constructor(private val mNetwokController: NetworkController,
                                          private val mContext: Context) : IMainRepository {
+
     init {
         Logger.logDebug("created REPOSITORY MainRepository")
     }
@@ -149,6 +150,10 @@ class MainRepository @Inject constructor(private val mNetwokController: NetworkC
 
     override fun loadMyResume():  Single<List<Resume>> =
             mNetwokController.loadMyResume(getAccessToken())
+
+    override fun createResume(resumeRequest: ResumeRequest): Single<Resume> =
+            mNetwokController.createResume(getAccessToken(), resumeRequest)
+
 
 
 }

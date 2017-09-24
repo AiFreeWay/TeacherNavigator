@@ -15,7 +15,7 @@ import com.teachernavigator.teachernavigator.presentation.models.ResumeModel
 import com.teachernavigator.teachernavigator.presentation.screens.common.BaseFragment
 import com.teachernavigator.teachernavigator.presentation.screens.jobs.fragments.abstractions.MyResumeView
 import com.teachernavigator.teachernavigator.presentation.screens.jobs.presenters.abstractions.IMyResumePresenter
-import kotlinx.android.synthetic.main.fmt_vacancies.*
+import kotlinx.android.synthetic.main.fmt_my_resume.*
 import ru.lliepmah.lib.UniversalAdapter
 import javax.inject.Inject
 
@@ -45,6 +45,7 @@ class MyResumeFragment : BaseFragment(), MyResumeView {
         inject()
         myResumePresenter.attachView(this)
 
+        myResumeBtnCreate.setOnClickListener { myResumePresenter.createResume() }
         vListSwipeLayout.setOnRefreshListener(myResumePresenter::refresh)
         vListSwipeLayout.setColorSchemeResources(R.color.colorAccent)
         vListRvData.layoutManager = LinearLayoutManager(context)
@@ -60,14 +61,10 @@ class MyResumeFragment : BaseFragment(), MyResumeView {
     }
 
     override fun setResumes(listOfResume: List<ResumeModel>) {
+        adapter.clear()
         adapter.addAll(listOfResume)
         adapter.notifyDataSetChanged()
     }
-
-//    override fun setResume(jobsList: List<VacancyModel>) {
-//        adapter.addAll(jobsList)
-//        adapter.notifyDataSetChanged()
-//    }
 
     override fun showRefresh() {
         vListSwipeLayout?.isRefreshing = true

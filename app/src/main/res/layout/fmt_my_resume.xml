@@ -9,10 +9,10 @@
         android:id="@+id/vListSwipeLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_above="@+id/myResumeBtnCreate"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        android:layout_above="@+id/myResumeBtnEdit"
         app:layout_constraintTop_toTopOf="parent">
 
         <android.support.v7.widget.RecyclerView
@@ -24,15 +24,15 @@
 
 
     <android.support.v7.widget.AppCompatButton
-        android:id="@+id/myResumeBtnEdit"
+        android:id="@+id/myResumeBtnCreate"
         style="@style/Button"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
         android:layout_width="@dimen/buttonAndTextWidth"
         android:layout_height="@dimen/normalControlsHeight"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
         android:layout_gravity="center"
         android:layout_margin="@dimen/spacingLarge"
-        android:text="@string/create_vacancy"
+        android:text="@string/create_resume"
         android:textAllCaps="false"
         app:backgroundTint="@color/orange" />
 

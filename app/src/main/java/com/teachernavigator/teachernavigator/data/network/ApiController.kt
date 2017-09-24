@@ -87,4 +87,7 @@ interface ApiController {
 
     @GET("/api/v0/me/resumes/")
     fun myResume(@Header("Authorization") accessToken: String): Single<BaseListResponse<Resume>>
+
+    @POST("/api/v0/me/resume/")
+    fun createResume(@Header("Authorization") accessToken: String, @Body resumeRequest: ResumeRequest): Single<Resume>
 }

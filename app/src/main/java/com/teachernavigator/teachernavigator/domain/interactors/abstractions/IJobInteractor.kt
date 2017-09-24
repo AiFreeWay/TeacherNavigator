@@ -1,5 +1,6 @@
 package com.teachernavigator.teachernavigator.domain.interactors.abstractions
 
+import com.teachernavigator.teachernavigator.data.network.requests.ResumeRequest
 import com.teachernavigator.teachernavigator.data.network.requests.VacancyRequest
 import com.teachernavigator.teachernavigator.domain.models.Resume
 import com.teachernavigator.teachernavigator.domain.models.TypeOfEmployment
@@ -12,6 +13,7 @@ import io.reactivex.Single
 interface IJobInteractor {
 
     fun createVacancy(vacancyRequest: VacancyRequest): Single<Vacancy>
+    fun createResume(resumeRequest: ResumeRequest): Single<Resume>
     fun loadMyVacancies(): Single<List<Vacancy>>
     fun loadMyResume(): Single<List<Resume>>
 

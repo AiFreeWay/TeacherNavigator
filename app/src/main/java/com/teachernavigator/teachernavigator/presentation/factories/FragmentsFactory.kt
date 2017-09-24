@@ -3,10 +3,7 @@ package com.teachernavigator.teachernavigator.presentation.factories
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import com.teachernavigator.teachernavigator.presentation.screens.auth.fragments.*
-import com.teachernavigator.teachernavigator.presentation.screens.jobs.fragments.CreateJobFragment
-import com.teachernavigator.teachernavigator.presentation.screens.jobs.fragments.JobsBankFragment
-import com.teachernavigator.teachernavigator.presentation.screens.jobs.fragments.MyJobsFragment
-import com.teachernavigator.teachernavigator.presentation.screens.jobs.fragments.MyResumeFragment
+import com.teachernavigator.teachernavigator.presentation.screens.jobs.fragments.*
 import com.teachernavigator.teachernavigator.presentation.screens.main.fragments.*
 
 /**
@@ -31,6 +28,7 @@ class FragmentsFactory {
                 SettingsFragment.FRAGMENT_KEY -> addBundle(SettingsFragment(), bundle)
                 JobsBankFragment.FRAGMENT_KEY -> addBundle(JobsBankFragment(), bundle)
                 MyJobsFragment.FRAGMENT_KEY -> addBundle(MyJobsFragment(), bundle)
+                CreateResumeFragment.FRAGMENT_KEY -> addBundle(CreateResumeFragment(), bundle)
                 MyResumeFragment.FRAGMENT_KEY -> addBundle(MyResumeFragment(), bundle)
                 CreateJobFragment.FRAGMENT_KEY -> addBundle(CreateJobFragment(), bundle)
                 AddPublicationFragment.FRAGMENT_KEY -> addBundle(AddPublicationFragment(), bundle)

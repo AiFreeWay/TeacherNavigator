@@ -1,5 +1,6 @@
 package com.teachernavigator.teachernavigator.domain.interactors
 
+import com.teachernavigator.teachernavigator.data.network.requests.ResumeRequest
 import com.teachernavigator.teachernavigator.data.network.requests.VacancyRequest
 import com.teachernavigator.teachernavigator.data.repository.abstractions.IJobRepository
 import com.teachernavigator.teachernavigator.domain.interactors.abstractions.IJobInteractor
@@ -14,6 +15,11 @@ import javax.inject.Inject
  * Created by root on 22.09.17
  */
 class JobInteractor @Inject constructor(private val jobRepository: IJobRepository) : IJobInteractor {
+
+    override fun createResume(resumeRequest: ResumeRequest): Single<Resume> =
+        jobRepository.createResume(resumeRequest)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.newThread())
 
     override fun loadMyResume():  Single<List<Resume>> =
             jobRepository.loadMyResume()

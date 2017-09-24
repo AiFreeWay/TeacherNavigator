@@ -124,17 +124,16 @@ class CreateJobPresenter
 
     private fun onCreated(vacancy: Vacancy) {
         stopProgress()
-        Log.d("Tag", "->Created vacancy=$vacancy")
+        mView?.showToast(R.string.vacancy_successfully_created)
+        router.exit()
     }
 
     private fun startProgress() {
         mView!!.getParentView().startProgress()
-//        mView!!.lockUi()
     }
 
     private fun stopProgress() {
         mView!!.getParentView().stopProgress()
-//        mView!!.unlockUi()
     }
 
     override fun detachView() {

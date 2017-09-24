@@ -1,6 +1,7 @@
 package com.teachernavigator.teachernavigator.presentation.screens.jobs.fragments
 
 import android.os.Bundle
+import android.support.v4.content.ContextCompat
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,59 +11,47 @@ import com.teachernavigator.teachernavigator.application.di.components.ParentScr
 import com.teachernavigator.teachernavigator.application.di.modules.ParentScreenModule
 import com.teachernavigator.teachernavigator.application.utils.rootComponent
 import com.teachernavigator.teachernavigator.presentation.screens.common.BaseFragment
-import com.teachernavigator.teachernavigator.presentation.screens.jobs.fragments.abstractions.CreateJobView
-import com.teachernavigator.teachernavigator.presentation.screens.jobs.presenters.abstractions.ICreateJobPresenter
-import kotlinx.android.synthetic.main.fmt_create_job.*
+import com.teachernavigator.teachernavigator.presentation.screens.jobs.fragments.abstractions.CreateResumeView
+import com.teachernavigator.teachernavigator.presentation.screens.jobs.presenters.abstractions.ICreateResumePresenter
+import kotlinx.android.synthetic.main.fmt_create_resume.*
 import javax.inject.Inject
 
 /**
- * Created by lliepmah on 22.09.17
+ * Created by lliepmah on 25.09.17
  */
 
-class CreateJobFragment : BaseFragment(), CreateJobView {
+class CreateResumeFragment : BaseFragment(), CreateResumeView {
 
     companion object {
-        val FRAGMENT_KEY = "create_job_fragment"
+        val FRAGMENT_KEY = "create_resume_fragment"
     }
 
     private lateinit var mParentScreenComponent: ParentScreenComponent
 
     @Inject
-    lateinit var createJobPresenter: ICreateJobPresenter
+    lateinit var createResumePresenter: ICreateResumePresenter
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? =
-            inflater?.inflate(R.layout.fmt_create_job, container, false)
+            inflater?.inflate(R.layout.fmt_create_resume, container, false)
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        createJobBtnCreateJob.setOnClickListener { createJob() }
-        createJobEtTypeOfEmployment.setOnClickListener { createJobPresenter.chooseTypeOfEmployment() }
-
+        createResumeTvAttachResume.setCompoundDrawables(null, null, ContextCompat.getDrawable(context, R.drawable.ic_resume), null)
+        createResumeBtnCreate.setOnClickListener { createResume() }
     }
 
-    override fun setTypeOfEmployment(type: CharSequence) {
-        createJobEtTypeOfEmployment.text = type
-    }
-
-    private fun createJob() =
-            createJobPresenter.validateAndCreate(
-                    organizationName = createJobEtOrganizationName.text,
-                    job = createJobEtJob.text,
-                    salary = createJobEtSalary.text,
-                    city = createJobEtCity.text,
-                    requiredExperience = createJobEtRequiredExperience.text,
-                    responsibilities = createJobEtResponsibilities.text,
-
-                    isSchool = createJobChSchool.isChecked,
-                    isCollege = createJobChCollege.isChecked,
-                    isUniversity = createJobChUniversity.isChecked
+    private fun createResume() =
+            createResumePresenter.validateAndCreate(
+                    careerObjective = createResumeEtCareerObjective.text,
+                    districtCouncil = createResumeEtDistrictCouncil.text,
+                    education = createResumeEtEducation.text,
+                    experience = createResumeEtExperience.text
             )
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         inject()
-        createJobPresenter.attachView(this)
+        createResumePresenter.attachView(this)
     }
 
     private fun inject() {

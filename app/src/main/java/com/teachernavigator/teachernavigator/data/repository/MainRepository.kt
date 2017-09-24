@@ -25,7 +25,6 @@ import javax.inject.Inject
  */
 class MainRepository @Inject constructor(private val mNetwokController: NetworkController,
                                          private val mContext: Context) : IMainRepository {
-
     init {
         Logger.logDebug("created REPOSITORY MainRepository")
     }
@@ -144,5 +143,9 @@ class MainRepository @Inject constructor(private val mNetwokController: NetworkC
     override fun getTypesOfEmployment(): List<TypeOfEmployment> =
             mContext.resources.getStringArray(R.array.types_of_employment)
                     .mapIndexed { index, resId -> TypeOfEmployment(index, resId) }
+
+    override fun loadMyVacancies(): Single<List<Vacancy>> =
+            mNetwokController.loadMyVacancies(getAccessToken())
+
 
 }

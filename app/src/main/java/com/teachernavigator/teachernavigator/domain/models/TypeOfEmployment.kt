@@ -3,4 +3,8 @@ package com.teachernavigator.teachernavigator.domain.models
 /**
  * Created by lliepmah on 23.09.17
  */
-data class TypeOfEmployment(val id: Int, val name: String)
+data class TypeOfEmployment(val id: Int, val name: String) {
+    companion object {
+        val dummy = TypeOfEmployment(-1, "")
+    }
+}

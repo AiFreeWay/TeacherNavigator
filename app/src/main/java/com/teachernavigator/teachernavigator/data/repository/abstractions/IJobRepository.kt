@@ -1,7 +1,6 @@
 package com.teachernavigator.teachernavigator.data.repository.abstractions
 
 import com.teachernavigator.teachernavigator.data.network.requests.VacancyRequest
-import com.teachernavigator.teachernavigator.domain.models.Monade
 import com.teachernavigator.teachernavigator.domain.models.TypeOfEmployment
 import com.teachernavigator.teachernavigator.domain.models.Vacancy
 import io.reactivex.Single
@@ -12,6 +11,18 @@ import io.reactivex.Single
 interface IJobRepository {
 
     fun createVacancy(vacancyRequest: VacancyRequest): Single<Vacancy>
+    fun loadMyVacancies(): Single<List<Vacancy>>
     fun getTypesOfEmployment(): List<TypeOfEmployment>
+
+    /* Default methods */
+    fun getTypeOfEmployment(id: Int): TypeOfEmployment {
+        val typesOfEmployment = getTypesOfEmployment()
+
+
+        return typesOfEmployment
+                .find { it.id == id }
+                ?: TypeOfEmployment.dummy
+    }
+
 
 }

@@ -3,10 +3,7 @@ package com.teachernavigator.teachernavigator.data.network
 import com.teachernavigator.teachernavigator.data.models.CommentNetwork
 import com.teachernavigator.teachernavigator.data.models.PostNetwork
 import com.teachernavigator.teachernavigator.data.network.requests.*
-import com.teachernavigator.teachernavigator.data.network.responses.BaseResponse
-import com.teachernavigator.teachernavigator.data.network.responses.GetMyCommentsResponse
-import com.teachernavigator.teachernavigator.data.network.responses.PostsResponse
-import com.teachernavigator.teachernavigator.data.network.responses.SingInResponse
+import com.teachernavigator.teachernavigator.data.network.responses.*
 import com.teachernavigator.teachernavigator.domain.models.Profile
 import com.teachernavigator.teachernavigator.domain.models.Vacancy
 import io.reactivex.Observable
@@ -83,4 +80,7 @@ interface ApiController {
 
     @POST("/api/v0/me/vacancy/")
     fun createVacancy(@Header("Authorization") accessToken: String, @Body vacancyRequest: VacancyRequest): Single<Vacancy>
+
+    @GET("/api/v0/me/vacancies/")
+    fun myVacancies(@Header("Authorization") accessToken: String): Single<BaseListResponse<Vacancy>>
 }

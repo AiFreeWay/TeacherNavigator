@@ -1,7 +1,6 @@
 package com.teachernavigator.teachernavigator.domain.interactors.abstractions
 
 import com.teachernavigator.teachernavigator.data.network.requests.VacancyRequest
-import com.teachernavigator.teachernavigator.domain.models.Monade
 import com.teachernavigator.teachernavigator.domain.models.TypeOfEmployment
 import com.teachernavigator.teachernavigator.domain.models.Vacancy
 import io.reactivex.Single
@@ -12,6 +11,7 @@ import io.reactivex.Single
 interface IJobInteractor {
 
     fun createVacancy(vacancyRequest: VacancyRequest): Single<Vacancy>
+    fun loadMyVacancies(): Single<List<Vacancy>>
 
     fun getTypesOfEmployment(): List<TypeOfEmployment>
 

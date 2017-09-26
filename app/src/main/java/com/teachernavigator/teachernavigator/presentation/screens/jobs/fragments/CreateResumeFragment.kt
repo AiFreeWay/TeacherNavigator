@@ -36,7 +36,7 @@ class CreateResumeFragment : BaseFragment(), CreateResumeView {
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        createResumeTvAttachResume.setCompoundDrawables(null, null, ContextCompat.getDrawable(context, R.drawable.ic_resume), null)
+        createResumeTvAttachResume.setCompoundDrawablesWithIntrinsicBounds(null, null, ContextCompat.getDrawable(context, R.drawable.ic_resume), null)
         createResumeBtnCreate.setOnClickListener { createResume() }
     }
 
@@ -45,7 +45,8 @@ class CreateResumeFragment : BaseFragment(), CreateResumeView {
                     careerObjective = createResumeEtCareerObjective.text,
                     districtCouncil = createResumeEtDistrictCouncil.text,
                     education = createResumeEtEducation.text,
-                    experience = createResumeEtExperience.text
+                    experience = createResumeEtExperience.text,
+                    salary = createResumeEtSalary.text
             )
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {

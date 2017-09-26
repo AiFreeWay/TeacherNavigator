@@ -11,7 +11,8 @@ interface ICreateResumePresenter : ViewAttacher<CreateResumeView> {
             careerObjective: CharSequence,
             districtCouncil: CharSequence,
             education: CharSequence,
-            experience: CharSequence
+            experience: CharSequence,
+            salary: CharSequence
     )
 
 }

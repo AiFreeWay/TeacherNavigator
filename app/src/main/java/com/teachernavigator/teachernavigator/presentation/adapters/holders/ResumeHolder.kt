@@ -16,6 +16,7 @@ import ru.lliepmah.lib.DefaultViewHolder
  */
 @HolderBuilder(R.layout.v_resume)
 class ResumeHolder(itemView: View,
+                   private val isMine: Boolean,
                    private val onProlongListener: OnProlongResumeListener,
                    private val onDeleteListener: OnDeleteResumeListener) : DefaultViewHolder<ResumeModel>(itemView) {
 
@@ -51,12 +52,12 @@ class ResumeHolder(itemView: View,
             vResumeTvName.text = it.userName
             vResumeTvCareerObjective.text = it.careerObjective
             vResumeTvDistrictCouncil.text = it.districtCouncil
-            vResumeTvSalary.text = "???"
+            vResumeTvSalary.text = it.salary
 
-            vResumeTvSuitableVacancies.visibility = if (it.isMine) View.VISIBLE else View.GONE
-            vResumeTvRemains.visibility = if (it.isMine) View.VISIBLE else View.GONE
-            vResumeBtnDelete.visibility = if (it.isMine) View.VISIBLE else View.GONE
-            vResumeBtnProlong.visibility = if (it.isMine) View.VISIBLE else View.GONE
+            vResumeTvSuitableVacancies.visibility = if (isMine) View.VISIBLE else View.GONE
+            vResumeTvRemains.visibility = if (isMine) View.VISIBLE else View.GONE
+            vResumeBtnDelete.visibility = if (isMine) View.VISIBLE else View.GONE
+            vResumeBtnProlong.visibility = if (isMine) View.VISIBLE else View.GONE
 
 
             vResumeTvSuitableVacancies.text = "Подходящих вакансий: 118"

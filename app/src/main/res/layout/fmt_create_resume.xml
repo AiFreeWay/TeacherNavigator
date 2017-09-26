@@ -56,6 +56,17 @@
             android:hint="@string/experience"
             android:lines="1" />
 
+        <android.support.design.widget.TextInputEditText
+            android:id="@+id/createResumeEtSalary"
+            style="@style/EditText"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/normalControlsHeight"
+            android:layout_marginEnd="@dimen/externalPadding"
+            android:layout_marginStart="@dimen/externalPadding"
+            android:layout_marginTop="@dimen/externalPadding"
+            android:hint="@string/salary"
+            android:lines="1" />
+
         <TextView
             android:id="@+id/createResumeTvAttachResume"
             android:layout_width="match_parent"

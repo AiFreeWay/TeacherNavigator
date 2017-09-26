@@ -24,15 +24,31 @@ constructor(private val context: Context) : EntityTransformer<Resume, ResumeMode
                     education = from.education,
                     experience = from.experience,
 
+                    salary = obtainSalary(from.salary),
+
                     created = from.created,
                     expired = from.expired,
 
                     file = from.file,
 
-                    userName = from.userObject?.full_name ?: context.getString(R.string.unknown),
-                    userAvatar = from.userObject?.avatars?.firstOrNull()?.avatar ?: "",
+                    userName = from.user?.full_name ?: context.getString(R.string.unknown),
+                    userAvatar = from.user?.avatars?.firstOrNull()?.avatar ?: "",
                     isMine = from.isMine
 
             )
+
+    private fun obtainSalary(salary: String): CharSequence {
+        val salaryNumber = salary.toIntOrNull()
+
+        return if (salaryNumber != null) {
+            if (salaryNumber > 0) {
+                context.spanned(R.string.cost_roubles, salaryNumber)
+            } else {
+                ""
+            }
+        } else {
+            salary
+        }
+    }
 
 }

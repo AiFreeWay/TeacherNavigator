@@ -13,6 +13,7 @@ data class ResumeModel(
         val districtCouncil: CharSequence,
         val education: String,
         val experience: CharSequence,
+        val salary: CharSequence,
 
         val created: Date,
         val expired: Date,

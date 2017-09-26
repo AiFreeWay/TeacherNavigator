@@ -12,13 +12,13 @@ data class Resume(
         @SerializedName("days_until_expired") val daysRemains: Int,
         @SerializedName("career_objective") val careerObjective: String,
         @SerializedName("district_council") val districtCouncil: Int,
+        @SerializedName("amount_of_wages") val salary: String,
         val education: String,
         val experience: String,
         val created: Date,
         val expired: Date,
         val file: Any?,
-        val user: Int,
-        val userObject: Profile? = null,
+        val user: Profile? = null,
         val isMine: Boolean = false
 
 )

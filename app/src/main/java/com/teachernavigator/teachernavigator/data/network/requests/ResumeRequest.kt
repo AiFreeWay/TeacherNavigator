@@ -8,5 +8,6 @@ import com.google.gson.annotations.SerializedName
 data class ResumeRequest(
         @SerializedName("career_objective") val careerObjective: String,
         @SerializedName("district_council") val districtCouncil: Int,
+        @SerializedName("amount_of_wages") val salary: String,
         val education: String,
         val experience: String)

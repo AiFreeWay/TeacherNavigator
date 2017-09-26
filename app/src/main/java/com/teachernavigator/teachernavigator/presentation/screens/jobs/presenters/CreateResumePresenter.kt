@@ -25,19 +25,23 @@ class CreateResumePresenter
     override fun validateAndCreate(careerObjective: CharSequence,
                                    districtCouncil: CharSequence,
                                    education: CharSequence,
-                                   experience: CharSequence) = mView?.run {
+                                   experience: CharSequence,
+                                   salary: CharSequence
+    ) = mView?.run {
         when {
             careerObjective.isBlank() -> errorValidation(R.string.validation_empty_field, R.string.career_objective)
             districtCouncil.isBlank() -> errorValidation(R.string.validation_empty_field, R.string.district_council)
             districtCouncil.toString().toIntOrNull() == null -> errorValidation(R.string.validation_only_numbers, R.string.district_council)
             education.isBlank() -> errorValidation(R.string.validation_empty_field, R.string.education)
             experience.isBlank() -> errorValidation(R.string.validation_empty_field, R.string.experience)
+            salary.isBlank() -> errorValidation(R.string.validation_empty_field, R.string.salary)
 
             else -> createResume(ResumeRequest(
                     careerObjective = careerObjective.toString(),
                     districtCouncil = districtCouncil.toString().toInt(),
                     education = education.toString(),
-                    experience = experience.toString()
+                    experience = experience.toString(),
+                    salary = salary.toString()
             ))
         }
     } ?: Unit

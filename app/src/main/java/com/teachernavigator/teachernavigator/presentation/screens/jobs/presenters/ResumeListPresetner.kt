@@ -7,35 +7,34 @@ import com.teachernavigator.teachernavigator.application.di.scopes.PerParentScre
 import com.teachernavigator.teachernavigator.domain.interactors.abstractions.IJobInteractor
 import com.teachernavigator.teachernavigator.presentation.models.ResumeModel
 import com.teachernavigator.teachernavigator.presentation.screens.common.BasePresenter
-import com.teachernavigator.teachernavigator.presentation.screens.jobs.fragments.CreateResumeFragment
-import com.teachernavigator.teachernavigator.presentation.screens.jobs.fragments.abstractions.MyResumeView
-import com.teachernavigator.teachernavigator.presentation.screens.jobs.presenters.abstractions.IMyResumePresenter
+import com.teachernavigator.teachernavigator.presentation.screens.jobs.fragments.abstractions.ResumeListView
+import com.teachernavigator.teachernavigator.presentation.screens.jobs.presenters.abstractions.IResumeListPresetner
 import com.teachernavigator.teachernavigator.presentation.transformers.ResumeTransformer
 import com.teachernavigator.teachernavigator.presentation.transformers.transformListEntity
 import ru.terrakok.cicerone.Router
 import javax.inject.Inject
 
 /**
- * Created by lliepmah on 24.09.17
+ * Created by lliepmah on 27.09.17
  */
 @PerParentScreen
-class MyResumePresenter
+class ResumeListPresetner
 @Inject constructor(val router: Router,
                     private val resumeTransformer: ResumeTransformer,
-                    private val jobsInteractor: IJobInteractor) : BasePresenter<MyResumeView>(), IMyResumePresenter {
+                    private val jobsInteractor: IJobInteractor) : BasePresenter<ResumeListView>(), IResumeListPresetner {
 
     @OnLifecycleEvent(Lifecycle.Event.ON_START)
     private fun onStart() {
-        mView?.getParentView()?.setToolbarTitle(R.string.my_resume)
-        loadMyResume()
+        mView?.getParentView()?.setToolbarTitle(R.string.view_resume)
+        loadResumeList()
     }
 
     override fun refresh() {
-        loadMyResume()
+        loadResumeList()
     }
 
-    private fun loadMyResume() =
-            addDissposable(jobsInteractor.loadMyResume()
+    private fun loadResumeList() =
+            addDissposable(jobsInteractor.loadResumeList()
                     .transformListEntity(resumeTransformer)
                     .doOnSubscribe { startProgress() }
                     .subscribe(this::onLoaded, this::onError))
@@ -59,14 +58,4 @@ class MyResumePresenter
         mView?.getParentView()?.stopProgress()
         mView?.hideRefresh()
     }
-
-    override fun createResume() =
-        router.navigateTo(CreateResumeFragment.FRAGMENT_KEY)
-
-    override fun onProlong(resume: ResumeModel) {
-    }
-
-    override fun onDelete(resume: ResumeModel) {
-    }
-
 }

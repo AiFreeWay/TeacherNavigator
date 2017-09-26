@@ -15,6 +15,7 @@ interface IJobRepository {
     fun createVacancy(vacancyRequest: VacancyRequest): Single<Vacancy>
     fun loadMyVacancies(): Single<List<Vacancy>>
     fun loadMyResume(): Single<List<Resume>>
+    fun loadResumeList(): Single<List<Resume>>
     fun createResume(resumeRequest: ResumeRequest): Single<Resume>
 
     fun getTypesOfEmployment(): List<TypeOfEmployment>

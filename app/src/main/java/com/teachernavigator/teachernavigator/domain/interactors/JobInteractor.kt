@@ -16,6 +16,11 @@ import javax.inject.Inject
  */
 class JobInteractor @Inject constructor(private val jobRepository: IJobRepository) : IJobInteractor {
 
+    override fun loadResumeList(): Single<List<Resume>> =
+            jobRepository.loadResumeList()
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribeOn(Schedulers.newThread())
+
     override fun createResume(resumeRequest: ResumeRequest): Single<Resume> =
         jobRepository.createResume(resumeRequest)
                 .observeOn(AndroidSchedulers.mainThread())

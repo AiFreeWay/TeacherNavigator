@@ -33,4 +33,8 @@ class PresentersModule {
     @PerParentScreen
     fun provideCreateResumePresenter(presenter: CreateResumePresenter): ICreateResumePresenter = presenter
 
+    @Provides
+    @PerParentScreen
+    fun provideResumeListPresetner(presenter: ResumeListPresetner): IResumeListPresetner = presenter
+
 }

@@ -17,8 +17,8 @@ import ru.lliepmah.lib.DefaultViewHolder
 @HolderBuilder(R.layout.v_resume)
 class ResumeHolder(itemView: View,
                    private val isMine: Boolean,
-                   private val onProlongListener: OnProlongResumeListener,
-                   private val onDeleteListener: OnDeleteResumeListener) : DefaultViewHolder<ResumeModel>(itemView) {
+                   private val onProlongListener: OnProlongResumeListener?,
+                   private val onDeleteListener: OnDeleteResumeListener?) : DefaultViewHolder<ResumeModel>(itemView) {
 
     private val vResumeIvAvatar: ImageView = itemView.find(R.id.vResumeIvAvatar)
     private val vResumeTvName: TextView = itemView.find(R.id.vResumeTvName)
@@ -66,11 +66,11 @@ class ResumeHolder(itemView: View,
     }
 
     private fun onProlong() = mResume?.let {
-        onProlongListener(it)
+        onProlongListener?.invoke(it)
     }
 
     private fun onDelete() = mResume?.let {
-        onDeleteListener(it)
+        onDeleteListener?.invoke(it)
     }
 
 }

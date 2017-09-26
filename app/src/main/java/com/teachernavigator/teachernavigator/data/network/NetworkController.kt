@@ -120,4 +120,8 @@ class NetworkController {
 
     fun createResume(accessToken: String, resumeRequest: ResumeRequest): Single<Resume> =
             mApiController.createResume(accessToken, resumeRequest)
+
+    fun loadResumeList(accessToken: String): Single<List<Resume>> =
+        mApiController.resumeList(accessToken)
+                .map { it.results }
 }

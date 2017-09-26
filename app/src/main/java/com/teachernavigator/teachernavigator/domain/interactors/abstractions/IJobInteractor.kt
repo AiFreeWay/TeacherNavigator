@@ -16,6 +16,7 @@ interface IJobInteractor {
     fun createResume(resumeRequest: ResumeRequest): Single<Resume>
     fun loadMyVacancies(): Single<List<Vacancy>>
     fun loadMyResume(): Single<List<Resume>>
+    fun loadResumeList(): Single<List<Resume>>
 
     fun getTypesOfEmployment(): List<TypeOfEmployment>
 

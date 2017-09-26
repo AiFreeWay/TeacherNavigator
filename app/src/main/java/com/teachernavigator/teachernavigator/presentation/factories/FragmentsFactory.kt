@@ -29,6 +29,7 @@ class FragmentsFactory {
                 JobsBankFragment.FRAGMENT_KEY -> addBundle(JobsBankFragment(), bundle)
                 MyJobsFragment.FRAGMENT_KEY -> addBundle(MyJobsFragment(), bundle)
                 CreateResumeFragment.FRAGMENT_KEY -> addBundle(CreateResumeFragment(), bundle)
+                ResumeListFragment.FRAGMENT_KEY -> addBundle(ResumeListFragment(), bundle)
                 MyResumeFragment.FRAGMENT_KEY -> addBundle(MyResumeFragment(), bundle)
                 CreateJobFragment.FRAGMENT_KEY -> addBundle(CreateJobFragment(), bundle)
                 AddPublicationFragment.FRAGMENT_KEY -> addBundle(AddPublicationFragment(), bundle)

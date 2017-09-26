@@ -8,6 +8,7 @@ import com.teachernavigator.teachernavigator.presentation.screens.common.BasePre
 import com.teachernavigator.teachernavigator.presentation.screens.jobs.fragments.CreateJobFragment
 import com.teachernavigator.teachernavigator.presentation.screens.jobs.fragments.MyJobsFragment
 import com.teachernavigator.teachernavigator.presentation.screens.jobs.fragments.MyResumeFragment
+import com.teachernavigator.teachernavigator.presentation.screens.jobs.fragments.ResumeListFragment
 import com.teachernavigator.teachernavigator.presentation.screens.jobs.fragments.abstractions.JobsBankView
 import com.teachernavigator.teachernavigator.presentation.screens.jobs.presenters.abstractions.IJobsBankPresenter
 import ru.terrakok.cicerone.Router
@@ -48,17 +49,13 @@ class JobsBankPresenter
     override fun navigateToPostJob() =
             router.navigateTo(CreateJobFragment.FRAGMENT_KEY)
 
-    override fun navigateToJobs() {
-    }
-
-
-    override fun navigateToViewResume() {
-    }
+    override fun navigateToViewResume() =
+            router.navigateTo(ResumeListFragment.FRAGMENT_KEY)
 
     override fun navigateToMyResume() =
             router.navigateTo(MyResumeFragment.FRAGMENT_KEY)
 
-    override fun navigateToViewProposals() {
+    override fun navigateToViewProposals() { // Посмотреть предложения
     }
 
 }

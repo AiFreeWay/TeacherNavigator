@@ -8,8 +8,6 @@ import com.teachernavigator.teachernavigator.presentation.screens.jobs.fragments
  */
 interface IJobsBankPresenter : ViewAttacher<JobsBankView> {
 
-    fun navigateToJobs()
-
     fun setApplicant()
     fun setEmployer()
 

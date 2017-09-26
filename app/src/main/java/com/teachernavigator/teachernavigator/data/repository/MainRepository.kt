@@ -148,12 +148,14 @@ class MainRepository @Inject constructor(private val mNetwokController: NetworkC
     override fun loadMyVacancies(): Single<List<Vacancy>> =
             mNetwokController.loadMyVacancies(getAccessToken())
 
-    override fun loadMyResume():  Single<List<Resume>> =
+    override fun loadMyResume(): Single<List<Resume>> =
             mNetwokController.loadMyResume(getAccessToken())
 
     override fun createResume(resumeRequest: ResumeRequest): Single<Resume> =
             mNetwokController.createResume(getAccessToken(), resumeRequest)
 
+    override fun loadResumeList(): Single<List<Resume>> =
+            mNetwokController.loadResumeList(getAccessToken())
 
 
 }

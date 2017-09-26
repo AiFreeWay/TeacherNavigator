@@ -88,6 +88,20 @@
             app:layout_constraintTop_toBottomOf="@+id/vVacancyTvResponsibility"
             tools:text="Осталось: 6 дней" />
 
+        <android.support.v7.widget.AppCompatButton
+            android:id="@+id/vVacancyBtnResponse"
+            style="@style/Button"
+            android:layout_width="@dimen/buttonAndTextWidth"
+            android:layout_height="@dimen/normalControlsHeight"
+            android:layout_gravity="center"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/vVacancyTvResponsibility"
+            android:layout_margin="@dimen/spacingLarge"
+            android:text="@string/response_to_vacancy"
+            android:textAllCaps="false"
+            app:backgroundTint="@color/orange" />
+
         <Button
             android:id="@+id/vVacancyBtnDelete"
             android:layout_width="wrap_content"

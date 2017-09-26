@@ -16,7 +16,7 @@ data class VacancyModel(
         val experience: String,
         val typeOfEmployment: CharSequence,
         val responsibility: CharSequence,
-        val typeOfInstitution: String,
+        val typeOfInstitution: TypeOfInstitution,
         val daysRemains: CharSequence,
 
         val created: Date,

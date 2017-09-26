@@ -5,10 +5,7 @@ import android.arch.lifecycle.OnLifecycleEvent
 import com.teachernavigator.teachernavigator.R
 import com.teachernavigator.teachernavigator.application.di.scopes.PerParentScreen
 import com.teachernavigator.teachernavigator.presentation.screens.common.BasePresenter
-import com.teachernavigator.teachernavigator.presentation.screens.jobs.fragments.CreateJobFragment
-import com.teachernavigator.teachernavigator.presentation.screens.jobs.fragments.MyJobsFragment
-import com.teachernavigator.teachernavigator.presentation.screens.jobs.fragments.MyResumeFragment
-import com.teachernavigator.teachernavigator.presentation.screens.jobs.fragments.ResumeListFragment
+import com.teachernavigator.teachernavigator.presentation.screens.jobs.fragments.*
 import com.teachernavigator.teachernavigator.presentation.screens.jobs.fragments.abstractions.JobsBankView
 import com.teachernavigator.teachernavigator.presentation.screens.jobs.presenters.abstractions.IJobsBankPresenter
 import ru.terrakok.cicerone.Router
@@ -55,7 +52,6 @@ class JobsBankPresenter
     override fun navigateToMyResume() =
             router.navigateTo(MyResumeFragment.FRAGMENT_KEY)
 
-    override fun navigateToViewProposals() { // Посмотреть предложения
-    }
-
+    override fun navigateToViewProposals() =
+            router.navigateTo(JobsFragment.FRAGMENT_KEY)
 }

@@ -36,6 +36,11 @@ class JobInteractor @Inject constructor(private val jobRepository: IJobRepositor
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribeOn(Schedulers.newThread())
 
+    override fun loadVacancies(): Single<List<Vacancy>> =
+            jobRepository.loadVacancies()
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribeOn(Schedulers.newThread())
+
 
     override fun createVacancy(vacancyRequest: VacancyRequest): Single<Vacancy> =
             jobRepository.createVacancy(vacancyRequest)

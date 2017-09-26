@@ -140,6 +140,8 @@
     <string name="attach_resume">Прикрепить резюме</string>
     <string name="resume_successfully_created">Резюме успешно создано</string>
     <string name="vacancy_successfully_created">Вакансия успешно создана</string>
+    <string name="view_vacancies">Посмотреть вакансии</string>
+    <string name="response_to_vacancy">Откликнуться на вакансию</string>
     <string-array name="types_of_employment">
         <item>@string/full</item>
         <item>@string/partial</item>

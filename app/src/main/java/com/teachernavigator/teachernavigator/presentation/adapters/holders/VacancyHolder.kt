@@ -14,8 +14,10 @@ import ru.lliepmah.lib.DefaultViewHolder
  */
 @HolderBuilder(R.layout.v_vacancy)
 class VacancyHolder(itemView: View,
-                    val onProlongListener: OnProlongVacancyListener,
-                    val onDeleteListener: OnDeleteVacancyListener) : DefaultViewHolder<VacancyModel>(itemView) {
+                    val isMine: Boolean,
+                    val onProlongListener: OnProlongVacancyListener?,
+                    val onDeleteListener: OnDeleteVacancyListener?,
+                    val onResponseListener: OnResponseVacancyListener?) : DefaultViewHolder<VacancyModel>(itemView) {
 
     private var mVacancy: VacancyModel? = null
 
@@ -28,10 +30,21 @@ class VacancyHolder(itemView: View,
     private val vVacancyTvRemains: TextView = itemView.find(R.id.vVacancyTvRemains)
     private val vVacancyBtnDelete: Button = itemView.find(R.id.vVacancyBtnDelete)
     private val vVacancyBtnProlong: Button = itemView.find(R.id.vVacancyBtnProlong)
+    private val vVacancyBtnResponse: Button = itemView.find(R.id.vVacancyBtnResponse)
 
     init {
-        vVacancyBtnDelete.setOnClickListener { onDelete() }
-        vVacancyBtnProlong.setOnClickListener { onProlong() }
+        if (isMine) {
+            vVacancyBtnDelete.setOnClickListener { onDelete() }
+            vVacancyBtnProlong.setOnClickListener { onProlong() }
+        } else {
+            vVacancyBtnResponse.setOnClickListener { onResponse() }
+        }
+
+        vVacancyBtnResponse.visibility = if (isMine) View.GONE else View.VISIBLE
+
+        vVacancyTvRemains.visibility = if (isMine) View.VISIBLE else View.GONE
+        vVacancyBtnDelete.visibility = if (isMine) View.VISIBLE else View.GONE
+        vVacancyBtnProlong.visibility = if (isMine) View.VISIBLE else View.GONE
     }
 
     override fun bind(vacancy: VacancyModel?) {
@@ -48,14 +61,19 @@ class VacancyHolder(itemView: View,
     }
 
     private fun onProlong() = mVacancy?.let {
-        onProlongListener(it)
+        onProlongListener?.invoke(it)
     }
 
     private fun onDelete() = mVacancy?.let {
-        onProlongListener(it)
+        onDeleteListener?.invoke(it)
+    }
+
+    private fun onResponse() = mVacancy?.let {
+        onResponseListener?.invoke(it)
     }
 
 }
 
 typealias OnProlongVacancyListener = (VacancyModel) -> Unit
 typealias OnDeleteVacancyListener = (VacancyModel) -> Unit
+typealias OnResponseVacancyListener = (VacancyModel) -> Unit

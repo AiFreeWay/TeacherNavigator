@@ -124,4 +124,8 @@ class NetworkController {
     fun loadResumeList(accessToken: String): Single<List<Resume>> =
         mApiController.resumeList(accessToken)
                 .map { it.results }
+
+    fun loadVacancies(accessToken: String): Single<List<Vacancy>> =
+        mApiController.vacancies(accessToken)
+                .map { it.results }
 }

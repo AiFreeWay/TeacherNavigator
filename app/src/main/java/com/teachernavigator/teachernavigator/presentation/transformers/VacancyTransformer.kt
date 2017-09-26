@@ -5,6 +5,7 @@ import com.teachernavigator.teachernavigator.R
 import com.teachernavigator.teachernavigator.application.di.scopes.PerParentScreen
 import com.teachernavigator.teachernavigator.data.repository.abstractions.IJobRepository
 import com.teachernavigator.teachernavigator.domain.models.Vacancy
+import com.teachernavigator.teachernavigator.presentation.models.TypeOfInstitution
 import com.teachernavigator.teachernavigator.presentation.models.VacancyModel
 import javax.inject.Inject
 
@@ -21,6 +22,7 @@ constructor(private val context: Context,
     override fun transform(from: Vacancy): VacancyModel = from.let {
 
         val typeOfEmployment = jobRepository.getTypeOfEmployment(it.typeOfEmployment).name
+        it.typeOfInstitution
         VacancyModel(
                 id = it.id,
                 organization = it.organization,
@@ -40,10 +42,10 @@ constructor(private val context: Context,
     }
 
     private fun getTypeOfInstitution(typeOfInstitution: Int) = when (typeOfInstitution) {
-        Vacancy.INSTITUTION_SCHOOL -> context.getString(R.string.school)
-        Vacancy.INSTITUTION_COLLEDGE -> context.getString(R.string.college)
-        Vacancy.INSTITUTION_UNIVERSITY -> context.getString(R.string.university)
-        else -> ""
+        Vacancy.INSTITUTION_SCHOOL -> TypeOfInstitution.SCHOOL
+        Vacancy.INSTITUTION_COLLEDGE ->TypeOfInstitution.COLLEGE
+        Vacancy.INSTITUTION_UNIVERSITY -> TypeOfInstitution.UNIVERSITY
+        else -> TypeOfInstitution.UNIVERSITY
     }
 
 }

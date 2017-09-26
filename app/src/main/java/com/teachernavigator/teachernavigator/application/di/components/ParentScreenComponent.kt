@@ -71,4 +71,5 @@ interface ParentScreenComponent {
     fun inject(myResumeFragment: MyResumeFragment)
     fun inject(createResumeFragment: CreateResumeFragment)
     fun inject(resumeListFragment: ResumeListFragment)
+    fun inject(jobsFragment: JobsFragment)
 }

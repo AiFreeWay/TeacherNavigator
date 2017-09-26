@@ -13,42 +13,59 @@ import com.teachernavigator.teachernavigator.application.utils.rootComponent
 import com.teachernavigator.teachernavigator.presentation.adapters.holders.VacancyHolderBuilder
 import com.teachernavigator.teachernavigator.presentation.models.VacancyModel
 import com.teachernavigator.teachernavigator.presentation.screens.common.BaseFragment
-import com.teachernavigator.teachernavigator.presentation.screens.jobs.fragments.abstractions.MyJobsView
-import com.teachernavigator.teachernavigator.presentation.screens.jobs.presenters.abstractions.IMyJobsPresenter
-import kotlinx.android.synthetic.main.fmt_vacancies.*
+import com.teachernavigator.teachernavigator.presentation.screens.jobs.fragments.abstractions.JobsView
+import com.teachernavigator.teachernavigator.presentation.screens.jobs.presenters.abstractions.IJobsPresenter
+import kotlinx.android.synthetic.main.fmt_vacancies_list.*
 import ru.lliepmah.lib.UniversalAdapter
 import javax.inject.Inject
 
 /**
- * Created by lliepmah on 24.09.17
+ * Created by lliepmah on 27.09.17
  */
-class MyJobsFragment : BaseFragment(), MyJobsView {
+class JobsFragment : BaseFragment(), JobsView {
 
     companion object {
-        val FRAGMENT_KEY = "my_jobs_fragment"
+        val FRAGMENT_KEY = "jobs_fragment"
     }
 
     private lateinit var mParentScreenComponent: ParentScreenComponent
 
     @Inject
-    lateinit var myJobsPresenter: IMyJobsPresenter
+    lateinit var jobsPresenter: IJobsPresenter
+
+    var isSchool = true
+    var isCollege = true
+    var isUniversity = true
 
     val adapter: UniversalAdapter by lazy {
-        UniversalAdapter(VacancyHolderBuilder(true, myJobsPresenter::onProlong, myJobsPresenter::onDelete, null))
+        UniversalAdapter(VacancyHolderBuilder(false, null, null, jobsPresenter::onResponse))
     }
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? =
-            inflater?.inflate(R.layout.fmt_vacancies, container, false)
+            inflater?.inflate(R.layout.fmt_vacancies_list, container, false)
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         inject()
-        myJobsPresenter.attachView(this)
+        jobsPresenter.attachView(this)
 
-        vListSwipeLayout.setOnRefreshListener(myJobsPresenter::refresh)
+        vListSwipeLayout.setOnRefreshListener(jobsPresenter::refresh)
         vListSwipeLayout.setColorSchemeResources(R.color.colorAccent)
         vListRvData.layoutManager = LinearLayoutManager(context)
         vListRvData.adapter = adapter
+
+        vacanciesChSchool.setOnCheckedChangeListener { _, checked ->
+            isSchool = checked
+            jobsPresenter.setFilter(isSchool, isCollege, isUniversity)
+        }
+        vacanciesChCollege.setOnCheckedChangeListener { _, checked ->
+            isCollege = checked
+            jobsPresenter.setFilter(isSchool, isCollege, isUniversity)
+        }
+        vacanciesChUniversity.setOnCheckedChangeListener { _, checked ->
+            isUniversity = checked
+            jobsPresenter.setFilter(isSchool, isCollege, isUniversity)
+        }
     }
 
     private fun inject() {

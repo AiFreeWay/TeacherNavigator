@@ -68,7 +68,7 @@ class JobsBankFragment : BaseFragment(), JobsBankView {
 
     override fun setState(applicant: Boolean, initial: Boolean) {
         if (!initial) {
-            TransitionManager.beginDelayedTransition(jobsBankMyJobs.rootView as ViewGroup, Fade().setDuration(500))
+            TransitionManager.beginDelayedTransition(jobsBankMyJobs.rootView as ViewGroup, Fade().setDuration(250))
         }
 
         val applicantVisibility = if (applicant) View.VISIBLE else View.GONE

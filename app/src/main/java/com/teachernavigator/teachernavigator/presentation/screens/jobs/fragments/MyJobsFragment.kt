@@ -15,7 +15,7 @@ import com.teachernavigator.teachernavigator.presentation.models.VacancyModel
 import com.teachernavigator.teachernavigator.presentation.screens.common.BaseFragment
 import com.teachernavigator.teachernavigator.presentation.screens.jobs.fragments.abstractions.MyJobsView
 import com.teachernavigator.teachernavigator.presentation.screens.jobs.presenters.abstractions.IMyJobsPresenter
-import kotlinx.android.synthetic.main.fmt_vacancies.*
+import kotlinx.android.synthetic.main.fmt_my_vacancies.*
 import ru.lliepmah.lib.UniversalAdapter
 import javax.inject.Inject
 
@@ -38,7 +38,7 @@ class MyJobsFragment : BaseFragment(), MyJobsView {
     }
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? =
-            inflater?.inflate(R.layout.fmt_vacancies, container, false)
+            inflater?.inflate(R.layout.fmt_my_vacancies, container, false)
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)

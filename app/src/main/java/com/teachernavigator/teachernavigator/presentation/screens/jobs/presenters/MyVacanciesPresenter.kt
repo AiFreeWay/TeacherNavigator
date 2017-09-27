@@ -9,7 +9,7 @@ import com.teachernavigator.teachernavigator.domain.interactors.abstractions.IJo
 import com.teachernavigator.teachernavigator.presentation.models.VacancyModel
 import com.teachernavigator.teachernavigator.presentation.screens.common.BasePresenter
 import com.teachernavigator.teachernavigator.presentation.screens.jobs.fragments.abstractions.MyJobsView
-import com.teachernavigator.teachernavigator.presentation.screens.jobs.presenters.abstractions.IMyJobsPresenter
+import com.teachernavigator.teachernavigator.presentation.screens.jobs.presenters.abstractions.IMyVacanciesPresenter
 import com.teachernavigator.teachernavigator.presentation.transformers.VacancyTransformer
 import com.teachernavigator.teachernavigator.presentation.transformers.transformListEntity
 import ru.terrakok.cicerone.Router
@@ -19,10 +19,10 @@ import javax.inject.Inject
  * Created by lliepmah on 24.09.17
  */
 @PerParentScreen
-class MyJobsPresenter
+class MyVacanciesPresenter
 @Inject constructor(val router: Router,
                     private val jobsInteractor: IJobInteractor,
-                    private val vacancyTransformer: VacancyTransformer) : BasePresenter<MyJobsView>(), IMyJobsPresenter {
+                    private val vacancyTransformer: VacancyTransformer) : BasePresenter<MyJobsView>(), IMyVacanciesPresenter {
 
     @OnLifecycleEvent(Lifecycle.Event.ON_START)
     private fun onStart() {
@@ -65,11 +65,11 @@ class MyJobsPresenter
     }
 
     override fun onDelete(vacancy: VacancyModel) {
-        Log.d(MyJobsPresenter::class.java.name, "-> onDelete=$vacancy")
+        Log.d(MyVacanciesPresenter::class.java.name, "-> onDelete=$vacancy")
     }
 
     override fun onProlong(vacancy: VacancyModel) {
-        Log.d(MyJobsPresenter::class.java.name, "-> onProlong=$vacancy")
+        Log.d(MyVacanciesPresenter::class.java.name, "-> onProlong=$vacancy")
     }
 
 }

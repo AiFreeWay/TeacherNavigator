@@ -66,10 +66,10 @@ interface ParentScreenComponent {
 
     //Job fragments
     fun inject(jobsBankFragment: JobsBankFragment)
-    fun inject(createJobFragment: CreateJobFragment)
-    fun inject(myJobsFragment: MyJobsFragment)
+    fun inject(createVacancyFragment: CreateVacancyFragment)
+    fun inject(myVacanciesFragment: MyVacanciesFragment)
     fun inject(myResumeFragment: MyResumeFragment)
     fun inject(createResumeFragment: CreateResumeFragment)
     fun inject(resumeListFragment: ResumeListFragment)
-    fun inject(jobsFragment: JobsFragment)
+    fun inject(jobsFragment: VacanciesFragment)
 }

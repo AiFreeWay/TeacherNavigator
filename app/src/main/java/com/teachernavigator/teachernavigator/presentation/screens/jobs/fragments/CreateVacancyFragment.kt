@@ -10,34 +10,34 @@ import com.teachernavigator.teachernavigator.application.di.components.ParentScr
 import com.teachernavigator.teachernavigator.application.di.modules.ParentScreenModule
 import com.teachernavigator.teachernavigator.application.utils.rootComponent
 import com.teachernavigator.teachernavigator.presentation.screens.common.BaseFragment
-import com.teachernavigator.teachernavigator.presentation.screens.jobs.fragments.abstractions.CreateJobView
-import com.teachernavigator.teachernavigator.presentation.screens.jobs.presenters.abstractions.ICreateJobPresenter
-import kotlinx.android.synthetic.main.fmt_create_job.*
+import com.teachernavigator.teachernavigator.presentation.screens.jobs.fragments.abstractions.CreateVacancyView
+import com.teachernavigator.teachernavigator.presentation.screens.jobs.presenters.abstractions.ICreateVacancyPresenter
+import kotlinx.android.synthetic.main.fmt_create_vacancy.*
 import javax.inject.Inject
 
 /**
  * Created by lliepmah on 22.09.17
  */
 
-class CreateJobFragment : BaseFragment(), CreateJobView {
+class CreateVacancyFragment : BaseFragment(), CreateVacancyView {
 
     companion object {
-        val FRAGMENT_KEY = "create_job_fragment"
+        val FRAGMENT_KEY = "create_vacancy_fragment"
     }
 
     private lateinit var mParentScreenComponent: ParentScreenComponent
 
     @Inject
-    lateinit var createJobPresenter: ICreateJobPresenter
+    lateinit var createVacancyPresenter: ICreateVacancyPresenter
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? =
-            inflater?.inflate(R.layout.fmt_create_job, container, false)
+            inflater?.inflate(R.layout.fmt_create_vacancy, container, false)
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         createJobBtnCreateJob.setOnClickListener { createJob() }
-        createJobEtTypeOfEmployment.setOnClickListener { createJobPresenter.chooseTypeOfEmployment() }
+        createJobEtTypeOfEmployment.setOnClickListener { createVacancyPresenter.chooseTypeOfEmployment() }
 
     }
 
@@ -46,7 +46,7 @@ class CreateJobFragment : BaseFragment(), CreateJobView {
     }
 
     private fun createJob() =
-            createJobPresenter.validateAndCreate(
+            createVacancyPresenter.validateAndCreate(
                     organizationName = createJobEtOrganizationName.text,
                     job = createJobEtJob.text,
                     salary = createJobEtSalary.text,
@@ -62,7 +62,7 @@ class CreateJobFragment : BaseFragment(), CreateJobView {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         inject()
-        createJobPresenter.attachView(this)
+        createVacancyPresenter.attachView(this)
     }
 
     private fun inject() {

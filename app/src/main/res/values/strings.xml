@@ -92,7 +92,7 @@
     <string name="applicant">Я соискатель</string>
     <string name="post_vacancy">Разместить вакансию</string>
     <string name="my_vacancy">Мои вакансии</string>
-    <string name="view_resume">Просмотреть резюме</string>
+    <string name="view_resume">Посмотреть резюме</string>
     <string name="my_resume">Моё резюме</string>
     <string name="view_proposals">Посмотреть предложения</string>
     <string name="rating">Рейтинг</string>
@@ -142,6 +142,7 @@
     <string name="vacancy_successfully_created">Вакансия успешно создана</string>
     <string name="view_vacancies">Посмотреть вакансии</string>
     <string name="response_to_vacancy">Откликнуться на вакансию</string>
+    <string name="me_employer">Я работодатель</string>
     <string-array name="types_of_employment">
         <item>@string/full</item>
         <item>@string/partial</item>

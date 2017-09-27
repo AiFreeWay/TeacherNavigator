@@ -3,7 +3,6 @@ package com.teachernavigator.teachernavigator.presentation.screens.jobs.presente
 import android.arch.lifecycle.Lifecycle
 import android.arch.lifecycle.OnLifecycleEvent
 import android.support.v7.app.AlertDialog
-import android.util.Log
 import com.teachernavigator.teachernavigator.R
 import com.teachernavigator.teachernavigator.application.di.scopes.PerParentScreen
 import com.teachernavigator.teachernavigator.data.network.requests.VacancyRequest
@@ -12,8 +11,8 @@ import com.teachernavigator.teachernavigator.domain.models.TypeOfEmployment
 import com.teachernavigator.teachernavigator.domain.models.Vacancy
 import com.teachernavigator.teachernavigator.presentation.dialogs.DialogRouter
 import com.teachernavigator.teachernavigator.presentation.screens.common.BasePresenter
-import com.teachernavigator.teachernavigator.presentation.screens.jobs.fragments.abstractions.CreateJobView
-import com.teachernavigator.teachernavigator.presentation.screens.jobs.presenters.abstractions.ICreateJobPresenter
+import com.teachernavigator.teachernavigator.presentation.screens.jobs.fragments.abstractions.CreateVacancyView
+import com.teachernavigator.teachernavigator.presentation.screens.jobs.presenters.abstractions.ICreateVacancyPresenter
 import ru.terrakok.cicerone.Router
 import javax.inject.Inject
 
@@ -21,10 +20,10 @@ import javax.inject.Inject
  * Created by lliepmah on 22.09.17
  */
 @PerParentScreen
-class CreateJobPresenter
+class CreateVacancyPresenter
 @Inject constructor(val router: Router,
                     private val dialogRouter: DialogRouter,
-                    private val jobInteractor: IJobInteractor) : BasePresenter<CreateJobView>(), ICreateJobPresenter {
+                    private val jobInteractor: IJobInteractor) : BasePresenter<CreateVacancyView>(), ICreateVacancyPresenter {
 
 
     private var mDialog: AlertDialog? = null

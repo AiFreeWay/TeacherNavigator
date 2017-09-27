@@ -6,7 +6,7 @@ import com.teachernavigator.teachernavigator.presentation.screens.common.ChildVi
 /**
  * Created by lliepmah on 22.09.17
  */
-interface CreateJobView : ChildView {
+interface CreateVacancyView : ChildView {
 
     fun setTypeOfEmployment(type: CharSequence)
 

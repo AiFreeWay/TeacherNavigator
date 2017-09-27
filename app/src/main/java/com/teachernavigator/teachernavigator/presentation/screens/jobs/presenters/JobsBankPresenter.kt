@@ -41,10 +41,10 @@ class JobsBankPresenter
     }
 
     override fun navigateToMyJobs() =
-            router.navigateTo(MyJobsFragment.FRAGMENT_KEY)
+            router.navigateTo(MyVacanciesFragment.FRAGMENT_KEY)
 
     override fun navigateToPostJob() =
-            router.navigateTo(CreateJobFragment.FRAGMENT_KEY)
+            router.navigateTo(CreateVacancyFragment.FRAGMENT_KEY)
 
     override fun navigateToViewResume() =
             router.navigateTo(ResumeListFragment.FRAGMENT_KEY)
@@ -53,5 +53,5 @@ class JobsBankPresenter
             router.navigateTo(MyResumeFragment.FRAGMENT_KEY)
 
     override fun navigateToViewProposals() =
-            router.navigateTo(JobsFragment.FRAGMENT_KEY)
+            router.navigateTo(VacanciesFragment.FRAGMENT_KEY)
 }

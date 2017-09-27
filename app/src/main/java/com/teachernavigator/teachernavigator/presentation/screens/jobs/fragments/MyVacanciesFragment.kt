@@ -14,7 +14,7 @@ import com.teachernavigator.teachernavigator.presentation.adapters.holders.Vacan
 import com.teachernavigator.teachernavigator.presentation.models.VacancyModel
 import com.teachernavigator.teachernavigator.presentation.screens.common.BaseFragment
 import com.teachernavigator.teachernavigator.presentation.screens.jobs.fragments.abstractions.MyJobsView
-import com.teachernavigator.teachernavigator.presentation.screens.jobs.presenters.abstractions.IMyJobsPresenter
+import com.teachernavigator.teachernavigator.presentation.screens.jobs.presenters.abstractions.IMyVacanciesPresenter
 import kotlinx.android.synthetic.main.fmt_my_vacancies.*
 import ru.lliepmah.lib.UniversalAdapter
 import javax.inject.Inject
@@ -22,7 +22,7 @@ import javax.inject.Inject
 /**
  * Created by lliepmah on 24.09.17
  */
-class MyJobsFragment : BaseFragment(), MyJobsView {
+class MyVacanciesFragment : BaseFragment(), MyJobsView {
 
     companion object {
         val FRAGMENT_KEY = "my_jobs_fragment"
@@ -31,10 +31,10 @@ class MyJobsFragment : BaseFragment(), MyJobsView {
     private lateinit var mParentScreenComponent: ParentScreenComponent
 
     @Inject
-    lateinit var myJobsPresenter: IMyJobsPresenter
+    lateinit var myVacanciesPresenter: IMyVacanciesPresenter
 
     val adapter: UniversalAdapter by lazy {
-        UniversalAdapter(VacancyHolderBuilder(true, myJobsPresenter::onProlong, myJobsPresenter::onDelete, null))
+        UniversalAdapter(VacancyHolderBuilder(true, myVacanciesPresenter::onProlong, myVacanciesPresenter::onDelete, null))
     }
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? =
@@ -43,9 +43,9 @@ class MyJobsFragment : BaseFragment(), MyJobsView {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         inject()
-        myJobsPresenter.attachView(this)
+        myVacanciesPresenter.attachView(this)
 
-        vListSwipeLayout.setOnRefreshListener(myJobsPresenter::refresh)
+        vListSwipeLayout.setOnRefreshListener(myVacanciesPresenter::refresh)
         vListSwipeLayout.setColorSchemeResources(R.color.colorAccent)
         vListRvData.layoutManager = LinearLayoutManager(context)
         vListRvData.adapter = adapter

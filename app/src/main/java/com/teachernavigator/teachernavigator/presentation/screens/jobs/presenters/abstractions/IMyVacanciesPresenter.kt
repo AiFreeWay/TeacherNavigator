@@ -7,7 +7,7 @@ import com.teachernavigator.teachernavigator.presentation.screens.jobs.fragments
 /**
  * Created by lliepmah on 24.09.17
  */
-interface IMyJobsPresenter : ViewAttacher<MyJobsView> {
+interface IMyVacanciesPresenter : ViewAttacher<MyJobsView> {
 
     fun onProlong(vacancy: VacancyModel)
     fun onDelete(vacancy: VacancyModel)

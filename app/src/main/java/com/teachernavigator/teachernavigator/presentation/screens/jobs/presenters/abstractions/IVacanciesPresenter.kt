@@ -2,12 +2,12 @@ package com.teachernavigator.teachernavigator.presentation.screens.jobs.presente
 
 import com.teachernavigator.teachernavigator.presentation.models.VacancyModel
 import com.teachernavigator.teachernavigator.presentation.screens.common.ViewAttacher
-import com.teachernavigator.teachernavigator.presentation.screens.jobs.fragments.abstractions.JobsView
+import com.teachernavigator.teachernavigator.presentation.screens.jobs.fragments.abstractions.VacanciesView
 
 /**
  * Created by lliepmah on 27.09.17
  */
-interface IJobsPresenter : ViewAttacher<JobsView> {
+interface IVacanciesPresenter : ViewAttacher<VacanciesView> {
 
     fun setFilter(isSchool: Boolean, isCollege: Boolean, isUniversity: Boolean)
     fun refresh()

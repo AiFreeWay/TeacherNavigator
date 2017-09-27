@@ -19,11 +19,11 @@ class PresentersModule {
 
     @Provides
     @PerParentScreen
-    fun provideCreateJobsPresenter(presenter: CreateJobPresenter): ICreateJobPresenter = presenter
+    fun provideCreateJobsPresenter(presenter: CreateVacancyPresenter): ICreateVacancyPresenter = presenter
 
     @Provides
     @PerParentScreen
-    fun provideMyJobsPresenter(presenter: MyJobsPresenter): IMyJobsPresenter = presenter
+    fun provideMyJobsPresenter(presenter: MyVacanciesPresenter): IMyVacanciesPresenter = presenter
 
     @Provides
     @PerParentScreen
@@ -39,6 +39,6 @@ class PresentersModule {
 
     @Provides
     @PerParentScreen
-    fun provideJobsPresenter(presenter: JobsPresenter): IJobsPresenter = presenter
+    fun provideJobsPresenter(presenter: VacanciesPresenter): IVacanciesPresenter = presenter
 
 }

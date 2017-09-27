@@ -17,7 +17,7 @@
         android:drawablePadding="@dimen/spacingLarge"
         android:gravity="center"
         android:padding="@dimen/spacingXXLarge"
-        android:text="@string/proposal"
+        android:text="@string/me_employer"
         android:textSize="@dimen/titleTextSize"
 
         app:layout_constraintLeft_toLeftOf="parent"
@@ -126,7 +126,7 @@
 
         android:paddingRight="@dimen/spacingXLarge"
         android:paddingTop="@dimen/spacingMedium"
-        android:text="@string/view_proposals"
+        android:text="@string/view_vacancies"
         android:textSize="@dimen/titleTextSize"
 
         app:layout_constraintLeft_toLeftOf="parent"

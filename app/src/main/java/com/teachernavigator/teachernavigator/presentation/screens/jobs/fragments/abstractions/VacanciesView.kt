@@ -6,7 +6,7 @@ import com.teachernavigator.teachernavigator.presentation.screens.common.ChildVi
 /**
  * Created by lliepmah on 27.09.17
  */
-interface JobsView : ChildView {
+interface VacanciesView : ChildView {
 
     fun setJobs(jobsList: List<VacancyModel>)
 

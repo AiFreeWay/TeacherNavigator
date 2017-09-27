@@ -8,8 +8,8 @@ import com.teachernavigator.teachernavigator.domain.interactors.abstractions.IJo
 import com.teachernavigator.teachernavigator.presentation.models.TypeOfInstitution
 import com.teachernavigator.teachernavigator.presentation.models.VacancyModel
 import com.teachernavigator.teachernavigator.presentation.screens.common.BasePresenter
-import com.teachernavigator.teachernavigator.presentation.screens.jobs.fragments.abstractions.JobsView
-import com.teachernavigator.teachernavigator.presentation.screens.jobs.presenters.abstractions.IJobsPresenter
+import com.teachernavigator.teachernavigator.presentation.screens.jobs.fragments.abstractions.VacanciesView
+import com.teachernavigator.teachernavigator.presentation.screens.jobs.presenters.abstractions.IVacanciesPresenter
 import com.teachernavigator.teachernavigator.presentation.transformers.VacancyTransformer
 import com.teachernavigator.teachernavigator.presentation.transformers.transformListEntity
 import ru.terrakok.cicerone.Router
@@ -19,10 +19,10 @@ import javax.inject.Inject
  * Created by lliepmah on 27.09.17
  */
 @PerParentScreen
-class JobsPresenter
+class VacanciesPresenter
 @Inject constructor(val router: Router,
                     private val jobsInteractor: IJobInteractor,
-                    private val vacancyTransformer: VacancyTransformer) : BasePresenter<JobsView>(), IJobsPresenter {
+                    private val vacancyTransformer: VacancyTransformer) : BasePresenter<VacanciesView>(), IVacanciesPresenter {
 
     override fun onResponse(vacancy: VacancyModel) = Unit
 

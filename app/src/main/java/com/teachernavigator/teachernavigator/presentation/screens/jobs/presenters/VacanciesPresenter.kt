@@ -24,7 +24,9 @@ class VacanciesPresenter
                     private val jobsInteractor: IJobInteractor,
                     private val vacancyTransformer: VacancyTransformer) : BasePresenter<VacanciesView>(), IVacanciesPresenter {
 
-    override fun onResponse(vacancy: VacancyModel) = Unit
+    override fun onResponse(vacancy: VacancyModel) {
+//        sadas
+    }
 
     private var listOfVacancy: List<VacancyModel> = emptyList()
 

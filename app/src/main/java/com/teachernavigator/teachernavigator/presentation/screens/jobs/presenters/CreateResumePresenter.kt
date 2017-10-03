@@ -22,6 +22,9 @@ class CreateResumePresenter
 @Inject constructor(val router: Router,
                     private val jobInteractor: IJobInteractor) : BasePresenter<CreateResumeView>(), ICreateResumePresenter {
 
+    override var resumePath: String? = null
+    override var resumeMime: String? = null
+
     override fun validateAndCreate(careerObjective: CharSequence,
                                    districtCouncil: CharSequence,
                                    education: CharSequence,
@@ -41,7 +44,10 @@ class CreateResumePresenter
                     districtCouncil = districtCouncil.toString().toInt(),
                     education = education.toString(),
                     experience = experience.toString(),
-                    salary = salary.toString()
+                    salary = salary.toString(),
+                    resumePath = resumePath,
+                    mime = resumeMime
+
             ))
         }
     } ?: Unit

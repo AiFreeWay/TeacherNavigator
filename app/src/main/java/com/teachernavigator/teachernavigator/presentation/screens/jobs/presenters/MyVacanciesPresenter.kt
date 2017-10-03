@@ -2,12 +2,14 @@ package com.teachernavigator.teachernavigator.presentation.screens.jobs.presente
 
 import android.arch.lifecycle.Lifecycle
 import android.arch.lifecycle.OnLifecycleEvent
+import android.os.Bundle
 import android.util.Log
 import com.teachernavigator.teachernavigator.R
 import com.teachernavigator.teachernavigator.application.di.scopes.PerParentScreen
 import com.teachernavigator.teachernavigator.domain.interactors.abstractions.IJobInteractor
 import com.teachernavigator.teachernavigator.presentation.models.VacancyModel
 import com.teachernavigator.teachernavigator.presentation.screens.common.BasePresenter
+import com.teachernavigator.teachernavigator.presentation.screens.jobs.fragments.VacancyFragment
 import com.teachernavigator.teachernavigator.presentation.screens.jobs.fragments.abstractions.MyJobsView
 import com.teachernavigator.teachernavigator.presentation.screens.jobs.presenters.abstractions.IMyVacanciesPresenter
 import com.teachernavigator.teachernavigator.presentation.transformers.VacancyTransformer
@@ -70,6 +72,11 @@ class MyVacanciesPresenter
 
     override fun onProlong(vacancy: VacancyModel) {
         Log.d(MyVacanciesPresenter::class.java.name, "-> onProlong=$vacancy")
+
+
+        val bundle = Bundle()
+        bundle.putInt(VacancyFragment.VACANCY_ID, vacancy.id)
+        router.navigateTo(VacancyFragment.FRAGMENT_KEY, bundle)
     }
 
 }

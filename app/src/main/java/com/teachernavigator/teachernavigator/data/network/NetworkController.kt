@@ -15,19 +15,25 @@ import com.teachernavigator.teachernavigator.domain.models.Resume
 import com.teachernavigator.teachernavigator.domain.models.Vacancy
 import io.reactivex.Observable
 import io.reactivex.Single
+import okhttp3.MediaType
 import okhttp3.OkHttpClient
+import okhttp3.RequestBody
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
+import java.io.File
 
 /**
- * Created by root on 11.08.17.
+ * Created by root on 11.08.17
  */
 class NetworkController {
 
-    private val API_URL = "http://pronm.pr-solution.ru/"
+    private val DOMAIN = "pronm.pr-solution.ru"
+    private val API_URL = "http://$DOMAIN/"
     private val mApiController: ApiController
+
+    private var client: OkHttpClient?
 
     init {
         Logger.logDebug("created CONTROLLER NetworkController")
@@ -45,11 +51,12 @@ class NetworkController {
             httpClient.addInterceptor(logging)
         }
 
+        client = httpClient.build()
         val retrofit = Retrofit.Builder()
                 .baseUrl(API_URL)
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create(gson))
-                .client(httpClient.build())
+                .client(client)
                 .build()
         mApiController = retrofit.create(ApiController::class.java)
     }
@@ -119,13 +126,22 @@ class NetworkController {
                     .map { it.results }
 
     fun createResume(accessToken: String, resumeRequest: ResumeRequest): Single<Resume> =
-            mApiController.createResume(accessToken, resumeRequest)
+            if (resumeRequest.resumePath != null && File(resumeRequest.resumePath).exists()) {
+                val file = RequestBody.create(MediaType.parse(resumeRequest.mime), File(resumeRequest.resumePath))
+                mApiController.createResumeAndUpload(accessToken, file, resumeRequest.careerObjective, resumeRequest.districtCouncil, resumeRequest.salary,
+                        resumeRequest.education, resumeRequest.experience)
+            } else {
+                mApiController.createResume(accessToken, resumeRequest)
+            }
 
     fun loadResumeList(accessToken: String): Single<List<Resume>> =
-        mApiController.resumeList(accessToken)
-                .map { it.results }
+            mApiController.resumeList(accessToken)
+                    .map { it.results }
 
     fun loadVacancies(accessToken: String): Single<List<Vacancy>> =
-        mApiController.vacancies(accessToken)
-                .map { it.results }
+            mApiController.vacancies(accessToken)
+                    .map { it.results }
+
+    fun loadVacancy(accessToken: String, vacancyId: Int): Single<Vacancy> =
+            mApiController.vacancy(accessToken, vacancyId)
 }

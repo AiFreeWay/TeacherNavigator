@@ -30,6 +30,7 @@ class FragmentsFactory {
                 MyVacanciesFragment.FRAGMENT_KEY -> addBundle(MyVacanciesFragment(), bundle)
                 VacanciesFragment.FRAGMENT_KEY -> addBundle(VacanciesFragment(), bundle)
                 CreateResumeFragment.FRAGMENT_KEY -> addBundle(CreateResumeFragment(), bundle)
+                VacancyFragment.FRAGMENT_KEY -> addBundle(VacancyFragment(), bundle)
                 ResumeListFragment.FRAGMENT_KEY -> addBundle(ResumeListFragment(), bundle)
                 MyResumeFragment.FRAGMENT_KEY -> addBundle(MyResumeFragment(), bundle)
                 CreateVacancyFragment.FRAGMENT_KEY -> addBundle(CreateVacancyFragment(), bundle)

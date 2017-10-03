@@ -18,6 +18,7 @@ interface IJobInteractor {
     fun loadVacancies(): Single<List<Vacancy>>
     fun loadMyResume(): Single<List<Resume>>
     fun loadResumeList(): Single<List<Resume>>
+    fun loadVacancy(vacancyId: Int): Single<Vacancy>
 
     fun getTypesOfEmployment(): List<TypeOfEmployment>
 

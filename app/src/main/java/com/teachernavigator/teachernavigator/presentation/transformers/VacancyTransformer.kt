@@ -7,6 +7,7 @@ import com.teachernavigator.teachernavigator.data.repository.abstractions.IJobRe
 import com.teachernavigator.teachernavigator.domain.models.Vacancy
 import com.teachernavigator.teachernavigator.presentation.models.TypeOfInstitution
 import com.teachernavigator.teachernavigator.presentation.models.VacancyModel
+import java.util.*
 import javax.inject.Inject
 
 /**
@@ -34,7 +35,7 @@ constructor(private val context: Context,
                 responsibility = context.spanned(R.string.responsibilities_text, it.responsibility),
                 typeOfInstitution = getTypeOfInstitution(from.typeOfInstitution),
                 daysRemains = context.spanned(R.string.remains_days_format, it.daysRemains),
-
+                responses = from.response_vacancy?.map(ResponseTransformer::transform) ?: listOf(),
                 created = it.created,
                 expired = it.expired,
                 user = it.user)

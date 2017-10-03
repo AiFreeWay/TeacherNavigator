@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="@dimen/externalPadding"
+    android:layout_marginRight="@dimen/externalPadding"
+    android:layout_marginTop="@dimen/externalPadding">
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/spacingLarge">
+
+        <ImageView
+            android:id="@+id/vResponseIvAvatar"
+            android:layout_width="38dp"
+            android:layout_height="38dp"
+            android:src="@drawable/ic_avatar"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="ContentDescription" />
+
+        <TextView
+            android:id="@+id/vResponseTvName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/spacingLarge"
+            android:layout_marginStart="@dimen/spacingLarge"
+            app:layout_constraintLeft_toRightOf="@+id/vResponseIvAvatar"
+            app:layout_constraintTop_toTopOf="@+id/vResponseIvAvatar"
+            tools:text="Иванов Иван" />
+
+        <TextView
+            android:id="@+id/vResponseTvTimeAgo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/spacingLarge"
+            android:layout_marginStart="@dimen/spacingLarge"
+            android:textColor="@color/grey"
+            app:layout_constraintBottom_toBottomOf="@+id/vResponseIvAvatar"
+            app:layout_constraintLeft_toRightOf="@+id/vResponseIvAvatar"
+            tools:text="36 минут назад" />
+
+        <TextView
+            android:id="@+id/vResponseTvDownload"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="?android:attr/selectableItemBackground"
+            tools:drawableRight="@drawable/ic_resume"
+            android:gravity="center_vertical|start"
+            android:text="@string/download_resume"
+            app:layout_constraintLeft_toLeftOf="@+id/vResponseTvTimeAgo"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/vResponseIvAvatar" />
+
+    </android.support.constraint.ConstraintLayout>
+</android.support.v7.widget.CardView>

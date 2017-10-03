@@ -9,6 +9,7 @@ import com.teachernavigator.teachernavigator.domain.models.Resume
 import com.teachernavigator.teachernavigator.domain.models.Vacancy
 import io.reactivex.Observable
 import io.reactivex.Single
+import okhttp3.RequestBody
 import retrofit2.http.*
 
 /**
@@ -94,6 +95,20 @@ interface ApiController {
     @POST("/api/v0/me/resume/")
     fun createResume(@Header("Authorization") accessToken: String, @Body resumeRequest: ResumeRequest): Single<Resume>
 
+    @Multipart
+    @POST("/api/v0/me/resume/")
+    fun createResumeAndUpload(@Header("Authorization") accessToken: String,
+                              @Part("file\"; filename=\"file.jpg") file: RequestBody,
+                              @Part("career_objective") career_objective: String,
+                              @Part("district_council") district_council: Int,
+                              @Part("amount_of_wages") amount_of_wages: String,
+                              @Part("education") education: String,
+                              @Part("experience") experience: String
+    ): Single<Resume>
+
     @GET("/api/v0/vacancies/")
     fun vacancies(@Header("Authorization") accessToken: String): Single<BaseListResponse<Vacancy>>
+
+    @GET("/api/v0/vacancy/{vacancyId}")
+    fun vacancy(@Header("Authorization") accessToken: String, @Path("vacancyId") vacancyId: Int): Single<Vacancy>
 }

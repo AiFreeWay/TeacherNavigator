@@ -19,7 +19,8 @@ data class Vacancy(
         @SerializedName("days_until_expired") val daysRemains: Int,
         val created: Date,
         val expired: Date,
-        val user: Author
+        val user: Author,
+        val response_vacancy: List<Response>? = null
 ) {
 
     companion object {

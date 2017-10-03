@@ -143,6 +143,7 @@
     <string name="view_vacancies">Посмотреть вакансии</string>
     <string name="response_to_vacancy">Откликнуться на вакансию</string>
     <string name="me_employer">Я работодатель</string>
+    <string name="download_resume">Скачать резюме</string>
     <string-array name="types_of_employment">
         <item>@string/full</item>
         <item>@string/partial</item>

@@ -41,4 +41,8 @@ class PresentersModule {
     @PerParentScreen
     fun provideJobsPresenter(presenter: VacanciesPresenter): IVacanciesPresenter = presenter
 
+    @Provides
+    @PerParentScreen
+    fun provideVacancyPresenter(presenter: VacancyPresenter): IVacancyPresenter = presenter
+
 }

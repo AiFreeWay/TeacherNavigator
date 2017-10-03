@@ -81,6 +81,8 @@ dependencies {
     compile "com.github.greenfrvr:hashtag-view:$hashtagView"
     compile "com.github.lliepmah:library:$universalAdapterVersion"
     kapt "com.github.lliepmah:compiler:$universalAdapterVersion"
+    compile "com.github.miguelbcr:RxPaparazzo:$rxPaparazzoVersion"
+    compile "com.tbruyelle.rxpermissions2:rxpermissions:$rxPermissions@aar"
 
     //Crash Reporting
     compile "com.google.firebase:firebase-crash:$firebaseCrash"

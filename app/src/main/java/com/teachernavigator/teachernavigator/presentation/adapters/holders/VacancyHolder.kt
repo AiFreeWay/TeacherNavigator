@@ -14,10 +14,10 @@ import ru.lliepmah.lib.DefaultViewHolder
  */
 @HolderBuilder(R.layout.v_vacancy)
 class VacancyHolder(itemView: View,
-                    val isMine: Boolean,
-                    val onProlongListener: OnProlongVacancyListener?,
-                    val onDeleteListener: OnDeleteVacancyListener?,
-                    val onResponseListener: OnResponseVacancyListener?) : DefaultViewHolder<VacancyModel>(itemView) {
+                    isMine: Boolean,
+                    private val onProlongListener: OnProlongVacancyListener?,
+                    private val onDeleteListener: OnDeleteVacancyListener?,
+                    private val onResponseListener: OnResponseVacancyListener?) : DefaultViewHolder<VacancyModel>(itemView) {
 
     private var mVacancy: VacancyModel? = null
 
@@ -40,11 +40,11 @@ class VacancyHolder(itemView: View,
             vVacancyBtnResponse.setOnClickListener { onResponse() }
         }
 
-        vVacancyBtnResponse.visibility = if (isMine) View.GONE else View.VISIBLE
+        vVacancyBtnResponse.visibility = if (isMine || onResponseListener == null) View.GONE else View.VISIBLE
 
         vVacancyTvRemains.visibility = if (isMine) View.VISIBLE else View.GONE
-        vVacancyBtnDelete.visibility = if (isMine) View.VISIBLE else View.GONE
-        vVacancyBtnProlong.visibility = if (isMine) View.VISIBLE else View.GONE
+        vVacancyBtnDelete.visibility = if (isMine && onDeleteListener != null) View.VISIBLE else View.GONE
+        vVacancyBtnProlong.visibility = if (isMine && onProlongListener != null) View.VISIBLE else View.GONE
     }
 
     override fun bind(vacancy: VacancyModel?) {

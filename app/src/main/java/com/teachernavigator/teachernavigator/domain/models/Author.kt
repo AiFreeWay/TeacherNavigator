@@ -4,7 +4,7 @@ import java.io.Serializable
 import java.util.*
 
 /**
- * Created by root on 20.09.17.
+ * Created by root on 20.09.17
  */
 class Author : Serializable {
 

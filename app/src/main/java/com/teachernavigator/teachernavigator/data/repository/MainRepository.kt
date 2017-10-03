@@ -160,6 +160,10 @@ class MainRepository @Inject constructor(private val mNetwokController: NetworkC
     override fun loadVacancies(): Single<List<Vacancy>> =
             mNetwokController.loadVacancies(getAccessToken())
 
+    override fun loadVacancy(vacancyId: Int): Single<Vacancy> =
+            mNetwokController.loadVacancy(getAccessToken(), vacancyId)
+
+
 
 
 }

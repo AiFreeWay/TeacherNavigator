@@ -7,6 +7,9 @@ import com.teachernavigator.teachernavigator.presentation.screens.jobs.fragments
  * Created by lliepmah on 25.09.17
  */
 interface ICreateResumePresenter : ViewAttacher<CreateResumeView> {
+    var resumePath: String?
+    var resumeMime: String?
+
     fun validateAndCreate(
             careerObjective: CharSequence,
             districtCouncil: CharSequence,
@@ -14,5 +17,6 @@ interface ICreateResumePresenter : ViewAttacher<CreateResumeView> {
             experience: CharSequence,
             salary: CharSequence
     )
+
 
 }

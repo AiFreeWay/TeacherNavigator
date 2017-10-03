@@ -10,4 +10,7 @@ data class ResumeRequest(
         @SerializedName("district_council") val districtCouncil: Int,
         @SerializedName("amount_of_wages") val salary: String,
         val education: String,
-        val experience: String)
+        val experience: String,
+        val resumePath: String? = null,
+        val mime: String? = null
+)

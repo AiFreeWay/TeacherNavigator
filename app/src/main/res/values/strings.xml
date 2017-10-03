@@ -3,7 +3,7 @@
     <string name="enter">Войти</string>
     <string name="information_tape">Информационная лента</string>
     <string name="settings">Настройки</string>
-    <string name="tags">Тэги</string>
+    <string name="tags">Теги</string>
     <string name="about">О нас</string>
     <string name="add_publication">Добавить публикацию</string>
     <string name="my_publication">Мои публикации</string>
@@ -49,7 +49,7 @@
     <string name="restore_password">Востановление пароля</string>
     <string name="search_publication">Поиск публикаций</string>
     <string name="search">Поиск</string>
-    <string name="add_tag">Добавить тэг</string>
+    <string name="add_tag">Добавить тег</string>
     <string name="publications">Публикации</string>
     <string name="any">Любые</string>
     <string name="only_text">Только текст</string>

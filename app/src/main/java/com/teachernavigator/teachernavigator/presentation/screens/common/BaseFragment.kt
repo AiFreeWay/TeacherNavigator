@@ -9,7 +9,7 @@ import android.widget.Toast
  */
 abstract class BaseFragment : Fragment(), ChildView {
 
-    private val mLifecycle: LifecycleRegistry = LifecycleRegistry(this)
+    private val mLifecycle by lazy { LifecycleRegistry(this) }
 
     override fun showToast(text: String) {
         Toast.makeText(context, text, Toast.LENGTH_SHORT).show()

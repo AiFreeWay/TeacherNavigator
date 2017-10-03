@@ -16,14 +16,13 @@ class TapeStrategy {
         val POSTS_TYPE_LAST = 2
         val POSTS_TYPE_NEWS = 3
 
-        fun getPostByType(tapeType: Int, interactor: IPostsInteractor): Observable<List<Post>> {
-            return when(tapeType) {
-                POSTS_TYPE_BEST -> interactor.getBestPosts()
-                POSTS_TYPE_INTERVIEWS -> interactor.getInterviewsPosts()
-                POSTS_TYPE_LAST -> interactor.getLatestPosts()
-                POSTS_TYPE_NEWS -> interactor.getNewsPosts()
-                else -> throw Exception("Invalid tape type $tapeType TapeStrategy.getPostByType(tapeType: Int, interactor: IPostsInteractor))")
-            }
-        }
+        fun getPostByType(tapeType: Int, interactor: IPostsInteractor): Observable<List<Post>> =
+                when(tapeType) {
+                    POSTS_TYPE_BEST -> interactor.getBestPosts()
+                    POSTS_TYPE_INTERVIEWS -> interactor.getInterviewsPosts()
+                    POSTS_TYPE_LAST -> interactor.getLatestPosts()
+                    POSTS_TYPE_NEWS -> interactor.getNewsPosts()
+                    else -> throw Exception("Invalid tape type $tapeType TapeStrategy.getPostByType(tapeType: Int, interactor: IPostsInteractor))")
+                }
     }
 }

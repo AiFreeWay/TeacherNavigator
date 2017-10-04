@@ -163,6 +163,20 @@ class MainRepository @Inject constructor(private val mNetwokController: NetworkC
     override fun loadVacancy(vacancyId: Int): Single<Vacancy> =
             mNetwokController.loadVacancy(getAccessToken(), vacancyId)
 
+    override fun removeVacancy(vacancyId: Int): Single<Unit> =
+            mNetwokController.removeVacancy(getAccessToken(), vacancyId)
+
+    override fun prolongVacancy(vacancyId: Int): Single<Unit> =
+            mNetwokController.prolongVacancy(getAccessToken(), vacancyId)
+
+    override fun prolongResume(resumeId: Int): Single<Unit> =
+            mNetwokController.prolongResume(getAccessToken(), resumeId)
+
+    override fun removeResume(resumeId: Int): Single<Unit> =
+            mNetwokController.removeResume(getAccessToken(), resumeId)
+
+    override fun respondVacancy(vacancyId: Int): Single<Unit> =
+            mNetwokController.respondVacancy(getAccessToken(), vacancyId)
 
 
 

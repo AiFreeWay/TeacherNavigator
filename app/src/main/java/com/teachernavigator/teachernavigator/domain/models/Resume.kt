@@ -17,9 +17,10 @@ data class Resume(
         val experience: String,
         val created: Date,
         val expired: Date,
-        val file: Any?,
+        val file: String?,
         val user: Profile? = null,
-        val isMine: Boolean = false
+        val isMine: Boolean = false,
+        val appropriate : List<Vacancy>? = null
 
 )
 

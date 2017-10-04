@@ -17,7 +17,8 @@ class VacancyHolder(itemView: View,
                     isMine: Boolean,
                     private val onProlongListener: OnProlongVacancyListener?,
                     private val onDeleteListener: OnDeleteVacancyListener?,
-                    private val onResponseListener: OnResponseVacancyListener?) : DefaultViewHolder<VacancyModel>(itemView) {
+                    private val onResponseListener: OnResponseVacancyListener?,
+                    private val onClickListener: OnClickVacancyListener?) : DefaultViewHolder<VacancyModel>(itemView) {
 
     private var mVacancy: VacancyModel? = null
 
@@ -31,11 +32,13 @@ class VacancyHolder(itemView: View,
     private val vVacancyBtnDelete: Button = itemView.find(R.id.vVacancyBtnDelete)
     private val vVacancyBtnProlong: Button = itemView.find(R.id.vVacancyBtnProlong)
     private val vVacancyBtnResponse: Button = itemView.find(R.id.vVacancyBtnResponse)
+    private val vVacancyRoot: View = itemView.find(R.id.vVacancyRoot)
 
     init {
         if (isMine) {
             vVacancyBtnDelete.setOnClickListener { onDelete() }
             vVacancyBtnProlong.setOnClickListener { onProlong() }
+            vVacancyRoot.setOnClickListener { onClick()}
         } else {
             vVacancyBtnResponse.setOnClickListener { onResponse() }
         }
@@ -60,6 +63,10 @@ class VacancyHolder(itemView: View,
 
     }
 
+    private fun onClick() = mVacancy?.let {
+        onClickListener?.invoke(it)
+    }
+
     private fun onProlong() = mVacancy?.let {
         onProlongListener?.invoke(it)
     }
@@ -77,3 +84,4 @@ class VacancyHolder(itemView: View,
 typealias OnProlongVacancyListener = (VacancyModel) -> Unit
 typealias OnDeleteVacancyListener = (VacancyModel) -> Unit
 typealias OnResponseVacancyListener = (VacancyModel) -> Unit
+typealias OnClickVacancyListener = (VacancyModel) -> Unit

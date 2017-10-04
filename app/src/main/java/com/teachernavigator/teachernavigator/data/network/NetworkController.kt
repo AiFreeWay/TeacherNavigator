@@ -5,11 +5,13 @@ import com.google.gson.GsonBuilder
 import com.teachernavigator.teachernavigator.BuildConfig
 import com.teachernavigator.teachernavigator.data.models.CommentNetwork
 import com.teachernavigator.teachernavigator.data.models.PostNetwork
+import com.teachernavigator.teachernavigator.data.network.adapters.UserDeserializer
 import com.teachernavigator.teachernavigator.data.network.requests.*
 import com.teachernavigator.teachernavigator.data.network.responses.BaseResponse
 import com.teachernavigator.teachernavigator.data.network.responses.GetMyCommentsResponse
 import com.teachernavigator.teachernavigator.data.network.responses.PostsResponse
 import com.teachernavigator.teachernavigator.data.network.responses.SingInResponse
+import com.teachernavigator.teachernavigator.domain.models.Author
 import com.teachernavigator.teachernavigator.domain.models.Profile
 import com.teachernavigator.teachernavigator.domain.models.Resume
 import com.teachernavigator.teachernavigator.domain.models.Vacancy
@@ -29,8 +31,15 @@ import java.io.File
  */
 class NetworkController {
 
-    private val DOMAIN = "pronm.pr-solution.ru"
-    private val API_URL = "http://$DOMAIN/"
+    companion object {
+        private const val DOMAIN = "pronm.pr-solution.ru"
+        public const val HTTP = "http://"
+        public const val SERVER = "$HTTP$DOMAIN"
+        private const val API_URL = "$SERVER/"
+
+        private const val DEFAULT_DATE_FORMAT = "yyyy-MM-dd'T'HH:mm:ss.Z"
+    }
+
     private val mApiController: ApiController
 
     private var client: OkHttpClient?
@@ -38,9 +47,15 @@ class NetworkController {
     init {
         Logger.logDebug("created CONTROLLER NetworkController")
 
+        val pureGson = GsonBuilder()
+                .setLenient()
+                .setDateFormat(DEFAULT_DATE_FORMAT)
+                .create()
+
         val gson = GsonBuilder()
                 .setLenient()
-                .setDateFormat("yyyy-MM-dd'T'HH:mm:ss.Z")
+                .setDateFormat(DEFAULT_DATE_FORMAT)
+                .registerTypeAdapter(Author::class.java, UserDeserializer(pureGson))
                 .create()
 
         val httpClient = OkHttpClient.Builder()
@@ -144,4 +159,26 @@ class NetworkController {
 
     fun loadVacancy(accessToken: String, vacancyId: Int): Single<Vacancy> =
             mApiController.vacancy(accessToken, vacancyId)
+
+    fun removeVacancy(accessToken: String, vacancyId: Int): Single<Unit> =
+            mApiController.removeVacancy(accessToken, vacancyId)
+                    .toSingle(Unit)// TODO Temporary, I do not have any time
+
+    fun prolongVacancy(accessToken: String, vacancyId: Int): Single<Unit> =
+            mApiController.updateVacancy(accessToken, vacancyId)
+                    .toSingle(Unit)// TODO Temporary, I don't have at all
+
+    fun prolongResume(accessToken: String, resumeId: Int): Single<Unit> =
+            mApiController.updateResume(accessToken, resumeId)
+                    .toSingle(Unit)// TODO Temporary, I don't have at all
+
+    fun removeResume(accessToken: String, resumeId: Int): Single<Unit> =
+            mApiController.removeResume(accessToken, resumeId)
+                    .toSingle(Unit)// TODO Temporary, I do not have any time
+
+    fun respondVacancy(accessToken: String, vacancyId: Int): Single<Unit> =
+            mApiController.respondVacancy(accessToken, RespondVacancyRequest(vacancyId))
+                    .toSingle(Unit)// TODO Temporary, I do not have any time
+
+
 }

@@ -24,10 +24,6 @@ class VacanciesPresenter
                     private val jobsInteractor: IJobInteractor,
                     private val vacancyTransformer: VacancyTransformer) : BasePresenter<VacanciesView>(), IVacanciesPresenter {
 
-    override fun onResponse(vacancy: VacancyModel) {
-//        sadas
-    }
-
     private var listOfVacancy: List<VacancyModel> = emptyList()
 
     private var isSchool = true
@@ -64,6 +60,13 @@ class VacanciesPresenter
         this.listOfVacancy = listOfVacancy
         updateJobs()
     }
+
+    override fun onResponse(vacancy: VacancyModel) =
+            addDissposable(jobsInteractor.respondVacancy(vacancy.id)
+                    .doOnSubscribe { startProgress() }
+                    .subscribe(this::onUpdated, this::onError))
+
+    private fun onUpdated(stub: Unit) = refresh()
 
     private fun updateJobs() {
         mView?.setJobs(listOfVacancy.filter {

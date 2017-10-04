@@ -61,12 +61,18 @@ class MyResumePresenter
     }
 
     override fun createResume() =
-        router.navigateTo(CreateResumeFragment.FRAGMENT_KEY)
+            router.navigateTo(CreateResumeFragment.FRAGMENT_KEY)
 
-    override fun onProlong(resume: ResumeModel) {
-    }
+    override fun onProlong(resume: ResumeModel) =
+            addDissposable(jobsInteractor.prolongResume(resume.id)
+                    .doOnSubscribe { startProgress() }
+                    .subscribe(this::onUpdated, this::onError))
 
-    override fun onDelete(resume: ResumeModel) {
-    }
+    private fun onUpdated(stub: Unit) = refresh()
+
+    override fun onDelete(resume: ResumeModel) =
+            addDissposable(jobsInteractor.removeResume(resume.id)
+                    .doOnSubscribe { startProgress() }
+                    .subscribe(this::onUpdated, this::onError))
 
 }

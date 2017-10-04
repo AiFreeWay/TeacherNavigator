@@ -7,6 +7,7 @@ import com.teachernavigator.teachernavigator.data.repository.abstractions.IJobRe
 import com.teachernavigator.teachernavigator.domain.models.Vacancy
 import com.teachernavigator.teachernavigator.presentation.models.TypeOfInstitution
 import com.teachernavigator.teachernavigator.presentation.models.VacancyModel
+import java.text.NumberFormat
 import java.util.*
 import javax.inject.Inject
 
@@ -19,16 +20,15 @@ class VacancyTransformer
 constructor(private val context: Context,
             private val jobRepository: IJobRepository) : EntityTransformer<Vacancy, VacancyModel> {
 
-
     override fun transform(from: Vacancy): VacancyModel = from.let {
 
         val typeOfEmployment = jobRepository.getTypeOfEmployment(it.typeOfEmployment).name
-        it.typeOfInstitution
+
         VacancyModel(
                 id = it.id,
                 organization = it.organization,
                 vacancy = it.vacancy,
-                salary = context.spanned(R.string.cost_roubles, it.salary),
+                salary = context.formatRoubles(it.salary),
                 city = it.city,
                 experience = it.experience,
                 typeOfEmployment = context.spanned(R.string.type_of_employment_formatted, typeOfEmployment),

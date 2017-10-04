@@ -38,7 +38,7 @@ class VacanciesFragment : BaseFragment(), VacanciesView {
     var isUniversity = true
 
     val adapter: UniversalAdapter by lazy {
-        UniversalAdapter(VacancyHolderBuilder(false, null, null, vacanciesPresenter::onResponse))
+        UniversalAdapter(VacancyHolderBuilder(false, null, null, vacanciesPresenter::onResponse, null))
     }
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? =

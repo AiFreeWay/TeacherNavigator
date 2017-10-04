@@ -34,7 +34,7 @@ class MyVacanciesFragment : BaseFragment(), MyJobsView {
     lateinit var myVacanciesPresenter: IMyVacanciesPresenter
 
     val adapter: UniversalAdapter by lazy {
-        UniversalAdapter(VacancyHolderBuilder(true, myVacanciesPresenter::onProlong, myVacanciesPresenter::onDelete, null))
+        UniversalAdapter(VacancyHolderBuilder(true, myVacanciesPresenter::onProlong, myVacanciesPresenter::onDelete, null, myVacanciesPresenter::onChoose))
     }
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? =

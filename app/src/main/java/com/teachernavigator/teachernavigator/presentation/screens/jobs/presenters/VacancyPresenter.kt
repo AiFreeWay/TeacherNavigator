@@ -2,7 +2,9 @@ package com.teachernavigator.teachernavigator.presentation.screens.jobs.presente
 
 import android.arch.lifecycle.Lifecycle
 import android.arch.lifecycle.OnLifecycleEvent
-import android.util.Log.d
+import android.content.Intent
+import android.net.Uri
+import android.support.v4.content.ContextCompat.startActivity
 import com.teachernavigator.teachernavigator.R
 import com.teachernavigator.teachernavigator.application.di.scopes.PerParentScreen
 import com.teachernavigator.teachernavigator.domain.interactors.abstractions.IJobInteractor
@@ -16,6 +18,7 @@ import com.teachernavigator.teachernavigator.presentation.transformers.transform
 import ru.terrakok.cicerone.Router
 import javax.inject.Inject
 
+
 /**
  * Created by lliepmah on 28.09.17
  */
@@ -25,9 +28,12 @@ class VacancyPresenter
                     private val jobsInteractor: IJobInteractor,
                     private val vacancyTransformer: VacancyTransformer) : BasePresenter<VacancyView>(), IVacancyPresenter {
 
-    override fun onDownload(response: ResponseModel) {
-        d(javaClass.name, "resp->$response")
-    }
+    override fun onDownload(response: ResponseModel) = mView?.let {
+        if (!response.portfolio.isBlank()) {
+            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(response.portfolio))
+            startActivity(it.getContext(), intent, null)
+        }
+    } ?: Unit
 
     private var mVacancyId = -1
 

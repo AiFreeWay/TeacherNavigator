@@ -127,11 +127,12 @@
     <string name="validation_empty">%1$s</string>
     <string name="delete">Удалить</string>
     <string name="prolong">Продлить</string>
-    <string name="cost_roubles"><![CDATA[<b>%d</b> рублей]]></string>
+    <string name="cost_roubles"><![CDATA[<b>%s</b> рублей]]></string>
     <string name="responsibilities_text"><![CDATA[<b>Обязанности: </b> %1$s]]></string>
     <string name="remains_days_format"><![CDATA[Осталось: <b>%1$d дней</b> ]]></string>
     <string name="type_of_employment_formatted"><![CDATA[%1$s занятость]]></string>
     <string name="district_council_number"><![CDATA[Межрайонный совет № %1$d]]></string>
+    <string name="appropriate_vacancies_count"><![CDATA[Подходящих вакансий: %1$d]]></string>
     <string name="unknown">Неизвестный</string>
     <string name="create_resume">Создать резюме</string>
     <string name="career_objective">Желаемая должность</string>

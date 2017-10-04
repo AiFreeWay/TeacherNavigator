@@ -3,7 +3,6 @@ package com.teachernavigator.teachernavigator.presentation.screens.jobs.presente
 import android.arch.lifecycle.Lifecycle
 import android.arch.lifecycle.OnLifecycleEvent
 import android.os.Bundle
-import android.util.Log
 import com.teachernavigator.teachernavigator.R
 import com.teachernavigator.teachernavigator.application.di.scopes.PerParentScreen
 import com.teachernavigator.teachernavigator.domain.interactors.abstractions.IJobInteractor
@@ -37,13 +36,16 @@ class MyVacanciesPresenter
         loadMyJobs()
     }
 
-
     private fun loadMyJobs() =
             addDissposable(jobsInteractor.loadMyVacancies()
                     .transformListEntity(vacancyTransformer)
                     .doOnSubscribe { startProgress() }
                     .subscribe(this::onLoaded, this::onError))
 
+
+    private fun onUpdated(stub: Unit) {
+        refresh()
+    }
 
     private fun onLoaded(listOfVacancy: List<VacancyModel>) {
         stopProgress()
@@ -56,27 +58,32 @@ class MyVacanciesPresenter
         doOnError(error)
     }
 
-    private fun startProgress() {
-        mView?.getParentView()?.startProgress()
-        mView?.showRefresh()
+    private fun startProgress() = mView?.apply {
+        getParentView().startProgress()
+        showRefresh()
     }
 
-    private fun stopProgress() {
-        mView?.getParentView()?.stopProgress()
-        mView?.hideRefresh()
+    private fun stopProgress() = mView?.apply {
+        getParentView().stopProgress()
+        hideRefresh()
     }
 
-    override fun onDelete(vacancy: VacancyModel) {
-        Log.d(MyVacanciesPresenter::class.java.name, "-> onDelete=$vacancy")
-    }
-
-    override fun onProlong(vacancy: VacancyModel) {
-        Log.d(MyVacanciesPresenter::class.java.name, "-> onProlong=$vacancy")
+    override fun onDelete(vacancy: VacancyModel) =
+            addDissposable(jobsInteractor.removeVacancy(vacancy.id)
+                    .doOnSubscribe { startProgress() }
+                    .subscribe(this::onUpdated, this::onError))
 
 
+    override fun onProlong(vacancy: VacancyModel) =
+            addDissposable(jobsInteractor.prolongVacancy(vacancy.id)
+                    .doOnSubscribe { startProgress() }
+                    .subscribe(this::onUpdated, this::onError))
+
+    override fun onChoose(vacancy: VacancyModel) {
         val bundle = Bundle()
         bundle.putInt(VacancyFragment.VACANCY_ID, vacancy.id)
         router.navigateTo(VacancyFragment.FRAGMENT_KEY, bundle)
     }
+
 
 }

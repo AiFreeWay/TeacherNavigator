@@ -13,6 +13,11 @@ import io.reactivex.Single
 interface IJobRepository {
 
     fun createVacancy(vacancyRequest: VacancyRequest): Single<Vacancy>
+    fun removeResume(resumeId: Int): Single<Unit>
+    fun removeVacancy(vacancyId: Int): Single<Unit>
+    fun prolongVacancy(vacancyId: Int): Single<Unit>
+    fun prolongResume(resumeId: Int): Single<Unit>
+    fun respondVacancy(vacancyId: Int): Single<Unit>
     fun loadMyVacancies(): Single<List<Vacancy>>
     fun loadVacancies(): Single<List<Vacancy>>
     fun loadMyResume(): Single<List<Resume>>
@@ -31,7 +36,5 @@ interface IJobRepository {
                 .find { it.id == id }
                 ?: TypeOfEmployment.dummy
     }
-
-
 
 }

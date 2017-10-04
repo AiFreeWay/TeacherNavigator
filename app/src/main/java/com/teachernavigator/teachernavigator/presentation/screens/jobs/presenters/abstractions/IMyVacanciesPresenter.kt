@@ -11,5 +11,6 @@ interface IMyVacanciesPresenter : ViewAttacher<MyJobsView> {
 
     fun onProlong(vacancy: VacancyModel)
     fun onDelete(vacancy: VacancyModel)
+    fun onChoose(vacancy: VacancyModel)
     fun refresh()
 }

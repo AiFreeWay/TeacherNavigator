@@ -13,6 +13,11 @@ import io.reactivex.Single
 interface IJobInteractor {
 
     fun createVacancy(vacancyRequest: VacancyRequest): Single<Vacancy>
+    fun removeVacancy(vacancyId: Int): Single<Unit>
+    fun removeResume(resumeId: Int): Single<Unit>
+    fun prolongVacancy(vacancyId: Int): Single<Unit>
+    fun respondVacancy(vacancyId: Int): Single<Unit>
+    fun prolongResume(resumeId: Int): Single<Unit>
     fun createResume(resumeRequest: ResumeRequest): Single<Resume>
     fun loadMyVacancies(): Single<List<Vacancy>>
     fun loadVacancies(): Single<List<Vacancy>>

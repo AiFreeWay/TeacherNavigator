@@ -13,7 +13,8 @@ import javax.inject.Inject
 @PerParentScreen
 class ResumeTransformer
 @Inject
-constructor(private val context: Context) : EntityTransformer<Resume, ResumeModel> {
+constructor(private val context: Context,
+            private var vacancyTransformer: VacancyTransformer) : EntityTransformer<Resume, ResumeModel> {
 
     override fun transform(from: Resume): ResumeModel =
             ResumeModel(
@@ -33,7 +34,9 @@ constructor(private val context: Context) : EntityTransformer<Resume, ResumeMode
 
                     userName = from.user?.full_name ?: context.getString(R.string.unknown),
                     userAvatar = from.user?.avatars?.firstOrNull()?.avatar ?: "",
-                    isMine = from.isMine
+                    isMine = from.isMine,
+                    appropriate = from.appropriate?.map(vacancyTransformer::transform) ?: emptyList(),
+                    appropriateCount = context.spanned(R.string.appropriate_vacancies_count, from.appropriate?.size ?: 0)
 
             )
 
@@ -42,7 +45,7 @@ constructor(private val context: Context) : EntityTransformer<Resume, ResumeMode
 
         return if (salaryNumber != null) {
             if (salaryNumber > 0) {
-                context.spanned(R.string.cost_roubles, salaryNumber)
+                context.formatRoubles(salaryNumber)
             } else {
                 ""
             }

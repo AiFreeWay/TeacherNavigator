@@ -16,6 +16,31 @@ import javax.inject.Inject
  */
 class JobInteractor @Inject constructor(private val jobRepository: IJobRepository) : IJobInteractor {
 
+    override fun respondVacancy(vacancyId: Int) =
+            jobRepository.respondVacancy(vacancyId)
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribeOn(Schedulers.newThread())
+
+    override fun removeResume(resumeId: Int) =
+            jobRepository.removeResume(resumeId)
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribeOn(Schedulers.newThread())
+
+    override fun prolongVacancy(vacancyId: Int) =
+            jobRepository.prolongVacancy(vacancyId)
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribeOn(Schedulers.newThread())
+
+    override fun prolongResume(resumeId: Int) =
+            jobRepository.prolongResume(resumeId)
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribeOn(Schedulers.newThread())
+
+    override fun removeVacancy(vacancyId: Int) =
+            jobRepository.removeVacancy(vacancyId)
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribeOn(Schedulers.newThread())
+
     override fun loadVacancy(vacancyId: Int) =
             jobRepository.loadVacancy(vacancyId)
                     .observeOn(AndroidSchedulers.mainThread())
@@ -27,11 +52,11 @@ class JobInteractor @Inject constructor(private val jobRepository: IJobRepositor
                     .subscribeOn(Schedulers.newThread())
 
     override fun createResume(resumeRequest: ResumeRequest): Single<Resume> =
-        jobRepository.createResume(resumeRequest)
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribeOn(Schedulers.newThread())
+            jobRepository.createResume(resumeRequest)
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribeOn(Schedulers.newThread())
 
-    override fun loadMyResume():  Single<List<Resume>> =
+    override fun loadMyResume(): Single<List<Resume>> =
             jobRepository.loadMyResume()
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribeOn(Schedulers.newThread())

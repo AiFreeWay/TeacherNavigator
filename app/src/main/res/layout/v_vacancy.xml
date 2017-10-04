@@ -9,6 +9,7 @@
     android:layout_marginTop="@dimen/externalPadding">
 
     <android.support.constraint.ConstraintLayout
+        android:id="@+id/vVacancyRoot"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="@dimen/spacingLarge">
@@ -82,8 +83,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/spacingXLarge"
             android:padding="@dimen/spacingSmall"
-            app:layout_constraintLeft_toLeftOf="parent"
             android:textColor="@color/grey"
+            app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/vVacancyTvResponsibility"
             tools:text="Осталось: 6 дней" />
@@ -94,38 +95,38 @@
             android:layout_width="@dimen/buttonAndTextWidth"
             android:layout_height="@dimen/normalControlsHeight"
             android:layout_gravity="center"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/vVacancyTvResponsibility"
             android:layout_margin="@dimen/spacingLarge"
             android:text="@string/response_to_vacancy"
             android:textAllCaps="false"
-            app:backgroundTint="@color/orange" />
+            app:backgroundTint="@color/orange"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/vVacancyTvResponsibility" />
 
         <Button
             android:id="@+id/vVacancyBtnDelete"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/spacingMedium"
+            android:layout_marginStart="@dimen/spacingMedium"
             android:background="?android:attr/selectableItemBackground"
             android:text="@string/delete"
             android:textColor="@color/greyTextColor"
             app:layout_constraintLeft_toLeftOf="parent"
-            android:layout_marginLeft="@dimen/spacingMedium"
-            android:layout_marginStart="@dimen/spacingMedium"
             app:layout_constraintTop_toBottomOf="@+id/vVacancyTvRemains" />
 
         <Button
             android:id="@+id/vVacancyBtnProlong"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/spacingMedium"
+            android:layout_marginRight="@dimen/spacingMedium"
             android:background="?android:attr/selectableItemBackground"
             android:text="@string/prolong"
             android:textColor="@color/colorPrimaryDark"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/vVacancyTvRemains"
 
-            android:layout_marginRight="@dimen/spacingMedium"
-            android:layout_marginEnd="@dimen/spacingMedium"/>
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/vVacancyTvRemains" />
 
     </android.support.constraint.ConstraintLayout>
 

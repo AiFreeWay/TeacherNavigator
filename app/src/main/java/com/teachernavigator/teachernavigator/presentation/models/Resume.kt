@@ -23,6 +23,8 @@ data class ResumeModel(
         val userName: String,
         val userAvatar: String,
 
-        val isMine : Boolean
+        val isMine: Boolean,
+        val appropriate: List<VacancyModel> = emptyList(),
+        val appropriateCount: CharSequence = ""
 
 ) : Model(id)

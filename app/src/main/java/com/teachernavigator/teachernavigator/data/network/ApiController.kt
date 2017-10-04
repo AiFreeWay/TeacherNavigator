@@ -7,6 +7,7 @@ import com.teachernavigator.teachernavigator.data.network.responses.*
 import com.teachernavigator.teachernavigator.domain.models.Profile
 import com.teachernavigator.teachernavigator.domain.models.Resume
 import com.teachernavigator.teachernavigator.domain.models.Vacancy
+import io.reactivex.Maybe
 import io.reactivex.Observable
 import io.reactivex.Single
 import okhttp3.RequestBody
@@ -111,4 +112,20 @@ interface ApiController {
 
     @GET("/api/v0/vacancy/{vacancyId}")
     fun vacancy(@Header("Authorization") accessToken: String, @Path("vacancyId") vacancyId: Int): Single<Vacancy>
+
+    @DELETE("/api/v0/vacancy/{vacancyId}/")
+    fun removeVacancy(@Header("Authorization") accessToken: String, @Path("vacancyId") vacancyId: Int): Maybe<Unit>
+
+    @PATCH("/api/v0/me/vacancy/update/{vacancyId}/")
+    fun updateVacancy(@Header("Authorization") accessToken: String, @Path("vacancyId") vacancyId: Int): Maybe<Unit>
+
+    @PATCH("/api/v0/me/resume/update/{resumeId}/")
+    fun updateResume(@Header("Authorization") accessToken: String, @Path("resumeId") resumeId: Int): Maybe<Unit>
+
+    @DELETE("/api/v0/me/resume/{resumeId}/")
+    fun removeResume(@Header("Authorization") accessToken: String, @Path("resumeId") resumeId: Int): Maybe<Unit>
+
+    @POST("/api/v0/response/")
+    fun respondVacancy(@Header("Authorization") accessToken: String, @Body request: RespondVacancyRequest): Maybe<Unit>
+
 }

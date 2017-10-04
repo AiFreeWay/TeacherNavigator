@@ -60,7 +60,7 @@ class ResumeHolder(itemView: View,
             vResumeBtnProlong.visibility = if (isMine) View.VISIBLE else View.GONE
 
 
-            vResumeTvSuitableVacancies.text = "Подходящих вакансий: 118"
+            vResumeTvSuitableVacancies.text = it.appropriateCount
             vResumeTvRemains.text = it.daysRemains
         }
     }

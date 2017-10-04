@@ -4,6 +4,8 @@ import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.GONE
+import android.view.View.VISIBLE
 import android.view.ViewGroup
 import com.teachernavigator.teachernavigator.R
 import com.teachernavigator.teachernavigator.application.di.components.DaggerParentScreenComponent
@@ -56,7 +58,7 @@ class VacancyFragment : BaseFragment(), VacancyView {
         vListRvData.layoutManager = LinearLayoutManager(context)
         vListRvData.adapter = adapter
 
-        mVacancyHolder = VacancyHolder(vVacancy, true, null, null, null)
+        mVacancyHolder = VacancyHolder(vVacancy, true, null, null, null, null)
     }
 
     private fun inject() {
@@ -68,10 +70,12 @@ class VacancyFragment : BaseFragment(), VacancyView {
     }
 
     override fun showRefresh() {
+        vVacancy.visibility = GONE
         vListSwipeLayout?.isRefreshing = true
     }
 
     override fun hideRefresh() {
+        vVacancy.visibility = VISIBLE
         vListSwipeLayout?.isRefreshing = false
     }
 

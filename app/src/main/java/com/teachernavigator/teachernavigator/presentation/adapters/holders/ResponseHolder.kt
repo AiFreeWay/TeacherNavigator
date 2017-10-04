@@ -2,6 +2,8 @@ package com.teachernavigator.teachernavigator.presentation.adapters.holders
 
 import android.support.v4.content.ContextCompat
 import android.view.View
+import android.view.View.GONE
+import android.view.View.VISIBLE
 import android.widget.ImageView
 import android.widget.TextView
 import com.teachernavigator.teachernavigator.R
@@ -41,6 +43,7 @@ class ResponseHolder(itemView: View,
             }
             vResponseTvTimeAgo.text = it.timeAgo
             vResponseTvName.text = it.userName
+            vResponseTvDownload.visibility = if (it.portfolio.isBlank()) GONE else VISIBLE
         }
     }
 

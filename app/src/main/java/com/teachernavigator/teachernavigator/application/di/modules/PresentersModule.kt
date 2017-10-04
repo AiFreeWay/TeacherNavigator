@@ -1,6 +1,8 @@
 package com.teachernavigator.teachernavigator.application.di.modules
 
 import com.teachernavigator.teachernavigator.application.di.scopes.PerParentScreen
+import com.teachernavigator.teachernavigator.presentation.screens.info.presenters.ImportantToKnowPresenter
+import com.teachernavigator.teachernavigator.presentation.screens.info.presenters.abstractions.IImportantToKnowPresenter
 import com.teachernavigator.teachernavigator.presentation.screens.jobs.presenters.*
 import com.teachernavigator.teachernavigator.presentation.screens.jobs.presenters.abstractions.*
 import dagger.Module
@@ -44,5 +46,9 @@ class PresentersModule {
     @Provides
     @PerParentScreen
     fun provideVacancyPresenter(presenter: VacancyPresenter): IVacancyPresenter = presenter
+
+    @Provides
+    @PerParentScreen
+    fun provideImportantToKnowPresenter(presenter: ImportantToKnowPresenter): IImportantToKnowPresenter = presenter
 
 }

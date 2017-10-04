@@ -58,7 +58,7 @@ class CreateResumeFragment : BaseFragment(), CreateResumeView {
 
         rxPermissions
                 .request(Manifest.permission.READ_EXTERNAL_STORAGE)
-                .map { if (!it) throw Error("Permossion Denied") }
+                .map { if (!it) throw Error("Permission Denied") }
                 .flatMap {
                     RxPaparazzo.single(this@CreateResumeFragment)
                             .usingFiles()

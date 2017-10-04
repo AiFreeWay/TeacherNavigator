@@ -145,6 +145,12 @@
     <string name="response_to_vacancy">Откликнуться на вакансию</string>
     <string name="me_employer">Я работодатель</string>
     <string name="download_resume">Скачать резюме</string>
+    <string name="label_choose_theme">Выберите тематику</string>
+    <string name="not_implemented">Данный функционал находится в стадии разработки</string>
+    <string name="label_courses">Курсы повышения квалификации</string>
+    <string name="label_legal">Законодательство</string>
+    <string name="label_internet_friend">Интернет - друг педагога</string>
+    <string name="label_care">С заботой о Вас</string>
     <string-array name="types_of_employment">
         <item>@string/full</item>
         <item>@string/partial</item>

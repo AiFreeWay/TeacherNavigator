@@ -31,30 +31,33 @@ class MenuItemsFactory {
             items.add(MenuItem(MenuItemTypes.SAVED.id, context.getString(R.string.saved), R.drawable.ic_saved))
             items.add(MenuItem(MenuItemTypes.CHAT.id, context.getString(R.string.chat), R.drawable.ic_chat))
             items.add(MenuItem(MenuItemTypes.SUPPORT.id, context.getString(R.string.support), R.drawable.ic_support))
-            items.add(MenuItem(MenuItemTypes.IMPORTATNT_TO_KNOW.id, context.getString(R.string.important_to_know), R.drawable.ic_important_to_know))
-            items.add(MenuItem(MenuItemTypes.BAKN_OF_VACANCY.id, context.getString(R.string.bank_of_vacancy), R.drawable.ic_bank_of_vacancy))
+            items.add(MenuItem(MenuItemTypes.IMPORTANT_TO_KNOW.id, context.getString(R.string.important_to_know), R.drawable.ic_important_to_know))
+            items.add(MenuItem(MenuItemTypes.BANK_OF_VACANCY.id, context.getString(R.string.bank_of_vacancy), R.drawable.ic_bank_of_vacancy))
 
             items.add(MenuItem(MenuItemTypes.ADD_PUBLICATION.id))
             return items
         }
     }
 
-    enum class MenuItemTypes(var id: Int) {
-        LOGIN(0),
+    enum class MenuItemTypes {
+        LOGIN,
 
-        TAPE(1),
-        SETTINGS(2),
-        ADD_PUBLICATION(5),
+        TAPE,
+        SETTINGS,
+        ADD_PUBLICATION,
 
-        PROFILE_HEADER(6),
-        MY_PUBLICATION(7),
-        MY_COMMENTS(8),
-        SAVED(9),
-        CHAT(10),
-        SUPPORT(11),
-        IMPORTATNT_TO_KNOW(12),
-        BAKN_OF_VACANCY(13),
+        PROFILE_HEADER,
+        MY_PUBLICATION,
+        MY_COMMENTS,
+        SAVED,
+        CHAT,
+        SUPPORT,
+        IMPORTANT_TO_KNOW,
+        BANK_OF_VACANCY,
 
-        DEVIDER(100)
+        DEVIDER;
+
+        val id: Int
+            get() = ordinal
     }
 }

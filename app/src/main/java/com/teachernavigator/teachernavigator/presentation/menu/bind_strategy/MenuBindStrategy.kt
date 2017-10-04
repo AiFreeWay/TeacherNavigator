@@ -24,8 +24,8 @@ class MenuBindStrategy(private val mMenuController: MenuController) : BindStrate
             MenuItemsFactory.MenuItemTypes.SAVED.id -> ItemBinder(parent)
             MenuItemsFactory.MenuItemTypes.CHAT.id -> ItemBinder(parent)
             MenuItemsFactory.MenuItemTypes.SUPPORT.id -> ItemBinder(parent)
-            MenuItemsFactory.MenuItemTypes.IMPORTATNT_TO_KNOW.id -> ItemBinder(parent)
-            MenuItemsFactory.MenuItemTypes.BAKN_OF_VACANCY.id -> ItemBinder(parent)
+            MenuItemsFactory.MenuItemTypes.IMPORTANT_TO_KNOW.id -> ItemBinder(parent)
+            MenuItemsFactory.MenuItemTypes.BANK_OF_VACANCY.id -> ItemBinder(parent)
             else -> throw Exception("Invalid menu item type $type MenuBindStrategy.getAdapterStrategy()")
         }
 

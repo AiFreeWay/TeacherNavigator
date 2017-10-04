@@ -3,6 +3,7 @@ package com.teachernavigator.teachernavigator.presentation.factories
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import com.teachernavigator.teachernavigator.presentation.screens.auth.fragments.*
+import com.teachernavigator.teachernavigator.presentation.screens.info.fragments.ImportantToKnowFragment
 import com.teachernavigator.teachernavigator.presentation.screens.jobs.fragments.*
 import com.teachernavigator.teachernavigator.presentation.screens.main.fragments.*
 
@@ -35,6 +36,7 @@ class FragmentsFactory {
                 MyResumeFragment.FRAGMENT_KEY -> addBundle(MyResumeFragment(), bundle)
                 CreateVacancyFragment.FRAGMENT_KEY -> addBundle(CreateVacancyFragment(), bundle)
                 AddPublicationFragment.FRAGMENT_KEY -> addBundle(AddPublicationFragment(), bundle)
+                ImportantToKnowFragment.FRAGMENT_KEY -> addBundle(ImportantToKnowFragment(), bundle)
                 else -> throw Exception("Invalid fragment key $screenKey FragmentsFactory.createFragment(screenKey: String?)")
             }
 

@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="@dimen/spacingLarge">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_margin="@dimen/spacingLarge"
+        android:text="@string/label_choose_theme"
+        android:textSize="@dimen/titleTextSize" />
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/spacingLarge">
+
+        <TextView
+            android:id="@+id/fmtImportantTvLegal"
+            android:background="?android:attr/selectableItemBackground"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/spacingLarge"
+            android:drawableStart="@drawable/ic_legal"
+            android:drawableLeft="@drawable/ic_legal"
+            android:drawablePadding="@dimen/spacingXXLarge"
+            android:text="@string/label_legal"
+            android:gravity="center_vertical"
+            android:textSize="@dimen/largeTextSize" />
+
+    </android.support.v7.widget.CardView>
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/spacingLarge">
+
+        <TextView
+            android:id="@+id/fmtImportantTvInternet"
+            android:background="?android:attr/selectableItemBackground"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/spacingLarge"
+            android:drawableStart="@drawable/ic_internet"
+            android:drawableLeft="@drawable/ic_internet"
+            android:drawablePadding="@dimen/spacingXXLarge"
+            android:text="@string/label_internet_friend"
+            android:gravity="center_vertical"
+            android:textSize="@dimen/largeTextSize" />
+
+    </android.support.v7.widget.CardView>
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/spacingLarge">
+
+        <TextView
+            android:id="@+id/fmtImportantTvCare"
+            android:background="?android:attr/selectableItemBackground"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/spacingLarge"
+            android:drawableStart="@drawable/ic_donation"
+            android:drawableLeft="@drawable/ic_donation"
+            android:drawablePadding="@dimen/spacingXXLarge"
+            android:text="@string/label_care"
+            android:gravity="center_vertical"
+            android:textSize="@dimen/largeTextSize" />
+
+    </android.support.v7.widget.CardView>
+
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/spacingLarge">
+
+        <TextView
+            android:id="@+id/fmtImportantTvCourses"
+            android:background="?android:attr/selectableItemBackground"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/spacingLarge"
+            android:drawableStart="@drawable/ic_courses"
+            android:drawableLeft="@drawable/ic_courses"
+            android:drawablePadding="@dimen/spacingXXLarge"
+            android:text="@string/label_courses"
+            android:gravity="center_vertical"
+            android:textSize="@dimen/largeTextSize" />
+
+    </android.support.v7.widget.CardView>
+
+</LinearLayout>

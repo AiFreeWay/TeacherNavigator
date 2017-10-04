@@ -4,6 +4,9 @@ import android.content.Context
 import android.database.Cursor
 import android.net.Uri
 import android.provider.MediaStore
+import android.widget.Toast
+import com.teachernavigator.teachernavigator.R
+import com.teachernavigator.teachernavigator.presentation.screens.common.BaseView
 
 /**
  * Created by lliepmah on 03.10.17
@@ -23,3 +26,6 @@ fun Context.getPathFromUri(contentUri: Uri): String {
         }
     }
 }
+
+fun BaseView.notImplemented() =
+        Toast.makeText(getContext(), R.string.not_implemented, Toast.LENGTH_LONG).show()

@@ -1,39 +1,36 @@
-apply plugin: 'com.github.ben-manes.versions'
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
+
 buildscript {
     ext {
-        kotlinVersion = '1.1.50'
-        supportLibrary = '26.1.0'
-        gradleVersionsVersion = '0.15.0'
+        kotlinVersion = '1.1.3-2'
+        supportLibrary = '26.0.0-alpha1'
         googleServices = '11.0.2'
         androidArh = '1.0.0-alpha1'
-        dagger = '2.11'
-        rxJava = '2.1.5'
+        dagger = '2.4'
+        rxJava = '2.1.1'
         rxAndroid = '2.0.1'
-        retrofit = '2.3.0'
-        okhttp = '3.9.0'
+        retrofit = '2.2.0'
+        okhttp = '3.4.1'
         picasso = '2.5.2'
-        constratintLayout = '1.1.0-beta2'
-        butterKnife = '8.8.1'
-        cicerone = '2.1.0'
+        constratintLayout = '1.0.2'
+        butterKnife = '8.0.1'
+        cicerone = '2.0.0'
         hawk = '2.0.1'
         circleView = '2.1.0'
         hashtagView = '1.3.1'
-        firebaseCrash = '11.4.2'
+        firebaseCrash = '11.2.2'
         universalAdapterVersion = '0.1.2'
         rxPaparazzoVersion = '0.5.4-2.x'
         rxPermissions = '0.9.4'
-        androidToolsVersion = '2.3.3'
-        gradleGoogleServicesVersion = '3.1.1'
     }
     repositories {
         jcenter()
         mavenCentral()
     }
     dependencies {
-        classpath "com.android.tools.build:gradle:$androidToolsVersion"
+        classpath 'com.android.tools.build:gradle:2.3.3'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
-        classpath "com.google.gms:google-services:$gradleGoogleServicesVersion"
-        classpath "com.github.ben-manes:gradle-versions-plugin:$gradleVersionsVersion"
+        classpath 'com.google.gms:google-services:3.0.0'
     }
 }
 

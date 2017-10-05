@@ -40,7 +40,7 @@
     <string name="agreement">Согласие на обработку персональных данных</string>
     <string name="do_restore_password">Получить пароль</string>
     <string name="restore_password_text">Введите Ваш e-mail или моб. телефон указанный при регистрации</string>
-    <string name="more">Читать далее...</string>
+    <string name="more">Читать далее&#8230;</string>
     <string name="complain">Пожаловаться</string>
     <string name="minus">-</string>
     <string name="plus">+</string>
@@ -165,4 +165,9 @@
         <item>@string/full</item>
         <item>@string/partial</item>
     </string-array>
+
+    <string name="social_link_vk">https://vk.com/mgo_profsoyuz</string>
+    <string name="social_link_fb">https://www.facebook.com/mgoprofru/</string>
+    <string name="social_link_instagram">https://www.instagram.com/pronm/</string>
+    <string name="browser_not_found">На вашем устройстве не установлен браузер</string>
 </resources>

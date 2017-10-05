@@ -7,5 +7,7 @@ import com.teachernavigator.teachernavigator.presentation.screens.info.fragments
  * Created by lliepmah on 05.10.17
  */
 interface IAboutPresenter : ViewAttacher<AboutView> {
-
+    fun openVk() : Unit?
+    fun openFb(): Unit?
+    fun openInstagram(): Unit?
 }

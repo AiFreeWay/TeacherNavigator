@@ -20,10 +20,10 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="@dimen/spacingXLarge"
-            android:textSize="@dimen/largeTextSize"
             android:gravity="center"
-            android:text="@string/we_in_social" />
+            android:padding="@dimen/spacingXLarge"
+            android:text="@string/we_in_social"
+            android:textSize="@dimen/largeTextSize" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -31,52 +31,52 @@
             android:orientation="horizontal">
 
             <ImageView
-                android:layout_width="match_parent"
-                android:layout_weight="1"
-                android:padding="@dimen/spacingMedium"
-                android:background="?android:attr/selectableItemBackground"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_social_vk"
                 android:id="@+id/fmtAboutSocialVk"
-                />
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="?android:attr/selectableItemBackground"
+                android:padding="@dimen/spacingMedium"
+                android:src="@drawable/ic_social_vk" />
 
             <ImageView
-                android:layout_width="match_parent"
-                android:layout_weight="1"
-                android:padding="@dimen/spacingMedium"
-                android:background="?android:attr/selectableItemBackground"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_social_tw"
                 android:id="@+id/fmtAboutSocialTw"
-                />
-            <ImageView
                 android:layout_width="match_parent"
-                android:layout_weight="1"
-                android:padding="@dimen/spacingMedium"
-                android:background="?android:attr/selectableItemBackground"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_social_fb"
-                android:id="@+id/fmtAboutSocialFb"
-                />
+                android:layout_weight="1"
+                android:background="?android:attr/selectableItemBackground"
+                android:padding="@dimen/spacingMedium"
+                android:src="@drawable/ic_social_tw"
+                android:visibility="gone" />
 
             <ImageView
+                android:id="@+id/fmtAboutSocialFb"
                 android:layout_width="match_parent"
-                android:layout_weight="1"
-                android:padding="@dimen/spacingMedium"
-                android:background="?android:attr/selectableItemBackground"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_instagram"
-                android:id="@+id/fmtAboutInstagram"
-                />
+                android:layout_weight="1"
+                android:background="?android:attr/selectableItemBackground"
+                android:padding="@dimen/spacingMedium"
+                android:src="@drawable/ic_social_fb" />
+
             <ImageView
+                android:id="@+id/fmtAboutInstagram"
                 android:layout_width="match_parent"
-                android:layout_weight="1"
-                android:padding="@dimen/spacingMedium"
-                android:background="?android:attr/selectableItemBackground"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_youtube"
+                android:layout_weight="1"
+                android:background="?android:attr/selectableItemBackground"
+                android:padding="@dimen/spacingMedium"
+                android:src="@drawable/ic_instagram" />
+
+            <ImageView
                 android:id="@+id/fmtAboutYoutube"
-                />
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="?android:attr/selectableItemBackground"
+                android:padding="@dimen/spacingMedium"
+                android:src="@drawable/ic_youtube"
+                android:visibility="gone" />
+
         </LinearLayout>
 
     </LinearLayout>

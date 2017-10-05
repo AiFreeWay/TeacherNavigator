@@ -2,6 +2,9 @@ package com.teachernavigator.teachernavigator.presentation.screens.info.presente
 
 import android.arch.lifecycle.Lifecycle
 import android.arch.lifecycle.OnLifecycleEvent
+import android.content.ActivityNotFoundException
+import android.content.Intent
+import android.net.Uri
 import com.teachernavigator.teachernavigator.R
 import com.teachernavigator.teachernavigator.application.di.scopes.PerParentScreen
 import com.teachernavigator.teachernavigator.domain.interactors.abstractions.IProfileInteractor
@@ -18,7 +21,7 @@ import javax.inject.Inject
 @PerParentScreen
 class AboutPresenter
 @Inject constructor(val router: Router,
-                    val interactor: IProfileInteractor) : BasePresenter<AboutView>(), IAboutPresenter {
+                    private val interactor: IProfileInteractor) : BasePresenter<AboutView>(), IAboutPresenter {
 
     @OnLifecycleEvent(Lifecycle.Event.ON_START)
     private fun onStart() {
@@ -43,4 +46,28 @@ class AboutPresenter
     private fun stopProgress() =
             mView?.getParentView()?.stopProgress()
 
+
+    override fun openVk() = mView?.let {
+        try {
+            it.getContext().startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(it.getContext().getString(R.string.social_link_vk))))
+        } catch (error: ActivityNotFoundException) {
+            it.showToast(R.string.browser_not_found)
+        }
+    }
+
+    override fun openFb() = mView?.let {
+        try {
+            it.getContext().startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(it.getContext().getString(R.string.social_link_fb))))
+        } catch (error: ActivityNotFoundException) {
+            it.showToast(R.string.browser_not_found)
+        }
+    }
+
+    override fun openInstagram() = mView?.let {
+        try {
+            it.getContext().startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(it.getContext().getString(R.string.social_link_instagram))))
+        } catch (error: ActivityNotFoundException) {
+            it.showToast(R.string.browser_not_found)
+        }
+    }
 }

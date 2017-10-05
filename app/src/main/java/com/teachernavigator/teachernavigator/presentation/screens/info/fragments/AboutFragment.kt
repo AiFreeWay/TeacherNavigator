@@ -35,10 +35,11 @@ class AboutFragment : BaseFragment(), AboutView {
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        fmtAboutSocialVk.setOnClickListener { notImplemented() }
+
+        fmtAboutSocialVk.setOnClickListener { aboutPresenter.openVk() }
         fmtAboutSocialTw.setOnClickListener { notImplemented() }
-        fmtAboutSocialFb.setOnClickListener { notImplemented() }
-        fmtAboutInstagram.setOnClickListener { notImplemented() }
+        fmtAboutSocialFb.setOnClickListener { aboutPresenter.openFb() }
+        fmtAboutInstagram.setOnClickListener { aboutPresenter.openInstagram() }
         fmtAboutYoutube.setOnClickListener { notImplemented() }
     }
 

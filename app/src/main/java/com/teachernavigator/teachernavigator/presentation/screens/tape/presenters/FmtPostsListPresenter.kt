@@ -47,9 +47,12 @@ class FmtPostsListPresenter : BasePresenter<PostsListView>(), IPostsListPresente
 
     override fun doOnError(error: Throwable) {
         super.doOnError(error)
-        mView!!.getParentView().stopProgress()
-        mView!!.showNoDataText()
-        Toast.makeText(mView!!.getContext(), mView!!.getContext().getString(R.string.error_throwed), Toast.LENGTH_SHORT).show()
+        mView?.apply {
+            getParentView().stopProgress()
+            showNoDataText()
+            Toast.makeText(getContext(), getContext().getString(R.string.error_throwed), Toast.LENGTH_SHORT).show()
+        }
+
     }
 
     override fun setTapeType(tapeType: Int) {
@@ -60,28 +63,27 @@ class FmtPostsListPresenter : BasePresenter<PostsListView>(), IPostsListPresente
 
     override fun getPosts() {
         addDissposable(TapeStrategy.getPostByType(mTapeType, mPostInteractor)
-                .doOnSubscribe { this::doOnSubscribeOnGetPosts }
+                .doOnSubscribe { doOnSubscribeOnGetPosts() }
                 .subscribe(this::doOnGetPosts, this::doOnError))
     }
 
-    private fun doOnGetPosts(posts: List<Post>) {
-        mView!!.getParentView().stopProgress()
-        mView!!.loadPosts(posts)
+    private fun doOnGetPosts(posts: List<Post>) = mView?.run {
+        getParentView().stopProgress()
+        loadPosts(posts)
 
         if (posts.isNotEmpty())
-            mView!!.hideNoDataText()
+            hideNoDataText()
         else
-            mView!!.showNoDataText()
+            showNoDataText()
+    } ?: Unit
+
+    private fun doOnSubscribeOnGetPosts() = mView?.apply {
+        getParentView().startProgress()
+        hideNoDataText()
     }
 
-    private fun doOnSubscribeOnGetPosts() {
-        mView!!.getParentView().startProgress()
-        mView!!.hideNoDataText()
-    }
-
-    private fun inject() {
-        mView!!.getParentView()
-                .getParentScreenComponent()
-                .inject(this)
-    }
+    private fun inject() =
+            mView?.getParentView()
+                    ?.getParentScreenComponent()
+                    ?.inject(this)
 }

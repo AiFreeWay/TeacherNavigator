@@ -19,12 +19,14 @@ import com.teachernavigator.teachernavigator.presentation.screens.auth.activitie
 import com.teachernavigator.teachernavigator.presentation.screens.common.BasePresenter
 import com.teachernavigator.teachernavigator.presentation.screens.info.fragments.AboutFragment
 import com.teachernavigator.teachernavigator.presentation.screens.info.fragments.ImportantToKnowFragment
+import com.teachernavigator.teachernavigator.presentation.screens.info.fragments.SupportFragment
 import com.teachernavigator.teachernavigator.presentation.screens.jobs.fragments.JobsBankFragment
 import com.teachernavigator.teachernavigator.presentation.screens.main.activities.ProfileActivity
 import com.teachernavigator.teachernavigator.presentation.screens.main.activities.abstractions.MainView
 import com.teachernavigator.teachernavigator.presentation.screens.main.fragments.*
 import com.teachernavigator.teachernavigator.presentation.screens.main.presenters.abstractions.IMainPresenter
 import com.teachernavigator.teachernavigator.presentation.utils.ActivityRouter
+import com.teachernavigator.teachernavigator.presentation.utils.notImplemented
 import ru.terrakok.cicerone.Router
 import javax.inject.Inject
 
@@ -107,6 +109,8 @@ class AcMainPresenter : BasePresenter<MainView>(), IMainPresenter {
             MenuItemsFactory.MenuItemTypes.SETTINGS.id -> navigateToFragment(SettingsFragment.FRAGMENT_KEY)
             MenuItemsFactory.MenuItemTypes.BANK_OF_VACANCY.id -> navigateToFragment(JobsBankFragment.FRAGMENT_KEY)
             MenuItemsFactory.MenuItemTypes.IMPORTANT_TO_KNOW.id -> navigateToFragment(ImportantToKnowFragment.FRAGMENT_KEY)
+            MenuItemsFactory.MenuItemTypes.SUPPORT.id -> navigateToFragment(SupportFragment.FRAGMENT_KEY)
+            MenuItemsFactory.MenuItemTypes.CHAT.id -> mView?.notImplemented()
             MenuItemsFactory.MenuItemTypes.PROFILE_HEADER.id -> {
                 val bundle = Bundle()
                 bundle.putBoolean(ProfileActivity.IS_MY_PROFILE_KEY, true)

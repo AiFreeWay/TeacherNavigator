@@ -152,6 +152,15 @@
     <string name="label_internet_friend">Интернет - друг педагога</string>
     <string name="label_care">С заботой о Вас</string>
     <string name="we_in_social">Мы в социальных сетях</string>
+    <string name="label_choose_specialist">Выберите специалиста</string>
+    <string name="label_legal_inspector">Правовой инспектор</string>
+    <string name="label_labour_protection_specialist">Специалист по охране труда</string>
+    <string name="label_economist">Экономист</string>
+    <string name="label_methodist">Методист</string>
+    <string name="label_psychologist">Психолог</string>
+    <string name="label_question_to_experienced">Вопрос бывалому</string>
+    <string name="answer_question">Вопрос - Ответ</string>
+    <string name="advises">Советы</string>
     <string-array name="types_of_employment">
         <item>@string/full</item>
         <item>@string/partial</item>

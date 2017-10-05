@@ -3,8 +3,10 @@ package com.teachernavigator.teachernavigator.application.di.modules
 import com.teachernavigator.teachernavigator.application.di.scopes.PerParentScreen
 import com.teachernavigator.teachernavigator.presentation.screens.info.presenters.AboutPresenter
 import com.teachernavigator.teachernavigator.presentation.screens.info.presenters.ImportantToKnowPresenter
+import com.teachernavigator.teachernavigator.presentation.screens.info.presenters.SupportPresenter
 import com.teachernavigator.teachernavigator.presentation.screens.info.presenters.abstractions.IAboutPresenter
 import com.teachernavigator.teachernavigator.presentation.screens.info.presenters.abstractions.IImportantToKnowPresenter
+import com.teachernavigator.teachernavigator.presentation.screens.info.presenters.abstractions.ISupportPresenter
 import com.teachernavigator.teachernavigator.presentation.screens.jobs.presenters.*
 import com.teachernavigator.teachernavigator.presentation.screens.jobs.presenters.abstractions.*
 import dagger.Module
@@ -56,5 +58,9 @@ class PresentersModule {
     @Provides
     @PerParentScreen
     fun provideAboutPresenter(presenter: AboutPresenter): IAboutPresenter = presenter
+
+    @Provides
+    @PerParentScreen
+    fun provideSupportPresenter(presenter: SupportPresenter): ISupportPresenter = presenter
 
 }

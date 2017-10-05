@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/fmtAboutTvText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/spacingXLarge"
+            android:textSize="@dimen/normalTextSize"
+            tools:text="@string/about" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/spacingXLarge"
+            android:textSize="@dimen/largeTextSize"
+            android:gravity="center"
+            android:text="@string/we_in_social" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_weight="1"
+                android:padding="@dimen/spacingMedium"
+                android:background="?android:attr/selectableItemBackground"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_social_vk"
+                android:id="@+id/fmtAboutSocialVk"
+                />
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_weight="1"
+                android:padding="@dimen/spacingMedium"
+                android:background="?android:attr/selectableItemBackground"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_social_tw"
+                android:id="@+id/fmtAboutSocialTw"
+                />
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_weight="1"
+                android:padding="@dimen/spacingMedium"
+                android:background="?android:attr/selectableItemBackground"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_social_fb"
+                android:id="@+id/fmtAboutSocialFb"
+                />
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_weight="1"
+                android:padding="@dimen/spacingMedium"
+                android:background="?android:attr/selectableItemBackground"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_instagram"
+                android:id="@+id/fmtAboutInstagram"
+                />
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_weight="1"
+                android:padding="@dimen/spacingMedium"
+                android:background="?android:attr/selectableItemBackground"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_youtube"
+                android:id="@+id/fmtAboutYoutube"
+                />
+        </LinearLayout>
+
+    </LinearLayout>
+
+</ScrollView>

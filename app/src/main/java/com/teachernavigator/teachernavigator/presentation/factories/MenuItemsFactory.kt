@@ -55,6 +55,9 @@ class MenuItemsFactory {
         IMPORTANT_TO_KNOW,
         BANK_OF_VACANCY,
 
+        ABOUT,
+        TAGS,
+
         DEVIDER;
 
         val id: Int

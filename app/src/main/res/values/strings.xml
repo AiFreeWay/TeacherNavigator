@@ -151,6 +151,7 @@
     <string name="label_legal">Законодательство</string>
     <string name="label_internet_friend">Интернет - друг педагога</string>
     <string name="label_care">С заботой о Вас</string>
+    <string name="we_in_social">Мы в социальных сетях</string>
     <string-array name="types_of_employment">
         <item>@string/full</item>
         <item>@string/partial</item>

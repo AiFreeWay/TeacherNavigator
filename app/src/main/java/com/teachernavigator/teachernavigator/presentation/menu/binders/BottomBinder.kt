@@ -1,11 +1,10 @@
 package com.teachernavigator.teachernavigator.presentation.menu.binders
 
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.TextView
-import butterknife.BindView
 import butterknife.ButterKnife
+import butterknife.OnClick
 import com.teachernavigator.teachernavigator.R
+import com.teachernavigator.teachernavigator.presentation.factories.MenuItemsFactory
 import com.teachernavigator.teachernavigator.presentation.models.MenuData
 import com.teachernavigator.teachernavigator.presentation.models.MenuItem
 
@@ -14,17 +13,40 @@ import com.teachernavigator.teachernavigator.presentation.models.MenuItem
  */
 class BottomBinder(viewGroup: ViewGroup) : BaseMenuBinder(viewInflater(viewGroup, R.layout.v_bottom_biner)) {
 
-    @BindView(R.id.v_bottom_binder_btn_add_publication)
-    lateinit var mBtnAddPublication: Button
-
     init {
         ButterKnife.bind(this, mView)
     }
 
+    private var mMenuItem: MenuItem? = null
+
     override fun bind(menuItem: MenuItem) {
-        mBtnAddPublication.setOnClickListener {
-            val action = MenuData<Any>(menuItem.mType, null)
+        mMenuItem = menuItem
+    }
+
+    @OnClick(R.id.v_bottom_binder_btn_add_publication)
+    fun addPublication() {
+        mMenuItem?.run {
+            val action = MenuData<Any>(mType, null)
             mOutputChannel?.onNext(action)
+
+        }
+    }
+
+    @OnClick(R.id.v_bottom_holder_tv_about)
+    fun about() {
+        mMenuItem?.run {
+            val action = MenuData<Any>(MenuItemsFactory.MenuItemTypes.ABOUT.id, null)
+            mOutputChannel?.onNext(action)
+
+        }
+    }
+
+    @OnClick(R.id.v_bottom_holder_tv_tags)
+    fun tags() {
+        mMenuItem?.run {
+            val action = MenuData<Any>(MenuItemsFactory.MenuItemTypes.TAGS.id, null)
+            mOutputChannel?.onNext(action)
+
         }
     }
 }

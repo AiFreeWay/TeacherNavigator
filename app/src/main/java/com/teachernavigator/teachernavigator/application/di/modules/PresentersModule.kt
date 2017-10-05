@@ -1,7 +1,9 @@
 package com.teachernavigator.teachernavigator.application.di.modules
 
 import com.teachernavigator.teachernavigator.application.di.scopes.PerParentScreen
+import com.teachernavigator.teachernavigator.presentation.screens.info.presenters.AboutPresenter
 import com.teachernavigator.teachernavigator.presentation.screens.info.presenters.ImportantToKnowPresenter
+import com.teachernavigator.teachernavigator.presentation.screens.info.presenters.abstractions.IAboutPresenter
 import com.teachernavigator.teachernavigator.presentation.screens.info.presenters.abstractions.IImportantToKnowPresenter
 import com.teachernavigator.teachernavigator.presentation.screens.jobs.presenters.*
 import com.teachernavigator.teachernavigator.presentation.screens.jobs.presenters.abstractions.*
@@ -50,5 +52,9 @@ class PresentersModule {
     @Provides
     @PerParentScreen
     fun provideImportantToKnowPresenter(presenter: ImportantToKnowPresenter): IImportantToKnowPresenter = presenter
+
+    @Provides
+    @PerParentScreen
+    fun provideAboutPresenter(presenter: AboutPresenter): IAboutPresenter = presenter
 
 }

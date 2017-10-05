@@ -1,7 +1,9 @@
 package com.teachernavigator.teachernavigator.data.repository.abstractions
 
+import com.teachernavigator.teachernavigator.domain.models.About
 import com.teachernavigator.teachernavigator.domain.models.Profile
 import io.reactivex.Observable
+import io.reactivex.Single
 import java.io.File
 
 /**
@@ -9,6 +11,7 @@ import java.io.File
  */
 interface IProfileRepository {
 
+    fun loadAbout(): Single<List<About>>
     fun getProfile(): Observable<Profile>
     fun getProfile(userId: Int): Observable<Profile>
     fun exit()

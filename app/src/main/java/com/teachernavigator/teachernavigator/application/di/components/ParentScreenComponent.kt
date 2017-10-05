@@ -14,6 +14,7 @@ import com.teachernavigator.teachernavigator.presentation.screens.auth.presenter
 import com.teachernavigator.teachernavigator.presentation.screens.auth.presenters.FmtRegistrationPresenter
 import com.teachernavigator.teachernavigator.presentation.screens.auth.presenters.FmtRestorePasswordPresenter
 import com.teachernavigator.teachernavigator.presentation.screens.common.ParentView
+import com.teachernavigator.teachernavigator.presentation.screens.info.fragments.AboutFragment
 import com.teachernavigator.teachernavigator.presentation.screens.info.fragments.ImportantToKnowFragment
 import com.teachernavigator.teachernavigator.presentation.screens.jobs.fragments.*
 import com.teachernavigator.teachernavigator.presentation.screens.main.presenters.*
@@ -77,4 +78,6 @@ interface ParentScreenComponent {
 
     //Information presenters
     fun inject(importantToKnowFragment: ImportantToKnowFragment)
+    fun inject(aboutFragment: AboutFragment)
+
 }

@@ -4,6 +4,7 @@ import com.teachernavigator.teachernavigator.data.models.CommentNetwork
 import com.teachernavigator.teachernavigator.data.models.PostNetwork
 import com.teachernavigator.teachernavigator.data.network.requests.*
 import com.teachernavigator.teachernavigator.data.network.responses.*
+import com.teachernavigator.teachernavigator.domain.models.About
 import com.teachernavigator.teachernavigator.domain.models.Profile
 import com.teachernavigator.teachernavigator.domain.models.Resume
 import com.teachernavigator.teachernavigator.domain.models.Vacancy
@@ -127,5 +128,8 @@ interface ApiController {
 
     @POST("/api/v0/response/")
     fun respondVacancy(@Header("Authorization") accessToken: String, @Body request: RespondVacancyRequest): Maybe<Unit>
+
+    @GET("/api/v0/about/")
+    fun loadAbout(@Header("Authorization") accessToken: String): Single<BaseListResponse<About>>
 
 }

@@ -11,10 +11,7 @@ import com.teachernavigator.teachernavigator.data.network.responses.BaseResponse
 import com.teachernavigator.teachernavigator.data.network.responses.GetMyCommentsResponse
 import com.teachernavigator.teachernavigator.data.network.responses.PostsResponse
 import com.teachernavigator.teachernavigator.data.network.responses.SingInResponse
-import com.teachernavigator.teachernavigator.domain.models.Author
-import com.teachernavigator.teachernavigator.domain.models.Profile
-import com.teachernavigator.teachernavigator.domain.models.Resume
-import com.teachernavigator.teachernavigator.domain.models.Vacancy
+import com.teachernavigator.teachernavigator.domain.models.*
 import io.reactivex.Observable
 import io.reactivex.Single
 import okhttp3.MediaType
@@ -180,5 +177,8 @@ class NetworkController {
             mApiController.respondVacancy(accessToken, RespondVacancyRequest(vacancyId))
                     .toSingle(Unit)// TODO Temporary, I do not have any time
 
+    fun loadAbout(accessToken: String): Single<List<About>> =
+            mApiController.loadAbout(accessToken)
+                    .map { it.results }
 
 }

@@ -178,6 +178,9 @@ class MainRepository @Inject constructor(private val mNetwokController: NetworkC
     override fun respondVacancy(vacancyId: Int): Single<Unit> =
             mNetwokController.respondVacancy(getAccessToken(), vacancyId)
 
+    // ------------------------------- Info methods --------------------------------
+    override fun loadAbout(): Single<List<About>> =
+            mNetwokController.loadAbout(getAccessToken())
 
 
 }

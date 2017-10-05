@@ -17,6 +17,7 @@ import com.teachernavigator.teachernavigator.presentation.menu.MenuController
 import com.teachernavigator.teachernavigator.presentation.models.MenuData
 import com.teachernavigator.teachernavigator.presentation.screens.auth.activities.AuthActivity
 import com.teachernavigator.teachernavigator.presentation.screens.common.BasePresenter
+import com.teachernavigator.teachernavigator.presentation.screens.info.fragments.AboutFragment
 import com.teachernavigator.teachernavigator.presentation.screens.info.fragments.ImportantToKnowFragment
 import com.teachernavigator.teachernavigator.presentation.screens.jobs.fragments.JobsBankFragment
 import com.teachernavigator.teachernavigator.presentation.screens.main.activities.ProfileActivity
@@ -112,6 +113,7 @@ class AcMainPresenter : BasePresenter<MainView>(), IMainPresenter {
                 ActivityRouter.openActivity(mView!!.getActivity(), bundle, ProfileActivity::class.java)
             }
             MenuItemsFactory.MenuItemTypes.ADD_PUBLICATION.id -> navigateToFragment(AddPublicationFragment.FRAGMENT_KEY)
+            MenuItemsFactory.MenuItemTypes.ABOUT.id -> navigateToFragment(AboutFragment.FRAGMENT_KEY)
         }
         mView!!.closeSideMenu()
     }

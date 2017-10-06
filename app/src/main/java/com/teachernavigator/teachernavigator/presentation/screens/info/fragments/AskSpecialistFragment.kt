@@ -33,7 +33,7 @@ class AskSpecialistFragment : BaseFragment(), AskSpecialistView {
     lateinit var askSpecialistPresenter: IAskSpecialistPresenter
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? =
-            inflater?.inflate(R.layout.fmt_important_to_know, container, false)
+            inflater?.inflate(R.layout.fmt_ask_question, container, false)
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -45,7 +45,6 @@ class AskSpecialistFragment : BaseFragment(), AskSpecialistView {
         inject()
         askSpecialistPresenter.attachView(this)
         askSpecialistPresenter.specialist = Specialist.values().getOrNull(arguments.getInt(SPECIALIST_KEY))
-
     }
 
     override fun cleanField() {

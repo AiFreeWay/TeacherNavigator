@@ -134,6 +134,6 @@ interface ApiController {
 
     @FormUrlEncoded
     @POST("/api/v0/me/support/")
-    fun askSpecialist(@Header("Authorization") accessToken: String, @Field("expert") name: String, @Field("text") question: String): Maybe<Unit>
+    fun askSpecialist(@Header("Authorization") accessToken: String, @Field("expert") name: Int, @Field("text") question: String): Maybe<Unit>
 
 }

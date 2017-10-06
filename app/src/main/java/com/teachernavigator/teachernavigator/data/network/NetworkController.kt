@@ -183,7 +183,7 @@ class NetworkController {
                     .map { it.results }
 
     fun askSpecialist(accessToken: String, specialist: Specialist, question: String): Single<Unit> =
-            mApiController.askSpecialist(accessToken, specialist.name, question)
+            mApiController.askSpecialist(accessToken, specialist.ordinal, question)
                     .toSingle(Unit)
 
 }

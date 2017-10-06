@@ -1,5 +1,6 @@
 package com.teachernavigator.teachernavigator.presentation.screens.info.presenters
 
+import com.teachernavigator.teachernavigator.R
 import com.teachernavigator.teachernavigator.application.di.scopes.PerParentScreen
 import com.teachernavigator.teachernavigator.domain.interactors.abstractions.IProfileInteractor
 import com.teachernavigator.teachernavigator.presentation.models.Specialist
@@ -30,13 +31,23 @@ class AskSpecialistPresenter
         if (!message.isBlank() && spec != null) {
             addDissposable(interactor.askSpecialist(spec, message)
                     .doOnSubscribe { startProgress() }
-                    .subscribe(this::onLoaded, this::doOnError))
+                    .subscribe(this::onLoaded, this::onError))
         }
+    }
+
+    private fun onError(error: Throwable) {
+        doOnError(error)
+        stopProgress()
+        val message = error.message ?: (mView?.getContext()?.getString(R.string.unknown_error) ?: "")
+        mView?.showToast(message)
     }
 
     private fun onLoaded(stub: Unit) {
         stopProgress()
-        mView?.cleanField()
+        mView?.apply {
+            cleanField()
+            showToast(R.string.question_was_sent)
+        }
     }
 
     private fun startProgress() =

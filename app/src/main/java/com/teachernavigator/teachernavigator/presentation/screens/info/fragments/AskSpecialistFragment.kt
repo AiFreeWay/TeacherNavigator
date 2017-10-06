@@ -9,46 +9,49 @@ import com.teachernavigator.teachernavigator.application.di.components.DaggerPar
 import com.teachernavigator.teachernavigator.application.di.components.ParentScreenComponent
 import com.teachernavigator.teachernavigator.application.di.modules.ParentScreenModule
 import com.teachernavigator.teachernavigator.application.utils.rootComponent
+import com.teachernavigator.teachernavigator.presentation.models.Specialist
 import com.teachernavigator.teachernavigator.presentation.screens.common.BaseFragment
-import com.teachernavigator.teachernavigator.presentation.screens.info.fragments.abstractions.SupportView
-import com.teachernavigator.teachernavigator.presentation.screens.info.presenters.abstractions.ISupportPresenter
-import com.teachernavigator.teachernavigator.presentation.utils.notImplemented
-import kotlinx.android.synthetic.main.fmt_support.*
+import com.teachernavigator.teachernavigator.presentation.screens.info.fragments.abstractions.AskSpecialistView
+import com.teachernavigator.teachernavigator.presentation.screens.info.presenters.abstractions.IAskSpecialistPresenter
+import kotlinx.android.synthetic.main.fmt_ask_question.*
 import javax.inject.Inject
 
 /**
  * Created by lliepmah on 05.10.17
  */
-class SupportFragment : BaseFragment(), SupportView {
+class AskSpecialistFragment : BaseFragment(), AskSpecialistView {
 
     companion object {
-        val FRAGMENT_KEY = "support_fragment"
+        val FRAGMENT_KEY = "ask_specialist_fragment"
+
+        val SPECIALIST_KEY = "specialist"
     }
 
     private lateinit var mParentScreenComponent: ParentScreenComponent
 
     @Inject
-    lateinit var supportPresenter: ISupportPresenter
+    lateinit var askSpecialistPresenter: IAskSpecialistPresenter
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? =
-            inflater?.inflate(R.layout.fmt_support, container, false)
+            inflater?.inflate(R.layout.fmt_important_to_know, container, false)
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        fmtSupportTvLegalInspector.setOnClickListener { supportPresenter.openLegalInspector() }
-        fmtSupportTvLabourProtectionSpecialist.setOnClickListener { supportPresenter.openLabourProtection() }
-        fmtSupportTvEconomist.setOnClickListener { supportPresenter.openEconomist() }
-        fmtSupportTvMethodist.setOnClickListener { supportPresenter.openMethodist() }
-        fmtSupportTvPsychologist.setOnClickListener { supportPresenter.openPsychologist() }
-        fmtSupportBtnAnswerQuestion.setOnClickListener { notImplemented() }
-        fmtSupportBtnAdvises.setOnClickListener { notImplemented() }
+        askQuestionBtnAsk.setOnClickListener { sendQuestion() }
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         inject()
-        supportPresenter.attachView(this)
+        askSpecialistPresenter.attachView(this)
+        askSpecialistPresenter.specialist = Specialist.values().getOrNull(arguments.getInt(SPECIALIST_KEY))
+
     }
+
+    override fun cleanField() {
+        askQuestionEtMessage.setText("")
+    }
+
 
     private fun inject() {
         mParentScreenComponent = DaggerParentScreenComponent.builder()
@@ -57,5 +60,8 @@ class SupportFragment : BaseFragment(), SupportView {
                 .build()
                 .also { it.inject(this) }
     }
+
+    private fun sendQuestion() =
+            askSpecialistPresenter.askQuestion(askQuestionEtMessage.text.toString())
 
 }

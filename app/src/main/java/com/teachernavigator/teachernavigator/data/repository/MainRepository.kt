@@ -15,6 +15,7 @@ import com.teachernavigator.teachernavigator.data.network.responses.PostsRespons
 import com.teachernavigator.teachernavigator.data.network.responses.SingInResponse
 import com.teachernavigator.teachernavigator.data.repository.abstractions.IMainRepository
 import com.teachernavigator.teachernavigator.domain.models.*
+import com.teachernavigator.teachernavigator.presentation.models.Specialist
 import io.reactivex.Observable
 import io.reactivex.Single
 import java.io.File
@@ -181,6 +182,9 @@ class MainRepository @Inject constructor(private val mNetwokController: NetworkC
     // ------------------------------- Info methods --------------------------------
     override fun loadAbout(): Single<List<About>> =
             mNetwokController.loadAbout(getAccessToken())
+
+    override fun askSpecialist(specialist: Specialist, question: String): Single<Unit> =
+            mNetwokController.askSpecialist(getAccessToken(), specialist, question)
 
 
 }

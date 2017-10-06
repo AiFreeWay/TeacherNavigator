@@ -1,7 +1,6 @@
 package com.teachernavigator.teachernavigator.presentation.screens.info.presenters.abstractions
 
 import com.teachernavigator.teachernavigator.presentation.screens.common.ViewAttacher
-import com.teachernavigator.teachernavigator.presentation.screens.info.fragments.abstractions.ImportantToKnowView
 import com.teachernavigator.teachernavigator.presentation.screens.info.fragments.abstractions.SupportView
 
 /**
@@ -9,5 +8,10 @@ import com.teachernavigator.teachernavigator.presentation.screens.info.fragments
  */
 interface ISupportPresenter : ViewAttacher<SupportView> {
 
+    fun openLegalInspector()
+    fun openEconomist()
+    fun openLabourProtection()
+    fun openMethodist()
+    fun openPsychologist()
 
 }

@@ -132,4 +132,8 @@ interface ApiController {
     @GET("/api/v0/about/")
     fun loadAbout(@Header("Authorization") accessToken: String): Single<BaseListResponse<About>>
 
+    @FormUrlEncoded
+    @POST("/api/v0/me/support/")
+    fun askSpecialist(@Header("Authorization") accessToken: String, @Field("expert") name: String, @Field("text") question: String): Maybe<Unit>
+
 }

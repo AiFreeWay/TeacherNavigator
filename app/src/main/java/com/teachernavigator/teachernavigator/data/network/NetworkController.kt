@@ -12,6 +12,7 @@ import com.teachernavigator.teachernavigator.data.network.responses.GetMyComment
 import com.teachernavigator.teachernavigator.data.network.responses.PostsResponse
 import com.teachernavigator.teachernavigator.data.network.responses.SingInResponse
 import com.teachernavigator.teachernavigator.domain.models.*
+import com.teachernavigator.teachernavigator.presentation.models.Specialist
 import io.reactivex.Observable
 import io.reactivex.Single
 import okhttp3.MediaType
@@ -180,5 +181,9 @@ class NetworkController {
     fun loadAbout(accessToken: String): Single<List<About>> =
             mApiController.loadAbout(accessToken)
                     .map { it.results }
+
+    fun askSpecialist(accessToken: String, specialist: Specialist, question: String): Single<Unit> =
+            mApiController.askSpecialist(accessToken, specialist.name, question)
+                    .toSingle(Unit)
 
 }

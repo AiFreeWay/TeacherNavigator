@@ -1,45 +1,48 @@
 package com.teachernavigator.teachernavigator.presentation.screens.main.activities
 
+import android.app.Activity
 import android.arch.lifecycle.LifecycleRegistry
 import android.content.Context
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.support.v4.widget.DrawerLayout
 import android.support.v7.app.ActionBarDrawerToggle
-import android.support.v7.widget.Toolbar
+import android.support.v7.app.AppCompatActivity
 import android.view.Gravity
 import android.view.KeyEvent
 import android.view.View
-import android.widget.LinearLayout
-import android.widget.ProgressBar
-import butterknife.BindView
-import butterknife.ButterKnife
-
+import android.view.inputmethod.InputMethodManager
 import com.teachernavigator.teachernavigator.R
 import com.teachernavigator.teachernavigator.application.di.components.ParentScreenComponent
 import com.teachernavigator.teachernavigator.presentation.screens.main.activities.abstractions.MainView
 import com.teachernavigator.teachernavigator.presentation.screens.main.presenters.AcMainPresenter
 import com.teachernavigator.teachernavigator.presentation.screens.main.presenters.abstractions.IMainPresenter
+import com.teachernavigator.teachernavigator.presentation.views.MenuArrowDrawable
+import kotlinx.android.synthetic.main.ac_main.*
 
 
 class MainActivity : AppCompatActivity(), MainView {
 
-    @BindView(R.id.ac_main_toolbar) lateinit var mToolbar: Toolbar
-    @BindView(R.id.ac_main_drawer) lateinit var mDrawer: DrawerLayout
-    @BindView(R.id.ac_main_ll_menu) lateinit var mLlMenu: LinearLayout
-    @BindView(R.id.ac_main_progress) lateinit var mProgressBar: ProgressBar
-
     private val mLifecycle: LifecycleRegistry = LifecycleRegistry(this)
     private val mPresenter: IMainPresenter = AcMainPresenter()
+    private val mMenuArrowDrawable by lazy { MenuArrowDrawable(this) }
+    private val mDrawerToggle by lazy {
+        ActionBarDrawerToggle(this, acMainDrawer, acMainToolbar, 0, 0).apply {
+            drawerArrowDrawable = mMenuArrowDrawable
+            acMainToolbar.setNavigationOnClickListener { onMenuClick() }
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.ac_main)
-        ButterKnife.bind(this)
         initToolbar()
         mPresenter.attachView(this)
-        mPresenter.loadMenuItemsToViewGroup(mLlMenu)
+        mPresenter.loadMenuItemsToViewGroup(acMainLlMenu)
         mPresenter.openStartFragment(savedInstanceState)
+    }
+
+    override fun onPostCreate(savedInstanceState: Bundle?) {
+        super.onPostCreate(savedInstanceState)
+        mDrawerToggle.syncState()
     }
 
     override fun onStart() {
@@ -64,26 +67,26 @@ class MainActivity : AppCompatActivity(), MainView {
 
     override fun getActivity(): AppCompatActivity = this
 
-    override fun getFragmentLayoutId(): Int = R.id.ac_main_fl_body
+    override fun getFragmentLayoutId(): Int = R.id.acMainFlBody
 
     override fun startProgress() {
-        mProgressBar.visibility = View.VISIBLE
+        acMainProgress.visibility = View.VISIBLE
     }
 
     override fun stopProgress() {
-        mProgressBar.visibility = View.GONE
+        acMainProgress.visibility = View.GONE
     }
 
-    override fun openSideMenu() = mDrawer.openDrawer(Gravity.START)
+    override fun openSideMenu() = acMainDrawer.openDrawer(Gravity.START)
 
-    override fun closeSideMenu() = mDrawer.closeDrawer(Gravity.START)
+    override fun closeSideMenu() = acMainDrawer.closeDrawer(Gravity.START)
 
     override fun setToolbarTitle(title: String) {
-        mToolbar.setTitle(title)
+        acMainToolbar.title = title
     }
 
     override fun setToolbarTitle(title: Int) {
-        mToolbar.setTitle(title)
+        acMainToolbar.setTitle(title)
     }
 
     override fun getParentScreenComponent(): ParentScreenComponent = mPresenter.getParentScreenComponent()
@@ -91,12 +94,40 @@ class MainActivity : AppCompatActivity(), MainView {
     override fun getContext(): Context = this
 
     private fun initToolbar() {
-        setSupportActionBar(mToolbar)
-        val drawerToggle = object : ActionBarDrawerToggle(this, mDrawer, mToolbar, 0, 0) {
-            override fun onDrawerSlide(drawerView: View, slideOffset: Float) {
-                super.onDrawerSlide(drawerView, 0F)
-            }
-        }
-        drawerToggle.syncState()
+        setSupportActionBar(acMainToolbar)
+        /* acMainDrawer.addDrawerListener(mDrawerToggle) */
+        supportFragmentManager.addOnBackStackChangedListener { this.onBackStackChanged() }
+        onBackStackChanged()
     }
+
+    private fun onMenuClick() {
+        if (!isRootFragment) {
+            mPresenter.navigateBack()
+        } else {
+            if (acMainDrawer.isDrawerOpen(Gravity.START))
+                acMainDrawer.closeDrawer(Gravity.START)
+            else
+                acMainDrawer.openDrawer(Gravity.START)
+        }
+    }
+
+    private val isRootFragment
+        get() = supportFragmentManager.backStackEntryCount <= 0
+
+    private fun onBackStackChanged() {
+        hideSoftKeyboard()
+        updateBackIndicator()
+    }
+
+    private fun updateBackIndicator() {
+        mMenuArrowDrawable.animateDrawable(!isRootFragment)
+    }
+
+    private fun hideSoftKeyboard() {
+        if (currentFocus != null) {
+            val inputMethodManager = getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
+            inputMethodManager.hideSoftInputFromWindow(currentFocus.windowToken, 0)
+        }
+    }
+
 }

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/ac_main_drawer"
+    android:id="@+id/acMainDrawer"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -10,7 +10,7 @@
         android:layout_height="match_parent">
 
         <android.support.design.widget.AppBarLayout
-            android:id="@+id/ac_main_appBarLayout"
+            android:id="@+id/acMainAppBarLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
@@ -19,7 +19,7 @@
             android:theme="@style/ThemeOverlay.AppCompat.Dark">
 
             <android.support.v7.widget.Toolbar
-                android:id="@+id/ac_main_toolbar"
+                android:id="@+id/acMainToolbar"
                 android:layout_width="match_parent"
                 android:layout_height="?android:attr/actionBarSize"
                 android:background="@color/colorPrimary"
@@ -27,15 +27,15 @@
         </android.support.design.widget.AppBarLayout>
 
         <FrameLayout
-            android:id="@+id/ac_main_fl_body"
+            android:id="@+id/acMainFlBody"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-            android:layout_below="@+id/ac_main_appBarLayout" />
+            android:layout_below="@+id/acMainAppBarLayout" />
 
         <ProgressBar
-            android:id="@+id/ac_main_progress"
+            android:id="@+id/acMainProgress"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
@@ -51,7 +51,7 @@
         android:fillViewport="true">
 
         <LinearLayout
-            android:id="@+id/ac_main_ll_menu"
+            android:id="@+id/acMainLlMenu"
             android:layout_width="@dimen/drawerWidthInternal"
             android:layout_height="wrap_content"
             android:background="@android:color/white"

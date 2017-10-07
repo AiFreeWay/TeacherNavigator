@@ -134,7 +134,7 @@ class AcMainPresenter : BasePresenter<MainView>(), IMainPresenter {
     private fun navigateToFragment(screenKey: String) {
         if (!TextUtils.equals(screenKey, mLastScreenKey)) {
             mLastScreenKey = screenKey
-            mRouter.navigateTo(screenKey)
+            mRouter.newRootScreen(screenKey)
         }
     }
 

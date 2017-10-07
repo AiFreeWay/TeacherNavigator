@@ -6,6 +6,7 @@ import android.widget.TextView
 import com.teachernavigator.teachernavigator.R
 import com.teachernavigator.teachernavigator.presentation.models.VacancyModel
 import com.teachernavigator.teachernavigator.presentation.utils.find
+import com.teachernavigator.teachernavigator.presentation.utils.toVisibility
 import ru.lliepmah.HolderBuilder
 import ru.lliepmah.lib.DefaultViewHolder
 
@@ -14,7 +15,7 @@ import ru.lliepmah.lib.DefaultViewHolder
  */
 @HolderBuilder(R.layout.v_vacancy)
 class VacancyHolder(itemView: View,
-                    isMine: Boolean,
+                    private val isMine: Boolean,
                     private val onProlongListener: OnProlongVacancyListener?,
                     private val onDeleteListener: OnDeleteVacancyListener?,
                     private val onResponseListener: OnResponseVacancyListener?,
@@ -38,7 +39,7 @@ class VacancyHolder(itemView: View,
         if (isMine) {
             vVacancyBtnDelete.setOnClickListener { onDelete() }
             vVacancyBtnProlong.setOnClickListener { onProlong() }
-            vVacancyRoot.setOnClickListener { onClick()}
+            vVacancyRoot.setOnClickListener { onClick() }
         } else {
             vVacancyBtnResponse.setOnClickListener { onResponse() }
         }
@@ -53,6 +54,7 @@ class VacancyHolder(itemView: View,
     override fun bind(vacancy: VacancyModel?) {
         mVacancy = vacancy
 
+        vVacancyBtnResponse.visibility = (!isMine && vacancy?.responded != true).toVisibility()
         vVacancyTvOrganization.text = vacancy?.organization ?: ""
         vVacancyTvVacancy.text = vacancy?.vacancy ?: ""
         vVacancyTvCity.text = vacancy?.city ?: ""

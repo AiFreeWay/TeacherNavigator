@@ -1,14 +1,13 @@
 package com.teachernavigator.teachernavigator.presentation.transformers
 
 import android.content.Context
+import android.util.Log.d
 import com.teachernavigator.teachernavigator.R
 import com.teachernavigator.teachernavigator.application.di.scopes.PerParentScreen
 import com.teachernavigator.teachernavigator.data.repository.abstractions.IJobRepository
 import com.teachernavigator.teachernavigator.domain.models.Vacancy
 import com.teachernavigator.teachernavigator.presentation.models.TypeOfInstitution
 import com.teachernavigator.teachernavigator.presentation.models.VacancyModel
-import java.text.NumberFormat
-import java.util.*
 import javax.inject.Inject
 
 /**
@@ -24,6 +23,8 @@ constructor(private val context: Context,
 
         val typeOfEmployment = jobRepository.getTypeOfEmployment(it.typeOfEmployment).name
 
+        d(javaClass.name, "-> ${it.responded} ->")
+
         VacancyModel(
                 id = it.id,
                 organization = it.organization,
@@ -38,13 +39,14 @@ constructor(private val context: Context,
                 responses = from.response_vacancy?.map(ResponseTransformer::transform) ?: listOf(),
                 created = it.created,
                 expired = it.expired,
+                responded = it.responded,
                 user = it.user)
 
     }
 
     private fun getTypeOfInstitution(typeOfInstitution: Int) = when (typeOfInstitution) {
         Vacancy.INSTITUTION_SCHOOL -> TypeOfInstitution.SCHOOL
-        Vacancy.INSTITUTION_COLLEDGE ->TypeOfInstitution.COLLEGE
+        Vacancy.INSTITUTION_COLLEDGE -> TypeOfInstitution.COLLEGE
         Vacancy.INSTITUTION_UNIVERSITY -> TypeOfInstitution.UNIVERSITY
         else -> TypeOfInstitution.UNIVERSITY
     }

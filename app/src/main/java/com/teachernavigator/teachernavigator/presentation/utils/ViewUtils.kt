@@ -8,3 +8,6 @@ import android.view.View
  */
 
 inline fun <reified T : View> View.find(@IdRes id: Int): T = findViewById(id)
+
+fun Boolean?.toVisibility() =
+        if (this == true) View.VISIBLE else View.GONE

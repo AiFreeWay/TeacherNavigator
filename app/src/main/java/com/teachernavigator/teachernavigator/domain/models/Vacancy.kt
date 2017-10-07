@@ -20,6 +20,7 @@ data class Vacancy(
         val created: Date,
         val expired: Date,
         val user: Author,
+        val responded: Boolean = false,
         val response_vacancy: List<Response>? = null
 ) {
 

@@ -1,7 +1,6 @@
 package com.teachernavigator.teachernavigator.presentation.models
 
 import com.teachernavigator.teachernavigator.domain.models.Author
-import java.net.SecureCacheResponse
 import java.util.*
 
 /**
@@ -23,5 +22,6 @@ data class VacancyModel(
         val responses: List<ResponseModel>,
         val created: Date,
         val expired: Date,
+        val responded: Boolean = false,
 
         val user: Author) : Model(id)

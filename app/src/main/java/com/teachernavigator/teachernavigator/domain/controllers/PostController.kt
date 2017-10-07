@@ -78,22 +78,25 @@ class PostController @Inject constructor(private val mRepository: IMainRepositor
     }
 
     override fun openCommentsScreen(post: Post, activity: Activity, doOnUserNotAuth: () -> Unit): Observable<Monade> {
-            if (mRepository.isAuth()) {
-                val bundle = Bundle()
-                bundle.putSerializable(PostCommentsActivity.POST_ID_KEY, post.id!!)
-                ActivityRouter.openActivity(activity, bundle, PostCommentsActivity::class.java)
-            } else
-                doOnUserNotAuth.invoke()
+        if (mRepository.isAuth()) {
+            val bundle = Bundle()
+            bundle.putSerializable(PostCommentsActivity.POST_ID_KEY, post.id!!)
+            ActivityRouter.openActivity(activity, bundle, PostCommentsActivity::class.java)
+        } else
+            doOnUserNotAuth.invoke()
         return Observable.just(Monade.FAILARY_MONADE)
     }
 
     override fun openProfileScreen(post: Post, activity: Activity, doOnUserNotAuth: () -> Unit): Observable<Monade> {
-        if (mRepository.isAuth() && post.author != null && post.author!!.id != null) {
+        val author = post.author
+        if (mRepository.isAuth() && author != null) {
             val bundle = Bundle()
-            bundle.putInt(ProfileActivity.USER_ID_KEY, post.author!!.id!!)
+            bundle.putInt(ProfileActivity.USER_ID_KEY, author.id)
             ActivityRouter.openActivity(activity, bundle, ProfileActivity::class.java)
-        } else
-            doOnUserNotAuth.invoke()
+        } else {
+            doOnUserNotAuth()
+        }
+
         return Observable.just(Monade.FAILARY_MONADE)
     }
 

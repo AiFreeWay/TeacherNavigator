@@ -4,6 +4,7 @@ import android.arch.lifecycle.Lifecycle
 import android.arch.lifecycle.OnLifecycleEvent
 import android.content.Intent
 import android.net.Uri
+import android.os.Bundle
 import android.support.v4.content.ContextCompat.startActivity
 import com.teachernavigator.teachernavigator.R
 import com.teachernavigator.teachernavigator.application.di.scopes.PerParentScreen
@@ -13,8 +14,10 @@ import com.teachernavigator.teachernavigator.presentation.models.VacancyModel
 import com.teachernavigator.teachernavigator.presentation.screens.common.BasePresenter
 import com.teachernavigator.teachernavigator.presentation.screens.jobs.fragments.abstractions.VacancyView
 import com.teachernavigator.teachernavigator.presentation.screens.jobs.presenters.abstractions.IVacancyPresenter
+import com.teachernavigator.teachernavigator.presentation.screens.main.activities.ProfileActivity
 import com.teachernavigator.teachernavigator.presentation.transformers.VacancyTransformer
 import com.teachernavigator.teachernavigator.presentation.transformers.transformEntity
+import com.teachernavigator.teachernavigator.presentation.utils.ActivityRouter
 import ru.terrakok.cicerone.Router
 import javax.inject.Inject
 
@@ -27,13 +30,6 @@ class VacancyPresenter
 @Inject constructor(val router: Router,
                     private val jobsInteractor: IJobInteractor,
                     private val vacancyTransformer: VacancyTransformer) : BasePresenter<VacancyView>(), IVacancyPresenter {
-
-    override fun onDownload(response: ResponseModel) = mView?.let {
-        if (!response.portfolio.isBlank()) {
-            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(response.portfolio))
-            startActivity(it.getContext(), intent, null)
-        }
-    } ?: Unit
 
     private var mVacancyId = -1
 
@@ -56,6 +52,20 @@ class VacancyPresenter
                 .subscribe(this::onLoaded, this::onError))
     }
 
+    override fun onDownload(response: ResponseModel) = mView?.let {
+        if (!response.portfolio.isBlank()) {
+            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(response.portfolio))
+            startActivity(it.getContext(), intent, null)
+        }
+    } ?: Unit
+
+    override fun onUser(response: ResponseModel) = mView?.let {
+        val bundle = Bundle().apply {
+            putInt(ProfileActivity.USER_ID_KEY, response.userId)
+        }
+        ActivityRouter.openActivity(it.getParentView().getActivity(), bundle, ProfileActivity::class.java)
+    } ?: Unit
+
     private fun onLoaded(vacancy: VacancyModel) {
         stopProgress()
         mView?.setVacancy(vacancy)
@@ -76,5 +86,6 @@ class VacancyPresenter
         mView?.getParentView()?.stopProgress()
         mView?.hideRefresh()
     }
+
 
 }

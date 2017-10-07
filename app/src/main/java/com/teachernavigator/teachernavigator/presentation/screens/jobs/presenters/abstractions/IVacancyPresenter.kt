@@ -12,5 +12,6 @@ interface IVacancyPresenter : ViewAttacher<VacancyView> {
     fun loadVacancy(vacancyId: Int)
     fun refresh()
     fun onDownload(response : ResponseModel)
+    fun onUser(response : ResponseModel)
 
 }

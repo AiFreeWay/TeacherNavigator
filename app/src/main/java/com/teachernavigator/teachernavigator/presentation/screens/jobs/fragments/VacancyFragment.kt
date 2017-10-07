@@ -39,7 +39,8 @@ class VacancyFragment : BaseFragment(), VacancyView {
 
     val adapter: UniversalAdapter by lazy {
         UniversalAdapter()
-                UniversalAdapter(ResponseHolderBuilder(vacancyPresenter::onDownload))
+                UniversalAdapter(ResponseHolderBuilder(vacancyPresenter::onDownload,
+                        vacancyPresenter::onUser))
     }
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? =

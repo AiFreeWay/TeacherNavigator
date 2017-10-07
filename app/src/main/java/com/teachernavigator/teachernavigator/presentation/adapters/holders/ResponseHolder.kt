@@ -10,6 +10,7 @@ import com.teachernavigator.teachernavigator.R
 import com.teachernavigator.teachernavigator.presentation.models.ResponseModel
 import com.teachernavigator.teachernavigator.presentation.utils.ImageLoader
 import com.teachernavigator.teachernavigator.presentation.utils.find
+import com.teachernavigator.teachernavigator.presentation.utils.listenClickBy
 import ru.lliepmah.HolderBuilder
 import ru.lliepmah.lib.DefaultViewHolder
 
@@ -18,7 +19,8 @@ import ru.lliepmah.lib.DefaultViewHolder
  */
 @HolderBuilder(R.layout.v_response)
 class ResponseHolder(itemView: View,
-                     onDownloadListener: OnDownloadListener?) : DefaultViewHolder<ResponseModel>(itemView) {
+                     onDownloadListener: OnDownloadListener?,
+                     onUserClickListener: OnUserClickListener?) : DefaultViewHolder<ResponseModel>(itemView) {
 
     private val vResponseIvAvatar: ImageView = itemView.find(R.id.vResponseIvAvatar)
     private val vResponseTvName: TextView = itemView.find(R.id.vResponseTvName)
@@ -28,9 +30,8 @@ class ResponseHolder(itemView: View,
     private var mResponseModel: ResponseModel? = null
 
     init {
-        onDownloadListener?.let {
-            vResponseTvDownload.setOnClickListener { mResponseModel?.apply { it(this) } }
-        }
+        vResponseTvDownload listenClickBy onDownloadListener andReturnModel { mResponseModel }
+        vResponseIvAvatar listenClickBy onUserClickListener andReturnModel { mResponseModel }
 
         vResponseTvDownload.setCompoundDrawables(null, null, ContextCompat.getDrawable(itemView.context, R.drawable.ic_resume), null)
     }
@@ -50,3 +51,4 @@ class ResponseHolder(itemView: View,
 }
 
 typealias OnDownloadListener = (ResponseModel) -> Unit
+typealias OnUserClickListener = (ResponseModel) -> Unit

@@ -1,4 +1,4 @@
-package com.teachernavigator.teachernavigator.presentation.screens.info.fragments
+package com.teachernavigator.teachernavigator.presentation.screens.main.fragments
 
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
@@ -10,53 +10,64 @@ import com.teachernavigator.teachernavigator.application.di.components.DaggerPar
 import com.teachernavigator.teachernavigator.application.di.components.ParentScreenComponent
 import com.teachernavigator.teachernavigator.application.di.modules.ParentScreenModule
 import com.teachernavigator.teachernavigator.application.utils.rootComponent
-import com.teachernavigator.teachernavigator.presentation.adapters.holders.InfoVHBuilder
-import com.teachernavigator.teachernavigator.presentation.adapters.holders.TitleVHBuilder
-import com.teachernavigator.teachernavigator.presentation.models.Info
+import com.teachernavigator.teachernavigator.presentation.adapters.holders.CommentVHBuilder
 import com.teachernavigator.teachernavigator.presentation.models.PostModel
 import com.teachernavigator.teachernavigator.presentation.screens.common.BaseFragment
-import com.teachernavigator.teachernavigator.presentation.screens.info.fragments.abstractions.ImportantToKnowView
-import com.teachernavigator.teachernavigator.presentation.screens.info.presenters.abstractions.IImportantToKnowPresenter
+import com.teachernavigator.teachernavigator.presentation.screens.main.fragments.abstractions.PostCommentsView
 import com.teachernavigator.teachernavigator.presentation.screens.main.presenters.abstractions.IPostActionsController
-import kotlinx.android.synthetic.main.fmt_important_to_know.*
+import com.teachernavigator.teachernavigator.presentation.screens.main.presenters.abstractions.IPostCommentsPresenter
+import kotlinx.android.synthetic.main.fmt_post_comments.*
 import layout.InfoPostVHBuilder
 import ru.lliepmah.lib.UniversalAdapter
 import javax.inject.Inject
 
 /**
- * Created by lliepmah on 05.10.17
+ * Created by lliepmah on 08.10.17
  */
-class ImportantToKnowFragment : BaseFragment(), ImportantToKnowView {
+class PostCommentsFragment : BaseFragment(), PostCommentsView {
 
     companion object {
-        val FRAGMENT_KEY = "important_to_know_fragment"
+        val FRAGMENT_KEY = "post_comments_fragment"
+
+        val ARG_POST_ID = "post_id"
+        val ARG_POST_TYPE = "post_type"
     }
 
     private lateinit var mParentScreenComponent: ParentScreenComponent
 
     @Inject
-    lateinit var presenter: IImportantToKnowPresenter
+    lateinit var presenter: IPostCommentsPresenter
     @Inject
     lateinit var postController: IPostActionsController
-
-    private var mPostsPosition: Int = 0
 
     val adapter: UniversalAdapter by lazy {
         UniversalAdapter(
                 InfoPostVHBuilder(
                         postController::onLike,
                         postController::onDislike,
-                        postController::onComments,
+                        null,
                         postController::onSave,
                         null,
-                        null // postController::onReadMore
+                        null // TODO postConroller::onReadMore
                 ),
-                InfoVHBuilder(presenter::onThemeChanged),
-                TitleVHBuilder())
+                CommentVHBuilder(
+                        null, // TODO presenter::onBranch
+                        null // TODO presenter::onSubscribe
+                )
+        )
     }
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? =
-            inflater?.inflate(R.layout.fmt_important_to_know, container, false)
+            inflater?.inflate(R.layout.fmt_post_comments, container, false)
+
+    override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        postCommentsIvSend.setOnClickListener { sendComment() }
+    }
+
+    private fun sendComment() {
+        presenter.sendComment(postCommentsEtSendText.text)
+    }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
@@ -68,6 +79,8 @@ class ImportantToKnowFragment : BaseFragment(), ImportantToKnowView {
         vListSwipeLayout.setColorSchemeResources(R.color.colorAccent)
         vListRvData.layoutManager = LinearLayoutManager(context)
         vListRvData.adapter = adapter
+
+        presenter.initPost(arguments.getInt(ARG_POST_ID), arguments.getInt(ARG_POST_TYPE))
     }
 
     private fun inject() {
@@ -78,29 +91,33 @@ class ImportantToKnowFragment : BaseFragment(), ImportantToKnowView {
                 .also { it.inject(this) }
     }
 
-    override fun setThemes(infoThemes: List<Info>) {
+    override fun setPost(post: PostModel) {
         adapter.clear()
-        adapter.add(getString(R.string.label_choose_theme))
-        adapter.addAll(infoThemes)
-        mPostsPosition = adapter.itemCount
-    }
-
-    override fun setInfoPosts(posts: List<PostModel>) {
-        adapter.removeItems(mPostsPosition, adapter.itemCount - 1)
-        adapter.addAll(posts)
+        adapter.add(post)
+        adapter.addAll(post.comments)
         adapter.notifyDataSetChanged()
     }
 
-    override fun updatePost(post: PostModel) {
-        adapter.notifyItemChanged(adapter.indexOf(post))
-    }
+    override fun scrollToLast() =
+            vListRvData.layoutManager.smoothScrollToPosition(vListRvData, null, adapter.itemCount - 1)
 
     override fun showRefresh() {
+        postCommentsIvSend.isEnabled = false
+        postCommentsEtSendText.isEnabled = false
         vListSwipeLayout?.isRefreshing = true
     }
 
     override fun hideRefresh() {
+        postCommentsIvSend.isEnabled = true
+        postCommentsEtSendText.isEnabled = true
         vListSwipeLayout?.isRefreshing = false
     }
+
+    override fun clearField() {
+        postCommentsEtSendText.setText(R.string.empty)
+    }
+
+    override fun updatePost(post: PostModel) =
+            adapter.notifyItemChanged(adapter.indexOf(post))
 
 }

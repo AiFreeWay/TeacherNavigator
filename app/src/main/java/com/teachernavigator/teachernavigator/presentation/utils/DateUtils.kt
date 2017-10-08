@@ -1,11 +1,10 @@
 package com.teachernavigator.teachernavigator.presentation.utils
 
-import android.content.Context
+import java.util.*
 
 /**
  * Created by lliepmah on 05.10.17
  */
-
 
 private val SECOND_MILLIS = 1000
 private val MINUTE_MILLIS = 60 * SECOND_MILLIS
@@ -13,8 +12,12 @@ private val HOUR_MILLIS = 60 * MINUTE_MILLIS
 private val DAY_MILLIS = 24 * HOUR_MILLIS
 
 
-fun getTimeAgo(time: Long): String {
-    var time = time
+fun Date.getTimeAgo(): String =
+        time.getTimeAgo()
+
+fun Long.getTimeAgo(): String {
+    var time = this
+
     if (time < 1000000000000L) {
         // if timestamp given in seconds, convert to millis
         time *= 1000
@@ -38,19 +41,4 @@ fun getTimeAgo(time: Long): String {
         else -> "${diff / DAY_MILLIS} дней назад"
     }
 
-//    return if (diff < MINUTE_MILLIS) {
-//        "just now"
-//    } else if (diff < 2 * MINUTE_MILLIS) {
-//        "a minute ago"
-//    } else if (diff < 50 * MINUTE_MILLIS) {
-//        diff / MINUTE_MILLIS + " minutes ago"
-//    } else if (diff < 90 * MINUTE_MILLIS) {
-//        "an hour ago"
-//    } else if (diff < 24 * HOUR_MILLIS) {
-//        diff / HOUR_MILLIS + " hours ago"
-//    } else if (diff < 48 * HOUR_MILLIS) {
-//        "yesterday"
-//    } else {
-//        diff / DAY_MILLIS + " days ago"
-//    }
 }

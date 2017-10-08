@@ -7,12 +7,12 @@ import com.teachernavigator.teachernavigator.domain.models.Post
  */
 interface IPostControllerFacade {
 
-    fun like(vote: Boolean, post: Post, callbak: IPostControllerFacadeCallback)
-    fun save(post: Post, callbak: IPostControllerFacadeCallback)
-    fun subscribe(post: Post, callbak: IPostControllerFacadeCallback)
-    fun complain(post: Post, callbak: IPostControllerFacadeCallback)
+    fun like(vote: Boolean, post: Post, callback: IPostControllerFacadeCallback)
+    fun save(post: Post, callback: IPostControllerFacadeCallback)
+    fun subscribe(post: Post, callback: IPostControllerFacadeCallback)
+    fun complain(post: Post, callback: IPostControllerFacadeCallback)
 
-    fun openCommentsScreen(post: Post, callbak: IPostControllerFacadeCallback)
-    fun openProfileScreen(post: Post, callbak: IPostControllerFacadeCallback)
+    fun openCommentsScreen(post: Post, callback: IPostControllerFacadeCallback)
+    fun openProfileScreen(post: Post, callback: IPostControllerFacadeCallback)
     fun openPostDetailScreen(post: Post)
 }

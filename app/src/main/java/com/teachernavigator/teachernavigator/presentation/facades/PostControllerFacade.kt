@@ -21,9 +21,9 @@ class PostControllerFacade @Inject constructor(private val mPostController: IPos
         Logger.logDebug("created Facade PostControllerFacade")
     }
 
-    override fun like(vote: Boolean, post: Post, callbak: IPostControllerFacadeCallback) {
+    override fun like(vote: Boolean, post: Post, callback: IPostControllerFacadeCallback) {
         mPostController.like(vote, post, { doOnUserNotAuth() })
-                .subscribe({ onSubscribe(it,  { if (vote) callbak.onLike() else callbak.onDislike() }) }, { doOnError(it, callbak) })
+                .subscribe({ onSubscribe(it,  { if (vote) callback.onLike() else callback.onDislike() }) }, { doOnError(it, callback) })
     }
 
     override fun save(post: Post, callbak: IPostControllerFacadeCallback) {

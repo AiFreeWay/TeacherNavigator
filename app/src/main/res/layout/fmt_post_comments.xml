@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/vListSwipeLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/postCommentsLSend">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/vListRvData"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clipToPadding="false"
+            android:paddingBottom="@dimen/spacingXLarge"
+            android:paddingLeft="@dimen/spacingMedium"
+            android:paddingRight="@dimen/spacingMedium"
+            android:paddingTop="@dimen/spacingMedium" />
+
+    </android.support.v4.widget.SwipeRefreshLayout>
+
+
+    <LinearLayout
+        android:id="@+id/postCommentsLSend"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <android.support.design.widget.TextInputEditText
+            android:id="@+id/postCommentsEtSendText"
+            style="@style/Text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/internalPadding"
+            android:layout_marginLeft="@dimen/internalPadding"
+            android:layout_marginStart="@dimen/internalPadding"
+            android:layout_marginTop="@dimen/internalPadding"
+            android:layout_weight="1"
+            android:hint="@string/comment_text"
+            android:lines="1" />
+
+        <ImageView
+            android:id="@+id/postCommentsIvSend"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0"
+            android:paddingBottom="@dimen/internalPadding"
+            android:paddingLeft="@dimen/internalPadding"
+            android:paddingRight="@dimen/internalPadding"
+            android:paddingTop="@dimen/internalPadding"
+            android:src="@drawable/ic_send" />
+    </LinearLayout>
+
+
+</RelativeLayout>

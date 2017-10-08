@@ -16,6 +16,6 @@ object ResponseTransformer : EntityTransformer<Response, ResponseModel> {
             userAvatar = from.employee?.avatars?.firstOrNull()?.avatar ?: "",
             userName = from.employee?.full_name ?: "",
             userId = from.employee?.id ?: -1,
-            timeAgo = getTimeAgo(from.created?.time ?: 0)
+            timeAgo = from.created?.time?.getTimeAgo() ?: ""
     )
 }

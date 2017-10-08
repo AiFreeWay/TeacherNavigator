@@ -15,6 +15,7 @@ import com.teachernavigator.teachernavigator.data.network.responses.PostsRespons
 import com.teachernavigator.teachernavigator.data.network.responses.SingInResponse
 import com.teachernavigator.teachernavigator.data.repository.abstractions.IMainRepository
 import com.teachernavigator.teachernavigator.domain.models.*
+import com.teachernavigator.teachernavigator.presentation.models.Info
 import com.teachernavigator.teachernavigator.presentation.models.Specialist
 import io.reactivex.Observable
 import io.reactivex.Single
@@ -98,13 +99,13 @@ class MainRepository @Inject constructor(private val mNetwokController: NetworkC
     override fun savePost(request: SavePostRequest): Observable<BaseResponse> =
             mNetwokController.savePost(getAccessToken(), request)
 
-    override fun comment(request: CommentRequest): Observable<CommentNetwork> =
+    override fun comment(request: CommentRequest): Single<CommentNetwork> =
             mNetwokController.comment(getAccessToken(), request)
 
     override fun subscribe(request: SubscribeRequest): Observable<BaseResponse> =
             mNetwokController.subscribe(getAccessToken(), request)
 
-    override fun vote(request: VoteRequest): Observable<BaseResponse> =
+    override fun vote(request: VoteRequest): Single<BaseResponse> =
             mNetwokController.vote(getAccessToken(), request)
 
     override fun getMyPublications(): Observable<Array<PostNetwork>> =
@@ -112,6 +113,15 @@ class MainRepository @Inject constructor(private val mNetwokController: NetworkC
 
     override fun getUserPost(userId: Int): Observable<Array<PostNetwork>> =
             mNetwokController.getUserPost(getAccessToken(), userId)
+
+    override fun getInfoPosts(currentTheme: Info): Single<PostsResponse> =
+            mNetwokController.getInfoPosts(getAccessToken(), currentTheme.ordinal)
+
+    override fun getPost(postId: Int, postType: PostType): Single<PostNetwork> = when (postType) {
+        PostType.importantinfo -> mNetwokController.getInfoPost(getAccessToken(), postId)
+        else -> throw Error("Not implemented yet")
+    }
+
 
     // ------------------------------- Settings methods --------------------------------
 

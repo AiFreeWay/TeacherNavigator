@@ -40,6 +40,7 @@ class FragmentsFactory {
                 CreateVacancyFragment.FRAGMENT_KEY -> addBundle(CreateVacancyFragment(), bundle)
                 AddPublicationFragment.FRAGMENT_KEY -> addBundle(AddPublicationFragment(), bundle)
                 ImportantToKnowFragment.FRAGMENT_KEY -> addBundle(ImportantToKnowFragment(), bundle)
+                PostCommentsFragment.FRAGMENT_KEY -> addBundle(PostCommentsFragment(), bundle)
                 AskSpecialistFragment.FRAGMENT_KEY -> addBundle(AskSpecialistFragment(), bundle)
                 SupportFragment.FRAGMENT_KEY -> addBundle(SupportFragment(), bundle)
                 AboutFragment.FRAGMENT_KEY -> addBundle(AboutFragment(), bundle)

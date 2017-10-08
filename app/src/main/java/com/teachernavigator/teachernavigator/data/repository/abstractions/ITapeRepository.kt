@@ -9,7 +9,10 @@ import com.teachernavigator.teachernavigator.data.network.requests.VoteRequest
 import com.teachernavigator.teachernavigator.data.network.responses.BaseResponse
 import com.teachernavigator.teachernavigator.data.network.responses.GetMyCommentsResponse
 import com.teachernavigator.teachernavigator.data.network.responses.PostsResponse
+import com.teachernavigator.teachernavigator.domain.models.PostType
+import com.teachernavigator.teachernavigator.presentation.models.Info
 import io.reactivex.Observable
+import io.reactivex.Single
 
 /**
  * Created by root on 22.08.17.
@@ -27,7 +30,9 @@ interface ITapeRepository {
     fun getUserPost(userId: Int): Observable<Array<PostNetwork>>
 
     fun savePost(request: SavePostRequest): Observable<BaseResponse>
-    fun comment(request: CommentRequest): Observable<CommentNetwork>
-    fun vote(request: VoteRequest): Observable<BaseResponse>
+    fun comment(request: CommentRequest): Single<CommentNetwork>
+    fun vote(request: VoteRequest): Single<BaseResponse>
     fun subscribe(request: SubscribeRequest): Observable<BaseResponse>
+    fun getInfoPosts(currentTheme: Info): Single<PostsResponse>
+    fun getPost(postId: Int, postType: PostType): Single<PostNetwork>
 }

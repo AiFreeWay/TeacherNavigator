@@ -1,16 +1,18 @@
 package com.teachernavigator.teachernavigator.data.models
 
 import com.teachernavigator.teachernavigator.domain.models.Author
+import java.util.*
 
 /**
  * Created by root on 07.09.17.
  */
-class CommentNetwork {
+data class CommentNetwork(
 
-    var id: Int? = null
-    var message: String? = null
-    var user: UserInComment? = null
-    var author: Author? = null
+        val id: Int? = null,
+        val message: String? = null,
+        val user: UserInComment? = null,
+        val author: Author? = null,
+        val created: Date? = null) {
 
     class UserInComment {
         var id: Int? = null
@@ -22,4 +24,12 @@ class CommentNetwork {
             var avatar: String? = null
         }
     }
+
 }
+
+
+//val id: Int? = null,
+//val message: String? = null,
+//val user: Author? = null,
+//val author: Author? = null,
+//val created: Date? = null

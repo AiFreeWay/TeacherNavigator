@@ -4,14 +4,17 @@ import android.app.Activity
 import com.teachernavigator.teachernavigator.domain.models.Comment
 import com.teachernavigator.teachernavigator.domain.models.Monade
 import com.teachernavigator.teachernavigator.domain.models.Post
+import com.teachernavigator.teachernavigator.domain.models.PostType
 import io.reactivex.Observable
+import io.reactivex.Single
 
 /**
  * Created by root on 07.09.17.
  */
 interface IPostController {
 
-    fun like(vote: Boolean, post: Post, doOnUserNotAuth: () -> Unit): Observable<Monade>
+    fun like(vote: Boolean, post: Post, doOnUserNotAuth: () -> Unit): Single<Monade>
+    fun vote(postId: Int, isLike: Boolean, type: PostType): Single<Boolean>
     fun save(post: Post, doOnUserNotAuth: () -> Unit): Observable<Monade>
     fun subscribe(post: Post, doOnUserNotAuth: () -> Unit): Observable<Monade>
     fun subscribe(comment: Comment, doOnUserNotAuth: () -> Unit): Observable<Monade>

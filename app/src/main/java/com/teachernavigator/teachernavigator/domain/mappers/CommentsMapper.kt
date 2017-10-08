@@ -4,11 +4,13 @@ import com.teachernavigator.teachernavigator.data.models.CommentNetwork
 import com.teachernavigator.teachernavigator.data.network.requests.CommentRequest
 import com.teachernavigator.teachernavigator.domain.models.Comment
 import com.teachernavigator.teachernavigator.domain.models.Post
-import java.util.ArrayList
+import com.teachernavigator.teachernavigator.domain.models.PostType
+import java.util.*
 
 /**
  * Created by root on 08.09.17.
  */
+// TODO Remove This
 class CommentsMapper {
 
     companion object {
@@ -19,7 +21,7 @@ class CommentsMapper {
             return mappedComments
         }
 
-        fun mapComment(comment: CommentNetwork): Comment=  Comment(comment.id, comment.message, mapCommentUser(comment.user), comment.author)
+        fun mapComment(comment: CommentNetwork): Comment = Comment(comment.id, comment.message, mapCommentUser(comment.user), comment.author)
 
         fun mapCommentUser(userInComment: CommentNetwork.UserInComment?): Comment.UserInComment? {
             if (userInComment != null) {
@@ -35,6 +37,7 @@ class CommentsMapper {
             return null
         }
 
-        fun mapCommentDataToRequest(post: Post, text: String): CommentRequest = CommentRequest(post.id!!, text)
+        fun mapCommentDataToRequest(post: Post, text: String)
+                = CommentRequest.build(post.id ?: -1, PostType.post, text)
     }
 }

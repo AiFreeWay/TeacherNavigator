@@ -31,7 +31,7 @@ class PostsMapper {
             }
             return mappedPosts
         }
-        
+
         fun mapPost(post: PostNetwork): Post {
             val mappedPost = Post()
             mappedPost.id = post.id
@@ -52,9 +52,9 @@ class PostsMapper {
 
         fun mapPostToSavePostRequest(post: Post): SavePostRequest = SavePostRequest(post.id!!, "mock")
 
-        fun mapPostToSubscribeRequesttRequest(post: Post): SubscribeRequest = SubscribeRequest(post.author!!.id!!)
+        fun mapPostToSubscribeRequesttRequest(post: Post): SubscribeRequest = SubscribeRequest(post.author!!.id)
 
-        fun mapPostToVoteRequest(vote: Boolean, post: Post): VoteRequest = VoteRequest(post.id!!, vote, "mock")
+        fun mapPostToVoteRequest(vote: Boolean, post: Post): VoteRequest = VoteRequest(post.id!!, vote, "post")
 
         private fun replaceTextToInt(number: Int?): Int {
             if (number == null) {

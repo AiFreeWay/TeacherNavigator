@@ -19,6 +19,7 @@ import com.teachernavigator.teachernavigator.presentation.screens.info.fragments
 import com.teachernavigator.teachernavigator.presentation.screens.info.fragments.ImportantToKnowFragment
 import com.teachernavigator.teachernavigator.presentation.screens.info.fragments.SupportFragment
 import com.teachernavigator.teachernavigator.presentation.screens.jobs.fragments.*
+import com.teachernavigator.teachernavigator.presentation.screens.main.fragments.PostCommentsFragment
 import com.teachernavigator.teachernavigator.presentation.screens.main.presenters.*
 import com.teachernavigator.teachernavigator.presentation.screens.settings.presenters.FmtAppSettingsPresenter
 import com.teachernavigator.teachernavigator.presentation.screens.settings.presenters.FmtProfileSettingsPresenter
@@ -83,5 +84,6 @@ interface ParentScreenComponent {
     fun inject(aboutFragment: AboutFragment)
     fun inject(supportFragment: SupportFragment)
     fun inject(askSpecialistFragment: AskSpecialistFragment)
+    fun inject(postCommentsFragment: PostCommentsFragment)
 
 }

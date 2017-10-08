@@ -77,7 +77,7 @@ class AcPostCommentsPresenter : BasePresenter<PostCommentsView>(), IPostComments
     override fun doComment(post: Post, text: String) {
         if (!TextUtils.isEmpty(text))
             addDissposable(mCommentsInteractor.comment(post, text)
-                    .doOnSubscribe { this::doOnSubscribeOnSendPost }
+                    .doOnSubscribe { doOnSubscribeOnSendPost() }
                     .subscribe(this::doOnCommented, this::doOnError))
     }
 

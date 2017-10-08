@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/vInfoRoot"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/spacingMedium">
+
+    <TextView
+        android:id="@+id/vInfoTvText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?android:attr/selectableItemBackground"
+        android:drawableLeft="@drawable/ic_legal"
+        android:drawablePadding="@dimen/spacingXXLarge"
+        android:drawableStart="@drawable/ic_legal"
+        android:gravity="center_vertical"
+        android:padding="@dimen/spacingLarge"
+        android:text="@string/label_legal"
+        android:textSize="@dimen/largeTextSize" />
+
+</android.support.v7.widget.CardView>

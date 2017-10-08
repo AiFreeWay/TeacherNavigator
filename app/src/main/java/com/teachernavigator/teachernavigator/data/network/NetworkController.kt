@@ -103,7 +103,7 @@ class NetworkController {
 
     fun getSavedPosts(token: String): Observable<PostsResponse> = mApiController.getSavedPosts(token)
 
-    fun comment(token: String, request: CommentRequest): Observable<CommentNetwork> = mApiController.comment(token, request)
+    fun comment(token: String, request: CommentRequest): Single<CommentNetwork> = mApiController.comment(token, request)
 
     fun subscribe(token: String, request: SubscribeRequest): Observable<BaseResponse> = mApiController.subscribe(token, request)
 
@@ -113,9 +113,9 @@ class NetworkController {
 
     //fun vote(token: String, request: VoteRequest): Observable<BaseResponse> = mApiController.vote(token, request)
 
-    fun vote(token: String, request: VoteRequest): Observable<BaseResponse> {
+    fun vote(token: String, request: VoteRequest): Single<BaseResponse> {
         val map = HashMap<String, String>()
-        map.put("model", "post")
+        map.put("model", request.model)
         map.put("id", request.id.toString())
         map.put("vote", request.like.toString())
         return mApiController.vote(token, map)
@@ -186,4 +186,9 @@ class NetworkController {
             mApiController.askSpecialist(accessToken, specialist.ordinal, question)
                     .toSingle(Unit)
 
+    fun getInfoPosts(accessToken: String, themeId: Int): Single<PostsResponse> =
+            mApiController.getInfoPosts(accessToken, themeId)
+
+    fun getInfoPost(accessToken: String, postId: Int): Single<PostNetwork> =
+            mApiController.getInfoPost(accessToken, postId)
 }

@@ -1,13 +1,18 @@
 package com.teachernavigator.teachernavigator.domain.interactors
 
 import com.example.root.androidtest.application.utils.Logger
+import com.teachernavigator.teachernavigator.data.models.CommentNetwork
 import com.teachernavigator.teachernavigator.data.models.PostNetwork
+import com.teachernavigator.teachernavigator.data.network.requests.CommentRequest
 import com.teachernavigator.teachernavigator.data.network.responses.PostsResponse
 import com.teachernavigator.teachernavigator.data.repository.abstractions.ITapeRepository
 import com.teachernavigator.teachernavigator.domain.interactors.abstractions.IPostsInteractor
 import com.teachernavigator.teachernavigator.domain.mappers.PostsMapper
 import com.teachernavigator.teachernavigator.domain.models.Post
+import com.teachernavigator.teachernavigator.domain.models.PostType
+import com.teachernavigator.teachernavigator.presentation.models.Info
 import io.reactivex.Observable
+import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
@@ -20,6 +25,22 @@ class PostsInteractor @Inject constructor(private val mRepository: ITapeReposito
     init {
         Logger.logDebug("created INTERACTOR PostsInteractor")
     }
+
+    override fun getPost(postId: Int, postType: PostType): Single<PostNetwork> =
+            mRepository.getPost(postId, postType)
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribeOn(Schedulers.newThread())
+
+    override fun sendComment(postId: Int, postType: PostType, text: String): Single<CommentNetwork> =
+            mRepository.comment(CommentRequest.build(postId, postType, text))
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribeOn(Schedulers.newThread())
+
+    override fun getInfoPosts(currentTheme: Info): Single<List<PostNetwork>> =
+            mRepository.getInfoPosts(currentTheme)
+                    .map { it.results }
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribeOn(Schedulers.newThread())
 
     override fun getBestPosts(): Observable<List<Post>> =
             configePostsObservable(mRepository.getPosts())
@@ -49,12 +70,12 @@ class PostsInteractor @Inject constructor(private val mRepository: ITapeReposito
     override fun getUserPost(userId: Int): Observable<List<Post>> =
             configeArrayPostsObservable(mRepository.getUserPost(userId))
 
-    private fun configePostsObservable(observable: Observable<PostsResponse>) : Observable<List<Post>> =
+    private fun configePostsObservable(observable: Observable<PostsResponse>): Observable<List<Post>> =
             observable.observeOn(AndroidSchedulers.mainThread())
                     .subscribeOn(Schedulers.newThread())
                     .map { PostsMapper.mapPosts(it) }
 
-    private fun configeArrayPostsObservable(observable: Observable<Array<PostNetwork>>) : Observable<List<Post>> =
+    private fun configeArrayPostsObservable(observable: Observable<Array<PostNetwork>>): Observable<List<Post>> =
             observable.observeOn(AndroidSchedulers.mainThread())
                     .subscribeOn(Schedulers.newThread())
                     .map { PostsMapper.mapPostsFromArray(it) }

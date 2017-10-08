@@ -57,7 +57,7 @@ interface ApiController {
     fun getSavedPosts(@Header("Authorization") accessToken: String): Observable<PostsResponse>
 
     @POST("/api/v0/comment/")
-    fun comment(@Header("Authorization") accessToken: String, @Body request: CommentRequest): Observable<CommentNetwork>
+    fun comment(@Header("Authorization") accessToken: String, @Body request: CommentRequest): Single<CommentNetwork>
 
     @POST("/api/v0/me/subscribe/")
     fun subscribe(@Header("Authorization") accessToken: String, @Body request: SubscribeRequest): Observable<BaseResponse>
@@ -66,7 +66,7 @@ interface ApiController {
     //fun vote(@Header("Authorization") accessToken: String, @Body request: VoteRequest): Observable<BaseResponse>
 
     @GET("/api/v0/votes/up/")
-    fun vote(@Header("Authorization") accessToken: String, @QueryMap map: Map<String, String>): Observable<BaseResponse>
+    fun vote(@Header("Authorization") accessToken: String, @QueryMap map: Map<String, String>): Single<BaseResponse>
 
     @GET("/api/v0/me/posts/")
     fun getMyPublications(@Header("Authorization") accessToken: String): Observable<Array<PostNetwork>>
@@ -135,5 +135,11 @@ interface ApiController {
     @FormUrlEncoded
     @POST("/api/v0/me/support/")
     fun askSpecialist(@Header("Authorization") accessToken: String, @Field("expert") name: Int, @Field("text") question: String): Maybe<Unit>
+
+    @GET("/api/v0/info_posts/{themeId}/")
+    fun getInfoPosts(@Header("Authorization") accessToken: String, @Path("themeId") themeId: Int): Single<PostsResponse>
+
+    @GET("/api/v0/info_post/{postId}/")
+    fun getInfoPost(@Header("Authorization") accessToken: String, @Path("postId") postId: Int): Single<PostNetwork>
 
 }

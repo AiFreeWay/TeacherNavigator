@@ -60,15 +60,15 @@ open class PostView : RelativeLayout, IPostControllerFacadeCallback {
         mPost = post
         setClickListeners(post)
 
-        mTvTitle.setText(post.title)
-        mTvPostime.setText(post.created)
-        mTvText.setText(post.text)
+        mTvTitle.text = post.title
+        mTvPostime.text = post.created
+        mTvText.text = post.text
 
         if (post.author != null) {
             if (TextUtils.isEmpty(post.author!!.full_name))
                 mTvAuthorName.text = context.getString(R.string.not_define)
             else
-                mTvAuthorName.setText(post.author!!.full_name)
+                mTvAuthorName.text = post.author?.full_name ?: ""
 
             if (post.author != null && post.author!!.avatars != null && post.author!!.avatars.isNotEmpty()) {
                 val uri = post.author!!.avatars.get(0).avatar
@@ -94,14 +94,14 @@ open class PostView : RelativeLayout, IPostControllerFacadeCallback {
     }
 
     fun loadLikes(vote: Boolean?) {
-        if (vote != null && vote) {
+        if (vote == true) {
             val like = ContextCompat.getDrawable(getContext(), R.drawable.ic_like_active)
             mTvLike.setCompoundDrawablesWithIntrinsicBounds(like, null, null, null)
             val dislike = ContextCompat.getDrawable(getContext(), R.drawable.ic_dislike)
             mTvDislike.setCompoundDrawablesWithIntrinsicBounds(dislike, null, null, null)
 
             mTvDislike.text.toString().toInt()
-        } else if (vote != null && !vote) {
+        } else if (vote == false) {
             val like = ContextCompat.getDrawable(getContext(), R.drawable.ic_like)
             mTvLike.setCompoundDrawablesWithIntrinsicBounds(like, null, null, null)
             val dislike = ContextCompat.getDrawable(getContext(), R.drawable.ic_dislike_active)

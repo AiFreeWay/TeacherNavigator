@@ -3,17 +3,20 @@ package com.teachernavigator.teachernavigator.domain.controllers
 import android.app.Activity
 import android.os.Bundle
 import com.example.root.androidtest.application.utils.Logger
+import com.teachernavigator.teachernavigator.data.network.requests.VoteRequest
 import com.teachernavigator.teachernavigator.data.repository.abstractions.IMainRepository
 import com.teachernavigator.teachernavigator.domain.mappers.BaseMapper
 import com.teachernavigator.teachernavigator.domain.mappers.PostsMapper
 import com.teachernavigator.teachernavigator.domain.models.Comment
 import com.teachernavigator.teachernavigator.domain.models.Monade
 import com.teachernavigator.teachernavigator.domain.models.Post
+import com.teachernavigator.teachernavigator.domain.models.PostType
 import com.teachernavigator.teachernavigator.presentation.screens.main.activities.ProfileActivity
 import com.teachernavigator.teachernavigator.presentation.screens.tape.activities.PostCommentsActivity
 import com.teachernavigator.teachernavigator.presentation.screens.tape.activities.PostDetailActivity
 import com.teachernavigator.teachernavigator.presentation.utils.ActivityRouter
 import io.reactivex.Observable
+import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
@@ -27,16 +30,22 @@ class PostController @Inject constructor(private val mRepository: IMainRepositor
         Logger.logDebug("created CONTROLLER PostController")
     }
 
-    override fun like(vote: Boolean, post: Post, doOnUserNotAuth: () -> Unit): Observable<Monade> {
-        if (mRepository.isAuth())
-            return mRepository.vote(PostsMapper.mapPostToVoteRequest(vote, post))
+    override fun like(vote: Boolean, post: Post, doOnUserNotAuth: () -> Unit): Single<Monade> =
+            if (mRepository.isAuth()) {
+                mRepository.vote(PostsMapper.mapPostToVoteRequest(vote, post))
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribeOn(Schedulers.newThread())
+                        .map { BaseMapper.mapBaseResponse(it) }
+            } else {
+                doOnUserNotAuth()
+                Single.just(Monade.FAILARY_MONADE)
+            }
+
+    override fun vote(postId: Int, isLike: Boolean, type: PostType) =
+            mRepository.vote(VoteRequest(postId, isLike, type.name))
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribeOn(Schedulers.newThread())
-                    .map { BaseMapper.mapBaseResponse(it) }
-        else
-            doOnUserNotAuth.invoke()
-        return Observable.just(Monade.FAILARY_MONADE)
-    }
+                    .map { it.is_error }
 
     override fun save(post: Post, doOnUserNotAuth: () -> Unit): Observable<Monade> {
         if (mRepository.isAuth())

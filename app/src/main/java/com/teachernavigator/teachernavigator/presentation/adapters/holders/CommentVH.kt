@@ -6,7 +6,10 @@ import android.widget.ImageView
 import android.widget.TextView
 import com.teachernavigator.teachernavigator.R
 import com.teachernavigator.teachernavigator.presentation.models.CommentModel
-import com.teachernavigator.teachernavigator.presentation.utils.*
+import com.teachernavigator.teachernavigator.presentation.utils.find
+import com.teachernavigator.teachernavigator.presentation.utils.listenClickBy
+import com.teachernavigator.teachernavigator.presentation.utils.setImageOrPlaceholder
+import com.teachernavigator.teachernavigator.presentation.utils.setTextOrHide
 import ru.lliepmah.HolderBuilder
 import ru.lliepmah.lib.DefaultViewHolder
 
@@ -33,11 +36,9 @@ class CommentVH(itemView: View,
     private var mComment: CommentModel? = null
 
     init {
-
         ivSubscribe listenClickBy onSubscribeListener andReturnModelOrHide { mComment }
         btnOpenBranch listenClickBy onBranchListener andReturnModelOrHide { mComment }
         llOpenBranch.visibility = btnOpenBranch.visibility
-
     }
 
     override fun bind(comment: CommentModel?) {

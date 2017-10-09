@@ -10,4 +10,5 @@ interface IAboutPresenter : ViewAttacher<AboutView> {
     fun openVk() : Unit?
     fun openFb(): Unit?
     fun openInstagram(): Unit?
+    fun openYoutube() : Unit?
 }

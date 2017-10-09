@@ -40,7 +40,7 @@ class AboutFragment : BaseFragment(), AboutView {
         fmtAboutSocialTw.setOnClickListener { notImplemented() }
         fmtAboutSocialFb.setOnClickListener { aboutPresenter.openFb() }
         fmtAboutInstagram.setOnClickListener { aboutPresenter.openInstagram() }
-        fmtAboutYoutube.setOnClickListener { notImplemented() }
+        fmtAboutYoutube.setOnClickListener { aboutPresenter.openYoutube() }
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {

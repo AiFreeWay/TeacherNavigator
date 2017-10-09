@@ -75,7 +75,7 @@
                 android:background="?android:attr/selectableItemBackground"
                 android:padding="@dimen/spacingMedium"
                 android:src="@drawable/ic_youtube"
-                android:visibility="gone" />
+                android:visibility="visible" />
 
         </LinearLayout>
 

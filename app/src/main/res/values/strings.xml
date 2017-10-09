@@ -169,6 +169,7 @@
     <string name="social_link_vk">https://vk.com/mgo_profsoyuz</string>
     <string name="social_link_fb">https://www.facebook.com/mgoprofru/</string>
     <string name="social_link_instagram">https://www.instagram.com/pronm/</string>
+    <string name="social_link_youtube">https://www.youtube.com/channel/UCOeWUQ0sy6oEP0zpKjbSplw</string>
     <string name="browser_not_found">На вашем устройстве не установлен браузер</string>
     <string name="ask_quesion_spec">Задайте вопрос специалисту</string>
     <string name="pending_time">Время ожидания ответа: 24 часа</string>
@@ -177,4 +178,5 @@
     <string name="unknown_error">Ошибка</string>
     <string name="question_was_sent">Вопрос был отправлен</string>
     <string name="empty" />
+    <string name="error_comments_send">При отправке комментария что-то пошло не так</string>
 </resources>

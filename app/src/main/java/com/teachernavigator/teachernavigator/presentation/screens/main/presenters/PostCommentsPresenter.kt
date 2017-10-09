@@ -1,5 +1,6 @@
 package com.teachernavigator.teachernavigator.presentation.screens.main.presenters
 
+import com.teachernavigator.teachernavigator.R
 import com.teachernavigator.teachernavigator.application.di.scopes.PerParentScreen
 import com.teachernavigator.teachernavigator.domain.interactors.PostsInteractor
 import com.teachernavigator.teachernavigator.domain.models.PostType
@@ -63,6 +64,13 @@ class PostCommentsPresenter
         stopProgress()
         error.printStackTrace()
         doOnError(error)
+
+        val msg = error.message
+        if (msg != null) {
+            mView?.showToast(msg)
+        } else {
+            mView?.showToast(R.string.error_comments_send)
+        }
     }
 
     private fun startProgress() = mView?.apply {

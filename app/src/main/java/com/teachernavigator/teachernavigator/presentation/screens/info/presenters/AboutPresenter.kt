@@ -2,9 +2,6 @@ package com.teachernavigator.teachernavigator.presentation.screens.info.presente
 
 import android.arch.lifecycle.Lifecycle
 import android.arch.lifecycle.OnLifecycleEvent
-import android.content.ActivityNotFoundException
-import android.content.Intent
-import android.net.Uri
 import com.teachernavigator.teachernavigator.R
 import com.teachernavigator.teachernavigator.application.di.scopes.PerParentScreen
 import com.teachernavigator.teachernavigator.domain.interactors.abstractions.IProfileInteractor
@@ -12,6 +9,7 @@ import com.teachernavigator.teachernavigator.domain.models.About
 import com.teachernavigator.teachernavigator.presentation.screens.common.BasePresenter
 import com.teachernavigator.teachernavigator.presentation.screens.info.fragments.abstractions.AboutView
 import com.teachernavigator.teachernavigator.presentation.screens.info.presenters.abstractions.IAboutPresenter
+import com.teachernavigator.teachernavigator.presentation.utils.openUrl
 import ru.terrakok.cicerone.Router
 import javax.inject.Inject
 
@@ -47,27 +45,9 @@ class AboutPresenter
             mView?.getParentView()?.stopProgress()
 
 
-    override fun openVk() = mView?.let {
-        try {
-            it.getContext().startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(it.getContext().getString(R.string.social_link_vk))))
-        } catch (error: ActivityNotFoundException) {
-            it.showToast(R.string.browser_not_found)
-        }
-    }
+    override fun openVk() = mView.openUrl(R.string.social_link_youtube)
+    override fun openYoutube() = mView.openUrl(R.string.social_link_youtube)
+    override fun openFb() = mView.openUrl(R.string.social_link_fb)
+    override fun openInstagram() = mView.openUrl(R.string.social_link_instagram)
 
-    override fun openFb() = mView?.let {
-        try {
-            it.getContext().startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(it.getContext().getString(R.string.social_link_fb))))
-        } catch (error: ActivityNotFoundException) {
-            it.showToast(R.string.browser_not_found)
-        }
-    }
-
-    override fun openInstagram() = mView?.let {
-        try {
-            it.getContext().startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(it.getContext().getString(R.string.social_link_instagram))))
-        } catch (error: ActivityNotFoundException) {
-            it.showToast(R.string.browser_not_found)
-        }
-    }
 }

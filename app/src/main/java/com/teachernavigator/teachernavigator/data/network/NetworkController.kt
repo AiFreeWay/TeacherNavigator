@@ -191,4 +191,11 @@ class NetworkController {
 
     fun getInfoPost(accessToken: String, postId: Int): Single<PostNetwork> =
             mApiController.getInfoPost(accessToken, postId)
+
+    fun saveInfoPost(accessToken: String, postId: Int): Single<Unit> =
+            mApiController.saveInfoPost(accessToken, postId)
+
+    fun getTags(accessToken: String): Single<List<Tag>> =
+            mApiController.tags(accessToken)
+                    .map { it.results }
 }

@@ -3,10 +3,7 @@ package com.teachernavigator.teachernavigator.presentation.factories
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import com.teachernavigator.teachernavigator.presentation.screens.auth.fragments.*
-import com.teachernavigator.teachernavigator.presentation.screens.info.fragments.AboutFragment
-import com.teachernavigator.teachernavigator.presentation.screens.info.fragments.AskSpecialistFragment
-import com.teachernavigator.teachernavigator.presentation.screens.info.fragments.ImportantToKnowFragment
-import com.teachernavigator.teachernavigator.presentation.screens.info.fragments.SupportFragment
+import com.teachernavigator.teachernavigator.presentation.screens.info.fragments.*
 import com.teachernavigator.teachernavigator.presentation.screens.jobs.fragments.*
 import com.teachernavigator.teachernavigator.presentation.screens.main.fragments.*
 
@@ -44,6 +41,7 @@ class FragmentsFactory {
                 AskSpecialistFragment.FRAGMENT_KEY -> addBundle(AskSpecialistFragment(), bundle)
                 SupportFragment.FRAGMENT_KEY -> addBundle(SupportFragment(), bundle)
                 AboutFragment.FRAGMENT_KEY -> addBundle(AboutFragment(), bundle)
+                TagsFragment.FRAGMENT_KEY -> addBundle(TagsFragment(), bundle)
                 else -> throw Exception("Invalid fragment key $screenKey FragmentsFactory.createFragment(screenKey: String?)")
             }
 

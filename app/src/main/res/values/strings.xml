@@ -179,4 +179,7 @@
     <string name="question_was_sent">Вопрос был отправлен</string>
     <string name="empty" />
     <string name="error_comments_send">При отправке комментария что-то пошло не так</string>
+    <string name="all_tags">Все теги</string>
+    <string name="trends">Тенденции</string>
+    <string name="search_tags">Поиск тегов</string>
 </resources>

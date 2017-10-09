@@ -20,6 +20,7 @@ import com.teachernavigator.teachernavigator.presentation.screens.common.BasePre
 import com.teachernavigator.teachernavigator.presentation.screens.info.fragments.AboutFragment
 import com.teachernavigator.teachernavigator.presentation.screens.info.fragments.ImportantToKnowFragment
 import com.teachernavigator.teachernavigator.presentation.screens.info.fragments.SupportFragment
+import com.teachernavigator.teachernavigator.presentation.screens.info.fragments.TagsFragment
 import com.teachernavigator.teachernavigator.presentation.screens.jobs.fragments.JobsBankFragment
 import com.teachernavigator.teachernavigator.presentation.screens.main.activities.ProfileActivity
 import com.teachernavigator.teachernavigator.presentation.screens.main.activities.abstractions.MainView
@@ -118,6 +119,7 @@ class AcMainPresenter : BasePresenter<MainView>(), IMainPresenter {
             }
             MenuItemsFactory.MenuItemTypes.ADD_PUBLICATION.id -> navigateToFragment(AddPublicationFragment.FRAGMENT_KEY)
             MenuItemsFactory.MenuItemTypes.ABOUT.id -> navigateToFragment(AboutFragment.FRAGMENT_KEY)
+            MenuItemsFactory.MenuItemTypes.TAGS.id -> navigateToFragment(TagsFragment.FRAGMENT_KEY)
         }
         mView!!.closeSideMenu()
     }

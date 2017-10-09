@@ -5,6 +5,7 @@ import android.arch.lifecycle.OnLifecycleEvent
 import com.teachernavigator.teachernavigator.R
 import com.teachernavigator.teachernavigator.application.di.scopes.PerParentScreen
 import com.teachernavigator.teachernavigator.domain.interactors.PostsInteractor
+import com.teachernavigator.teachernavigator.domain.interactors.abstractions.IPostsInteractor
 import com.teachernavigator.teachernavigator.domain.models.PostType
 import com.teachernavigator.teachernavigator.presentation.models.Info
 import com.teachernavigator.teachernavigator.presentation.models.PostModel
@@ -22,7 +23,7 @@ import javax.inject.Inject
 @PerParentScreen
 class ImportantToKnowPresenter
 @Inject constructor(val router: Router,
-                    private val postsInteractor: PostsInteractor,
+                    private val postsInteractor: IPostsInteractor,
                     private val postTransformerFactory: PostTransformerFactory) : BasePresenter<ImportantToKnowView>(), IImportantToKnowPresenter {
 
     private var currentTheme: Info? = null

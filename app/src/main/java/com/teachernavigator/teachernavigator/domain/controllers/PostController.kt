@@ -22,7 +22,7 @@ import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
 /**
- * Created by root on 07.09.17.
+ * Created by root on 07.09.17
  */
 class PostController @Inject constructor(private val mRepository: IMainRepository) : IPostController {
 
@@ -46,6 +46,13 @@ class PostController @Inject constructor(private val mRepository: IMainRepositor
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribeOn(Schedulers.newThread())
                     .map { it.is_error }
+
+    override fun save(postId: Int, type: PostType): Single<Unit> =
+        mRepository.save(postId, type)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.newThread())
+//                .map { it.is_error }
+
 
     override fun save(post: Post, doOnUserNotAuth: () -> Unit): Observable<Monade> {
         if (mRepository.isAuth())

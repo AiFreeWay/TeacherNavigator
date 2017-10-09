@@ -1,9 +1,10 @@
 package com.teachernavigator.teachernavigator.presentation.screens.main.presenters
 
 import android.os.Bundle
+import android.util.Log.d
 import com.teachernavigator.teachernavigator.application.di.scopes.PerParentScreen
 import com.teachernavigator.teachernavigator.domain.controllers.IPostController
-import com.teachernavigator.teachernavigator.domain.models.PostType
+import com.teachernavigator.teachernavigator.domain.models.Post
 import com.teachernavigator.teachernavigator.presentation.models.PostModel
 import com.teachernavigator.teachernavigator.presentation.screens.common.BasePresenter
 import com.teachernavigator.teachernavigator.presentation.screens.info.fragments.abstractions.PostActionsView
@@ -21,18 +22,20 @@ class PostActionsController
                     private val postController: IPostController) : BasePresenter<PostActionsView>(), IPostActionsController {
 
     override fun onLike(post: PostModel) =
-            addDissposable(postController.vote(post.id, true, PostType.importantinfo)
+            addDissposable(postController.vote(post.id, true, post.type)
                     .doOnSubscribe { startProgress() }
                     .subscribe({ onVoted(true, post) }, this::onError))
 
     override fun onDislike(post: PostModel) =
-            addDissposable(postController.vote(post.id, false, PostType.importantinfo)
+            addDissposable(postController.vote(post.id, false, post.type)
                     .doOnSubscribe { startProgress() }
                     .subscribe({ onVoted(false, post) }, this::onError))
 
 
-    override fun onSave(post: PostModel) = Unit
-    // todo
+    override fun onSave(post: PostModel) =
+            addDissposable(postController.save(post.id, post.type)
+                    .doOnSubscribe { startProgress() }
+                    .subscribe({ onSaved(post) }, this::onError))
 
     override fun onSubscribe(post: PostModel) {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
@@ -42,6 +45,9 @@ class PostActionsController
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
+    private fun onSaved(post: PostModel) {
+        d(javaClass.name, "-> resl ->$post")
+    }
 
     override fun onComments(post: PostModel) = mView?.getParentView()?.let {
 

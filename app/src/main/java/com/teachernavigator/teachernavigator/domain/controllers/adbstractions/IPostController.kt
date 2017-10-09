@@ -25,4 +25,6 @@ interface IPostController {
     fun openProfileScreen(comment: Comment, activity: Activity, doOnUserNotAuth: () -> Unit): Observable<Monade>
     fun openBranch(comment: Comment, activity: Activity)
     fun openPostDetailScreen(post: Post, activity: Activity)
+
+    fun save(postId: Int, type: PostType): Single<Unit>
 }

@@ -4,12 +4,13 @@ import com.teachernavigator.teachernavigator.data.models.CommentNetwork
 import com.teachernavigator.teachernavigator.data.models.PostNetwork
 import com.teachernavigator.teachernavigator.domain.models.Post
 import com.teachernavigator.teachernavigator.domain.models.PostType
+import com.teachernavigator.teachernavigator.domain.models.Tag
 import com.teachernavigator.teachernavigator.presentation.models.Info
 import io.reactivex.Observable
 import io.reactivex.Single
 
 /**
- * Created by root on 22.08.17.
+ * Created by root on 22.08.17
  */
 interface IPostsInteractor {
 
@@ -25,4 +26,5 @@ interface IPostsInteractor {
     fun getInfoPosts(currentTheme: Info): Single<List<PostNetwork>>
     fun getPost(postId: Int, postType: PostType): Single<PostNetwork>
     fun sendComment(postId: Int, postType: PostType, text: String): Single<CommentNetwork>
+    fun getTags(): Single<List<Tag>>
 }

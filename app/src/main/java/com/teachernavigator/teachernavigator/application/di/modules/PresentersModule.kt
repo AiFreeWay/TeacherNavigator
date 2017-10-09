@@ -1,14 +1,8 @@
 package com.teachernavigator.teachernavigator.application.di.modules
 
 import com.teachernavigator.teachernavigator.application.di.scopes.PerParentScreen
-import com.teachernavigator.teachernavigator.presentation.screens.info.presenters.AboutPresenter
-import com.teachernavigator.teachernavigator.presentation.screens.info.presenters.AskSpecialistPresenter
-import com.teachernavigator.teachernavigator.presentation.screens.info.presenters.ImportantToKnowPresenter
-import com.teachernavigator.teachernavigator.presentation.screens.info.presenters.SupportPresenter
-import com.teachernavigator.teachernavigator.presentation.screens.info.presenters.abstractions.IAboutPresenter
-import com.teachernavigator.teachernavigator.presentation.screens.info.presenters.abstractions.IAskSpecialistPresenter
-import com.teachernavigator.teachernavigator.presentation.screens.info.presenters.abstractions.IImportantToKnowPresenter
-import com.teachernavigator.teachernavigator.presentation.screens.info.presenters.abstractions.ISupportPresenter
+import com.teachernavigator.teachernavigator.presentation.screens.info.presenters.*
+import com.teachernavigator.teachernavigator.presentation.screens.info.presenters.abstractions.*
 import com.teachernavigator.teachernavigator.presentation.screens.jobs.presenters.*
 import com.teachernavigator.teachernavigator.presentation.screens.jobs.presenters.abstractions.*
 import com.teachernavigator.teachernavigator.presentation.screens.main.presenters.PostActionsController
@@ -78,9 +72,13 @@ class PresentersModule {
     @PerParentScreen
     fun providePostActionsController(presenter: PostActionsController): IPostActionsController = presenter
 
-
     @Provides
     @PerParentScreen
     fun providePostCommentsPresenter(presenter: PostCommentsPresenter): IPostCommentsPresenter = presenter
+
+
+    @Provides
+    @PerParentScreen
+    fun provideTagsPresenter(presenter: TagsPresenter): ITagsPresenter = presenter
 
 }

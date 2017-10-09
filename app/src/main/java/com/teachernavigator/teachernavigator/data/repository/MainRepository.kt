@@ -23,7 +23,7 @@ import java.io.File
 import javax.inject.Inject
 
 /**
- * Created by root on 22.08.17.
+ * Created by root on 22.08.17
  */
 class MainRepository @Inject constructor(private val mNetwokController: NetworkController,
                                          private val mContext: Context) : IMainRepository {
@@ -121,6 +121,14 @@ class MainRepository @Inject constructor(private val mNetwokController: NetworkC
         PostType.importantinfo -> mNetwokController.getInfoPost(getAccessToken(), postId)
         else -> throw Error("Not implemented yet")
     }
+
+    override fun save(postId: Int, type: PostType): Single<Unit> = when (type) {
+        PostType.importantinfo -> mNetwokController.saveInfoPost(getAccessToken(), postId)
+        else -> throw Error("Not implemented yet")
+    }.map { Unit }
+
+    override fun getTags(): Single<List<Tag>> =
+            mNetwokController.getTags(getAccessToken())
 
 
     // ------------------------------- Settings methods --------------------------------

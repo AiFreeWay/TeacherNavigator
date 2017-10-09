@@ -10,6 +10,7 @@ import com.teachernavigator.teachernavigator.domain.interactors.abstractions.IPo
 import com.teachernavigator.teachernavigator.domain.mappers.PostsMapper
 import com.teachernavigator.teachernavigator.domain.models.Post
 import com.teachernavigator.teachernavigator.domain.models.PostType
+import com.teachernavigator.teachernavigator.domain.models.Tag
 import com.teachernavigator.teachernavigator.presentation.models.Info
 import io.reactivex.Observable
 import io.reactivex.Single
@@ -25,6 +26,11 @@ class PostsInteractor @Inject constructor(private val mRepository: ITapeReposito
     init {
         Logger.logDebug("created INTERACTOR PostsInteractor")
     }
+
+    override fun getTags(): Single<List<Tag>> =
+            mRepository.getTags()
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribeOn(Schedulers.newThread())
 
     override fun getPost(postId: Int, postType: PostType): Single<PostNetwork> =
             mRepository.getPost(postId, postType)

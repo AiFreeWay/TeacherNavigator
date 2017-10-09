@@ -4,10 +4,7 @@ import com.teachernavigator.teachernavigator.data.models.CommentNetwork
 import com.teachernavigator.teachernavigator.data.models.PostNetwork
 import com.teachernavigator.teachernavigator.data.network.requests.*
 import com.teachernavigator.teachernavigator.data.network.responses.*
-import com.teachernavigator.teachernavigator.domain.models.About
-import com.teachernavigator.teachernavigator.domain.models.Profile
-import com.teachernavigator.teachernavigator.domain.models.Resume
-import com.teachernavigator.teachernavigator.domain.models.Vacancy
+import com.teachernavigator.teachernavigator.domain.models.*
 import io.reactivex.Maybe
 import io.reactivex.Observable
 import io.reactivex.Single
@@ -141,5 +138,12 @@ interface ApiController {
 
     @GET("/api/v0/info_post/{postId}/")
     fun getInfoPost(@Header("Authorization") accessToken: String, @Path("postId") postId: Int): Single<PostNetwork>
+
+    @FormUrlEncoded
+    @POST("/api/v0/save/info/")
+    fun saveInfoPost(@Header("Authorization") accessToken: String, @Field("important_info") postId: Int): Single<Unit>
+
+    @GET("/api/v0/tags/")
+    fun tags(@Header("Authorization") accessToken: String): Single<BaseListResponse<Tag>>
 
 }

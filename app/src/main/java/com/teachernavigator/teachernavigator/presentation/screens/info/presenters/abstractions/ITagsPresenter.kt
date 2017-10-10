@@ -9,7 +9,7 @@ import com.teachernavigator.teachernavigator.presentation.screens.info.fragments
 interface ITagsPresenter : ViewAttacher<TagsView> {
 
     fun refresh()
-    var onlyTrends: Boolean
+    var trends: Boolean
     var text: CharSequence
 
 }

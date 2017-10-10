@@ -39,4 +39,5 @@ interface ITapeRepository {
 
     fun save(postId: Int, type: PostType): Single<Unit>
     fun getTags(): Single<List<Tag>>
+    fun getTrends(): Single<List<Tag>>
 }

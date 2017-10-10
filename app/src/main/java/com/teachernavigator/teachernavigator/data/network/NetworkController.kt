@@ -198,4 +198,8 @@ class NetworkController {
     fun getTags(accessToken: String): Single<List<Tag>> =
             mApiController.tags(accessToken)
                     .map { it.results }
+
+    fun getTrends(accessToken: String): Single<List<Tag>> =
+            mApiController.tagsTrends(accessToken)
+                    .map { it.results }
 }

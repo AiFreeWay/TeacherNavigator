@@ -28,10 +28,10 @@ class TagsPresenter
             updateTags()
         }
 
-    override var onlyTrends: Boolean = false
+    override var trends: Boolean = false
         set(value) {
             field = value
-            updateTags()
+            refresh()
         }
 
     @OnLifecycleEvent(Lifecycle.Event.ON_START)
@@ -39,7 +39,7 @@ class TagsPresenter
             mView?.getParentView()?.setToolbarTitle(R.string.tags)
 
     override fun refresh() =
-            addDissposable(postsInteractor.getTags()
+            addDissposable(load()
                     .doOnSubscribe { startProgress() }
                     .subscribe(this::onLoaded, this::onError))
 
@@ -49,11 +49,12 @@ class TagsPresenter
         updateTags()
     }
 
+    private fun load() = if (trends) postsInteractor.getTrends() else postsInteractor.getTags()
+
     private fun updateTags() =
             mView?.setTags(
-                    mTags.filter { text.isBlank() || it.name.contains(text) }
-                            .sortedWith(Comparator { left, right -> right.count - left.count })
-                            .take(if (onlyTrends) 5 else mTags.size))
+                    mTags.filter { text.isBlank() || it.name.contains(text, ignoreCase = true) }
+                            .sortedWith(Comparator { left, right -> right.count - left.count }))
 
 
     private fun onError(error: Throwable) {

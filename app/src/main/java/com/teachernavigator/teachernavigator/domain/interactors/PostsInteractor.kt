@@ -27,6 +27,11 @@ class PostsInteractor @Inject constructor(private val mRepository: ITapeReposito
         Logger.logDebug("created INTERACTOR PostsInteractor")
     }
 
+    override fun getTrends(): Single<List<Tag>> =
+            mRepository.getTrends()
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribeOn(Schedulers.newThread())
+
     override fun getTags(): Single<List<Tag>> =
             mRepository.getTags()
                     .observeOn(AndroidSchedulers.mainThread())

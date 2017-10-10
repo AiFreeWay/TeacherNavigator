@@ -146,4 +146,7 @@ interface ApiController {
     @GET("/api/v0/tags/")
     fun tags(@Header("Authorization") accessToken: String): Single<BaseListResponse<Tag>>
 
+    @GET("/api/v0/tags/trends/")
+    fun tagsTrends(@Header("Authorization") accessToken: String): Single<BaseListResponse<Tag>>
+
 }

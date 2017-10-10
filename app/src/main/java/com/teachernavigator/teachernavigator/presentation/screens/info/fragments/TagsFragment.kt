@@ -62,7 +62,6 @@ class TagsFragment : BaseFragment(), TagsView {
         vTabLayout.addTab(allTab)
         vTabLayout.addTab(trends)
         allTab.select()
-
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -76,10 +75,10 @@ class TagsFragment : BaseFragment(), TagsView {
         vListRvData.adapter = adapter
 
         vTabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
-            override fun onTabReselected(tab: TabLayout.Tab?) = presenter.refresh()
             override fun onTabUnselected(tab: TabLayout.Tab?) = Unit
+            override fun onTabReselected(tab: TabLayout.Tab?) = presenter.refresh()
             override fun onTabSelected(tab: TabLayout.Tab?) {
-                presenter.onlyTrends = tab?.tag == TagsView.TRENDS
+                presenter.trends = tab?.tag == TagsView.TRENDS
             }
         })
 
@@ -103,7 +102,7 @@ class TagsFragment : BaseFragment(), TagsView {
     override fun setTags(tags: List<Tag>) {
         adapter.clear()
         adapter.addAll(tags)
-        TransitionManager.beginDelayedTransition(vListSwipeLayout)
+        TransitionManager.beginDelayedTransition(vListSwipeLayout)//, Fade())
         adapter.notifyDataSetChanged()
     }
 

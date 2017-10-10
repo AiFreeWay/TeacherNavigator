@@ -130,6 +130,10 @@ class MainRepository @Inject constructor(private val mNetwokController: NetworkC
     override fun getTags(): Single<List<Tag>> =
             mNetwokController.getTags(getAccessToken())
 
+    override fun getTrends(): Single<List<Tag>> =
+            mNetwokController.getTrends(getAccessToken())
+
+
 
     // ------------------------------- Settings methods --------------------------------
 

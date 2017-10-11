@@ -1,6 +1,7 @@
 package com.teachernavigator.teachernavigator.domain.interactors.abstractions
 
 import com.teachernavigator.teachernavigator.data.models.CommentNetwork
+import com.teachernavigator.teachernavigator.data.models.FileInfo
 import com.teachernavigator.teachernavigator.data.models.PostNetwork
 import com.teachernavigator.teachernavigator.domain.models.Post
 import com.teachernavigator.teachernavigator.domain.models.PostType
@@ -29,5 +30,5 @@ interface IPostsInteractor {
     fun getTags(): Single<List<Tag>>
     fun getTrends(): Single<List<Tag>>
 
-    fun sendPost(title: String, text: String, tags: List<String>, filePath: String?, fileMime: String?): Single<Post>
+    fun sendPost(title: String, text: String, tags: List<String>,fileInfo: FileInfo?): Single<Post>
 }

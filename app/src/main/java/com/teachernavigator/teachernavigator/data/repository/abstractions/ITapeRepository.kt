@@ -1,6 +1,7 @@
 package com.teachernavigator.teachernavigator.data.repository.abstractions
 
 import com.teachernavigator.teachernavigator.data.models.CommentNetwork
+import com.teachernavigator.teachernavigator.data.models.FileInfo
 import com.teachernavigator.teachernavigator.data.models.PostNetwork
 import com.teachernavigator.teachernavigator.data.network.requests.CommentRequest
 import com.teachernavigator.teachernavigator.data.network.requests.SavePostRequest
@@ -42,5 +43,5 @@ interface ITapeRepository {
     fun getTags(): Single<List<Tag>>
     fun getTrends(): Single<List<Tag>>
 
-    fun sendPost(title: String, text: String, tags: List<String>, filePath: String?, fileMime: String?): Single<Post>
+    fun sendPost(title: String, text: String, tags: List<String>, fileInfo: FileInfo?): Single<Post>
 }

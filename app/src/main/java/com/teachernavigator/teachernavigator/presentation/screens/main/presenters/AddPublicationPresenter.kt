@@ -7,6 +7,7 @@ import android.util.Log.d
 import android.widget.Toast
 import com.teachernavigator.teachernavigator.R
 import com.teachernavigator.teachernavigator.application.di.scopes.PerParentScreen
+import com.teachernavigator.teachernavigator.data.models.FileInfo
 import com.teachernavigator.teachernavigator.domain.interactors.abstractions.IPostsInteractor
 import com.teachernavigator.teachernavigator.domain.models.Post
 import com.teachernavigator.teachernavigator.domain.models.Tag
@@ -17,6 +18,7 @@ import com.teachernavigator.teachernavigator.presentation.screens.main.presenter
 import com.teachernavigator.teachernavigator.presentation.utils.ActivityRouter
 import io.reactivex.Single
 import ru.terrakok.cicerone.Router
+import java.io.File
 import javax.inject.Inject
 
 /**
@@ -27,8 +29,7 @@ class AddPublicationPresenter
 @Inject constructor(val router: Router,
                     private val postsInteractor: IPostsInteractor) : BasePresenter<AddPublicationView>(), IAddPublicationPresenter {
 
-    override var filePath: String? = null
-    override var fileMime: String? = null
+    var fileInfo: FileInfo? = null
 
     private var mTags: List<Tag>? = null
 
@@ -45,7 +46,7 @@ class AddPublicationPresenter
     }
 
     override fun publish(title: CharSequence, text: CharSequence) = validateAndPerform(title, text) {
-        addDissposable(postsInteractor.sendPost(title.toString(), text.toString(), mPublicationTags.toList(), filePath, fileMime)
+        addDissposable(postsInteractor.sendPost(title.toString(), text.toString(), mPublicationTags.toList(), fileInfo)
                 .doOnSubscribe { startProgress() }
                 .subscribe(this::onCreated, this::doOnError))
 
@@ -77,6 +78,10 @@ class AddPublicationPresenter
         mView?.setTags(mPublicationTags.toList())
     }
 
+    override fun setFile(file: File?, mimeType: String?) = if (file != null && mimeType != null) {
+        fileInfo = FileInfo(file.absolutePath, mimeType, file.name)
+    } else Unit
+
     override fun searchTags(tag: CharSequence) {
         addDissposable(load()
                 .map {
@@ -89,7 +94,6 @@ class AddPublicationPresenter
     }
 
     private fun onCreated(post: Post) {
-        d(javaClass.name, "-> onCreated -> $post")
         stopProgress()
         mView?.showToast(R.string.post_successfully_created)
         router.exit()

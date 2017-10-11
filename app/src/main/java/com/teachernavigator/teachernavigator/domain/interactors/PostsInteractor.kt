@@ -2,6 +2,7 @@ package com.teachernavigator.teachernavigator.domain.interactors
 
 import com.example.root.androidtest.application.utils.Logger
 import com.teachernavigator.teachernavigator.data.models.CommentNetwork
+import com.teachernavigator.teachernavigator.data.models.FileInfo
 import com.teachernavigator.teachernavigator.data.models.PostNetwork
 import com.teachernavigator.teachernavigator.data.network.requests.CommentRequest
 import com.teachernavigator.teachernavigator.data.network.responses.PostsResponse
@@ -23,8 +24,8 @@ import javax.inject.Inject
  */
 class PostsInteractor @Inject constructor(private val mRepository: ITapeRepository) : IPostsInteractor {
 
-    override fun sendPost(title: String, text: String, tags: List<String>, filePath: String?, fileMime: String?): Single<Post> =
-            mRepository.sendPost(title, text, tags, filePath, fileMime)
+    override fun sendPost(title: String, text: String, tags: List<String>, fileInfo: FileInfo?): Single<Post> =
+            mRepository.sendPost(title, text, tags, fileInfo)
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribeOn(Schedulers.newThread())
 

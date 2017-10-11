@@ -152,10 +152,7 @@ interface ApiController {
     @Multipart
     @POST("/api/v0/post/")
     fun sendPost(@Header("Authorization") accessToken: String,
-                 @Part("title") title: RequestBody,
-                 @Part("text") text: RequestBody,
-                 @Part("tags") tags: RequestBody,
-                 @Part("file\"; filename=\"file") fileRequestBody: RequestBody?): Single<Post>
+                 @PartMap params: Map<String, @JvmSuppressWildcards RequestBody>): Single<Post>
 
 
 }

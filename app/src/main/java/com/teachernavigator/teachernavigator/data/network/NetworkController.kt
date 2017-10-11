@@ -5,6 +5,7 @@ import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.teachernavigator.teachernavigator.BuildConfig
 import com.teachernavigator.teachernavigator.data.models.CommentNetwork
+import com.teachernavigator.teachernavigator.data.models.FileInfo
 import com.teachernavigator.teachernavigator.data.models.PostNetwork
 import com.teachernavigator.teachernavigator.data.network.adapters.UserDeserializer
 import com.teachernavigator.teachernavigator.data.network.requests.*
@@ -25,6 +26,7 @@ import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import java.io.File
+
 
 /**
  * Created by root on 11.08.17
@@ -220,19 +222,18 @@ class NetworkController {
     private fun loadTags(accessToken: String, page: Int) = mApiController.tags(accessToken, page)
     private fun loadTrends(accessToken: String, page: Int) = mApiController.tagsTrends(accessToken, page)
 
-    fun sendPost(accessToken: String, title: String, text: String, tags: List<String>, filePath: String?, fileMime: String?): Single<Post> {
-        val fileRequestBody = if (fileMime != null && filePath != null) RequestBody.create(MediaType.parse(fileMime), File(filePath)) else null
+    fun sendPost(accessToken: String, title: String, text: String, tags: List<String>, fileInfo: FileInfo?): Single<Post> {
 
-//        Content-Disposition: form-data; name="file";"
+        val params = HashMap<String, RequestBody>().apply {
+            put("title", title.toRequestBody())
+            put("text", text.toRequestBody())
+            put("tags", tags.toRequestBody())
 
-//        // TODO: Refactor this shit!!!
-//        val char = '"'
-//        val tagsString = "[$char${TextUtils.join("$char,$char", tags)}$char]"
-//
-//        val tagsRequest = RequestBody.create(MediaType.parse("application/json"), tagsString)
-//        val titleRequest = RequestBody.create(MediaType.parse("application/json"), title)
-//        val textRequest = RequestBody.create(MediaType.parse("application/json"), text)
+            if (fileInfo != null) {
+                put("file\"; filename=\"${fileInfo.fileName}", fileInfo.toRequestBody())
+            }
+        }
 
-        return mApiController.sendPost(accessToken, title.toRequestBody(), text.toRequestBody(), tags.toRequestBody(), fileRequestBody)
+        return mApiController.sendPost(accessToken, params)
     }
 }

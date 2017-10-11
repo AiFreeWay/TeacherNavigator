@@ -107,8 +107,7 @@ class AddPublicationFragment : BaseFragment(), AddPublicationView {
         val data = response.data()
         if (response.resultCode() == Activity.RESULT_OK && data != null) {
             fmtAddPublicationTvAddFile.text = data.filename
-            presenter.filePath = data.file.path
-            presenter.fileMime = data.mimeType
+            presenter.setFile(data.file, data.mimeType)
         }
     }
 

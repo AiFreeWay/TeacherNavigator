@@ -6,6 +6,7 @@ import com.example.root.androidtest.application.utils.Logger
 import com.teachernavigator.teachernavigator.R
 import com.teachernavigator.teachernavigator.data.cache.CacheController
 import com.teachernavigator.teachernavigator.data.models.CommentNetwork
+import com.teachernavigator.teachernavigator.data.models.FileInfo
 import com.teachernavigator.teachernavigator.data.models.PostNetwork
 import com.teachernavigator.teachernavigator.data.network.NetworkController
 import com.teachernavigator.teachernavigator.data.network.requests.*
@@ -133,8 +134,8 @@ class MainRepository @Inject constructor(private val mNetwokController: NetworkC
     override fun getTrends(): Single<List<Tag>> =
             mNetwokController.getTrends(getAccessToken())
 
-    override fun sendPost(title: String, text: String, tags: List<String>, filePath: String?, fileMime: String?): Single<Post> =
-            mNetwokController.sendPost(getAccessToken(), title, text, tags, filePath, fileMime)
+    override fun sendPost(title: String, text: String, tags: List<String>, fileInfo: FileInfo?): Single<Post> =
+            mNetwokController.sendPost(getAccessToken(), title, text, tags, fileInfo)
 
     // ------------------------------- Settings methods --------------------------------
 

@@ -9,6 +9,7 @@ import com.teachernavigator.teachernavigator.data.network.requests.VoteRequest
 import com.teachernavigator.teachernavigator.data.network.responses.BaseResponse
 import com.teachernavigator.teachernavigator.data.network.responses.GetMyCommentsResponse
 import com.teachernavigator.teachernavigator.data.network.responses.PostsResponse
+import com.teachernavigator.teachernavigator.domain.models.Post
 import com.teachernavigator.teachernavigator.domain.models.PostType
 import com.teachernavigator.teachernavigator.domain.models.Tag
 import com.teachernavigator.teachernavigator.presentation.models.Info
@@ -40,4 +41,6 @@ interface ITapeRepository {
     fun save(postId: Int, type: PostType): Single<Unit>
     fun getTags(): Single<List<Tag>>
     fun getTrends(): Single<List<Tag>>
+
+    fun sendPost(title: String, text: String, tags: List<String>, filePath: String?, fileMime: String?): Single<Post>
 }

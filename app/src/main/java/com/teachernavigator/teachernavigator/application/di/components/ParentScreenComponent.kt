@@ -16,6 +16,7 @@ import com.teachernavigator.teachernavigator.presentation.screens.auth.presenter
 import com.teachernavigator.teachernavigator.presentation.screens.common.ParentView
 import com.teachernavigator.teachernavigator.presentation.screens.info.fragments.*
 import com.teachernavigator.teachernavigator.presentation.screens.jobs.fragments.*
+import com.teachernavigator.teachernavigator.presentation.screens.main.fragments.AddPublicationFragment
 import com.teachernavigator.teachernavigator.presentation.screens.main.fragments.PostCommentsFragment
 import com.teachernavigator.teachernavigator.presentation.screens.main.presenters.*
 import com.teachernavigator.teachernavigator.presentation.screens.settings.presenters.FmtAppSettingsPresenter
@@ -48,7 +49,7 @@ interface ParentScreenComponent {
     fun inject(presenter: FmtSavedPostsPresenter)
     fun inject(presenter: FmtMyPublicationsPresenter)
     fun inject(presenter: FmtSettingsPresenter)
-    fun inject(presenter: FmtAddPublicationPresenter)
+    fun inject(presenter: AddPublicationPresenter)
 
     //Tape presenters
     fun inject(presenter: AcPostSearchPresenter)
@@ -83,5 +84,6 @@ interface ParentScreenComponent {
     fun inject(askSpecialistFragment: AskSpecialistFragment)
     fun inject(postCommentsFragment: PostCommentsFragment)
     fun inject(tagsFragment: TagsFragment)
+    fun inject(addPublicationFragment: AddPublicationFragment)
 
 }

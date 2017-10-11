@@ -28,7 +28,7 @@
         android:id="@+id/myResumeBtnCreate"
         style="@style/Button"
         android:layout_width="@dimen/buttonAndTextWidth"
-        android:layout_height="@dimen/normalControlsHeight"
+        android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_gravity="center"

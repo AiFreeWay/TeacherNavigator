@@ -133,7 +133,8 @@ class MainRepository @Inject constructor(private val mNetwokController: NetworkC
     override fun getTrends(): Single<List<Tag>> =
             mNetwokController.getTrends(getAccessToken())
 
-
+    override fun sendPost(title: String, text: String, tags: List<String>, filePath: String?, fileMime: String?): Single<Post> =
+            mNetwokController.sendPost(getAccessToken(), title, text, tags, filePath, fileMime)
 
     // ------------------------------- Settings methods --------------------------------
 

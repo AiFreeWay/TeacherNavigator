@@ -91,9 +91,9 @@
 
         <android.support.v7.widget.AppCompatButton
             android:id="@+id/vVacancyBtnResponse"
-            style="@style/Button"
+            style="@style/Button.Small"
             android:layout_width="@dimen/buttonAndTextWidth"
-            android:layout_height="@dimen/normalControlsHeight"
+            android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_margin="@dimen/spacingLarge"
             android:text="@string/response_to_vacancy"

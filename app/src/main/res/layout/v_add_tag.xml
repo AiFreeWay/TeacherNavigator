@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="center"
+    android:background="@color/white_overlay">
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="@dimen/spacingXXLarge">
+
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/spacingLarge">
+
+
+            <TextView
+                android:id="@+id/vAddTagTvTitle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/spacingLarge"
+                android:layout_marginEnd="@dimen/spacingLarge"
+                android:layout_marginLeft="@dimen/spacingLarge"
+                android:layout_marginRight="@dimen/spacingLarge"
+                android:layout_marginStart="@dimen/spacingLarge"
+                android:text="@string/add_tag"
+                android:textSize="@dimen/titleTextSize"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <LinearLayout
+                android:id="@+id/vAddTagLTags"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/spacingXLarge"
+                android:background="@drawable/bg_edit_rounded"
+                android:orientation="vertical"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/vAddTagTvTitle">
+
+                <EditText
+                    android:id="@+id/vAddTagEtTag"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@null"
+                    android:inputType="text"
+                    android:padding="@dimen/spacingLarge" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginLeft="@dimen/spacingLarge"
+                    android:layout_marginRight="@dimen/spacingLarge"
+                    android:background="@color/grey" />
+
+                <include
+                    android:id="@+id/vAddTagVTag1"
+                    layout="@layout/v_tag" />
+
+                <include
+                    android:id="@+id/vAddTagVTag2"
+                    layout="@layout/v_tag" />
+
+            </LinearLayout>
+
+
+            <Button
+                android:id="@+id/vAddTagBtnCancel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/spacingMedium"
+
+                android:layout_marginStart="@dimen/spacingMedium"
+                android:layout_marginTop="@dimen/spacingLarge"
+                android:background="?android:attr/selectableItemBackground"
+                android:text="@string/cancel"
+                android:textColor="@color/greyTextColor"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/vAddTagLTags" />
+
+            <Button
+                android:id="@+id/vAddTagBtnAdd"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/spacingMedium"
+                android:layout_marginRight="@dimen/spacingMedium"
+                android:layout_marginTop="@dimen/spacingLarge"
+                android:background="?android:attr/selectableItemBackground"
+                android:text="@string/add"
+                android:textColor="@color/colorPrimaryDark"
+                app:layout_constraintRight_toRightOf="parent"
+
+                app:layout_constraintTop_toBottomOf="@+id/vAddTagLTags"
+                tools:layout_editor_absoluteY="427dp" />
+
+        </android.support.constraint.ConstraintLayout>
+
+    </android.support.v7.widget.CardView>
+
+</FrameLayout>

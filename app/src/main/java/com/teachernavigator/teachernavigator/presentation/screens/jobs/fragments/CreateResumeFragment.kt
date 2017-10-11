@@ -40,7 +40,8 @@ class CreateResumeFragment : BaseFragment(), CreateResumeView {
 
     @Inject
     lateinit var createResumePresenter: ICreateResumePresenter
-    lateinit var rxPermissions: RxPermissions
+
+    private val rxPermissions by lazy { RxPermissions(activity) }
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? =
             inflater?.inflate(R.layout.fmt_create_resume, container, false)
@@ -96,7 +97,6 @@ class CreateResumeFragment : BaseFragment(), CreateResumeView {
         super.onActivityCreated(savedInstanceState)
         inject()
         createResumePresenter.attachView(this)
-        rxPermissions = RxPermissions(activity)
     }
 
     private fun inject() {

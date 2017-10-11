@@ -225,7 +225,7 @@
                         android:id="@+id/v_post_btn_more"
                         style="@style/Button"
                         android:layout_width="wrap_content"
-                        android:layout_height="@dimen/miniControlsHeight"
+                        android:layout_height="wrap_content"
                         android:text="@string/more"
                         android:textAllCaps="false"
                         app:backgroundTint="@color/colorAccent" />

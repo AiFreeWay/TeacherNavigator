@@ -23,6 +23,11 @@ import javax.inject.Inject
  */
 class PostsInteractor @Inject constructor(private val mRepository: ITapeRepository) : IPostsInteractor {
 
+    override fun sendPost(title: String, text: String, tags: List<String>, filePath: String?, fileMime: String?): Single<Post> =
+            mRepository.sendPost(title, text, tags, filePath, fileMime)
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribeOn(Schedulers.newThread())
+
     init {
         Logger.logDebug("created INTERACTOR PostsInteractor")
     }

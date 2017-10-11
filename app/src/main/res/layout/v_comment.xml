@@ -99,9 +99,9 @@
 
         <android.support.v7.widget.AppCompatButton
             android:id="@+id/v_comment_btn_open_branch"
-            style="@style/Button"
+            style="@style/Button.Small"
             android:layout_width="wrap_content"
-            android:layout_height="@dimen/miniControlsHeight"
+            android:layout_height="wrap_content"
 
             android:text="@string/open_branch"
             android:textAllCaps="false"

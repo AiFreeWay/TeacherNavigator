@@ -28,4 +28,6 @@ interface IPostsInteractor {
     fun sendComment(postId: Int, postType: PostType, text: String): Single<CommentNetwork>
     fun getTags(): Single<List<Tag>>
     fun getTrends(): Single<List<Tag>>
+
+    fun sendPost(title: String, text: String, tags: List<String>, filePath: String?, fileMime: String?): Single<Post>
 }

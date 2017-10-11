@@ -37,11 +37,7 @@ class TagsFragment : BaseFragment(), TagsView {
     @Inject
     lateinit var presenter: ITagsPresenter
 
-    val adapter: UniversalAdapter by lazy {
-        UniversalAdapter(
-                TagVHBuilder()
-        )
-    }
+    val adapter: UniversalAdapter by lazy { UniversalAdapter(TagVHBuilder(null)) }
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? =
             inflater?.inflate(R.layout.fmt_tags, container, false)
@@ -99,6 +95,11 @@ class TagsFragment : BaseFragment(), TagsView {
                 .also { it.inject(this) }
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        presenter.detachView()
+    }
+
     override fun setTags(tags: List<Tag>) {
         adapter.clear()
         adapter.addAll(tags)
@@ -113,6 +114,5 @@ class TagsFragment : BaseFragment(), TagsView {
     override fun hideRefresh() {
         vListSwipeLayout?.isRefreshing = false
     }
-
 
 }

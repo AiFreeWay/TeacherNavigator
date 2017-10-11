@@ -85,7 +85,7 @@
             android:id="@+id/createResumeBtnCreate"
             style="@style/Button"
             android:layout_width="@dimen/buttonAndTextWidth"
-            android:layout_height="@dimen/normalControlsHeight"
+            android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_margin="@dimen/spacingXXXLarge"
             android:text="@string/create_resume"

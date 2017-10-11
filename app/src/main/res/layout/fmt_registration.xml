@@ -186,7 +186,7 @@
             android:id="@+id/fmt_registration_btn_sing_up"
             style="@style/Button"
             android:layout_width="@dimen/buttonAndTextWidth"
-            android:layout_height="@dimen/normalControlsHeight"
+            android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginBottom="@dimen/externalPadding"
             android:layout_marginTop="@dimen/externalPadding"

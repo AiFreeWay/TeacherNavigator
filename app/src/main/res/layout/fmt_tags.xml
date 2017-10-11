@@ -19,26 +19,18 @@
 
     <EditText
         android:id="@+id/etSearch"
+        style="@style/EditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/vTabLayout"
-        android:background="@drawable/bg_edit_rounded"
         android:layout_margin="@dimen/spacingLarge"
-
-        android:paddingBottom="@dimen/spacingLarge"
-        android:paddingLeft="@dimen/spacingXXXLarge"
-        android:paddingRight="@dimen/spacingXXXLarge"
-        android:paddingTop="@dimen/spacingLarge"
-
-        android:hint="@string/search_tags"
-        />
+        android:hint="@string/search_tags" />
 
     <android.support.v4.widget.SwipeRefreshLayout
         android:id="@+id/vListSwipeLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/etSearch"
-        >
+        android:layout_below="@+id/etSearch">
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/vListRvData"

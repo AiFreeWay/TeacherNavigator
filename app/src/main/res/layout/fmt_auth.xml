@@ -121,7 +121,7 @@
             android:id="@+id/fmt_auth_btn_sing_in"
             style="@style/Button"
             android:layout_width="@dimen/buttonAndTextWidth"
-            android:layout_height="@dimen/normalControlsHeight"
+            android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="@dimen/externalPadding"
             android:text="@string/enter"

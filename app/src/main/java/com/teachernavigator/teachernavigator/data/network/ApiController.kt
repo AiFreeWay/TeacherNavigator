@@ -144,9 +144,18 @@ interface ApiController {
     fun saveInfoPost(@Header("Authorization") accessToken: String, @Field("important_info") postId: Int): Single<Unit>
 
     @GET("/api/v0/tags/")
-    fun tags(@Header("Authorization") accessToken: String): Single<BaseListResponse<Tag>>
+    fun tags(@Header("Authorization") accessToken: String, @Query("page") page: Int): Observable<BaseListResponse<Tag>>
 
-    @GET("/api/v0/tags/trends/")
-    fun tagsTrends(@Header("Authorization") accessToken: String): Single<BaseListResponse<Tag>>
+    @GET("/api/v0/tags/trends")
+    fun tagsTrends(@Header("Authorization") accessToken: String, @Query("page") page: Int): Observable<BaseListResponse<Tag>>
+
+    @Multipart
+    @POST("/api/v0/post/")
+    fun sendPost(@Header("Authorization") accessToken: String,
+                 @Part("title") title: RequestBody,
+                 @Part("text") text: RequestBody,
+                 @Part("tags") tags: RequestBody,
+                 @Part("file\"; filename=\"file") fileRequestBody: RequestBody?): Single<Post>
+
 
 }

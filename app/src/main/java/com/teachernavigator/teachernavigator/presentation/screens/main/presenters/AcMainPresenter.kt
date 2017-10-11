@@ -101,25 +101,25 @@ class AcMainPresenter : BasePresenter<MainView>(), IMainPresenter {
 
     private fun onMenuItemClick(item: MenuData<*>) {
         when (item.mType) {
-            MenuItemsFactory.MenuItemTypes.TAPE.id -> navigateToFragment(TapeFragment.FRAGMENT_KEY)
-            MenuItemsFactory.MenuItemTypes.MY_COMMENTS.id -> navigateToFragment(MyCommentsFragment.FRAGMENT_KEY)
-            MenuItemsFactory.MenuItemTypes.SAVED.id -> navigateToFragment(SavedPostsFragment.FRAGMENT_KEY)
-            MenuItemsFactory.MenuItemTypes.MY_PUBLICATION.id -> navigateToFragment(MyPublicationsFragment.FRAGMENT_KEY)
+            MenuItemsFactory.MenuItemTypes.TAPE.id -> toFragment(TapeFragment.FRAGMENT_KEY)
+            MenuItemsFactory.MenuItemTypes.MY_COMMENTS.id -> toFragment(MyCommentsFragment.FRAGMENT_KEY)
+            MenuItemsFactory.MenuItemTypes.SAVED.id -> toFragment(SavedPostsFragment.FRAGMENT_KEY)
+            MenuItemsFactory.MenuItemTypes.MY_PUBLICATION.id -> toFragment(MyPublicationsFragment.FRAGMENT_KEY)
 
             MenuItemsFactory.MenuItemTypes.LOGIN.id -> ActivityRouter.openActivity(mView!!.getActivity(), AuthActivity::class.java)
-            MenuItemsFactory.MenuItemTypes.SETTINGS.id -> navigateToFragment(SettingsFragment.FRAGMENT_KEY)
-            MenuItemsFactory.MenuItemTypes.BANK_OF_VACANCY.id -> navigateToFragment(JobsBankFragment.FRAGMENT_KEY)
-            MenuItemsFactory.MenuItemTypes.IMPORTANT_TO_KNOW.id -> navigateToFragment(ImportantToKnowFragment.FRAGMENT_KEY)
-            MenuItemsFactory.MenuItemTypes.SUPPORT.id -> navigateToFragment(SupportFragment.FRAGMENT_KEY)
+            MenuItemsFactory.MenuItemTypes.SETTINGS.id -> toFragment(SettingsFragment.FRAGMENT_KEY)
+            MenuItemsFactory.MenuItemTypes.BANK_OF_VACANCY.id -> toFragment(JobsBankFragment.FRAGMENT_KEY)
+            MenuItemsFactory.MenuItemTypes.IMPORTANT_TO_KNOW.id -> toFragment(ImportantToKnowFragment.FRAGMENT_KEY)
+            MenuItemsFactory.MenuItemTypes.SUPPORT.id -> toFragment(SupportFragment.FRAGMENT_KEY)
             MenuItemsFactory.MenuItemTypes.CHAT.id -> mView?.notImplemented()
             MenuItemsFactory.MenuItemTypes.PROFILE_HEADER.id -> {
                 val bundle = Bundle()
                 bundle.putBoolean(ProfileActivity.IS_MY_PROFILE_KEY, true)
                 ActivityRouter.openActivity(mView!!.getActivity(), bundle, ProfileActivity::class.java)
             }
-            MenuItemsFactory.MenuItemTypes.ADD_PUBLICATION.id -> navigateToFragment(AddPublicationFragment.FRAGMENT_KEY)
-            MenuItemsFactory.MenuItemTypes.ABOUT.id -> navigateToFragment(AboutFragment.FRAGMENT_KEY)
-            MenuItemsFactory.MenuItemTypes.TAGS.id -> navigateToFragment(TagsFragment.FRAGMENT_KEY)
+            MenuItemsFactory.MenuItemTypes.ADD_PUBLICATION.id -> toFragment(AddPublicationFragment.FRAGMENT_KEY, false)
+            MenuItemsFactory.MenuItemTypes.ABOUT.id -> toFragment(AboutFragment.FRAGMENT_KEY, false)
+            MenuItemsFactory.MenuItemTypes.TAGS.id -> toFragment(TagsFragment.FRAGMENT_KEY, false)
         }
         mView!!.closeSideMenu()
     }
@@ -133,10 +133,15 @@ class AcMainPresenter : BasePresenter<MainView>(), IMainPresenter {
         mParentScreenComponent.inject(this)
     }
 
-    private fun navigateToFragment(screenKey: String) {
+    private fun toFragment(screenKey: String, newRoot: Boolean = true) {
         if (!TextUtils.equals(screenKey, mLastScreenKey)) {
             mLastScreenKey = screenKey
-            mRouter.newRootScreen(screenKey)
+
+            if (newRoot) {
+                mRouter.newRootScreen(screenKey)
+            } else {
+                mRouter.navigateTo(screenKey)
+            }
         }
     }
 

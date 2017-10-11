@@ -141,6 +141,7 @@
     <string name="attach_resume">Прикрепить резюме</string>
     <string name="resume_successfully_created">Резюме успешно создано</string>
     <string name="vacancy_successfully_created">Вакансия успешно создана</string>
+    <string name="post_successfully_created">Публикация успешно добавлена</string>
     <string name="view_vacancies">Посмотреть вакансии</string>
     <string name="response_to_vacancy">Откликнуться на вакансию</string>
     <string name="me_employer">Я работодатель</string>
@@ -182,4 +183,8 @@
     <string name="all_tags">Все теги</string>
     <string name="trends">Тенденции</string>
     <string name="search_tags">Поиск тегов</string>
+    <string name="attach_file">Выбрать файл</string>
+    <string name="cancel">Отмена</string>
+    <string name="add">Добавить</string>
+    <string name="add_least_one_tag">Добавьте как минимум один тег</string>
 </resources>

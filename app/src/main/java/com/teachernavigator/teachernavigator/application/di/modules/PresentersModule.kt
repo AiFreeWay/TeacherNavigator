@@ -5,8 +5,10 @@ import com.teachernavigator.teachernavigator.presentation.screens.info.presenter
 import com.teachernavigator.teachernavigator.presentation.screens.info.presenters.abstractions.*
 import com.teachernavigator.teachernavigator.presentation.screens.jobs.presenters.*
 import com.teachernavigator.teachernavigator.presentation.screens.jobs.presenters.abstractions.*
+import com.teachernavigator.teachernavigator.presentation.screens.main.presenters.AddPublicationPresenter
 import com.teachernavigator.teachernavigator.presentation.screens.main.presenters.PostActionsController
 import com.teachernavigator.teachernavigator.presentation.screens.main.presenters.PostCommentsPresenter
+import com.teachernavigator.teachernavigator.presentation.screens.main.presenters.abstractions.IAddPublicationPresenter
 import com.teachernavigator.teachernavigator.presentation.screens.main.presenters.abstractions.IPostActionsController
 import com.teachernavigator.teachernavigator.presentation.screens.main.presenters.abstractions.IPostCommentsPresenter
 import dagger.Module
@@ -76,9 +78,12 @@ class PresentersModule {
     @PerParentScreen
     fun providePostCommentsPresenter(presenter: PostCommentsPresenter): IPostCommentsPresenter = presenter
 
-
     @Provides
     @PerParentScreen
     fun provideTagsPresenter(presenter: TagsPresenter): ITagsPresenter = presenter
+
+    @Provides
+    @PerParentScreen
+    fun provideAddPublicationPresenter(presenter: AddPublicationPresenter): IAddPublicationPresenter = presenter
 
 }

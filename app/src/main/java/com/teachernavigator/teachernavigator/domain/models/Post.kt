@@ -5,11 +5,12 @@ import java.io.Serializable
 /**
  * Created by root on 22.08.17.
  */
-class Post : Serializable {
+data class Post(var title: String? = null,
+                var text: String? = null) : Serializable {
 
     var id: Int? = null
-    var title: String? = null
-    var text: String? = null
+
+
     var file: String? = null
     var created: String? = null
     var tags: List<String>? = null

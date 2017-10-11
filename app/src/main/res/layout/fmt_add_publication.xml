@@ -1,115 +1,150 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <RelativeLayout
+    <ScrollView
+        android:id="@+id/fmtAddPublicationScrollView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent">
 
-        <android.support.design.widget.TextInputEditText
-            android:id="@+id/fmt_add_publication_et_title"
-            style="@style/EditText"
-            android:layout_width="@dimen/buttonAndTextWidth"
-            android:layout_height="@dimen/normalControlsHeight"
-            android:layout_gravity="center"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginBottom="@dimen/internalPadding"
-            android:layout_marginEnd="@dimen/externalPadding"
-            android:layout_marginStart="@dimen/externalPadding"
-            android:layout_marginTop="@dimen/externalPadding"
-            android:background="@drawable/oval_edit_text_backgroud"
-            android:hint="@string/title"
-            android:lines="1" />
-
-        <TextView
-            style="@style/TitleText"
-            android:id="@+id/fmt_add_publication_tv_title"
-            android:layout_width="@dimen/buttonAndTextWidth"
+        <RelativeLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="@dimen/externalPadding"
-            android:layout_alignLeft="@+id/fmt_add_publication_et_title"
-            android:layout_alignStart="@+id/fmt_add_publication_et_title"
-            android:layout_below="@+id/fmt_add_publication_et_title"
-            android:text="@string/publication_text" />
+            android:padding="@dimen/spacingLarge">
 
-        <android.support.design.widget.TextInputEditText
-            android:id="@+id/fmt_add_publication_et_text"
-            android:layout_width="@dimen/buttonAndTextWidth"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:gravity="top"
-            android:layout_marginTop="@dimen/externalPadding"
-            android:padding="@dimen/internalPadding"
-            android:layout_alignLeft="@+id/fmt_add_publication_tv_title"
-            android:layout_alignStart="@+id/fmt_add_publication_tv_title"
-            android:layout_below="@+id/fmt_add_publication_tv_title"
-            android:background="@drawable/oval_text_backgroud"
-            android:minLines="5" />
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/fmtAddPublicationEtTitle"
+                style="@style/EditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:layout_gravity="center"
+                android:layout_margin="@dimen/spacingLarge"
+                android:hint="@string/title"
+                android:lines="1" />
 
-        <TextView
-            android:id="@+id/fmt_add_publication_tv_add_tag"
-            style="@style/SmallText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/fmt_add_publication_et_text"
-            android:layout_alignStart="@+id/fmt_add_publication_et_text"
-            android:layout_below="@+id/fmt_add_publication_et_text"
-            android:layout_marginTop="@dimen/externalPadding"
-            android:background="@drawable/hash_tag_background"
-            android:drawableLeft="@drawable/ic_plus"
-            android:drawablePadding="@dimen/internalPadding"
-            android:drawableStart="@drawable/ic_plus"
-            android:paddingBottom="@dimen/internalPadding"
-            android:paddingLeft="@dimen/externalPadding"
-            android:paddingRight="@dimen/externalPadding"
-            android:paddingTop="@dimen/internalPadding"
-            android:text="@string/add_tag" />
+            <TextView
+                android:id="@+id/fmtAddPublicationTvTitle"
+                style="@style/TitleText"
+                android:layout_width="@dimen/buttonAndTextWidth"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/fmtAddPublicationEtTitle"
+                android:layout_gravity="center"
+                android:layout_marginBottom="@dimen/spacingMedium"
+                android:layout_marginLeft="@dimen/spacingLarge"
+                android:layout_marginRight="@dimen/spacingLarge"
+                android:layout_marginTop="@dimen/spacingLarge"
+                android:text="@string/publication_text" />
 
-        <com.greenfrvr.hashtagview.HashtagView
-            android:id="@+id/fmt_add_publication_hv_hashtags"
-            android:layout_width="@dimen/buttonAndTextWidth"
-            android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/fmt_add_publication_tv_add_tag"
-            android:layout_alignStart="@+id/fmt_add_publication_tv_add_tag"
-            android:layout_below="@+id/fmt_add_publication_tv_add_tag"
-            android:layout_marginTop="@dimen/externalPadding"
-            app:rowGravity="left"
-            app:tagBackground="@drawable/hash_tag_background"
-            app:tagPaddingLeft="12dp"
-            app:tagPaddingRight="12dp"
-            app:tagTextColor="@color/greyTextColor"
-            app:tagTextSize="@dimen/normalTextSize" />
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/fmtAddPublicationEtText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/fmtAddPublicationTvTitle"
+                android:layout_gravity="center"
+                android:layout_marginBottom="@dimen/spacingSmall"
+                android:layout_marginLeft="@dimen/spacingLarge"
+                android:layout_marginRight="@dimen/spacingLarge"
+                android:layout_marginTop="@dimen/spacingSmall"
+                android:background="@drawable/oval_text_backgroud"
+                android:gravity="top"
+                android:minLines="5"
+                android:padding="@dimen/internalPadding" />
 
-        <android.support.v7.widget.AppCompatButton
-            android:id="@+id/fmt_add_publication_btn_public"
-            style="@style/Button"
-            android:layout_width="@dimen/buttonAndTextWidth"
-            android:layout_height="@dimen/normalControlsHeight"
-            android:layout_alignLeft="@+id/fmt_add_publication_hv_hashtags"
-            android:layout_alignStart="@+id/fmt_add_publication_hv_hashtags"
-            android:layout_below="@+id/fmt_add_publication_hv_hashtags"
-            android:layout_marginTop="@dimen/externalPadding"
-            android:text="@string/do_public"
-            android:textAllCaps="false"
-            app:backgroundTint="@color/orange"/>
+            <TextView
+                android:id="@+id/fmtAddPublicationTvAddTag"
+                style="@style/SmallText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/fmtAddPublicationEtText"
+                android:layout_marginBottom="@dimen/spacingMedium"
+                android:layout_marginLeft="@dimen/spacingLarge"
+                android:layout_marginRight="@dimen/spacingLarge"
+                android:layout_marginTop="@dimen/spacingMedium"
+                android:background="@drawable/hash_tag_background"
+                android:drawableLeft="@drawable/ic_plus"
+                android:drawablePadding="@dimen/internalPadding"
+                android:drawableStart="@drawable/ic_plus"
+                android:paddingBottom="@dimen/internalPadding"
+                android:paddingLeft="@dimen/externalPadding"
+                android:paddingRight="@dimen/externalPadding"
+                android:paddingTop="@dimen/internalPadding"
+                android:text="@string/add_tag" />
 
-        <android.support.v7.widget.AppCompatButton
-            android:id="@+id/fmt_add_publication_btn_preview"
-            style="@style/Button"
-            android:layout_width="@dimen/buttonAndTextWidth"
-            android:layout_height="@dimen/normalControlsHeight"
-            android:layout_alignLeft="@+id/fmt_add_publication_btn_public"
-            android:layout_alignStart="@+id/fmt_add_publication_btn_public"
-            android:layout_below="@+id/fmt_add_publication_btn_public"
-            android:layout_marginTop="@dimen/externalPadding"
-            android:layout_marginBottom="@dimen/externalPadding"
-            android:text="@string/preview"
-            android:textAllCaps="false"
-            android:textColor="@color/greyTextColor"
-            app:backgroundTint="@color/lightGrey" />
-    </RelativeLayout>
-</ScrollView>
+            <com.greenfrvr.hashtagview.HashtagView
+                android:id="@+id/fmtAddPublicationHvHashtags"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/fmtAddPublicationTvAddTag"
+                android:layout_marginBottom="@dimen/spacingMedium"
+                android:layout_marginLeft="@dimen/spacingLarge"
+                android:layout_marginRight="@dimen/spacingLarge"
+                android:layout_marginTop="@dimen/spacingMedium"
+                app:rowGravity="left"
+                app:tagBackground="@drawable/hash_tag_background"
+                app:tagPaddingLeft="12dp"
+                app:tagPaddingRight="12dp"
+                app:tagTextColor="@color/greyTextColor"
+                app:tagTextSize="@dimen/normalTextSize" />
+
+            <TextView
+                android:id="@+id/fmtAddPublicationTvAddFile"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/normalControlsHeight"
+                android:layout_below="@+id/fmtAddPublicationHvHashtags"
+                android:layout_marginBottom="@dimen/spacingMedium"
+                android:layout_marginEnd="@dimen/externalPadding"
+                android:layout_marginLeft="@dimen/spacingLarge"
+                android:layout_marginRight="@dimen/spacingLarge"
+                android:layout_marginStart="@dimen/externalPadding"
+                android:layout_marginTop="@dimen/spacingMedium"
+                android:background="?android:attr/selectableItemBackground"
+                android:gravity="center_vertical|start"
+                android:padding="@dimen/spacingMedium"
+                android:text="@string/attach_file"
+                tools:drawableRight="@drawable/ic_resume" />
+
+            <android.support.v7.widget.AppCompatButton
+                android:id="@+id/fmtAddPublicationBtnPublic"
+                style="@style/Button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/fmtAddPublicationTvAddFile"
+                android:layout_marginBottom="@dimen/spacingMedium"
+                android:layout_marginLeft="@dimen/spacingXXLarge"
+                android:layout_marginRight="@dimen/spacingXXLarge"
+                android:layout_marginTop="@dimen/spacingXXLarge"
+                android:gravity="center"
+                android:text="@string/do_public"
+                android:textAllCaps="false"
+                app:backgroundTint="@color/orange" />
+
+            <android.support.v7.widget.AppCompatButton
+                android:id="@+id/fmtAddPublicationBtnPreview"
+                style="@style/Button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/fmtAddPublicationBtnPublic"
+                android:layout_marginBottom="@dimen/spacingMedium"
+                android:layout_marginLeft="@dimen/spacingXXLarge"
+                android:layout_marginRight="@dimen/spacingXXLarge"
+                android:layout_marginTop="@dimen/spacingMedium"
+                android:gravity="center"
+                android:text="@string/preview"
+                android:textColor="@color/greyTextColor"
+                app:backgroundTint="@color/lightGrey" />
+        </RelativeLayout>
+    </ScrollView>
+
+    <include
+        android:id="@+id/fmtAddPublicationVAddTag"
+        layout="@layout/v_add_tag"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone" />
+
+</FrameLayout>

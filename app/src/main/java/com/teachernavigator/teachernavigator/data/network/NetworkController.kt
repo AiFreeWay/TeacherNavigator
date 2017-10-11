@@ -1,6 +1,7 @@
 package com.teachernavigator.teachernavigator.data.network
 
 import com.example.root.androidtest.application.utils.Logger
+import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.teachernavigator.teachernavigator.BuildConfig
 import com.teachernavigator.teachernavigator.data.models.CommentNetwork
@@ -11,6 +12,7 @@ import com.teachernavigator.teachernavigator.data.network.responses.BaseResponse
 import com.teachernavigator.teachernavigator.data.network.responses.GetMyCommentsResponse
 import com.teachernavigator.teachernavigator.data.network.responses.PostsResponse
 import com.teachernavigator.teachernavigator.data.network.responses.SingInResponse
+import com.teachernavigator.teachernavigator.data.utils.toRequestBody
 import com.teachernavigator.teachernavigator.domain.models.*
 import com.teachernavigator.teachernavigator.presentation.models.Specialist
 import io.reactivex.Observable
@@ -36,11 +38,15 @@ class NetworkController {
         private const val API_URL = "$SERVER/"
 
         private const val DEFAULT_DATE_FORMAT = "yyyy-MM-dd'T'HH:mm:ss.Z"
+
+        private const val MAX_PAGE_COUNT = 1000
     }
 
     private val mApiController: ApiController
 
     private var client: OkHttpClient?
+
+    private var gson: Gson
 
     init {
         Logger.logDebug("created CONTROLLER NetworkController")
@@ -50,7 +56,7 @@ class NetworkController {
                 .setDateFormat(DEFAULT_DATE_FORMAT)
                 .create()
 
-        val gson = GsonBuilder()
+        gson = GsonBuilder()
                 .setLenient()
                 .setDateFormat(DEFAULT_DATE_FORMAT)
                 .registerTypeAdapter(Author::class.java, UserDeserializer(pureGson))
@@ -196,10 +202,37 @@ class NetworkController {
             mApiController.saveInfoPost(accessToken, postId)
 
     fun getTags(accessToken: String): Single<List<Tag>> =
-            mApiController.tags(accessToken)
+            Observable.range(1, MAX_PAGE_COUNT)
+                    .flatMap { loadTags(accessToken, it) }
+                    .takeUntil { it.next.isNullOrBlank() || it.count == 0 }
                     .map { it.results }
+                    .flatMap { Observable.fromIterable(it) }
+                    .toList()
 
     fun getTrends(accessToken: String): Single<List<Tag>> =
-            mApiController.tagsTrends(accessToken)
+            Observable.range(1, MAX_PAGE_COUNT)
+                    .flatMap { loadTrends(accessToken, it) }
+                    .takeUntil { it.next.isNullOrBlank() || it.count == 0 }
                     .map { it.results }
+                    .flatMap { Observable.fromIterable(it) }
+                    .toList()
+
+    private fun loadTags(accessToken: String, page: Int) = mApiController.tags(accessToken, page)
+    private fun loadTrends(accessToken: String, page: Int) = mApiController.tagsTrends(accessToken, page)
+
+    fun sendPost(accessToken: String, title: String, text: String, tags: List<String>, filePath: String?, fileMime: String?): Single<Post> {
+        val fileRequestBody = if (fileMime != null && filePath != null) RequestBody.create(MediaType.parse(fileMime), File(filePath)) else null
+
+//        Content-Disposition: form-data; name="file";"
+
+//        // TODO: Refactor this shit!!!
+//        val char = '"'
+//        val tagsString = "[$char${TextUtils.join("$char,$char", tags)}$char]"
+//
+//        val tagsRequest = RequestBody.create(MediaType.parse("application/json"), tagsString)
+//        val titleRequest = RequestBody.create(MediaType.parse("application/json"), title)
+//        val textRequest = RequestBody.create(MediaType.parse("application/json"), text)
+
+        return mApiController.sendPost(accessToken, title.toRequestBody(), text.toRequestBody(), tags.toRequestBody(), fileRequestBody)
+    }
 }

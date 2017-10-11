@@ -111,7 +111,7 @@
             android:id="@+id/ac_post_search_btn_find"
             style="@style/Button"
             android:layout_width="@dimen/buttonAndTextWidth"
-            android:layout_height="@dimen/normalControlsHeight"
+            android:layout_height="wrap_content"
             android:layout_below="@+id/fmt_post_search_chb_with_document_publication"
             android:layout_centerHorizontal="true"
             android:layout_gravity="center"

@@ -44,7 +44,7 @@ abstract class BasePresenter<V : BaseView> : LifecycleObserver, ViewAttacher<V> 
             CacheController.removeData(TOKEN_KEY)
 
             ((mView as? ChildView)?.getParentView() ?: (mView as? ParentView))?.getActivity()?.let {
-                ActivityRouter.openActivity(it, AuthActivity::class.java)
+                ActivityRouter.openActivityAndClosePrevent(it, AuthActivity::class.java)
                 it.finish()
             }
         }

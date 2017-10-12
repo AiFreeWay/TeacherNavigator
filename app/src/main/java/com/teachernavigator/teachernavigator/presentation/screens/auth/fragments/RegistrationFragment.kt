@@ -4,22 +4,19 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.CheckBox
-import android.widget.EditText
-import butterknife.BindView
-import butterknife.ButterKnife
+import com.redmadrobot.inputmask.MaskedTextChangedListener
 import com.teachernavigator.teachernavigator.R
-import com.teachernavigator.teachernavigator.domain.models.SingUpData
 import com.teachernavigator.teachernavigator.presentation.dialogs.AccountCreatedDialog
 import com.teachernavigator.teachernavigator.presentation.screens.auth.activities.abstractions.AuthParentView
 import com.teachernavigator.teachernavigator.presentation.screens.auth.fragments.abstractions.RegistrationView
 import com.teachernavigator.teachernavigator.presentation.screens.auth.presenters.FmtRegistrationPresenter
 import com.teachernavigator.teachernavigator.presentation.screens.auth.presenters.abstractions.IRegistrationPresenter
 import com.teachernavigator.teachernavigator.presentation.screens.common.BaseFragment
+import kotlinx.android.synthetic.main.fmt_registration.*
+
 
 /**
- * Created by root on 24.08.17.
+ * Created by root on 24.08.17
  */
 class RegistrationFragment : BaseFragment(), RegistrationView {
 
@@ -27,44 +24,53 @@ class RegistrationFragment : BaseFragment(), RegistrationView {
         val FRAGMENT_KEY = "registration_fragment"
     }
 
-    @BindView(R.id.fmt_registration_et_full_name) lateinit var mEtFullName: EditText
-    @BindView(R.id.fmt_registration_et_birthday) lateinit var mEtBirthday: EditText
-    @BindView(R.id.fmt_registration_et_work_place) lateinit var mEtWorkPlace: EditText
-    @BindView(R.id.fmt_registration_et_position) lateinit var mEtPosition: EditText
-    @BindView(R.id.fmt_registration_et_experience) lateinit var mEtExperience: EditText
-    @BindView(R.id.fmt_registration_chb_trade_unionist_yes) lateinit var mChbTradeUnionistYes: CheckBox
-    @BindView(R.id.fmt_registration_chb_trade_unionist_no) lateinit var mChbTradeUnionistNo: CheckBox
-    @BindView(R.id.fmt_registration_et_trade_union_ticket_number) lateinit var mEtTradeUnionTicketNumber: EditText
-    @BindView(R.id.fmt_registration_et_email) lateinit var mEtEmail: EditText
-    @BindView(R.id.fmt_registration_et_phone) lateinit var mEtPhone: EditText
-    @BindView(R.id.fmt_registration_et_password) lateinit var mEtPassword: EditText
-    @BindView(R.id.fmt_registration_chb_agreement) lateinit var mChbAgreement: CheckBox
-    @BindView(R.id.fmt_registration_btn_sing_up) lateinit var mBtnSingUp: Button
-
     private val mPresenter: IRegistrationPresenter = FmtRegistrationPresenter()
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val view: View = inflater!!.inflate(R.layout.fmt_registration, container, false)
-        ButterKnife.bind(this, view)
-        return view
-    }
+    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? =
+            inflater?.inflate(R.layout.fmt_registration, container, false)
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         mPresenter.attachView(this)
-        mBtnSingUp.setOnClickListener { mPresenter.singUp() }
 
-        mChbTradeUnionistYes.setOnCheckedChangeListener { compoundButton, isChecked ->
+        fmtRegistrationTvBirthday.setOnClickListener { mPresenter.pickDate() }
+        fmtRegistrationBtnSingUp.setOnClickListener { signUp() }
+        fmtRegistrationTvExperience.setOnClickListener { mPresenter.pickExperience() }
+
+        fmtRegistrationChbTradeUnionistYes.setOnCheckedChangeListener { compoundButton, isChecked ->
             if (isChecked)
-                mEtTradeUnionTicketNumber.visibility = View.VISIBLE
+                fmtRegistrationEtTradeUnionTicketNumber.visibility = View.VISIBLE
             else
-                mEtTradeUnionTicketNumber.visibility = View.GONE
+                fmtRegistrationEtTradeUnionTicketNumber.visibility = View.GONE
 
-            mChbTradeUnionistNo.isChecked = !isChecked
+            fmtRegistrationChbTradeUnionistNo.isChecked = !isChecked
         }
 
-        mChbTradeUnionistNo.setOnCheckedChangeListener { compoundButton, isChecked ->
-            mChbTradeUnionistYes.isChecked = !isChecked
+        fmtRegistrationChbTradeUnionistNo.setOnCheckedChangeListener { compoundButton, isChecked ->
+            fmtRegistrationChbTradeUnionistYes.isChecked = !isChecked
+        }
+
+        val phoneListener = MaskedTextChangedListener("+7 ([000]) [000] [00] [00]", true, fmtRegistrationEtPhone,
+                null, null)
+
+        fmtRegistrationEtPhone.addTextChangedListener(phoneListener)
+        fmtRegistrationEtPhone.onFocusChangeListener = phoneListener
+    }
+
+    private fun signUp() {
+        if (!fmtRegistrationChbAgreement.isChecked) {
+            showToast(R.string.need_agreement)
+        } else {
+            mPresenter.singUp(
+                    fullName = fmtRegistrationEtFullName.text.toString(),
+                    workOrLearnPlace = fmtRegistrationEtWorkPlace.text.toString(),
+                    position = fmtRegistrationEtPosition.text.toString(),
+                    unionist = isTradeUnionist(),
+                    numberOfUnionTicket = fmtRegistrationEtTradeUnionTicketNumber.text.toString(),
+                    email = fmtRegistrationEtEmail.text.toString(),
+                    phoneNumber = fmtRegistrationEtPhone.text.toString(),
+                    password = fmtRegistrationEtPassword.text.toString()
+            )
         }
     }
 
@@ -82,39 +88,32 @@ class RegistrationFragment : BaseFragment(), RegistrationView {
     }
 
     private fun setEnabledViews(enabled: Boolean) {
-        mEtFullName.isEnabled = enabled
-        mEtBirthday.isEnabled = enabled
-        mEtWorkPlace.isEnabled = enabled
-        mEtPosition.isEnabled = enabled
-        mEtExperience.isEnabled = enabled
-        mChbTradeUnionistYes.isEnabled = enabled
-        mChbTradeUnionistNo.isEnabled = enabled
-        mEtTradeUnionTicketNumber.isEnabled = enabled
-        mEtEmail.isEnabled = enabled
-        mEtPhone.isEnabled = enabled
-        mEtPassword.isEnabled = enabled
-        mChbAgreement.isEnabled = enabled
-        mBtnSingUp.isEnabled = enabled
+        fmtRegistrationEtFullName.isEnabled = enabled
+        fmtRegistrationEtWorkPlace.isEnabled = enabled
+        fmtRegistrationEtPosition.isEnabled = enabled
+        fmtRegistrationChbTradeUnionistYes.isEnabled = enabled
+        fmtRegistrationChbTradeUnionistNo.isEnabled = enabled
+        fmtRegistrationEtTradeUnionTicketNumber.isEnabled = enabled
+        fmtRegistrationEtEmail.isEnabled = enabled
+        fmtRegistrationEtPhone.isEnabled = enabled
+        fmtRegistrationEtPassword.isEnabled = enabled
+        fmtRegistrationChbAgreement.isEnabled = enabled
+        fmtRegistrationBtnSingUp.isEnabled = enabled
     }
 
-    override fun getSingUpData(): SingUpData {
-        return SingUpData(mEtEmail.text.toString(),
-                mEtPassword.text.toString(),
-                mEtFullName.text.toString(),
-                mEtBirthday.text.toString(),
-                mEtWorkPlace.text.toString(),
-                "Not indicated",
-                mEtPosition.text.toString(),
-                mEtExperience.text.toString(),
-                isTradeUnionist(),
-                mEtTradeUnionTicketNumber.text.toString(),
-                mEtPhone.text.toString())
+
+    override fun setDate(dateString: String) {
+        fmtRegistrationTvBirthday.text = dateString
     }
 
-    override fun showAccountCreatedDilog() {
-        val dialogFragment = AccountCreatedDialog.newInstance{ (getParentView() as AuthParentView).navigateBack() }
+    override fun setExperience(experience: String) {
+        fmtRegistrationTvExperience.text = experience
+    }
+
+    override fun showAccountCreatedDialog() {
+        val dialogFragment = AccountCreatedDialog.newInstance { (getParentView() as AuthParentView).navigateBack() }
         dialogFragment.show(fragmentManager, AccountCreatedDialog.FRAGMENT_MANAGER_TAG)
     }
 
-    private fun isTradeUnionist(): Boolean = mChbTradeUnionistYes.isChecked
+    private fun isTradeUnionist(): Boolean = fmtRegistrationChbTradeUnionistYes.isChecked
 }

@@ -1,5 +1,6 @@
 package com.teachernavigator.teachernavigator.data.network
 
+import android.support.annotation.VisibleForTesting
 import com.example.root.androidtest.application.utils.Logger
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
@@ -16,8 +17,10 @@ import com.teachernavigator.teachernavigator.data.network.responses.SingInRespon
 import com.teachernavigator.teachernavigator.data.utils.toRequestBody
 import com.teachernavigator.teachernavigator.domain.models.*
 import com.teachernavigator.teachernavigator.presentation.models.Specialist
+import com.teachernavigator.teachernavigator.presentation.utils.DEFAULT_DATE_FORMAT
 import io.reactivex.Observable
 import io.reactivex.Single
+import okhttp3.Interceptor
 import okhttp3.MediaType
 import okhttp3.OkHttpClient
 import okhttp3.RequestBody
@@ -26,6 +29,7 @@ import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import java.io.File
+import java.util.*
 
 
 /**
@@ -39,7 +43,6 @@ class NetworkController {
         public const val SERVER = "$HTTP$DOMAIN"
         private const val API_URL = "$SERVER/"
 
-        private const val DEFAULT_DATE_FORMAT = "yyyy-MM-dd'T'HH:mm:ss.Z"
 
         private const val MAX_PAGE_COUNT = 1000
     }
@@ -65,6 +68,7 @@ class NetworkController {
                 .create()
 
         val httpClient = OkHttpClient.Builder()
+                .addInterceptor(createHeadersInterceptor())
 
         if (BuildConfig.DEBUG) {
             val logging = HttpLoggingInterceptor()
@@ -82,13 +86,19 @@ class NetworkController {
         mApiController = retrofit.create(ApiController::class.java)
     }
 
+    @VisibleForTesting
+    private fun createHeadersInterceptor() = Interceptor { chain ->
+        val requestBuilder = chain.request().newBuilder()
+        requestBuilder.addHeader("Accept-Language", Locale.getDefault().language)
+        requestBuilder.addHeader("Accept", "application/json")
+        chain.proceed(requestBuilder.build())
+    }
+
     // ------------------------------- Auth methods --------------------------------
 
     fun singUp(request: SingUpRequest): Observable<BaseResponse> = mApiController.singUp(request)
 
-
     fun singIn(request: SingInRequest): Observable<SingInResponse> = mApiController.singIn(request)
-
 
     fun restorePassword(request: RestorePasswordRequest): Observable<BaseResponse> =
             mApiController.restorePassword(request)

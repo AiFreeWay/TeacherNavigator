@@ -38,6 +38,7 @@
     <string name="or">Или</string>
     <string name="phone">Номер телефона</string>
     <string name="agreement">Согласие на обработку персональных данных</string>
+    <string name="need_agreement">Необходимо подтвердить согласие на обработку персональных данных</string>
     <string name="do_restore_password">Получить пароль</string>
     <string name="restore_password_text">Введите Ваш e-mail или моб. телефон указанный при регистрации</string>
     <string name="more">Читать далее&#8230;</string>
@@ -63,8 +64,10 @@
     <string name="indicate_full_name">Укажите ФИО</string>
     <string name="indicate_birthday">Укажите дату рождения</string>
     <string name="indicate_work_or_learn_place">Укажите место работы или учёбы</string>
+    <string name="work_or_learn_place">Место работы или учёбы</string>
     <string name="indicate_experience">Укажите опыт</string>
     <string name="indicate_number_of_unionist_ticket">Укажите номер профсоюзного билета</string>
+    <string name="number_of_unionist_ticket">Номер профсоюзного билета</string>
     <string name="indicate_login">Укажите E-mail или номер моб. телефона</string>
     <string name="registration_error">Ошибка регистрации</string>
     <string name="auth_error">Ошибка авторизации</string>
@@ -187,4 +190,27 @@
     <string name="cancel">Отмена</string>
     <string name="add">Добавить</string>
     <string name="add_least_one_tag">Добавьте как минимум один тег</string>
+    <string name="under_construction">Данный функционал находится в стадии разработки</string>
+    <string name="input_experience">Введите ваш опыт (в годах)</string>
+    <string name="error_enter_valid_email">Введите корректный e-mail</string>
+    <string name="input_phone">Введите корректный номер телефона</string>
+    <string name="input_phone_or_email">Введите e-mail или номер телефона</string>
+    <string name="district">Дистрикт</string>
+    <string name="trade_unionist">Член профсоюза</string>
+    <string name="phone_number">Номер телефона</string>
+
+    <plurals name="plural_years">
+        <item quantity="zero">%1$d лет
+        </item> <!--zero — строка для нуля, отсутствия чего-либо; в некоторых языках — ещё и для чисел, оканчивающихся нулём;-->
+        <item quantity="one">%1$d год
+        </item> <!--one — строка для чисел, заканчивающихся на единицу; в некоторых языках — только для единицы;-->
+        <item quantity="two">%1$d года
+        </item> <!--two — для чисел, заканчивающихся на двойку, или только для двойки;-->
+        <item quantity="few">%1$d года
+        </item> <!--few — зависит от языковых правил; например, для русского языка это относится к числам, оканчивающимся на 2, 3 и 4 (несмотря на наличие правила «two»);-->
+        <item quantity="many">%1$d лет
+        </item> <!--many — также зависит от языковых правил; в русском языке — от пятёрки и выше;-->
+        <item quantity="other">%1$d лет</item> <!--other — остальные варианты-->
+    </plurals>
+
 </resources>

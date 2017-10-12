@@ -20,16 +20,16 @@ class AuthMapper {
 
         fun mapSingUpDataToRequest(singUpData: SingUpData): SingUpRequest =
                 SingUpRequest(singUpData.email,
-                    singUpData.password,
-                    singUpData.full_name,
-                    singUpData.birthday,
-                    singUpData.work_or_learn_place,
-                    singUpData.district,
-                    singUpData.position,
-                    singUpData.experience.toInt(),
-                    singUpData.unionist,
-                    singUpData.number_of_union_ticket,
-                    mapPhoneNumber(singUpData.phone_number))
+                        singUpData.password,
+                        singUpData.full_name,
+                        singUpData.birthday,
+                        singUpData.work_or_learn_place,
+                        singUpData.district,
+                        singUpData.position,
+                        singUpData.experience,
+                        singUpData.unionist,
+                        singUpData.number_of_union_ticket,
+                        mapPhoneNumber(singUpData.phone_number))
 
         fun mapSingInDataToRequest(login: String, password: String, authCredentials: AuthCredentials): SingInRequest =
                 SingInRequest(login, password,
@@ -55,11 +55,10 @@ class AuthMapper {
         }
 
         private fun mapPhoneNumber(number: String?): String? {
-            if (number == null)
+            if (number.isNullOrBlank())
                 return null
-            if (number.get(0) == '8')
-                return number.replaceFirst("8", "+7", true)
-            return number
+
+            return number?.replaceFirst("8", "+7")?.replace(" ", "")?.replace("(", "")?.replace(")", "")
         }
     }
 }

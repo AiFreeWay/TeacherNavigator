@@ -56,7 +56,7 @@ class PostControllerFacade @Inject constructor(private val mPostController: IPos
     }
 
     private fun doOnUserNotAuth() {
-        ActivityRouter.openActivity(mParentView.getActivity(), AuthActivity::class.java)
+        ActivityRouter.openActivityAndClosePrevent(mParentView.getActivity(), AuthActivity::class.java)
     }
 
     private fun doOnError(error: Throwable, callbak: IPostControllerFacadeCallback) {

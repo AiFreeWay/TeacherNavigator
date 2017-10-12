@@ -1,9 +1,6 @@
 package com.teachernavigator.teachernavigator.application
 
-import android.app.Application
-import android.content.Context
-//import android.support.multidex.MultiDex
-//import android.support.multidex.MultiDexApplication
+import android.support.multidex.MultiDexApplication
 import android.support.v7.app.AppCompatDelegate
 import com.example.root.androidtest.application.di.components.DaggerRootComponent
 import com.example.root.androidtest.application.di.components.RootComponent
@@ -12,9 +9,9 @@ import com.miguelbcr.ui.rx_paparazzo2.RxPaparazzo
 import com.orhanobut.hawk.Hawk
 
 /**
- * Created by root on 11.08.17.
+ * Created by root on 11.08.17
  */
-class TeacherNavigatopApp : Application() {
+class TeacherNavigatopApp : MultiDexApplication() {
 
     private lateinit var mRootComponent: RootComponent
 

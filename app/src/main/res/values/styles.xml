@@ -23,6 +23,9 @@
         <item name="android:textColor">@color/textColor</item>
     </style>
 
+    <style name="Dialog" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
 
     <style name="Button.Small">
         <item name="android:paddingLeft">@dimen/spacingLarge</item>
@@ -53,6 +56,15 @@
         <item name="android:paddingBottom">@dimen/spacingLarge</item>
         <item name="android:paddingTop">@dimen/spacingLarge</item>
         <item name="android:inputType">text</item>
+    </style>
+
+    <style name="EditTextView">
+        <item name="android:background">@drawable/oval_edit_text_backgroud</item>
+        <item name="android:paddingLeft">@dimen/spacingXXLarge</item>
+        <item name="android:paddingRight">@dimen/spacingXXLarge</item>
+        <item name="android:paddingBottom">@dimen/spacingLarge</item>
+        <item name="android:paddingTop">@dimen/spacingLarge</item>
+        <item name="android:textSize">@dimen/titleTextSize</item>
     </style>
 
     <style name="TransperentToolbar" parent="AppTheme">

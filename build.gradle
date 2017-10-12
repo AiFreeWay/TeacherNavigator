@@ -27,6 +27,7 @@ buildscript {
         multidexVersion = '1.0.1'
         dexcountVersion = "0.6.1"
         gradleVersionsVersion = '0.15.0'
+        materialDialogsVersion = '0.9.4.5'
     }
     repositories {
         jcenter()

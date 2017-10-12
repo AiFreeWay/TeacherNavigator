@@ -13,26 +13,26 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@color/colorAccent"
             android:gravity="center"
-            android:textSize="@dimen/titleTextSize"
             android:paddingTop="@dimen/externalPadding"
             android:text="@string/auth"
             android:textColor="@android:color/white"
-            android:background="@color/colorAccent"/>
+            android:textSize="@dimen/titleTextSize" />
 
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:scaleType="centerCrop"
             android:layout_gravity="center_horizontal"
+            android:scaleType="centerCrop"
             android:src="@drawable/auth_logo" />
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:gravity="center"
             android:layout_marginTop="@dimen/internalPadding"
+            android:gravity="center"
             android:orientation="horizontal">
 
             <ImageView
@@ -43,6 +43,7 @@
                 android:layout_marginEnd="@dimen/externalPadding"
                 android:layout_marginStart="@dimen/externalPadding"
                 android:layout_marginTop="@dimen/internalPadding"
+                android:background="?android:attr/selectableItemBackground"
                 android:src="@drawable/ic_social_vk" />
 
             <ImageView
@@ -53,6 +54,7 @@
                 android:layout_marginEnd="@dimen/externalPadding"
                 android:layout_marginStart="@dimen/externalPadding"
                 android:layout_marginTop="@dimen/internalPadding"
+                android:background="?android:attr/selectableItemBackground"
                 android:src="@drawable/ic_social_fb" />
 
             <ImageView
@@ -63,6 +65,7 @@
                 android:layout_marginEnd="@dimen/externalPadding"
                 android:layout_marginStart="@dimen/externalPadding"
                 android:layout_marginTop="@dimen/internalPadding"
+                android:background="?android:attr/selectableItemBackground"
                 android:src="@drawable/ic_social_tw" />
 
             <ImageView
@@ -73,18 +76,19 @@
                 android:layout_marginEnd="@dimen/externalPadding"
                 android:layout_marginStart="@dimen/externalPadding"
                 android:layout_marginTop="@dimen/internalPadding"
+                android:background="?android:attr/selectableItemBackground"
                 android:src="@drawable/ic_social_gp" />
         </LinearLayout>
 
         <android.support.design.widget.TextInputEditText
             android:id="@+id/fmt_auth_et_login"
             style="@style/EditText"
-            android:layout_width="@dimen/buttonAndTextWidth"
-            android:layout_height="@dimen/normalControlsHeight"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginBottom="@dimen/internalPadding"
-            android:layout_marginEnd="@dimen/externalPadding"
-            android:layout_marginStart="@dimen/externalPadding"
+            android:layout_marginEnd="@dimen/spacingXXLarge"
+            android:layout_marginStart="@dimen/spacingXXLarge"
             android:layout_marginTop="@dimen/externalPadding"
             android:background="@drawable/oval_edit_text_backgroud"
             android:hint="@string/login_hint"
@@ -93,15 +97,15 @@
         <android.support.design.widget.TextInputEditText
             android:id="@+id/fmt_auth_et_password"
             style="@style/EditText"
-            android:layout_width="@dimen/buttonAndTextWidth"
-            android:layout_height="@dimen/normalControlsHeight"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginEnd="@dimen/externalPadding"
-            android:layout_marginStart="@dimen/externalPadding"
+            android:layout_marginEnd="@dimen/spacingXXLarge"
+            android:layout_marginStart="@dimen/spacingXXLarge"
             android:layout_marginTop="@dimen/internalPadding"
             android:background="@drawable/oval_edit_text_backgroud"
-            android:inputType="textPassword"
             android:hint="@string/password"
+            android:inputType="textPassword"
             android:lines="1" />
 
         <TextView
@@ -114,15 +118,18 @@
             android:layout_marginEnd="@dimen/externalPadding"
             android:layout_marginStart="@dimen/externalPadding"
             android:layout_marginTop="@dimen/internalPadding"
+            android:background="?android:attr/selectableItemBackground"
             android:gravity="center"
             android:text="@string/forgot_password" />
 
         <android.support.v7.widget.AppCompatButton
             android:id="@+id/fmt_auth_btn_sing_in"
             style="@style/Button"
-            android:layout_width="@dimen/buttonAndTextWidth"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:layout_marginEnd="@dimen/spacingXXLarge"
+            android:layout_marginStart="@dimen/spacingXXLarge"
             android:layout_marginTop="@dimen/externalPadding"
             android:text="@string/enter"
             android:textAllCaps="false"
@@ -136,7 +143,7 @@
             android:layout_gravity="center"
             android:layout_marginBottom="@dimen/externalPadding"
             android:layout_marginTop="@dimen/internalPadding"
-            android:background="@android:color/white"
+            android:background="?android:attr/selectableItemBackground"
             android:gravity="center"
             android:text="@string/create_account"
             android:textAllCaps="false" />

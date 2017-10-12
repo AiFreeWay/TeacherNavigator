@@ -19,6 +19,7 @@ android {
         versionName "1.0"
         vectorDrawables.useSupportLibrary = true
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        multiDexEnabled true
     }
 
     signingConfigs {
@@ -92,6 +93,8 @@ dependencies {
     kapt "com.github.lliepmah:compiler:$universalAdapterVersion"
     compile "com.github.miguelbcr:RxPaparazzo:$rxPaparazzoVersion"
     compile "com.tbruyelle.rxpermissions2:rxpermissions:$rxPermissions@aar"
+    compile 'com.redmadrobot:inputmask:2.3.0'
+    compile "com.afollestad.material-dialogs:core:$materialDialogsVersion"
 
     //Crash Reporting
 //    compile "com.google.firebase:firebase-crash:$firebaseCrash"

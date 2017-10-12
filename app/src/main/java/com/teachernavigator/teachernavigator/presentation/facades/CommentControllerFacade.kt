@@ -35,7 +35,7 @@ class CommentControllerFacade @Inject constructor(private val mPostController: I
     }
 
     private fun doOnUserNotAuth() {
-        ActivityRouter.openActivity(mParentView.getActivity(), AuthActivity::class.java)
+        ActivityRouter.openActivityAndClosePrevent(mParentView.getActivity(), AuthActivity::class.java)
     }
 
     private fun doOnError(error: Throwable, callbak: ICommentControllerFacadeCallback) {

@@ -9,16 +9,16 @@ import com.teachernavigator.teachernavigator.domain.models.Monade
 import com.teachernavigator.teachernavigator.presentation.screens.auth.activities.abstractions.AuthParentView
 import com.teachernavigator.teachernavigator.presentation.screens.auth.fragments.RegistrationFragment
 import com.teachernavigator.teachernavigator.presentation.screens.auth.fragments.RestorePasswordFragment
-import com.teachernavigator.teachernavigator.presentation.screens.common.BasePresenter
 import com.teachernavigator.teachernavigator.presentation.screens.auth.fragments.abstractions.AuthView
 import com.teachernavigator.teachernavigator.presentation.screens.auth.presenters.abstractions.IAuthPresenter
+import com.teachernavigator.teachernavigator.presentation.screens.common.BasePresenter
 import com.teachernavigator.teachernavigator.presentation.screens.main.activities.MainActivity
 import com.teachernavigator.teachernavigator.presentation.utils.ActivityRouter
 import ru.terrakok.cicerone.Router
 import javax.inject.Inject
 
 /**
- * Created by root on 22.08.17.
+ * Created by root on 22.08.17
  */
 class FmtAuthPresenter : BasePresenter<AuthView>(), IAuthPresenter {
 
@@ -54,28 +54,28 @@ class FmtAuthPresenter : BasePresenter<AuthView>(), IAuthPresenter {
     }
 
     override fun singInViaVkontakte() {
-        mView!!.showToast("Проявите терпение, Алексей, я скоро заработаю!")
+        mView!!.showToast(R.string.under_construction)
         /*addDissposable(mAuthInteractor.singInViaVkontakte()
                 .doOnSubscribe { startProgress() }
                 .subscribe(this::doOnSingIn, this::doOnError))*/
     }
 
     override fun singInViaFacebook() {
-        mView!!.showToast("Проявите терпение, Алексей, я скоро заработаю!")
+        mView!!.showToast(R.string.under_construction)
         /*addDissposable(mAuthInteractor.singInViaFacebook()
                 .doOnSubscribe { startProgress() }
                 .subscribe(this::doOnSingIn, this::doOnError))*/
     }
 
     override fun singInViaTwitter() {
-        mView!!.showToast("Проявите терпение, Алексей, я скоро заработаю!")
+        mView!!.showToast(R.string.under_construction)
         /*addDissposable(mAuthInteractor.singInViaTwitter()
                 .doOnSubscribe { startProgress() }
                 .subscribe(this::doOnSingIn, this::doOnError))*/
     }
 
     override fun singInViaGooglePlus() {
-        mView!!.showToast("Проявите терпение, Алексей, я скоро заработаю!")
+        mView!!.showToast(R.string.under_construction)
         /*addDissposable(mAuthInteractor.singInViaGooglePlus()
                 .doOnSubscribe { startProgress() }
                 .subscribe(this::doOnSingIn, this::doOnError))*/

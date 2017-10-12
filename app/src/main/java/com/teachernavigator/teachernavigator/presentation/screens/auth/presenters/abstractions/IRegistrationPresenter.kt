@@ -4,9 +4,14 @@ import com.teachernavigator.teachernavigator.presentation.screens.auth.fragments
 import com.teachernavigator.teachernavigator.presentation.screens.common.ViewAttacher
 
 /**
- * Created by root on 24.08.17.
+ * Created by root on 24.08.17
  */
 interface IRegistrationPresenter : ViewAttacher<RegistrationView> {
 
-    fun singUp()
+    fun singUp(fullName: String, workOrLearnPlace: String, position: String,
+               unionist: Boolean, numberOfUnionTicket: String, email: String,
+               phoneNumber: String, password: String)
+
+    fun pickDate()
+    fun pickExperience()
 }

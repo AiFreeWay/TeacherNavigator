@@ -15,16 +15,20 @@ private val DAY_MILLIS = 24 * HOUR_MILLIS
 
 /***************************************************************2017-06-13T01:41:31+03:00 */
 const val DEFAULT_DATE_FORMAT = "yyyy-MM-dd'T'HH:mm:ss.Z"
+const val SERVER_DATE = "dd.MM.yy"
 
 private val DISPLAY_DATE_FORMAT = AtomicReference(SimpleDateFormat("dd MMMM yyyy", Locale.getDefault()))
 private val DISPLAY_TIME_FORMAT = AtomicReference(SimpleDateFormat("HH:mm", Locale.getDefault()))
 private val SERVER_DATETIME_FORMAT = AtomicReference(SimpleDateFormat(DEFAULT_DATE_FORMAT, Locale.getDefault()))
+private val SERVER_DATE_FORMAT = AtomicReference(SimpleDateFormat(SERVER_DATE, Locale.getDefault()))
 
 //fun String.parseServerDate(): Date? = DISPLAY_TIME_FORMAT.get().parse(this)
 //fun String.parsePlaylistDate(): Date? = PLAYLIST_FORMAT.get().parse(this)
 
 val Date.formatDisplayTime: String?
     get() = DISPLAY_TIME_FORMAT.get().format(this)
+val Date.formatServerDate: String?
+    get() = SERVER_DATE_FORMAT.get().format(this)
 val Date.formatDisplayDate: String?
     get() = DISPLAY_DATE_FORMAT.get().format(this)
 val Date.formatServerDatetime: String?

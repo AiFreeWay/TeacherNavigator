@@ -6,13 +6,17 @@ import android.view.View
 import android.view.ViewGroup
 import com.redmadrobot.inputmask.MaskedTextChangedListener
 import com.teachernavigator.teachernavigator.R
+import com.teachernavigator.teachernavigator.application.di.components.DaggerParentScreenComponent
+import com.teachernavigator.teachernavigator.application.di.components.ParentScreenComponent
+import com.teachernavigator.teachernavigator.application.di.modules.ParentScreenModule
+import com.teachernavigator.teachernavigator.application.utils.rootComponent
 import com.teachernavigator.teachernavigator.presentation.dialogs.AccountCreatedDialog
 import com.teachernavigator.teachernavigator.presentation.screens.auth.activities.abstractions.AuthParentView
 import com.teachernavigator.teachernavigator.presentation.screens.auth.fragments.abstractions.RegistrationView
-import com.teachernavigator.teachernavigator.presentation.screens.auth.presenters.FmtRegistrationPresenter
 import com.teachernavigator.teachernavigator.presentation.screens.auth.presenters.abstractions.IRegistrationPresenter
 import com.teachernavigator.teachernavigator.presentation.screens.common.BaseFragment
 import kotlinx.android.synthetic.main.fmt_registration.*
+import javax.inject.Inject
 
 
 /**
@@ -21,21 +25,34 @@ import kotlinx.android.synthetic.main.fmt_registration.*
 class RegistrationFragment : BaseFragment(), RegistrationView {
 
     companion object {
-        val FRAGMENT_KEY = "registration_fragment"
+        val FRAGMENT_KEY = "Registration_Fragment _ 312"
     }
 
-    private val mPresenter: IRegistrationPresenter = FmtRegistrationPresenter()
+    private lateinit var mParentScreenComponent: ParentScreenComponent
+
+    @Inject
+    lateinit var presenter: IRegistrationPresenter
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? =
             inflater?.inflate(R.layout.fmt_registration, container, false)
 
+
+    private fun inject() {
+        mParentScreenComponent = DaggerParentScreenComponent.builder()
+                .rootComponent(rootComponent())
+                .parentScreenModule(ParentScreenModule(getParentView()))
+                .build()
+                .also { it.inject(this) }
+    }
+
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        mPresenter.attachView(this)
+        inject()
+        presenter.attachView(this)
 
-        fmtRegistrationTvBirthday.setOnClickListener { mPresenter.pickDate() }
+        fmtRegistrationTvBirthday.setOnClickListener { presenter.pickDate() }
         fmtRegistrationBtnSingUp.setOnClickListener { signUp() }
-        fmtRegistrationTvExperience.setOnClickListener { mPresenter.pickExperience() }
+        fmtRegistrationTvExperience.setOnClickListener { presenter.pickExperience() }
 
         fmtRegistrationChbTradeUnionistYes.setOnCheckedChangeListener { compoundButton, isChecked ->
             if (isChecked)
@@ -61,10 +78,11 @@ class RegistrationFragment : BaseFragment(), RegistrationView {
         if (!fmtRegistrationChbAgreement.isChecked) {
             showToast(R.string.need_agreement)
         } else {
-            mPresenter.singUp(
+            presenter.singUp(
                     fullName = fmtRegistrationEtFullName.text.toString(),
                     workOrLearnPlace = fmtRegistrationEtWorkPlace.text.toString(),
                     position = fmtRegistrationEtPosition.text.toString(),
+                    district = fmtRegistrationEtDistrict.text.toString(),
                     unionist = isTradeUnionist(),
                     numberOfUnionTicket = fmtRegistrationEtTradeUnionTicketNumber.text.toString(),
                     email = fmtRegistrationEtEmail.text.toString(),
@@ -76,7 +94,7 @@ class RegistrationFragment : BaseFragment(), RegistrationView {
 
     override fun onDestroyView() {
         super.onDestroyView()
-        mPresenter.detachView()
+        presenter.detachView()
     }
 
     override fun lockUi() {
@@ -91,6 +109,7 @@ class RegistrationFragment : BaseFragment(), RegistrationView {
         fmtRegistrationEtFullName.isEnabled = enabled
         fmtRegistrationEtWorkPlace.isEnabled = enabled
         fmtRegistrationEtPosition.isEnabled = enabled
+        fmtRegistrationEtDistrict.isEnabled = enabled
         fmtRegistrationChbTradeUnionistYes.isEnabled = enabled
         fmtRegistrationChbTradeUnionistNo.isEnabled = enabled
         fmtRegistrationEtTradeUnionTicketNumber.isEnabled = enabled
@@ -106,8 +125,8 @@ class RegistrationFragment : BaseFragment(), RegistrationView {
         fmtRegistrationTvBirthday.text = dateString
     }
 
-    override fun setExperience(experience: String) {
-        fmtRegistrationTvExperience.text = experience
+    override fun setExperience(experience: Int) {
+        fmtRegistrationTvExperience.text = resources.getQuantityString(R.plurals.plural_years, experience, experience)
     }
 
     override fun showAccountCreatedDialog() {

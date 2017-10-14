@@ -1,6 +1,10 @@
 package com.teachernavigator.teachernavigator.application.di.modules
 
 import com.teachernavigator.teachernavigator.application.di.scopes.PerParentScreen
+import com.teachernavigator.teachernavigator.presentation.screens.auth.presenters.AuthPresenter
+import com.teachernavigator.teachernavigator.presentation.screens.auth.presenters.RegistrationPresenter
+import com.teachernavigator.teachernavigator.presentation.screens.auth.presenters.abstractions.IAuthPresenter
+import com.teachernavigator.teachernavigator.presentation.screens.auth.presenters.abstractions.IRegistrationPresenter
 import com.teachernavigator.teachernavigator.presentation.screens.info.presenters.*
 import com.teachernavigator.teachernavigator.presentation.screens.info.presenters.abstractions.*
 import com.teachernavigator.teachernavigator.presentation.screens.jobs.presenters.*
@@ -85,5 +89,13 @@ class PresentersModule {
     @Provides
     @PerParentScreen
     fun provideAddPublicationPresenter(presenter: AddPublicationPresenter): IAddPublicationPresenter = presenter
+
+    @Provides
+    @PerParentScreen
+    fun provideRegistrationPresenter(presenter: RegistrationPresenter): IRegistrationPresenter = presenter
+
+    @Provides
+    @PerParentScreen
+    fun provideAuthPresenter(presenter: AuthPresenter): IAuthPresenter = presenter
 
 }

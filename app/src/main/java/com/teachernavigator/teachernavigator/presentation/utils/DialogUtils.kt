@@ -16,7 +16,7 @@ import java.util.*
 object DialogUtils {
 
     fun showDateDialog(context: Context, currentDate: Date?, minDate: Date?, maxDate: Date?,
-                       onDateChangedListener: (Date) -> Unit) {
+                       onDateChangedListener: (Date) -> Unit) : DatePickerDialog{
 
         val calendar = Calendar.getInstance()
         calendar.time = currentDate ?: Date()
@@ -38,6 +38,8 @@ object DialogUtils {
         }
 
         datePickerDialog.show()
+
+        return datePickerDialog
     }
 
 

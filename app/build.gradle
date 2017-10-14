@@ -58,6 +58,8 @@ dependencies {
 
     //GoogleService
     compile "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlinVersion"
+//    compile "com.google.firebase:firebase-auth:$firebaseVersion"
+    compile "com.google.android.gms:play-services-auth:$firebaseVersion"
 
     //Arch
     compile "android.arch.lifecycle:runtime:$androidArh"
@@ -94,7 +96,13 @@ dependencies {
     compile "com.github.miguelbcr:RxPaparazzo:$rxPaparazzoVersion"
     compile "com.tbruyelle.rxpermissions2:rxpermissions:$rxPermissions@aar"
     compile 'com.redmadrobot:inputmask:2.3.0'
+
     compile "com.afollestad.material-dialogs:core:$materialDialogsVersion"
+
+    /* Social */
+    compile "com.facebook.android:facebook-android-sdk:4+"
+    compile 'com.twitter.sdk.android:twitter-core:3.1.1'
+    compile 'com.vk:androidsdk:1.6.5'
 
     //Crash Reporting
 //    compile "com.google.firebase:firebase-crash:$firebaseCrash"

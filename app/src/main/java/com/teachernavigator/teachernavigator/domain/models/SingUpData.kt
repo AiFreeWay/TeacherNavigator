@@ -14,5 +14,5 @@ class SingUpData(
         var email: String,
         var phone_number: String,
         var password: String,
-        var district: String = "Район N9"
+        var district: String
 )

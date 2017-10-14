@@ -100,6 +100,10 @@ class NetworkController {
 
     fun singIn(request: SingInRequest): Observable<SingInResponse> = mApiController.singIn(request)
 
+
+    fun convertToken(request: ConvertTokenRequest): Single<SingInResponse> =
+            mApiController.convertToken(request)
+
     fun restorePassword(request: RestorePasswordRequest): Observable<BaseResponse> =
             mApiController.restorePassword(request)
 

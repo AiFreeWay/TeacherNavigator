@@ -1,25 +1,24 @@
 package com.teachernavigator.teachernavigator.presentation.screens.auth.fragments
 
+import android.content.Intent
 import android.os.Bundle
 import android.text.TextUtils
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.EditText
-import android.widget.ImageView
-import android.widget.TextView
-import butterknife.BindView
-import butterknife.ButterKnife
 import com.teachernavigator.teachernavigator.R
-import com.teachernavigator.teachernavigator.presentation.screens.common.BaseFragment
+import com.teachernavigator.teachernavigator.application.di.components.DaggerParentScreenComponent
+import com.teachernavigator.teachernavigator.application.di.components.ParentScreenComponent
+import com.teachernavigator.teachernavigator.application.di.modules.ParentScreenModule
+import com.teachernavigator.teachernavigator.application.utils.rootComponent
 import com.teachernavigator.teachernavigator.presentation.screens.auth.fragments.abstractions.AuthView
-import com.teachernavigator.teachernavigator.presentation.screens.auth.presenters.FmtAuthPresenter
 import com.teachernavigator.teachernavigator.presentation.screens.auth.presenters.abstractions.IAuthPresenter
+import com.teachernavigator.teachernavigator.presentation.screens.common.BaseFragment
+import kotlinx.android.synthetic.main.fmt_auth.*
+import javax.inject.Inject
 
 
 /**
- * Created by root on 22.08.17.
+ * Created by root on 22.08.17
  */
 
 class AuthFragment : BaseFragment(), AuthView {
@@ -28,47 +27,51 @@ class AuthFragment : BaseFragment(), AuthView {
         val FRAGMENT_KEY = "auth_fragment"
     }
 
-    @BindView(R.id.fmt_auth_iv_vk) lateinit var mIvVk: ImageView
-    @BindView(R.id.fmt_auth_iv_fb) lateinit var mIvFb: ImageView
-    @BindView(R.id.fmt_auth_iv_tw) lateinit var mIvTw: ImageView
-    @BindView(R.id.fmt_auth_iv_gp) lateinit var mIvGp: ImageView
+    private lateinit var mParentScreenComponent: ParentScreenComponent
 
-    @BindView(R.id.fmt_auth_et_login) lateinit var mEtLogin: EditText
-    @BindView(R.id.fmt_auth_et_password) lateinit var mEtPassword: EditText
+    @Inject
+    lateinit var presenter: IAuthPresenter
 
-    @BindView(R.id.fmt_auth_tv_restore_password) lateinit var mTvRestorePassword: TextView
-    @BindView(R.id.fmt_auth_btn_sing_in) lateinit var mBtnSingIn: Button
-    @BindView(R.id.fmt_auth_tv_sing_up) lateinit var mTvSingUp: TextView
-
-    private val mPresenter: IAuthPresenter = FmtAuthPresenter()
-
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val view: View = inflater!!.inflate(R.layout.fmt_auth, container, false)
-        ButterKnife.bind(this, view)
-        return view
-    }
+    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?) =
+            inflater?.inflate(R.layout.fmt_auth, container, false)
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        mPresenter.attachView(this)
-        mIvVk.setOnClickListener { mPresenter.singInViaVkontakte() }
-        mIvFb.setOnClickListener { mPresenter.singInViaFacebook() }
-        mIvTw.setOnClickListener { mPresenter.singInViaTwitter() }
-        mIvGp.setOnClickListener { mPresenter.singInViaGooglePlus() }
-        mTvRestorePassword.setOnClickListener { mPresenter.openRestorePasswordScreen() }
-        mBtnSingIn.setOnClickListener {
+        inject()
+        presenter.attachView(this)
+
+        fmtAuthIvVk.setOnClickListener { presenter.singInViaVkontakte() }
+        fmtAuthIvFb.setOnClickListener { presenter.singInViaFacebook(this) }
+        fmtAuthIvTw.setOnClickListener { presenter.singInViaTwitter() }
+        fmtAuthIvGp.setOnClickListener { presenter.singInViaGooglePlus() }
+        fmtAuthTvRestorePassword.setOnClickListener { presenter.openRestorePasswordScreen() }
+        fmtAuthBtnSingIn.setOnClickListener {
             if (checkLoginFields()) {
-                val login = mEtLogin.text.toString()
-                val pasword = mEtPassword.text.toString()
-                mPresenter.singIn(login, pasword)
+                val login = fmtAuthEtLogin.text.toString()
+                val pasword = fmtAuthEtPassword.text.toString()
+                presenter.singIn(login, pasword)
             }
         }
-        mTvSingUp.setOnClickListener { mPresenter.openSingUpScreen() }
+
+        fmtAuthTvSingUp.setOnClickListener { presenter.openSingUpScreen() }
+    }
+
+    private fun inject() {
+        mParentScreenComponent = DaggerParentScreenComponent.builder()
+                .rootComponent(rootComponent())
+                .parentScreenModule(ParentScreenModule(getParentView()))
+                .build()
+                .also { it.inject(this) }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        presenter.onActivityResult(requestCode, resultCode, data)
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
-        mPresenter.detachView()
+        presenter.detachView()
     }
 
     override fun lockUi() {
@@ -78,27 +81,27 @@ class AuthFragment : BaseFragment(), AuthView {
     override fun unlockUi() {
         setEnabledViews(true)
     }
-    
+
     private fun setEnabledViews(enabled: Boolean) {
-        mIvVk.isEnabled = enabled
-        mIvFb.isEnabled = enabled
-        mIvTw.isEnabled = enabled
-        mIvGp.isEnabled = enabled
+        fmtAuthIvVk.isEnabled = enabled
+        fmtAuthIvFb.isEnabled = enabled
+        fmtAuthIvTw.isEnabled = enabled
+        fmtAuthIvGp.isEnabled = enabled
 
-        mEtLogin.isEnabled = enabled
-        mEtPassword.isEnabled = enabled
+        fmtAuthEtLogin.isEnabled = enabled
+        fmtAuthEtPassword.isEnabled = enabled
 
-        mTvRestorePassword.isEnabled = enabled
-        mBtnSingIn.isEnabled = enabled
-        mTvSingUp.isEnabled = enabled
+        fmtAuthTvRestorePassword.isEnabled = enabled
+        fmtAuthBtnSingIn.isEnabled = enabled
+        fmtAuthTvSingUp.isEnabled = enabled
     }
 
     private fun checkLoginFields(): Boolean {
-        if (TextUtils.isEmpty(mEtLogin.text.toString())) {
+        if (TextUtils.isEmpty(fmtAuthEtLogin.text.toString())) {
             showToast(getString(R.string.indicate_login))
             return false
         }
-        if (TextUtils.isEmpty(mEtPassword.text.toString())) {
+        if (TextUtils.isEmpty(fmtAuthEtPassword.text.toString())) {
             showToast(getString(R.string.indicate_password))
             return false
         }

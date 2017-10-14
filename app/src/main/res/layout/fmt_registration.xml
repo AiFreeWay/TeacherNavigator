@@ -50,6 +50,18 @@
             android:lines="1" />
 
         <android.support.design.widget.TextInputEditText
+            android:id="@+id/fmtRegistrationEtDistrict"
+            style="@style/EditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/externalPadding"
+            android:layout_marginStart="@dimen/externalPadding"
+            android:layout_marginTop="@dimen/spacingXLarge"
+            android:hint="@string/district"
+            android:inputType="numberDecimal"
+            android:lines="1" />
+
+        <android.support.design.widget.TextInputEditText
             android:id="@+id/fmtRegistrationEtPosition"
             style="@style/EditText"
             android:layout_width="match_parent"
@@ -146,16 +158,6 @@
             android:inputType="textWebEmailAddress"
             android:lines="1" />
 
-        <TextView
-            style="@style/Text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginEnd="@dimen/externalPadding"
-            android:layout_marginStart="@dimen/externalPadding"
-            android:layout_marginTop="@dimen/spacingXLarge"
-            android:text="@string/or"
-            android:textAllCaps="true" />
 
         <android.support.design.widget.TextInputEditText
             android:id="@+id/fmtRegistrationEtPhone"

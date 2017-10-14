@@ -1,35 +1,33 @@
 {
   "project_info": {
-    "project_number": "929070940817",
-    "firebase_url": "https://teachernavigator.firebaseio.com",
-    "project_id": "teachernavigator",
-    "storage_bucket": "teachernavigator.appspot.com"
+    "project_number": "23933902730",
+    "project_id": "youngteacherss"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:929070940817:android:20b8265e045abe20",
+        "mobilesdk_app_id": "1:23933902730:android:20b8265e045abe20",
         "android_client_info": {
           "package_name": "com.teachernavigator.teachernavigator"
         }
       },
       "oauth_client": [
         {
-          "client_id": "929070940817-remme4p4jouuc71ddfdrlk03ud32884i.apps.googleusercontent.com",
+          "client_id": "23933902730-bhlrp8dd9d7nljj3agliv90ufb678jc6.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.teachernavigator.teachernavigator",
-            "certificate_hash": "aa20eb9db56d7e5b414804d39e61c015f24672c9"
+            "certificate_hash": "a61c1ae1291dc5f7fa574507b32bf738c5c7bf34"
           }
         },
         {
-          "client_id": "929070940817-9gmvve8dt9v9g3eaafprqk8ubjb8lern.apps.googleusercontent.com",
+          "client_id": "23933902730-ur30aegehjdj8iq479q9tksi7tc1e4kg.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyAmGuCG-7wu9t8tj8AOhnk2m58cTQvxsyM"
+          "current_key": "AIzaSyBU_PXgvBiav4Mp0-6ttsAr8m2RmJZ4vCI"
         }
       ],
       "services": {
@@ -37,16 +35,11 @@
           "status": 1
         },
         "appinvite_service": {
-          "status": 2,
-          "other_platform_oauth_client": [
-            {
-              "client_id": "929070940817-9gmvve8dt9v9g3eaafprqk8ubjb8lern.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
+          "status": 1,
+          "other_platform_oauth_client": []
         },
         "ads_service": {
-          "status": 2
+          "status": 1
         }
       }
     }

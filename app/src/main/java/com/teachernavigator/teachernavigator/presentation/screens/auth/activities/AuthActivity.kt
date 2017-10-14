@@ -2,6 +2,7 @@ package com.teachernavigator.teachernavigator.presentation.screens.auth.activiti
 
 import android.arch.lifecycle.LifecycleRegistry
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
@@ -15,6 +16,7 @@ import com.teachernavigator.teachernavigator.application.di.components.ParentScr
 import com.teachernavigator.teachernavigator.presentation.screens.auth.activities.abstractions.AuthParentView
 import com.teachernavigator.teachernavigator.presentation.screens.auth.presenters.AcAuthParentPresenter
 import com.teachernavigator.teachernavigator.presentation.screens.auth.presenters.abstractions.IAuthParentPresenter
+
 
 /**
  * Created by root on 24.08.17.
@@ -93,5 +95,12 @@ class AuthActivity : AppCompatActivity(), AuthParentView {
         setSupportActionBar(mToolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setHomeButtonEnabled(true)
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        supportFragmentManager
+                .findFragmentById(R.id.ac_auth_fl_body)
+                ?.onActivityResult(requestCode, resultCode, data)
     }
 }

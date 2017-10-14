@@ -9,9 +9,11 @@ import com.teachernavigator.teachernavigator.data.repository.abstractions.IProfi
 import com.teachernavigator.teachernavigator.data.repository.abstractions.ISettingsRepository
 import com.teachernavigator.teachernavigator.data.repository.abstractions.ITapeRepository
 import com.teachernavigator.teachernavigator.domain.controllers.IPostController
+import com.teachernavigator.teachernavigator.presentation.screens.auth.fragments.AuthFragment
+import com.teachernavigator.teachernavigator.presentation.screens.auth.fragments.RegistrationFragment
 import com.teachernavigator.teachernavigator.presentation.screens.auth.presenters.AcAuthParentPresenter
-import com.teachernavigator.teachernavigator.presentation.screens.auth.presenters.FmtAuthPresenter
-import com.teachernavigator.teachernavigator.presentation.screens.auth.presenters.FmtRegistrationPresenter
+import com.teachernavigator.teachernavigator.presentation.screens.auth.presenters.AuthPresenter
+import com.teachernavigator.teachernavigator.presentation.screens.auth.presenters.RegistrationPresenter
 import com.teachernavigator.teachernavigator.presentation.screens.auth.presenters.FmtRestorePasswordPresenter
 import com.teachernavigator.teachernavigator.presentation.screens.common.ParentView
 import com.teachernavigator.teachernavigator.presentation.screens.info.fragments.*
@@ -59,8 +61,8 @@ interface ParentScreenComponent {
 
     //Auth presenters
     fun inject(presenter: AcAuthParentPresenter)
-    fun inject(presenter: FmtAuthPresenter)
-    fun inject(presenter: FmtRegistrationPresenter)
+    fun inject(presenter: AuthPresenter)
+    fun inject(presenter: RegistrationPresenter)
     fun inject(presenter: FmtRestorePasswordPresenter)
 
     //Settings presenters
@@ -85,5 +87,7 @@ interface ParentScreenComponent {
     fun inject(postCommentsFragment: PostCommentsFragment)
     fun inject(tagsFragment: TagsFragment)
     fun inject(addPublicationFragment: AddPublicationFragment)
+    fun inject(registrationFragment: RegistrationFragment)
+    fun inject(authFragment: AuthFragment)
 
 }

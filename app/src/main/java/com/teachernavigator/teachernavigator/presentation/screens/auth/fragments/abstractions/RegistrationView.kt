@@ -12,5 +12,5 @@ interface RegistrationView : ChildView {
     fun showAccountCreatedDialog()
 
     fun setDate(dateString : String)
-    fun setExperience(experience : String)
+    fun setExperience(experience : Int)
 }

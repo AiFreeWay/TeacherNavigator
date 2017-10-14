@@ -67,6 +67,7 @@
     <string name="work_or_learn_place">Место работы или учёбы</string>
     <string name="indicate_experience">Укажите опыт</string>
     <string name="indicate_number_of_unionist_ticket">Укажите номер профсоюзного билета</string>
+    <string name="indicate_district">Укажите округ</string>
     <string name="number_of_unionist_ticket">Номер профсоюзного билета</string>
     <string name="indicate_login">Укажите E-mail или номер моб. телефона</string>
     <string name="registration_error">Ошибка регистрации</string>
@@ -190,12 +191,11 @@
     <string name="cancel">Отмена</string>
     <string name="add">Добавить</string>
     <string name="add_least_one_tag">Добавьте как минимум один тег</string>
-    <string name="under_construction">Данный функционал находится в стадии разработки</string>
     <string name="input_experience">Введите ваш опыт (в годах)</string>
     <string name="error_enter_valid_email">Введите корректный e-mail</string>
     <string name="input_phone">Введите корректный номер телефона</string>
     <string name="input_phone_or_email">Введите e-mail или номер телефона</string>
-    <string name="district">Дистрикт</string>
+    <string name="district">Округ</string>
     <string name="trade_unionist">Член профсоюза</string>
     <string name="phone_number">Номер телефона</string>
 

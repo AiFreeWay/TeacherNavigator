@@ -45,7 +45,7 @@ class AboutPresenter
             mView?.getParentView()?.stopProgress()
 
 
-    override fun openVk() = mView.openUrl(R.string.social_link_youtube)
+    override fun openVk() = mView.openUrl(R.string.social_link_vk)
     override fun openYoutube() = mView.openUrl(R.string.social_link_youtube)
     override fun openFb() = mView.openUrl(R.string.social_link_fb)
     override fun openInstagram() = mView.openUrl(R.string.social_link_instagram)

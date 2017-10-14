@@ -29,8 +29,7 @@ class CreateResumePresenter
                                    districtCouncil: CharSequence,
                                    education: CharSequence,
                                    experience: CharSequence,
-                                   salary: CharSequence
-    ) = mView?.run {
+                                   salary: CharSequence) = mView?.run {
         when {
             careerObjective.isBlank() -> errorValidation(R.string.validation_empty_field, R.string.career_objective)
             districtCouncil.isBlank() -> errorValidation(R.string.validation_empty_field, R.string.district_council)

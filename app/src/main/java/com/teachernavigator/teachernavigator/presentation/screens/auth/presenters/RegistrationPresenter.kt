@@ -1,24 +1,28 @@
 package com.teachernavigator.teachernavigator.presentation.screens.auth.presenters
 
+import android.app.DatePickerDialog
 import android.arch.lifecycle.Lifecycle
 import android.arch.lifecycle.OnLifecycleEvent
 import android.text.TextUtils
-import com.example.root.androidtest.application.utils.Logger
+import com.afollestad.materialdialogs.MaterialDialog
 import com.google.gson.Gson
 import com.teachernavigator.teachernavigator.R
+import com.teachernavigator.teachernavigator.application.di.scopes.PerParentScreen
 import com.teachernavigator.teachernavigator.data.network.responses.BaseResponse
 import com.teachernavigator.teachernavigator.domain.interactors.abstractions.IAuthInteractor
 import com.teachernavigator.teachernavigator.domain.models.Monade
 import com.teachernavigator.teachernavigator.domain.models.SingUpData
+import com.teachernavigator.teachernavigator.presentation.models.FieldNames
 import com.teachernavigator.teachernavigator.presentation.screens.auth.activities.abstractions.AuthParentView
 import com.teachernavigator.teachernavigator.presentation.screens.auth.fragments.abstractions.RegistrationView
 import com.teachernavigator.teachernavigator.presentation.screens.auth.presenters.abstractions.IRegistrationPresenter
 import com.teachernavigator.teachernavigator.presentation.screens.common.BasePresenter
 import com.teachernavigator.teachernavigator.presentation.utils.DialogUtils
 import com.teachernavigator.teachernavigator.presentation.utils.formatDisplayDate
-import com.teachernavigator.teachernavigator.presentation.utils.formatServerDatetime
+import com.teachernavigator.teachernavigator.presentation.utils.formatServerDate
 import com.teachernavigator.teachernavigator.presentation.validators.EmailValidator
 import retrofit2.HttpException
+import ru.terrakok.cicerone.Router
 import java.io.InputStreamReader
 import java.util.*
 import javax.inject.Inject
@@ -26,17 +30,17 @@ import javax.inject.Inject
 /**
  * Created by root on 24.08.17
  */
-class FmtRegistrationPresenter : BasePresenter<RegistrationView>(), IRegistrationPresenter {
+@PerParentScreen
+class RegistrationPresenter
+@Inject
+constructor(private val router: Router,
+            private val authInteractor: IAuthInteractor) : BasePresenter<RegistrationView>(), IRegistrationPresenter {
 
-    @Inject
-    lateinit var mAuthInteractor: IAuthInteractor
-
-    private var mBirthdate: Date? = Date()
+    private var mBirthDate: Date? = Date()
     private var mExperience = 0
 
-    init {
-        Logger.logDebug("created PRESENTER FmtRegistrationPresenter")
-    }
+    private var mDateDialog: DatePickerDialog? = null
+    private var mNumberDialog: MaterialDialog? = null
 
     @OnLifecycleEvent(Lifecycle.Event.ON_START)
     private fun onStart() {
@@ -47,12 +51,15 @@ class FmtRegistrationPresenter : BasePresenter<RegistrationView>(), IRegistratio
     @OnLifecycleEvent(Lifecycle.Event.ON_STOP)
     private fun onStop() {
         mDisposables.clear()
+        dismissDateDialog()
+        dismissNumberDialog()
     }
 
-    override fun attachView(view: RegistrationView) {
-        super.attachView(view)
-        inject()
-    }
+    private fun dismissDateDialog() =
+            mDateDialog?.run { if (isShowing) dismiss() }
+
+    private fun dismissNumberDialog() =
+            mNumberDialog?.run { if (isShowing) dismiss() }
 
     override fun doOnError(error: Throwable) {
         super.doOnError(error)
@@ -69,55 +76,38 @@ class FmtRegistrationPresenter : BasePresenter<RegistrationView>(), IRegistratio
             val errors = response.errors
             val key = errors.keys.first()
 
-            mView!!.showToast("${getFieldName(key)}: ${errors[key]?.firstOrNull() ?: "неизвестная ошибка"}")
+            mView?.showToast("${getFieldName(key)}: ${errors[key]?.firstOrNull() ?: FieldNames.UNKNOWN_ERROR}")
 
         } else {
-            mView!!.showToast(getContext().getString(R.string.registration_error))
+            mView?.showToast(getContext().getString(R.string.registration_error))
         }
     }
 
-    private fun getFieldName(key: String) = when (key) {
-
-        "email" -> mView?.getContext()?.getString(R.string.email) ?: ""
-        "password" -> mView?.getContext()?.getString(R.string.password) ?: ""
-        "full_name" -> mView?.getContext()?.getString(R.string.full_name) ?: ""
-        "birthday" -> mView?.getContext()?.getString(R.string.birthday) ?: ""
-
-        "work_or_learn_place" -> mView?.getContext()?.getString(R.string.work_or_learn_place) ?: ""
-        "district" -> mView?.getContext()?.getString(R.string.district) ?: ""
-        "position" -> mView?.getContext()?.getString(R.string.position) ?: ""
-
-        "experience" -> mView?.getContext()?.getString(R.string.experience) ?: ""
-        "unionist" -> mView?.getContext()?.getString(R.string.trade_unionist) ?: ""
-        "number_of_union_ticket" -> mView?.getContext()?.getString(R.string.indicate_number_of_unionist_ticket) ?: ""
-        "phone_number" -> mView?.getContext()?.getString(R.string.phone_number) ?: ""
-
-        else -> {
-            "Регистрация"
-        }
-    }
+    private fun getFieldName(key: String): String =
+            mView?.getContext()?.getString(FieldNames.registrationFieldnames(key, R.string.registration)) ?: ""
 
     override fun singUp(fullName: String, workOrLearnPlace: String, position: String,
-                        unionist: Boolean, numberOfUnionTicket: String, email: String,
-                        phoneNumber: String, password: String) {
+                        district: String, unionist: Boolean, numberOfUnionTicket: String,
+                        email: String, phoneNumber: String, password: String) {
 
         if (checkSingUpData(fullName = fullName, workOrLearnPlace = workOrLearnPlace, position = position,
-                unionist = unionist, numberOfUnionTicket = numberOfUnionTicket, email = email,
-                phoneNumber = phoneNumber, password = password)) {
+                district = district, unionist = unionist, numberOfUnionTicket = numberOfUnionTicket,
+                email = email, phoneNumber = phoneNumber, password = password)) {
 
             val singUpData = SingUpData(
                     email = email,
                     full_name = fullName,
-                    birthday = mBirthdate?.formatServerDatetime ?: "",
+                    birthday = mBirthDate?.formatServerDate ?: "",
                     password = password,
                     work_or_learn_place = workOrLearnPlace,
                     position = position,
                     experience = mExperience,
+                    district = district,
                     unionist = unionist,
                     number_of_union_ticket = numberOfUnionTicket,
                     phone_number = phoneNumber)
 
-            addDissposable(mAuthInteractor.singUp(singUpData)
+            addDissposable(authInteractor.singUp(singUpData)
                     .doOnSubscribe { startProgress() }
                     .subscribe(this::doOnSingUp, this::doOnError))
         }
@@ -130,36 +120,30 @@ class FmtRegistrationPresenter : BasePresenter<RegistrationView>(), IRegistratio
     }
 
     override fun pickDate() = mView?.run {
-        DialogUtils.showDateDialog(getContext(), mBirthdate, null, Date()) {
-            mBirthdate = it
+        dismissDateDialog()
+        mDateDialog = DialogUtils.showDateDialog(getContext(), mBirthDate, null, Date()) {
+            mBirthDate = it
             setDate(it.formatDisplayDate ?: "")
         }
-    } ?: Unit
+    }
 
     override fun pickExperience() = mView?.run {
-        DialogUtils.showNumberDialog(getContext(), R.string.experience, R.string.input_experience) {
+        mNumberDialog = DialogUtils.showNumberDialog(getContext(), R.string.experience, R.string.input_experience) {
             mExperience = it
-            setExperience(getContext().resources.getQuantityString(R.plurals.plural_years, it, it))
+            setExperience(it)
         }
-
-        Unit
-    } ?: Unit
+    }
 
     private fun checkSingUpData(fullName: String, workOrLearnPlace: String, position: String,
-                                unionist: Boolean, numberOfUnionTicket: String, email: String,
-                                phoneNumber: String, password: String): Boolean {
+                                district: String, unionist: Boolean, numberOfUnionTicket: String,
+                                email: String, phoneNumber: String, password: String): Boolean {
 
-        if (phoneNumber.isBlank() && email.isBlank()) {
-            mView!!.showToast(getContext().getString(R.string.input_phone_or_email))
-            return false
-        }
-
-        if (email.isBlank() && phoneNumber.length < 18) {
+        if (!phoneNumber.isBlank() && phoneNumber.length < 18) {
             mView!!.showToast(getContext().getString(R.string.input_phone))
             return false
         }
 
-        if (phoneNumber.isBlank() && !EmailValidator.getInstance().isValid(email)) {
+        if (!EmailValidator.getInstance().isValid(email)) {
             mView!!.showToast(getContext().getString(R.string.error_enter_valid_email))
             return false
         }
@@ -172,7 +156,7 @@ class FmtRegistrationPresenter : BasePresenter<RegistrationView>(), IRegistratio
             mView!!.showToast(getContext().getString(R.string.indicate_full_name))
             return false
         }
-        if (mBirthdate == null) {
+        if (mBirthDate == null) {
             mView!!.showToast(getContext().getString(R.string.indicate_birthday))
             return false
         }
@@ -188,13 +172,12 @@ class FmtRegistrationPresenter : BasePresenter<RegistrationView>(), IRegistratio
             mView!!.showToast(getContext().getString(R.string.indicate_number_of_unionist_ticket))
             return false
         }
-        return true
-    }
 
-    private fun inject() {
-        mView!!.getParentView()
-                .getParentScreenComponent()
-                .inject(this)
+        if (district.isBlank()) {
+            mView!!.showToast(getContext().getString(R.string.indicate_district))
+            return false
+        }
+        return true
     }
 
     private fun startProgress() {

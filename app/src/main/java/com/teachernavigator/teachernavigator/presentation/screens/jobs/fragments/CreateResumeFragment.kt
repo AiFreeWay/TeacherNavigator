@@ -111,38 +111,4 @@ class CreateResumeFragment : BaseFragment(), CreateResumeView {
             showToast(getString(validationResId, getString(fieldLabelResId)))
 
 
-//    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-//
-//        if (resultCode == Activity.RESULT_OK && data != null) {
-//            when (requestCode) {
-//                FilePickerConst.REQUEST_CODE_PHOTO -> {
-//                    val stringArrayListExtra = data.getStringArrayListExtra(FilePickerConst.KEY_SELECTED_MEDIA)
-//                    if (stringArrayListExtra.orEmpty().isNotEmpty()) {
-//
-//                        val first = stringArrayListExtra?.first()
-//                        first?.let {
-//                            createResumeTvAttachResume.text = it
-//                            createResumePresenter.resumePath = it
-//                            Uri.parse(it).lastPathSegment
-////                            createResumePresenter.resumeMime = first.mimeType
-//                        }
-//
-//                    }
-//
-//                }
-//                FilePickerConst.REQUEST_CODE_DOC -> {
-//                    val stringArrayListExtra = data.getStringArrayListExtra(FilePickerConst.KEY_SELECTED_DOCS)
-//
-//                    val first = stringArrayListExtra?.first()
-//                    first?.let {
-//                        createResumeTvAttachResume.text = it
-//                        createResumePresenter.resumePath = it
-////                            createResumePresenter.resumeMime = first.mimeType
-//                    }
-//                }
-//            }
-//
-//
-//        }
-//    }
 }

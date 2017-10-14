@@ -55,7 +55,8 @@ class MainRepository @Inject constructor(private val mNetwokController: NetworkC
 
     override fun singInViaVkontakte(): Observable<Monade> = Observable.just(Monade(false))
 
-    override fun singInViaFacebook(): Observable<Monade> = Observable.just(Monade(false))
+    override fun singInViaFacebook(request: ConvertTokenRequest): Single<SingInResponse> =
+            mNetwokController.convertToken(request)
 
     override fun singInViaTwitter(): Observable<Monade> = Observable.just(Monade(false))
 
@@ -70,8 +71,7 @@ class MainRepository @Inject constructor(private val mNetwokController: NetworkC
     override fun getAuthCredentials(): AuthCredentials {
         val clientId = mContext.getString(R.string.client_id)
         val clientSecret = mContext.getString(R.string.client_secret)
-        val grantType = mContext.getString(R.string.grant_type)
-        return AuthCredentials(clientId, clientSecret, grantType)
+        return AuthCredentials(clientId, clientSecret)
     }
 
     override fun restorePassword(request: RestorePasswordRequest): Observable<BaseResponse> =

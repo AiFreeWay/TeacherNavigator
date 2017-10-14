@@ -1,6 +1,7 @@
 package com.teachernavigator.teachernavigator.domain.mappers
 
 import android.text.TextUtils
+import com.teachernavigator.teachernavigator.data.network.requests.ConvertTokenRequest
 import com.teachernavigator.teachernavigator.data.network.requests.RestorePasswordRequest
 import com.teachernavigator.teachernavigator.data.network.requests.SingInRequest
 import com.teachernavigator.teachernavigator.data.network.requests.SingUpRequest
@@ -12,7 +13,7 @@ import com.teachernavigator.teachernavigator.domain.models.SingUpData
 import com.teachernavigator.teachernavigator.domain.models.Token
 
 /**
- * Created by root on 07.09.17.
+ * Created by root on 07.09.17
  */
 class AuthMapper {
 
@@ -29,21 +30,29 @@ class AuthMapper {
                         singUpData.experience,
                         singUpData.unionist,
                         singUpData.number_of_union_ticket,
-                        mapPhoneNumber(singUpData.phone_number))
+                        singUpData.phone_number)
 
         fun mapSingInDataToRequest(login: String, password: String, authCredentials: AuthCredentials): SingInRequest =
-                SingInRequest(login, password,
-                        authCredentials.clientId,
-                        authCredentials.clientSecret,
-                        authCredentials.grantType)
+                SingInRequest(
+                        username = login,
+                        password = password,
+                        client_id = authCredentials.clientId,
+                        client_secret = authCredentials.clientSecret)
 
-        fun mapSingInResponse(response: SingInResponse): Monade {
-            return Monade(!TextUtils.isEmpty(response.error))
-        }
+        fun mapConvertTokenRequest(token: String, socialNetwork: String, authCredentials: AuthCredentials) =
+                ConvertTokenRequest(
+                        backend = socialNetwork,
+                        token = token,
+                        client_id = authCredentials.clientId,
+                        client_secret = authCredentials.clientSecret)
+
+        fun mapSingInResponse(response: SingInResponse): Monade =
+                Monade(!TextUtils.isEmpty(response.error))
 
         fun mapToken(response: SingInResponse): Token =
                 Token(response.access_token!!, response.token_type!!, response.scope!!, response.refresh_token!!)
 
+        // toso
         fun mapRestorePasswordDataRequest(login: String): RestorePasswordRequest {
             if (login.contains("@"))
                 return RestorePasswordRequest(login, null)
@@ -54,11 +63,11 @@ class AuthMapper {
             return Monade(response.is_error)
         }
 
-        private fun mapPhoneNumber(number: String?): String? {
-            if (number.isNullOrBlank())
-                return null
-
-            return number?.replaceFirst("8", "+7")?.replace(" ", "")?.replace("(", "")?.replace(")", "")
-        }
+//        private fun mapPhoneNumber(number: String?): String? {
+//            if (number.isNullOrBlank())
+//                return null
+//
+//            return number?.replace(" ", "")?.replace("(", "")?.replace(")", "")
+//        }
     }
 }

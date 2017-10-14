@@ -12,7 +12,7 @@ import okhttp3.RequestBody
 import retrofit2.http.*
 
 /**
- * Created by root on 11.08.17.
+ * Created by root on 11.08.17
  */
 interface ApiController {
 
@@ -23,6 +23,9 @@ interface ApiController {
 
     @POST("api/v0/sign_in/")
     fun singIn(@Body request: SingInRequest): Observable<SingInResponse>
+
+    @POST("api/v0/socialauth/convert-token")
+    fun convertToken(@Body request: ConvertTokenRequest): Single<SingInResponse>
 
     @POST("/api/v0/ask_pass/")
     fun restorePassword(@Body request: RestorePasswordRequest): Observable<BaseResponse>

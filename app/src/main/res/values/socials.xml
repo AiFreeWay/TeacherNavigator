@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <integer name="com_vk_sdk_AppId">1516516516</integer>
+
+    <string name="facebook_app_id">384369015315338</string>
+
+    <string name="twitter_consumer_key">QTbNdYosYkffCFwoDpgxsy3DW</string>
+    <string name="twitter_consumer_secret">EWK8xxcLJXpj6Mhd7jtPZUZSssKyvddyjTcU7yPUzMl8jvvlZB</string>
+
+    <string name="google_client_id">23933902730-ur30aegehjdj8iq479q9tksi7tc1e4kg.apps.googleusercontent.com</string>
+    <!--<string name="google_client_id">23933902730-0211129ucrgesiqvp4gm6ag9dnk20tg6.apps.googleusercontent.com</string>-->
+
+</resources>

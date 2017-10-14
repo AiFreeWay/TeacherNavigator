@@ -2,22 +2,23 @@ package com.teachernavigator.teachernavigator.presentation.screens.main.fragment
 
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
 import android.view.*
-import android.widget.TextView
-import butterknife.BindView
-import butterknife.ButterKnife
 import com.teachernavigator.teachernavigator.R
+import com.teachernavigator.teachernavigator.application.di.components.DaggerParentScreenComponent
+import com.teachernavigator.teachernavigator.application.di.components.ParentScreenComponent
+import com.teachernavigator.teachernavigator.application.di.modules.ParentScreenModule
+import com.teachernavigator.teachernavigator.application.utils.rootComponent
 import com.teachernavigator.teachernavigator.domain.models.Post
 import com.teachernavigator.teachernavigator.presentation.adapters.MultyRvAdapter
 import com.teachernavigator.teachernavigator.presentation.adapters.holders.SavedPostHolder
 import com.teachernavigator.teachernavigator.presentation.screens.common.BaseFragment
 import com.teachernavigator.teachernavigator.presentation.screens.main.fragments.abstractions.SavedPostsView
-import com.teachernavigator.teachernavigator.presentation.screens.main.presenters.FmtSavedPostsPresenter
 import com.teachernavigator.teachernavigator.presentation.screens.main.presenters.abstractions.ISavedPostsPresenter
+import kotlinx.android.synthetic.main.fmt_list.*
+import javax.inject.Inject
 
 /**
- * Created by root on 08.09.17.
+ * Created by root on 08.09.17
  */
 class SavedPostsFragment : BaseFragment(), SavedPostsView {
 
@@ -25,31 +26,39 @@ class SavedPostsFragment : BaseFragment(), SavedPostsView {
         val FRAGMENT_KEY = "saved_posts_fragment"
     }
 
-    @BindView(R.id.fmt_list_rv_list) lateinit var mRvList: RecyclerView
-    @BindView(R.id.fmt_list_tv_no_data) lateinit var mTvNoData: TextView
+    private lateinit var mParentScreenComponent: ParentScreenComponent
 
-    private val mPresenter: ISavedPostsPresenter = FmtSavedPostsPresenter()
+    @Inject
+    lateinit var presenter: ISavedPostsPresenter
+
     private lateinit var mAdapter: MultyRvAdapter<Post>
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val view: View = inflater!!.inflate(R.layout.fmt_list, container, false)
-        ButterKnife.bind(this, view)
-        return view
-    }
+    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?) =
+            inflater?.inflate(R.layout.fmt_list, container, false)
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+        inject()
+        presenter.attachView(this)
+
         setHasOptionsMenu(true)
-        mPresenter.attachView(this)
-        mAdapter = MultyRvAdapter(SavedPostHolder(context, mPresenter.getPostControllerFacade()))
-        mRvList.layoutManager = LinearLayoutManager(context)
-        mRvList.adapter = mAdapter
-        mPresenter.getSavedPosts()
+        mAdapter = MultyRvAdapter(SavedPostHolder(context, presenter.getPostControllerFacade()))
+        fmt_list_rv_list.layoutManager = LinearLayoutManager(context)
+        fmt_list_rv_list.adapter = mAdapter
+        presenter.getSavedPosts()
+    }
+
+    private fun inject() {
+        mParentScreenComponent = DaggerParentScreenComponent.builder()
+                .rootComponent(rootComponent())
+                .parentScreenModule(ParentScreenModule(getParentView()))
+                .build()
+                .also { it.inject(this) }
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
-        mPresenter.detachView()
+        presenter.detachView()
     }
 
     override fun loadSavedPosts(posts: List<Post>) {
@@ -57,11 +66,11 @@ class SavedPostsFragment : BaseFragment(), SavedPostsView {
     }
 
     override fun showNoDataText() {
-        mTvNoData.visibility = View.VISIBLE
+        fmt_list_tv_no_data.visibility = View.VISIBLE
     }
 
     override fun hideNoDataText() {
-        mTvNoData.visibility = View.GONE
+        fmt_list_tv_no_data.visibility = View.GONE
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -70,9 +79,13 @@ class SavedPostsFragment : BaseFragment(), SavedPostsView {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when(item.itemId) {
-            R.id.action_search -> { mPresenter.openPostSearchScreen() }
-            R.id.action_refresh -> { mPresenter.refresh() }
+        when (item.itemId) {
+            R.id.action_search -> {
+                presenter.openPostSearchScreen()
+            }
+            R.id.action_refresh -> {
+                presenter.refresh()
+            }
         }
         return super.onOptionsItemSelected(item)
     }

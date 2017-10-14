@@ -11,12 +11,10 @@ import com.teachernavigator.teachernavigator.presentation.screens.info.presenter
 import com.teachernavigator.teachernavigator.presentation.screens.info.presenters.abstractions.*
 import com.teachernavigator.teachernavigator.presentation.screens.jobs.presenters.*
 import com.teachernavigator.teachernavigator.presentation.screens.jobs.presenters.abstractions.*
-import com.teachernavigator.teachernavigator.presentation.screens.main.presenters.AddPublicationPresenter
-import com.teachernavigator.teachernavigator.presentation.screens.main.presenters.PostActionsController
-import com.teachernavigator.teachernavigator.presentation.screens.main.presenters.PostCommentsPresenter
-import com.teachernavigator.teachernavigator.presentation.screens.main.presenters.abstractions.IAddPublicationPresenter
-import com.teachernavigator.teachernavigator.presentation.screens.main.presenters.abstractions.IPostActionsController
-import com.teachernavigator.teachernavigator.presentation.screens.main.presenters.abstractions.IPostCommentsPresenter
+import com.teachernavigator.teachernavigator.presentation.screens.main.presenters.*
+import com.teachernavigator.teachernavigator.presentation.screens.main.presenters.abstractions.*
+import com.teachernavigator.teachernavigator.presentation.screens.tape.presenters.PostSearchPresenter
+import com.teachernavigator.teachernavigator.presentation.screens.tape.presenters.abstractions.IPostSearchPresenter
 import dagger.Module
 import dagger.Provides
 
@@ -101,5 +99,17 @@ class PresentersModule {
     @Provides
     @PerParentScreen
     fun provideRestorePasswordPresenter(presenter: RestorePasswordPresenter): IRestorePasswordPresenter = presenter
+
+    @Provides
+    @PerParentScreen
+    fun providePostSearchPresenter(presenter: PostSearchPresenter): IPostSearchPresenter = presenter
+
+    @Provides
+    @PerParentScreen
+    fun provideSavedPostsPresenter(presenter: SavedPostsPresenter): ISavedPostsPresenter = presenter
+
+    @Provides
+    @PerParentScreen
+    fun provideTapePresenter(presenter: TapePresenter): ITapePresenter = presenter
 
 }

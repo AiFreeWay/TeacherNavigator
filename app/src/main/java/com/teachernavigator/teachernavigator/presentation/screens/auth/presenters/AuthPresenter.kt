@@ -83,7 +83,7 @@ constructor(val router: Router,
     @OnLifecycleEvent(Lifecycle.Event.ON_START)
     private fun onStart() {
         mView?.getParentView()?.setToolbarTitle(R.string.auth)
-        (mView?.getParentView() as? AuthParentView)?.hightActionBar()
+        (mView?.getParentView() as? AuthParentView)?.hideActionBar()
     }
 
     @OnLifecycleEvent(Lifecycle.Event.ON_STOP)

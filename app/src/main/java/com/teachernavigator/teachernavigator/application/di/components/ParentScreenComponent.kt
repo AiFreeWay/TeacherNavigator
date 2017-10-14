@@ -21,13 +21,16 @@ import com.teachernavigator.teachernavigator.presentation.screens.info.fragments
 import com.teachernavigator.teachernavigator.presentation.screens.jobs.fragments.*
 import com.teachernavigator.teachernavigator.presentation.screens.main.fragments.AddPublicationFragment
 import com.teachernavigator.teachernavigator.presentation.screens.main.fragments.PostCommentsFragment
+import com.teachernavigator.teachernavigator.presentation.screens.main.fragments.SavedPostsFragment
+import com.teachernavigator.teachernavigator.presentation.screens.main.fragments.TapeFragment
 import com.teachernavigator.teachernavigator.presentation.screens.main.presenters.*
 import com.teachernavigator.teachernavigator.presentation.screens.settings.presenters.FmtAppSettingsPresenter
 import com.teachernavigator.teachernavigator.presentation.screens.settings.presenters.FmtProfileSettingsPresenter
+import com.teachernavigator.teachernavigator.presentation.screens.tape.fragments.PostsSearchFragment
 import com.teachernavigator.teachernavigator.presentation.screens.tape.presenters.AcPostCommentsPresenter
 import com.teachernavigator.teachernavigator.presentation.screens.tape.presenters.AcPostDetailPresenter
-import com.teachernavigator.teachernavigator.presentation.screens.tape.presenters.AcPostSearchPresenter
 import com.teachernavigator.teachernavigator.presentation.screens.tape.presenters.FmtPostsListPresenter
+import com.teachernavigator.teachernavigator.presentation.screens.tape.presenters.PostSearchPresenter
 import dagger.Component
 
 /**
@@ -37,41 +40,46 @@ import dagger.Component
 @Component(modules = arrayOf(ParentScreenModule::class, PresentersModule::class), dependencies = arrayOf(RootComponent::class))
 interface ParentScreenComponent {
 
-    fun provideTapeRepository() : ITapeRepository
-    fun provideAuthRepository() : IAuthRepository
-    fun provideSettingsRepository() : ISettingsRepository
-    fun provideProfileRepository() : IProfileRepository
-    fun providePostController() : IPostController
-    fun provideParentView() : ParentView
+    fun provideTapeRepository(): ITapeRepository
+    fun provideAuthRepository(): IAuthRepository
+    fun provideSettingsRepository(): ISettingsRepository
+    fun provideProfileRepository(): IProfileRepository
+    fun providePostController(): IPostController
+    fun provideParentView(): ParentView
 
     //Main presenters
     fun inject(presenter: AcMainPresenter)
+
     fun inject(presenter: AcProfilePresenter)
-    fun inject(presenter: FmtTapePresenter)
+    fun inject(presenter: TapePresenter)
     fun inject(presenter: FmtMyCommentsPresenter)
-    fun inject(presenter: FmtSavedPostsPresenter)
+    fun inject(presenter: SavedPostsPresenter)
     fun inject(presenter: FmtMyPublicationsPresenter)
     fun inject(presenter: FmtSettingsPresenter)
     fun inject(presenter: AddPublicationPresenter)
 
     //Tape presenters
-    fun inject(presenter: AcPostSearchPresenter)
+    fun inject(presenter: PostSearchPresenter)
+
     fun inject(presenter: AcPostDetailPresenter)
     fun inject(presenter: AcPostCommentsPresenter)
     fun inject(presenter: FmtPostsListPresenter)
 
     //Auth presenters
     fun inject(presenter: AcAuthParentPresenter)
+
     fun inject(presenter: AuthPresenter)
     fun inject(presenter: RegistrationPresenter)
     fun inject(presenter: RestorePasswordPresenter)
 
     //Settings presenters
     fun inject(presenter: FmtAppSettingsPresenter)
+
     fun inject(presenter: FmtProfileSettingsPresenter)
 
     //Job fragments
     fun inject(jobsBankFragment: JobsBankFragment)
+
     fun inject(createVacancyFragment: CreateVacancyFragment)
     fun inject(myVacanciesFragment: MyVacanciesFragment)
     fun inject(myResumeFragment: MyResumeFragment)
@@ -82,6 +90,7 @@ interface ParentScreenComponent {
 
     //Information presenters
     fun inject(importantToKnowFragment: ImportantToKnowFragment)
+
     fun inject(aboutFragment: AboutFragment)
     fun inject(supportFragment: SupportFragment)
     fun inject(askSpecialistFragment: AskSpecialistFragment)
@@ -91,5 +100,8 @@ interface ParentScreenComponent {
     fun inject(registrationFragment: RegistrationFragment)
     fun inject(authFragment: AuthFragment)
     fun inject(restorePasswordFragment: RestorePasswordFragment)
+    fun inject(postsSearchFragment: PostsSearchFragment)
+    fun inject(savedPostsFragment: SavedPostsFragment)
+    fun inject(tapeFragment: TapeFragment)
 
 }

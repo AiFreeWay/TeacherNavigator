@@ -19,7 +19,7 @@ import com.teachernavigator.teachernavigator.presentation.screens.auth.presenter
 
 
 /**
- * Created by root on 24.08.17.
+ * Created by root on 24.08.17
  */
 class AuthActivity : AppCompatActivity(), AuthParentView {
 
@@ -81,7 +81,7 @@ class AuthActivity : AppCompatActivity(), AuthParentView {
         mToolbar.visibility = View.VISIBLE
     }
 
-    override fun hightActionBar() {
+    override fun hideActionBar() {
         mToolbar.visibility = View.GONE
     }
 

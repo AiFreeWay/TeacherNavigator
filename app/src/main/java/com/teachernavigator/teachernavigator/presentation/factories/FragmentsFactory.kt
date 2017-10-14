@@ -6,6 +6,7 @@ import com.teachernavigator.teachernavigator.presentation.screens.auth.fragments
 import com.teachernavigator.teachernavigator.presentation.screens.info.fragments.*
 import com.teachernavigator.teachernavigator.presentation.screens.jobs.fragments.*
 import com.teachernavigator.teachernavigator.presentation.screens.main.fragments.*
+import com.teachernavigator.teachernavigator.presentation.screens.tape.fragments.PostsSearchFragment
 
 /**
  * Created by root on 14.08.17.
@@ -25,6 +26,7 @@ class FragmentsFactory {
                 RestorePasswordFragment.FRAGMENT_KEY -> addBundle(RestorePasswordFragment(), bundle)
                 MyCommentsFragment.FRAGMENT_KEY -> addBundle(MyCommentsFragment(), bundle)
                 SavedPostsFragment.FRAGMENT_KEY -> addBundle(SavedPostsFragment(), bundle)
+                PostsSearchFragment.FRAGMENT_KEY -> addBundle(PostsSearchFragment(), bundle)
                 MyPublicationsFragment.FRAGMENT_KEY -> addBundle(MyPublicationsFragment(), bundle)
                 SettingsFragment.FRAGMENT_KEY -> addBundle(SettingsFragment(), bundle)
                 JobsBankFragment.FRAGMENT_KEY -> addBundle(JobsBankFragment(), bundle)

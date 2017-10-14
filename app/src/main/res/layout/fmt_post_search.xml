@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:padding="@dimen/spacingLarge">
+
+        <android.support.design.widget.TextInputEditText
+            android:id="@+id/fmtPostSearchEtSearch"
+            style="@style/EditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="center"
+            android:layout_marginLeft="@dimen/spacingLarge"
+            android:layout_marginRight="@dimen/spacingLarge"
+            android:layout_marginTop="@dimen/externalPadding"
+            android:background="@drawable/oval_edit_text_backgroud"
+            android:hint="@string/search"
+            android:lines="1" />
+
+        <TextView
+            android:id="@+id/fmtPostSearchTvAddTag"
+            style="@style/SmallText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/fmtPostSearchEtSearch"
+            android:layout_alignStart="@+id/fmtPostSearchEtSearch"
+            android:layout_below="@+id/fmtPostSearchEtSearch"
+            android:layout_marginTop="@dimen/externalPadding"
+            android:background="@drawable/hash_tag_background"
+            android:drawableLeft="@drawable/ic_plus"
+            android:drawablePadding="@dimen/internalPadding"
+            android:drawableStart="@drawable/ic_plus"
+            android:paddingBottom="@dimen/internalPadding"
+            android:paddingLeft="@dimen/externalPadding"
+            android:paddingRight="@dimen/externalPadding"
+            android:paddingTop="@dimen/internalPadding"
+            android:text="@string/add_tag" />
+
+        <com.greenfrvr.hashtagview.HashtagView
+            android:id="@+id/fmtPostSearchTvHashtags"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/fmtPostSearchTvAddTag"
+            android:layout_marginBottom="@dimen/spacingMedium"
+            android:layout_marginLeft="@dimen/spacingLarge"
+            android:layout_marginRight="@dimen/spacingLarge"
+            android:layout_marginTop="@dimen/spacingMedium"
+            app:rowGravity="left"
+            app:tagBackground="@drawable/hash_tag_background"
+            app:tagPaddingLeft="12dp"
+            app:tagPaddingRight="12dp"
+            app:tagTextColor="@color/greyTextColor"
+            app:tagTextSize="@dimen/normalTextSize" />
+
+        <TextView
+            android:id="@+id/fmtPostSearchTvPublication"
+            style="@style/TitleText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/fmtPostSearchEtSearch"
+            android:layout_alignStart="@+id/fmtPostSearchEtSearch"
+            android:layout_below="@+id/fmtPostSearchTvHashtags"
+            android:layout_marginBottom="@dimen/spacingMedium"
+            android:layout_marginLeft="@dimen/externalPadding"
+            android:layout_marginStart="@dimen/externalPadding"
+            android:layout_marginTop="@dimen/spacingXXXLarge"
+            android:text="@string/publications" />
+
+        <RadioGroup
+            android:id="@+id/fmtPostSearchRadioGroup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/fmtPostSearchTvPublication">
+
+            <android.support.v7.widget.AppCompatRadioButton
+                android:id="@+id/fmtPostSearchChbAnyPublication"
+                style="@style/SmallText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/spacingSmall"
+                android:layout_marginLeft="@dimen/spacingLarge"
+                android:layout_marginRight="@dimen/spacingLarge"
+                android:layout_marginTop="@dimen/spacingSmall"
+                android:text="@string/any" />
+
+            <android.support.v7.widget.AppCompatRadioButton
+                android:id="@+id/fmtPostSearchChbOnlyTextPublication"
+                style="@style/SmallText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/spacingSmall"
+                android:layout_marginLeft="@dimen/spacingLarge"
+                android:layout_marginRight="@dimen/spacingLarge"
+                android:layout_marginTop="@dimen/spacingSmall"
+                android:text="@string/only_text" />
+
+            <android.support.v7.widget.AppCompatRadioButton
+                android:id="@+id/fmtPostSearchChbWithDocumentPublication"
+                style="@style/SmallText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/spacingSmall"
+                android:layout_marginLeft="@dimen/spacingLarge"
+                android:layout_marginRight="@dimen/spacingLarge"
+                android:layout_marginTop="@dimen/spacingSmall"
+                android:text="@string/with_document" />
+
+
+        </RadioGroup>
+
+
+        <android.support.v7.widget.AppCompatButton
+            android:id="@+id/fmtPostSearchBtnFind"
+            style="@style/Button"
+            android:layout_width="@dimen/buttonAndTextWidth"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/fmtPostSearchRadioGroup"
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="center"
+            android:layout_marginTop="30dp"
+            android:text="@string/find"
+            android:textAllCaps="false"
+            app:backgroundTint="@color/orange" />
+
+    </RelativeLayout>
+
+    <ProgressBar
+        android:id="@+id/fmtPostSearchProgress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:visibility="gone" />
+</RelativeLayout>
+

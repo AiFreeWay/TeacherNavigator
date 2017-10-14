@@ -1,22 +1,23 @@
 package com.teachernavigator.teachernavigator.presentation.screens.main.fragments
 
 import android.os.Bundle
-import android.support.design.widget.TabLayout
-import android.support.v4.view.ViewPager
 import android.view.*
-import butterknife.BindView
-import butterknife.ButterKnife
 import com.teachernavigator.teachernavigator.R
+import com.teachernavigator.teachernavigator.application.di.components.DaggerParentScreenComponent
+import com.teachernavigator.teachernavigator.application.di.components.ParentScreenComponent
+import com.teachernavigator.teachernavigator.application.di.modules.ParentScreenModule
+import com.teachernavigator.teachernavigator.application.utils.rootComponent
 import com.teachernavigator.teachernavigator.presentation.adapters.ViewPagerAdapter
 import com.teachernavigator.teachernavigator.presentation.models.ViewPagerItemContainer
 import com.teachernavigator.teachernavigator.presentation.screens.common.BaseFragment
 import com.teachernavigator.teachernavigator.presentation.screens.main.fragments.abstractions.TapeView
-import com.teachernavigator.teachernavigator.presentation.screens.main.presenters.FmtTapePresenter
 import com.teachernavigator.teachernavigator.presentation.screens.main.presenters.abstractions.ITapePresenter
+import kotlinx.android.synthetic.main.fmt_feed.*
+import javax.inject.Inject
 
 
 /**
- * Created by root on 14.08.17.
+ * Created by root on 14.08.17
  */
 class TapeFragment : BaseFragment(), TapeView {
 
@@ -25,28 +26,37 @@ class TapeFragment : BaseFragment(), TapeView {
         val LAST_VIEW_PAGER_POSITION = "last_view_pager_position"
     }
 
-    @BindView(R.id.fmt_view_pager_tb_tabs) lateinit var mTbTabs: TabLayout
-    @BindView(R.id.fmt_view_pager_vp_body) lateinit var mVpTapeItems: ViewPager
+    private lateinit var mParentScreenComponent: ParentScreenComponent
 
-    private lateinit var mAdapter: ViewPagerAdapter
-    private val mPresenter: ITapePresenter = FmtTapePresenter()
+    private val mAdapter by lazy { ViewPagerAdapter(childFragmentManager) }
+
     private var mLastViewPagerPosition = 0
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val view: View = inflater!!.inflate(R.layout.fmt_view_pager, container, false)
-        ButterKnife.bind(this, view)
-        return view
-    }
+    @Inject
+    lateinit var mPresenter: ITapePresenter
+
+    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?) =
+            inflater?.inflate(R.layout.fmt_feed, container, false)
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+        inject()
         setHasOptionsMenu(true)
         mPresenter.attachView(this)
-        mTbTabs.setupWithViewPager(mVpTapeItems)
-        mAdapter = ViewPagerAdapter(childFragmentManager)
-        mVpTapeItems.adapter = mAdapter
+
+        fmtFeedTbTabs.setupWithViewPager(fmtFeedVpBody)
+        fmtFeedVpBody.adapter = mAdapter
         mPresenter.loadFragments()
     }
+
+    private fun inject() {
+        mParentScreenComponent = DaggerParentScreenComponent.builder()
+                .rootComponent(rootComponent())
+                .parentScreenModule(ParentScreenModule(getParentView()))
+                .build()
+                .also { it.inject(this) }
+    }
+
 
     override fun onDestroyView() {
         super.onDestroyView()
@@ -55,7 +65,7 @@ class TapeFragment : BaseFragment(), TapeView {
 
     override fun onSaveInstanceState(outState: Bundle?) {
         super.onSaveInstanceState(outState)
-        outState?.putInt(LAST_VIEW_PAGER_POSITION, mVpTapeItems.currentItem)
+        outState?.putInt(LAST_VIEW_PAGER_POSITION, fmtFeedVpBody.currentItem)
     }
 
     override fun onViewStateRestored(savedInstanceState: Bundle?) {
@@ -65,9 +75,13 @@ class TapeFragment : BaseFragment(), TapeView {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when(item.itemId) {
-            R.id.action_search -> { mPresenter.openPostSearchScreen() }
-            R.id.action_refresh -> { mPresenter.refresh(mAdapter.currentFragment(mVpTapeItems.currentItem)) }
+        when (item.itemId) {
+            R.id.action_search -> {
+                mPresenter.openPostSearchScreen()
+            }
+            R.id.action_refresh -> {
+                mPresenter.refresh(mAdapter.currentFragment(fmtFeedVpBody.currentItem))
+            }
         }
         return super.onOptionsItemSelected(item)
     }
@@ -79,6 +93,6 @@ class TapeFragment : BaseFragment(), TapeView {
 
     override fun loadOrdersFragments(data: List<ViewPagerItemContainer>) {
         mAdapter.loadData(data)
-        mVpTapeItems.currentItem = mLastViewPagerPosition
+        fmtFeedVpBody.currentItem = mLastViewPagerPosition
     }
 }

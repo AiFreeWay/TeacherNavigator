@@ -74,7 +74,7 @@ class MainRepository @Inject constructor(private val mNetwokController: NetworkC
         return AuthCredentials(clientId, clientSecret)
     }
 
-    override fun restorePassword(request: RestorePasswordRequest): Observable<BaseResponse> =
+    override fun restorePassword(request: RestorePasswordRequest): Single<BaseResponse> =
             mNetwokController.restorePassword(request)
 
     // ------------------------------- Posts methods --------------------------------

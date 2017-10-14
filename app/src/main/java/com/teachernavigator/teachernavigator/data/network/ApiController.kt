@@ -28,7 +28,7 @@ interface ApiController {
     fun convertToken(@Body request: ConvertTokenRequest): Single<SingInResponse>
 
     @POST("/api/v0/ask_pass/")
-    fun restorePassword(@Body request: RestorePasswordRequest): Observable<BaseResponse>
+    fun restorePassword(@Body request: RestorePasswordRequest): Single<BaseResponse>
 
     // ------------------------------- Posts methods --------------------------------
 

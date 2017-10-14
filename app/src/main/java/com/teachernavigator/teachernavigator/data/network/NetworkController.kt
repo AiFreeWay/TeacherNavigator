@@ -104,7 +104,7 @@ class NetworkController {
     fun convertToken(request: ConvertTokenRequest): Single<SingInResponse> =
             mApiController.convertToken(request)
 
-    fun restorePassword(request: RestorePasswordRequest): Observable<BaseResponse> =
+    fun restorePassword(request: RestorePasswordRequest): Single<BaseResponse> =
             mApiController.restorePassword(request)
 
     // ------------------------------- Posts methods --------------------------------

@@ -4,9 +4,9 @@ import com.teachernavigator.teachernavigator.presentation.screens.auth.fragments
 import com.teachernavigator.teachernavigator.presentation.screens.common.ViewAttacher
 
 /**
- * Created by root on 28.08.17.
+ * Created by root on 28.08.17
  */
 interface IRestorePasswordPresenter : ViewAttacher<RestorePasswordView> {
 
-    fun restorePassword(login: String)
+    fun restorePassword(email: String, phone: String, isPhone: Boolean)
 }

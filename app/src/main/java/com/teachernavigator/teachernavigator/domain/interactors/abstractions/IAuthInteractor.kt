@@ -1,9 +1,7 @@
 package com.teachernavigator.teachernavigator.domain.interactors.abstractions
 
-import com.teachernavigator.teachernavigator.data.network.responses.SingInResponse
 import com.teachernavigator.teachernavigator.domain.models.Monade
 import com.teachernavigator.teachernavigator.domain.models.SingUpData
-import com.teachernavigator.teachernavigator.domain.models.Token
 import io.reactivex.Observable
 import io.reactivex.Single
 
@@ -23,5 +21,5 @@ interface IAuthInteractor {
 
     fun singUp(singUpData: SingUpData): Observable<Monade>
 
-    fun restorePassword(login: String): Observable<Monade>
+    fun restorePassword(email: String, phone: String): Single<Monade>
 }

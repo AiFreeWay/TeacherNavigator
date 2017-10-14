@@ -3,8 +3,10 @@ package com.teachernavigator.teachernavigator.application.di.modules
 import com.teachernavigator.teachernavigator.application.di.scopes.PerParentScreen
 import com.teachernavigator.teachernavigator.presentation.screens.auth.presenters.AuthPresenter
 import com.teachernavigator.teachernavigator.presentation.screens.auth.presenters.RegistrationPresenter
+import com.teachernavigator.teachernavigator.presentation.screens.auth.presenters.RestorePasswordPresenter
 import com.teachernavigator.teachernavigator.presentation.screens.auth.presenters.abstractions.IAuthPresenter
 import com.teachernavigator.teachernavigator.presentation.screens.auth.presenters.abstractions.IRegistrationPresenter
+import com.teachernavigator.teachernavigator.presentation.screens.auth.presenters.abstractions.IRestorePasswordPresenter
 import com.teachernavigator.teachernavigator.presentation.screens.info.presenters.*
 import com.teachernavigator.teachernavigator.presentation.screens.info.presenters.abstractions.*
 import com.teachernavigator.teachernavigator.presentation.screens.jobs.presenters.*
@@ -27,7 +29,6 @@ class PresentersModule {
     @Provides
     @PerParentScreen
     fun provideJobsBankPresenter(presenter: JobsBankPresenter): IJobsBankPresenter = presenter
-
 
     @Provides
     @PerParentScreen
@@ -69,7 +70,6 @@ class PresentersModule {
     @PerParentScreen
     fun provideSupportPresenter(presenter: SupportPresenter): ISupportPresenter = presenter
 
-
     @Provides
     @PerParentScreen
     fun provideAskSpecialistPresenter(presenter: AskSpecialistPresenter): IAskSpecialistPresenter = presenter
@@ -97,5 +97,9 @@ class PresentersModule {
     @Provides
     @PerParentScreen
     fun provideAuthPresenter(presenter: AuthPresenter): IAuthPresenter = presenter
+
+    @Provides
+    @PerParentScreen
+    fun provideRestorePasswordPresenter(presenter: RestorePasswordPresenter): IRestorePasswordPresenter = presenter
 
 }

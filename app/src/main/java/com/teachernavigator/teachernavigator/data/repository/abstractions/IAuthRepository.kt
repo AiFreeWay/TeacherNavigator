@@ -26,6 +26,6 @@ interface IAuthRepository {
     fun singInViaGooglePlus(): Observable<Monade>
     fun singIn(request: SingInRequest): Observable<SingInResponse>
     fun singUp(request: SingUpRequest): Observable<BaseResponse>
-    fun restorePassword(request: RestorePasswordRequest): Observable<BaseResponse>
+    fun restorePassword(request: RestorePasswordRequest): Single<BaseResponse>
     fun getAuthCredentials(): AuthCredentials
 }

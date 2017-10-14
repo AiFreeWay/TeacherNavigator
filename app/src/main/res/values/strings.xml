@@ -71,7 +71,7 @@
     <string name="number_of_unionist_ticket">Номер профсоюзного билета</string>
     <string name="indicate_login">Укажите E-mail или номер моб. телефона</string>
     <string name="registration_error">Ошибка регистрации</string>
-    <string name="auth_error">Ошибка авторизации</string>
+    <string name="auth_error">Неправильный логин или пароль</string>
     <string name="restore_password_error">Ошибка восстановления пароля</string>
     <string name="no_data">Не данных</string>
     <string name="error_throwed">Произошла ошибка</string>
@@ -198,6 +198,8 @@
     <string name="district">Округ</string>
     <string name="trade_unionist">Член профсоюза</string>
     <string name="phone_number">Номер телефона</string>
+    <string name="email_not_registered">Указанный Email не зарегистрирован</string>
+    <string name="phone_not_registered">Указанный номер телефона не зарегистрирован</string>
 
     <plurals name="plural_years">
         <item quantity="zero">%1$d лет

@@ -50,15 +50,13 @@ constructor(val router: Router,
         GoogleApiClient.OnConnectionFailedListener,
         FacebookCallback<LoginResult> {
 
-    override fun onConnectionFailed(p0: ConnectionResult) {
-        d(javaClass.name, "-> Google Auth Error -> ${p0.errorMessage}")
+    companion object {
+        const val RC_SIGN_IN = 3254
     }
-
 
     private val googleApiClient by lazy {
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestProfile()
-//                .requestServerAuthCode(mView!!.getContext().getString(R.string.google_client_id))
                 .requestIdToken(mView!!.getContext().getString(R.string.google_client_id))
                 .requestEmail()
                 .build()
@@ -81,10 +79,6 @@ constructor(val router: Router,
                 result?.data?.authToken?.token?.let { singInViaTwitterToken(it) } ?: Unit
     }
 
-    private fun singInViaTwitterToken(token: String) =
-            addDissposable(authInteractor.singInViaTwitter(token)
-                    .doOnSubscribe { startProgress() }
-                    .subscribe(this::doOnSingIn, this::doOnError))
 
     @OnLifecycleEvent(Lifecycle.Event.ON_START)
     private fun onStart() {
@@ -97,10 +91,15 @@ constructor(val router: Router,
         mDisposables.clear()
     }
 
+    private fun singInViaTwitterToken(token: String) =
+            addDissposable(authInteractor.singInViaTwitter(token)
+                    .doOnSubscribe { startProgress() }
+                    .subscribe(this::doOnSingIn, this::doOnError))
+
+
     override fun doOnError(error: Throwable) {
-        super.doOnError(error)
         stopProgress()
-        mView!!.showToast(getContext().getString(R.string.auth_error))
+        mView?.showToast(getContext().getString(R.string.auth_error))
     }
 
     override fun singInViaVkontakte() {
@@ -119,8 +118,6 @@ constructor(val router: Router,
         }
     }
 
-    val RC_SIGN_IN = 3254
-
     override fun singInViaGooglePlus() {
         val signInIntent = Auth.GoogleSignInApi.getSignInIntent(googleApiClient)
         mView?.getParentView()?.getActivity()?.startActivityForResult(signInIntent, RC_SIGN_IN)
@@ -131,6 +128,14 @@ constructor(val router: Router,
                     .doOnSubscribe { startProgress() }
                     .subscribe(this::doOnSingIn, this::doOnError))
 
+    /* Common Success */
+    private fun doOnSingIn(result: Monade) {
+        stopProgress()
+        if (!result.isError) {
+            ActivityRouter.openActivityAndClosePrevent(mView!!.getParentView().getActivity(), MainActivity::class.java)
+        }
+    }
+
     override fun openSingUpScreen() {
         router.navigateTo(RegistrationFragment.FRAGMENT_KEY)
     }
@@ -139,12 +144,18 @@ constructor(val router: Router,
         router.navigateTo(RestorePasswordFragment.FRAGMENT_KEY)
     }
 
-    private fun doOnSingIn(result: Monade) {
-        stopProgress()
-        if (!result.isError)
-            ActivityRouter.openActivityAndClosePrevent(mView!!.getParentView().getActivity(), MainActivity::class.java)
+    /* G+ Error */
+    override fun onConnectionFailed(p0: ConnectionResult) {
+        d(javaClass.name, "-> Google Auth Error -> ${p0.errorMessage}")
     }
 
+    /* G+ Success */
+    fun handleSignInResult(result: GoogleSignInResult) {
+        d(javaClass.name, "-> result ->${result.signInAccount?.displayName}")
+        d(javaClass.name, "-> result ->${result.signInAccount?.idToken}")
+    }
+
+    /* Fb Success */
     override fun onSuccess(loginResult: LoginResult) =
             addDissposable(authInteractor.singInViaFacebook(loginResult.accessToken.token)
                     .doOnSubscribe { startProgress() }
@@ -177,15 +188,9 @@ constructor(val router: Router,
 //        }
     }
 
-    fun handleSignInResult(result: GoogleSignInResult) {
-
-        d(javaClass.name, "-> result ->${result.signInAccount?.displayName}")
-        d(javaClass.name, "-> result ->${result.signInAccount?.idToken}")
-
-    }
-
     override fun onCancel() = Unit
 
+    /* Fb Error */
     override fun onError(exception: FacebookException) {
         doOnError(exception)
     }

@@ -11,10 +11,11 @@ import com.teachernavigator.teachernavigator.data.repository.abstractions.ITapeR
 import com.teachernavigator.teachernavigator.domain.controllers.IPostController
 import com.teachernavigator.teachernavigator.presentation.screens.auth.fragments.AuthFragment
 import com.teachernavigator.teachernavigator.presentation.screens.auth.fragments.RegistrationFragment
+import com.teachernavigator.teachernavigator.presentation.screens.auth.fragments.RestorePasswordFragment
 import com.teachernavigator.teachernavigator.presentation.screens.auth.presenters.AcAuthParentPresenter
 import com.teachernavigator.teachernavigator.presentation.screens.auth.presenters.AuthPresenter
 import com.teachernavigator.teachernavigator.presentation.screens.auth.presenters.RegistrationPresenter
-import com.teachernavigator.teachernavigator.presentation.screens.auth.presenters.FmtRestorePasswordPresenter
+import com.teachernavigator.teachernavigator.presentation.screens.auth.presenters.RestorePasswordPresenter
 import com.teachernavigator.teachernavigator.presentation.screens.common.ParentView
 import com.teachernavigator.teachernavigator.presentation.screens.info.fragments.*
 import com.teachernavigator.teachernavigator.presentation.screens.jobs.fragments.*
@@ -63,7 +64,7 @@ interface ParentScreenComponent {
     fun inject(presenter: AcAuthParentPresenter)
     fun inject(presenter: AuthPresenter)
     fun inject(presenter: RegistrationPresenter)
-    fun inject(presenter: FmtRestorePasswordPresenter)
+    fun inject(presenter: RestorePasswordPresenter)
 
     //Settings presenters
     fun inject(presenter: FmtAppSettingsPresenter)
@@ -89,5 +90,6 @@ interface ParentScreenComponent {
     fun inject(addPublicationFragment: AddPublicationFragment)
     fun inject(registrationFragment: RegistrationFragment)
     fun inject(authFragment: AuthFragment)
+    fun inject(restorePasswordFragment: RestorePasswordFragment)
 
 }

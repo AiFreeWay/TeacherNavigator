@@ -1,5 +1,6 @@
 package com.teachernavigator.teachernavigator.domain.interactors
 
+import com.teachernavigator.teachernavigator.data.network.requests.RestorePasswordRequest
 import com.teachernavigator.teachernavigator.data.network.responses.SingInResponse
 import com.teachernavigator.teachernavigator.data.repository.abstractions.IAuthRepository
 import com.teachernavigator.teachernavigator.domain.interactors.abstractions.IAuthInteractor
@@ -30,10 +31,10 @@ class AuthInteractor @Inject constructor(private val mRepository: IAuthRepositor
                     .subscribeOn(Schedulers.newThread())
 
     override fun singInViaFacebook(token: String): Single<Monade> =
-        mRepository.singInViaFacebook(AuthMapper.mapConvertTokenRequest(token, "facebook", mRepository.getAuthCredentials()))
-                .map { mapSingInResponse(it) }
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribeOn(Schedulers.newThread())
+            mRepository.singInViaFacebook(AuthMapper.mapConvertTokenRequest(token, "facebook", mRepository.getAuthCredentials()))
+                    .map { mapSingInResponse(it) }
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribeOn(Schedulers.newThread())
 
     override fun singInViaTwitter(token: String): Single<Monade> =
             mRepository.singInViaFacebook(AuthMapper.mapConvertTokenRequest(token, "twitter", mRepository.getAuthCredentials()))
@@ -58,11 +59,12 @@ class AuthInteractor @Inject constructor(private val mRepository: IAuthRepositor
                     .subscribeOn(Schedulers.newThread())
                     .map { BaseMapper.mapBaseResponse(it) }
 
-    override fun restorePassword(login: String): Observable<Monade> =
-            mRepository.restorePassword(AuthMapper.mapRestorePasswordDataRequest(login))
+    override fun restorePassword(email: String, phone: String): Single<Monade> =
+            mRepository.restorePassword(RestorePasswordRequest(email, phone.replace("(\\(|\\)| )", "")))
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribeOn(Schedulers.newThread())
                     .map { AuthMapper.mapRestorePasswordDataResponse(it) }
+
 
     private fun mapSingInResponse(response: SingInResponse): Monade {
         val monade = AuthMapper.mapSingInResponse(response)

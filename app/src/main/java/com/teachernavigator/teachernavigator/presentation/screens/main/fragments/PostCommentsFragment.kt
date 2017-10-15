@@ -43,7 +43,8 @@ class PostCommentsFragment : BaseFragment(), PostCommentsView {
                         postController::onSave,
                         null,
                         null, // TODO postConroller::onReadMore
-                        null
+                        null,
+                        postController::onPollPassed
                 ),
                 CommentVHBuilder(
                         null, // TODO presenter::onBranch
@@ -105,7 +106,9 @@ class PostCommentsFragment : BaseFragment(), PostCommentsView {
         postCommentsEtSendText.setText(R.string.empty)
     }
 
-    override fun updatePost(post: PostModel) =
-            adapter.notifyItemChanged(adapter.indexOf(post))
+    override fun updatePost(post: PostModel) {
+        adapter.replace(0, post)
+        adapter.notifyItemChanged(0)
+    }
 
 }

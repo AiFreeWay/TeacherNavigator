@@ -1,10 +1,10 @@
 package com.teachernavigator.teachernavigator.presentation.screens.main.presenters
 
 import android.os.Bundle
-import android.util.Log.d
 import com.teachernavigator.teachernavigator.R
 import com.teachernavigator.teachernavigator.application.di.scopes.PerParentScreen
 import com.teachernavigator.teachernavigator.data.repository.abstractions.IPostsRepository
+import com.teachernavigator.teachernavigator.presentation.models.ChoiceModel
 import com.teachernavigator.teachernavigator.presentation.models.PostModel
 import com.teachernavigator.teachernavigator.presentation.screens.common.BasePresenter
 import com.teachernavigator.teachernavigator.presentation.screens.info.fragments.abstractions.PostActionsView
@@ -22,6 +22,23 @@ import javax.inject.Inject
 class PostActionsController
 @Inject constructor(private val router: Router,
                     private val repository: IPostsRepository) : BasePresenter<PostActionsView>(), IPostActionsController {
+
+    override fun onPollPassed(post: PostModel, choiceModel: ChoiceModel) =
+            addDissposable(repository.passPoll(post.id, choiceModel.id)
+                    .applySchedulers()
+                    .map { it.is_error }
+                    .doOnSubscribe { startProgress() }
+                    .subscribe({ onPollPassed(it, post, choiceModel) }, this::onError))
+
+    private fun onPollPassed(isError: Boolean, post: PostModel, choiceModel: ChoiceModel) {
+        stopProgress()
+
+        if (!isError) {
+            mView?.updatePost(post.copy(pollPassed = true, choices = post.choices.map { if (it.id == choiceModel.id) it.copy(votes = it.votes + 1) else it }))
+        } else {
+            mView?.showToast(R.string.error_throwed)
+        }
+    }
 
     override fun onLike(post: PostModel) =
             addDissposable(repository.vote(post.id, true, post.type)
@@ -76,41 +93,19 @@ class PostActionsController
     }
 
     override fun onComments(post: PostModel) = mView?.getParentView()?.let {
-
-        d(javaClass.name, "-> onComments -> type=${post.type.name}")
-
         val bundle = Bundle()
         bundle.putInt(PostCommentsFragment.ARG_POST_ID, post.id)
         bundle.putInt(PostCommentsFragment.ARG_POST_TYPE, post.type.ordinal)
         router.navigateTo(PostCommentsFragment.FRAGMENT_KEY, bundle)
-
     } ?: Unit
 
     override fun onReadMore(post: PostModel) {
-
-        d(javaClass.name, "[${hashCode()}]-> onReadMore -> view=${mView}")
-
         mView?.getParentView()?.let {
-
-
             val bundle = Bundle()
             bundle.putInt(PostCommentsFragment.ARG_POST_ID, post.id)
             bundle.putInt(PostCommentsFragment.ARG_POST_TYPE, post.type.ordinal)
             router.navigateTo(PostCommentsFragment.FRAGMENT_KEY, bundle)
-
         }
-    }
-
-    override fun detachView() {
-        d(javaClass.name, "[${hashCode()}]-> Detach -> ${mView}")
-
-        super.detachView()
-    }
-
-    override fun attachView(view: PostActionsView) {
-        super.attachView(view)
-
-        d(javaClass.name, "[${hashCode()}]-> Attach -> ${mView}")
     }
 
     private fun onVoted(isLiked: Boolean, post: PostModel) {

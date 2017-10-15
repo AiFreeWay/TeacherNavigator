@@ -205,6 +205,7 @@
     <string name="complaint_was_sent">Жалоба была отправлена</string>
     <string name="ask_subscribe_to_user">Вы действительно хотите подписаться на пользователя %1$s</string>
     <string name="ask_complaint_to_post">Вы действительно хотите пожаловаться на запись: %1$s</string>
+    <string name="pass_test">Ответить</string>
 
     <plurals name="plural_years">
         <item quantity="zero">%1$d лет

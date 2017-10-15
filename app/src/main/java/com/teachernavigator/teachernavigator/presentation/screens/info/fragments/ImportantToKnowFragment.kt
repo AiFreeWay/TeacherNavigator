@@ -48,6 +48,7 @@ class ImportantToKnowFragment : BaseFragment(), ImportantToKnowView {
                         postController::onSave,
                         null,
                         null,
+                        null,
                         null
                 ),
                 InfoVHBuilder(presenter::onThemeChanged),

@@ -4,7 +4,6 @@ import com.teachernavigator.teachernavigator.data.models.CommentNetwork
 import com.teachernavigator.teachernavigator.data.models.FileInfo
 import com.teachernavigator.teachernavigator.data.models.PostNetwork
 import com.teachernavigator.teachernavigator.data.network.requests.CommentRequest
-import com.teachernavigator.teachernavigator.data.network.requests.SavePostRequest
 import com.teachernavigator.teachernavigator.data.network.responses.BaseResponse
 import com.teachernavigator.teachernavigator.data.network.responses.GetMyCommentsResponse
 import com.teachernavigator.teachernavigator.data.network.responses.PostsResponse
@@ -47,4 +46,9 @@ interface IPostsRepository {
 
     fun sendPost(title: String, text: String, tags: List<String>, fileInfo: FileInfo?): Single<PostNetwork>
 
+    /* Storage Methods */
+    fun isPollPassed(id: Int): Boolean
+
+    fun sedPollPassed(id: Int)
+    fun passPoll(postId: Int, choiceId: Int): Single<BaseResponse>
 }

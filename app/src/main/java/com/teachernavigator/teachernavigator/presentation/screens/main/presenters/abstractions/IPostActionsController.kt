@@ -1,5 +1,6 @@
 package com.teachernavigator.teachernavigator.presentation.screens.main.presenters.abstractions
 
+import com.teachernavigator.teachernavigator.presentation.models.ChoiceModel
 import com.teachernavigator.teachernavigator.presentation.models.PostModel
 import com.teachernavigator.teachernavigator.presentation.screens.common.ViewAttacher
 import com.teachernavigator.teachernavigator.presentation.screens.info.fragments.abstractions.PostActionsView
@@ -16,5 +17,6 @@ interface IPostActionsController : ViewAttacher<PostActionsView> {
     fun onSubscribe(post: PostModel)
     fun onReadMore(post: PostModel)
     fun onComplain(post: PostModel)
+    fun onPollPassed(post : PostModel, choiceModel: ChoiceModel)
 
 }

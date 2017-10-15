@@ -14,6 +14,8 @@ import com.teachernavigator.teachernavigator.data.network.responses.GetMyComment
 import com.teachernavigator.teachernavigator.data.network.responses.PostsResponse
 import com.teachernavigator.teachernavigator.data.network.responses.SingInResponse
 import com.teachernavigator.teachernavigator.data.repository.abstractions.IMainRepository
+import com.teachernavigator.teachernavigator.data.utils.isPollPassed
+import com.teachernavigator.teachernavigator.data.utils.setPollPassed
 import com.teachernavigator.teachernavigator.domain.models.*
 import com.teachernavigator.teachernavigator.presentation.models.Info
 import com.teachernavigator.teachernavigator.presentation.models.Specialist
@@ -28,7 +30,6 @@ import javax.inject.Inject
  */
 class MainRepository @Inject constructor(private val mNetwokController: NetworkController,
                                          private val mContext: Context) : IMainRepository {
-
 
     // TODO Make it nullable
     override fun getAccessToken(): String {
@@ -145,6 +146,9 @@ class MainRepository @Inject constructor(private val mNetwokController: NetworkC
     }
             .map { Unit }
 
+    override fun passPoll(postId: Int, choiceId: Int) =
+            mNetwokController.passPoll(getAccessToken(), postId, choiceId)
+                    .doOnSuccess { if (!it.is_error) mContext.setPollPassed(postId) }
 
     override fun getTags(): Single<List<Tag>> =
             mNetwokController.getTags(getAccessToken())
@@ -227,6 +231,12 @@ class MainRepository @Inject constructor(private val mNetwokController: NetworkC
 
     override fun askSpecialist(specialist: Specialist, question: String): Single<Unit> =
             mNetwokController.askSpecialist(getAccessToken(), specialist, question)
+
+
+    /* Storage Methods */
+    override fun isPollPassed(id: Int) = mContext.isPollPassed(id)
+
+    override fun sedPollPassed(id: Int) = mContext.setPollPassed(id)
 
 
 }

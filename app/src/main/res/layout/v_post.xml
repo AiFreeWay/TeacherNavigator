@@ -78,13 +78,35 @@
         android:ellipsize="end"
         tools:text="Текст поста" />
 
+    <RadioGroup
+        android:id="@+id/v_post_ll_choices"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/v_post_ll_more_and_complain"
+        android:layout_alignStart="@+id/v_post_ll_more_and_complain"
+        android:layout_below="@+id/v_post_tv_text"
+        android:layout_marginTop="@dimen/externalPadding"
+        android:orientation="vertical"
+        android:visibility="gone" />
+
+    <LinearLayout
+        android:id="@+id/v_post_ll_choiced_choices"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/v_post_ll_more_and_complain"
+        android:layout_alignStart="@+id/v_post_ll_more_and_complain"
+        android:layout_below="@+id/v_post_ll_choices"
+        android:layout_marginTop="@dimen/externalPadding"
+        android:orientation="vertical"
+        android:visibility="gone" />
+
     <LinearLayout
         android:id="@+id/v_post_ll_more_and_complain"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/v_post_tv_title"
         android:layout_alignStart="@+id/v_post_tv_title"
-        android:layout_below="@+id/v_post_tv_text"
+        android:layout_below="@+id/v_post_ll_choiced_choices"
         android:layout_marginTop="@dimen/externalPadding"
         android:gravity="start"
         android:orientation="horizontal">
@@ -95,6 +117,15 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/more"
+            android:textAllCaps="false"
+            app:backgroundTint="@color/colorAccent" />
+
+        <android.support.v7.widget.AppCompatButton
+            android:id="@+id/v_post_btn_pass_test"
+            style="@style/Button.Small"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/pass_test"
             android:textAllCaps="false"
             app:backgroundTint="@color/colorAccent" />
 
@@ -113,16 +144,6 @@
             android:visibility="visible" />
     </LinearLayout>
 
-    <LinearLayout
-        android:id="@+id/v_post_ll_choices"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/v_post_ll_more_and_complain"
-        android:layout_alignStart="@+id/v_post_ll_more_and_complain"
-        android:layout_below="@+id/v_post_ll_more_and_complain"
-        android:layout_marginTop="@dimen/externalPadding"
-        android:orientation="vertical"
-        android:visibility="gone" />
 
     <com.greenfrvr.hashtagview.HashtagView
         android:id="@+id/v_post_hv_hasttags"
@@ -130,7 +151,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_below="@+id/v_post_ll_choices"
+        android:layout_below="@+id/v_post_ll_more_and_complain"
         android:paddingTop="@dimen/externalPadding"
         app:rowGravity="left"
         app:tagBackground="@drawable/hash_tag_background"

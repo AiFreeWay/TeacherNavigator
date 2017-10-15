@@ -25,7 +25,8 @@ data class PostModel(
         val type: PostType,
         val file: String? = null,
 
-        val shortTitle: String
-        // TODO val choices: List<Choice>? = null
+        val shortTitle: String,
+        val choices: List<ChoiceModel>,
+        val pollPassed: Boolean
 
 ) : Model(id)

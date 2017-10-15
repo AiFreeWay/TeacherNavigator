@@ -4,7 +4,7 @@ import com.teachernavigator.teachernavigator.domain.models.Author
 import com.teachernavigator.teachernavigator.domain.models.Choice
 
 /**
- * Created by root on 07.09.17.
+ * Created by root on 07.09.17
  */
 data class PostNetwork(
 
@@ -21,4 +21,5 @@ data class PostNetwork(
         val comments: List<CommentNetwork>? = null,
         val author: Author? = null,
         val choices: List<Choice>? = null
+
 )

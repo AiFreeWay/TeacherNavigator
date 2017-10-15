@@ -41,7 +41,8 @@ class PostsListFragment : BaseFragment(), PostsListView {
                         postController::onSave,
                         postController::onSubscribe,
                         postController::onReadMore,
-                        postController::onComplain
+                        postController::onComplain,
+                        null
                 ))
     }
 

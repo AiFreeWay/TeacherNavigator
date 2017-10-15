@@ -237,6 +237,10 @@ class NetworkController {
     fun complaintPoll(accessToken: String, postId: Int): Single<BaseResponse> =
             mApiController.complaintPoll(accessToken, postId)
 
+    fun passPoll(accessToken: String, postId: Int, choiceId: Int): Single<BaseResponse> =
+            mApiController.passPoll(accessToken, postId, choiceId)
+
+
     fun getTags(accessToken: String): Single<List<Tag>> =
             Observable.range(1, MAX_PAGE_COUNT)
                     .flatMap { loadTags(accessToken, it) }
@@ -271,4 +275,5 @@ class NetworkController {
 
         return mApiController.sendPost(accessToken, params)
     }
+
 }

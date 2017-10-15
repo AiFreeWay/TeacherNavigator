@@ -193,5 +193,9 @@ interface ApiController {
     @POST("/api/v0/me/complaint/poll/")
     fun complaintPoll(@Header("Authorization") accessToken: String, @Field("question") postId: Int): Single<BaseResponse>
 
+    @FormUrlEncoded
+    @POST("/api/v0/polls/action/")
+    fun passPoll(@Header("Authorization") accessToken: String, @Field("question") postId: Int, @Field("choice") choiceId: Int): Single<BaseResponse>
+
 
 }

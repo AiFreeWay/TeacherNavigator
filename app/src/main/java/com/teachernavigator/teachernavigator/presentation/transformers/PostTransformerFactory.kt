@@ -1,9 +1,9 @@
 package com.teachernavigator.teachernavigator.presentation.transformers
 
-import android.content.Context
 import android.support.v4.util.SparseArrayCompat
 import com.teachernavigator.teachernavigator.application.di.scopes.PerParentScreen
 import com.teachernavigator.teachernavigator.data.models.PostNetwork
+import com.teachernavigator.teachernavigator.data.repository.abstractions.IPostsRepository
 import com.teachernavigator.teachernavigator.domain.models.PostType
 import com.teachernavigator.teachernavigator.presentation.models.PostModel
 import com.teachernavigator.teachernavigator.presentation.utils.makeLess
@@ -17,8 +17,9 @@ import javax.inject.Inject
 @PerParentScreen
 class PostTransformerFactory
 @Inject
-constructor(private val context: Context,
-            private val commentTransformer: CommentTransformer) {
+constructor(private val commentTransformer: CommentTransformer,
+            private val choiceTransformer: ChoiceTransformer,
+            private val postsRepository: IPostsRepository) {
 
     companion object {
         private const val SHORT_TITLE_LENGTH = 20
@@ -31,12 +32,14 @@ constructor(private val context: Context,
             transformers.get(postType.ordinal, createAndSave(postType, shorter))
 
     private fun createAndSave(postType: PostType, shorter: Boolean) =
-            PostTransformer(postType, context, shorter, commentTransformer).apply { transformers.put(postType.ordinal, this) }
+            PostTransformer(postType, shorter, commentTransformer, choiceTransformer, postsRepository)
+                    .apply { transformers.put(postType.ordinal, this) }
 
     private class PostTransformer(private val postType: PostType,
-                                  private val context: Context, // TODO Will be needed in future
                                   private val shorter: Boolean,
-                                  private val commentTransformer: CommentTransformer) : EntityTransformer<PostNetwork, PostModel> {
+                                  private val commentTransformer: CommentTransformer,
+                                  private val choiceTransformer: ChoiceTransformer,
+                                  private val postsRepository: IPostsRepository) : EntityTransformer<PostNetwork, PostModel> {
 
         override fun transform(from: PostNetwork): PostModel =
                 PostModel(
@@ -55,7 +58,9 @@ constructor(private val context: Context,
                         authorName = from.author?.full_name ?: "",
                         authorAvatar = from.author?.avatars?.firstOrNull()?.avatar,
                         type = this.postType,
-                        file = from.file
+                        file = from.file,
+                        choices = from.choices?.map(choiceTransformer::transform) ?: emptyList(),
+                        pollPassed = (postType == PostType.poll) && postsRepository.isPollPassed(from.id ?: -1)
                 )
     }
 

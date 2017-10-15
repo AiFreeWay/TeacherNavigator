@@ -5,17 +5,16 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.Toolbar
 import android.view.MenuItem
 import android.view.View
-import android.widget.ProgressBar
-import butterknife.BindView
-import butterknife.ButterKnife
 import com.teachernavigator.teachernavigator.R
-import com.teachernavigator.teachernavigator.application.di.components.ParentScreenComponent
+import com.teachernavigator.teachernavigator.application.di.components.DaggerParentScreenComponent
+import com.teachernavigator.teachernavigator.application.di.modules.ParentScreenModule
+import com.teachernavigator.teachernavigator.application.utils.rootComponent
 import com.teachernavigator.teachernavigator.presentation.screens.auth.activities.abstractions.AuthParentView
-import com.teachernavigator.teachernavigator.presentation.screens.auth.presenters.AcAuthParentPresenter
 import com.teachernavigator.teachernavigator.presentation.screens.auth.presenters.abstractions.IAuthParentPresenter
+import kotlinx.android.synthetic.main.ac_auth.*
+import javax.inject.Inject
 
 
 /**
@@ -23,18 +22,22 @@ import com.teachernavigator.teachernavigator.presentation.screens.auth.presenter
  */
 class AuthActivity : AppCompatActivity(), AuthParentView {
 
-    @BindView(R.id.ac_auth_toolbar)
-    lateinit var mToolbar: Toolbar
-    @BindView(R.id.ac_auth_progress)
-    lateinit var mProgressBar: ProgressBar
-
     private val mLifecycle: LifecycleRegistry = LifecycleRegistry(this)
-    private val mPresenter: IAuthParentPresenter = AcAuthParentPresenter()
+
+    private val mParentScreenComponent by lazy {
+        DaggerParentScreenComponent.builder()
+                .rootComponent(rootComponent())
+                .parentScreenModule(ParentScreenModule(this))
+                .build()
+    }
+
+    @Inject
+    lateinit var mPresenter: IAuthParentPresenter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.ac_auth)
-        ButterKnife.bind(this)
+        mParentScreenComponent.inject(this)
         initToolbar()
         mPresenter.attachView(this)
         mPresenter.openStartFragment(savedInstanceState)
@@ -46,7 +49,7 @@ class AuthActivity : AppCompatActivity(), AuthParentView {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if (item.getItemId() == android.R.id.home) {
+        if (item.itemId == android.R.id.home) {
             navigateBack()
             return true
         }
@@ -55,34 +58,32 @@ class AuthActivity : AppCompatActivity(), AuthParentView {
 
     override fun getActivity(): AppCompatActivity = this
 
-    override fun getFragmentLayoutId(): Int = R.id.ac_auth_fl_body
+    override fun getFragmentLayoutId(): Int = R.id.acAuthFlBody
 
     override fun startProgress() {
-        mProgressBar.visibility = View.VISIBLE
+        acAuthProgress.visibility = View.VISIBLE
     }
 
     override fun stopProgress() {
-        mProgressBar.visibility = View.GONE
+        acAuthProgress.visibility = View.GONE
     }
 
     override fun setToolbarTitle(title: String) {
-        supportActionBar?.setTitle(title)
+        supportActionBar?.title = title
     }
 
     override fun setToolbarTitle(title: Int) {
         supportActionBar?.setTitle(title)
     }
 
-    override fun getParentScreenComponent(): ParentScreenComponent = mPresenter.getParentScreenComponent()
-
     override fun getLifecycle(): LifecycleRegistry = mLifecycle
 
     override fun showActionBar() {
-        mToolbar.visibility = View.VISIBLE
+        acAuthToolbar.visibility = View.VISIBLE
     }
 
     override fun hideActionBar() {
-        mToolbar.visibility = View.GONE
+        acAuthToolbar.visibility = View.GONE
     }
 
     override fun navigateBack() {
@@ -92,7 +93,7 @@ class AuthActivity : AppCompatActivity(), AuthParentView {
     override fun getContext(): Context = this
 
     private fun initToolbar() {
-        setSupportActionBar(mToolbar)
+        setSupportActionBar(acAuthToolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setHomeButtonEnabled(true)
     }
@@ -100,7 +101,7 @@ class AuthActivity : AppCompatActivity(), AuthParentView {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         supportFragmentManager
-                .findFragmentById(R.id.ac_auth_fl_body)
+                .findFragmentById(R.id.acAuthFlBody)
                 ?.onActivityResult(requestCode, resultCode, data)
     }
 }

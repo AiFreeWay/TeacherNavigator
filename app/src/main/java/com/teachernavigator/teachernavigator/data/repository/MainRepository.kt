@@ -2,7 +2,6 @@ package com.teachernavigator.teachernavigator.data.repository
 
 import android.content.Context
 import android.text.TextUtils
-import com.example.root.androidtest.application.utils.Logger
 import com.teachernavigator.teachernavigator.R
 import com.teachernavigator.teachernavigator.data.cache.CacheController
 import com.teachernavigator.teachernavigator.data.models.CommentNetwork
@@ -18,6 +17,7 @@ import com.teachernavigator.teachernavigator.data.repository.abstractions.IMainR
 import com.teachernavigator.teachernavigator.domain.models.*
 import com.teachernavigator.teachernavigator.presentation.models.Info
 import com.teachernavigator.teachernavigator.presentation.models.Specialist
+import com.teachernavigator.teachernavigator.presentation.utils.applySchedulers
 import io.reactivex.Observable
 import io.reactivex.Single
 import java.io.File
@@ -29,12 +29,15 @@ import javax.inject.Inject
 class MainRepository @Inject constructor(private val mNetwokController: NetworkController,
                                          private val mContext: Context) : IMainRepository {
 
-    init {
-        Logger.logDebug("created REPOSITORY MainRepository")
-    }
 
+    // TODO Make it nullable
     override fun getAccessToken(): String {
         val token = (CacheController.getData(CacheController.TOKEN_KEY, Token.EMPTY_TOKEN) as Token)
+
+        if (token.accessToken.isBlank()) {
+            return ""
+        }
+
         token.tokenType + " " + token.accessToken
         return token.tokenType + " " + token.accessToken
     }
@@ -79,54 +82,69 @@ class MainRepository @Inject constructor(private val mNetwokController: NetworkC
 
     // ------------------------------- Posts methods --------------------------------
 
-    override fun getInterviewsPosts(): Observable<PostsResponse> = mNetwokController.getInterviewsPosts(getAccessToken())
+    override fun getPolls(): Single<PostsResponse> =
+            mNetwokController.getPolls(getAccessToken())
 
-    override fun getNewsPosts(): Observable<PostsResponse> = mNetwokController.getNewsPosts(getAccessToken())
+    override fun getNewsPosts(): Single<PostsResponse> =
+            mNetwokController.getNewsPosts(getAccessToken())
 
-    override fun getPosts(): Observable<PostsResponse> {
-        if (isAuth())
-            return mNetwokController.getPosts(getAccessToken())
-        return mNetwokController.getPosts()
-    }
+    override fun getPosts(): Single<PostsResponse> =
+            mNetwokController.getPosts(getAccessToken())
 
-    override fun getPostById(postId: Int): Observable<PostNetwork> = mNetwokController.getPost(getAccessToken(), postId)
+    override fun getBestPosts(): Single<PostsResponse> =
+            mNetwokController.getBestPosts(getAccessToken())
 
     override fun getMyComments(): Observable<GetMyCommentsResponse>
             = mNetwokController.getMyComments(getAccessToken())
 
-    override fun getSavedPosts(): Observable<PostsResponse>
+    override fun getSavedPosts(): Single<PostsResponse>
             = mNetwokController.getSavedPosts(getAccessToken())
-
-    override fun savePost(request: SavePostRequest): Observable<BaseResponse> =
-            mNetwokController.savePost(getAccessToken(), request)
 
     override fun comment(request: CommentRequest): Single<CommentNetwork> =
             mNetwokController.comment(getAccessToken(), request)
 
-    override fun subscribe(request: SubscribeRequest): Observable<BaseResponse> =
-            mNetwokController.subscribe(getAccessToken(), request)
+    override fun subscribe(userId: Int): Single<BaseResponse> =
+            mNetwokController.subscribe(getAccessToken(), SubscribeRequest(userId))
+                    .applySchedulers()
 
-    override fun vote(request: VoteRequest): Single<BaseResponse> =
-            mNetwokController.vote(getAccessToken(), request)
+    override fun vote(postId: Int, isLike: Boolean, type: PostType): Single<BaseResponse> =
+            mNetwokController.vote(getAccessToken(), VoteRequest(postId, isLike, type.name))
+                    .applySchedulers()
 
-    override fun getMyPublications(): Observable<Array<PostNetwork>> =
+    override fun complaint(postId: Int, type: PostType): Single<BaseResponse> = when (type) {
+
+        PostType.importantinfo -> mNetwokController.complaintInfo(getAccessToken(), postId)
+        PostType.post -> mNetwokController.complaintPost(getAccessToken(), postId)
+        PostType.poll -> mNetwokController.complaintPoll(getAccessToken(), postId)
+        PostType.news -> mNetwokController.complaintNews(getAccessToken(), postId)
+
+    }.applySchedulers()
+
+    override fun getMyPublications(): Single<Array<PostNetwork>> =
             mNetwokController.getMyPublications(getAccessToken())
 
-    override fun getUserPost(userId: Int): Observable<Array<PostNetwork>> =
+    override fun getUserPost(userId: Int): Single<Array<PostNetwork>> =
             mNetwokController.getUserPost(getAccessToken(), userId)
 
     override fun getInfoPosts(currentTheme: Info): Single<PostsResponse> =
             mNetwokController.getInfoPosts(getAccessToken(), currentTheme.ordinal)
 
     override fun getPost(postId: Int, postType: PostType): Single<PostNetwork> = when (postType) {
+
         PostType.importantinfo -> mNetwokController.getInfoPost(getAccessToken(), postId)
-        else -> throw Error("Not implemented yet")
+        PostType.post -> mNetwokController.getPost(getAccessToken(), postId)
+        PostType.news -> mNetwokController.getNews(getAccessToken(), postId)
+        PostType.poll -> mNetwokController.getPoll(getAccessToken(), postId)
     }
 
     override fun save(postId: Int, type: PostType): Single<Unit> = when (type) {
         PostType.importantinfo -> mNetwokController.saveInfoPost(getAccessToken(), postId)
-        else -> throw Error("Not implemented yet")
-    }.map { Unit }
+        PostType.poll -> mNetwokController.savePoll(getAccessToken(), postId)
+        PostType.news -> mNetwokController.saveNews(getAccessToken(), postId)
+        PostType.post -> mNetwokController.savePost(getAccessToken(), postId)
+    }
+            .map { Unit }
+
 
     override fun getTags(): Single<List<Tag>> =
             mNetwokController.getTags(getAccessToken())
@@ -134,7 +152,7 @@ class MainRepository @Inject constructor(private val mNetwokController: NetworkC
     override fun getTrends(): Single<List<Tag>> =
             mNetwokController.getTrends(getAccessToken())
 
-    override fun sendPost(title: String, text: String, tags: List<String>, fileInfo: FileInfo?): Single<Post> =
+    override fun sendPost(title: String, text: String, tags: List<String>, fileInfo: FileInfo?): Single<PostNetwork> =
             mNetwokController.sendPost(getAccessToken(), title, text, tags, fileInfo)
 
     // ------------------------------- Settings methods --------------------------------
@@ -150,16 +168,16 @@ class MainRepository @Inject constructor(private val mNetwokController: NetworkC
 
     // ------------------------------- Profile methods --------------------------------
 
-    override fun getProfile(): Observable<Profile> = mNetwokController.getProfile(getAccessToken())
+    override fun getProfile(): Single<Profile> = mNetwokController.getProfile(getAccessToken())
 
-    override fun getProfile(userId: Int): Observable<Profile> = mNetwokController.getProfile(getAccessToken(), userId)
+    override fun getProfile(userId: Int): Single<Profile> = mNetwokController.getProfile(getAccessToken(), userId)
 
     override fun exit() {
         CacheController.removeData(CacheController.TOKEN_KEY)
     }
 
-    override fun uploadPhoto(file: File): Observable<File> {
-        return Observable.just(file)
+    override fun uploadPhoto(file: File): Single<File> {
+        return Single.just(file)
     }
 
     // ------------------------------- Job methods --------------------------------

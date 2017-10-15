@@ -3,29 +3,26 @@ package com.teachernavigator.teachernavigator.presentation.screens.main.presente
 import android.arch.lifecycle.Lifecycle
 import android.arch.lifecycle.OnLifecycleEvent
 import android.widget.Toast
-import com.example.root.androidtest.application.utils.Logger
 import com.teachernavigator.teachernavigator.R
 import com.teachernavigator.teachernavigator.domain.interactors.abstractions.IPostsInteractor
-import com.teachernavigator.teachernavigator.domain.models.Post
-import com.teachernavigator.teachernavigator.presentation.facades.abstractions.IPostControllerFacade
+import com.teachernavigator.teachernavigator.domain.models.PostType
+import com.teachernavigator.teachernavigator.presentation.models.PostModel
 import com.teachernavigator.teachernavigator.presentation.screens.common.BasePresenter
 import com.teachernavigator.teachernavigator.presentation.screens.main.fragments.abstractions.MyPublicationsView
 import com.teachernavigator.teachernavigator.presentation.screens.main.presenters.abstractions.IMyPublicationsPresenter
+import com.teachernavigator.teachernavigator.presentation.transformers.PostTransformerFactory
+import com.teachernavigator.teachernavigator.presentation.transformers.transformListEntity
 import javax.inject.Inject
 
 /**
- * Created by root on 13.09.17.
+ * Created by root on 13.09.17
  */
-class FmtMyPublicationsPresenter : BasePresenter<MyPublicationsView>(), IMyPublicationsPresenter {
+class MyPublicationsPresenter : BasePresenter<MyPublicationsView>(), IMyPublicationsPresenter {
 
     @Inject
     lateinit var mPostInteractor: IPostsInteractor
     @Inject
-    lateinit var mPostControllerFacade: IPostControllerFacade
-
-    init {
-        Logger.logDebug("created PRESENTER FmtMyPublicationsPresenter")
-    }
+    lateinit var postTransformerFactory: PostTransformerFactory
 
     @OnLifecycleEvent(Lifecycle.Event.ON_START)
     private fun onStart() {
@@ -37,11 +34,6 @@ class FmtMyPublicationsPresenter : BasePresenter<MyPublicationsView>(), IMyPubli
         mDisposables.clear()
     }
 
-    override fun attachView(view: MyPublicationsView) {
-        super.attachView(view)
-        inject()
-    }
-
     override fun doOnError(error: Throwable) {
         super.doOnError(error)
         mView!!.getParentView().stopProgress()
@@ -49,11 +41,10 @@ class FmtMyPublicationsPresenter : BasePresenter<MyPublicationsView>(), IMyPubli
         Toast.makeText(mView!!.getContext(), mView!!.getContext().getString(R.string.error_throwed), Toast.LENGTH_SHORT).show()
     }
 
-    override fun getPostControllerFacade(): IPostControllerFacade = mPostControllerFacade
-
     override fun getMyPublications() {
         addDissposable(mPostInteractor.getMyPublications()
-                .doOnSubscribe { this::doOnSubscribeOnGetPosts }
+                .transformListEntity(postTransformerFactory.build(PostType.post, true))
+                .doOnSubscribe { (this::doOnSubscribeOnGetPosts)() }
                 .subscribe(this::doOnGetMyPublications, this::doOnError))
     }
 
@@ -61,7 +52,7 @@ class FmtMyPublicationsPresenter : BasePresenter<MyPublicationsView>(), IMyPubli
         getMyPublications()
     }
 
-    private fun doOnGetMyPublications(posts: List<Post>) {
+    private fun doOnGetMyPublications(posts: List<PostModel>) {
         mView!!.getParentView().stopProgress()
         mView!!.loadMyPublications(posts)
 
@@ -76,9 +67,4 @@ class FmtMyPublicationsPresenter : BasePresenter<MyPublicationsView>(), IMyPubli
         mView!!.hideNoDataText()
     }
 
-    private fun inject() {
-        mView!!.getParentView()
-                .getParentScreenComponent()
-                .inject(this)
-    }
 }

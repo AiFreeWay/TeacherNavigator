@@ -6,18 +6,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.teachernavigator.teachernavigator.R
-import com.teachernavigator.teachernavigator.application.di.components.DaggerParentScreenComponent
-import com.teachernavigator.teachernavigator.application.di.components.ParentScreenComponent
-import com.teachernavigator.teachernavigator.application.di.modules.ParentScreenModule
-import com.teachernavigator.teachernavigator.application.utils.rootComponent
 import com.teachernavigator.teachernavigator.presentation.adapters.holders.CommentVHBuilder
+import com.teachernavigator.teachernavigator.presentation.adapters.holders.InfoPostVHBuilder
 import com.teachernavigator.teachernavigator.presentation.models.PostModel
 import com.teachernavigator.teachernavigator.presentation.screens.common.BaseFragment
 import com.teachernavigator.teachernavigator.presentation.screens.main.fragments.abstractions.PostCommentsView
 import com.teachernavigator.teachernavigator.presentation.screens.main.presenters.abstractions.IPostActionsController
 import com.teachernavigator.teachernavigator.presentation.screens.main.presenters.abstractions.IPostCommentsPresenter
 import kotlinx.android.synthetic.main.fmt_post_comments.*
-import layout.InfoPostVHBuilder
 import ru.lliepmah.lib.UniversalAdapter
 import javax.inject.Inject
 
@@ -33,8 +29,6 @@ class PostCommentsFragment : BaseFragment(), PostCommentsView {
         val ARG_POST_TYPE = "post_type"
     }
 
-    private lateinit var mParentScreenComponent: ParentScreenComponent
-
     @Inject
     lateinit var presenter: IPostCommentsPresenter
     @Inject
@@ -48,7 +42,8 @@ class PostCommentsFragment : BaseFragment(), PostCommentsView {
                         null,
                         postController::onSave,
                         null,
-                        null // TODO postConroller::onReadMore
+                        null, // TODO postConroller::onReadMore
+                        null
                 ),
                 CommentVHBuilder(
                         null, // TODO presenter::onBranch
@@ -71,7 +66,8 @@ class PostCommentsFragment : BaseFragment(), PostCommentsView {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        inject()
+        mParentScreenComponent.inject(this)
+
         presenter.attachView(this)
         postController.attachView(this)
 
@@ -81,14 +77,6 @@ class PostCommentsFragment : BaseFragment(), PostCommentsView {
         vListRvData.adapter = adapter
 
         presenter.initPost(arguments.getInt(ARG_POST_ID), arguments.getInt(ARG_POST_TYPE))
-    }
-
-    private fun inject() {
-        mParentScreenComponent = DaggerParentScreenComponent.builder()
-                .rootComponent(rootComponent())
-                .parentScreenModule(ParentScreenModule(getParentView()))
-                .build()
-                .also { it.inject(this) }
     }
 
     override fun setPost(post: PostModel) {

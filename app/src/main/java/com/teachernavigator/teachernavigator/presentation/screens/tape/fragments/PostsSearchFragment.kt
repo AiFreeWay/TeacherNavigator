@@ -5,10 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.teachernavigator.teachernavigator.R
-import com.teachernavigator.teachernavigator.application.di.components.DaggerParentScreenComponent
-import com.teachernavigator.teachernavigator.application.di.components.ParentScreenComponent
-import com.teachernavigator.teachernavigator.application.di.modules.ParentScreenModule
-import com.teachernavigator.teachernavigator.application.utils.rootComponent
 import com.teachernavigator.teachernavigator.presentation.screens.common.BaseFragment
 import com.teachernavigator.teachernavigator.presentation.screens.tape.fragments.abstractions.PostsSearchView
 import com.teachernavigator.teachernavigator.presentation.screens.tape.presenters.abstractions.IPostSearchPresenter
@@ -25,8 +21,6 @@ class PostsSearchFragment : BaseFragment(), PostsSearchView {
         val FRAGMENT_KEY = PostsSearchFragment::class.java.name!!
     }
 
-    private lateinit var mParentScreenComponent: ParentScreenComponent
-
     @Inject
     lateinit var presenter: IPostSearchPresenter
 
@@ -35,18 +29,10 @@ class PostsSearchFragment : BaseFragment(), PostsSearchView {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        inject()
+        mParentScreenComponent.inject(this)
         presenter.attachView(this)
 
         fmtPostSearchBtnFind.setOnClickListener { presenter.navigateBack() }
-    }
-
-    private fun inject() {
-        mParentScreenComponent = DaggerParentScreenComponent.builder()
-                .rootComponent(rootComponent())
-                .parentScreenModule(ParentScreenModule(getParentView()))
-                .build()
-                .also { it.inject(this) }
     }
 
     override fun onDetach() {

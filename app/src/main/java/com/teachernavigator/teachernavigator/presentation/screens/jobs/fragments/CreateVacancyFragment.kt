@@ -25,8 +25,6 @@ class CreateVacancyFragment : BaseFragment(), CreateVacancyView {
         val FRAGMENT_KEY = "create_vacancy_fragment"
     }
 
-    private lateinit var mParentScreenComponent: ParentScreenComponent
-
     @Inject
     lateinit var createVacancyPresenter: ICreateVacancyPresenter
 
@@ -35,10 +33,8 @@ class CreateVacancyFragment : BaseFragment(), CreateVacancyView {
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         createJobBtnCreateJob.setOnClickListener { createJob() }
         createJobEtTypeOfEmployment.setOnClickListener { createVacancyPresenter.chooseTypeOfEmployment() }
-
     }
 
     override fun setTypeOfEmployment(type: CharSequence) {
@@ -61,16 +57,8 @@ class CreateVacancyFragment : BaseFragment(), CreateVacancyView {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        inject()
+        mParentScreenComponent.inject(this)
         createVacancyPresenter.attachView(this)
-    }
-
-    private fun inject() {
-        mParentScreenComponent = DaggerParentScreenComponent.builder()
-                .rootComponent(rootComponent())
-                .parentScreenModule(ParentScreenModule(getParentView()))
-                .build()
-                .also { it.inject(this) }
     }
 
     override fun errorValidation(validationResId: Int, fieldLabelResId: Int) =

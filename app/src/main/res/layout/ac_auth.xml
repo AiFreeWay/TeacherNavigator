@@ -5,7 +5,7 @@
     android:layout_height="match_parent">
 
     <android.support.design.widget.AppBarLayout
-        android:id="@+id/ac_auth_appBarLayout"
+        android:id="@+id/acAuthAppBarLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
@@ -14,7 +14,7 @@
         android:theme="@style/ThemeOverlay.AppCompat.Dark">
 
         <android.support.v7.widget.Toolbar
-            android:id="@+id/ac_auth_toolbar"
+            android:id="@+id/acAuthToolbar"
             android:layout_width="match_parent"
             android:layout_height="?android:attr/actionBarSize"
             android:background="@color/colorPrimary"
@@ -22,15 +22,15 @@
     </android.support.design.widget.AppBarLayout>
 
     <FrameLayout
-        android:id="@+id/ac_auth_fl_body"
+        android:id="@+id/acAuthFlBody"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_below="@+id/ac_auth_appBarLayout" />
+        android:layout_below="@+id/acAuthAppBarLayout" />
 
     <ProgressBar
-        android:id="@+id/ac_auth_progress"
+        android:id="@+id/acAuthProgress"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"

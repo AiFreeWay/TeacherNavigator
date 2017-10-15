@@ -1,16 +1,11 @@
 package com.teachernavigator.teachernavigator.application.di.modules
 
-import com.example.root.androidtest.application.utils.Logger
 import com.teachernavigator.teachernavigator.application.di.scopes.PerParentScreen
 import com.teachernavigator.teachernavigator.data.repository.abstractions.*
 import com.teachernavigator.teachernavigator.domain.controllers.IPostController
 import com.teachernavigator.teachernavigator.domain.controllers.PostController
 import com.teachernavigator.teachernavigator.domain.interactors.*
 import com.teachernavigator.teachernavigator.domain.interactors.abstractions.*
-import com.teachernavigator.teachernavigator.presentation.facades.CommentControllerFacade
-import com.teachernavigator.teachernavigator.presentation.facades.PostControllerFacade
-import com.teachernavigator.teachernavigator.presentation.facades.abstractions.ICommentControllerFacade
-import com.teachernavigator.teachernavigator.presentation.facades.abstractions.IPostControllerFacade
 import com.teachernavigator.teachernavigator.presentation.screens.common.ParentView
 import com.teachernavigator.teachernavigator.presentation.utils.FragmentNavigator
 import dagger.Module
@@ -19,17 +14,14 @@ import ru.terrakok.cicerone.Cicerone
 import ru.terrakok.cicerone.Router
 
 /**
- * Created by root on 14.08.17.
+ * Created by root on 14.08.17
  */
 @Module
 class ParentScreenModule(private val mParentView: ParentView) {
 
-    private val mCicerone: Cicerone<Router>
+    private val mCicerone: Cicerone<Router> = Cicerone.create()
 
     init {
-        Logger.logDebug("created MODULE ParentScreenModule")
-
-        mCicerone = Cicerone.create()
         mCicerone.navigatorHolder.setNavigator(FragmentNavigator(mParentView.getActivity(),
                 mParentView.getSupportFragmentManager(),
                 mParentView.getFragmentLayoutId()))
@@ -41,7 +33,7 @@ class ParentScreenModule(private val mParentView: ParentView) {
 
     @Provides
     @PerParentScreen
-    fun provideTapeRepository(repository: IMainRepository): ITapeRepository = repository
+    fun provideTapeRepository(repository: IMainRepository): IPostsRepository = repository
 
     @Provides
     @PerParentScreen
@@ -82,14 +74,6 @@ class ParentScreenModule(private val mParentView: ParentView) {
     @Provides
     @PerParentScreen
     fun provideParentView(): ParentView = mParentView
-
-    @Provides
-    @PerParentScreen
-    fun providePostControllerFacade(controller : PostControllerFacade): IPostControllerFacade = controller
-
-    @Provides
-    @PerParentScreen
-    fun provideCommentControllerFacade(controller : CommentControllerFacade): ICommentControllerFacade = controller
 
     @Provides
     @PerParentScreen

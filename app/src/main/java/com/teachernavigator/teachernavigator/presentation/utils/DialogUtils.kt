@@ -11,12 +11,13 @@ import android.support.annotation.StringRes
 import android.text.InputType
 import com.afollestad.materialdialogs.MaterialDialog
 import com.teachernavigator.teachernavigator.R
+import io.reactivex.Maybe
 import java.util.*
 
 object DialogUtils {
 
     fun showDateDialog(context: Context, currentDate: Date?, minDate: Date?, maxDate: Date?,
-                       onDateChangedListener: (Date) -> Unit) : DatePickerDialog{
+                       onDateChangedListener: (Date) -> Unit): DatePickerDialog {
 
         val calendar = Calendar.getInstance()
         calendar.time = currentDate ?: Date()
@@ -58,8 +59,21 @@ object DialogUtils {
     }
 
 
-    fun showMessage(context: Context, @StringRes titleRes: Int, message: String) =
+    fun askPermission(context: Context, @StringRes titleRes: Int, vararg formatArgs: String) =
 
+            Maybe.create<Unit> {
+                val message = context.getString(titleRes, *formatArgs)
+                MaterialDialog.Builder(context)
+                        .content(message)
+                        .positiveText(android.R.string.ok)
+                        .negativeText(android.R.string.cancel)
+                        .onPositive { _, _ -> it.onSuccess(Unit) }
+                        .onNegative { _, _ -> it.onComplete() }
+                        .show()
+            }!!
+
+
+    fun showMessage(context: Context, @StringRes titleRes: Int, message: String) =
             MaterialDialog.Builder(context)
                     .title(titleRes)
                     .content(message)

@@ -11,13 +11,9 @@ import com.teachernavigator.teachernavigator.presentation.screens.main.presenter
 import javax.inject.Inject
 
 /**
- * Created by root on 18.09.17.
+ * Created by root on 18.09.17
  */
-class FmtSettingsPresenter : BasePresenter<SettingsView>(), ISettingsPresenter {
-
-    init {
-        Logger.logDebug("created PRESENTER FmtSettingsPresenter")
-    }
+class SettingsPresenter : BasePresenter<SettingsView>(), ISettingsPresenter {
 
     @OnLifecycleEvent(Lifecycle.Event.ON_START)
     private fun onStart() {
@@ -27,11 +23,6 @@ class FmtSettingsPresenter : BasePresenter<SettingsView>(), ISettingsPresenter {
     @OnLifecycleEvent(Lifecycle.Event.ON_STOP)
     private fun onStop() {
         mDisposables.clear()
-    }
-
-    override fun attachView(view: SettingsView) {
-        super.attachView(view)
-        inject()
     }
 
     override fun doOnError(error: Throwable) {
@@ -44,9 +35,4 @@ class FmtSettingsPresenter : BasePresenter<SettingsView>(), ISettingsPresenter {
         mView!!.loadOrdersFragments(fragmentsContainer)
     }
 
-    private fun inject() {
-        mView!!.getParentView()
-                .getParentScreenComponent()
-                .inject(this)
-    }
 }

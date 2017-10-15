@@ -21,8 +21,6 @@ class CommentVH(itemView: View,
                 onSubscribeListener: OnSubscribeListener?,
                 onBranchListener: OnBranchListener?) : DefaultViewHolder<CommentModel>(itemView) {
 
-    private val context = itemView.context
-
     private val ivAvatar: ImageView = itemView.find(R.id.v_comment_iv_avatar)
     private val tvPostAuthorName: TextView = itemView.find(R.id.v_comment_tv_post_author_name)
     private val tvAuthorName: TextView = itemView.find(R.id.v_comment_tv_author_name)

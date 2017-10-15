@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:padding="@dimen/externalPadding">
+    android:layout_marginTop="@dimen/spacingXLarge"
+    android:layout_marginLeft="@dimen/spacingXLarge"
+    android:layout_marginRight="@dimen/spacingXLarge"
+    android:layout_height="wrap_content">
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/v_post_iv_avatar"
@@ -17,14 +20,15 @@
     <TextView
         android:id="@+id/v_post_tv_author_name"
         style="@style/TitleText"
+
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_marginLeft="@dimen/externalPadding"
         android:layout_marginStart="@dimen/externalPadding"
-        android:layout_marginTop="@dimen/internalPadding"
         android:layout_toEndOf="@+id/v_post_iv_avatar"
-        android:layout_toRightOf="@+id/v_post_iv_avatar" />
+        android:layout_toRightOf="@+id/v_post_iv_avatar"
+        tools:text="Имя Автора" />
 
     <TextView
         android:id="@+id/v_post_tv_post_time"
@@ -34,7 +38,8 @@
         android:layout_alignLeft="@+id/v_post_tv_author_name"
         android:layout_alignStart="@+id/v_post_tv_author_name"
         android:layout_below="@+id/v_post_tv_author_name"
-        android:textColor="@color/lightTextColor" />
+        android:textColor="@color/lightTextColor"
+        tools:text="Только что" />
 
     <ImageView
         android:id="@+id/v_post_iv_subscribe"
@@ -42,9 +47,10 @@
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
-        android:layout_alignTop="@+id/v_post_tv_author_name"
         android:background="?android:attr/selectableItemBackground"
-        android:src="@drawable/ic_subscribe" />
+        android:padding="@dimen/spacingLarge"
+        android:src="@drawable/ic_subscribe"
+        tools:ignore="ContentDescription" />
 
     <TextView
         android:id="@+id/v_post_tv_title"
@@ -57,7 +63,8 @@
         android:layout_marginTop="@dimen/externalPadding"
         android:fontFamily="sans-serif-medium"
         android:textAllCaps="false"
-        android:textColor="@color/darkTextColor" />
+        android:textColor="@color/darkTextColor"
+        tools:text="Название поста" />
 
     <TextView
         android:id="@+id/v_post_tv_text"
@@ -68,12 +75,13 @@
         android:layout_alignStart="@+id/v_post_tv_title"
         android:layout_below="@+id/v_post_tv_title"
         android:layout_marginTop="@dimen/externalPadding"
-        android:ellipsize="end" />
+        android:ellipsize="end"
+        tools:text="Текст поста" />
 
     <LinearLayout
         android:id="@+id/v_post_ll_more_and_complain"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/normalControlsHeight"
+        android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/v_post_tv_title"
         android:layout_alignStart="@+id/v_post_tv_title"
         android:layout_below="@+id/v_post_tv_text"
@@ -95,11 +103,14 @@
             style="@style/Text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/internalPadding"
+            android:layout_marginLeft="@dimen/spacingXXLarge"
+            android:layout_marginRight="@dimen/spacingXXLarge"
+            android:background="?android:attr/selectableItemBackground"
             android:gravity="center_vertical"
+            android:padding="@dimen/spacingLarge"
             android:text="@string/complain"
             android:textColor="@color/greyTextColor"
-            android:visibility="gone" />
+            android:visibility="visible" />
     </LinearLayout>
 
     <LinearLayout
@@ -146,11 +157,11 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/v_post_v_devider"
-        android:layout_marginTop="10dp"
         android:background="?android:attr/selectableItemBackground"
         android:drawableLeft="@drawable/ic_like"
         android:drawablePadding="@dimen/internalPadding"
         android:drawableStart="@drawable/ic_like"
+        android:padding="@dimen/spacingLarge"
         android:text="@string/zero" />
 
     <TextView
@@ -160,16 +171,13 @@
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@+id/v_post_tv_like"
         android:layout_alignBottom="@+id/v_post_tv_like"
-        android:layout_marginEnd="@dimen/internalPadding"
-        android:layout_marginLeft="@dimen/externalPadding"
-        android:layout_marginRight="@dimen/internalPadding"
-        android:layout_marginStart="@dimen/externalPadding"
         android:layout_toEndOf="@+id/v_post_tv_like"
         android:layout_toRightOf="@+id/v_post_tv_like"
         android:background="?android:attr/selectableItemBackground"
         android:drawableLeft="@drawable/ic_dislike"
         android:drawablePadding="@dimen/internalPadding"
         android:drawableStart="@drawable/ic_dislike"
+        android:padding="@dimen/spacingLarge"
         android:text="@string/zero" />
 
     <TextView
@@ -179,11 +187,11 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/v_post_v_devider"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="10dp"
         android:background="?android:attr/selectableItemBackground"
         android:drawableLeft="@drawable/ic_comments"
         android:drawablePadding="@dimen/internalPadding"
         android:drawableStart="@drawable/ic_comments"
+        android:padding="@dimen/spacingLarge"
         android:text="@string/zero" />
 
     <ImageView
@@ -193,7 +201,9 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_below="@+id/v_post_v_devider"
-        android:layout_marginTop="12dp"
         android:background="?android:attr/selectableItemBackground"
-        android:src="@drawable/ic_save" />
+        android:padding="@dimen/spacingLarge"
+        android:src="@drawable/ic_save"
+        tools:ignore="ContentDescription" />
+
 </RelativeLayout>

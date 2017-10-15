@@ -1,7 +1,6 @@
-package layout
+package com.teachernavigator.teachernavigator.presentation.adapters.holders
 
 import android.support.v4.content.ContextCompat
-import android.util.Log.d
 import android.view.View
 import android.widget.Button
 import android.widget.ImageView
@@ -11,7 +10,7 @@ import com.teachernavigator.teachernavigator.R
 import com.teachernavigator.teachernavigator.presentation.models.PostModel
 import com.teachernavigator.teachernavigator.presentation.utils.find
 import com.teachernavigator.teachernavigator.presentation.utils.listenClickBy
-import com.teachernavigator.teachernavigator.presentation.utils.setImageOrHide
+import com.teachernavigator.teachernavigator.presentation.utils.setImageOrPlaceholder
 import com.teachernavigator.teachernavigator.presentation.utils.setTextOrHide
 import ru.lliepmah.HolderBuilder
 import ru.lliepmah.lib.DefaultViewHolder
@@ -25,8 +24,9 @@ class InfoPostVH(itemView: View,
                  onDislikeListener: OnDislikeListener?,
                  onCommentsListener: OnCommentsListener?,
                  onSaveListener: OnSaveListener?,
-                 onSubscribeListener: OnSubscribeListener?,
-                 onReadMoreListener: OnReadMoreListener?
+                 onSubscribeListener: OnSubscribePostListener?,
+                 onReadMoreListener: OnReadMoreListener?,
+                 onComplaintListener: OnComplaintListener?
 
 ) : DefaultViewHolder<PostModel>(itemView) {
 
@@ -39,6 +39,7 @@ class InfoPostVH(itemView: View,
     private val tvTitle: TextView = itemView.find(R.id.v_post_tv_title)
     private val tvText: TextView = itemView.find(R.id.v_post_tv_text)
     private val btnMore: Button = itemView.find(R.id.v_post_btn_more)
+    //    private val layoutMoreAndComplain: View = itemView.find(R.id.v_post_ll_more_and_complain)
     private val lMore: View = itemView.find(R.id.v_post_ll_more_and_complain)
     private val tvComplain: TextView = itemView.find(R.id.v_post_tv_complain)
     private val llChoices: View = itemView.find(R.id.v_post_ll_choices)
@@ -51,29 +52,32 @@ class InfoPostVH(itemView: View,
     private var mModel: PostModel? = null
 
     init {
-
         tvLike listenClickBy onLikeListener andReturnModel { mModel }
         tvDislike listenClickBy onDislikeListener andReturnModel { mModel }
-        tvComments listenClickBy onCommentsListener andReturnModelOrHide  { mModel }
+        tvComments listenClickBy onCommentsListener andReturnModelOrHide { mModel }
         ivSave listenClickBy onSaveListener andReturnModel { mModel }
         ivSubscribe listenClickBy onSubscribeListener andReturnModelOrHide { mModel }
         btnMore listenClickBy onReadMoreListener andReturnModelOrHide { mModel }
-
-        // TODO Temp fix
-        lMore.visibility = btnMore.visibility
+        tvComplain listenClickBy onComplaintListener andReturnModelOrHide { mModel }
     }
 
     override fun bind(model: PostModel?) {
         mModel = model
 
-        ivAvatar.setImageOrHide(model?.authorAvatar)
+        ivAvatar.setImageOrPlaceholder(model?.authorAvatar)
         tvAuthorName.setTextOrHide(model?.authorName)
         tvPostTime.setTextOrHide(model?.created)
-        ivSubscribe.visibility = if ((model?.authorId ?: -1) > 0) View.VISIBLE else View.GONE
+
+        val hasAuthor = (model?.authorId ?: -1) > 0
+        tvAuthorName.visibility = if (hasAuthor) View.VISIBLE else View.GONE
+        ivAvatar.visibility = if (hasAuthor) View.VISIBLE else View.GONE
+        ivSubscribe.visibility = if (hasAuthor) View.VISIBLE else View.GONE
+
         tvTitle.setTextOrHide(model?.title)
         tvText.setTextOrHide(model?.text)
-        // TODO: tvComplain
-        // TODO: llChoices
+
+        // TODO: llChoices Для опросов!
+
         hvHasttags.setData(model?.tags ?: emptyList())
 
         tvLike.text = "${model?.count_likes ?: 0}"
@@ -96,5 +100,6 @@ typealias OnLikeListener = (PostModel) -> Unit
 typealias OnDislikeListener = (PostModel) -> Unit
 typealias OnCommentsListener = (PostModel) -> Unit
 typealias OnSaveListener = (PostModel) -> Unit
-typealias OnSubscribeListener = (PostModel) -> Unit
+typealias OnSubscribePostListener = (PostModel) -> Unit
 typealias OnReadMoreListener = (PostModel) -> Unit
+typealias OnComplaintListener = (PostModel) -> Unit

@@ -16,14 +16,16 @@ data class PostModel(
         var count_dislikes: Int,
         var vote: Boolean? = null,
         val count_comments: Int,
-        val comments: List<CommentModel>,
+        val comments: List<Any>,
 
         val authorId: Int,
         val authorName: String,
-        val authorAvatar: String,
+        val authorAvatar: String?,
 
         val type: PostType,
-        val file: String? = null
+        val file: String? = null,
+
+        val shortTitle: String
         // TODO val choices: List<Choice>? = null
 
 ) : Model(id)

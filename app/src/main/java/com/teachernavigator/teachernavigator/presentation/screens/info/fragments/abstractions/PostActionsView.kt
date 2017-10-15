@@ -8,8 +8,6 @@ import com.teachernavigator.teachernavigator.presentation.screens.common.ChildVi
  */
 interface PostActionsView : ChildView {
 
-    fun showRefresh()
-    fun hideRefresh()
-
     fun updatePost(post: PostModel)
+
 }

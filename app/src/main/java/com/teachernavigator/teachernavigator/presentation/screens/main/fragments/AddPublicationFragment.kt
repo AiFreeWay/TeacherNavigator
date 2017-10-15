@@ -16,10 +16,6 @@ import com.miguelbcr.ui.rx_paparazzo2.entities.FileData
 import com.miguelbcr.ui.rx_paparazzo2.entities.Response
 import com.tbruyelle.rxpermissions2.RxPermissions
 import com.teachernavigator.teachernavigator.R
-import com.teachernavigator.teachernavigator.application.di.components.DaggerParentScreenComponent
-import com.teachernavigator.teachernavigator.application.di.components.ParentScreenComponent
-import com.teachernavigator.teachernavigator.application.di.modules.ParentScreenModule
-import com.teachernavigator.teachernavigator.application.utils.rootComponent
 import com.teachernavigator.teachernavigator.domain.models.Tag
 import com.teachernavigator.teachernavigator.presentation.adapters.holders.TagVH
 import com.teachernavigator.teachernavigator.presentation.screens.common.BaseFragment
@@ -41,8 +37,6 @@ class AddPublicationFragment : BaseFragment(), AddPublicationView {
         val FRAGMENT_KEY = "add_publication_fragment"
     }
 
-    private lateinit var mParentScreenComponent: ParentScreenComponent
-
     @Inject
     lateinit var presenter: IAddPublicationPresenter
 
@@ -62,7 +56,8 @@ class AddPublicationFragment : BaseFragment(), AddPublicationView {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        inject()
+        mParentScreenComponent.inject(this)
+
         presenter.attachView(this)
         tagHolder1 = TagVH(vAddTagVTag1, { addTag(it) })
         tagHolder2 = TagVH(vAddTagVTag2, { addTag(it) })
@@ -150,14 +145,6 @@ class AddPublicationFragment : BaseFragment(), AddPublicationView {
     private fun showAddTags() {
         presenter.searchTags("")
         fmtAddPublicationVAddTag.visibility = View.VISIBLE
-    }
-
-    private fun inject() {
-        mParentScreenComponent = DaggerParentScreenComponent.builder()
-                .rootComponent(rootComponent())
-                .parentScreenModule(ParentScreenModule(getParentView()))
-                .build()
-                .also { it.inject(this) }
     }
 
     private fun preview() =

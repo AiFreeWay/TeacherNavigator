@@ -33,34 +33,53 @@ interface ApiController {
     // ------------------------------- Posts methods --------------------------------
 
     @GET("/api/v0/feed/")
-    fun getPosts(): Observable<PostsResponse>
+    fun getPosts(@Header("Authorization") accessToken: String?): Single<PostsResponse>
 
-    @GET("/api/v0/feed/")
-    fun getPosts(@Header("Authorization") accessToken: String): Observable<PostsResponse>
+    @GET("/api/v0/feed/best/")
+    fun getBestPosts(@Header("Authorization") accessToken: String?): Single<PostsResponse>
 
     @GET("/api/v0/newses/")
-    fun getNews(@Header("Authorization") accessToken: String): Observable<PostsResponse>
+    fun getNews(@Header("Authorization") accessToken: String): Single<PostsResponse>
 
     @GET("/api/v0/polls/")
-    fun getPools(@Header("Authorization") accessToken: String): Observable<PostsResponse>
+    fun getPolls(@Header("Authorization") accessToken: String?): Single<PostsResponse>
+
 
     @GET("/api/v0/post/{postId}")
-    fun getPost(@Header("Authorization") accessToken: String, @Path("postId") postId: Int): Observable<PostNetwork>
+    fun getPost(@Header("Authorization") accessToken: String, @Path("postId") postId: Int): Single<PostNetwork>
+
+    @GET("/api/v0/news/{newsId}")
+    fun getNews(@Header("Authorization") accessToken: String, @Path("newsId") newsId: Int): Single<PostNetwork>
+
+    @GET("/api/v0/poll/{pollId}")
+    fun getPoll(@Header("Authorization") accessToken: String, @Path("pollId") poll: Int): Single<PostNetwork>
 
     @GET("/api/v0/me/comments/")
     fun getMyComments(@Header("Authorization") accessToken: String): Observable<GetMyCommentsResponse>
 
+    @FormUrlEncoded
     @POST("/api/v0/save/post/")
-    fun savePost(@Header("Authorization") accessToken: String, @Body request: SavePostRequest): Observable<BaseResponse>
+    fun savePost(@Header("Authorization") accessToken: String, @Field("post") postId: Int,
+                 @Field("user") user: Int = 0): Single<BaseResponse>
+
+    @FormUrlEncoded
+    @POST("/api/v0/save/poll/")
+    fun savePoll(@Header("Authorization") accessToken: String, @Field("question") postId: Int,
+                 @Field("user") user: Int = 0): Single<BaseResponse>
+
+    @FormUrlEncoded
+    @POST("/api/v0/save/news/")
+    fun saveNews(@Header("Authorization") accessToken: String, @Field("news") postId: Int,
+                 @Field("user") user: Int = 0): Single<BaseResponse>
 
     @GET("/api/v0/me/saved/")
-    fun getSavedPosts(@Header("Authorization") accessToken: String): Observable<PostsResponse>
+    fun getSavedPosts(@Header("Authorization") accessToken: String): Single<PostsResponse>
 
     @POST("/api/v0/comment/")
     fun comment(@Header("Authorization") accessToken: String, @Body request: CommentRequest): Single<CommentNetwork>
 
     @POST("/api/v0/me/subscribe/")
-    fun subscribe(@Header("Authorization") accessToken: String, @Body request: SubscribeRequest): Observable<BaseResponse>
+    fun subscribe(@Header("Authorization") accessToken: String, @Body request: SubscribeRequest): Single<BaseResponse>
 
     //@POST("/api/v0/votes/up/")
     //fun vote(@Header("Authorization") accessToken: String, @Body request: VoteRequest): Observable<BaseResponse>
@@ -69,18 +88,18 @@ interface ApiController {
     fun vote(@Header("Authorization") accessToken: String, @QueryMap map: Map<String, String>): Single<BaseResponse>
 
     @GET("/api/v0/me/posts/")
-    fun getMyPublications(@Header("Authorization") accessToken: String): Observable<Array<PostNetwork>>
+    fun getMyPublications(@Header("Authorization") accessToken: String): Single<Array<PostNetwork>>
 
     @GET("/api/v0/profile/{userId}/posts/ ")
-    fun getUserPost(@Header("Authorization") accessToken: String, @Path("userId") userId: Int): Observable<Array<PostNetwork>>
+    fun getUserPost(@Header("Authorization") accessToken: String, @Path("userId") userId: Int): Single<Array<PostNetwork>>
 
     // ------------------------------- Profile methods --------------------------------
 
     @GET("/api/v0/me/")
-    fun getProfile(@Header("Authorization") accessToken: String): Observable<Profile>
+    fun getProfile(@Header("Authorization") accessToken: String): Single<Profile>
 
     @GET("/api/v0/profile/{userId}/")
-    fun getProfile(@Header("Authorization") accessToken: String, @Path("userId") userId: Int): Observable<Profile>
+    fun getProfile(@Header("Authorization") accessToken: String, @Path("userId") userId: Int): Single<Profile>
 
     @POST("/api/v0/me/vacancy/")
     fun createVacancy(@Header("Authorization") accessToken: String, @Body vacancyRequest: VacancyRequest): Single<Vacancy>
@@ -144,7 +163,8 @@ interface ApiController {
 
     @FormUrlEncoded
     @POST("/api/v0/save/info/")
-    fun saveInfoPost(@Header("Authorization") accessToken: String, @Field("important_info") postId: Int): Single<Unit>
+    fun saveInfoPost(@Header("Authorization") accessToken: String, @Field("important_info") postId: Int,
+                     @Field("user") user: Int = 0): Single<Unit>
 
     @GET("/api/v0/tags/")
     fun tags(@Header("Authorization") accessToken: String, @Query("page") page: Int): Observable<BaseListResponse<Tag>>
@@ -155,7 +175,23 @@ interface ApiController {
     @Multipart
     @POST("/api/v0/post/")
     fun sendPost(@Header("Authorization") accessToken: String,
-                 @PartMap params: Map<String, @JvmSuppressWildcards RequestBody>): Single<Post>
+                 @PartMap params: Map<String, @JvmSuppressWildcards RequestBody>): Single<PostNetwork>
+
+    @FormUrlEncoded
+    @POST("/api/v0/me/complaint/info/")
+    fun complaintInfo(@Header("Authorization") accessToken: String, @Field("important_info") postId: Int): Single<BaseResponse>
+
+    @FormUrlEncoded
+    @POST("/api/v0/me/complaint/post/")
+    fun complaintPost(@Header("Authorization") accessToken: String, @Field("post") postId: Int): Single<BaseResponse>
+
+    @FormUrlEncoded
+    @POST("/api/v0/me/complaint/news/")
+    fun complaintNews(@Header("Authorization") accessToken: String, @Field("news") postId: Int): Single<BaseResponse>
+
+    @FormUrlEncoded
+    @POST("/api/v0/me/complaint/poll/")
+    fun complaintPoll(@Header("Authorization") accessToken: String, @Field("question") postId: Int): Single<BaseResponse>
 
 
 }

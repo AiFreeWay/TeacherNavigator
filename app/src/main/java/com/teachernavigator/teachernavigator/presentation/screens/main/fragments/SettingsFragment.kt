@@ -11,7 +11,7 @@ import com.teachernavigator.teachernavigator.presentation.adapters.ViewPagerAdap
 import com.teachernavigator.teachernavigator.presentation.models.ViewPagerItemContainer
 import com.teachernavigator.teachernavigator.presentation.screens.common.BaseFragment
 import com.teachernavigator.teachernavigator.presentation.screens.main.fragments.abstractions.SettingsView
-import com.teachernavigator.teachernavigator.presentation.screens.main.presenters.FmtSettingsPresenter
+import com.teachernavigator.teachernavigator.presentation.screens.main.presenters.SettingsPresenter
 import com.teachernavigator.teachernavigator.presentation.screens.main.presenters.abstractions.ISettingsPresenter
 
 /**
@@ -28,7 +28,7 @@ class SettingsFragment : BaseFragment(), SettingsView {
     @BindView(R.id.fmt_view_pager_vp_body) lateinit var mVpTapeItems: ViewPager
 
     private lateinit var mAdapter: ViewPagerAdapter
-    private val mPresenter: ISettingsPresenter = FmtSettingsPresenter()
+    private val mPresenter: ISettingsPresenter = SettingsPresenter()
     private var mLastViewPagerPosition = 0
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {

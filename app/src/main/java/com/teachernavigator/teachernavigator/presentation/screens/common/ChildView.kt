@@ -1,7 +1,7 @@
 package com.teachernavigator.teachernavigator.presentation.screens.common
 
 /**
- * Created by root on 15.08.17.
+ * Created by root on 15.08.17
  */
 interface ChildView : BaseView {
 

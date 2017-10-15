@@ -1,5 +1,6 @@
 package com.teachernavigator.teachernavigator.application.utils
 
+import android.app.Activity
 import android.support.v4.app.Fragment
 import com.teachernavigator.teachernavigator.application.TeacherNavigatopApp
 
@@ -9,3 +10,4 @@ import com.teachernavigator.teachernavigator.application.TeacherNavigatopApp
 
 
 fun Fragment.rootComponent() = (activity.application as TeacherNavigatopApp).getRootComponent()
+fun Activity.rootComponent() = (application as TeacherNavigatopApp).getRootComponent()

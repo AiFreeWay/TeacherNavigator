@@ -1,5 +1,6 @@
 package com.teachernavigator.teachernavigator.presentation.models
 
+import com.teachernavigator.teachernavigator.data.models.PostNetwork
 import com.teachernavigator.teachernavigator.domain.models.Post
 import com.teachernavigator.teachernavigator.domain.models.Profile
 
@@ -13,14 +14,14 @@ class ProfilePostConteainer : Typed {
         this.profile = profile
     }
 
-    constructor(containerType: Int, post: Post) {
+    constructor(containerType: Int, post: PostNetwork) {
         this.containerType = containerType
         this.post = post
     }
 
     var containerType: Int = -1
     var profile: Profile? = null
-    var post: Post? = null
+    var post: PostNetwork? = null
 
     override fun getType(): Int = containerType
 }

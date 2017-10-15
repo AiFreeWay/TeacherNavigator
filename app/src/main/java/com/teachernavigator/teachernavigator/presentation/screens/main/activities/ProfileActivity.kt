@@ -7,21 +7,17 @@ import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.Toolbar
-import android.util.Log
-import android.view.*
+import android.view.Menu
+import android.view.MenuItem
+import android.view.View
 import android.widget.ImageView
 import android.widget.ProgressBar
 import butterknife.BindView
 import butterknife.ButterKnife
-import com.example.root.androidtest.application.utils.Logger
 import com.teachernavigator.teachernavigator.R
 import com.teachernavigator.teachernavigator.application.di.components.ParentScreenComponent
-import com.teachernavigator.teachernavigator.presentation.adapters.ProfileAdapterStrategy
-import com.teachernavigator.teachernavigator.presentation.adapters.StrategyMultiRvAdapter
-import com.teachernavigator.teachernavigator.presentation.facades.abstractions.IProfileFacade
 import com.teachernavigator.teachernavigator.presentation.models.ProfilePostConteainer
 import com.teachernavigator.teachernavigator.presentation.screens.main.activities.abstractions.ProfileView
 import com.teachernavigator.teachernavigator.presentation.screens.main.presenters.AcProfilePresenter
@@ -30,7 +26,7 @@ import java.io.File
 
 
 /**
- * Created by root on 18.09.17.
+ * Created by root on 18.09.17
  */
 class ProfileActivity : AppCompatActivity(), ProfileView {
 
@@ -48,23 +44,10 @@ class ProfileActivity : AppCompatActivity(), ProfileView {
     lateinit var mRvData: RecyclerView
 
     private val mPresenter: IProfilePresenter = AcProfilePresenter()
-    private lateinit var mAdapter: StrategyMultiRvAdapter<ProfilePostConteainer>
     private val mLifecycle: LifecycleRegistry = LifecycleRegistry(this)
     private var mAvatar: ImageView? = null
     private var mIsMyProfile = false
     private var mUserId = -1
-
-    private val mProfileFacade = object : IProfileFacade {
-
-        override fun onExit() {
-            exit()
-        }
-
-        override fun onChangePhoto(imageView: ImageView) {
-            mAvatar = imageView
-            getPicture()
-        }
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -74,9 +57,10 @@ class ProfileActivity : AppCompatActivity(), ProfileView {
         mPresenter.attachView(this)
         mIsMyProfile = intent.getBooleanExtra(IS_MY_PROFILE_KEY, false)
         mUserId = intent.getIntExtra(USER_ID_KEY, -1)
-        mAdapter = StrategyMultiRvAdapter(ProfileAdapterStrategy(mProfileFacade, mIsMyProfile, mPresenter.getPostControllerFacade()))
-        mRvData.layoutManager = LinearLayoutManager(this)
-        mRvData.adapter = mAdapter
+
+//        mAdapter = StrategyMultiRvAdapter(ProfileAdapterStrategy(mProfileFacade, mIsMyProfile, mPresenter.getPostControllerFacade()))
+//        mRvData.layoutManager = LinearLayoutManager(this)
+//        mRvData.adapter = mAdapter
     }
 
     override fun onStart() {
@@ -107,7 +91,7 @@ class ProfileActivity : AppCompatActivity(), ProfileView {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when(item.itemId) {
+        when (item.itemId) {
             android.R.id.home -> mPresenter.navigateBack()
             R.id.action_exit -> exit()
         }
@@ -115,7 +99,7 @@ class ProfileActivity : AppCompatActivity(), ProfileView {
     }
 
     override fun loadProfile(data: List<ProfilePostConteainer>) {
-        mAdapter.loadData(data)
+//        mAdapter.loadData(data)
     }
 
     override fun startProgress() {
@@ -133,8 +117,6 @@ class ProfileActivity : AppCompatActivity(), ProfileView {
     override fun setToolbarTitle(title: Int) {
         supportActionBar?.setTitle(title)
     }
-
-    override fun getParentScreenComponent(): ParentScreenComponent = mPresenter.getParentScreenComponent()
 
     override fun getFragmentLayoutId(): Int = 0
 
@@ -162,8 +144,9 @@ class ProfileActivity : AppCompatActivity(), ProfileView {
                 .setTitle(getString(R.string.you_want_exit))
                 .setPositiveButton(R.string.yes, { a, b ->
                     mPresenter.exit()
-                    a.dismiss() })
-                .setNegativeButton(R.string.no, { a, b -> a.dismiss()})
+                    a.dismiss()
+                })
+                .setNegativeButton(R.string.no, { a, b -> a.dismiss() })
                 .setCancelable(true)
                 .show()
     }

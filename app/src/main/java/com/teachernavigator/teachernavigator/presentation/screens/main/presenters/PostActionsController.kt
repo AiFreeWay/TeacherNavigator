@@ -2,14 +2,16 @@ package com.teachernavigator.teachernavigator.presentation.screens.main.presente
 
 import android.os.Bundle
 import android.util.Log.d
+import com.teachernavigator.teachernavigator.R
 import com.teachernavigator.teachernavigator.application.di.scopes.PerParentScreen
-import com.teachernavigator.teachernavigator.domain.controllers.IPostController
-import com.teachernavigator.teachernavigator.domain.models.Post
+import com.teachernavigator.teachernavigator.data.repository.abstractions.IPostsRepository
 import com.teachernavigator.teachernavigator.presentation.models.PostModel
 import com.teachernavigator.teachernavigator.presentation.screens.common.BasePresenter
 import com.teachernavigator.teachernavigator.presentation.screens.info.fragments.abstractions.PostActionsView
 import com.teachernavigator.teachernavigator.presentation.screens.main.fragments.PostCommentsFragment
 import com.teachernavigator.teachernavigator.presentation.screens.main.presenters.abstractions.IPostActionsController
+import com.teachernavigator.teachernavigator.presentation.utils.DialogUtils
+import com.teachernavigator.teachernavigator.presentation.utils.applySchedulers
 import ru.terrakok.cicerone.Router
 import javax.inject.Inject
 
@@ -18,51 +20,98 @@ import javax.inject.Inject
  */
 @PerParentScreen
 class PostActionsController
-@Inject constructor(val router: Router,
-                    private val postController: IPostController) : BasePresenter<PostActionsView>(), IPostActionsController {
+@Inject constructor(private val router: Router,
+                    private val repository: IPostsRepository) : BasePresenter<PostActionsView>(), IPostActionsController {
 
     override fun onLike(post: PostModel) =
-            addDissposable(postController.vote(post.id, true, post.type)
+            addDissposable(repository.vote(post.id, true, post.type)
+                    .map { it.is_error }
                     .doOnSubscribe { startProgress() }
                     .subscribe({ onVoted(true, post) }, this::onError))
 
     override fun onDislike(post: PostModel) =
-            addDissposable(postController.vote(post.id, false, post.type)
+            addDissposable(repository.vote(post.id, false, post.type)
+                    .map { it.is_error }
                     .doOnSubscribe { startProgress() }
                     .subscribe({ onVoted(false, post) }, this::onError))
 
-
     override fun onSave(post: PostModel) =
-            addDissposable(postController.save(post.id, post.type)
+            addDissposable(repository.save(post.id, post.type)
+                    .applySchedulers()
                     .doOnSubscribe { startProgress() }
                     .subscribe({ onSaved(post) }, this::onError))
 
-    override fun onSubscribe(post: PostModel) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    override fun onSubscribe(post: PostModel) =
+            addDissposable(DialogUtils.askPermission(mView!!.getContext(), R.string.ask_subscribe_to_user, post.authorName)
+                    .flatMap {
+                        repository.subscribe(post.authorId)
+                                .doOnSubscribe { startProgress() }
+                                .toMaybe()
+                    }
+                    .subscribe({ onSubscribed(post) }, this::onError))
+
+    override fun onComplain(post: PostModel) =
+            addDissposable(DialogUtils.askPermission(mView!!.getContext(), R.string.ask_complaint_to_post, post.shortTitle)
+                    .flatMap {
+                        repository.complaint(post.id, post.type)
+                                .doOnSubscribe { startProgress() }
+                                .toMaybe()
+                    }
+
+                    .subscribe({ onComplained(post) }, this::onError))
+
+    private fun onComplained(post: PostModel) {
+        stopProgress()
+        mView?.showToast(R.string.complaint_was_sent)
     }
 
-    override fun onReadMode(post: PostModel) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    private fun onSubscribed(post: PostModel) {
+        stopProgress()
+        mView?.showToast(R.string.you_are_subscribed)
     }
 
     private fun onSaved(post: PostModel) {
-        d(javaClass.name, "-> resl ->$post")
+        stopProgress()
+        mView?.showToast(R.string.post_is_saved)
     }
 
     override fun onComments(post: PostModel) = mView?.getParentView()?.let {
 
-        val postType = post.type
+        d(javaClass.name, "-> onComments -> type=${post.type.name}")
 
-        if (postType != null) {
-            val bundle = Bundle()
-            bundle.putInt(PostCommentsFragment.ARG_POST_ID, post.id)
-            bundle.putInt(PostCommentsFragment.ARG_POST_TYPE, postType.ordinal)
-            router.navigateTo(PostCommentsFragment.FRAGMENT_KEY, bundle)
-        } else {
-            onError(Error("Unknown post type"))
-        }
+        val bundle = Bundle()
+        bundle.putInt(PostCommentsFragment.ARG_POST_ID, post.id)
+        bundle.putInt(PostCommentsFragment.ARG_POST_TYPE, post.type.ordinal)
+        router.navigateTo(PostCommentsFragment.FRAGMENT_KEY, bundle)
 
     } ?: Unit
+
+    override fun onReadMore(post: PostModel) {
+
+        d(javaClass.name, "[${hashCode()}]-> onReadMore -> view=${mView}")
+
+        mView?.getParentView()?.let {
+
+
+            val bundle = Bundle()
+            bundle.putInt(PostCommentsFragment.ARG_POST_ID, post.id)
+            bundle.putInt(PostCommentsFragment.ARG_POST_TYPE, post.type.ordinal)
+            router.navigateTo(PostCommentsFragment.FRAGMENT_KEY, bundle)
+
+        }
+    }
+
+    override fun detachView() {
+        d(javaClass.name, "[${hashCode()}]-> Detach -> ${mView}")
+
+        super.detachView()
+    }
+
+    override fun attachView(view: PostActionsView) {
+        super.attachView(view)
+
+        d(javaClass.name, "[${hashCode()}]-> Attach -> ${mView}")
+    }
 
     private fun onVoted(isLiked: Boolean, post: PostModel) {
         stopProgress()
@@ -84,23 +133,19 @@ class PostActionsController
         mView?.updatePost(post)
     }
 
-
     private fun onError(error: Throwable) {
         stopProgress()
         error.printStackTrace()
         doOnError(error)
     }
 
+
     private fun startProgress() = mView?.apply {
         getParentView().startProgress()
-        showRefresh()
     }
 
     private fun stopProgress() = mView?.apply {
         getParentView().stopProgress()
-        hideRefresh()
     }
-
-
 }
 

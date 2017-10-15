@@ -6,6 +6,7 @@ import com.teachernavigator.teachernavigator.application.di.scopes.PerParentScre
 import com.teachernavigator.teachernavigator.data.models.PostNetwork
 import com.teachernavigator.teachernavigator.domain.models.PostType
 import com.teachernavigator.teachernavigator.presentation.models.PostModel
+import com.teachernavigator.teachernavigator.presentation.utils.makeLess
 import v_aniskin.com.trucktaxi.application.utils.DateMapper
 import javax.inject.Inject
 
@@ -19,23 +20,30 @@ class PostTransformerFactory
 constructor(private val context: Context,
             private val commentTransformer: CommentTransformer) {
 
+    companion object {
+        private const val SHORT_TITLE_LENGTH = 20
+        private const val SHORT_TEXT_LENGTH = 120
+    }
+
     private val transformers = SparseArrayCompat<PostTransformer>()
 
-    fun build(postType: PostType): EntityTransformer<PostNetwork, PostModel> =
-            transformers.get(postType.ordinal, createAndSave(postType))
+    fun build(postType: PostType, shorter: Boolean): EntityTransformer<PostNetwork, PostModel> =
+            transformers.get(postType.ordinal, createAndSave(postType, shorter))
 
-    private fun createAndSave(postType: PostType) =
-            PostTransformer(postType, context, commentTransformer).apply { transformers.put(postType.ordinal, this) }
+    private fun createAndSave(postType: PostType, shorter: Boolean) =
+            PostTransformer(postType, context, shorter, commentTransformer).apply { transformers.put(postType.ordinal, this) }
 
     private class PostTransformer(private val postType: PostType,
                                   private val context: Context, // TODO Will be needed in future
+                                  private val shorter: Boolean,
                                   private val commentTransformer: CommentTransformer) : EntityTransformer<PostNetwork, PostModel> {
 
         override fun transform(from: PostNetwork): PostModel =
                 PostModel(
                         id = from.id ?: -1,
-                        title = from.title ?: "",
-                        text = from.text ?: "",
+                        title = from.title?.let { if (shorter) it.makeLess(SHORT_TEXT_LENGTH) else it } ?: "",
+                        shortTitle = from.title.makeLess(SHORT_TITLE_LENGTH) ?: "",
+                        text = from.text?.let { if (shorter) it.makeLess(SHORT_TEXT_LENGTH) else it } ?: "",
                         created = if (!from.created.isNullOrBlank()) DateMapper.mapDate(from.created!!) else "",
                         tags = from.tags.orEmpty(),
                         count_likes = from.count_likes ?: 0,
@@ -45,9 +53,9 @@ constructor(private val context: Context,
                         comments = from.comments?.map(commentTransformer::transform) ?: emptyList(),
                         authorId = from.author?.id ?: -1,
                         authorName = from.author?.full_name ?: "",
-                        authorAvatar = from.author?.avatars?.firstOrNull()?.avatar ?: "",
-                        file = from.file,
-                        type = this.postType
+                        authorAvatar = from.author?.avatars?.firstOrNull()?.avatar,
+                        type = this.postType,
+                        file = from.file
                 )
     }
 

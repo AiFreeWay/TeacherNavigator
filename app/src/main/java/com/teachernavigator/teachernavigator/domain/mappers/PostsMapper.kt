@@ -52,9 +52,6 @@ class PostsMapper {
 
         fun mapPostToSavePostRequest(post: Post): SavePostRequest = SavePostRequest(post.id!!, "mock")
 
-        fun mapPostToSubscribeRequesttRequest(post: Post): SubscribeRequest = SubscribeRequest(post.author!!.id)
-
-        fun mapPostToVoteRequest(vote: Boolean, post: Post): VoteRequest = VoteRequest(post.id!!, vote, "post")
 
         private fun replaceTextToInt(number: Int?): Int {
             if (number == null) {

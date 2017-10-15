@@ -8,4 +8,7 @@ interface ImportantToKnowView : ChildView, PostActionsView {
 
     fun setThemes(infoThemes: List<Info>)
     fun setInfoPosts(posts: List<PostModel>)
+
+    fun  showRefresh()
+    fun  hideRefresh()
 }

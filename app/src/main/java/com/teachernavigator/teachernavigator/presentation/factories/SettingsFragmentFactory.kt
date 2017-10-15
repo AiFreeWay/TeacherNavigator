@@ -7,7 +7,7 @@ import com.teachernavigator.teachernavigator.presentation.screens.settings.fragm
 import com.teachernavigator.teachernavigator.presentation.screens.settings.fragments.ProfileSettingsFragment
 
 /**
- * Created by root on 18.09.17.
+ * Created by root on 18.09.17
  */
 class SettingsFragmentFactory {
 

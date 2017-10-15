@@ -11,11 +11,9 @@ import butterknife.BindView
 import butterknife.ButterKnife
 import com.teachernavigator.teachernavigator.R
 import com.teachernavigator.teachernavigator.domain.models.Comment
-import com.teachernavigator.teachernavigator.presentation.adapters.MultyRvAdapter
-import com.teachernavigator.teachernavigator.presentation.adapters.holders.MyCommentHolder
 import com.teachernavigator.teachernavigator.presentation.screens.common.BaseFragment
 import com.teachernavigator.teachernavigator.presentation.screens.main.fragments.abstractions.MyCommentsView
-import com.teachernavigator.teachernavigator.presentation.screens.main.presenters.FmtMyCommentsPresenter
+import com.teachernavigator.teachernavigator.presentation.screens.main.presenters.MyCommentsPresenter
 import com.teachernavigator.teachernavigator.presentation.screens.main.presenters.abstractions.IMyCommentsPresenter
 
 /**
@@ -30,8 +28,8 @@ class MyCommentsFragment : BaseFragment(), MyCommentsView {
     @BindView(R.id.fmt_list_rv_list) lateinit var mRvList: RecyclerView
     @BindView(R.id.fmt_list_tv_no_data) lateinit var mTvNoData: TextView
 
-    private val mPresenter: IMyCommentsPresenter = FmtMyCommentsPresenter()
-    private lateinit var mAdapter: MultyRvAdapter<Comment>
+    private val mPresenter: IMyCommentsPresenter = MyCommentsPresenter()
+    private lateinit var mAdapter: Nothing //: MultyRvAdapter<Comment>
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view: View = inflater!!.inflate(R.layout.fmt_list, container, false)
@@ -42,7 +40,7 @@ class MyCommentsFragment : BaseFragment(), MyCommentsView {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         mPresenter.attachView(this)
-        mAdapter = MultyRvAdapter(MyCommentHolder(context, mPresenter.getCommentControllerFacade()))
+        mAdapter = TODO()
         mRvList.layoutManager = LinearLayoutManager(context)
         mRvList.adapter = mAdapter
     }
@@ -53,7 +51,7 @@ class MyCommentsFragment : BaseFragment(), MyCommentsView {
     }
 
     override fun loadComments(posts: List<Comment>) {
-        mAdapter.loadData(posts)
+        // mAdapter.loadData(posts)
     }
 
     override fun showNoDataText() {

@@ -10,6 +10,7 @@ import com.teachernavigator.teachernavigator.application.di.components.DaggerPar
 import com.teachernavigator.teachernavigator.application.di.components.ParentScreenComponent
 import com.teachernavigator.teachernavigator.application.di.modules.ParentScreenModule
 import com.teachernavigator.teachernavigator.application.utils.rootComponent
+import com.teachernavigator.teachernavigator.presentation.adapters.holders.InfoPostVHBuilder
 import com.teachernavigator.teachernavigator.presentation.adapters.holders.InfoVHBuilder
 import com.teachernavigator.teachernavigator.presentation.adapters.holders.TitleVHBuilder
 import com.teachernavigator.teachernavigator.presentation.models.Info
@@ -19,7 +20,6 @@ import com.teachernavigator.teachernavigator.presentation.screens.info.fragments
 import com.teachernavigator.teachernavigator.presentation.screens.info.presenters.abstractions.IImportantToKnowPresenter
 import com.teachernavigator.teachernavigator.presentation.screens.main.presenters.abstractions.IPostActionsController
 import kotlinx.android.synthetic.main.fmt_important_to_know.*
-import layout.InfoPostVHBuilder
 import ru.lliepmah.lib.UniversalAdapter
 import javax.inject.Inject
 
@@ -31,8 +31,6 @@ class ImportantToKnowFragment : BaseFragment(), ImportantToKnowView {
     companion object {
         val FRAGMENT_KEY = "important_to_know_fragment"
     }
-
-    private lateinit var mParentScreenComponent: ParentScreenComponent
 
     @Inject
     lateinit var presenter: IImportantToKnowPresenter
@@ -49,7 +47,8 @@ class ImportantToKnowFragment : BaseFragment(), ImportantToKnowView {
                         postController::onComments,
                         postController::onSave,
                         null,
-                        null // postController::onReadMore
+                        null,
+                        null
                 ),
                 InfoVHBuilder(presenter::onThemeChanged),
                 TitleVHBuilder())
@@ -60,7 +59,7 @@ class ImportantToKnowFragment : BaseFragment(), ImportantToKnowView {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        inject()
+        mParentScreenComponent.inject(this)
         presenter.attachView(this)
         postController.attachView(this)
 
@@ -68,14 +67,6 @@ class ImportantToKnowFragment : BaseFragment(), ImportantToKnowView {
         vListSwipeLayout.setColorSchemeResources(R.color.colorAccent)
         vListRvData.layoutManager = LinearLayoutManager(context)
         vListRvData.adapter = adapter
-    }
-
-    private fun inject() {
-        mParentScreenComponent = DaggerParentScreenComponent.builder()
-                .rootComponent(rootComponent())
-                .parentScreenModule(ParentScreenModule(getParentView()))
-                .build()
-                .also { it.inject(this) }
     }
 
     override fun setThemes(infoThemes: List<Info>) {

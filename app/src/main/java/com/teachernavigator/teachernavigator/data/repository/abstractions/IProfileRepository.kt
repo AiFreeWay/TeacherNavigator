@@ -13,9 +13,9 @@ import java.io.File
 interface IProfileRepository {
 
     fun loadAbout(): Single<List<About>>
-    fun getProfile(): Observable<Profile>
-    fun getProfile(userId: Int): Observable<Profile>
+    fun getProfile(): Single<Profile>
+    fun getProfile(userId: Int): Single<Profile>
     fun exit()
-    fun uploadPhoto(file: File): Observable<File>
+    fun uploadPhoto(file: File): Single<File>
     fun askSpecialist(specialist: Specialist, question: String): Single<Unit>
 }

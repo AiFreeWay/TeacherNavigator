@@ -6,7 +6,7 @@ import io.reactivex.Observable
 import io.reactivex.Single
 
 /**
- * Created by root on 08.09.17.
+ * Created by root on 08.09.17
  */
 interface ICommentsInteractor {
 

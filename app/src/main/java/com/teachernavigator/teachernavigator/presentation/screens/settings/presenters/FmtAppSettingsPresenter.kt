@@ -16,16 +16,12 @@ import com.teachernavigator.teachernavigator.presentation.screens.settings.prese
 import javax.inject.Inject
 
 /**
- * Created by root on 18.09.17.
+ * Created by root on 18.09.17
  */
 class FmtAppSettingsPresenter : BasePresenter<AppSettingsView>(), IAppSettingsPresenter {
 
     @Inject
     lateinit var mSettingsInteractor: ISettingsInteractor
-
-    init {
-        Logger.logDebug("created PRESENTER FmtAppSettingsPresenter")
-    }
 
     private var mSettings = Settings()
 
@@ -34,14 +30,10 @@ class FmtAppSettingsPresenter : BasePresenter<AppSettingsView>(), IAppSettingsPr
         mDisposables.clear()
     }
 
-    override fun attachView(view: AppSettingsView) {
-        super.attachView(view)
-        inject()
-    }
 
     override fun getSettings() {
         mDisposables.add(mSettingsInteractor.getSettings()
-                .doOnSubscribe { this::doOnSubscribe }
+                .doOnSubscribe { doOnSubscribe() }
                 .subscribe(this::doOnGetSettings, this::doOnError))
     }
 
@@ -79,9 +71,4 @@ class FmtAppSettingsPresenter : BasePresenter<AppSettingsView>(), IAppSettingsPr
         mView!!.lockUi()
     }
 
-    private fun inject() {
-        mView!!.getParentView()
-                .getParentScreenComponent()
-                .inject(this)
-    }
 }

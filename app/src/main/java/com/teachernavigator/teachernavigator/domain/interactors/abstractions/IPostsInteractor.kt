@@ -7,6 +7,7 @@ import com.teachernavigator.teachernavigator.domain.models.Post
 import com.teachernavigator.teachernavigator.domain.models.PostType
 import com.teachernavigator.teachernavigator.domain.models.Tag
 import com.teachernavigator.teachernavigator.presentation.models.Info
+import com.teachernavigator.teachernavigator.presentation.models.PostsSource
 import io.reactivex.Observable
 import io.reactivex.Single
 
@@ -15,14 +16,14 @@ import io.reactivex.Single
  */
 interface IPostsInteractor {
 
-    fun getBestPosts(): Observable<List<Post>>
-    fun getInterviewsPosts(): Observable<List<Post>>
-    fun getLatestPosts(): Observable<List<Post>>
-    fun getNewsPosts(): Observable<List<Post>>
-    fun getUserPost(userId: Int): Observable<List<Post>>
-    fun getPostById(postId: Int): Observable<Post>
-    fun getSavedPosts(): Observable<List<Post>>
-    fun getMyPublications(): Observable<List<Post>>
+    fun getPosts(postType: PostType, postsSource: PostsSource): Single<List<PostNetwork>>
+
+    fun getPolls(): Single<List<PostNetwork>>
+    fun getLatestPosts(): Single<List<PostNetwork>>
+    fun getNewsPosts(): Single<List<PostNetwork>>
+    fun getUserPost(userId: Int): Single<List<PostNetwork>>
+    fun getSavedPosts(): Single<List<PostNetwork>>
+    fun getMyPublications(): Single<List<PostNetwork>>
 
     fun getInfoPosts(currentTheme: Info): Single<List<PostNetwork>>
     fun getPost(postId: Int, postType: PostType): Single<PostNetwork>
@@ -30,5 +31,7 @@ interface IPostsInteractor {
     fun getTags(): Single<List<Tag>>
     fun getTrends(): Single<List<Tag>>
 
-    fun sendPost(title: String, text: String, tags: List<String>,fileInfo: FileInfo?): Single<Post>
+    fun sendPost(title: String, text: String, tags: List<String>,fileInfo: FileInfo?): Single<PostNetwork>
+
+    fun getBestPosts(): Single<List<PostNetwork>>
 }

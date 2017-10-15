@@ -8,7 +8,7 @@ import butterknife.ButterKnife
 import com.teachernavigator.teachernavigator.R
 import com.teachernavigator.teachernavigator.presentation.screens.common.BaseFragment
 import com.teachernavigator.teachernavigator.presentation.screens.settings.fragments.abstractions.ProfileSettingsView
-import com.teachernavigator.teachernavigator.presentation.screens.settings.presenters.FmtProfileSettingsPresenter
+import com.teachernavigator.teachernavigator.presentation.screens.settings.presenters.ProfileSettingsPresenter
 import com.teachernavigator.teachernavigator.presentation.screens.settings.presenters.abstractions.IProfileSettingsPresenter
 
 /**
@@ -16,7 +16,7 @@ import com.teachernavigator.teachernavigator.presentation.screens.settings.prese
  */
 class ProfileSettingsFragment : BaseFragment(), ProfileSettingsView {
 
-    private val mPresenter: IProfileSettingsPresenter = FmtProfileSettingsPresenter()
+    private val mPresenter: IProfileSettingsPresenter = ProfileSettingsPresenter()
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view: View = inflater!!.inflate(R.layout.fmt_profile_settings, container, false)

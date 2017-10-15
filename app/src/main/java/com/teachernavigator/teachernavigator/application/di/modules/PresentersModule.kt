@@ -1,9 +1,11 @@
 package com.teachernavigator.teachernavigator.application.di.modules
 
 import com.teachernavigator.teachernavigator.application.di.scopes.PerParentScreen
+import com.teachernavigator.teachernavigator.presentation.screens.auth.presenters.AuthParentPresenter
 import com.teachernavigator.teachernavigator.presentation.screens.auth.presenters.AuthPresenter
 import com.teachernavigator.teachernavigator.presentation.screens.auth.presenters.RegistrationPresenter
 import com.teachernavigator.teachernavigator.presentation.screens.auth.presenters.RestorePasswordPresenter
+import com.teachernavigator.teachernavigator.presentation.screens.auth.presenters.abstractions.IAuthParentPresenter
 import com.teachernavigator.teachernavigator.presentation.screens.auth.presenters.abstractions.IAuthPresenter
 import com.teachernavigator.teachernavigator.presentation.screens.auth.presenters.abstractions.IRegistrationPresenter
 import com.teachernavigator.teachernavigator.presentation.screens.auth.presenters.abstractions.IRestorePasswordPresenter
@@ -14,7 +16,9 @@ import com.teachernavigator.teachernavigator.presentation.screens.jobs.presenter
 import com.teachernavigator.teachernavigator.presentation.screens.main.presenters.*
 import com.teachernavigator.teachernavigator.presentation.screens.main.presenters.abstractions.*
 import com.teachernavigator.teachernavigator.presentation.screens.tape.presenters.PostSearchPresenter
+import com.teachernavigator.teachernavigator.presentation.screens.tape.presenters.PostsListPresenter
 import com.teachernavigator.teachernavigator.presentation.screens.tape.presenters.abstractions.IPostSearchPresenter
+import com.teachernavigator.teachernavigator.presentation.screens.tape.presenters.abstractions.IPostsListPresenter
 import dagger.Module
 import dagger.Provides
 
@@ -111,5 +115,13 @@ class PresentersModule {
     @Provides
     @PerParentScreen
     fun provideTapePresenter(presenter: TapePresenter): ITapePresenter = presenter
+
+    @Provides
+    @PerParentScreen
+    fun providePostsListPresenter(presenter: PostsListPresenter): IPostsListPresenter = presenter
+
+    @Provides
+    @PerParentScreen
+    fun provideAcAuthParentPresenter(presenter: AuthParentPresenter): IAuthParentPresenter = presenter
 
 }

@@ -5,7 +5,7 @@ import android.graphics.*
 import com.squareup.picasso.Transformation
 
 /**
- * Created by root on 30.08.17.
+ * Created by root on 30.08.17
  */
 
 class CircleTransform : Transformation {

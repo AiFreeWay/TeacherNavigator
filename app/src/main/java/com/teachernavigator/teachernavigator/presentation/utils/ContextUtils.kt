@@ -4,6 +4,7 @@ import android.content.Context
 import android.database.Cursor
 import android.net.Uri
 import android.provider.MediaStore
+import android.support.v4.app.Fragment
 import android.widget.Toast
 import com.teachernavigator.teachernavigator.R
 import com.teachernavigator.teachernavigator.presentation.screens.common.BaseView
@@ -29,3 +30,10 @@ fun Context.getPathFromUri(contentUri: Uri): String {
 
 fun BaseView.notImplemented() =
         Toast.makeText(getContext(), R.string.not_implemented, Toast.LENGTH_LONG).show()
+
+
+inline fun <reified T> Fragment.arg(key: String): T =
+        arguments.get(key) as T
+
+inline fun <reified T> Fragment.argNullable(key: String): T? =
+        arguments?.get(key) as? T

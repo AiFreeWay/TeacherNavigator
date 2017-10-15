@@ -25,8 +25,6 @@ class SupportFragment : BaseFragment(), SupportView {
         val FRAGMENT_KEY = "support_fragment"
     }
 
-    private lateinit var mParentScreenComponent: ParentScreenComponent
-
     @Inject
     lateinit var supportPresenter: ISupportPresenter
 
@@ -46,16 +44,8 @@ class SupportFragment : BaseFragment(), SupportView {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        inject()
+        mParentScreenComponent.inject(this)
         supportPresenter.attachView(this)
-    }
-
-    private fun inject() {
-        mParentScreenComponent = DaggerParentScreenComponent.builder()
-                .rootComponent(rootComponent())
-                .parentScreenModule(ParentScreenModule(getParentView()))
-                .build()
-                .also { it.inject(this) }
     }
 
 }

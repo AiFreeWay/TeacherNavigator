@@ -6,11 +6,10 @@ import com.teachernavigator.teachernavigator.presentation.screens.auth.activitie
 import com.teachernavigator.teachernavigator.presentation.screens.common.ViewAttacher
 
 /**
- * Created by root on 24.08.17.
+ * Created by root on 24.08.17
  */
 interface IAuthParentPresenter : ViewAttacher<AuthParentView> {
 
     fun openStartFragment(savedState: Bundle?)
-    fun getParentScreenComponent(): ParentScreenComponent
     fun navigateBack()
 }

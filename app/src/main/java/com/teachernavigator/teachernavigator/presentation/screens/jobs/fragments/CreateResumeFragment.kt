@@ -12,10 +12,6 @@ import com.miguelbcr.ui.rx_paparazzo2.entities.FileData
 import com.miguelbcr.ui.rx_paparazzo2.entities.Response
 import com.tbruyelle.rxpermissions2.RxPermissions
 import com.teachernavigator.teachernavigator.R
-import com.teachernavigator.teachernavigator.application.di.components.DaggerParentScreenComponent
-import com.teachernavigator.teachernavigator.application.di.components.ParentScreenComponent
-import com.teachernavigator.teachernavigator.application.di.modules.ParentScreenModule
-import com.teachernavigator.teachernavigator.application.utils.rootComponent
 import com.teachernavigator.teachernavigator.presentation.screens.common.BaseFragment
 import com.teachernavigator.teachernavigator.presentation.screens.jobs.fragments.abstractions.CreateResumeView
 import com.teachernavigator.teachernavigator.presentation.screens.jobs.presenters.abstractions.ICreateResumePresenter
@@ -31,12 +27,9 @@ import javax.inject.Inject
 
 class CreateResumeFragment : BaseFragment(), CreateResumeView {
 
-
     companion object {
         val FRAGMENT_KEY = "create_resume_fragment"
     }
-
-    private lateinit var mParentScreenComponent: ParentScreenComponent
 
     @Inject
     lateinit var createResumePresenter: ICreateResumePresenter
@@ -56,7 +49,6 @@ class CreateResumeFragment : BaseFragment(), CreateResumeView {
     }
 
     private fun attachFile() {
-
         rxPermissions
                 .request(Manifest.permission.READ_EXTERNAL_STORAGE)
                 .map { if (!it) throw Error("Permission Denied") }
@@ -95,20 +87,11 @@ class CreateResumeFragment : BaseFragment(), CreateResumeView {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        inject()
+        mParentScreenComponent.inject(this)
         createResumePresenter.attachView(this)
-    }
-
-    private fun inject() {
-        mParentScreenComponent = DaggerParentScreenComponent.builder()
-                .rootComponent(rootComponent())
-                .parentScreenModule(ParentScreenModule(getParentView()))
-                .build()
-                .also { it.inject(this) }
     }
 
     override fun errorValidation(validationResId: Int, fieldLabelResId: Int) =
             showToast(getString(validationResId, getString(fieldLabelResId)))
-
 
 }

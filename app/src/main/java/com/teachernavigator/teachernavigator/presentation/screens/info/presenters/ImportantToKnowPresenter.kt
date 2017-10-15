@@ -39,7 +39,7 @@ class ImportantToKnowPresenter
 
     private fun loadPosts() = currentTheme?.let {
         addDissposable(postsInteractor.getInfoPosts(it)
-                .transformListEntity(postTransformerFactory.build(PostType.importantinfo))
+                .transformListEntity(postTransformerFactory.build(PostType.importantinfo, false))
                 .doOnSubscribe { startProgress() }
                 .subscribe(this::onLoaded, this::onError))
     }

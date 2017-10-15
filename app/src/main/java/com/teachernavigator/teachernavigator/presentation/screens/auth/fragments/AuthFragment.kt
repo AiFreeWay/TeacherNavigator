@@ -6,10 +6,6 @@ import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.teachernavigator.teachernavigator.R
-import com.teachernavigator.teachernavigator.application.di.components.DaggerParentScreenComponent
-import com.teachernavigator.teachernavigator.application.di.components.ParentScreenComponent
-import com.teachernavigator.teachernavigator.application.di.modules.ParentScreenModule
-import com.teachernavigator.teachernavigator.application.utils.rootComponent
 import com.teachernavigator.teachernavigator.presentation.screens.auth.fragments.abstractions.AuthView
 import com.teachernavigator.teachernavigator.presentation.screens.auth.presenters.abstractions.IAuthPresenter
 import com.teachernavigator.teachernavigator.presentation.screens.common.BaseFragment
@@ -27,8 +23,6 @@ class AuthFragment : BaseFragment(), AuthView {
         val FRAGMENT_KEY = "auth_fragment"
     }
 
-    private lateinit var mParentScreenComponent: ParentScreenComponent
-
     @Inject
     lateinit var presenter: IAuthPresenter
 
@@ -37,7 +31,7 @@ class AuthFragment : BaseFragment(), AuthView {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        inject()
+        mParentScreenComponent.inject(this)
         presenter.attachView(this)
 
         fmtAuthIvVk.setOnClickListener { presenter.singInViaVkontakte() }
@@ -54,14 +48,6 @@ class AuthFragment : BaseFragment(), AuthView {
         }
 
         fmtAuthTvSingUp.setOnClickListener { presenter.openSingUpScreen() }
-    }
-
-    private fun inject() {
-        mParentScreenComponent = DaggerParentScreenComponent.builder()
-                .rootComponent(rootComponent())
-                .parentScreenModule(ParentScreenModule(getParentView()))
-                .build()
-                .also { it.inject(this) }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

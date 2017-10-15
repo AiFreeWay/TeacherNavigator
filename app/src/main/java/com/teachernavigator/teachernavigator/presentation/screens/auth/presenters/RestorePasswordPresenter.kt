@@ -33,11 +33,6 @@ class RestorePasswordPresenter
         mDisposables.clear()
     }
 
-    override fun attachView(view: RestorePasswordView) {
-        super.attachView(view)
-        inject()
-    }
-
     override fun doOnError(error: Throwable) {
         super.doOnError(error)
         stopProgress()
@@ -71,22 +66,17 @@ class RestorePasswordPresenter
     private fun doOnSingRestore(result: Monade) {
         stopProgress()
         if (!result.isError)
-            mView!!.showToast(getContext().getString(R.string.account_created_text))
+            mView?.showToast(getContext().getString(R.string.account_created_text))
     }
 
-    private fun inject() {
-        mView!!.getParentView()
-                .getParentScreenComponent()
-                .inject(this)
-    }
 
     private fun startProgress() {
-        mView!!.getParentView().startProgress()
-        mView!!.lockUi()
+        mView?.getParentView()?.startProgress()
+        mView?.lockUi()
     }
 
     private fun stopProgress() {
-        mView!!.getParentView().stopProgress()
-        mView!!.unlockUi()
+        mView?.getParentView()?.stopProgress()
+        mView?.unlockUi()
     }
 }

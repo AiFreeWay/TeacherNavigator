@@ -6,10 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.teachernavigator.teachernavigator.R
-import com.teachernavigator.teachernavigator.application.di.components.DaggerParentScreenComponent
-import com.teachernavigator.teachernavigator.application.di.components.ParentScreenComponent
-import com.teachernavigator.teachernavigator.application.di.modules.ParentScreenModule
-import com.teachernavigator.teachernavigator.application.utils.rootComponent
 import com.teachernavigator.teachernavigator.presentation.adapters.holders.ResumeHolderBuilder
 import com.teachernavigator.teachernavigator.presentation.models.ResumeModel
 import com.teachernavigator.teachernavigator.presentation.screens.common.BaseFragment
@@ -28,8 +24,6 @@ class ResumeListFragment : BaseFragment(), ResumeListView {
         val FRAGMENT_KEY = "resume_list_fragment"
     }
 
-    private lateinit var mParentScreenComponent: ParentScreenComponent
-
     @Inject
     lateinit var resumeListPresetner: IResumeListPresetner
 
@@ -42,21 +36,13 @@ class ResumeListFragment : BaseFragment(), ResumeListView {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        inject()
+        mParentScreenComponent.inject(this)
         resumeListPresetner.attachView(this)
 
         vListSwipeLayout.setOnRefreshListener(resumeListPresetner::refresh)
         vListSwipeLayout.setColorSchemeResources(R.color.colorAccent)
         vListRvData.layoutManager = LinearLayoutManager(context)
         vListRvData.adapter = adapter
-    }
-
-    private fun inject() {
-        mParentScreenComponent = DaggerParentScreenComponent.builder()
-                .rootComponent(rootComponent())
-                .parentScreenModule(ParentScreenModule(getParentView()))
-                .build()
-                .also { it.inject(this) }
     }
 
     override fun setResumes(listOfResume: List<ResumeModel>) {

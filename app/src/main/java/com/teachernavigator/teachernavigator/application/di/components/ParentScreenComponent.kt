@@ -5,14 +5,15 @@ import com.teachernavigator.teachernavigator.application.di.modules.ParentScreen
 import com.teachernavigator.teachernavigator.application.di.modules.PresentersModule
 import com.teachernavigator.teachernavigator.application.di.scopes.PerParentScreen
 import com.teachernavigator.teachernavigator.data.repository.abstractions.IAuthRepository
+import com.teachernavigator.teachernavigator.data.repository.abstractions.IPostsRepository
 import com.teachernavigator.teachernavigator.data.repository.abstractions.IProfileRepository
 import com.teachernavigator.teachernavigator.data.repository.abstractions.ISettingsRepository
-import com.teachernavigator.teachernavigator.data.repository.abstractions.ITapeRepository
 import com.teachernavigator.teachernavigator.domain.controllers.IPostController
+import com.teachernavigator.teachernavigator.presentation.screens.auth.activities.AuthActivity
 import com.teachernavigator.teachernavigator.presentation.screens.auth.fragments.AuthFragment
 import com.teachernavigator.teachernavigator.presentation.screens.auth.fragments.RegistrationFragment
 import com.teachernavigator.teachernavigator.presentation.screens.auth.fragments.RestorePasswordFragment
-import com.teachernavigator.teachernavigator.presentation.screens.auth.presenters.AcAuthParentPresenter
+import com.teachernavigator.teachernavigator.presentation.screens.auth.presenters.AuthParentPresenter
 import com.teachernavigator.teachernavigator.presentation.screens.auth.presenters.AuthPresenter
 import com.teachernavigator.teachernavigator.presentation.screens.auth.presenters.RegistrationPresenter
 import com.teachernavigator.teachernavigator.presentation.screens.auth.presenters.RestorePasswordPresenter
@@ -25,22 +26,21 @@ import com.teachernavigator.teachernavigator.presentation.screens.main.fragments
 import com.teachernavigator.teachernavigator.presentation.screens.main.fragments.TapeFragment
 import com.teachernavigator.teachernavigator.presentation.screens.main.presenters.*
 import com.teachernavigator.teachernavigator.presentation.screens.settings.presenters.FmtAppSettingsPresenter
-import com.teachernavigator.teachernavigator.presentation.screens.settings.presenters.FmtProfileSettingsPresenter
+import com.teachernavigator.teachernavigator.presentation.screens.settings.presenters.ProfileSettingsPresenter
+import com.teachernavigator.teachernavigator.presentation.screens.tape.fragments.PostsListFragment
 import com.teachernavigator.teachernavigator.presentation.screens.tape.fragments.PostsSearchFragment
-import com.teachernavigator.teachernavigator.presentation.screens.tape.presenters.AcPostCommentsPresenter
-import com.teachernavigator.teachernavigator.presentation.screens.tape.presenters.AcPostDetailPresenter
-import com.teachernavigator.teachernavigator.presentation.screens.tape.presenters.FmtPostsListPresenter
 import com.teachernavigator.teachernavigator.presentation.screens.tape.presenters.PostSearchPresenter
+import com.teachernavigator.teachernavigator.presentation.screens.tape.presenters.PostsListPresenter
 import dagger.Component
 
 /**
- * Created by root on 14.08.17.
+ * Created by root on 14.08.17
  */
 @PerParentScreen
 @Component(modules = arrayOf(ParentScreenModule::class, PresentersModule::class), dependencies = arrayOf(RootComponent::class))
 interface ParentScreenComponent {
 
-    fun provideTapeRepository(): ITapeRepository
+    fun provideTapeRepository(): IPostsRepository
     fun provideAuthRepository(): IAuthRepository
     fun provideSettingsRepository(): ISettingsRepository
     fun provideProfileRepository(): IProfileRepository
@@ -52,21 +52,19 @@ interface ParentScreenComponent {
 
     fun inject(presenter: AcProfilePresenter)
     fun inject(presenter: TapePresenter)
-    fun inject(presenter: FmtMyCommentsPresenter)
+    fun inject(presenter: MyCommentsPresenter)
     fun inject(presenter: SavedPostsPresenter)
-    fun inject(presenter: FmtMyPublicationsPresenter)
-    fun inject(presenter: FmtSettingsPresenter)
+    fun inject(presenter: MyPublicationsPresenter)
+    fun inject(presenter: SettingsPresenter)
     fun inject(presenter: AddPublicationPresenter)
 
     //Tape presenters
     fun inject(presenter: PostSearchPresenter)
 
-    fun inject(presenter: AcPostDetailPresenter)
-    fun inject(presenter: AcPostCommentsPresenter)
-    fun inject(presenter: FmtPostsListPresenter)
+    fun inject(presenter: PostsListPresenter)
 
     //Auth presenters
-    fun inject(presenter: AcAuthParentPresenter)
+    fun inject(presenter: AuthParentPresenter)
 
     fun inject(presenter: AuthPresenter)
     fun inject(presenter: RegistrationPresenter)
@@ -75,7 +73,7 @@ interface ParentScreenComponent {
     //Settings presenters
     fun inject(presenter: FmtAppSettingsPresenter)
 
-    fun inject(presenter: FmtProfileSettingsPresenter)
+    fun inject(presenter: ProfileSettingsPresenter)
 
     //Job fragments
     fun inject(jobsBankFragment: JobsBankFragment)
@@ -103,5 +101,7 @@ interface ParentScreenComponent {
     fun inject(postsSearchFragment: PostsSearchFragment)
     fun inject(savedPostsFragment: SavedPostsFragment)
     fun inject(tapeFragment: TapeFragment)
+    fun inject(postsListFragment: PostsListFragment)
+    fun inject(authActivity: AuthActivity)
 
 }

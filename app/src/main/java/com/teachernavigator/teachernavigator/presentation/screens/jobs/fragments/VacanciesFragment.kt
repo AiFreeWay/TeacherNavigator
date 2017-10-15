@@ -6,10 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.teachernavigator.teachernavigator.R
-import com.teachernavigator.teachernavigator.application.di.components.DaggerParentScreenComponent
-import com.teachernavigator.teachernavigator.application.di.components.ParentScreenComponent
-import com.teachernavigator.teachernavigator.application.di.modules.ParentScreenModule
-import com.teachernavigator.teachernavigator.application.utils.rootComponent
 import com.teachernavigator.teachernavigator.presentation.adapters.holders.VacancyHolderBuilder
 import com.teachernavigator.teachernavigator.presentation.models.VacancyModel
 import com.teachernavigator.teachernavigator.presentation.screens.common.BaseFragment
@@ -28,8 +24,6 @@ class VacanciesFragment : BaseFragment(), VacanciesView {
         val FRAGMENT_KEY = "jobs_fragment"
     }
 
-    private lateinit var mParentScreenComponent: ParentScreenComponent
-
     @Inject
     lateinit var vacanciesPresenter: IVacanciesPresenter
 
@@ -46,7 +40,7 @@ class VacanciesFragment : BaseFragment(), VacanciesView {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        inject()
+        mParentScreenComponent.inject(this)
         vacanciesPresenter.attachView(this)
 
         vListSwipeLayout.setOnRefreshListener(vacanciesPresenter::refresh)
@@ -66,14 +60,6 @@ class VacanciesFragment : BaseFragment(), VacanciesView {
             isUniversity = checked
             vacanciesPresenter.setFilter(isSchool, isCollege, isUniversity)
         }
-    }
-
-    private fun inject() {
-        mParentScreenComponent = DaggerParentScreenComponent.builder()
-                .rootComponent(rootComponent())
-                .parentScreenModule(ParentScreenModule(getParentView()))
-                .build()
-                .also { it.inject(this) }
     }
 
     override fun setJobs(jobsList: List<VacancyModel>) {

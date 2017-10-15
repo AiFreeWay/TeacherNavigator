@@ -1,7 +1,7 @@
 package com.teachernavigator.teachernavigator.domain.interactors
 
 import com.example.root.androidtest.application.utils.Logger
-import com.teachernavigator.teachernavigator.data.repository.abstractions.ITapeRepository
+import com.teachernavigator.teachernavigator.data.repository.abstractions.IPostsRepository
 import com.teachernavigator.teachernavigator.domain.interactors.abstractions.ICommentsInteractor
 import com.teachernavigator.teachernavigator.domain.mappers.CommentsMapper
 import com.teachernavigator.teachernavigator.domain.models.Comment
@@ -15,7 +15,7 @@ import javax.inject.Inject
 /**
  * Created by root on 08.09.17.
  */
-class CommentsInteractor  @Inject constructor(private val mRepository: ITapeRepository) : ICommentsInteractor {
+class CommentsInteractor  @Inject constructor(private val mRepository: IPostsRepository) : ICommentsInteractor {
 
     init {
         Logger.logDebug("created INTERACTOR CommentsInteractor")

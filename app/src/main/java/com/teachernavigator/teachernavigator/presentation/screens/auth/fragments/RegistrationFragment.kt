@@ -6,10 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import com.redmadrobot.inputmask.MaskedTextChangedListener
 import com.teachernavigator.teachernavigator.R
-import com.teachernavigator.teachernavigator.application.di.components.DaggerParentScreenComponent
-import com.teachernavigator.teachernavigator.application.di.components.ParentScreenComponent
-import com.teachernavigator.teachernavigator.application.di.modules.ParentScreenModule
-import com.teachernavigator.teachernavigator.application.utils.rootComponent
 import com.teachernavigator.teachernavigator.presentation.dialogs.AccountCreatedDialog
 import com.teachernavigator.teachernavigator.presentation.screens.auth.activities.abstractions.AuthParentView
 import com.teachernavigator.teachernavigator.presentation.screens.auth.fragments.abstractions.RegistrationView
@@ -28,8 +24,6 @@ class RegistrationFragment : BaseFragment(), RegistrationView {
         val FRAGMENT_KEY = "Registration_Fragment _ 312"
     }
 
-    private lateinit var mParentScreenComponent: ParentScreenComponent
-
     @Inject
     lateinit var presenter: IRegistrationPresenter
 
@@ -37,17 +31,9 @@ class RegistrationFragment : BaseFragment(), RegistrationView {
             inflater?.inflate(R.layout.fmt_registration, container, false)
 
 
-    private fun inject() {
-        mParentScreenComponent = DaggerParentScreenComponent.builder()
-                .rootComponent(rootComponent())
-                .parentScreenModule(ParentScreenModule(getParentView()))
-                .build()
-                .also { it.inject(this) }
-    }
-
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        inject()
+        mParentScreenComponent.inject(this)
         presenter.attachView(this)
 
         fmtRegistrationTvBirthday.setOnClickListener { presenter.pickDate() }

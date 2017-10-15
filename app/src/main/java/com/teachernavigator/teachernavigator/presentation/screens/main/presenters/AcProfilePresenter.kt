@@ -9,12 +9,10 @@ import com.teachernavigator.teachernavigator.R
 import com.teachernavigator.teachernavigator.application.di.components.DaggerParentScreenComponent
 import com.teachernavigator.teachernavigator.application.di.components.ParentScreenComponent
 import com.teachernavigator.teachernavigator.application.di.modules.ParentScreenModule
+import com.teachernavigator.teachernavigator.data.models.PostNetwork
 import com.teachernavigator.teachernavigator.domain.interactors.abstractions.IPostsInteractor
 import com.teachernavigator.teachernavigator.domain.interactors.abstractions.IProfileInteractor
-import com.teachernavigator.teachernavigator.domain.models.Post
 import com.teachernavigator.teachernavigator.domain.models.Profile
-import com.teachernavigator.teachernavigator.presentation.adapters.ProfileAdapterStrategy
-import com.teachernavigator.teachernavigator.presentation.facades.abstractions.IPostControllerFacade
 import com.teachernavigator.teachernavigator.presentation.models.ProfilePostConteainer
 import com.teachernavigator.teachernavigator.presentation.screens.common.BasePresenter
 import com.teachernavigator.teachernavigator.presentation.screens.main.activities.MainActivity
@@ -38,8 +36,6 @@ class AcProfilePresenter : BasePresenter<ProfileView>(), IProfilePresenter {
     lateinit var mProfileInteractor: IProfileInteractor
     @Inject
     lateinit var mPostsInteractor: IPostsInteractor
-    @Inject
-    lateinit var mPostControllerFacade: IPostControllerFacade
 
     private lateinit var mParentScreenComponent: ParentScreenComponent
 
@@ -60,24 +56,27 @@ class AcProfilePresenter : BasePresenter<ProfileView>(), IProfilePresenter {
     override fun doOnError(error: Throwable) {
         super.doOnError(error)
         mView!!.stopProgress()
-        val mappedList = ArrayList<ProfilePostConteainer>()
-        mappedList.add(ProfilePostConteainer(ProfileAdapterStrategy.TYPE_HEADER, Profile()))
-        mView!!.loadProfile(mappedList)
+//        val mappedList = ArrayList<ProfilePostConteainer>()
+//        mappedList.add(ProfilePostConteainer(ProfileAdapterStrategy.TYPE_HEADER, Profile()))
+//        mView!!.loadProfile(mappedList)
+
         Toast.makeText(mView!!.getContext(), mView!!.getContext().getString(R.string.error_throwed), Toast.LENGTH_SHORT).show()
     }
 
     override fun getProfile() {
         addDissposable(mProfileInteractor.getProfile()
-                .zipWith(mPostsInteractor.getMyPublications(), BiFunction<Profile, List<Post>, List<ProfilePostConteainer>> { t1, t2 ->
-                    mapProfileAndPostData(t1, t2) })
+                .zipWith(mPostsInteractor.getMyPublications(), BiFunction<Profile, List<PostNetwork>, List<ProfilePostConteainer>> { t1, t2 ->
+                    mapProfileAndPostData(t1, t2)
+                })
                 .doOnSubscribe { mView!!.startProgress() }
                 .subscribe(this::doOnGetProfile, this::doOnError))
     }
 
     override fun getProfile(userId: Int) {
         addDissposable(mProfileInteractor.getProfile(userId)
-                .zipWith(mPostsInteractor.getUserPost(userId), BiFunction<Profile, List<Post>, List<ProfilePostConteainer>> { t1, t2 ->
-                    mapProfileAndPostData(t1, t2) })
+                .zipWith(mPostsInteractor.getUserPost(userId), BiFunction<Profile, List<PostNetwork>, List<ProfilePostConteainer>> { t1, t2 ->
+                    mapProfileAndPostData(t1, t2)
+                })
                 .doOnSubscribe { mView!!.startProgress() }
                 .subscribe(this::doOnGetProfile, this::doOnError))
     }
@@ -99,8 +98,6 @@ class AcProfilePresenter : BasePresenter<ProfileView>(), IProfilePresenter {
 
     override fun getParentScreenComponent(): ParentScreenComponent = mParentScreenComponent
 
-    override fun getPostControllerFacade(): IPostControllerFacade = mPostControllerFacade
-
     private fun doOnGetProfile(data: List<ProfilePostConteainer>) {
         mView!!.stopProgress()
         mView!!.loadProfile(data)
@@ -120,12 +117,13 @@ class AcProfilePresenter : BasePresenter<ProfileView>(), IProfilePresenter {
         mParentScreenComponent.inject(this)
     }
 
-    private fun mapProfileAndPostData(profile: Profile, posts: List<Post>): List<ProfilePostConteainer> {
+    private fun mapProfileAndPostData(profile: Profile, posts: List<PostNetwork>): List<ProfilePostConteainer> {
         val mappedList = ArrayList<ProfilePostConteainer>()
-        mappedList.add(ProfilePostConteainer(ProfileAdapterStrategy.TYPE_HEADER, profile))
-        posts.forEach {
-            mappedList.add(ProfilePostConteainer(ProfileAdapterStrategy.TYPE_ITEM, it))
-        }
+//        mappedList.add(ProfilePostConteainer(ProfileAdapterStrategy.TYPE_HEADER, profile))
+//
+//        posts.forEach {
+//            mappedList.add(ProfilePostConteainer(ProfileAdapterStrategy.TYPE_ITEM, it))
+//        }
         return mappedList
     }
 }

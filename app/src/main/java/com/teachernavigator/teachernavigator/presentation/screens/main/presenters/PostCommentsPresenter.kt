@@ -36,7 +36,7 @@ class PostCommentsPresenter
         addDissposable(postsInteractor.sendComment(mPostId, mPostType, text.toString())
                 .doOnSubscribe { startProgress() }
                 .flatMap { postsInteractor.getPost(mPostId, mPostType) }
-                .transformEntity(postTransformerFactory.build(mPostType))
+                .transformEntity(postTransformerFactory.build(mPostType, false))
                 .subscribe(this::onCommentSent, this::onError))
 
     } else Unit
@@ -49,7 +49,7 @@ class PostCommentsPresenter
     }
 
     private fun loadPost() = addDissposable(postsInteractor.getPost(mPostId, mPostType)
-            .transformEntity(postTransformerFactory.build(mPostType))
+            .transformEntity(postTransformerFactory.build(mPostType, false))
             .doOnSubscribe { startProgress() }
             .subscribe(this::onLoaded, this::onError))
 

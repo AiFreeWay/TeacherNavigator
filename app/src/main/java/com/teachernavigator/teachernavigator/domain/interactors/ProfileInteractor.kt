@@ -33,13 +33,13 @@ class ProfileInteractor @Inject constructor(private val mRepository: IProfileRep
         Logger.logDebug("created INTERACTOR ProfileInteractor")
     }
 
-    override fun getProfile(): Observable<Profile> =
+    override fun getProfile(): Single<Profile> =
             mRepository.getProfile()
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribeOn(Schedulers.newThread())
                     .map { it }
 
-    override fun getProfile(userId: Int): Observable<Profile> =
+    override fun getProfile(userId: Int): Single<Profile> =
             mRepository.getProfile(userId)
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribeOn(Schedulers.newThread())
@@ -49,7 +49,7 @@ class ProfileInteractor @Inject constructor(private val mRepository: IProfileRep
         mRepository.exit()
     }
 
-    override fun uploadPhoto(file: File): Observable<File> =
+    override fun uploadPhoto(file: File): Single<File> =
             mRepository.uploadPhoto(file)
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribeOn(Schedulers.newThread())

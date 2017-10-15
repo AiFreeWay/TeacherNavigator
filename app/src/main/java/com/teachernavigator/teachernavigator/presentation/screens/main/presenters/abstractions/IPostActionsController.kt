@@ -14,6 +14,7 @@ interface IPostActionsController : ViewAttacher<PostActionsView> {
     fun onComments(post: PostModel)
     fun onSave(post: PostModel)
     fun onSubscribe(post: PostModel)
-    fun onReadMode(post: PostModel)
+    fun onReadMore(post: PostModel)
+    fun onComplain(post: PostModel)
 
 }

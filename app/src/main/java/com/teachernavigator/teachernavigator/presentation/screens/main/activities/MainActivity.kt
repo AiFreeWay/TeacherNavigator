@@ -89,8 +89,6 @@ class MainActivity : AppCompatActivity(), MainView {
         acMainToolbar.setTitle(title)
     }
 
-    override fun getParentScreenComponent(): ParentScreenComponent = mPresenter.getParentScreenComponent()
-
     override fun getContext(): Context = this
 
     private fun initToolbar() {

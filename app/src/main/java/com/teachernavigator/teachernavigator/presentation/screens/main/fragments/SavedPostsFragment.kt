@@ -4,13 +4,7 @@ import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import android.view.*
 import com.teachernavigator.teachernavigator.R
-import com.teachernavigator.teachernavigator.application.di.components.DaggerParentScreenComponent
-import com.teachernavigator.teachernavigator.application.di.components.ParentScreenComponent
-import com.teachernavigator.teachernavigator.application.di.modules.ParentScreenModule
-import com.teachernavigator.teachernavigator.application.utils.rootComponent
-import com.teachernavigator.teachernavigator.domain.models.Post
-import com.teachernavigator.teachernavigator.presentation.adapters.MultyRvAdapter
-import com.teachernavigator.teachernavigator.presentation.adapters.holders.SavedPostHolder
+import com.teachernavigator.teachernavigator.presentation.models.PostModel
 import com.teachernavigator.teachernavigator.presentation.screens.common.BaseFragment
 import com.teachernavigator.teachernavigator.presentation.screens.main.fragments.abstractions.SavedPostsView
 import com.teachernavigator.teachernavigator.presentation.screens.main.presenters.abstractions.ISavedPostsPresenter
@@ -26,43 +20,35 @@ class SavedPostsFragment : BaseFragment(), SavedPostsView {
         val FRAGMENT_KEY = "saved_posts_fragment"
     }
 
-    private lateinit var mParentScreenComponent: ParentScreenComponent
-
     @Inject
     lateinit var presenter: ISavedPostsPresenter
 
-    private lateinit var mAdapter: MultyRvAdapter<Post>
+    private lateinit var mAdapter: Nothing
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?) =
             inflater?.inflate(R.layout.fmt_list, container, false)
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        inject()
+        mParentScreenComponent.inject(this)
+
         presenter.attachView(this)
 
         setHasOptionsMenu(true)
-        mAdapter = MultyRvAdapter(SavedPostHolder(context, presenter.getPostControllerFacade()))
+        mAdapter = TODO("implement this chi!")
         fmt_list_rv_list.layoutManager = LinearLayoutManager(context)
         fmt_list_rv_list.adapter = mAdapter
         presenter.getSavedPosts()
     }
 
-    private fun inject() {
-        mParentScreenComponent = DaggerParentScreenComponent.builder()
-                .rootComponent(rootComponent())
-                .parentScreenModule(ParentScreenModule(getParentView()))
-                .build()
-                .also { it.inject(this) }
-    }
 
     override fun onDestroyView() {
         super.onDestroyView()
         presenter.detachView()
     }
 
-    override fun loadSavedPosts(posts: List<Post>) {
-        mAdapter.loadData(posts)
+    override fun loadSavedPosts(posts: List<PostModel>) {
+        // mAdapter.loadData(posts)
     }
 
     override fun showNoDataText() {

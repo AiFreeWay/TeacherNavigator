@@ -8,10 +8,6 @@ import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.view.ViewGroup
 import com.teachernavigator.teachernavigator.R
-import com.teachernavigator.teachernavigator.application.di.components.DaggerParentScreenComponent
-import com.teachernavigator.teachernavigator.application.di.components.ParentScreenComponent
-import com.teachernavigator.teachernavigator.application.di.modules.ParentScreenModule
-import com.teachernavigator.teachernavigator.application.utils.rootComponent
 import com.teachernavigator.teachernavigator.presentation.adapters.holders.ResponseHolderBuilder
 import com.teachernavigator.teachernavigator.presentation.adapters.holders.VacancyHolder
 import com.teachernavigator.teachernavigator.presentation.models.VacancyModel
@@ -32,15 +28,13 @@ class VacancyFragment : BaseFragment(), VacancyView {
         val VACANCY_ID = "vacancy_id"
     }
 
-    private lateinit var mParentScreenComponent: ParentScreenComponent
-
     @Inject
     lateinit var vacancyPresenter: IVacancyPresenter
 
     val adapter: UniversalAdapter by lazy {
         UniversalAdapter()
-                UniversalAdapter(ResponseHolderBuilder(vacancyPresenter::onDownload,
-                        vacancyPresenter::onUser))
+        UniversalAdapter(ResponseHolderBuilder(vacancyPresenter::onDownload,
+                vacancyPresenter::onUser))
     }
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? =
@@ -50,7 +44,7 @@ class VacancyFragment : BaseFragment(), VacancyView {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        inject()
+        mParentScreenComponent.inject(this)
         vacancyPresenter.attachView(this)
         vacancyPresenter.loadVacancy(arguments.getInt(VACANCY_ID))
 
@@ -60,14 +54,6 @@ class VacancyFragment : BaseFragment(), VacancyView {
         vListRvData.adapter = adapter
 
         mVacancyHolder = VacancyHolder(vVacancy, true, null, null, null, null)
-    }
-
-    private fun inject() {
-        mParentScreenComponent = DaggerParentScreenComponent.builder()
-                .rootComponent(rootComponent())
-                .parentScreenModule(ParentScreenModule(getParentView()))
-                .build()
-                .also { it.inject(this) }
     }
 
     override fun showRefresh() {

@@ -11,4 +11,7 @@ interface PostCommentsView : PostActionsView {
     fun setPost(post: PostModel)
     fun clearField()
     fun scrollToLast()
+
+    fun  showRefresh()
+    fun  hideRefresh()
 }

@@ -3,16 +3,15 @@ package com.teachernavigator.teachernavigator.presentation.screens.main.presente
 import android.arch.lifecycle.Lifecycle
 import android.arch.lifecycle.OnLifecycleEvent
 import android.os.Bundle
-import android.util.Log.d
 import android.widget.Toast
 import com.teachernavigator.teachernavigator.R
 import com.teachernavigator.teachernavigator.application.di.scopes.PerParentScreen
 import com.teachernavigator.teachernavigator.data.models.FileInfo
+import com.teachernavigator.teachernavigator.data.models.PostNetwork
 import com.teachernavigator.teachernavigator.domain.interactors.abstractions.IPostsInteractor
 import com.teachernavigator.teachernavigator.domain.models.Post
 import com.teachernavigator.teachernavigator.domain.models.Tag
 import com.teachernavigator.teachernavigator.presentation.screens.common.BasePresenter
-import com.teachernavigator.teachernavigator.presentation.screens.main.activities.PreviewPostActivity
 import com.teachernavigator.teachernavigator.presentation.screens.main.fragments.abstractions.AddPublicationView
 import com.teachernavigator.teachernavigator.presentation.screens.main.presenters.abstractions.IAddPublicationPresenter
 import com.teachernavigator.teachernavigator.presentation.utils.ActivityRouter
@@ -64,10 +63,10 @@ class AddPublicationPresenter
 
     override fun preview(title: CharSequence, text: CharSequence) = validateAndPerform(title, text) {
 
-        val bundle = Bundle()
-        bundle.putSerializable(PreviewPostActivity.POST_KEY, Post(title.toString(), text.toString()))
-        ActivityRouter.openActivity(mView!!.getParentView().getActivity(), bundle,
-                PreviewPostActivity::class.java)
+//        val bundle = Bundle()
+//        bundle.putSerializable(PreviewPostActivity.POST_KEY, Post(title.toString(), text.toString()))
+//        ActivityRouter.openActivity(mView!!.getParentView().getActivity(), bundle,
+//                PreviewPostActivity::class.java)
 
     } ?: Unit
 
@@ -93,7 +92,7 @@ class AddPublicationPresenter
                 .subscribe(this::onTagsLoaded, this::doOnError))
     }
 
-    private fun onCreated(post: Post) {
+    private fun onCreated(post: PostNetwork) {
         stopProgress()
         mView?.showToast(R.string.post_successfully_created)
         router.exit()

@@ -200,6 +200,11 @@
     <string name="phone_number">Номер телефона</string>
     <string name="email_not_registered">Указанный Email не зарегистрирован</string>
     <string name="phone_not_registered">Указанный номер телефона не зарегистрирован</string>
+    <string name="post_is_saved">Запись сохранена</string>
+    <string name="you_are_subscribed">Вы подписаны</string>
+    <string name="complaint_was_sent">Жалоба была отправлена</string>
+    <string name="ask_subscribe_to_user">Вы действительно хотите подписаться на пользователя %1$s</string>
+    <string name="ask_complaint_to_post">Вы действительно хотите пожаловаться на запись: %1$s</string>
 
     <plurals name="plural_years">
         <item quantity="zero">%1$d лет

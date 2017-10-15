@@ -1,13 +1,26 @@
 package com.teachernavigator.teachernavigator.presentation.screens.common
 
 import android.arch.lifecycle.LifecycleRegistry
+import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.widget.Toast
+import com.teachernavigator.teachernavigator.application.di.components.DaggerParentScreenComponent
+import com.teachernavigator.teachernavigator.application.di.components.ParentScreenComponent
+import com.teachernavigator.teachernavigator.application.di.modules.ParentScreenModule
+import com.teachernavigator.teachernavigator.application.utils.rootComponent
 
 /**
- * Created by root on 14.08.17.
+ * Created by root on 14.08.17
  */
+
 abstract class BaseFragment : Fragment(), ChildView {
+
+    protected val mParentScreenComponent by lazy {
+        DaggerParentScreenComponent.builder()
+                .rootComponent(rootComponent())
+                .parentScreenModule(ParentScreenModule(getParentView()))
+                .build()
+    }
 
     private val mLifecycle by lazy { LifecycleRegistry(this) }
 

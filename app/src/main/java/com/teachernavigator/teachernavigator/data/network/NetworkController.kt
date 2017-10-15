@@ -109,29 +109,37 @@ class NetworkController {
 
     // ------------------------------- Posts methods --------------------------------
 
-    fun getInterviewsPosts(token: String): Observable<PostsResponse> = mApiController.getPools(token)
+    fun getPolls(token: String?): Single<PostsResponse> = mApiController.getPolls(token)
 
-    fun getNewsPosts(token: String): Observable<PostsResponse> = mApiController.getNews(token)
+    fun getNewsPosts(token: String): Single<PostsResponse> = mApiController.getNews(token)
 
-    fun getPosts(): Observable<PostsResponse> = mApiController.getPosts()
+    fun getPosts(token: String?): Single<PostsResponse> = mApiController.getPosts(token)
 
-    fun getPosts(token: String): Observable<PostsResponse> = mApiController.getPosts(token)
+    fun getBestPosts(token: String): Single<PostsResponse> = mApiController.getBestPosts(token)
 
-    fun getPost(token: String, postId: Int): Observable<PostNetwork> = mApiController.getPost(token, postId)
+    fun getPost(token: String, postId: Int): Single<PostNetwork> = mApiController.getPost(token, postId)
+
+    fun getNews(token: String, newsId: Int): Single<PostNetwork> = mApiController.getNews(token, newsId)
+
+    fun getPoll(token: String, pollId: Int): Single<PostNetwork> = mApiController.getPoll(token, pollId)
 
     fun getMyComments(token: String): Observable<GetMyCommentsResponse> = mApiController.getMyComments(token)
 
-    fun savePost(token: String, request: SavePostRequest): Observable<BaseResponse> = mApiController.savePost(token, request)
+    fun savePost(token: String, postId: Int): Single<BaseResponse> = mApiController.savePost(token, postId)
 
-    fun getSavedPosts(token: String): Observable<PostsResponse> = mApiController.getSavedPosts(token)
+    fun savePoll(token: String, postId: Int): Single<BaseResponse> = mApiController.savePoll(token, postId)
+
+    fun saveNews(token: String, postId: Int): Single<BaseResponse> = mApiController.saveNews(token, postId)
+
+    fun getSavedPosts(token: String): Single<PostsResponse> = mApiController.getSavedPosts(token)
 
     fun comment(token: String, request: CommentRequest): Single<CommentNetwork> = mApiController.comment(token, request)
 
-    fun subscribe(token: String, request: SubscribeRequest): Observable<BaseResponse> = mApiController.subscribe(token, request)
+    fun subscribe(token: String, request: SubscribeRequest): Single<BaseResponse> = mApiController.subscribe(token, request)
 
-    fun getMyPublications(token: String): Observable<Array<PostNetwork>> = mApiController.getMyPublications(token)
+    fun getMyPublications(token: String): Single<Array<PostNetwork>> = mApiController.getMyPublications(token)
 
-    fun getUserPost(token: String, userId: Int): Observable<Array<PostNetwork>> = mApiController.getUserPost(token, userId)
+    fun getUserPost(token: String, userId: Int): Single<Array<PostNetwork>> = mApiController.getUserPost(token, userId)
 
     //fun vote(token: String, request: VoteRequest): Observable<BaseResponse> = mApiController.vote(token, request)
 
@@ -145,9 +153,9 @@ class NetworkController {
 
     // ------------------------------- Profile methods --------------------------------
 
-    fun getProfile(token: String): Observable<Profile> = mApiController.getProfile(token)
+    fun getProfile(token: String): Single<Profile> = mApiController.getProfile(token)
 
-    fun getProfile(token: String, userId: Int): Observable<Profile> = mApiController.getProfile(token, userId)
+    fun getProfile(token: String, userId: Int): Single<Profile> = mApiController.getProfile(token, userId)
 
     fun createVacancy(token: String, vacancyRequest: VacancyRequest): Single<Vacancy> =
             mApiController.createVacancy(token, vacancyRequest)
@@ -217,6 +225,18 @@ class NetworkController {
     fun saveInfoPost(accessToken: String, postId: Int): Single<Unit> =
             mApiController.saveInfoPost(accessToken, postId)
 
+    fun complaintInfo(accessToken: String, postId: Int): Single<BaseResponse> =
+            mApiController.complaintInfo(accessToken, postId)
+
+    fun complaintPost(accessToken: String, postId: Int): Single<BaseResponse> =
+            mApiController.complaintPost(accessToken, postId)
+
+    fun complaintNews(accessToken: String, postId: Int): Single<BaseResponse> =
+            mApiController.complaintNews(accessToken, postId)
+
+    fun complaintPoll(accessToken: String, postId: Int): Single<BaseResponse> =
+            mApiController.complaintPoll(accessToken, postId)
+
     fun getTags(accessToken: String): Single<List<Tag>> =
             Observable.range(1, MAX_PAGE_COUNT)
                     .flatMap { loadTags(accessToken, it) }
@@ -236,7 +256,8 @@ class NetworkController {
     private fun loadTags(accessToken: String, page: Int) = mApiController.tags(accessToken, page)
     private fun loadTrends(accessToken: String, page: Int) = mApiController.tagsTrends(accessToken, page)
 
-    fun sendPost(accessToken: String, title: String, text: String, tags: List<String>, fileInfo: FileInfo?): Single<Post> {
+
+    fun sendPost(accessToken: String, title: String, text: String, tags: List<String>, fileInfo: FileInfo?): Single<PostNetwork> {
 
         val params = HashMap<String, RequestBody>().apply {
             put("title", title.toRequestBody())

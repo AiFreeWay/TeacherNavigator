@@ -11,13 +11,12 @@ import butterknife.BindView
 import butterknife.ButterKnife
 import com.teachernavigator.teachernavigator.R
 import com.teachernavigator.teachernavigator.domain.models.Profile
-import com.teachernavigator.teachernavigator.presentation.facades.abstractions.IProfileFacade
 import com.teachernavigator.teachernavigator.presentation.utils.ImageLoader
 
 /**
- * Created by root on 20.09.17.
+ * Created by root on 20.09.17
  */
-class ProfileHeaderView(facade: IProfileFacade, isMyProfile: Boolean, context: Context) : RelativeLayout(context) {
+class ProfileHeaderView(isMyProfile: Boolean, context: Context) : RelativeLayout(context) {
 
     @BindView(R.id.ac_profile_iv_avatar) lateinit var mIvAvatar: ImageView
     @BindView(R.id.ac_profile_upload_photo) lateinit var mIvUploadPhoto: ImageView
@@ -37,7 +36,8 @@ class ProfileHeaderView(facade: IProfileFacade, isMyProfile: Boolean, context: C
             mIvExit.visibility = View.VISIBLE
             mIvUploadPhoto.visibility = View.VISIBLE
 
-            mIvUploadPhoto.setOnClickListener { facade.onChangePhoto(mIvAvatar) }
+            // TODO mIvUploadPhoto.setOnClickListener { facade.onChangePhoto(mIvAvatar) }
+
         } else {
             mIvUploadPhoto.visibility = View.GONE
 
@@ -56,11 +56,11 @@ class ProfileHeaderView(facade: IProfileFacade, isMyProfile: Boolean, context: C
         else
             mTvName.setText(context.getString(R.string.not_define))
 
-        val subscribers = if (profile.count_subscribers != null && profile.count_subscribers >0 )
+        val subscribers = if (profile.count_subscribers != null && profile.count_subscribers > 0)
             profile.count_subscribers
         else 0
 
-        val publications = if (profile.count_publications != null && profile.count_publications >0 )
+        val publications = if (profile.count_publications != null && profile.count_publications > 0)
             profile.count_publications
         else 0
 

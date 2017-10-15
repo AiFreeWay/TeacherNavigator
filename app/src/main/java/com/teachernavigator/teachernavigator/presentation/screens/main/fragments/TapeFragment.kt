@@ -3,10 +3,6 @@ package com.teachernavigator.teachernavigator.presentation.screens.main.fragment
 import android.os.Bundle
 import android.view.*
 import com.teachernavigator.teachernavigator.R
-import com.teachernavigator.teachernavigator.application.di.components.DaggerParentScreenComponent
-import com.teachernavigator.teachernavigator.application.di.components.ParentScreenComponent
-import com.teachernavigator.teachernavigator.application.di.modules.ParentScreenModule
-import com.teachernavigator.teachernavigator.application.utils.rootComponent
 import com.teachernavigator.teachernavigator.presentation.adapters.ViewPagerAdapter
 import com.teachernavigator.teachernavigator.presentation.models.ViewPagerItemContainer
 import com.teachernavigator.teachernavigator.presentation.screens.common.BaseFragment
@@ -23,14 +19,9 @@ class TapeFragment : BaseFragment(), TapeView {
 
     companion object {
         val FRAGMENT_KEY = "tape_fragment"
-        val LAST_VIEW_PAGER_POSITION = "last_view_pager_position"
     }
 
-    private lateinit var mParentScreenComponent: ParentScreenComponent
-
     private val mAdapter by lazy { ViewPagerAdapter(childFragmentManager) }
-
-    private var mLastViewPagerPosition = 0
 
     @Inject
     lateinit var mPresenter: ITapePresenter
@@ -40,7 +31,8 @@ class TapeFragment : BaseFragment(), TapeView {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        inject()
+        mParentScreenComponent.inject(this)
+
         setHasOptionsMenu(true)
         mPresenter.attachView(this)
 
@@ -49,29 +41,9 @@ class TapeFragment : BaseFragment(), TapeView {
         mPresenter.loadFragments()
     }
 
-    private fun inject() {
-        mParentScreenComponent = DaggerParentScreenComponent.builder()
-                .rootComponent(rootComponent())
-                .parentScreenModule(ParentScreenModule(getParentView()))
-                .build()
-                .also { it.inject(this) }
-    }
-
-
     override fun onDestroyView() {
         super.onDestroyView()
         mPresenter.detachView()
-    }
-
-    override fun onSaveInstanceState(outState: Bundle?) {
-        super.onSaveInstanceState(outState)
-        outState?.putInt(LAST_VIEW_PAGER_POSITION, fmtFeedVpBody.currentItem)
-    }
-
-    override fun onViewStateRestored(savedInstanceState: Bundle?) {
-        super.onViewStateRestored(savedInstanceState)
-        if (savedInstanceState != null)
-            mLastViewPagerPosition = savedInstanceState.getInt(LAST_VIEW_PAGER_POSITION, 0)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -93,6 +65,5 @@ class TapeFragment : BaseFragment(), TapeView {
 
     override fun loadOrdersFragments(data: List<ViewPagerItemContainer>) {
         mAdapter.loadData(data)
-        fmtFeedVpBody.currentItem = mLastViewPagerPosition
     }
 }

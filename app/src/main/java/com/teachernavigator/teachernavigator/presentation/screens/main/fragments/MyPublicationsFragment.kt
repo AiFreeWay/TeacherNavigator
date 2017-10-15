@@ -9,15 +9,14 @@ import butterknife.BindView
 import butterknife.ButterKnife
 import com.teachernavigator.teachernavigator.R
 import com.teachernavigator.teachernavigator.domain.models.Post
-import com.teachernavigator.teachernavigator.presentation.adapters.MultyRvAdapter
-import com.teachernavigator.teachernavigator.presentation.adapters.holders.MyPublicationHolder
+import com.teachernavigator.teachernavigator.presentation.models.PostModel
 import com.teachernavigator.teachernavigator.presentation.screens.common.BaseFragment
 import com.teachernavigator.teachernavigator.presentation.screens.main.fragments.abstractions.MyPublicationsView
-import com.teachernavigator.teachernavigator.presentation.screens.main.presenters.FmtMyPublicationsPresenter
+import com.teachernavigator.teachernavigator.presentation.screens.main.presenters.MyPublicationsPresenter
 import com.teachernavigator.teachernavigator.presentation.screens.main.presenters.abstractions.IMyPublicationsPresenter
 
 /**
- * Created by root on 13.09.17.
+ * Created by root on 13.09.17
  */
 class MyPublicationsFragment : BaseFragment(), MyPublicationsView {
 
@@ -28,8 +27,8 @@ class MyPublicationsFragment : BaseFragment(), MyPublicationsView {
     @BindView(R.id.fmt_list_rv_list) lateinit var mRvList: RecyclerView
     @BindView(R.id.fmt_list_tv_no_data) lateinit var mTvNoData: TextView
 
-    private val mPresenter: IMyPublicationsPresenter = FmtMyPublicationsPresenter()
-    private lateinit var mAdapter: MultyRvAdapter<Post>
+    private val mPresenter: IMyPublicationsPresenter = MyPublicationsPresenter()
+    private lateinit var mAdapter: Nothing
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view: View = inflater!!.inflate(R.layout.fmt_list, container, false)
@@ -41,7 +40,7 @@ class MyPublicationsFragment : BaseFragment(), MyPublicationsView {
         super.onActivityCreated(savedInstanceState)
         setHasOptionsMenu(true)
         mPresenter.attachView(this)
-        mAdapter = MultyRvAdapter(MyPublicationHolder(context, mPresenter.getPostControllerFacade()))
+        mAdapter = TODO()
         mRvList.layoutManager = LinearLayoutManager(context)
         mRvList.adapter = mAdapter
         mPresenter.getMyPublications()
@@ -52,8 +51,8 @@ class MyPublicationsFragment : BaseFragment(), MyPublicationsView {
         mPresenter.detachView()
     }
 
-    override fun loadMyPublications(posts: List<Post>) {
-        mAdapter.loadData(posts)
+    override fun loadMyPublications(posts: List<PostModel>) {
+        // mAdapter.loadData(posts)
     }
 
     override fun showNoDataText() {
@@ -70,8 +69,10 @@ class MyPublicationsFragment : BaseFragment(), MyPublicationsView {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when(item.itemId) {
-            R.id.action_refresh -> { mPresenter.refresh() }
+        when (item.itemId) {
+            R.id.action_refresh -> {
+                mPresenter.refresh()
+            }
         }
         return super.onOptionsItemSelected(item)
     }

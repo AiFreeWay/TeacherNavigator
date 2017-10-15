@@ -53,14 +53,21 @@ class ListenerHelper<in T>(private val view: View,
 
     infix fun andReturnModel(modelGetter: () -> T?) =
             if (listener != null) {
-                view.setOnClickListener { modelGetter.invoke()?.apply { listener.invoke(this) } }
+                view.setOnClickListener {
+                    modelGetter.invoke()?.apply { listener.invoke(this) }
+                }
+
             } else Unit
 
 
     infix fun andReturnModelOrHide(modelGetter: () -> T?) =
             if (listener != null) {
+
                 view.visibility = View.VISIBLE
-                view.setOnClickListener { modelGetter.invoke()?.apply { listener.invoke(this) } }
+                view.setOnClickListener {
+                    modelGetter.invoke()?.apply { listener.invoke(this) }
+                }
+
             } else {
                 view.visibility = View.GONE
             }

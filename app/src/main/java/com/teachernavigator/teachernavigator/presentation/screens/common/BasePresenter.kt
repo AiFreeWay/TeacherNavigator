@@ -16,7 +16,7 @@ import io.reactivex.disposables.Disposable
 import retrofit2.HttpException
 
 /**
- * Created by root on 11.08.17.
+ * Created by root on 11.08.17
  */
 abstract class BasePresenter<V : BaseView> : LifecycleObserver, ViewAttacher<V> {
 
@@ -50,9 +50,8 @@ abstract class BasePresenter<V : BaseView> : LifecycleObserver, ViewAttacher<V> 
         }
     }
 
-    protected fun getRootComponent(activity: Activity): RootComponent {
-        return (activity.application as TeacherNavigatopApp).getRootComponent()
-    }
+    protected fun getRootComponent(activity: Activity): RootComponent =
+            (activity.application as TeacherNavigatopApp).getRootComponent()
 
     protected fun getContext(): Context = mView!!.getContext()
 }

@@ -27,8 +27,6 @@ class AskSpecialistFragment : BaseFragment(), AskSpecialistView {
         val SPECIALIST_KEY = "specialist"
     }
 
-    private lateinit var mParentScreenComponent: ParentScreenComponent
-
     @Inject
     lateinit var askSpecialistPresenter: IAskSpecialistPresenter
 
@@ -42,22 +40,13 @@ class AskSpecialistFragment : BaseFragment(), AskSpecialistView {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        inject()
+        mParentScreenComponent.inject(this)
         askSpecialistPresenter.attachView(this)
         askSpecialistPresenter.specialist = Specialist.values().getOrNull(arguments.getInt(SPECIALIST_KEY))
     }
 
     override fun cleanField() {
         askQuestionEtMessage.setText("")
-    }
-
-
-    private fun inject() {
-        mParentScreenComponent = DaggerParentScreenComponent.builder()
-                .rootComponent(rootComponent())
-                .parentScreenModule(ParentScreenModule(getParentView()))
-                .build()
-                .also { it.inject(this) }
     }
 
     private fun sendQuestion() =

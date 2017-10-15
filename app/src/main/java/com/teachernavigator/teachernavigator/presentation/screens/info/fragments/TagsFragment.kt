@@ -32,8 +32,6 @@ class TagsFragment : BaseFragment(), TagsView {
         val FRAGMENT_KEY = "tags_fragment"
     }
 
-    private lateinit var mParentScreenComponent: ParentScreenComponent
-
     @Inject
     lateinit var presenter: ITagsPresenter
 
@@ -62,7 +60,7 @@ class TagsFragment : BaseFragment(), TagsView {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        inject()
+        mParentScreenComponent.inject(this)
         presenter.attachView(this)
         presenter.refresh()
         vListSwipeLayout.setOnRefreshListener(presenter::refresh)
@@ -85,14 +83,6 @@ class TagsFragment : BaseFragment(), TagsView {
                 presenter.text = text ?: ""
             }
         })
-    }
-
-    private fun inject() {
-        mParentScreenComponent = DaggerParentScreenComponent.builder()
-                .rootComponent(rootComponent())
-                .parentScreenModule(ParentScreenModule(getParentView()))
-                .build()
-                .also { it.inject(this) }
     }
 
     override fun onDestroyView() {

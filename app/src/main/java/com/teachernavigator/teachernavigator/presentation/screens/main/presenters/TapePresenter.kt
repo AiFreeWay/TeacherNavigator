@@ -7,6 +7,7 @@ import com.teachernavigator.teachernavigator.R
 import com.teachernavigator.teachernavigator.application.di.scopes.PerParentScreen
 import com.teachernavigator.teachernavigator.domain.interactors.abstractions.IAuthInteractor
 import com.teachernavigator.teachernavigator.presentation.factories.PostsFragmentsFactory
+import com.teachernavigator.teachernavigator.presentation.models.PostsSource
 import com.teachernavigator.teachernavigator.presentation.screens.common.BasePresenter
 import com.teachernavigator.teachernavigator.presentation.screens.main.fragments.abstractions.TapeView
 import com.teachernavigator.teachernavigator.presentation.screens.main.presenters.abstractions.ITapePresenter
@@ -23,9 +24,20 @@ class TapePresenter
 @Inject constructor(private val router: Router,
                     private val authInteractor: IAuthInteractor) : BasePresenter<TapeView>(), ITapePresenter {
 
+    private var mType = PostsSource.Common
+
     @OnLifecycleEvent(Lifecycle.Event.ON_START)
     private fun onStart() {
-        mView?.getParentView()?.setToolbarTitle(R.string.tape)
+        val title = when (mType) {
+
+            PostsSource.Common -> R.string.tape
+            PostsSource.Mine -> R.string.my_publication
+            PostsSource.Saved -> R.string.saved
+            PostsSource.Best -> R.string.tape
+        }
+
+
+        mView?.getParentView()?.setToolbarTitle(title)
     }
 
     @OnLifecycleEvent(Lifecycle.Event.ON_STOP)
@@ -38,8 +50,10 @@ class TapePresenter
         mView?.getParentView()?.stopProgress()
     }
 
-    override fun loadFragments() {
-        addDissposable(authInteractor.isAuthAsynch()
+    override fun loadFragments(postSourceType: Int?) {
+        mType = postSourceType?.let { PostsSource.values().getOrNull(it) } ?: PostsSource.Common
+
+        addDissposable(authInteractor.isAuthAsync()
                 .doOnSubscribe { mView!!.getParentView().startProgress() }
                 .subscribe({ doOnGetIsUserAuthInfo(it) }, this::doOnError))
     }
@@ -57,10 +71,10 @@ class TapePresenter
     private fun doOnGetIsUserAuthInfo(isAuth: Boolean) {
         mView?.getParentView()?.stopProgress()
 
-        val fragmentsContainer = if (isAuth) {
-            PostsFragmentsFactory.createItems(getContext())
-        } else {
-            PostsFragmentsFactory.createForUnregisterUserItems(getContext())
+        val fragmentsContainer = when {
+            isAuth && mType == PostsSource.Common -> PostsFragmentsFactory.createItems(getContext())
+            !isAuth && mType == PostsSource.Common -> PostsFragmentsFactory.createForUnregisterUserItems(getContext())
+            else -> PostsFragmentsFactory.createMyItems(getContext(), mType)
         }
 
         mView?.loadOrdersFragments(fragmentsContainer)

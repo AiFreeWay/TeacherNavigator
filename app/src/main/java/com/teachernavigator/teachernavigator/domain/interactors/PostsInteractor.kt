@@ -30,6 +30,13 @@ class PostsInteractor @Inject constructor(private val mRepository: IPostsReposit
         PostType.poll to PostsSource.Common -> getPolls()
         PostType.news to PostsSource.Common -> getNewsPosts()
 
+        PostType.post to PostsSource.Mine -> getMyPosts()
+
+        PostType.post to PostsSource.Saved -> getSavedPosts()
+        PostType.importantinfo to PostsSource.Saved -> getSavedImportantInfos()
+        PostType.poll to PostsSource.Saved -> getSavedPolls()
+        PostType.news to PostsSource.Saved -> getSavedNews()
+
         else -> throw Error("Unknown Type")
     }
 
@@ -89,9 +96,26 @@ class PostsInteractor @Inject constructor(private val mRepository: IPostsReposit
                     .map { it.results }
                     .applySchedulers()
 
-    override fun getMyPublications(): Single<List<PostNetwork>> =
-            mRepository.getMyPublications()
-                    .map { it.toList() }
+    private fun getSavedImportantInfos(): Single<List<PostNetwork>> =
+            mRepository.getSavedImportantInfos()
+                    .map { it.results }
+                    .applySchedulers()
+
+    private fun getSavedPolls(): Single<List<PostNetwork>> =
+            mRepository.getSavedPolls()
+                    .map { it.results }
+                    .applySchedulers()
+
+    private fun getSavedNews(): Single<List<PostNetwork>> =
+            mRepository.getSavedNews()
+                    .map { it.results }
+                    .applySchedulers()
+
+
+
+    override fun getMyPosts(): Single<List<PostNetwork>> =
+            mRepository.getMyPosts()
+                    .map { it.results }
                     .applySchedulers()
 
     override fun getUserPost(userId: Int): Single<List<PostNetwork>> =

@@ -168,9 +168,15 @@ constructor(private val router: Router,
             mView!!.showToast(getContext().getString(R.string.indicate_experience))
             return false
         }
-        if (unionist && TextUtils.isEmpty(numberOfUnionTicket)) {
-            mView!!.showToast(getContext().getString(R.string.indicate_number_of_unionist_ticket))
-            return false
+
+        if (unionist) {
+            if (numberOfUnionTicket.isBlank()) {
+                mView?.showToast(getContext().getString(R.string.indicate_number_of_unionist_ticket))
+                return false
+            } else if (numberOfUnionTicket.length !in 6..8) {
+                mView?.showToast(getContext().getString(R.string.wrong_unionist_ticket))
+                return false
+            }
         }
 
         if (district.isBlank()) {

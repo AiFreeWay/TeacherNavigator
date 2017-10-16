@@ -19,11 +19,11 @@ data class PostNetwork(
         val count_dislikes: Int? = null,
         val vote: Boolean? = null,
         val count_comments: Int? = null,
-        val comments: List<CommentNetwork>? = null,
+        val comments: List<CommentNetwork?>? = null,
         val author: Author? = null,
         val choices: List<Choice>? = null,
+        val did_action: Boolean? = null,
 
-
-        val postType: PostType? = null
+        var postType: PostType? = null
 
 )

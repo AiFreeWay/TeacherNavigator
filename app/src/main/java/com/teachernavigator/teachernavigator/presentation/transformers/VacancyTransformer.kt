@@ -1,7 +1,6 @@
 package com.teachernavigator.teachernavigator.presentation.transformers
 
 import android.content.Context
-import android.util.Log.d
 import com.teachernavigator.teachernavigator.R
 import com.teachernavigator.teachernavigator.application.di.scopes.PerParentScreen
 import com.teachernavigator.teachernavigator.data.repository.abstractions.IJobRepository
@@ -17,13 +16,12 @@ import javax.inject.Inject
 class VacancyTransformer
 @Inject
 constructor(private val context: Context,
-            private val jobRepository: IJobRepository) : EntityTransformer<Vacancy, VacancyModel> {
+            private val jobRepository: IJobRepository,
+            private val responseTransformer: ResponseTransformer) : EntityTransformer<Vacancy, VacancyModel> {
 
     override fun transform(from: Vacancy): VacancyModel = from.let {
 
         val typeOfEmployment = jobRepository.getTypeOfEmployment(it.typeOfEmployment).name
-
-        d(javaClass.name, "-> ${it.responded} ->")
 
         VacancyModel(
                 id = it.id,
@@ -36,7 +34,7 @@ constructor(private val context: Context,
                 responsibility = context.spanned(R.string.responsibilities_text, it.responsibility),
                 typeOfInstitution = getTypeOfInstitution(from.typeOfInstitution),
                 daysRemains = context.spanned(R.string.remains_days_format, it.daysRemains),
-                responses = from.response_vacancy?.map(ResponseTransformer::transform) ?: listOf(),
+                responses = from.response_vacancy?.map(responseTransformer::transform) ?: listOf(),
                 created = it.created,
                 expired = it.expired,
                 responded = it.responded,

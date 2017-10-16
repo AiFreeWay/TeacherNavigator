@@ -11,6 +11,7 @@ import com.teachernavigator.teachernavigator.data.models.PostCommentNetwork
 import com.teachernavigator.teachernavigator.data.models.PostNetwork
 import com.teachernavigator.teachernavigator.data.network.adapters.UserDeserializer
 import com.teachernavigator.teachernavigator.data.network.requests.*
+import com.teachernavigator.teachernavigator.data.network.responses.BaseListResponse
 import com.teachernavigator.teachernavigator.data.network.responses.BaseResponse
 import com.teachernavigator.teachernavigator.data.network.responses.PostsResponse
 import com.teachernavigator.teachernavigator.data.network.responses.SingInResponse
@@ -135,15 +136,18 @@ class NetworkController {
 
     fun getSavedPosts(token: String): Single<PostsResponse> = mApiController.getSavedPosts(token)
 
+    fun getSavedImportantInfos(token: String): Single<PostsResponse> = mApiController.getSavedImportantInfos(token)
+    fun getSavedPolls(token: String): Single<PostsResponse> = mApiController.getSavedPolls(token)
+    fun getSavedNews(token: String): Single<PostsResponse> = mApiController.getSavedNews(token)
+
+    fun getMyPosts(token: String): Single<BaseListResponse<PostNetwork>> = mApiController.getMyPosts(token)
+
     fun comment(token: String, request: CommentRequest): Single<CommentNetwork> = mApiController.comment(token, request)
 
     fun subscribe(token: String, request: SubscribeRequest): Single<BaseResponse> = mApiController.subscribe(token, request)
 
-    fun getMyPublications(token: String): Single<Array<PostNetwork>> = mApiController.getMyPublications(token)
-
     fun getUserPost(token: String, userId: Int): Single<Array<PostNetwork>> = mApiController.getUserPost(token, userId)
 
-    //fun vote(token: String, request: VoteRequest): Observable<BaseResponse> = mApiController.vote(token, request)
 
     fun vote(token: String, request: VoteRequest): Single<BaseResponse> {
         val map = HashMap<String, String>()

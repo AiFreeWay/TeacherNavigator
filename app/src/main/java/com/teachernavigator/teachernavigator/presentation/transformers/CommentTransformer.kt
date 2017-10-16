@@ -1,6 +1,7 @@
 package com.teachernavigator.teachernavigator.presentation.transformers
 
 import android.content.Context
+import com.teachernavigator.teachernavigator.R
 import com.teachernavigator.teachernavigator.application.di.scopes.PerParentScreen
 import com.teachernavigator.teachernavigator.data.models.CommentNetwork
 import com.teachernavigator.teachernavigator.presentation.models.CommentModel
@@ -13,7 +14,7 @@ import javax.inject.Inject
 @PerParentScreen
 class CommentTransformer
 @Inject
-constructor(context: Context) : EntityTransformer<CommentNetwork, CommentModel> {
+constructor(private val context: Context) : EntityTransformer<CommentNetwork, CommentModel> {
 
     override fun transform(from: CommentNetwork): CommentModel =
             CommentModel(
@@ -25,7 +26,7 @@ constructor(context: Context) : EntityTransformer<CommentNetwork, CommentModel> 
 
                     userName = from.user?.full_name ?: "",
                     userAvatar = from.user?.avatars?.avatar ?: "",
-                    timeAgo = "Неделю назад"//from.created?.getTimeAgo() ?: ""
+                    timeAgo = from.created?.getTimeAgo(context) ?: context.getString(R.string.just_now)
             )
 
 }

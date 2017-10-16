@@ -50,8 +50,7 @@ interface ParentScreenComponent {
     fun inject(presenter: AcProfilePresenter)
     fun inject(presenter: TapePresenter)
     fun inject(presenter: MyCommentsPresenter)
-    fun inject(presenter: SavedPostsPresenter)
-    fun inject(presenter: MyPublicationsPresenter)
+//    fun inject(presenter: MyPublicationsPresenter)
     fun inject(presenter: SettingsPresenter)
     fun inject(presenter: AddPublicationPresenter)
 
@@ -96,7 +95,6 @@ interface ParentScreenComponent {
     fun inject(authFragment: AuthFragment)
     fun inject(restorePasswordFragment: RestorePasswordFragment)
     fun inject(postsSearchFragment: PostsSearchFragment)
-    fun inject(savedPostsFragment: SavedPostsFragment)
     fun inject(tapeFragment: TapeFragment)
     fun inject(postsListFragment: PostsListFragment)
     fun inject(authActivity: AuthActivity)

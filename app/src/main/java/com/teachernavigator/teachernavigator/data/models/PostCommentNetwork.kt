@@ -5,11 +5,9 @@ package com.teachernavigator.teachernavigator.data.models
  */
 data class PostCommentNetwork(
 
-        var post: Int? = null,
-        var poll: Int? = null,
-        var news: Int? = null,
-        var important_info: Int? = null,
-
-        var postNetwork: PostNetwork? = null
+        val post: PostNetwork? = null,
+        val poll: PostNetwork? = null,
+        val news: PostNetwork? = null,
+        val important_info: PostNetwork? = null
 
 ) : CommentNetwork()

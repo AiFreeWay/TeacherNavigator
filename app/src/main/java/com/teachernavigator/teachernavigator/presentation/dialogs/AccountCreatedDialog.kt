@@ -1,16 +1,16 @@
 package com.teachernavigator.teachernavigator.presentation.dialogs
 
 import android.app.Dialog
-import android.support.v4.app.DialogFragment
 import android.os.Bundle
+import android.support.v4.app.DialogFragment
 import android.support.v7.app.AlertDialog
 import com.teachernavigator.teachernavigator.R
 
 
 /**
- * Created by root on 07.09.17.
+ * Created by root on 07.09.17
  */
-class AccountCreatedDialog: DialogFragment() {
+class AccountCreatedDialog : DialogFragment() {
 
     lateinit var mOnPositiveClick: () -> Unit
 
@@ -26,10 +26,10 @@ class AccountCreatedDialog: DialogFragment() {
     }
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog =
-        AlertDialog.Builder(activity)
-                .setTitle(getString(R.string.your_account_succesfuly_created))
-                .setMessage(getString(R.string.account_created_text))
-                .setPositiveButton(getString(R.string.do_auth), { dialog, whichButton ->  mOnPositiveClick.invoke() })
-                .setCancelable(false)
-                .create()
+            AlertDialog.Builder(activity)
+                    .setTitle(getString(R.string.your_account_succesfuly_created))
+                    .setMessage(getString(R.string.account_created_text))
+                    .setPositiveButton(getString(R.string.do_auth), { dialog, whichButton -> mOnPositiveClick.invoke() })
+                    .setCancelable(false)
+                    .create()
 }

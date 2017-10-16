@@ -24,7 +24,6 @@ interface IPostsInteractor {
     fun getNewsPosts(): Single<List<PostNetwork>>
     fun getUserPost(userId: Int): Single<List<PostNetwork>>
     fun getSavedPosts(): Single<List<PostNetwork>>
-    fun getMyPublications(): Single<List<PostNetwork>>
 
     fun getInfoPosts(currentTheme: Info): Single<List<PostNetwork>>
     fun getPost(postId: Int, postType: PostType): Single<PostNetwork>
@@ -36,4 +35,5 @@ interface IPostsInteractor {
 
     fun getBestPosts(): Single<List<PostNetwork>>
     fun getMyComments(): Single<List<PostCommentNetwork>>
+    fun getMyPosts(): Single<List<PostNetwork>>
 }

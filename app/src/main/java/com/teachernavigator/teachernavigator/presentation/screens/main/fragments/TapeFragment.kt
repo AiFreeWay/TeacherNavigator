@@ -8,6 +8,8 @@ import com.teachernavigator.teachernavigator.presentation.models.ViewPagerItemCo
 import com.teachernavigator.teachernavigator.presentation.screens.common.BaseFragment
 import com.teachernavigator.teachernavigator.presentation.screens.main.fragments.abstractions.TapeView
 import com.teachernavigator.teachernavigator.presentation.screens.main.presenters.abstractions.ITapePresenter
+import com.teachernavigator.teachernavigator.presentation.utils.arg
+import com.teachernavigator.teachernavigator.presentation.utils.argNullable
 import kotlinx.android.synthetic.main.fmt_feed.*
 import javax.inject.Inject
 
@@ -19,6 +21,8 @@ class TapeFragment : BaseFragment(), TapeView {
 
     companion object {
         val FRAGMENT_KEY = "tape_fragment"
+
+        val POSTS_SOURCE_KEY = "posts_source"
     }
 
     private val mAdapter by lazy { ViewPagerAdapter(childFragmentManager) }
@@ -38,7 +42,7 @@ class TapeFragment : BaseFragment(), TapeView {
 
         fmtFeedTbTabs.setupWithViewPager(fmtFeedVpBody)
         fmtFeedVpBody.adapter = mAdapter
-        mPresenter.loadFragments()
+        mPresenter.loadFragments(argNullable(POSTS_SOURCE_KEY))
     }
 
     override fun onDestroyView() {

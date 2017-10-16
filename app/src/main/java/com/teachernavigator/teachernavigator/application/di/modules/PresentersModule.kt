@@ -110,10 +110,6 @@ class PresentersModule {
 
     @Provides
     @PerParentScreen
-    fun provideSavedPostsPresenter(presenter: SavedPostsPresenter): ISavedPostsPresenter = presenter
-
-    @Provides
-    @PerParentScreen
     fun provideTapePresenter(presenter: TapePresenter): ITapePresenter = presenter
 
     @Provides

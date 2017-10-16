@@ -32,7 +32,10 @@ import com.twitter.sdk.android.core.Result
 import com.twitter.sdk.android.core.TwitterException
 import com.twitter.sdk.android.core.TwitterSession
 import com.twitter.sdk.android.core.identity.TwitterAuthClient
+import com.vk.sdk.VKAccessToken
+import com.vk.sdk.VKCallback
 import com.vk.sdk.VKSdk
+import com.vk.sdk.api.VKError
 import ru.terrakok.cicerone.Router
 import javax.inject.Inject
 
@@ -163,6 +166,7 @@ constructor(val router: Router,
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
 
+
 //        if (!VKSdk.onActivityResult(requestCode, resultCode, data, object : VKCallback<VKAccessToken> {
 //
 //            override fun onError(error: VKError?) {
@@ -183,7 +187,23 @@ constructor(val router: Router,
                 handleSignInResult(result)
             }
             twitterAuthClient.requestCode -> twitterAuthClient.onActivityResult(requestCode, resultCode, data)
-            else -> callbackManager.onActivityResult(requestCode, resultCode, data)
+            else -> if (!callbackManager.onActivityResult(requestCode, resultCode, data)) {
+
+                VKSdk.onActivityResult(requestCode, resultCode, data, object : VKCallback<VKAccessToken> {
+
+                    override fun onError(error: VKError?) {
+                        if (error != null) {
+
+                            d(javaClass.name, "-> onError -> ${error.errorMessage}")
+                        }
+                    }
+
+                    override fun onResult(res: VKAccessToken?) {
+                        d(javaClass.name, "-> onResult -> ${res?.accessToken ?: " no token"}")
+                    }
+
+                })
+            }
         }
 //        }
     }

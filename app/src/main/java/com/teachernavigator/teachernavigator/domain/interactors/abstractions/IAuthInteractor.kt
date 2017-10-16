@@ -10,7 +10,7 @@ import io.reactivex.Single
  */
 interface IAuthInteractor {
 
-    fun isAuthAsynch(): Observable<Boolean>
+    fun isAuthAsync(): Single<Boolean>
 
     fun singInViaVkontakte(): Observable<Monade>
     fun singInViaTwitter(token: String): Single<Monade>

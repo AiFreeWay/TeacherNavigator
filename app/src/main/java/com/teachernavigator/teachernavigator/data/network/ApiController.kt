@@ -70,8 +70,23 @@ interface ApiController {
     fun saveNews(@Header("Authorization") accessToken: String, @Field("news") postId: Int,
                  @Field("user") user: Int = 0): Single<BaseResponse>
 
-    @GET("/api/v0/me/saved/")
+    @GET("/api/v0/me/saved/posts/")
     fun getSavedPosts(@Header("Authorization") accessToken: String): Single<PostsResponse>
+
+
+    @GET("/api/v0/me/saved/info/")
+    fun getSavedImportantInfos(@Header("Authorization") accessToken: String): Single<PostsResponse>
+
+
+    @GET("/api/v0/me/saved/polls/")
+    fun getSavedPolls(@Header("Authorization") accessToken: String): Single<PostsResponse>
+
+
+    @GET("/api/v0/me/saved/newses/")
+    fun getSavedNews(@Header("Authorization") accessToken: String): Single<PostsResponse>
+
+    @GET("/api/v0/me/posts/")
+    fun getMyPosts(@Header("Authorization") accessToken: String): Single<BaseListResponse<PostNetwork>>
 
     @POST("/api/v0/comment/")
     fun comment(@Header("Authorization") accessToken: String, @Body request: CommentRequest): Single<CommentNetwork>
@@ -84,9 +99,6 @@ interface ApiController {
 
     @GET("/api/v0/votes/up/")
     fun vote(@Header("Authorization") accessToken: String, @QueryMap map: Map<String, String>): Single<BaseResponse>
-
-    @GET("/api/v0/me/posts/")
-    fun getMyPublications(@Header("Authorization") accessToken: String): Single<Array<PostNetwork>>
 
     @GET("/api/v0/profile/{userId}/posts/ ")
     fun getUserPost(@Header("Authorization") accessToken: String, @Path("userId") userId: Int): Single<Array<PostNetwork>>

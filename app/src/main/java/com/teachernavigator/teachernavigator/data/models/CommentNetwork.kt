@@ -12,7 +12,7 @@ open class CommentNetwork(
         open val message: String? = null,
         open val user: UserInComment? = null,
         open val author: Author? = null,
-        open val created: String? = null) {
+        open val created: Date? = null) {
 
     class UserInComment {
         var id: Int? = null

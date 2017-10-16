@@ -10,6 +10,7 @@ import com.teachernavigator.teachernavigator.data.models.PostCommentNetwork
 import com.teachernavigator.teachernavigator.data.models.PostNetwork
 import com.teachernavigator.teachernavigator.data.network.NetworkController
 import com.teachernavigator.teachernavigator.data.network.requests.*
+import com.teachernavigator.teachernavigator.data.network.responses.BaseListResponse
 import com.teachernavigator.teachernavigator.data.network.responses.BaseResponse
 import com.teachernavigator.teachernavigator.data.network.responses.PostsResponse
 import com.teachernavigator.teachernavigator.data.network.responses.SingInResponse
@@ -45,8 +46,8 @@ class MainRepository @Inject constructor(private val mNetwokController: NetworkC
 
     // ------------------------------- Auth methods --------------------------------
 
-    override fun getTokenAsynch(): Observable<Token> =
-            Observable.just(CacheController.getData(CacheController.TOKEN_KEY, Token.EMPTY_TOKEN))
+    override fun getTokenAsync(): Single<Token> =
+            Single.just(CacheController.getData(CacheController.TOKEN_KEY, Token.EMPTY_TOKEN))
 
     override fun isAuth(): Boolean {
         val token = (CacheController.getData(CacheController.TOKEN_KEY, Token.EMPTY_TOKEN) as Token)
@@ -96,28 +97,22 @@ class MainRepository @Inject constructor(private val mNetwokController: NetworkC
             mNetwokController.getBestPosts(getAccessToken())
 
     override fun getMyComments(): Single<List<PostCommentNetwork>>
-
             = mNetwokController.getMyComments(getAccessToken())
-            .toObservable()
-            .flatMap { it -> Observable.fromIterable(it) }
-            .flatMap { post ->
-                when {
-                    post.news != null -> getPost(post.news!!, PostType.news).toObservable()
-                    post.poll != null -> getPost(post.poll!!, PostType.poll).toObservable()
-                    post.post != null -> getPost(post.post!!, PostType.post).toObservable()
-                    post.important_info != null -> getPost(post.important_info!!, PostType.importantinfo).toObservable()
-                    else -> throw Error("Unknown post type")
-                }.map {
-                    post.postNetwork = it
-                    post
-
-                }
-            }
-            .toList()
-
 
     override fun getSavedPosts(): Single<PostsResponse>
             = mNetwokController.getSavedPosts(getAccessToken())
+
+    override fun getSavedImportantInfos(): Single<PostsResponse>
+            = mNetwokController.getSavedImportantInfos(getAccessToken())
+
+    override fun getSavedPolls(): Single<PostsResponse>
+            = mNetwokController.getSavedPolls(getAccessToken())
+
+    override fun getSavedNews(): Single<PostsResponse>
+            = mNetwokController.getSavedNews(getAccessToken())
+
+    override fun getMyPosts(): Single<BaseListResponse<PostNetwork>>
+            = mNetwokController.getMyPosts(getAccessToken())
 
     override fun comment(request: CommentRequest): Single<CommentNetwork> =
             mNetwokController.comment(getAccessToken(), request)
@@ -138,9 +133,6 @@ class MainRepository @Inject constructor(private val mNetwokController: NetworkC
         PostType.news -> mNetwokController.complaintNews(getAccessToken(), postId)
 
     }.applySchedulers()
-
-    override fun getMyPublications(): Single<Array<PostNetwork>> =
-            mNetwokController.getMyPublications(getAccessToken())
 
     override fun getUserPost(userId: Int): Single<Array<PostNetwork>> =
             mNetwokController.getUserPost(getAccessToken(), userId)

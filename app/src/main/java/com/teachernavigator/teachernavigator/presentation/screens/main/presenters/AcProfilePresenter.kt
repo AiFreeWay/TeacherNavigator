@@ -65,7 +65,7 @@ class AcProfilePresenter : BasePresenter<ProfileView>(), IProfilePresenter {
 
     override fun getProfile() {
         addDissposable(mProfileInteractor.getProfile()
-                .zipWith(mPostsInteractor.getMyPublications(), BiFunction<Profile, List<PostNetwork>, List<ProfilePostConteainer>> { t1, t2 ->
+                .zipWith(mPostsInteractor.getMyPosts(), BiFunction<Profile, List<PostNetwork>, List<ProfilePostConteainer>> { t1, t2 ->
                     mapProfileAndPostData(t1, t2)
                 })
                 .doOnSubscribe { mView!!.startProgress() }

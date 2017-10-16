@@ -44,7 +44,7 @@ class PostCommentsFragment : BaseFragment(), PostCommentsView {
                         null,
                         null, // TODO postConroller::onReadMore
                         null,
-                        postController::onPollPassed
+                        postController::onPollVote
                 ),
                 CommentVHBuilder(
                         null, // TODO presenter::onBranch

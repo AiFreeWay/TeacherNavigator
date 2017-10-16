@@ -17,6 +17,6 @@ interface IPostActionsController : ViewAttacher<PostActionsView> {
     fun onSubscribe(post: PostModel)
     fun onReadMore(post: PostModel)
     fun onComplain(post: PostModel)
-    fun onPollPassed(post : PostModel, choiceModel: ChoiceModel)
+    fun onPollVote(post : PostModel, choiceModel: ChoiceModel)
 
 }

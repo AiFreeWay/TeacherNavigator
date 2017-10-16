@@ -5,7 +5,7 @@ import com.teachernavigator.teachernavigator.R
 import com.teachernavigator.teachernavigator.presentation.models.MenuItem
 
 /**
- * Created by root on 15.08.17.
+ * Created by root on 15.08.17
  */
 class MenuItemsFactory {
 

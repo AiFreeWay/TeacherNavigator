@@ -23,7 +23,7 @@ class PostActionsController
 @Inject constructor(private val router: Router,
                     private val repository: IPostsRepository) : BasePresenter<PostActionsView>(), IPostActionsController {
 
-    override fun onPollPassed(post: PostModel, choiceModel: ChoiceModel) =
+    override fun onPollVote(post: PostModel, choiceModel: ChoiceModel) =
             addDissposable(repository.passPoll(post.id, choiceModel.id)
                     .applySchedulers()
                     .map { it.is_error }

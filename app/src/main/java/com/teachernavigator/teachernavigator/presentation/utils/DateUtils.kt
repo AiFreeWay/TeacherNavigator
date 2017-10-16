@@ -1,5 +1,7 @@
 package com.teachernavigator.teachernavigator.presentation.utils
 
+import android.content.Context
+import com.teachernavigator.teachernavigator.R
 import java.text.SimpleDateFormat
 import java.util.*
 import java.util.concurrent.atomic.AtomicReference
@@ -35,10 +37,10 @@ val Date.formatServerDatetime: String?
     get() = SERVER_DATETIME_FORMAT.get().format(this)
 
 
-fun Date.getTimeAgo(): String =
-        time.getTimeAgo()
+fun Date.getTimeAgo(context: Context): String =
+        time.getTimeAgo(context)
 
-fun Long.getTimeAgo(): String {
+fun Long.getTimeAgo(context: Context): String {
     var time = this
 
     if (time < 1000000000000L) {
@@ -55,13 +57,13 @@ fun Long.getTimeAgo(): String {
     val diff = now - time
 
     return when (diff) {
-        in Int.MIN_VALUE..MINUTE_MILLIS -> "только что"
-        in MINUTE_MILLIS..2 * MINUTE_MILLIS -> "минуту назад"
-        in 2 * MINUTE_MILLIS..50 * MINUTE_MILLIS -> "${diff / MINUTE_MILLIS} минут назад"
-        in 50 * MINUTE_MILLIS..90 * MINUTE_MILLIS -> "час назад"
-        in 90 * MINUTE_MILLIS..24 * HOUR_MILLIS -> "${diff / HOUR_MILLIS} часов назад"
-        in 24 * HOUR_MILLIS..48 * HOUR_MILLIS -> "вчера"
-        else -> "${diff / DAY_MILLIS} дней назад"
+        in Int.MIN_VALUE..MINUTE_MILLIS -> context.getString(R.string.just_now)
+        in MINUTE_MILLIS..2 * MINUTE_MILLIS -> context.getString(R.string.minute_ago)
+        in 2 * MINUTE_MILLIS..50 * MINUTE_MILLIS -> (diff / MINUTE_MILLIS).let { context.resources.getQuantityString(R.plurals.minutes_ago, it.toInt(), it) }
+        in 50 * MINUTE_MILLIS..90 * MINUTE_MILLIS -> context.getString(R.string.hour_ago)
+        in 90 * MINUTE_MILLIS..24 * HOUR_MILLIS -> (diff / HOUR_MILLIS).let { context.resources.getQuantityString(R.plurals.hours_ago, it.toInt(), it) }
+        in 24 * HOUR_MILLIS..48 * HOUR_MILLIS -> context.getString(R.string.yesterday)
+        else -> (diff / DAY_MILLIS).let { context.resources.getQuantityString(R.plurals.days_ago, it.toInt(), it) }
     }
 
 }

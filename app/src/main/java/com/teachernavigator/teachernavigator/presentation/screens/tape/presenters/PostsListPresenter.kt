@@ -47,6 +47,10 @@ constructor(val router: Router,
         mPostType = PostType.values()[postsType]
         mPostsSource = PostsSource.values()[postsSource]
 
+        if (mPostsSource == PostsSource.Mine) {
+            mView?.getParentView()?.setToolbarTitle(R.string.my_publication)
+        }
+
         if (mPosts.isNullOrEmpty()) {
             refresh()
         }

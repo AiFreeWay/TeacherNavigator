@@ -5,6 +5,7 @@ import com.teachernavigator.teachernavigator.data.models.FileInfo
 import com.teachernavigator.teachernavigator.data.models.PostCommentNetwork
 import com.teachernavigator.teachernavigator.data.models.PostNetwork
 import com.teachernavigator.teachernavigator.data.network.requests.CommentRequest
+import com.teachernavigator.teachernavigator.data.network.responses.BaseListResponse
 import com.teachernavigator.teachernavigator.data.network.responses.BaseResponse
 import com.teachernavigator.teachernavigator.data.network.responses.PostsResponse
 import com.teachernavigator.teachernavigator.domain.models.PostType
@@ -24,7 +25,10 @@ interface IPostsRepository {
     fun getPolls(): Single<PostsResponse>
 
     fun getSavedPosts(): Single<PostsResponse>
-    fun getMyPublications(): Single<Array<PostNetwork>>
+    fun getSavedImportantInfos(): Single<PostsResponse>
+    fun getSavedPolls(): Single<PostsResponse>
+    fun getSavedNews(): Single<PostsResponse>
+    fun getMyPosts(): Single<BaseListResponse<PostNetwork>>
     fun getUserPost(userId: Int): Single<Array<PostNetwork>>
 
     fun getMyComments(): Single<List<PostCommentNetwork>>

@@ -9,7 +9,7 @@ import com.teachernavigator.teachernavigator.presentation.screens.main.fragments
  */
 interface ITapePresenter : ViewAttacher<TapeView> {
 
-    fun loadFragments()
+    fun loadFragments(type : Int?)
     fun openPostSearchScreen()
     fun refresh(fragment: Fragment?)
 }

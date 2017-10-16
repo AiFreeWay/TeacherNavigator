@@ -19,8 +19,8 @@ import javax.inject.Inject
  */
 class AuthInteractor @Inject constructor(private val mRepository: IAuthRepository) : IAuthInteractor {
 
-    override fun isAuthAsynch(): Observable<Boolean> =
-            mRepository.getTokenAsynch()
+    override fun isAuthAsync(): Single<Boolean> =
+            mRepository.getTokenAsync()
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribeOn(Schedulers.newThread())
                     .map { it.isExists() }

@@ -23,6 +23,8 @@ import javax.inject.Inject
 class PostsListFragment : BaseFragment(), PostsListView {
 
     companion object {
+        const val FRAGMENT_KEY = "PostsListFragment"
+
         const val POSTS_SOURCE_KEY = "posts_source"
         const val POST_TYPE_KEY = "post_type"
     }

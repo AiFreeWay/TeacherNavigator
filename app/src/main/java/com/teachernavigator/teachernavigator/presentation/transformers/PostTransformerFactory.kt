@@ -53,14 +53,15 @@ constructor(private val commentTransformer: CommentTransformer,
                         count_dislikes = from.count_dislikes ?: 0,
                         vote = from.vote,
                         count_comments = from.count_comments ?: 0,
-                        comments = from.comments?.map(commentTransformer::transform) ?: emptyList(),
+                        comments = from.comments?.filterNotNull()?.map(commentTransformer::transform) ?: emptyList(),
                         authorId = from.author?.id ?: -1,
                         authorName = from.author?.full_name ?: "",
                         authorAvatar = from.author?.avatars?.firstOrNull()?.avatar,
                         type = this.postType,
                         file = from.file,
                         choices = from.choices?.map(choiceTransformer::transform) ?: emptyList(),
-                        pollPassed = (postType == PostType.poll) && postsRepository.isPollPassed(from.id ?: -1)
+                        pollPassed = (postType == PostType.poll) && (from.did_action == true || postsRepository.isPollPassed(from.id ?: -1))
+
                 )
     }
 

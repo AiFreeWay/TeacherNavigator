@@ -29,7 +29,7 @@ class AuthMapper {
                         singUpData.position,
                         singUpData.experience,
                         singUpData.unionist,
-                        singUpData.number_of_union_ticket,
+                        if(!singUpData.unionist) null else singUpData.number_of_union_ticket,
                         singUpData.phone_number.replace("(\\(|\\)| )", ""))
 
         fun mapSingInDataToRequest(login: String, password: String, authCredentials: AuthCredentials): SingInRequest =

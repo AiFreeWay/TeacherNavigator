@@ -21,7 +21,7 @@ import javax.inject.Inject
 class RegistrationFragment : BaseFragment(), RegistrationView {
 
     companion object {
-        val FRAGMENT_KEY = "Registration_Fragment _ 312"
+        val FRAGMENT_KEY = "registration_fragment"
     }
 
     @Inject

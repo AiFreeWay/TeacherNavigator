@@ -13,9 +13,17 @@ import com.teachernavigator.teachernavigator.presentation.screens.tape.fragments
  */
 object PostsFragmentsFactory {
 
+    fun createMyItems(context: Context, postsSource: PostsSource): List<ViewPagerItemContainer> {
+        val itemContainers = ArrayList<ViewPagerItemContainer>()
+        itemContainers.add(ViewPagerItemContainer(context.getString(R.string.news), createPostFragment(PostType.news, postsSource)))
+        itemContainers.add(ViewPagerItemContainer(context.getString(R.string.last), createPostFragment(PostType.post, postsSource)))
+        itemContainers.add(ViewPagerItemContainer(context.getString(R.string.important_to_know), createPostFragment(PostType.importantinfo, postsSource)))
+        itemContainers.add(ViewPagerItemContainer(context.getString(R.string.interviews), createPostFragment(PostType.poll, postsSource)))
+        return itemContainers
+    }
+
     fun createItems(context: Context): List<ViewPagerItemContainer> {
         val itemContainers = ArrayList<ViewPagerItemContainer>()
-
         itemContainers.add(ViewPagerItemContainer(context.getString(R.string.news), createPostFragment(PostType.news)))
         itemContainers.add(ViewPagerItemContainer(context.getString(R.string.last), createPostFragment(PostType.post)))
         itemContainers.add(ViewPagerItemContainer(context.getString(R.string.best), createPostFragment(PostType.post, PostsSource.Best)))

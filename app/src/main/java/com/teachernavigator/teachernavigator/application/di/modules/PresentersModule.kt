@@ -124,4 +124,8 @@ class PresentersModule {
     @PerParentScreen
     fun provideAcAuthParentPresenter(presenter: AuthParentPresenter): IAuthParentPresenter = presenter
 
+    @Provides
+    @PerParentScreen
+    fun provideMyCommentsPresenter(presenter: MyCommentsPresenter): IMyCommentsPresenter = presenter
+
 }

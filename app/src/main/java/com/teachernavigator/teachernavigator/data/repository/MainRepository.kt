@@ -6,11 +6,11 @@ import com.teachernavigator.teachernavigator.R
 import com.teachernavigator.teachernavigator.data.cache.CacheController
 import com.teachernavigator.teachernavigator.data.models.CommentNetwork
 import com.teachernavigator.teachernavigator.data.models.FileInfo
+import com.teachernavigator.teachernavigator.data.models.PostCommentNetwork
 import com.teachernavigator.teachernavigator.data.models.PostNetwork
 import com.teachernavigator.teachernavigator.data.network.NetworkController
 import com.teachernavigator.teachernavigator.data.network.requests.*
 import com.teachernavigator.teachernavigator.data.network.responses.BaseResponse
-import com.teachernavigator.teachernavigator.data.network.responses.GetMyCommentsResponse
 import com.teachernavigator.teachernavigator.data.network.responses.PostsResponse
 import com.teachernavigator.teachernavigator.data.network.responses.SingInResponse
 import com.teachernavigator.teachernavigator.data.repository.abstractions.IMainRepository
@@ -95,8 +95,26 @@ class MainRepository @Inject constructor(private val mNetwokController: NetworkC
     override fun getBestPosts(): Single<PostsResponse> =
             mNetwokController.getBestPosts(getAccessToken())
 
-    override fun getMyComments(): Observable<GetMyCommentsResponse>
+    override fun getMyComments(): Single<List<PostCommentNetwork>>
+
             = mNetwokController.getMyComments(getAccessToken())
+            .toObservable()
+            .flatMap { it -> Observable.fromIterable(it) }
+            .flatMap { post ->
+                when {
+                    post.news != null -> getPost(post.news!!, PostType.news).toObservable()
+                    post.poll != null -> getPost(post.poll!!, PostType.poll).toObservable()
+                    post.post != null -> getPost(post.post!!, PostType.post).toObservable()
+                    post.important_info != null -> getPost(post.important_info!!, PostType.importantinfo).toObservable()
+                    else -> throw Error("Unknown post type")
+                }.map {
+                    post.postNetwork = it
+                    post
+
+                }
+            }
+            .toList()
+
 
     override fun getSavedPosts(): Single<PostsResponse>
             = mNetwokController.getSavedPosts(getAccessToken())

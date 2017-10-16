@@ -3,10 +3,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_marginTop="@dimen/spacingXLarge"
+    android:layout_height="wrap_content"
     android:layout_marginLeft="@dimen/spacingXLarge"
     android:layout_marginRight="@dimen/spacingXLarge"
-    android:layout_height="wrap_content">
+    android:layout_marginTop="@dimen/spacingXLarge">
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/v_post_iv_avatar"
@@ -160,13 +160,48 @@
         app:tagTextColor="@color/greyTextColor"
         app:tagTextSize="@dimen/normalTextSize" />
 
+    <LinearLayout
+        android:id="@+id/v_post_l_your_comment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/v_post_hv_hasttags"
+        android:visibility="gone"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/your_comment"
+            android:layout_marginBottom="@dimen/spacingMedium"
+            android:layout_marginLeft="@dimen/spacingLarge"
+            android:layout_marginRight="@dimen/spacingLarge"
+            android:layout_marginTop="@dimen/spacingMedium"
+            android:textSize="@dimen/titleTextSize"/>
+
+        <TextView
+            android:id="@+id/v_post_tv_comment_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="@dimen/spacingSmall"
+            android:layout_marginLeft="@dimen/spacingLarge"
+            android:layout_marginRight="@dimen/spacingLarge"
+            tools:text="Такой то комментарий!"
+            android:layout_marginTop="@dimen/spacingSmall"
+            android:background="@drawable/oval_text_backgroud"
+            android:gravity="top"
+            android:minLines="3"
+            android:padding="@dimen/internalPadding" />
+
+    </LinearLayout>
+
     <View
         android:id="@+id/v_post_v_devider"
         android:layout_width="match_parent"
         android:layout_height="2dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_below="@+id/v_post_hv_hasttags"
+        android:layout_below="@+id/v_post_l_your_comment"
         android:layout_marginTop="@dimen/internalPadding"
         android:background="@color/colorDevider" />
 
@@ -226,5 +261,20 @@
         android:padding="@dimen/spacingLarge"
         android:src="@drawable/ic_save"
         tools:ignore="ContentDescription" />
+
+
+    <android.support.v7.widget.AppCompatButton
+        android:id="@+id/v_post_btn_open_branch"
+        style="@style/Button.Small"
+        android:visibility="gone"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/v_post_v_devider"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/spacingSmall"
+        android:text="@string/open_branch"
+        android:textAllCaps="false"
+        app:backgroundTint="@color/colorAccent" />
 
 </RelativeLayout>

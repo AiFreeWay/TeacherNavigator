@@ -7,11 +7,11 @@ import com.google.gson.GsonBuilder
 import com.teachernavigator.teachernavigator.BuildConfig
 import com.teachernavigator.teachernavigator.data.models.CommentNetwork
 import com.teachernavigator.teachernavigator.data.models.FileInfo
+import com.teachernavigator.teachernavigator.data.models.PostCommentNetwork
 import com.teachernavigator.teachernavigator.data.models.PostNetwork
 import com.teachernavigator.teachernavigator.data.network.adapters.UserDeserializer
 import com.teachernavigator.teachernavigator.data.network.requests.*
 import com.teachernavigator.teachernavigator.data.network.responses.BaseResponse
-import com.teachernavigator.teachernavigator.data.network.responses.GetMyCommentsResponse
 import com.teachernavigator.teachernavigator.data.network.responses.PostsResponse
 import com.teachernavigator.teachernavigator.data.network.responses.SingInResponse
 import com.teachernavigator.teachernavigator.data.utils.toRequestBody
@@ -123,13 +123,15 @@ class NetworkController {
 
     fun getPoll(token: String, pollId: Int): Single<PostNetwork> = mApiController.getPoll(token, pollId)
 
-    fun getMyComments(token: String): Observable<GetMyCommentsResponse> = mApiController.getMyComments(token)
-
     fun savePost(token: String, postId: Int): Single<BaseResponse> = mApiController.savePost(token, postId)
 
     fun savePoll(token: String, postId: Int): Single<BaseResponse> = mApiController.savePoll(token, postId)
 
     fun saveNews(token: String, postId: Int): Single<BaseResponse> = mApiController.saveNews(token, postId)
+
+    fun getMyComments(token: String): Single<List<PostCommentNetwork>> =
+            mApiController.myComments(token)
+                    .map { it.results }
 
     fun getSavedPosts(token: String): Single<PostsResponse> = mApiController.getSavedPosts(token)
 

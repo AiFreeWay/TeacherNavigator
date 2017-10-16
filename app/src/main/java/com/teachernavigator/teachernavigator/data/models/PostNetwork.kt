@@ -2,6 +2,7 @@ package com.teachernavigator.teachernavigator.data.models
 
 import com.teachernavigator.teachernavigator.domain.models.Author
 import com.teachernavigator.teachernavigator.domain.models.Choice
+import com.teachernavigator.teachernavigator.domain.models.PostType
 
 /**
  * Created by root on 07.09.17
@@ -20,6 +21,9 @@ data class PostNetwork(
         val count_comments: Int? = null,
         val comments: List<CommentNetwork>? = null,
         val author: Author? = null,
-        val choices: List<Choice>? = null
+        val choices: List<Choice>? = null,
+
+
+        val postType: PostType? = null
 
 )

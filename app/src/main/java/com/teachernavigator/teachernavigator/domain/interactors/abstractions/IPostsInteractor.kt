@@ -2,6 +2,7 @@ package com.teachernavigator.teachernavigator.domain.interactors.abstractions
 
 import com.teachernavigator.teachernavigator.data.models.CommentNetwork
 import com.teachernavigator.teachernavigator.data.models.FileInfo
+import com.teachernavigator.teachernavigator.data.models.PostCommentNetwork
 import com.teachernavigator.teachernavigator.data.models.PostNetwork
 import com.teachernavigator.teachernavigator.domain.models.Post
 import com.teachernavigator.teachernavigator.domain.models.PostType
@@ -34,4 +35,5 @@ interface IPostsInteractor {
     fun sendPost(title: String, text: String, tags: List<String>,fileInfo: FileInfo?): Single<PostNetwork>
 
     fun getBestPosts(): Single<List<PostNetwork>>
+    fun getMyComments(): Single<List<PostCommentNetwork>>
 }

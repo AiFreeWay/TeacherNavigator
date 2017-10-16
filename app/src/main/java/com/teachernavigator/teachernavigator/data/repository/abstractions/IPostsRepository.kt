@@ -2,15 +2,14 @@ package com.teachernavigator.teachernavigator.data.repository.abstractions
 
 import com.teachernavigator.teachernavigator.data.models.CommentNetwork
 import com.teachernavigator.teachernavigator.data.models.FileInfo
+import com.teachernavigator.teachernavigator.data.models.PostCommentNetwork
 import com.teachernavigator.teachernavigator.data.models.PostNetwork
 import com.teachernavigator.teachernavigator.data.network.requests.CommentRequest
 import com.teachernavigator.teachernavigator.data.network.responses.BaseResponse
-import com.teachernavigator.teachernavigator.data.network.responses.GetMyCommentsResponse
 import com.teachernavigator.teachernavigator.data.network.responses.PostsResponse
 import com.teachernavigator.teachernavigator.domain.models.PostType
 import com.teachernavigator.teachernavigator.domain.models.Tag
 import com.teachernavigator.teachernavigator.presentation.models.Info
-import io.reactivex.Observable
 import io.reactivex.Single
 
 /**
@@ -28,7 +27,7 @@ interface IPostsRepository {
     fun getMyPublications(): Single<Array<PostNetwork>>
     fun getUserPost(userId: Int): Single<Array<PostNetwork>>
 
-    fun getMyComments(): Observable<GetMyCommentsResponse>
+    fun getMyComments(): Single<List<PostCommentNetwork>>
 
     fun comment(request: CommentRequest): Single<CommentNetwork>
 

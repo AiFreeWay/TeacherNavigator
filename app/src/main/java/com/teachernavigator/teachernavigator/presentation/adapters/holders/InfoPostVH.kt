@@ -20,7 +20,7 @@ import ru.lliepmah.lib.DefaultViewHolder
  * Created by lliepmah on 07.10.17
  */
 @HolderBuilder(R.layout.v_info_post)
-class InfoPostVH(itemView: View,
+open class InfoPostVH(itemView: View,
                  onLikeListener: OnLikeListener?,
                  onDislikeListener: OnDislikeListener?,
                  onCommentsListener: OnCommentsListener?,
@@ -48,9 +48,10 @@ class InfoPostVH(itemView: View,
     private val hvHasttags: HashtagView = itemView.find(R.id.v_post_hv_hasttags)
     private val tvLike: TextView = itemView.find(R.id.v_post_tv_like)
     private val tvDislike: TextView = itemView.find(R.id.v_post_tv_dislike)
-    private val tvComments: TextView = itemView.find(R.id.v_post_tv_comments)
-    private val ivSave: ImageView = itemView.find(R.id.v_post_iv_save)
     private val passTestButton: Button = itemView.find(R.id.v_post_btn_pass_test)
+
+    val tvComments: TextView = itemView.find(R.id.v_post_tv_comments)
+    val ivSave: ImageView = itemView.find(R.id.v_post_iv_save)
 
     private var mModel: PostModel? = null
 

@@ -1,6 +1,7 @@
 package com.teachernavigator.teachernavigator.data.network
 
 import com.teachernavigator.teachernavigator.data.models.CommentNetwork
+import com.teachernavigator.teachernavigator.data.models.PostCommentNetwork
 import com.teachernavigator.teachernavigator.data.models.PostNetwork
 import com.teachernavigator.teachernavigator.data.network.requests.*
 import com.teachernavigator.teachernavigator.data.network.responses.*
@@ -53,9 +54,6 @@ interface ApiController {
 
     @GET("/api/v0/poll/{pollId}")
     fun getPoll(@Header("Authorization") accessToken: String, @Path("pollId") poll: Int): Single<PostNetwork>
-
-    @GET("/api/v0/me/comments/")
-    fun getMyComments(@Header("Authorization") accessToken: String): Observable<GetMyCommentsResponse>
 
     @FormUrlEncoded
     @POST("/api/v0/save/post/")
@@ -168,6 +166,9 @@ interface ApiController {
 
     @GET("/api/v0/tags/")
     fun tags(@Header("Authorization") accessToken: String, @Query("page") page: Int): Observable<BaseListResponse<Tag>>
+
+    @GET("/api/v0/me/comments/")
+    fun myComments(@Header("Authorization") accessToken: String): Single<BaseListResponse<PostCommentNetwork>>
 
     @GET("/api/v0/tags/trends")
     fun tagsTrends(@Header("Authorization") accessToken: String, @Query("page") page: Int): Observable<BaseListResponse<Tag>>

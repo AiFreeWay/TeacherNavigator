@@ -4,15 +4,15 @@ import com.teachernavigator.teachernavigator.domain.models.Author
 import java.util.*
 
 /**
- * Created by root on 07.09.17.
+ * Created by root on 07.09.17
  */
-data class CommentNetwork(
+open class CommentNetwork(
 
-        val id: Int? = null,
-        val message: String? = null,
-        val user: UserInComment? = null,
-        val author: Author? = null,
-        val created: Date? = null) {
+        open val id: Int? = null,
+        open val message: String? = null,
+        open val user: UserInComment? = null,
+        open val author: Author? = null,
+        open val created: String? = null) {
 
     class UserInComment {
         var id: Int? = null

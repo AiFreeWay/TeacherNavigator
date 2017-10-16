@@ -20,10 +20,7 @@ import com.teachernavigator.teachernavigator.presentation.screens.auth.presenter
 import com.teachernavigator.teachernavigator.presentation.screens.common.ParentView
 import com.teachernavigator.teachernavigator.presentation.screens.info.fragments.*
 import com.teachernavigator.teachernavigator.presentation.screens.jobs.fragments.*
-import com.teachernavigator.teachernavigator.presentation.screens.main.fragments.AddPublicationFragment
-import com.teachernavigator.teachernavigator.presentation.screens.main.fragments.PostCommentsFragment
-import com.teachernavigator.teachernavigator.presentation.screens.main.fragments.SavedPostsFragment
-import com.teachernavigator.teachernavigator.presentation.screens.main.fragments.TapeFragment
+import com.teachernavigator.teachernavigator.presentation.screens.main.fragments.*
 import com.teachernavigator.teachernavigator.presentation.screens.main.presenters.*
 import com.teachernavigator.teachernavigator.presentation.screens.settings.presenters.FmtAppSettingsPresenter
 import com.teachernavigator.teachernavigator.presentation.screens.settings.presenters.ProfileSettingsPresenter
@@ -103,5 +100,6 @@ interface ParentScreenComponent {
     fun inject(tapeFragment: TapeFragment)
     fun inject(postsListFragment: PostsListFragment)
     fun inject(authActivity: AuthActivity)
+    fun inject(myCommentsFragment: MyCommentsFragment)
 
 }

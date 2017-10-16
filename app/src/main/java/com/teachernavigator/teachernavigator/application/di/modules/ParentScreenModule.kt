@@ -53,23 +53,19 @@ class ParentScreenModule(private val mParentView: ParentView) {
 
     @Provides
     @PerParentScreen
-    fun provideAuthInteractor(interactor : AuthInteractor): IAuthInteractor = interactor
+    fun provideAuthInteractor(interactor: AuthInteractor): IAuthInteractor = interactor
 
     @Provides
     @PerParentScreen
-    fun providePostsInteractor(interactor : PostsInteractor): IPostsInteractor = interactor
+    fun providePostsInteractor(interactor: PostsInteractor): IPostsInteractor = interactor
 
     @Provides
     @PerParentScreen
-    fun provideJobInteractor(interactor : JobInteractor): IJobInteractor = interactor
+    fun provideJobInteractor(interactor: JobInteractor): IJobInteractor = interactor
 
     @Provides
     @PerParentScreen
-    fun provideCommentsInteractor(interactor : CommentsInteractor): ICommentsInteractor = interactor
-
-    @Provides
-    @PerParentScreen
-    fun providePostController(controller : PostController): IPostController = controller
+    fun providePostController(controller: PostController): IPostController = controller
 
     @Provides
     @PerParentScreen
@@ -77,9 +73,9 @@ class ParentScreenModule(private val mParentView: ParentView) {
 
     @Provides
     @PerParentScreen
-    fun provideSettingsInteractor(interactor : SettingsInteractor): ISettingsInteractor = interactor
+    fun provideSettingsInteractor(interactor: SettingsInteractor): ISettingsInteractor = interactor
 
     @Provides
     @PerParentScreen
-    fun provideProfileInteractor(interactor : ProfileInteractor): IProfileInteractor = interactor
+    fun provideProfileInteractor(interactor: ProfileInteractor): IProfileInteractor = interactor
 }

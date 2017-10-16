@@ -43,7 +43,6 @@ constructor(val router: Router,
         mDisposables.clear()
     }
 
-
     override fun initialLoad(postsSource: Int, postsType: Int) {
         mPostType = PostType.values()[postsType]
         mPostsSource = PostsSource.values()[postsSource]

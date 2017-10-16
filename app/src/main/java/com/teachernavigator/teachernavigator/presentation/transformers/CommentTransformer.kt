@@ -25,7 +25,7 @@ constructor(context: Context) : EntityTransformer<CommentNetwork, CommentModel> 
 
                     userName = from.user?.full_name ?: "",
                     userAvatar = from.user?.avatars?.avatar ?: "",
-                    timeAgo = from.created?.getTimeAgo() ?: ""
+                    timeAgo = "Неделю назад"//from.created?.getTimeAgo() ?: ""
             )
 
 }

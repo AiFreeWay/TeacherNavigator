@@ -2,6 +2,7 @@ package com.teachernavigator.teachernavigator.domain.interactors
 
 import com.teachernavigator.teachernavigator.data.models.CommentNetwork
 import com.teachernavigator.teachernavigator.data.models.FileInfo
+import com.teachernavigator.teachernavigator.data.models.PostCommentNetwork
 import com.teachernavigator.teachernavigator.data.models.PostNetwork
 import com.teachernavigator.teachernavigator.data.network.requests.CommentRequest
 import com.teachernavigator.teachernavigator.data.repository.abstractions.IPostsRepository
@@ -91,13 +92,16 @@ class PostsInteractor @Inject constructor(private val mRepository: IPostsReposit
     override fun getMyPublications(): Single<List<PostNetwork>> =
             mRepository.getMyPublications()
                     .map { it.toList() }
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribeOn(Schedulers.newThread())
+                    .applySchedulers()
 
     override fun getUserPost(userId: Int): Single<List<PostNetwork>> =
             mRepository.getUserPost(userId)
                     .map { it.toList() }
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribeOn(Schedulers.newThread())
+                    .applySchedulers()
+
+    override fun getMyComments(): Single<List<PostCommentNetwork>> =
+            mRepository.getMyComments()
+                    .map { it.toList() }
+                    .applySchedulers()
 
 }

@@ -8,5 +8,5 @@ import java.util.*
  */
 data class Author(var id: Int = -1,
                   var full_name: String = "",
-                  var avatars: List<Avatar> = Collections.emptyList()
+                  var avatar: String = ""
 ) : Serializable

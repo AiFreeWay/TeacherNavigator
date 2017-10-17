@@ -46,6 +46,7 @@ class ImportantToKnowFragment : BaseFragment(), ImportantToKnowView {
                         null,
                         null,
                         null,
+                        null,
                         null
                 ),
                 InfoVHBuilder(presenter::onThemeChanged),

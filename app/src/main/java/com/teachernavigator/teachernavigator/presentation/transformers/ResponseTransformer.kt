@@ -20,7 +20,7 @@ constructor(private val context: Context) : EntityTransformer<Response, Response
 
     override fun transform(from: Response) = ResponseModel(
             portfolio = from.resume.firstOrNull()?.file?.let { if (it.startsWith(HTTP)) it else "$SERVER$it" } ?: "", // hilarious kotlin ☻
-            userAvatar = from.employee?.avatars?.firstOrNull()?.avatar ?: "",
+            userAvatar = from.employee?.avatar ?: "",
             userName = from.employee?.full_name ?: "",
             userId = from.employee?.id ?: -1,
             timeAgo = from.created?.time?.getTimeAgo(context) ?: context.getString(R.string.just_now)

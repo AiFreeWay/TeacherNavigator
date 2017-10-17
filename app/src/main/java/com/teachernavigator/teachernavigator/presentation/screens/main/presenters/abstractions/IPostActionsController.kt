@@ -19,6 +19,8 @@ interface IPostActionsController : ViewAttacher<PostActionsView> {
     fun onSubscribe(comment: CommentModel)
     fun onReadMore(post: PostModel)
     fun onComplain(post: PostModel)
+    fun onOpenProfile(post: PostModel)
+    fun onOpenProfile(comment: CommentModel)
     fun onPollVote(post: PostModel, choiceModel: ChoiceModel)
     fun onOpenFile(url: String)
 

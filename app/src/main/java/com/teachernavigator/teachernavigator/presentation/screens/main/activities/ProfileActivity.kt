@@ -1,28 +1,30 @@
 package com.teachernavigator.teachernavigator.presentation.screens.main.activities
 
-import android.app.Activity
 import android.arch.lifecycle.LifecycleRegistry
 import android.content.Context
-import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.RecyclerView
-import android.support.v7.widget.Toolbar
+import android.support.v7.widget.LinearLayoutManager
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
-import android.widget.ImageView
-import android.widget.ProgressBar
-import butterknife.BindView
-import butterknife.ButterKnife
+import android.widget.Toast
 import com.teachernavigator.teachernavigator.R
-import com.teachernavigator.teachernavigator.application.di.components.ParentScreenComponent
-import com.teachernavigator.teachernavigator.presentation.models.ProfilePostConteainer
+import com.teachernavigator.teachernavigator.application.di.components.DaggerParentScreenComponent
+import com.teachernavigator.teachernavigator.application.di.modules.ParentScreenModule
+import com.teachernavigator.teachernavigator.application.utils.rootComponent
+import com.teachernavigator.teachernavigator.presentation.adapters.holders.InfoPostVHBuilder
+import com.teachernavigator.teachernavigator.presentation.adapters.holders.ProfileVHBuilder
+import com.teachernavigator.teachernavigator.presentation.models.PostModel
+import com.teachernavigator.teachernavigator.presentation.models.ProfileModel
+import com.teachernavigator.teachernavigator.presentation.models.ToolbarStyle
 import com.teachernavigator.teachernavigator.presentation.screens.main.activities.abstractions.ProfileView
-import com.teachernavigator.teachernavigator.presentation.screens.main.presenters.AcProfilePresenter
+import com.teachernavigator.teachernavigator.presentation.screens.main.presenters.abstractions.IPostActionsController
 import com.teachernavigator.teachernavigator.presentation.screens.main.presenters.abstractions.IProfilePresenter
-import java.io.File
+import kotlinx.android.synthetic.main.ac_profile.*
+import ru.lliepmah.lib.UniversalAdapter
+import javax.inject.Inject
 
 
 /**
@@ -30,88 +32,117 @@ import java.io.File
  */
 class ProfileActivity : AppCompatActivity(), ProfileView {
 
+    override fun setToolbarStyle(front: ToolbarStyle) = Unit
+    override fun updateToolbarAlpha(alpha: Float) = Unit
+
     companion object {
         val IS_MY_PROFILE_KEY = "is_my_profile_key"
+
         val USER_ID_KEY = "user_id_key"
+
         val GET_PHOTO_REQUEST_CODE = 1
     }
 
-    @BindView(R.id.ac_profile_toolbar)
-    lateinit var mToolbar: Toolbar
-    @BindView(R.id.ac_profile_progress)
-    lateinit var mProgressBar: ProgressBar
-    @BindView(R.id.ac_profile_rv_data)
-    lateinit var mRvData: RecyclerView
+    private val mParentScreenComponent by lazy {
+        DaggerParentScreenComponent.builder()
+                .rootComponent(rootComponent())
+                .parentScreenModule(ParentScreenModule(this))
+                .build()
+    }
 
-    private val mPresenter: IProfilePresenter = AcProfilePresenter()
+    @Inject
+    lateinit var presenter: IProfilePresenter
+    @Inject
+    lateinit var postController: IPostActionsController
+
+
+    val adapter: UniversalAdapter by lazy {
+        UniversalAdapter(
+                ProfileVHBuilder(),
+                InfoPostVHBuilder(
+                        postController::onLike,
+                        postController::onDislike,
+                        postController::onComments,
+                        null,
+                        null,
+                        postController::onReadMore,
+                        null,
+                        null,
+                        null,
+                        null
+                ))
+    }
+
     private val mLifecycle: LifecycleRegistry = LifecycleRegistry(this)
-    private var mAvatar: ImageView? = null
-    private var mIsMyProfile = false
-    private var mUserId = -1
+
+    private var mIsMyProfile: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.ac_profile)
-        ButterKnife.bind(this)
         initToolbar()
-        mPresenter.attachView(this)
+        mParentScreenComponent.inject(this)
+        presenter.attachView(this)
+        postController.attachView(this)
+
         mIsMyProfile = intent.getBooleanExtra(IS_MY_PROFILE_KEY, false)
-        mUserId = intent.getIntExtra(USER_ID_KEY, -1)
+        val userId = intent.getIntExtra(USER_ID_KEY, -1)
 
-//        mAdapter = StrategyMultiRvAdapter(ProfileAdapterStrategy(mProfileFacade, mIsMyProfile, mPresenter.getPostControllerFacade()))
-//        mRvData.layoutManager = LinearLayoutManager(this)
-//        mRvData.adapter = mAdapter
-    }
+        presenter.initialLoad(mIsMyProfile, userId)
 
-    override fun onStart() {
-        super.onStart()
-        if (mIsMyProfile)
-            mPresenter.getProfile()
-        else
-            mPresenter.getProfile(mUserId)
-    }
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        if (resultCode == Activity.RESULT_OK && requestCode == GET_PHOTO_REQUEST_CODE && mAvatar != null) {
-            val imageUri = data!!.data
-            mPresenter.uploadPhoto(mAvatar!!, File(imageUri.toString()))
-        }
+        acProfileSwipeLayout.setOnRefreshListener(presenter::refresh)
+        acProfileSwipeLayout.setColorSchemeResources(R.color.colorAccent)
+        acProfileRvList.layoutManager = LinearLayoutManager(this)
+        acProfileRvList.adapter = adapter
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        mPresenter.detachView()
+        presenter.detachView()
+        postController.detachView()
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        if (mIsMyProfile)
+        if (mIsMyProfile) {
             menuInflater.inflate(R.menu.exit_menu, menu)
+        } else {
+            menuInflater.inflate(R.menu.subscribe_menu, menu)
+        }
+
         return true
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            android.R.id.home -> mPresenter.navigateBack()
+            android.R.id.home -> presenter.navigateBack()
             R.id.action_exit -> exit()
+            R.id.action_subscribe -> presenter.subscribe()
         }
         return super.onOptionsItemSelected(item)
     }
 
-    override fun loadProfile(data: List<ProfilePostConteainer>) {
-//        mAdapter.loadData(data)
+    override fun updatePost(post: PostModel) = adapter.notifyItemChanged(adapter.indexOf(post))
+
+    override fun setProfile(data: Pair<ProfileModel, List<PostModel>>) {
+        adapter.clear()
+        adapter.add(data.first)
+        adapter.addAll(data.second)
+        adapter.notifyDataSetChanged()
     }
 
+
     override fun startProgress() {
-        mProgressBar.visibility = View.VISIBLE
+        acProfileProgress.visibility = View.VISIBLE
+        acProfileSwipeLayout?.isRefreshing = true
     }
 
     override fun stopProgress() {
-        mProgressBar.visibility = View.GONE
+        acProfileProgress.visibility = View.GONE
+        acProfileSwipeLayout?.isRefreshing = false
     }
 
     override fun setToolbarTitle(title: String) {
-        supportActionBar?.setTitle(title)
+        supportActionBar?.title = title
     }
 
     override fun setToolbarTitle(title: Int) {
@@ -127,27 +158,33 @@ class ProfileActivity : AppCompatActivity(), ProfileView {
     override fun getLifecycle(): LifecycleRegistry = mLifecycle
 
     private fun initToolbar() {
-        setSupportActionBar(mToolbar)
+        setSupportActionBar(acProfileToolbar)
         setToolbarTitle("")
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setHomeButtonEnabled(true)
-    }
-
-    private fun getPicture() {
-        val intent = Intent(Intent.ACTION_PICK)
-        intent.type = "image/*"
-        startActivityForResult(intent, GET_PHOTO_REQUEST_CODE)
     }
 
     private fun exit() {
         AlertDialog.Builder(getContext())
                 .setTitle(getString(R.string.you_want_exit))
                 .setPositiveButton(R.string.yes, { a, b ->
-                    mPresenter.exit()
+                    presenter.exit()
                     a.dismiss()
                 })
                 .setNegativeButton(R.string.no, { a, b -> a.dismiss() })
                 .setCancelable(true)
                 .show()
     }
+
+
+    override fun getParentView() = this
+
+    override fun showToast(text: String) {
+        Toast.makeText(this, text, Toast.LENGTH_LONG).show()
+    }
+
+    override fun showToast(textRes: Int) {
+        Toast.makeText(this, textRes, Toast.LENGTH_LONG).show()
+    }
+
 }

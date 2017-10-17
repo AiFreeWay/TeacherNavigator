@@ -8,7 +8,7 @@ import io.reactivex.Single
 import java.io.File
 
 /**
- * Created by root on 18.09.17.
+ * Created by root on 18.09.17
  */
 interface IProfileInteractor {
 

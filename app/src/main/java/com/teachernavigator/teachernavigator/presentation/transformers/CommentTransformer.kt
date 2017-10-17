@@ -24,12 +24,12 @@ constructor(private val context: Context,
                     message = from.message ?: "",
 
                     postAuthorName = from.author?.full_name ?: "",
-                    postAuthorAvatar = from.author?.avatars?.firstOrNull()?.avatar ?: "",
+                    postAuthorAvatar = from.author?.avatar ?: "",
 
                     isMine = (from.user?.id ?: -1) == postsRepository.currentUserId(),
                     userId = from.user?.id ?: -1,
                     userName = from.user?.full_name.let { if (it == null || it.isBlank()) context.getString(R.string.unknown) else it },
-                    userAvatar = from.user?.avatars?.avatar ?: "",
+                    userAvatar = from.user?.avatar ?: "",
                     timeAgo = from.created?.getTimeAgo(context) ?: context.getString(R.string.just_now)
             )
 

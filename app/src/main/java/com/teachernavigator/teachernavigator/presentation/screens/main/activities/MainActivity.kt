@@ -3,6 +3,7 @@ package com.teachernavigator.teachernavigator.presentation.screens.main.activiti
 import android.app.Activity
 import android.arch.lifecycle.LifecycleRegistry
 import android.content.Context
+import android.os.Build
 import android.os.Bundle
 import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
@@ -10,8 +11,9 @@ import android.view.Gravity
 import android.view.KeyEvent
 import android.view.View
 import android.view.inputmethod.InputMethodManager
+import android.widget.RelativeLayout
 import com.teachernavigator.teachernavigator.R
-import com.teachernavigator.teachernavigator.application.di.components.ParentScreenComponent
+import com.teachernavigator.teachernavigator.presentation.models.ToolbarStyle
 import com.teachernavigator.teachernavigator.presentation.screens.main.activities.abstractions.MainView
 import com.teachernavigator.teachernavigator.presentation.screens.main.presenters.AcMainPresenter
 import com.teachernavigator.teachernavigator.presentation.screens.main.presenters.abstractions.IMainPresenter
@@ -125,6 +127,33 @@ class MainActivity : AppCompatActivity(), MainView {
         if (currentFocus != null) {
             val inputMethodManager = getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
             inputMethodManager.hideSoftInputFromWindow(currentFocus.windowToken, 0)
+        }
+    }
+
+
+    override fun setToolbarStyle(style: ToolbarStyle) {
+
+//        if (acMainFlBody != null) {
+
+        val lp = acMainFlBody.layoutParams
+
+        if (lp is RelativeLayout.LayoutParams) {
+
+            if (style == ToolbarStyle.Front) {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
+                    lp.removeRule(RelativeLayout.BELOW)
+                }
+            } else {
+                lp.addRule(RelativeLayout.BELOW, R.id.acMainToolbar)
+            }
+        }
+//        }
+    }
+
+    override fun updateToolbarAlpha(alpha: Float) {
+        acMainToolbar?.background?.alpha = (alpha * 255f).toInt()
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            acMainAppBarLayout?.elevation = (15 * alpha)
         }
     }
 

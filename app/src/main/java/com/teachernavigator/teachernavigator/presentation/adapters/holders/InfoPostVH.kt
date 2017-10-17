@@ -30,7 +30,8 @@ open class InfoPostVH(itemView: View,
                       onReadMoreListener: OnReadMoreListener?,
                       private val onComplaintListener: OnComplaintListener?,
                       onPollPassListener: OnPollPassListener?,
-                      private val onFileClickListener: OnFileClickListener?
+                      private val onFileClickListener: OnFileClickListener?,
+                      onOpenUserListener : OnOpenUserListener?
 
 ) : DefaultViewHolder<PostModel>(itemView) {
 
@@ -59,6 +60,8 @@ open class InfoPostVH(itemView: View,
     private var mModel: PostModel? = null
 
     init {
+        ivAvatar listenClickBy onOpenUserListener andReturnModel { mModel }
+
         tvLike listenClickBy onLikeListener andReturnModel { mModel }
         tvDislike listenClickBy onDislikeListener andReturnModel { mModel }
         tvComments listenClickBy onCommentsListener andReturnModelOrHide { mModel }
@@ -213,3 +216,4 @@ typealias OnReadMoreListener = (PostModel) -> Unit
 typealias OnComplaintListener = (PostModel) -> Unit
 typealias OnPollPassListener = (PostModel, ChoiceModel) -> Unit
 typealias OnFileClickListener = (String) -> Unit
+typealias OnOpenUserListener = (PostModel) -> Unit

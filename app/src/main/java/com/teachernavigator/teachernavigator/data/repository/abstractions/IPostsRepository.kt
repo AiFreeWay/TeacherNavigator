@@ -29,7 +29,7 @@ interface IPostsRepository {
     fun getSavedPolls(): Single<PostsResponse>
     fun getSavedNews(): Single<PostsResponse>
     fun getMyPosts(): Single<BaseListResponse<PostNetwork>>
-    fun getUserPost(userId: Int): Single<Array<PostNetwork>>
+    fun getUserPost(userId: Int): Single<BaseListResponse<PostNetwork>>
 
     fun getMyComments(): Single<List<PostCommentNetwork>>
 

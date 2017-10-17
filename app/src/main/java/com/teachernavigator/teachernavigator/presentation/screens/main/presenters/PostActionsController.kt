@@ -9,8 +9,10 @@ import com.teachernavigator.teachernavigator.presentation.models.CommentModel
 import com.teachernavigator.teachernavigator.presentation.models.PostModel
 import com.teachernavigator.teachernavigator.presentation.screens.common.BasePresenter
 import com.teachernavigator.teachernavigator.presentation.screens.info.fragments.abstractions.PostActionsView
+import com.teachernavigator.teachernavigator.presentation.screens.main.activities.ProfileActivity
 import com.teachernavigator.teachernavigator.presentation.screens.main.fragments.PostCommentsFragment
 import com.teachernavigator.teachernavigator.presentation.screens.main.presenters.abstractions.IPostActionsController
+import com.teachernavigator.teachernavigator.presentation.utils.ActivityRouter
 import com.teachernavigator.teachernavigator.presentation.utils.DialogUtils
 import com.teachernavigator.teachernavigator.presentation.utils.applySchedulers
 import com.teachernavigator.teachernavigator.presentation.utils.openUrl
@@ -24,6 +26,19 @@ import javax.inject.Inject
 class PostActionsController
 @Inject constructor(private val router: Router,
                     private val repository: IPostsRepository) : BasePresenter<PostActionsView>(), IPostActionsController {
+
+    override fun onOpenProfile(comment: CommentModel) =
+            openProfile(comment.isMine, comment.userId)
+
+    override fun onOpenProfile(post: PostModel) =
+            openProfile(post.isMine, post.authorId)
+
+    private fun openProfile(isMine: Boolean, userId: Int) = mView?.let {
+        val bundle = Bundle()
+        bundle.putBoolean(ProfileActivity.IS_MY_PROFILE_KEY, isMine)
+        bundle.putInt(ProfileActivity.USER_ID_KEY, userId)
+        ActivityRouter.openActivity(it.getParentView().getActivity(), bundle, ProfileActivity::class.java)
+    } ?: Unit
 
     override fun onOpenFile(url: String) = mView.openUrl(url)
 

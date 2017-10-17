@@ -62,7 +62,7 @@ constructor(private val commentTransformer: CommentTransformer,
 
                         authorId = from.author?.id ?: -1,
                         authorName = from.author?.full_name.let { if (it == null || it.isBlank()) context.getString(R.string.unknown) else it },
-                        authorAvatar = from.author?.avatars?.firstOrNull()?.avatar,
+                        authorAvatar = from.author?.avatar,
                         type = this.postType,
                         file = from.file,
                         choices = from.choices?.map(choiceTransformer::transform) ?: emptyList(),

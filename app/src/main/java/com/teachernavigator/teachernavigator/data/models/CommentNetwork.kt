@@ -17,12 +17,7 @@ open class CommentNetwork(
     class UserInComment {
         var id: Int? = null
         var full_name: String? = null
-        var avatars: Avatars? = null
-
-        class Avatars {
-            var id: Int? = null
-            var avatar: String? = null
-        }
+        var avatar: String? = null
     }
 
 }

@@ -20,6 +20,7 @@ import com.teachernavigator.teachernavigator.presentation.screens.auth.presenter
 import com.teachernavigator.teachernavigator.presentation.screens.common.ParentView
 import com.teachernavigator.teachernavigator.presentation.screens.info.fragments.*
 import com.teachernavigator.teachernavigator.presentation.screens.jobs.fragments.*
+import com.teachernavigator.teachernavigator.presentation.screens.main.activities.ProfileActivity
 import com.teachernavigator.teachernavigator.presentation.screens.main.fragments.*
 import com.teachernavigator.teachernavigator.presentation.screens.main.presenters.*
 import com.teachernavigator.teachernavigator.presentation.screens.settings.presenters.FmtAppSettingsPresenter
@@ -47,7 +48,7 @@ interface ParentScreenComponent {
     //Main presenters
     fun inject(presenter: AcMainPresenter)
 
-    fun inject(presenter: AcProfilePresenter)
+    fun inject(presenter: ProfilePresenter)
     fun inject(presenter: TapePresenter)
     fun inject(presenter: MyCommentsPresenter)
 //    fun inject(presenter: MyPublicationsPresenter)
@@ -99,5 +100,6 @@ interface ParentScreenComponent {
     fun inject(postsListFragment: PostsListFragment)
     fun inject(authActivity: AuthActivity)
     fun inject(myCommentsFragment: MyCommentsFragment)
+    fun inject(profileActivity: ProfileActivity)
 
 }

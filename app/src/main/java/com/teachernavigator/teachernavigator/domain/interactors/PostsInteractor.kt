@@ -119,7 +119,7 @@ class PostsInteractor @Inject constructor(private val mRepository: IPostsReposit
 
     override fun getUserPost(userId: Int): Single<List<PostNetwork>> =
             mRepository.getUserPost(userId)
-                    .map { it.toList() }
+                    .map { it.results }
                     .applySchedulers()
 
     override fun getMyComments(): Single<List<PostCommentNetwork>> =

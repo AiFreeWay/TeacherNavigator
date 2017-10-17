@@ -27,19 +27,17 @@ class ProfileInteractor @Inject constructor(private val mRepository: IProfileRep
 
     override fun loadAbout(): Single<List<About>> =
             mRepository.loadAbout()
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribeOn(Schedulers.newThread())
+                    .applySchedulers()
 
     override fun getProfile(): Single<Profile> =
             mRepository.getProfile()
-                    .applySchedulers()
                     .map { it }
+                    .applySchedulers()
 
     override fun getProfile(userId: Int): Single<Profile> =
             mRepository.getProfile(userId)
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribeOn(Schedulers.newThread())
                     .map { it }
+                    .applySchedulers()
 
     override fun exit() {
         mRepository.exit()

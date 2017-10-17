@@ -25,13 +25,15 @@
             android:id="@+id/ac_profile_iv_exit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentRight="true"
+
             android:layout_alignParentEnd="true"
-            android:layout_marginTop="30dp"
-            android:layout_marginRight="@dimen/externalPadding"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
             android:layout_marginEnd="@dimen/externalPadding"
-            android:src="@drawable/ic_exit" />
+            android:layout_marginRight="@dimen/externalPadding"
+            android:layout_marginTop="30dp"
+            android:src="@drawable/ic_exit"
+            android:visibility="gone" />
 
         <ImageView
             android:id="@+id/ac_profile_upload_photo"
@@ -83,127 +85,127 @@
         android:id="@+id/ac_profile_profile_info"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="165dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
+        android:layout_marginTop="165dp"
         app:cardCornerRadius="10dp"
         app:cardElevation="8dp">
 
         <LinearLayout
-            android:padding="@dimen/externalPadding"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:padding="@dimen/externalPadding">
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:gravity="center">
+                android:gravity="center"
+                android:orientation="vertical">
 
                 <TextView
                     style="@style/SmallText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/rating"/>
+                    android:text="@string/rating" />
 
                 <TextView
-                    style="@style/TitleText"
                     android:id="@+id/ac_profile_tv_rating"
+                    style="@style/TitleText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/colorAccent"
-                    android:textAllCaps="true" />
+                    android:textAllCaps="true"
+                    android:textColor="@color/colorAccent" />
             </LinearLayout>
 
             <View
                 android:layout_width="1dp"
-                android:layout_marginLeft="8dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginRight="8dp"
-                android:layout_marginEnd="8dp"
                 android:layout_height="40dp"
-                android:background="@color/grey"/>
+                android:layout_marginEnd="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginStart="8dp"
+                android:background="@color/grey" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:gravity="center">
+                android:gravity="center"
+                android:orientation="vertical">
 
                 <TextView
                     style="@style/SmallText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/subscribers"/>
+                    android:text="@string/subscribers" />
 
                 <TextView
-                    style="@style/TitleText"
                     android:id="@+id/ac_profile_tv_subscribers"
+                    style="@style/TitleText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/colorAccent"
-                    android:textAllCaps="true" />
+                    android:textAllCaps="true"
+                    android:textColor="@color/colorAccent" />
             </LinearLayout>
 
             <View
                 android:layout_width="1dp"
-                android:layout_marginLeft="8dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginRight="8dp"
-                android:layout_marginEnd="8dp"
                 android:layout_height="40dp"
-                android:background="@color/grey"/>
+                android:layout_marginEnd="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginStart="8dp"
+                android:background="@color/grey" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:gravity="center">
+                android:gravity="center"
+                android:orientation="vertical">
 
                 <TextView
                     style="@style/SmallText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/pubicationss"/>
+                    android:text="@string/pubicationss" />
 
                 <TextView
-                    style="@style/TitleText"
                     android:id="@+id/ac_profile_tv_publications"
+                    style="@style/TitleText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/colorAccent"
-                    android:textAllCaps="true" />
+                    android:textAllCaps="true"
+                    android:textColor="@color/colorAccent" />
             </LinearLayout>
 
             <View
                 android:layout_width="1dp"
-                android:layout_marginLeft="8dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginRight="8dp"
-                android:layout_marginEnd="8dp"
                 android:layout_height="40dp"
-                android:background="@color/grey"/>
+                android:layout_marginEnd="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginStart="8dp"
+                android:background="@color/grey" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:gravity="center">
+                android:gravity="center"
+                android:orientation="vertical">
 
                 <TextView
                     style="@style/SmallText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/commentaries"/>
+                    android:text="@string/commentaries" />
 
                 <TextView
-                    style="@style/TitleText"
                     android:id="@+id/ac_profile_tv_commentaries"
+                    style="@style/TitleText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/colorAccent"
-                    android:textAllCaps="true" />
+                    android:textAllCaps="true"
+                    android:textColor="@color/colorAccent" />
             </LinearLayout>
         </LinearLayout>
     </android.support.v7.widget.CardView>

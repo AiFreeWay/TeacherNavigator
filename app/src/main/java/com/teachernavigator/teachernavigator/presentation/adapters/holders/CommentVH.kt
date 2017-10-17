@@ -21,7 +21,7 @@ import ru.lliepmah.lib.DefaultViewHolder
 @HolderBuilder(R.layout.v_comment_card)
 class CommentVH(itemView: View,
                 private val onSubscribeListener: OnSubscribeListener?,
-                onBranchListener: OnBranchListener?) : DefaultViewHolder<CommentModel>(itemView) {
+                onOpenProfileListener: OnOpenProfileListener?) : DefaultViewHolder<CommentModel>(itemView) {
 
     private val ivAvatar: ImageView = itemView.find(R.id.v_comment_iv_avatar)
     private val tvPostAuthorName: TextView = itemView.find(R.id.v_comment_tv_post_author_name)
@@ -37,7 +37,9 @@ class CommentVH(itemView: View,
 
     init {
         ivSubscribe listenClickBy onSubscribeListener andReturnModelOrHide { mComment }
-        btnOpenBranch listenClickBy onBranchListener andReturnModelOrHide { mComment }
+        ivAvatar listenClickBy onOpenProfileListener andReturnModel { mComment }
+
+        btnOpenBranch.visibility = GONE
         llOpenBranch.visibility = btnOpenBranch.visibility
     }
 
@@ -59,4 +61,4 @@ class CommentVH(itemView: View,
 }
 
 typealias OnSubscribeListener = (CommentModel) -> Unit
-typealias OnBranchListener = (CommentModel) -> Unit
+typealias OnOpenProfileListener = (CommentModel) -> Unit

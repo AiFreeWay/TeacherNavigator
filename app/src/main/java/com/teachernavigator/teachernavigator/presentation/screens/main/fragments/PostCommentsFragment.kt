@@ -45,11 +45,12 @@ class PostCommentsFragment : BaseFragment(), PostCommentsView {
                         null,
                         null,
                         postController::onPollVote,
-                        postController::onOpenFile
+                        postController::onOpenFile,
+                        postController::onOpenProfile
                 ),
                 CommentVHBuilder(
                         postController::onSubscribe,
-                        null
+                        postController::onOpenProfile
                 )
         )
     }

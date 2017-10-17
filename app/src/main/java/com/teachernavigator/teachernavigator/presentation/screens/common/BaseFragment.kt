@@ -1,13 +1,12 @@
 package com.teachernavigator.teachernavigator.presentation.screens.common
 
 import android.arch.lifecycle.LifecycleRegistry
-import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.widget.Toast
 import com.teachernavigator.teachernavigator.application.di.components.DaggerParentScreenComponent
-import com.teachernavigator.teachernavigator.application.di.components.ParentScreenComponent
 import com.teachernavigator.teachernavigator.application.di.modules.ParentScreenModule
 import com.teachernavigator.teachernavigator.application.utils.rootComponent
+import com.teachernavigator.teachernavigator.presentation.models.ToolbarStyle
 
 /**
  * Created by root on 14.08.17
@@ -21,6 +20,14 @@ abstract class BaseFragment : Fragment(), ChildView {
                 .parentScreenModule(ParentScreenModule(getParentView()))
                 .build()
     }
+
+    override fun onStart() {
+        super.onStart()
+        getParentView().setToolbarStyle(getToolbarStyle())
+        getParentView().updateToolbarAlpha(1F)
+    }
+
+    open fun getToolbarStyle() = ToolbarStyle.Over
 
     private val mLifecycle by lazy { LifecycleRegistry(this) }
 

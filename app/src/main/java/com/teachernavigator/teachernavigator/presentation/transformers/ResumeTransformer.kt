@@ -33,7 +33,7 @@ constructor(private val context: Context,
                     file = from.file,
 
                     userName = from.user?.full_name ?: context.getString(R.string.unknown),
-                    userAvatar = from.user?.avatars?.firstOrNull()?.avatar ?: "",
+                    userAvatar = from.user?.avatar ?: "",
                     isMine = from.isMine,
                     appropriate = from.appropriate?.map(vacancyTransformer::transform) ?: emptyList(),
                     appropriateCount = context.spanned(R.string.appropriate_vacancies_count, from.appropriate?.size ?: 0)

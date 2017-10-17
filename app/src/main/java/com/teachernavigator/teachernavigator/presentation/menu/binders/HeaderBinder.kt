@@ -56,8 +56,8 @@ class HeaderBinder(viewGroup: ViewGroup) : BaseMenuBinder(viewInflater(viewGroup
     }
 
     private fun loadProfile(profile: Profile) {
-        if (profile.avatars != null && profile.avatars.isNotEmpty())
-            ImageLoader.load(mView.context, profile.avatars.get(0).avatar, mIvAvatar)
+        if (!profile.avatar.isNullOrBlank())
+            ImageLoader.load(mView.context, profile.avatar, mIvAvatar)
 
         if (!TextUtils.isEmpty(profile.full_name))
             mTvTitle.setText(profile.full_name)

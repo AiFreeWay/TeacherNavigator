@@ -139,7 +139,7 @@ class MainRepository @Inject constructor(private val mNetwokController: NetworkC
 
     }.applySchedulers()
 
-    override fun getUserPost(userId: Int): Single<Array<PostNetwork>> =
+    override fun getUserPost(userId: Int): Single<BaseListResponse<PostNetwork>> =
             mNetwokController.getUserPost(getAccessToken(), userId)
 
     override fun getInfoPosts(currentTheme: Info): Single<PostsResponse> =

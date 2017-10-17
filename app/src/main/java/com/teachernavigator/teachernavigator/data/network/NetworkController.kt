@@ -146,7 +146,7 @@ class NetworkController {
 
     fun subscribe(token: String, request: SubscribeRequest): Single<BaseResponse> = mApiController.subscribe(token, request)
 
-    fun getUserPost(token: String, userId: Int): Single<Array<PostNetwork>> = mApiController.getUserPost(token, userId)
+    fun getUserPost(token: String, userId: Int): Single<BaseListResponse<PostNetwork>> = mApiController.getUserPost(token, userId)
 
 
     fun vote(token: String, request: VoteRequest): Single<BaseResponse> {

@@ -11,6 +11,7 @@ import com.teachernavigator.teachernavigator.R
 import com.teachernavigator.teachernavigator.application.di.components.DaggerParentScreenComponent
 import com.teachernavigator.teachernavigator.application.di.modules.ParentScreenModule
 import com.teachernavigator.teachernavigator.application.utils.rootComponent
+import com.teachernavigator.teachernavigator.presentation.models.ToolbarStyle
 import com.teachernavigator.teachernavigator.presentation.screens.auth.activities.abstractions.AuthParentView
 import com.teachernavigator.teachernavigator.presentation.screens.auth.presenters.abstractions.IAuthParentPresenter
 import kotlinx.android.synthetic.main.ac_auth.*
@@ -20,7 +21,11 @@ import javax.inject.Inject
 /**
  * Created by root on 24.08.17
  */
+
 class AuthActivity : AppCompatActivity(), AuthParentView {
+
+    override fun updateToolbarAlpha(alpha: Float) = Unit
+    override fun setToolbarStyle(front: ToolbarStyle) = Unit
 
     private val mLifecycle: LifecycleRegistry = LifecycleRegistry(this)
 

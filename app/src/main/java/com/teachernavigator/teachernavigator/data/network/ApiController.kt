@@ -101,7 +101,7 @@ interface ApiController {
     fun vote(@Header("Authorization") accessToken: String, @QueryMap map: Map<String, String>): Single<BaseResponse>
 
     @GET("/api/v0/profile/{userId}/posts/ ")
-    fun getUserPost(@Header("Authorization") accessToken: String, @Path("userId") userId: Int): Single<Array<PostNetwork>>
+    fun getUserPost(@Header("Authorization") accessToken: String, @Path("userId") userId: Int): Single<BaseListResponse<PostNetwork>>
 
     // ------------------------------- Profile methods --------------------------------
 

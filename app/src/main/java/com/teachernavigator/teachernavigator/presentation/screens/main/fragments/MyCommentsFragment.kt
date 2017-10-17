@@ -43,7 +43,8 @@ class MyCommentsFragment : BaseFragment(), MyCommentsView {
                         postController::onReadMore,
                         postController::onComplain,
                         null,
-                        null
+                        null,
+                        postController::onOpenProfile
                 ))
     }
 

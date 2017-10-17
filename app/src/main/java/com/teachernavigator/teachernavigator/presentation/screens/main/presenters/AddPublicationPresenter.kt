@@ -62,12 +62,7 @@ class AddPublicationPresenter
     }
 
     override fun preview(title: CharSequence, text: CharSequence) = validateAndPerform(title, text) {
-
-//        val bundle = Bundle()
-//        bundle.putSerializable(PreviewPostActivity.POST_KEY, Post(title.toString(), text.toString()))
-//        ActivityRouter.openActivity(mView!!.getParentView().getActivity(), bundle,
-//                PreviewPostActivity::class.java)
-
+        TODO("Not Impl.")
     } ?: Unit
 
     override fun addTag(tag: CharSequence) {

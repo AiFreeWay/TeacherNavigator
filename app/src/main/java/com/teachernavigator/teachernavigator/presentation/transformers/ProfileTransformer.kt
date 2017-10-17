@@ -1,6 +1,8 @@
 package com.teachernavigator.teachernavigator.presentation.transformers
 
 import com.teachernavigator.teachernavigator.application.di.scopes.PerParentScreen
+import com.teachernavigator.teachernavigator.data.repository.MainRepository_Factory
+import com.teachernavigator.teachernavigator.data.repository.abstractions.IPostsRepository
 import com.teachernavigator.teachernavigator.domain.models.Profile
 import com.teachernavigator.teachernavigator.presentation.models.ProfileModel
 import javax.inject.Inject
@@ -11,7 +13,7 @@ import javax.inject.Inject
 @PerParentScreen
 class ProfileTransformer
 @Inject
-constructor() : EntityTransformer<Profile, ProfileModel> {
+constructor(private val postsRepository: IPostsRepository) : EntityTransformer<Profile, ProfileModel> {
 
 
     override fun transform(from: Profile): ProfileModel {
@@ -28,7 +30,8 @@ constructor() : EntityTransformer<Profile, ProfileModel> {
                 countPublications = from.count_publications ?: 0,
                 countSubscribers = from.count_subscribers ?: 0,
                 countComments = from.count_comments ?: 0,
-                ratingString = "%.1f".format(rating)
+                ratingString = "%.1f".format(rating),
+                isMine = from.id == postsRepository.currentUserId()
         )
     }
 

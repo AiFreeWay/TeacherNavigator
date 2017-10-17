@@ -3,6 +3,7 @@ package com.teachernavigator.teachernavigator.presentation.screens.main.presente
 import com.teachernavigator.teachernavigator.presentation.models.ChoiceModel
 import com.teachernavigator.teachernavigator.presentation.models.CommentModel
 import com.teachernavigator.teachernavigator.presentation.models.PostModel
+import com.teachernavigator.teachernavigator.presentation.models.ProfileModel
 import com.teachernavigator.teachernavigator.presentation.screens.common.ViewAttacher
 import com.teachernavigator.teachernavigator.presentation.screens.info.fragments.abstractions.PostActionsView
 
@@ -24,4 +25,5 @@ interface IPostActionsController : ViewAttacher<PostActionsView> {
     fun onPollVote(post: PostModel, choiceModel: ChoiceModel)
     fun onOpenFile(url: String)
 
+    fun onSubscribe(profile: ProfileModel)
 }

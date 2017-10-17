@@ -45,6 +45,11 @@ class TapeFragment : BaseFragment(), TapeView {
         mPresenter.loadFragments(argNullable(POSTS_SOURCE_KEY))
     }
 
+    override fun onResume() {
+        super.onResume()
+
+    }
+
     override fun onDestroyView() {
         super.onDestroyView()
         mPresenter.detachView()

@@ -50,7 +50,6 @@ class AddPublicationFragment : BaseFragment(), AddPublicationView {
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         fmtAddPublicationTvAddFile.setCompoundDrawablesWithIntrinsicBounds(null, null, ContextCompat.getDrawable(context, R.drawable.ic_resume), null)
     }
 

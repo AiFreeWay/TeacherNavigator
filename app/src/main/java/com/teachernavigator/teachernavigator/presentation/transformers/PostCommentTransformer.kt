@@ -19,7 +19,7 @@ constructor(private val commentTransformer: CommentTransformer,
 
     override fun transform(from: PostCommentNetwork): PostCommentModel =
             PostCommentModel(
-                    postModel = getPost(from).let { postTransformerFactory.build(it.postType ?: PostType.post, false).transform(it) },
+                    postModel = getPost(from).let { postTransformerFactory.build(it.postType ?: PostType.post, true).transform(it) },
                     commentModel = commentTransformer.transform(from)
             )
 

@@ -7,12 +7,12 @@ import com.teachernavigator.teachernavigator.data.repository.abstractions.IPosts
 import com.teachernavigator.teachernavigator.presentation.models.ChoiceModel
 import com.teachernavigator.teachernavigator.presentation.models.CommentModel
 import com.teachernavigator.teachernavigator.presentation.models.PostModel
+import com.teachernavigator.teachernavigator.presentation.models.ProfileModel
 import com.teachernavigator.teachernavigator.presentation.screens.common.BasePresenter
 import com.teachernavigator.teachernavigator.presentation.screens.info.fragments.abstractions.PostActionsView
-import com.teachernavigator.teachernavigator.presentation.screens.main.activities.ProfileActivity
+import com.teachernavigator.teachernavigator.presentation.screens.main.fragments.ProfileFragment
 import com.teachernavigator.teachernavigator.presentation.screens.main.fragments.PostCommentsFragment
 import com.teachernavigator.teachernavigator.presentation.screens.main.presenters.abstractions.IPostActionsController
-import com.teachernavigator.teachernavigator.presentation.utils.ActivityRouter
 import com.teachernavigator.teachernavigator.presentation.utils.DialogUtils
 import com.teachernavigator.teachernavigator.presentation.utils.applySchedulers
 import com.teachernavigator.teachernavigator.presentation.utils.openUrl
@@ -35,9 +35,9 @@ class PostActionsController
 
     private fun openProfile(isMine: Boolean, userId: Int) = mView?.let {
         val bundle = Bundle()
-        bundle.putBoolean(ProfileActivity.IS_MY_PROFILE_KEY, isMine)
-        bundle.putInt(ProfileActivity.USER_ID_KEY, userId)
-        ActivityRouter.openActivity(it.getParentView().getActivity(), bundle, ProfileActivity::class.java)
+        bundle.putBoolean(ProfileFragment.IS_MY_PROFILE_KEY, isMine)
+        bundle.putInt(ProfileFragment.USER_ID_KEY, userId)
+        router.navigateTo(ProfileFragment.FRAGMENT_KEY, bundle)
     } ?: Unit
 
     override fun onOpenFile(url: String) = mView.openUrl(url)
@@ -84,7 +84,16 @@ class PostActionsController
                                 .doOnSubscribe { startProgress() }
                                 .toMaybe()
                     }
-                    .subscribe({ onSubscribed(comment) }, this::onError))
+                    .subscribe({ onSubscribed() }, this::onError))
+
+    override fun onSubscribe(profile: ProfileModel) =
+            addDissposable(DialogUtils.askPermission(mView!!.getContext(), R.string.ask_subscribe_to_user, profile.name)
+                    .flatMap {
+                        repository.subscribe(profile.id)
+                                .doOnSubscribe { startProgress() }
+                                .toMaybe()
+                    }
+                    .subscribe({ onSubscribed() }, this::onError))
 
     override fun onSubscribe(post: PostModel) =
             addDissposable(DialogUtils.askPermission(mView!!.getContext(), R.string.ask_subscribe_to_user, post.authorName)
@@ -93,7 +102,7 @@ class PostActionsController
                                 .doOnSubscribe { startProgress() }
                                 .toMaybe()
                     }
-                    .subscribe({ onSubscribed(post) }, this::onError))
+                    .subscribe({ onSubscribed() }, this::onError))
 
     override fun onComplain(post: PostModel) =
             addDissposable(DialogUtils.askPermission(mView!!.getContext(), R.string.ask_complaint_to_post, post.shortTitle)
@@ -110,7 +119,7 @@ class PostActionsController
         mView?.showToast(R.string.complaint_was_sent)
     }
 
-    private fun onSubscribed(stub: Any) {
+    private fun onSubscribed() {
         stopProgress()
         mView?.showToast(R.string.you_are_subscribed)
     }

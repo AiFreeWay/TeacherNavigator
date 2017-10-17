@@ -9,5 +9,6 @@ data class ResponseModel(
         val userName: String,
         val userAvatar: String,
         val portfolio: String,
-        val timeAgo: String
+        val timeAgo: String,
+        val isMine: Boolean
 ) : Model(id)

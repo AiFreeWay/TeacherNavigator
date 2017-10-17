@@ -100,13 +100,38 @@
         android:orientation="vertical"
         android:visibility="gone" />
 
+    <TextView
+        android:id="@+id/v_post_tv_file"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/v_post_ll_choiced_choices"
+        android:background="?android:attr/selectableItemBackground"
+        android:gravity="center_vertical|start"
+        android:text="@string/download_resume"
+        tools:drawableRight="@drawable/ic_resume" />
+
+    <com.greenfrvr.hashtagview.HashtagView
+        android:id="@+id/v_post_hv_hasttags"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/v_post_tv_file"
+        android:paddingTop="@dimen/externalPadding"
+        app:rowGravity="left"
+        app:tagBackground="@drawable/hash_tag_background"
+        app:tagPaddingLeft="12dp"
+        app:tagPaddingRight="12dp"
+        app:tagTextColor="@color/greyTextColor"
+        app:tagTextSize="@dimen/normalTextSize" />
+
     <LinearLayout
         android:id="@+id/v_post_ll_more_and_complain"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/v_post_tv_title"
         android:layout_alignStart="@+id/v_post_tv_title"
-        android:layout_below="@+id/v_post_ll_choiced_choices"
+        android:layout_below="@+id/v_post_hv_hasttags"
         android:layout_marginTop="@dimen/externalPadding"
         android:gravity="start"
         android:orientation="horizontal">
@@ -146,37 +171,11 @@
             android:visibility="visible" />
     </LinearLayout>
 
-
-    <TextView
-        android:id="@+id/v_post_tv_file"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/v_post_ll_more_and_complain"
-        android:background="?android:attr/selectableItemBackground"
-        android:gravity="center_vertical|start"
-        android:text="@string/download_resume"
-        tools:drawableRight="@drawable/ic_resume" />
-
-    <com.greenfrvr.hashtagview.HashtagView
-        android:id="@+id/v_post_hv_hasttags"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/v_post_tv_file"
-        android:paddingTop="@dimen/externalPadding"
-        app:rowGravity="left"
-        app:tagBackground="@drawable/hash_tag_background"
-        app:tagPaddingLeft="12dp"
-        app:tagPaddingRight="12dp"
-        app:tagTextColor="@color/greyTextColor"
-        app:tagTextSize="@dimen/normalTextSize" />
-
     <LinearLayout
         android:id="@+id/v_post_l_your_comment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/v_post_hv_hasttags"
+        android:layout_below="@+id/v_post_ll_more_and_complain"
         android:orientation="vertical"
         android:visibility="gone">
 
@@ -188,7 +187,7 @@
             android:layout_marginRight="@dimen/spacingLarge"
             android:layout_marginTop="@dimen/spacingMedium"
             android:text="@string/your_comment"
-            android:textSize="@dimen/titleTextSize" />
+            android:textSize="@dimen/normalTextSize" />
 
         <TextView
             android:id="@+id/v_post_tv_comment_text"

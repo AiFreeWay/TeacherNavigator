@@ -137,6 +137,12 @@ interface ApiController {
                               @Part("experience") experience: String
     ): Single<Resume>
 
+    @Multipart
+    @POST("/api/v0/me/avatar/")
+    fun uploadAvatar(@Header("Authorization")  accessToken: String,
+                     @PartMap params: Map<String, @JvmSuppressWildcards RequestBody>) : Single<BaseResponse>
+
+
     @GET("/api/v0/vacancies/")
     fun vacancies(@Header("Authorization") accessToken: String): Single<BaseListResponse<Vacancy>>
 

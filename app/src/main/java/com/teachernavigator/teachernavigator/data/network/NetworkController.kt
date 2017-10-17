@@ -183,6 +183,9 @@ class NetworkController {
                 mApiController.createResume(accessToken, resumeRequest)
             }
 
+    fun uploadAvatar(accessToken: String, fileInfo: FileInfo): Single<BaseResponse> =
+            mApiController.uploadAvatar(accessToken, mapOf("avatar\"; filename=\"${fileInfo.fileName}" to fileInfo.toRequestBody()))
+
     fun loadResumeList(accessToken: String): Single<List<Resume>> =
             mApiController.resumeList(accessToken)
                     .map { it.results }

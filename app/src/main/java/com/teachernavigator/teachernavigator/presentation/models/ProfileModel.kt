@@ -14,6 +14,7 @@ data class ProfileModel(
         val countPublications: Int,
         val countSubscribers: Int,
         val countComments: Int,
-        val ratingString: String
+        val ratingString: String,
+        val isMine: Boolean
 
 ) : Model(id)

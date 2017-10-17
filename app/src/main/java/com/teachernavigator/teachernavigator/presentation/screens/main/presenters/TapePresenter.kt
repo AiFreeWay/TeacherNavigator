@@ -3,6 +3,7 @@ package com.teachernavigator.teachernavigator.presentation.screens.main.presente
 import android.arch.lifecycle.Lifecycle
 import android.arch.lifecycle.OnLifecycleEvent
 import android.support.v4.app.Fragment
+import android.util.Log.d
 import com.teachernavigator.teachernavigator.R
 import com.teachernavigator.teachernavigator.application.di.scopes.PerParentScreen
 import com.teachernavigator.teachernavigator.domain.interactors.abstractions.IAuthInteractor
@@ -29,14 +30,11 @@ class TapePresenter
     @OnLifecycleEvent(Lifecycle.Event.ON_START)
     private fun onStart() {
         val title = when (mType) {
-
-            PostsSource.Common -> R.string.tape
+            PostsSource.Common -> R.string.news_feed
             PostsSource.Mine -> R.string.my_publication
             PostsSource.Saved -> R.string.saved
-            PostsSource.Best -> R.string.tape
+            PostsSource.Best -> R.string.news_feed
         }
-
-
         mView?.getParentView()?.setToolbarTitle(title)
     }
 
@@ -50,8 +48,8 @@ class TapePresenter
         mView?.getParentView()?.stopProgress()
     }
 
-    override fun loadFragments(postSourceType: Int?) {
-        mType = postSourceType?.let { PostsSource.values().getOrNull(it) } ?: PostsSource.Common
+    override fun loadFragments(type: Int?) {
+        mType = type?.let { PostsSource.values().getOrNull(it) } ?: PostsSource.Common
 
         addDissposable(authInteractor.isAuthAsync()
                 .doOnSubscribe { mView!!.getParentView().startProgress() }

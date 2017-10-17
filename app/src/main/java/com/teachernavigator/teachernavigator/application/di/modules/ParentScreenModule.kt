@@ -2,8 +2,6 @@ package com.teachernavigator.teachernavigator.application.di.modules
 
 import com.teachernavigator.teachernavigator.application.di.scopes.PerParentScreen
 import com.teachernavigator.teachernavigator.data.repository.abstractions.*
-import com.teachernavigator.teachernavigator.domain.controllers.IPostController
-import com.teachernavigator.teachernavigator.domain.controllers.PostController
 import com.teachernavigator.teachernavigator.domain.interactors.*
 import com.teachernavigator.teachernavigator.domain.interactors.abstractions.*
 import com.teachernavigator.teachernavigator.presentation.screens.common.ParentView
@@ -62,10 +60,6 @@ class ParentScreenModule(private val mParentView: ParentView) {
     @Provides
     @PerParentScreen
     fun provideJobInteractor(interactor: JobInteractor): IJobInteractor = interactor
-
-    @Provides
-    @PerParentScreen
-    fun providePostController(controller: PostController): IPostController = controller
 
     @Provides
     @PerParentScreen

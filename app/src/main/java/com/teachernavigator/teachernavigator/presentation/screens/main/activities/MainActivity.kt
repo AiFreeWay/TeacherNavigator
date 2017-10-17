@@ -84,11 +84,11 @@ class MainActivity : AppCompatActivity(), MainView {
     override fun closeSideMenu() = acMainDrawer.closeDrawer(Gravity.START)
 
     override fun setToolbarTitle(title: String) {
-        acMainToolbar.title = title
+        setTitle(title)
     }
 
     override fun setToolbarTitle(title: Int) {
-        acMainToolbar.setTitle(title)
+        setTitle(title)
     }
 
     override fun getContext(): Context = this
@@ -152,9 +152,9 @@ class MainActivity : AppCompatActivity(), MainView {
 
     override fun updateToolbarAlpha(alpha: Float) {
         acMainToolbar?.background?.alpha = (alpha * 255f).toInt()
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            acMainAppBarLayout?.elevation = (15 * alpha)
-        }
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+//            acMainAppBarLayout?.elevation = (15 * alpha)
+//        }
     }
 
 }

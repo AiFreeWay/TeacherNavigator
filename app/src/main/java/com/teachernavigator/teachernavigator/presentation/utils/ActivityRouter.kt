@@ -5,7 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 
 /**
- * Created by root on 24.08.17.
+ * Created by root on 24.08.17
  */
 class ActivityRouter {
 

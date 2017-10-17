@@ -2,17 +2,17 @@ package com.teachernavigator.teachernavigator.presentation.screens.main.presente
 
 import android.arch.lifecycle.Lifecycle
 import android.arch.lifecycle.OnLifecycleEvent
-import android.widget.ImageView
 import com.teachernavigator.teachernavigator.R
 import com.teachernavigator.teachernavigator.application.di.scopes.PerParentScreen
+import com.teachernavigator.teachernavigator.data.models.FileInfo
 import com.teachernavigator.teachernavigator.domain.interactors.abstractions.IPostsInteractor
 import com.teachernavigator.teachernavigator.domain.interactors.abstractions.IProfileInteractor
 import com.teachernavigator.teachernavigator.domain.models.PostType
 import com.teachernavigator.teachernavigator.presentation.models.PostModel
 import com.teachernavigator.teachernavigator.presentation.models.ProfileModel
+import com.teachernavigator.teachernavigator.presentation.screens.auth.activities.AuthActivity
 import com.teachernavigator.teachernavigator.presentation.screens.common.BasePresenter
-import com.teachernavigator.teachernavigator.presentation.screens.main.activities.MainActivity
-import com.teachernavigator.teachernavigator.presentation.screens.main.activities.abstractions.ProfileView
+import com.teachernavigator.teachernavigator.presentation.screens.main.fragments.abstractions.ProfileView
 import com.teachernavigator.teachernavigator.presentation.screens.main.presenters.abstractions.IProfilePresenter
 import com.teachernavigator.teachernavigator.presentation.transformers.PostTransformerFactory
 import com.teachernavigator.teachernavigator.presentation.transformers.ProfileTransformer
@@ -22,7 +22,6 @@ import com.teachernavigator.teachernavigator.presentation.utils.ActivityRouter
 import io.reactivex.Single
 import io.reactivex.functions.BiFunction
 import ru.terrakok.cicerone.Router
-import java.io.File
 import javax.inject.Inject
 
 /**
@@ -38,6 +37,7 @@ constructor(private val router: Router,
             private val profileTransformer: ProfileTransformer,
             private val postTransformerFactory: PostTransformerFactory) : BasePresenter<ProfileView>(), IProfilePresenter {
 
+    override var profile: ProfileModel? = null
     private var mIsMyProfile: Boolean = true
     private var mUserId: Int = -1
 
@@ -71,7 +71,6 @@ constructor(private val router: Router,
 //        val mappedList = ArrayList<ProfilePostConteainer>()
 //        mappedList.add(ProfilePostConteainer(ProfileAdapterStrategy.TYPE_HEADER, Profile()))
 //        mView!!.setProfile(mappedList)
-
 //        Toast.makeText(mView!!.getContext(), mView!!.getContext().getString(R.string.error_throwed), Toast.LENGTH_SHORT).show()
         mView?.showToast(R.string.error_throwed)
     }
@@ -97,29 +96,35 @@ constructor(private val router: Router,
         mView?.stopProgress()
     }
 
-    override fun navigateBack() {
-        router.exit()
+//    override fun navigateBack() {
+//        router.exit()
+//    }
+
+    override fun uploadPhoto(fileName:String, filePath: String, fileMime: String) {
+        addDissposable(profileInteractor.uploadAvatar(FileInfo(filePath, fileMime, fileName))
+                .doOnSubscribe { startProgress() }
+                .transformEntity(profileTransformer)
+                .subscribe({ onProfileChanged(it) }, this::doOnError))
     }
 
-    override fun uploadPhoto(imageView: ImageView, file: File) {
-        addDissposable(profileInteractor.uploadPhoto(file)
-                .doOnSubscribe { mView!!.startProgress() }
-                .subscribe({ doOnLoadAvatar(imageView, file) }, this::doOnError))
+    private fun onProfileChanged(profile: ProfileModel) {
+        stopProgress()
+        mView?.updateProfile(profile)
     }
 
     override fun exit() {
         profileInteractor.exit()
-        ActivityRouter.openActivityAndClosePrevent(mView!!.getActivity(), MainActivity::class.java)
+        ActivityRouter.openActivityAndClosePrevent(mView!!.getParentView().getActivity(), AuthActivity::class.java)
     }
 
     private fun doOnGetProfile(data: Pair<ProfileModel, List<PostModel>>) {
         stopProgress()
         mView?.setProfile(data)
+        profile = data.first
+//        mView?.getParentView()?.setToolbarTitle(data.first.name)
     }
 
-    private fun doOnLoadAvatar(imageView: ImageView, file: File) {
-        stopProgress()
-//        ImageLoader.load(mView?.getActivity(), file, imageView)
-    }
+
+
 
 }

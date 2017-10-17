@@ -23,7 +23,7 @@ import com.teachernavigator.teachernavigator.presentation.screens.info.fragments
 import com.teachernavigator.teachernavigator.presentation.screens.info.fragments.SupportFragment
 import com.teachernavigator.teachernavigator.presentation.screens.info.fragments.TagsFragment
 import com.teachernavigator.teachernavigator.presentation.screens.jobs.fragments.JobsBankFragment
-import com.teachernavigator.teachernavigator.presentation.screens.main.activities.ProfileActivity
+import com.teachernavigator.teachernavigator.presentation.screens.main.fragments.ProfileFragment
 import com.teachernavigator.teachernavigator.presentation.screens.main.activities.abstractions.MainView
 import com.teachernavigator.teachernavigator.presentation.screens.main.fragments.AddPublicationFragment
 import com.teachernavigator.teachernavigator.presentation.screens.main.fragments.MyCommentsFragment
@@ -112,11 +112,7 @@ class AcMainPresenter : BasePresenter<MainView>(), IMainPresenter {
             MenuItemsFactory.MenuItemTypes.IMPORTANT_TO_KNOW.id -> toFragment(ImportantToKnowFragment.FRAGMENT_KEY)
             MenuItemsFactory.MenuItemTypes.SUPPORT.id -> toFragment(SupportFragment.FRAGMENT_KEY)
             MenuItemsFactory.MenuItemTypes.CHAT.id -> mView?.notImplemented()
-            MenuItemsFactory.MenuItemTypes.PROFILE_HEADER.id -> {
-                val bundle = Bundle()
-                bundle.putBoolean(ProfileActivity.IS_MY_PROFILE_KEY, true)
-                ActivityRouter.openActivity(mView!!.getActivity(), bundle, ProfileActivity::class.java)
-            }
+            MenuItemsFactory.MenuItemTypes.PROFILE_HEADER.id -> toProfile()
             MenuItemsFactory.MenuItemTypes.ADD_PUBLICATION.id -> toFragment(AddPublicationFragment.FRAGMENT_KEY, false)
             MenuItemsFactory.MenuItemTypes.ABOUT.id -> toFragment(AboutFragment.FRAGMENT_KEY, false)
             MenuItemsFactory.MenuItemTypes.TAGS.id -> toFragment(TagsFragment.FRAGMENT_KEY, false)
@@ -162,6 +158,12 @@ class AcMainPresenter : BasePresenter<MainView>(), IMainPresenter {
         } else {
             mRouter.navigateTo(screenKey)
         }
+    }
+
+    private fun toProfile() {
+        val bundle = Bundle()
+        bundle.putBoolean(ProfileFragment.IS_MY_PROFILE_KEY, true)
+        mRouter.navigateTo(ProfileFragment.FRAGMENT_KEY, bundle)
     }
 
     private fun loadProfileIsAuth(isAuthorized: Boolean) {

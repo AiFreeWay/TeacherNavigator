@@ -8,7 +8,6 @@ import com.teachernavigator.teachernavigator.data.repository.abstractions.IAuthR
 import com.teachernavigator.teachernavigator.data.repository.abstractions.IPostsRepository
 import com.teachernavigator.teachernavigator.data.repository.abstractions.IProfileRepository
 import com.teachernavigator.teachernavigator.data.repository.abstractions.ISettingsRepository
-import com.teachernavigator.teachernavigator.domain.controllers.IPostController
 import com.teachernavigator.teachernavigator.presentation.screens.auth.activities.AuthActivity
 import com.teachernavigator.teachernavigator.presentation.screens.auth.fragments.AuthFragment
 import com.teachernavigator.teachernavigator.presentation.screens.auth.fragments.RegistrationFragment
@@ -20,8 +19,11 @@ import com.teachernavigator.teachernavigator.presentation.screens.auth.presenter
 import com.teachernavigator.teachernavigator.presentation.screens.common.ParentView
 import com.teachernavigator.teachernavigator.presentation.screens.info.fragments.*
 import com.teachernavigator.teachernavigator.presentation.screens.jobs.fragments.*
-import com.teachernavigator.teachernavigator.presentation.screens.main.activities.ProfileActivity
-import com.teachernavigator.teachernavigator.presentation.screens.main.fragments.*
+import com.teachernavigator.teachernavigator.presentation.screens.main.fragments.ProfileFragment
+import com.teachernavigator.teachernavigator.presentation.screens.main.fragments.AddPublicationFragment
+import com.teachernavigator.teachernavigator.presentation.screens.main.fragments.MyCommentsFragment
+import com.teachernavigator.teachernavigator.presentation.screens.main.fragments.PostCommentsFragment
+import com.teachernavigator.teachernavigator.presentation.screens.main.fragments.TapeFragment
 import com.teachernavigator.teachernavigator.presentation.screens.main.presenters.*
 import com.teachernavigator.teachernavigator.presentation.screens.settings.presenters.FmtAppSettingsPresenter
 import com.teachernavigator.teachernavigator.presentation.screens.settings.presenters.ProfileSettingsPresenter
@@ -42,7 +44,6 @@ interface ParentScreenComponent {
     fun provideAuthRepository(): IAuthRepository
     fun provideSettingsRepository(): ISettingsRepository
     fun provideProfileRepository(): IProfileRepository
-    fun providePostController(): IPostController
     fun provideParentView(): ParentView
 
     //Main presenters
@@ -100,6 +101,6 @@ interface ParentScreenComponent {
     fun inject(postsListFragment: PostsListFragment)
     fun inject(authActivity: AuthActivity)
     fun inject(myCommentsFragment: MyCommentsFragment)
-    fun inject(profileActivity: ProfileActivity)
+    fun inject(profileFragment: ProfileFragment)
 
 }

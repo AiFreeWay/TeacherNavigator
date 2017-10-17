@@ -24,7 +24,6 @@ import com.teachernavigator.teachernavigator.presentation.models.Specialist
 import com.teachernavigator.teachernavigator.presentation.utils.applySchedulers
 import io.reactivex.Observable
 import io.reactivex.Single
-import java.io.File
 import javax.inject.Inject
 
 /**
@@ -127,7 +126,7 @@ class MainRepository @Inject constructor(private val mNetwokController: NetworkC
                     .applySchedulers()
 
     override fun vote(postId: Int, isLike: Boolean, type: PostType): Single<BaseResponse> =
-            mNetwokController.vote(getAccessToken(), VoteRequest(postId, isLike, type.name))
+            mNetwokController.vote(getAccessToken(), VoteRequest(postId, isLike, if (type == PostType.poll) "question" else type.name))
                     .applySchedulers()
 
     override fun complaint(postId: Int, type: PostType): Single<BaseResponse> = when (type) {
@@ -197,10 +196,6 @@ class MainRepository @Inject constructor(private val mNetwokController: NetworkC
         CacheController.removeData(CacheController.TOKEN_KEY)
     }
 
-    override fun uploadPhoto(file: File): Single<File> {
-        return Single.just(file)
-    }
-
     // ------------------------------- Job methods --------------------------------
     override fun createVacancy(vacancyRequest: VacancyRequest): Single<Vacancy> =
             mNetwokController.createVacancy(getAccessToken(), vacancyRequest)
@@ -241,6 +236,11 @@ class MainRepository @Inject constructor(private val mNetwokController: NetworkC
 
     override fun respondVacancy(vacancyId: Int): Single<Unit> =
             mNetwokController.respondVacancy(getAccessToken(), vacancyId)
+
+
+    override fun uploadAvatar(fileInfo: FileInfo): Single<Unit> =
+            mNetwokController.uploadAvatar(getAccessToken(), fileInfo)
+                    .map { Unit }
 
     // ------------------------------- Info methods --------------------------------
     override fun loadAbout(): Single<List<About>> =

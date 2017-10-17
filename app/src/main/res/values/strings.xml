@@ -2,6 +2,7 @@
     <!-- Menu items -->
     <string name="enter">Войти</string>
     <string name="information_tape">Информационная лента</string>
+    <string name="news_feed">Лента новостей</string>
     <string name="settings">Настройки</string>
     <string name="tags">Теги</string>
     <string name="about">О нас</string>
@@ -77,7 +78,7 @@
     <string name="no_data">Не данных</string>
     <string name="error_throwed">Произошла ошибка</string>
     <string name="comments">Комментарии</string>
-    <string name="open_branch">Открыть ветвь</string>
+    <string name="open_branch">Раскрыть ветвь</string>
     <string name="added">Добавлено</string>
     <string name="comment_text">Текст комментария</string>
     <string name="zero">0</string>
@@ -152,7 +153,7 @@
     <string name="me_employer">Вакансии</string>
     <string name="download_resume">Скачать резюме</string>
     <string name="label_choose_theme">Выберите тематику</string>
-    <string name="not_implemented">Данный функционал находится в стадии разработки</string>
+    <string name="not_implemented">Данный функционал находится на стадии тестирования</string>
     <string name="label_courses">Курсы повышения квалификации</string>
     <string name="label_legal">Законодательство</string>
     <string name="label_internet_friend">Интернет - друг педагога</string>

@@ -14,10 +14,9 @@ import com.teachernavigator.teachernavigator.presentation.models.VacancyModel
 import com.teachernavigator.teachernavigator.presentation.screens.common.BasePresenter
 import com.teachernavigator.teachernavigator.presentation.screens.jobs.fragments.abstractions.VacancyView
 import com.teachernavigator.teachernavigator.presentation.screens.jobs.presenters.abstractions.IVacancyPresenter
-import com.teachernavigator.teachernavigator.presentation.screens.main.activities.ProfileActivity
+import com.teachernavigator.teachernavigator.presentation.screens.main.fragments.ProfileFragment
 import com.teachernavigator.teachernavigator.presentation.transformers.VacancyTransformer
 import com.teachernavigator.teachernavigator.presentation.transformers.transformEntity
-import com.teachernavigator.teachernavigator.presentation.utils.ActivityRouter
 import ru.terrakok.cicerone.Router
 import javax.inject.Inject
 
@@ -61,9 +60,10 @@ class VacancyPresenter
 
     override fun onUser(response: ResponseModel) = mView?.let {
         val bundle = Bundle().apply {
-            putInt(ProfileActivity.USER_ID_KEY, response.userId)
+            putInt(ProfileFragment.USER_ID_KEY, response.userId)
+            putBoolean(ProfileFragment.IS_MY_PROFILE_KEY, response.isMine)
         }
-        ActivityRouter.openActivity(it.getParentView().getActivity(), bundle, ProfileActivity::class.java)
+        router.navigateTo(ProfileFragment.FRAGMENT_KEY, bundle)
     } ?: Unit
 
     private fun onLoaded(vacancy: VacancyModel) {

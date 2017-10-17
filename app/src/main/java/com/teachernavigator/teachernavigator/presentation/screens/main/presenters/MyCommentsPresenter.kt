@@ -42,9 +42,6 @@ constructor(val router: Router,
 
     override fun refresh() =
             addDissposable(postsInteractor.getMyComments()
-                    .doOnSuccess {
-                        d(javaClass.name,"-> it -> $it")
-                    }
                     .transformListEntity(postCommentTransformer)
                     .doOnSubscribe { doOnSubscribeOnGetPosts() }
                     .subscribe(this::doOnGetComments, this::doOnError))

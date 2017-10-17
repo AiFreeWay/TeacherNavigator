@@ -44,18 +44,12 @@ fun Long.getTimeAgo(context: Context): String {
     var time = this
 
     if (time < 1000000000000L) {
-        // if timestamp given in seconds, convert to millis
         time *= 1000
     }
 
     val now = System.currentTimeMillis()
-    if (time > now || time <= 0) {
-        return ""
-    }
 
-    // TODO: localize
     val diff = now - time
-
     return when (diff) {
         in Int.MIN_VALUE..MINUTE_MILLIS -> context.getString(R.string.just_now)
         in MINUTE_MILLIS..2 * MINUTE_MILLIS -> context.getString(R.string.minute_ago)

@@ -10,6 +10,8 @@ data class CommentModel(
         var postAuthorName: String,
         var postAuthorAvatar: String,
 
+        var userId: Int,
+        var isMine: Boolean,
         var userName: String,
         var userAvatar: String,
         val timeAgo: String

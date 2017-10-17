@@ -5,6 +5,7 @@ import com.teachernavigator.teachernavigator.R
 import com.teachernavigator.teachernavigator.application.di.scopes.PerParentScreen
 import com.teachernavigator.teachernavigator.data.repository.abstractions.IPostsRepository
 import com.teachernavigator.teachernavigator.presentation.models.ChoiceModel
+import com.teachernavigator.teachernavigator.presentation.models.CommentModel
 import com.teachernavigator.teachernavigator.presentation.models.PostModel
 import com.teachernavigator.teachernavigator.presentation.screens.common.BasePresenter
 import com.teachernavigator.teachernavigator.presentation.screens.info.fragments.abstractions.PostActionsView
@@ -12,6 +13,7 @@ import com.teachernavigator.teachernavigator.presentation.screens.main.fragments
 import com.teachernavigator.teachernavigator.presentation.screens.main.presenters.abstractions.IPostActionsController
 import com.teachernavigator.teachernavigator.presentation.utils.DialogUtils
 import com.teachernavigator.teachernavigator.presentation.utils.applySchedulers
+import com.teachernavigator.teachernavigator.presentation.utils.openUrl
 import ru.terrakok.cicerone.Router
 import javax.inject.Inject
 
@@ -22,6 +24,8 @@ import javax.inject.Inject
 class PostActionsController
 @Inject constructor(private val router: Router,
                     private val repository: IPostsRepository) : BasePresenter<PostActionsView>(), IPostActionsController {
+
+    override fun onOpenFile(url: String) = mView.openUrl(url)
 
     override fun onPollVote(post: PostModel, choiceModel: ChoiceModel) =
             addDissposable(repository.passPoll(post.id, choiceModel.id)
@@ -58,6 +62,15 @@ class PostActionsController
                     .doOnSubscribe { startProgress() }
                     .subscribe({ onSaved(post) }, this::onError))
 
+    override fun onSubscribe(comment: CommentModel) =
+            addDissposable(DialogUtils.askPermission(mView!!.getContext(), R.string.ask_subscribe_to_user, comment.userName)
+                    .flatMap {
+                        repository.subscribe(comment.userId)
+                                .doOnSubscribe { startProgress() }
+                                .toMaybe()
+                    }
+                    .subscribe({ onSubscribed(comment) }, this::onError))
+
     override fun onSubscribe(post: PostModel) =
             addDissposable(DialogUtils.askPermission(mView!!.getContext(), R.string.ask_subscribe_to_user, post.authorName)
                     .flatMap {
@@ -82,7 +95,7 @@ class PostActionsController
         mView?.showToast(R.string.complaint_was_sent)
     }
 
-    private fun onSubscribed(post: PostModel) {
+    private fun onSubscribed(stub: Any) {
         stopProgress()
         mView?.showToast(R.string.you_are_subscribed)
     }

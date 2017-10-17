@@ -6,10 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.teachernavigator.teachernavigator.R
-import com.teachernavigator.teachernavigator.application.di.components.DaggerParentScreenComponent
-import com.teachernavigator.teachernavigator.application.di.components.ParentScreenComponent
-import com.teachernavigator.teachernavigator.application.di.modules.ParentScreenModule
-import com.teachernavigator.teachernavigator.application.utils.rootComponent
 import com.teachernavigator.teachernavigator.presentation.adapters.holders.InfoPostVHBuilder
 import com.teachernavigator.teachernavigator.presentation.adapters.holders.InfoVHBuilder
 import com.teachernavigator.teachernavigator.presentation.adapters.holders.TitleVHBuilder
@@ -46,6 +42,7 @@ class ImportantToKnowFragment : BaseFragment(), ImportantToKnowView {
                         postController::onDislike,
                         postController::onComments,
                         postController::onSave,
+                        null,
                         null,
                         null,
                         null,

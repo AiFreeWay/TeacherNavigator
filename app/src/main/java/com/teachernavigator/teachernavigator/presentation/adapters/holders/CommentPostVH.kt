@@ -24,15 +24,14 @@ class CommentPostVH(itemView: View,
                     onSubscribeListener: OnSubscribePostListener?,
                     onReadMoreListener: OnReadMoreListener?,
                     onComplaintListener: OnComplaintListener?,
-                    onPollPassListener: OnPollPassListener?
+                    onPollPassListener: OnPollPassListener?,
+                    onFileClickListener: OnFileClickListener?
 
 ) : DefaultViewHolder<PostCommentModel>(itemView) {
 
-    private val context = itemView.context
-
     private val postHolder = InfoPostVH(itemView, onLikeListener, onDislikeListener, onCommentsListener,
             onSaveListener, onSubscribeListener, onReadMoreListener, onComplaintListener,
-            onPollPassListener)
+            onPollPassListener, onFileClickListener)
 
     private val lYourComment: View = itemView.find(R.id.v_post_l_your_comment)
     private val tvCommentText: TextView = itemView.find(R.id.v_post_tv_comment_text)

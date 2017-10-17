@@ -15,8 +15,9 @@ data class PostModel(
         var count_likes: Int,
         var count_dislikes: Int,
         var vote: Boolean? = null,
+        var isMine: Boolean,
         val count_comments: Int,
-        val comments: List<Any>,
+        val comments: List<CommentModel>,
 
         val authorId: Int,
         val authorName: String,

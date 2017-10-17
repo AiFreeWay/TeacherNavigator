@@ -52,6 +52,8 @@ interface IPostsRepository {
     /* Storage Methods */
     fun isPollPassed(id: Int): Boolean
 
+    fun currentUserId(): Int
+
     fun sedPollPassed(id: Int)
     fun passPoll(postId: Int, choiceId: Int): Single<BaseResponse>
 }

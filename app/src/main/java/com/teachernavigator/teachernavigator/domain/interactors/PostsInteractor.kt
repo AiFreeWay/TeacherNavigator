@@ -1,5 +1,6 @@
 package com.teachernavigator.teachernavigator.domain.interactors
 
+import android.util.Log.d
 import com.teachernavigator.teachernavigator.data.models.CommentNetwork
 import com.teachernavigator.teachernavigator.data.models.FileInfo
 import com.teachernavigator.teachernavigator.data.models.PostCommentNetwork
@@ -57,8 +58,7 @@ class PostsInteractor @Inject constructor(private val mRepository: IPostsReposit
 
     override fun getPost(postId: Int, postType: PostType): Single<PostNetwork> =
             mRepository.getPost(postId, postType)
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribeOn(Schedulers.newThread())
+                    .applySchedulers()
 
     override fun sendComment(postId: Int, postType: PostType, text: String): Single<CommentNetwork> =
             mRepository.comment(CommentRequest.build(postId, postType, text))
@@ -110,7 +110,6 @@ class PostsInteractor @Inject constructor(private val mRepository: IPostsReposit
             mRepository.getSavedNews()
                     .map { it.results }
                     .applySchedulers()
-
 
 
     override fun getMyPosts(): Single<List<PostNetwork>> =

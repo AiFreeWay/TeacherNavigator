@@ -124,10 +124,10 @@
             android:id="@+id/v_post_btn_pass_test"
             style="@style/Button.Small"
             android:layout_width="wrap_content"
-            android:visibility="gone"
             android:layout_height="wrap_content"
             android:text="@string/pass_test"
             android:textAllCaps="false"
+            android:visibility="gone"
             app:backgroundTint="@color/colorAccent" />
 
         <TextView
@@ -140,12 +140,22 @@
             android:background="?android:attr/selectableItemBackground"
             android:gravity="center_vertical"
             android:padding="@dimen/spacingLarge"
-            android:textSize="@dimen/smallTextSize"
             android:text="@string/complain"
             android:textColor="@color/greyTextColor"
+            android:textSize="@dimen/smallTextSize"
             android:visibility="visible" />
     </LinearLayout>
 
+
+    <TextView
+        android:id="@+id/v_post_tv_file"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/v_post_ll_more_and_complain"
+        android:background="?android:attr/selectableItemBackground"
+        android:gravity="center_vertical|start"
+        android:text="@string/download_resume"
+        tools:drawableRight="@drawable/ic_resume" />
 
     <com.greenfrvr.hashtagview.HashtagView
         android:id="@+id/v_post_hv_hasttags"
@@ -153,7 +163,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_below="@+id/v_post_ll_more_and_complain"
+        android:layout_below="@+id/v_post_tv_file"
         android:paddingTop="@dimen/externalPadding"
         app:rowGravity="left"
         app:tagBackground="@drawable/hash_tag_background"
@@ -167,18 +177,18 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/v_post_hv_hasttags"
-        android:visibility="gone"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:visibility="gone">
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/your_comment"
             android:layout_marginBottom="@dimen/spacingMedium"
             android:layout_marginLeft="@dimen/spacingLarge"
             android:layout_marginRight="@dimen/spacingLarge"
             android:layout_marginTop="@dimen/spacingMedium"
-            android:textSize="@dimen/titleTextSize"/>
+            android:text="@string/your_comment"
+            android:textSize="@dimen/titleTextSize" />
 
         <TextView
             android:id="@+id/v_post_tv_comment_text"
@@ -188,12 +198,12 @@
             android:layout_marginBottom="@dimen/spacingSmall"
             android:layout_marginLeft="@dimen/spacingLarge"
             android:layout_marginRight="@dimen/spacingLarge"
-            tools:text="Такой то комментарий!"
             android:layout_marginTop="@dimen/spacingSmall"
             android:background="@drawable/oval_text_backgroud"
             android:gravity="top"
             android:minLines="3"
-            android:padding="@dimen/internalPadding" />
+            android:padding="@dimen/internalPadding"
+            tools:text="Такой то комментарий!" />
 
     </LinearLayout>
 
@@ -268,15 +278,15 @@
     <android.support.v7.widget.AppCompatButton
         android:id="@+id/v_post_btn_open_branch"
         style="@style/Button.Small"
-        android:visibility="gone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_below="@+id/v_post_v_devider"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:layout_margin="@dimen/spacingSmall"
         android:text="@string/open_branch"
         android:textAllCaps="false"
+        android:visibility="gone"
         app:backgroundTint="@color/colorAccent" />
 
 </RelativeLayout>

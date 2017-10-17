@@ -1,5 +1,6 @@
 package com.teachernavigator.teachernavigator.presentation.adapters.holders
 
+import android.net.Uri
 import android.support.v4.content.ContextCompat
 import android.view.View
 import android.view.View.GONE
@@ -21,14 +22,15 @@ import ru.lliepmah.lib.DefaultViewHolder
  */
 @HolderBuilder(R.layout.v_info_post)
 open class InfoPostVH(itemView: View,
-                 onLikeListener: OnLikeListener?,
-                 onDislikeListener: OnDislikeListener?,
-                 onCommentsListener: OnCommentsListener?,
-                 onSaveListener: OnSaveListener?,
-                 onSubscribeListener: OnSubscribePostListener?,
-                 onReadMoreListener: OnReadMoreListener?,
-                 onComplaintListener: OnComplaintListener?,
-                 onPollPassListener: OnPollPassListener?
+                      onLikeListener: OnLikeListener?,
+                      onDislikeListener: OnDislikeListener?,
+                      onCommentsListener: OnCommentsListener?,
+                      onSaveListener: OnSaveListener?,
+                      private val onSubscribeListener: OnSubscribePostListener?,
+                      onReadMoreListener: OnReadMoreListener?,
+                      private val onComplaintListener: OnComplaintListener?,
+                      onPollPassListener: OnPollPassListener?,
+                      private val onFileClickListener: OnFileClickListener?
 
 ) : DefaultViewHolder<PostModel>(itemView) {
 
@@ -49,6 +51,7 @@ open class InfoPostVH(itemView: View,
     private val tvLike: TextView = itemView.find(R.id.v_post_tv_like)
     private val tvDislike: TextView = itemView.find(R.id.v_post_tv_dislike)
     private val passTestButton: Button = itemView.find(R.id.v_post_btn_pass_test)
+    private val fileTv: TextView = itemView.find(R.id.v_post_tv_file)
 
     val tvComments: TextView = itemView.find(R.id.v_post_tv_comments)
     val ivSave: ImageView = itemView.find(R.id.v_post_iv_save)
@@ -63,6 +66,9 @@ open class InfoPostVH(itemView: View,
         ivSubscribe listenClickBy onSubscribeListener andReturnModelOrHide { mModel }
         btnMore listenClickBy onReadMoreListener andReturnModelOrHide { mModel }
         tvComplain listenClickBy onComplaintListener andReturnModelOrHide { mModel }
+        fileTv listenClickBy onFileClickListener andReturnModelOrHide { mModel?.file }
+
+        fileTv.setCompoundDrawablesWithIntrinsicBounds(null, null, ContextCompat.getDrawable(itemView.context, R.drawable.ic_resume), null)
 
         if (onPollPassListener != null) {
             passTestButton.setOnClickListener { passTest(onPollPassListener) }
@@ -102,11 +108,12 @@ open class InfoPostVH(itemView: View,
         tvTitle.setTextOrHide(model?.title)
         tvText.setTextOrHide(model?.text)
 
+        if (onFileClickListener != null) {
+            fileTv.setTextOrHide(model?.file?.let { Uri.parse(it).lastPathSegment })
+        }
 
         if (model?.type == PostType.poll && btnMore.visibility == GONE && !model.choices.isNullOrEmpty()) {
-
             prepareChoiceView(model)
-
         } else {
             llChoices.visibility = GONE
             passTestButton.visibility = GONE
@@ -121,6 +128,9 @@ open class InfoPostVH(itemView: View,
 
         tvLike.setCompoundDrawablesWithIntrinsicBounds(getLikeDrawable(model?.vote), null, null, null)
         tvDislike.setCompoundDrawablesWithIntrinsicBounds(getDislikeDrawable(model?.vote), null, null, null)
+
+        ivSubscribe.visibility = if (onSubscribeListener == null || model == null || model.authorId <= 0 || model.isMine == true) GONE else VISIBLE
+        tvComplain.visibility = if (onComplaintListener == null || model?.isMine == true) GONE else VISIBLE
     }
 
 
@@ -202,3 +212,4 @@ typealias OnSubscribePostListener = (PostModel) -> Unit
 typealias OnReadMoreListener = (PostModel) -> Unit
 typealias OnComplaintListener = (PostModel) -> Unit
 typealias OnPollPassListener = (PostModel, ChoiceModel) -> Unit
+typealias OnFileClickListener = (String) -> Unit

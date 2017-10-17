@@ -4,6 +4,7 @@ import android.content.Context
 import android.text.TextUtils
 import com.teachernavigator.teachernavigator.R
 import com.teachernavigator.teachernavigator.data.cache.CacheController
+import com.teachernavigator.teachernavigator.data.cache.CacheController.Companion.USER_KEY
 import com.teachernavigator.teachernavigator.data.models.CommentNetwork
 import com.teachernavigator.teachernavigator.data.models.FileInfo
 import com.teachernavigator.teachernavigator.data.models.PostCommentNetwork
@@ -31,6 +32,10 @@ import javax.inject.Inject
  */
 class MainRepository @Inject constructor(private val mNetwokController: NetworkController,
                                          private val mContext: Context) : IMainRepository {
+
+    @Suppress("CAST_NEVER_SUCCEEDS")
+    override fun currentUserId(): Int =
+            (CacheController.getData(USER_KEY, null) as? Profile)?.id ?: -1
 
     // TODO Make it nullable
     override fun getAccessToken(): String {
@@ -182,7 +187,9 @@ class MainRepository @Inject constructor(private val mNetwokController: NetworkC
 
     // ------------------------------- Profile methods --------------------------------
 
-    override fun getProfile(): Single<Profile> = mNetwokController.getProfile(getAccessToken())
+    override fun getProfile(): Single<Profile> =
+            mNetwokController.getProfile(getAccessToken())
+                    .doOnSuccess { CacheController.putData(USER_KEY, it) }
 
     override fun getProfile(userId: Int): Single<Profile> = mNetwokController.getProfile(getAccessToken(), userId)
 

@@ -41,14 +41,15 @@ class PostCommentsFragment : BaseFragment(), PostCommentsView {
                         postController::onDislike,
                         null,
                         postController::onSave,
+                        postController::onSubscribe,
                         null,
-                        null, // TODO postConroller::onReadMore
                         null,
-                        postController::onPollVote
+                        postController::onPollVote,
+                        postController::onOpenFile
                 ),
                 CommentVHBuilder(
-                        null, // TODO presenter::onBranch
-                        null // TODO presenter::onSubscribe
+                        postController::onSubscribe,
+                        null
                 )
         )
     }

@@ -7,6 +7,7 @@ import com.teachernavigator.teachernavigator.domain.mappers.ProfileMapper
 import com.teachernavigator.teachernavigator.domain.models.About
 import com.teachernavigator.teachernavigator.domain.models.Profile
 import com.teachernavigator.teachernavigator.presentation.models.Specialist
+import com.teachernavigator.teachernavigator.presentation.utils.applySchedulers
 import io.reactivex.Observable
 import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -29,14 +30,9 @@ class ProfileInteractor @Inject constructor(private val mRepository: IProfileRep
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribeOn(Schedulers.newThread())
 
-    init {
-        Logger.logDebug("created INTERACTOR ProfileInteractor")
-    }
-
     override fun getProfile(): Single<Profile> =
             mRepository.getProfile()
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribeOn(Schedulers.newThread())
+                    .applySchedulers()
                     .map { it }
 
     override fun getProfile(userId: Int): Single<Profile> =

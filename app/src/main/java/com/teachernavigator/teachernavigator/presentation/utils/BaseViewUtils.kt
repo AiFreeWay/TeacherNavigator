@@ -19,3 +19,12 @@ fun ChildView?.openUrl(@StringRes urlResId: Int) =
                 showToast(R.string.browser_not_found)
             }
         } else Unit
+
+fun ChildView?.openUrl(url: String) =
+        if (this != null) {
+            try {
+                getContext().startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(url)))
+            } catch (error: ActivityNotFoundException) {
+                showToast(R.string.browser_not_found)
+            }
+        } else Unit

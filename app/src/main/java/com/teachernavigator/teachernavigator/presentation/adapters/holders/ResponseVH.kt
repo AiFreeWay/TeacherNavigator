@@ -33,7 +33,7 @@ class ResponseHolder(itemView: View,
         vResponseTvDownload listenClickBy onDownloadListener andReturnModel { mResponseModel }
         vResponseIvAvatar listenClickBy onUserClickListener andReturnModel { mResponseModel }
 
-        vResponseTvDownload.setCompoundDrawables(null, null, ContextCompat.getDrawable(itemView.context, R.drawable.ic_resume), null)
+        vResponseTvDownload.setCompoundDrawablesWithIntrinsicBounds(null, null, ContextCompat.getDrawable(itemView.context, R.drawable.ic_resume), null)
     }
 
     override fun bind(response: ResponseModel?) {

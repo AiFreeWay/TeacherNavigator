@@ -1,6 +1,8 @@
 package com.teachernavigator.teachernavigator.presentation.adapters.holders
 
 import android.view.View
+import android.view.View.GONE
+import android.view.View.VISIBLE
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
@@ -18,7 +20,7 @@ import ru.lliepmah.lib.DefaultViewHolder
  */
 @HolderBuilder(R.layout.v_comment_card)
 class CommentVH(itemView: View,
-                onSubscribeListener: OnSubscribeListener?,
+                private val onSubscribeListener: OnSubscribeListener?,
                 onBranchListener: OnBranchListener?) : DefaultViewHolder<CommentModel>(itemView) {
 
     private val ivAvatar: ImageView = itemView.find(R.id.v_comment_iv_avatar)
@@ -44,7 +46,11 @@ class CommentVH(itemView: View,
 
         ivAvatar.setImageOrPlaceholder(comment?.userAvatar)
         tvAuthorName.setTextOrHide(comment?.userName)
+
         tvPostAuthorName.setTextOrHide(comment?.postAuthorName)
+
+        ivSubscribe.visibility = if (onSubscribeListener == null || comment?.isMine == true ||
+                comment?.userId == null || comment.userId <= 0) GONE else VISIBLE
 
         tvText.setTextOrHide(comment?.message)
         tvPostTime.setTextOrHide(comment?.timeAgo)

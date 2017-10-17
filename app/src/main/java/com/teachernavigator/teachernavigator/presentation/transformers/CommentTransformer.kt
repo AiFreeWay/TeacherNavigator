@@ -4,6 +4,7 @@ import android.content.Context
 import com.teachernavigator.teachernavigator.R
 import com.teachernavigator.teachernavigator.application.di.scopes.PerParentScreen
 import com.teachernavigator.teachernavigator.data.models.CommentNetwork
+import com.teachernavigator.teachernavigator.data.repository.abstractions.IPostsRepository
 import com.teachernavigator.teachernavigator.presentation.models.CommentModel
 import com.teachernavigator.teachernavigator.presentation.utils.getTimeAgo
 import javax.inject.Inject
@@ -14,7 +15,8 @@ import javax.inject.Inject
 @PerParentScreen
 class CommentTransformer
 @Inject
-constructor(private val context: Context) : EntityTransformer<CommentNetwork, CommentModel> {
+constructor(private val context: Context,
+            private val postsRepository: IPostsRepository) : EntityTransformer<CommentNetwork, CommentModel> {
 
     override fun transform(from: CommentNetwork): CommentModel =
             CommentModel(
@@ -24,7 +26,9 @@ constructor(private val context: Context) : EntityTransformer<CommentNetwork, Co
                     postAuthorName = from.author?.full_name ?: "",
                     postAuthorAvatar = from.author?.avatars?.firstOrNull()?.avatar ?: "",
 
-                    userName = from.user?.full_name ?: "",
+                    isMine = (from.user?.id ?: -1) == postsRepository.currentUserId(),
+                    userId = from.user?.id ?: -1,
+                    userName = from.user?.full_name.let { if (it == null || it.isBlank()) context.getString(R.string.unknown) else it },
                     userAvatar = from.user?.avatars?.avatar ?: "",
                     timeAgo = from.created?.getTimeAgo(context) ?: context.getString(R.string.just_now)
             )

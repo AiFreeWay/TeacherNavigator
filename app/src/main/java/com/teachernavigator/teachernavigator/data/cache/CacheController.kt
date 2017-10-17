@@ -3,11 +3,13 @@ package com.teachernavigator.teachernavigator.data.cache
 import com.orhanobut.hawk.Hawk
 
 /**
- * Created by root on 23.08.17.
+ * Created by root on 23.08.17
  */
 class CacheController {
 
     companion object {
+
+        val USER_KEY = "user"
 
         val TOKEN_KEY = "token"
         val SETTINGS_KEY = "settings"
@@ -21,10 +23,6 @@ class CacheController {
                 Hawk.delete(key)
         }
 
-        fun <T> getData(key: String, default: T?): T? {
-            if (Hawk.contains(key))
-                return Hawk.get(key)
-            return default
-        }
+        fun <T> getData(key: String, default: T?): T? = Hawk.get(key, default)
     }
 }

@@ -1,6 +1,8 @@
 package com.teachernavigator.teachernavigator.presentation.transformers
 
+import android.content.Context
 import android.support.v4.util.SparseArrayCompat
+import com.teachernavigator.teachernavigator.R
 import com.teachernavigator.teachernavigator.application.di.scopes.PerParentScreen
 import com.teachernavigator.teachernavigator.data.models.PostNetwork
 import com.teachernavigator.teachernavigator.data.repository.abstractions.IPostsRepository
@@ -19,6 +21,7 @@ class PostTransformerFactory
 @Inject
 constructor(private val commentTransformer: CommentTransformer,
             private val choiceTransformer: ChoiceTransformer,
+            private val context: Context,
             private val postsRepository: IPostsRepository) {
 
     companion object {
@@ -32,11 +35,12 @@ constructor(private val commentTransformer: CommentTransformer,
             transformers.get(postType.ordinal, createAndSave(postType, shorter))
 
     private fun createAndSave(postType: PostType, shorter: Boolean) =
-            PostTransformer(postType, shorter, commentTransformer, choiceTransformer, postsRepository)
+            PostTransformer(postType, shorter, context, commentTransformer, choiceTransformer, postsRepository)
                     .apply { transformers.put(postType.ordinal, this) }
 
     private class PostTransformer(private val postType: PostType,
                                   private val shorter: Boolean,
+                                  private val context: Context,
                                   private val commentTransformer: CommentTransformer,
                                   private val choiceTransformer: ChoiceTransformer,
                                   private val postsRepository: IPostsRepository) : EntityTransformer<PostNetwork, PostModel> {
@@ -53,9 +57,11 @@ constructor(private val commentTransformer: CommentTransformer,
                         count_dislikes = from.count_dislikes ?: 0,
                         vote = from.vote,
                         count_comments = from.count_comments ?: 0,
-                        comments = from.comments?.filterNotNull()?.map(commentTransformer::transform) ?: emptyList(),
+                        isMine = (from.author?.id ?: -1) == postsRepository.currentUserId(),
+                        comments = from.comments?.filterNotNull()?.map { it.apply { author = from.author } }?.map(commentTransformer::transform) ?: emptyList(),
+
                         authorId = from.author?.id ?: -1,
-                        authorName = from.author?.full_name ?: "",
+                        authorName = from.author?.full_name.let { if (it == null || it.isBlank()) context.getString(R.string.unknown) else it },
                         authorAvatar = from.author?.avatars?.firstOrNull()?.avatar,
                         type = this.postType,
                         file = from.file,

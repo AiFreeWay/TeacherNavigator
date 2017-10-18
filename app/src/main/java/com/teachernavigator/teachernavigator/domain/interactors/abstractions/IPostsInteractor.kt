@@ -4,6 +4,7 @@ import com.teachernavigator.teachernavigator.data.models.CommentNetwork
 import com.teachernavigator.teachernavigator.data.models.FileInfo
 import com.teachernavigator.teachernavigator.data.models.PostCommentNetwork
 import com.teachernavigator.teachernavigator.data.models.PostNetwork
+import com.teachernavigator.teachernavigator.domain.interactors.Filter
 import com.teachernavigator.teachernavigator.domain.models.Post
 import com.teachernavigator.teachernavigator.domain.models.PostType
 import com.teachernavigator.teachernavigator.domain.models.Tag
@@ -36,4 +37,7 @@ interface IPostsInteractor {
     fun getBestPosts(): Single<List<PostNetwork>>
     fun getMyComments(): Single<List<PostCommentNetwork>>
     fun getMyPosts(): Single<List<PostNetwork>>
+
+    fun setSearch(source: PostsSource, text: CharSequence, publicationsContent: Pair<Boolean, Boolean>, searchTags: HashSet<String>)
+    fun getFilter(source: PostsSource): Filter?
 }

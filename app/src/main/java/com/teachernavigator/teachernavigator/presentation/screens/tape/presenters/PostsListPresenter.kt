@@ -32,7 +32,7 @@ constructor(val router: Router,
     private lateinit var mPostType: PostType
     private lateinit var mPostsSource: PostsSource
 
-    private var mPosts: List<PostModel>? = null
+//    private var mPosts: List<PostModel>? = null
 
     @OnLifecycleEvent(Lifecycle.Event.ON_START)
     private fun onStart() {
@@ -51,9 +51,9 @@ constructor(val router: Router,
             mView?.getParentView()?.setToolbarTitle(R.string.my_publication)
         }
 
-        if (mPosts.isNullOrEmpty()) {
+//        if (mPosts.isNullOrEmpty()) {
             refresh()
-        }
+//        }
     }
 
     override fun doOnError(error: Throwable) {
@@ -78,7 +78,7 @@ constructor(val router: Router,
     private fun doOnGetPosts(posts: List<PostModel>) = mView?.run {
         getParentView().stopProgress()
         hideRefresh()
-        mPosts = posts
+//        mPosts = posts
 
         setPosts(posts)
 

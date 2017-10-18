@@ -9,5 +9,9 @@ import com.teachernavigator.teachernavigator.presentation.screens.tape.fragments
 interface IPostSearchPresenter : ViewAttacher<PostsSearchView> {
 
     fun navigateBack()
+    fun searchTags(tag: CharSequence)
+    fun addTag(name: CharSequence)
+    fun setSource(id: Int?)
+    fun performSearch(text: CharSequence, publicationsContent: Pair<Boolean, Boolean>)
 
 }

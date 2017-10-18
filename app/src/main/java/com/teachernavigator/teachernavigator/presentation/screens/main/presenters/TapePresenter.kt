@@ -2,8 +2,8 @@ package com.teachernavigator.teachernavigator.presentation.screens.main.presente
 
 import android.arch.lifecycle.Lifecycle
 import android.arch.lifecycle.OnLifecycleEvent
+import android.os.Bundle
 import android.support.v4.app.Fragment
-import android.util.Log.d
 import com.teachernavigator.teachernavigator.R
 import com.teachernavigator.teachernavigator.application.di.scopes.PerParentScreen
 import com.teachernavigator.teachernavigator.domain.interactors.abstractions.IAuthInteractor
@@ -57,7 +57,9 @@ class TapePresenter
     }
 
     override fun openPostSearchScreen() {
-        router.navigateTo(PostsSearchFragment.FRAGMENT_KEY)
+        val bundle = Bundle()
+        bundle.putInt(PostsSearchFragment.POSTS_SOURCE_KEY, mType.ordinal)
+        router.navigateTo(PostsSearchFragment.FRAGMENT_KEY, bundle)
     }
 
     override fun refresh(fragment: Fragment?) {

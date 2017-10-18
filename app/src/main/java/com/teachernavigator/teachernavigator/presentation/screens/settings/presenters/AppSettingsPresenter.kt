@@ -2,26 +2,25 @@ package com.teachernavigator.teachernavigator.presentation.screens.settings.pres
 
 import android.arch.lifecycle.Lifecycle
 import android.arch.lifecycle.OnLifecycleEvent
-import android.text.TextUtils
 import android.widget.Toast
-import com.example.root.androidtest.application.utils.Logger
 import com.teachernavigator.teachernavigator.R
-import com.teachernavigator.teachernavigator.application.di.components.DaggerParentScreenComponent
-import com.teachernavigator.teachernavigator.application.di.modules.ParentScreenModule
+import com.teachernavigator.teachernavigator.application.di.scopes.PerParentScreen
 import com.teachernavigator.teachernavigator.domain.interactors.abstractions.ISettingsInteractor
 import com.teachernavigator.teachernavigator.domain.models.Settings
 import com.teachernavigator.teachernavigator.presentation.screens.common.BasePresenter
 import com.teachernavigator.teachernavigator.presentation.screens.settings.fragments.abstractions.AppSettingsView
 import com.teachernavigator.teachernavigator.presentation.screens.settings.presenters.abstractions.IAppSettingsPresenter
+import ru.terrakok.cicerone.Router
 import javax.inject.Inject
 
 /**
  * Created by root on 18.09.17
  */
-class FmtAppSettingsPresenter : BasePresenter<AppSettingsView>(), IAppSettingsPresenter {
-
-    @Inject
-    lateinit var mSettingsInteractor: ISettingsInteractor
+@PerParentScreen
+class AppSettingsPresenter
+@Inject
+constructor(val router: Router,
+            private val settingsInteractor: ISettingsInteractor) : BasePresenter<AppSettingsView>(), IAppSettingsPresenter {
 
     private var mSettings = Settings()
 
@@ -30,26 +29,25 @@ class FmtAppSettingsPresenter : BasePresenter<AppSettingsView>(), IAppSettingsPr
         mDisposables.clear()
     }
 
-
     override fun getSettings() {
-        mDisposables.add(mSettingsInteractor.getSettings()
+        mDisposables.add(settingsInteractor.getSettings()
                 .doOnSubscribe { doOnSubscribe() }
                 .subscribe(this::doOnGetSettings, this::doOnError))
     }
 
     override fun changeNightTheme(state: Boolean) {
         mSettings.isNithThemeOn = state
-        mSettingsInteractor.putSettings(mSettings)
+        settingsInteractor.putSettings(mSettings)
     }
 
     override fun changePush(state: Boolean) {
         mSettings.isPushOn = state
-        mSettingsInteractor.putSettings(mSettings)
+        settingsInteractor.putSettings(mSettings)
     }
 
     override fun changeSound(state: Boolean) {
         mSettings.isSoundOn = state
-        mSettingsInteractor.putSettings(mSettings)
+        settingsInteractor.putSettings(mSettings)
     }
 
     override fun doOnError(error: Throwable) {

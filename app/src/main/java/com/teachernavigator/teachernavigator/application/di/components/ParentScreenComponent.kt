@@ -19,13 +19,10 @@ import com.teachernavigator.teachernavigator.presentation.screens.auth.presenter
 import com.teachernavigator.teachernavigator.presentation.screens.common.ParentView
 import com.teachernavigator.teachernavigator.presentation.screens.info.fragments.*
 import com.teachernavigator.teachernavigator.presentation.screens.jobs.fragments.*
-import com.teachernavigator.teachernavigator.presentation.screens.main.fragments.ProfileFragment
-import com.teachernavigator.teachernavigator.presentation.screens.main.fragments.AddPublicationFragment
-import com.teachernavigator.teachernavigator.presentation.screens.main.fragments.MyCommentsFragment
-import com.teachernavigator.teachernavigator.presentation.screens.main.fragments.PostCommentsFragment
-import com.teachernavigator.teachernavigator.presentation.screens.main.fragments.TapeFragment
+import com.teachernavigator.teachernavigator.presentation.screens.main.fragments.*
 import com.teachernavigator.teachernavigator.presentation.screens.main.presenters.*
-import com.teachernavigator.teachernavigator.presentation.screens.settings.presenters.FmtAppSettingsPresenter
+import com.teachernavigator.teachernavigator.presentation.screens.settings.fragments.AppSettingsFragment
+import com.teachernavigator.teachernavigator.presentation.screens.settings.presenters.AppSettingsPresenter
 import com.teachernavigator.teachernavigator.presentation.screens.settings.presenters.ProfileSettingsPresenter
 import com.teachernavigator.teachernavigator.presentation.screens.tape.fragments.PostsListFragment
 import com.teachernavigator.teachernavigator.presentation.screens.tape.fragments.PostsSearchFragment
@@ -52,8 +49,8 @@ interface ParentScreenComponent {
     fun inject(presenter: ProfilePresenter)
     fun inject(presenter: TapePresenter)
     fun inject(presenter: MyCommentsPresenter)
-//    fun inject(presenter: MyPublicationsPresenter)
-    fun inject(presenter: SettingsPresenter)
+//    fun inject(presenterApp: MyPublicationsPresenter)
+    fun inject(presenterApp: SettingsPresenter)
     fun inject(presenter: AddPublicationPresenter)
 
     //Tape presenters
@@ -69,7 +66,7 @@ interface ParentScreenComponent {
     fun inject(presenter: RestorePasswordPresenter)
 
     //Settings presenters
-    fun inject(presenter: FmtAppSettingsPresenter)
+    fun inject(presenterApp: AppSettingsPresenter)
 
     fun inject(presenter: ProfileSettingsPresenter)
 
@@ -102,5 +99,7 @@ interface ParentScreenComponent {
     fun inject(authActivity: AuthActivity)
     fun inject(myCommentsFragment: MyCommentsFragment)
     fun inject(profileFragment: ProfileFragment)
+    fun inject(settingsFragment: SettingsFragment)
+    fun inject(appSettingsFragment: AppSettingsFragment)
 
 }

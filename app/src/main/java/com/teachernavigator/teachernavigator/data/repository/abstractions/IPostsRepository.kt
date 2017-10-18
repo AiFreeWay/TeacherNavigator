@@ -8,6 +8,7 @@ import com.teachernavigator.teachernavigator.data.network.requests.CommentReques
 import com.teachernavigator.teachernavigator.data.network.responses.BaseListResponse
 import com.teachernavigator.teachernavigator.data.network.responses.BaseResponse
 import com.teachernavigator.teachernavigator.data.network.responses.PostsResponse
+import com.teachernavigator.teachernavigator.domain.interactors.Filter
 import com.teachernavigator.teachernavigator.domain.models.PostType
 import com.teachernavigator.teachernavigator.domain.models.Tag
 import com.teachernavigator.teachernavigator.presentation.models.Info
@@ -56,4 +57,6 @@ interface IPostsRepository {
 
     fun sedPollPassed(id: Int)
     fun passPoll(postId: Int, choiceId: Int): Single<BaseResponse>
+    fun putFilter(ordinal: Int, filter: Filter)
+    fun getFilter(pos: Int): Filter?
 }

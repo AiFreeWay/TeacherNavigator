@@ -1,11 +1,8 @@
 package com.teachernavigator.teachernavigator.presentation.screens.main.fragments
 
 import android.os.Bundle
-import android.support.design.widget.TabLayout
-import android.support.v4.view.ViewPager
-import android.view.*
-import butterknife.BindView
-import butterknife.ButterKnife
+import android.view.LayoutInflater
+import android.view.ViewGroup
 import com.teachernavigator.teachernavigator.R
 import com.teachernavigator.teachernavigator.presentation.adapters.ViewPagerAdapter
 import com.teachernavigator.teachernavigator.presentation.models.ViewPagerItemContainer
@@ -13,9 +10,11 @@ import com.teachernavigator.teachernavigator.presentation.screens.common.BaseFra
 import com.teachernavigator.teachernavigator.presentation.screens.main.fragments.abstractions.SettingsView
 import com.teachernavigator.teachernavigator.presentation.screens.main.presenters.SettingsPresenter
 import com.teachernavigator.teachernavigator.presentation.screens.main.presenters.abstractions.ISettingsPresenter
+import kotlinx.android.synthetic.main.fmt_settings.*
+import javax.inject.Inject
 
 /**
- * Created by root on 18.09.17.
+ * Created by root on 18.09.17
  */
 class SettingsFragment : BaseFragment(), SettingsView {
 
@@ -24,37 +23,35 @@ class SettingsFragment : BaseFragment(), SettingsView {
         val LAST_VIEW_PAGER_POSITION = "last_view_pager_position"
     }
 
-    @BindView(R.id.fmt_view_pager_tb_tabs) lateinit var mTbTabs: TabLayout
-    @BindView(R.id.fmt_view_pager_vp_body) lateinit var mVpTapeItems: ViewPager
-
     private lateinit var mAdapter: ViewPagerAdapter
-    private val mPresenter: ISettingsPresenter = SettingsPresenter()
     private var mLastViewPagerPosition = 0
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val view: View = inflater!!.inflate(R.layout.fmt_view_pager, container, false)
-        ButterKnife.bind(this, view)
-        return view
-    }
+    @Inject
+    lateinit var presenter: ISettingsPresenter
+
+    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?) =
+            inflater?.inflate(R.layout.fmt_settings, container, false)
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         setHasOptionsMenu(true)
-        mPresenter.attachView(this)
-        mTbTabs.setupWithViewPager(mVpTapeItems)
+        mParentScreenComponent.inject(this)
+        presenter.attachView(this)
+
+        fmtViewPagerTbTabs.setupWithViewPager(fmtViewPagerVpBody)
         mAdapter = ViewPagerAdapter(childFragmentManager)
-        mVpTapeItems.adapter = mAdapter
-        mPresenter.getSettings()
+        fmtViewPagerVpBody.adapter = mAdapter
+        presenter.getSettings()
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
-        mPresenter.detachView()
+        presenter.detachView()
     }
 
     override fun onSaveInstanceState(outState: Bundle?) {
         super.onSaveInstanceState(outState)
-        outState?.putInt(LAST_VIEW_PAGER_POSITION, mVpTapeItems.currentItem)
+        outState?.putInt(LAST_VIEW_PAGER_POSITION, fmtViewPagerVpBody.currentItem)
     }
 
     override fun onViewStateRestored(savedInstanceState: Bundle?) {
@@ -65,6 +62,6 @@ class SettingsFragment : BaseFragment(), SettingsView {
 
     override fun loadOrdersFragments(data: List<ViewPagerItemContainer>) {
         mAdapter.loadData(data)
-        mVpTapeItems.currentItem = mLastViewPagerPosition
+        fmtViewPagerVpBody.currentItem = mLastViewPagerPosition
     }
 }

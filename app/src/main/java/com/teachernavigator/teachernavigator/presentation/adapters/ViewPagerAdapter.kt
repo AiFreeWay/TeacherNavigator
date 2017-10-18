@@ -23,11 +23,6 @@ class ViewPagerAdapter(fragmentManager: FragmentManager) : FragmentStatePagerAda
         notifyDataSetChanged()
     }
 
-    fun currentFragment(currentPosition: Int): Fragment? {
-        if (currentPosition > -1)
-            return getItem(currentPosition)
-        return null
-    }
 }
 
 

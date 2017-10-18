@@ -8,7 +8,6 @@ import com.teachernavigator.teachernavigator.presentation.models.ViewPagerItemCo
 import com.teachernavigator.teachernavigator.presentation.screens.common.BaseFragment
 import com.teachernavigator.teachernavigator.presentation.screens.main.fragments.abstractions.TapeView
 import com.teachernavigator.teachernavigator.presentation.screens.main.presenters.abstractions.ITapePresenter
-import com.teachernavigator.teachernavigator.presentation.utils.arg
 import com.teachernavigator.teachernavigator.presentation.utils.argNullable
 import kotlinx.android.synthetic.main.fmt_feed.*
 import javax.inject.Inject
@@ -45,11 +44,6 @@ class TapeFragment : BaseFragment(), TapeView {
         mPresenter.loadFragments(argNullable(POSTS_SOURCE_KEY))
     }
 
-    override fun onResume() {
-        super.onResume()
-
-    }
-
     override fun onDestroyView() {
         super.onDestroyView()
         mPresenter.detachView()
@@ -61,7 +55,7 @@ class TapeFragment : BaseFragment(), TapeView {
                 mPresenter.openPostSearchScreen()
             }
             R.id.action_refresh -> {
-                mPresenter.refresh(mAdapter.currentFragment(fmtFeedVpBody.currentItem))
+                mPresenter.refresh(childFragmentManager.findFragmentById(fmtFeedVpBody.id))
             }
         }
         return super.onOptionsItemSelected(item)

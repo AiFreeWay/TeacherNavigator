@@ -1,6 +1,7 @@
 package com.teachernavigator.teachernavigator.data.repository
 
 import android.content.Context
+import android.support.v4.util.SparseArrayCompat
 import android.text.TextUtils
 import com.teachernavigator.teachernavigator.R
 import com.teachernavigator.teachernavigator.data.cache.CacheController
@@ -18,6 +19,7 @@ import com.teachernavigator.teachernavigator.data.network.responses.SingInRespon
 import com.teachernavigator.teachernavigator.data.repository.abstractions.IMainRepository
 import com.teachernavigator.teachernavigator.data.utils.isPollPassed
 import com.teachernavigator.teachernavigator.data.utils.setPollPassed
+import com.teachernavigator.teachernavigator.domain.interactors.Filter
 import com.teachernavigator.teachernavigator.domain.models.*
 import com.teachernavigator.teachernavigator.presentation.models.Info
 import com.teachernavigator.teachernavigator.presentation.models.Specialist
@@ -31,6 +33,15 @@ import javax.inject.Inject
  */
 class MainRepository @Inject constructor(private val mNetwokController: NetworkController,
                                          private val mContext: Context) : IMainRepository {
+
+    override fun putFilter(pos: Int, filter: Filter) {
+        mFilters.put(pos, filter)
+    }
+
+    override fun getFilter(pos: Int): Filter? =
+            mFilters.get(pos)
+
+    private val mFilters: SparseArrayCompat<Filter> = SparseArrayCompat()
 
     @Suppress("CAST_NEVER_SUCCEEDS")
     override fun currentUserId(): Int =

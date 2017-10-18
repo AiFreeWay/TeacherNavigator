@@ -1,6 +1,5 @@
 package com.teachernavigator.teachernavigator.domain.interactors
 
-import android.util.Log.d
 import com.teachernavigator.teachernavigator.data.models.CommentNetwork
 import com.teachernavigator.teachernavigator.data.models.FileInfo
 import com.teachernavigator.teachernavigator.data.models.PostCommentNetwork
@@ -23,23 +22,32 @@ import javax.inject.Inject
  */
 class PostsInteractor @Inject constructor(private val mRepository: IPostsRepository) : IPostsInteractor {
 
-    override fun getPosts(postType: PostType, postsSource: PostsSource) = when (postType to postsSource) {
 
-        PostType.post to PostsSource.Common -> getLatestPosts()
-        PostType.post to PostsSource.Best -> getBestPosts()
-
-        PostType.poll to PostsSource.Common -> getPolls()
-        PostType.news to PostsSource.Common -> getNewsPosts()
-
-        PostType.post to PostsSource.Mine -> getMyPosts()
-
-        PostType.post to PostsSource.Saved -> getSavedPosts()
-        PostType.importantinfo to PostsSource.Saved -> getSavedImportantInfos()
-        PostType.poll to PostsSource.Saved -> getSavedPolls()
-        PostType.news to PostsSource.Saved -> getSavedNews()
-
-        else -> throw Error("Unknown Type")
+    override fun setSearch(source: PostsSource, text: CharSequence, publicationsContent: Pair<Boolean, Boolean>, searchTags: HashSet<String>) {
+        mRepository.putFilter(source.ordinal, Filter(text, publicationsContent, searchTags))
     }
+
+    override fun getFilter(source: PostsSource) = mRepository.getFilter(source.ordinal)
+
+    override fun getPosts(postType: PostType, postsSource: PostsSource) =
+            when (postType to postsSource) {
+
+                PostType.post to PostsSource.Common -> getLatestPosts()
+                PostType.post to PostsSource.Best -> getBestPosts()
+
+                PostType.poll to PostsSource.Common -> getPolls()
+                PostType.news to PostsSource.Common -> getNewsPosts()
+
+                PostType.post to PostsSource.Mine -> getMyPosts()
+
+                PostType.post to PostsSource.Saved -> getSavedPosts()
+                PostType.importantinfo to PostsSource.Saved -> getSavedImportantInfos()
+                PostType.poll to PostsSource.Saved -> getSavedPolls()
+                PostType.news to PostsSource.Saved -> getSavedNews()
+
+                else -> throw Error("Unknown Type")
+
+            }.map { list -> getFilter(postsSource)?.let { filter -> list.filter { filter(it) } } ?: list }
 
     override fun sendPost(title: String, text: String, tags: List<String>, fileInfo: FileInfo?): Single<PostNetwork> =
             mRepository.sendPost(title, text, tags, fileInfo)

@@ -8,6 +8,6 @@
     <string name="twitter_consumer_key">QTbNdYosYkffCFwoDpgxsy3DW</string>
     <string name="twitter_consumer_secret">EWK8xxcLJXpj6Mhd7jtPZUZSssKyvddyjTcU7yPUzMl8jvvlZB</string>
 
-    <string name="google_client_id">23933902730-ur30aegehjdj8iq479q9tksi7tc1e4kg.apps.googleusercontent.com</string>
+    <string name="google_server_client_id">23933902730-ur30aegehjdj8iq479q9tksi7tc1e4kg.apps.googleusercontent.com</string>
 
 </resources>

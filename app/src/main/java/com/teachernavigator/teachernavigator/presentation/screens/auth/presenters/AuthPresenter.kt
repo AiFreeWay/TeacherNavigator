@@ -14,7 +14,9 @@ import com.google.android.gms.auth.api.Auth
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.auth.api.signin.GoogleSignInResult
 import com.google.android.gms.common.ConnectionResult
+import com.google.android.gms.common.Scopes
 import com.google.android.gms.common.api.GoogleApiClient
+import com.google.android.gms.common.api.Scope
 import com.teachernavigator.teachernavigator.R
 import com.teachernavigator.teachernavigator.application.di.scopes.PerParentScreen
 import com.teachernavigator.teachernavigator.domain.interactors.abstractions.IAuthInteractor
@@ -59,16 +61,16 @@ constructor(val router: Router,
 
     private val googleApiClient by lazy {
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestProfile()
-// TODO Make It Proper! .requestScopes(Scope.)
-                .requestEmail()
-                .requestIdToken(mView!!.getContext().getString(R.string.google_client_id))
+                .requestScopes(Scope(Scopes.PLUS_ME), Scope(Scopes.PLUS_LOGIN))
+                .requestServerAuthCode(mView!!.getContext().getString(R.string.google_server_client_id), false)
                 .build()
 
         GoogleApiClient.Builder(mView!!.getContext())
                 .enableAutoManage(mView!!.getParentView().getActivity(), this)
                 .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
                 .build()
+
+
     }
 
     private val twitterAuthClient by lazy { TwitterAuthClient() }
@@ -165,8 +167,10 @@ constructor(val router: Router,
     /* G+ Success */
     fun handleSignInResult(result: GoogleSignInResult) {
 
-        result.signInAccount?.idToken?.let { singInViaGoogle(it) }
+        result.signInAccount?.serverAuthCode?.let { singInViaGoogle(it) }
 
+        d(javaClass.name, "-> result ->${result.signInAccount?.serverAuthCode}")
+        d(javaClass.name, "-> result ->${result.signInAccount?.id}")
         d(javaClass.name, "-> result ->${result.signInAccount?.displayName}")
         d(javaClass.name, "-> result ->${result.signInAccount?.familyName}")
     }

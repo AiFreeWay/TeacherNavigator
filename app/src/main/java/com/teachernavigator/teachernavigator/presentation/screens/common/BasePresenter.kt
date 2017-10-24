@@ -25,7 +25,7 @@ abstract class BasePresenter<V : BaseView> : LifecycleObserver, ViewAttacher<V> 
 
     override fun attachView(view: V) {
         mView = view
-        mView!!.lifecycle.addObserver(this)
+        mView?.lifecycle?.addObserver(this)
     }
 
     override fun detachView() {
@@ -41,7 +41,7 @@ abstract class BasePresenter<V : BaseView> : LifecycleObserver, ViewAttacher<V> 
         if (BuildConfig.DEBUG) Logger.logError(error)
 
         if ((error as? HttpException)?.code() == 401) {
-            CacheController.removeData(TOKEN_KEY)
+            CacheController.logout()
 
             ((mView as? ChildView)?.getParentView() ?: (mView as? ParentView))?.getActivity()?.let {
                 ActivityRouter.openActivityAndClosePrevent(it, AuthActivity::class.java)

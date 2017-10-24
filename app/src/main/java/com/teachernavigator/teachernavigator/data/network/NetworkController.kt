@@ -44,6 +44,7 @@ class NetworkController {
         public const val SERVER = "$HTTP$DOMAIN"
         private const val API_URL = "$SERVER/"
 
+        private const val ANDROID = "android"
 
         private const val MAX_PAGE_COUNT = 1000
     }
@@ -97,9 +98,10 @@ class NetworkController {
 
     // ------------------------------- Auth methods --------------------------------
 
-    fun singUp(request: SingUpRequest): Observable<BaseResponse> = mApiController.singUp(request)
+    fun singUp(request: SingUpRequest): Single
+    <BaseResponse> = mApiController.singUp(request)
 
-    fun singIn(request: SingInRequest): Observable<SingInResponse> = mApiController.singIn(request)
+    fun singIn(request: SingInRequest): Single<SingInResponse> = mApiController.singIn(request)
 
 
     fun convertToken(request: ConvertTokenRequest): Single<SingInResponse> =
@@ -251,6 +253,8 @@ class NetworkController {
     fun passPoll(accessToken: String, postId: Int, choiceId: Int): Single<BaseResponse> =
             mApiController.passPoll(accessToken, postId, choiceId)
 
+    fun updateFCMToken(accessToken: String, deviceName: String, fcmToken: String, deviceId: String, active: Boolean): Single<BaseResponse> =
+            mApiController.registerDevices(accessToken, deviceName, fcmToken, deviceId, active, ANDROID)
 
     fun getTags(accessToken: String): Single<List<Tag>> =
             Observable.range(1, MAX_PAGE_COUNT)

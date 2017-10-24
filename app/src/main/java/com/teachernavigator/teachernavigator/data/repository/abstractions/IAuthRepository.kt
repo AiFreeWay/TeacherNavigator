@@ -20,11 +20,12 @@ interface IAuthRepository {
     fun getTokenAsync(): Single<Token>
     fun isAuth(): Boolean
     fun saveToken(token: Token)
-    fun singInViaFacebook(request: ConvertTokenRequest): Single<SingInResponse>
+    fun singInViaSocials(request: ConvertTokenRequest): Single<SingInResponse>
     fun singInViaTwitter(): Observable<Monade>
-    fun singInViaGooglePlus(): Observable<Monade>
-    fun singIn(request: SingInRequest): Observable<SingInResponse>
-    fun singUp(request: SingUpRequest): Observable<BaseResponse>
+    fun singIn(request: SingInRequest): Single<SingInResponse>
+    fun singUp(request: SingUpRequest): Single<BaseResponse>
     fun restorePassword(request: RestorePasswordRequest): Single<BaseResponse>
     fun getAuthCredentials(): AuthCredentials
+
+    fun updateFCMToken()
 }

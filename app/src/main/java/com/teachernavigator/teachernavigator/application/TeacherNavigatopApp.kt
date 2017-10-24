@@ -7,6 +7,7 @@ import com.crashlytics.android.Crashlytics
 import com.example.root.androidtest.application.di.components.DaggerRootComponent
 import com.example.root.androidtest.application.di.components.RootComponent
 import com.example.root.androidtest.application.di.modules.RootModule
+import com.google.firebase.FirebaseApp
 import com.miguelbcr.ui.rx_paparazzo2.RxPaparazzo
 import com.orhanobut.hawk.Hawk
 import com.teachernavigator.teachernavigator.R
@@ -33,6 +34,7 @@ class TeacherNavigatopApp : MultiDexApplication() {
 
     override fun onCreate() {
         super.onCreate()
+        FirebaseApp.initializeApp(this)
         AppCompatDelegate.setCompatVectorFromResourcesEnabled(true)
         Hawk.init(this).build()
         Fabric.with(this, Crashlytics())

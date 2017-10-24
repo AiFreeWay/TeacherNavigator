@@ -15,7 +15,6 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.auth.api.signin.GoogleSignInResult
 import com.google.android.gms.common.ConnectionResult
 import com.google.android.gms.common.api.GoogleApiClient
-import com.google.android.gms.common.api.Scope
 import com.teachernavigator.teachernavigator.R
 import com.teachernavigator.teachernavigator.application.di.scopes.PerParentScreen
 import com.teachernavigator.teachernavigator.domain.interactors.abstractions.IAuthInteractor
@@ -61,7 +60,7 @@ constructor(val router: Router,
     private val googleApiClient by lazy {
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestProfile()
-//                .requestScopes(Scope.)
+// TODO Make It Proper! .requestScopes(Scope.)
                 .requestEmail()
                 .requestIdToken(mView!!.getContext().getString(R.string.google_client_id))
                 .build()
@@ -110,7 +109,6 @@ constructor(val router: Router,
             addDissposable(authInteractor.singInViaGoogle(token)
                     .doOnSubscribe { startProgress() }
                     .subscribe(this::doOnSingIn, this::doOnError))
-
 
     override fun doOnError(error: Throwable) {
         stopProgress()

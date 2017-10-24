@@ -13,6 +13,7 @@ import io.reactivex.Maybe
 import io.reactivex.Observable
 import io.reactivex.Single
 import okhttp3.RequestBody
+import retrofit2.Call
 import retrofit2.http.*
 
 /**
@@ -23,10 +24,11 @@ interface ApiController {
     // ------------------------------- Auth methods --------------------------------
 
     @POST("api/v0/sign_up/")
-    fun singUp(@Body request: SingUpRequest): Observable<BaseResponse>
+
+    fun singUp(@Body request: SingUpRequest): Single<BaseResponse>
 
     @POST("api/v0/sign_in/")
-    fun singIn(@Body request: SingInRequest): Observable<SingInResponse>
+    fun singIn(@Body request: SingInRequest): Single<SingInResponse>
 
     @POST("api/v0/socialauth/convert-token")
     fun convertToken(@Body request: ConvertTokenRequest): Single<SingInResponse>
@@ -225,6 +227,15 @@ interface ApiController {
     @FormUrlEncoded
     @POST("/api/v0/polls/action/")
     fun passPoll(@Header("Authorization") accessToken: String, @Field("question") postId: Int, @Field("choice") choiceId: Int): Single<BaseResponse>
+
+    @FormUrlEncoded
+    @POST("/api/v0/devices")
+    fun registerDevices(@Header("Authorization") accessToken: String,
+                        @Field("name") deviceName: String,
+                        @Field("registration_id") fcmToken: String,
+                        @Field("device_id") deviceId: String,
+                        @Field("active") active: Boolean,
+                        @Field("type") android: String): Single<BaseResponse>
 
 
 }

@@ -15,14 +15,12 @@ interface IAuthInteractor {
     fun singInViaGoogle(token: String): Single<Monade>
     fun singInViaVk(token: String): Single<Monade>
     fun singInViaFacebook(token: String): Single<Monade>
-
     fun singInViaTwitter(token: String): Single<Monade>
 
-    fun singInViaGooglePlus(): Observable<Monade>
-    fun singIn(login: String, password: String): Observable<Monade>
-
-
-    fun singUp(singUpData: SingUpData): Observable<Monade>
+    fun singIn(login: String, password: String): Single<Monade>
+    fun singUp(singUpData: SingUpData): Single<Monade>
 
     fun restorePassword(email: String, phone: String): Single<Monade>
+
+    fun updateFCMToken()
 }

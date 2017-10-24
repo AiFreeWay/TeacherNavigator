@@ -1,7 +1,9 @@
 {
   "project_info": {
     "project_number": "23933902730",
-    "project_id": "youngteacherss"
+    "firebase_url": "https://youngteacherss.firebaseio.com",
+    "project_id": "youngteacherss",
+    "storage_bucket": "youngteacherss.appspot.com"
   },
   "client": [
     {
@@ -12,6 +14,18 @@
         }
       },
       "oauth_client": [
+        {
+          "client_id": "23933902730-69vejuv6tomgtpgpd2rii65k28oh8t35.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.teachernavigator.teachernavigator",
+            "certificate_hash": "a7223068e2ea3ac4e497af44d2aa5b27d0302726"
+          }
+        },
+        {
+          "client_id": "23933902730-jbim4dtas8fn29c4plkul7f8q8uj40kv.apps.googleusercontent.com",
+          "client_type": 3
+        },
         {
           "client_id": "23933902730-bhlrp8dd9d7nljj3agliv90ufb678jc6.apps.googleusercontent.com",
           "client_type": 1,
@@ -35,11 +49,16 @@
           "status": 1
         },
         "appinvite_service": {
-          "status": 1,
-          "other_platform_oauth_client": []
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "23933902730-jbim4dtas8fn29c4plkul7f8q8uj40kv.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         },
         "ads_service": {
-          "status": 1
+          "status": 2
         }
       }
     }

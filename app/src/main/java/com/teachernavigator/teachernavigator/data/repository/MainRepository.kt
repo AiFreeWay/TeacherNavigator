@@ -1,8 +1,10 @@
 package com.teachernavigator.teachernavigator.data.repository
 
 import android.content.Context
+import android.os.Build
 import android.support.v4.util.SparseArrayCompat
 import android.text.TextUtils
+import com.google.firebase.iid.FirebaseInstanceId
 import com.teachernavigator.teachernavigator.R
 import com.teachernavigator.teachernavigator.data.cache.CacheController
 import com.teachernavigator.teachernavigator.data.cache.CacheController.Companion.USER_KEY
@@ -34,8 +36,8 @@ import javax.inject.Inject
 class MainRepository @Inject constructor(private val mNetwokController: NetworkController,
                                          private val mContext: Context) : IMainRepository {
 
-    override fun putFilter(pos: Int, filter: Filter) {
-        mFilters.put(pos, filter)
+    override fun putFilter(ordinal: Int, filter: Filter) {
+        mFilters.put(ordinal, filter)
     }
 
     override fun getFilter(pos: Int): Filter? =
@@ -73,17 +75,15 @@ class MainRepository @Inject constructor(private val mNetwokController: NetworkC
         CacheController.putData(CacheController.TOKEN_KEY, token)
     }
 
-    override fun singInViaFacebook(request: ConvertTokenRequest): Single<SingInResponse> =
+    override fun singInViaSocials(request: ConvertTokenRequest): Single<SingInResponse> =
             mNetwokController.convertToken(request)
 
     override fun singInViaTwitter(): Observable<Monade> = Observable.just(Monade(false))
 
-    override fun singInViaGooglePlus(): Observable<Monade> = Observable.just(Monade(false))
-
-    override fun singIn(request: SingInRequest): Observable<SingInResponse> =
+    override fun singIn(request: SingInRequest): Single<SingInResponse> =
             mNetwokController.singIn(request)
 
-    override fun singUp(request: SingUpRequest): Observable<BaseResponse> =
+    override fun singUp(request: SingUpRequest): Single<BaseResponse> =
             mNetwokController.singUp(request)
 
     override fun getAuthCredentials(): AuthCredentials {
@@ -94,6 +94,13 @@ class MainRepository @Inject constructor(private val mNetwokController: NetworkC
 
     override fun restorePassword(request: RestorePasswordRequest): Single<BaseResponse> =
             mNetwokController.restorePassword(request)
+
+    override fun updateFCMToken() {
+        mNetwokController.updateFCMToken(getAccessToken(), deviceName, fcmToken, deviceId, CacheController.isPushEnabled())
+                .subscribe { _, throwable ->
+                    throwable?.printStackTrace()
+                }
+    }
 
     // ------------------------------- Posts methods --------------------------------
 
@@ -136,8 +143,8 @@ class MainRepository @Inject constructor(private val mNetwokController: NetworkC
     override fun comment(request: CommentRequest): Single<CommentNetwork> =
             mNetwokController.comment(getAccessToken(), request)
 
-    override fun subscribe(userId: Int): Single<BaseResponse> =
-            mNetwokController.subscribe(getAccessToken(), SubscribeRequest(userId))
+    override fun subscribe(authorId: Int): Single<BaseResponse> =
+            mNetwokController.subscribe(getAccessToken(), SubscribeRequest(authorId))
                     .applySchedulers()
 
     override fun vote(postId: Int, isLike: Boolean, type: PostType): Single<BaseResponse> =
@@ -177,7 +184,7 @@ class MainRepository @Inject constructor(private val mNetwokController: NetworkC
 
     override fun passPoll(postId: Int, choiceId: Int) =
             mNetwokController.passPoll(getAccessToken(), postId, choiceId)
-                    .doOnSuccess { if (!it.is_error) mContext.setPollPassed(postId) }
+                    .doOnSuccess { if (!it.is_error) mContext.setPollPassed(postId) }!!
 
     override fun getTags(): Single<List<Tag>> =
             mNetwokController.getTags(getAccessToken())
@@ -269,6 +276,16 @@ class MainRepository @Inject constructor(private val mNetwokController: NetworkC
     override fun isPollPassed(id: Int) = mContext.isPollPassed(id)
 
     override fun sedPollPassed(id: Int) = mContext.setPollPassed(id)
+
+
+    private val deviceName: String
+        get() = "${Build.DEVICE}_${Build.MANUFACTURER}_${Build.MODEL}"
+
+    private val fcmToken: String
+        get() = FirebaseInstanceId.getInstance().token ?: ""
+
+    private val deviceId: String
+        get() = CacheController.getDeviceId()
 
 
 }

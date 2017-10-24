@@ -169,6 +169,7 @@ class ProfileFragment : BaseFragment(), ProfileView {
                 .setTitle(getString(R.string.you_want_exit))
                 .setPositiveButton(R.string.yes, { a, b ->
                     presenter.exit()
+                    getParentView().updateToolbarAlpha(1F)
                     a.dismiss()
                 })
                 .setNegativeButton(R.string.no, { a, b -> a.dismiss() })

@@ -5,10 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.teachernavigator.teachernavigator.R
-import com.teachernavigator.teachernavigator.application.di.components.DaggerParentScreenComponent
-import com.teachernavigator.teachernavigator.application.di.components.ParentScreenComponent
-import com.teachernavigator.teachernavigator.application.di.modules.ParentScreenModule
-import com.teachernavigator.teachernavigator.application.utils.rootComponent
 import com.teachernavigator.teachernavigator.presentation.models.Specialist
 import com.teachernavigator.teachernavigator.presentation.screens.common.BaseFragment
 import com.teachernavigator.teachernavigator.presentation.screens.info.fragments.abstractions.AskSpecialistView
@@ -42,7 +38,12 @@ class AskSpecialistFragment : BaseFragment(), AskSpecialistView {
         super.onActivityCreated(savedInstanceState)
         mParentScreenComponent.inject(this)
         askSpecialistPresenter.attachView(this)
-        askSpecialistPresenter.specialist = Specialist.values().getOrNull(arguments.getInt(SPECIALIST_KEY))
+        val specialist = Specialist.values().getOrNull(arguments.getInt(SPECIALIST_KEY))
+        askQuestionTvAskQuestion.text =
+                getString(R.string.ask_question_to_f,
+                        getString(if (specialist == Specialist.experienced) R.string.to_experienced else R.string.to_specialist))
+
+        askSpecialistPresenter.specialist = specialist
     }
 
     override fun cleanField() {

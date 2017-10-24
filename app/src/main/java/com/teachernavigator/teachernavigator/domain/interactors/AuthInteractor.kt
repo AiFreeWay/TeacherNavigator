@@ -8,6 +8,7 @@ import com.teachernavigator.teachernavigator.domain.mappers.AuthMapper
 import com.teachernavigator.teachernavigator.domain.mappers.BaseMapper
 import com.teachernavigator.teachernavigator.domain.models.Monade
 import com.teachernavigator.teachernavigator.domain.models.SingUpData
+import com.teachernavigator.teachernavigator.presentation.utils.applySchedulers
 import io.reactivex.Observable
 import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -25,22 +26,25 @@ class AuthInteractor @Inject constructor(private val mRepository: IAuthRepositor
                     .subscribeOn(Schedulers.newThread())
                     .map { it.isExists() }
 
-    override fun singInViaVkontakte(): Observable<Monade> =
-            mRepository.singInViaVkontakte()
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribeOn(Schedulers.newThread())
-
     override fun singInViaFacebook(token: String): Single<Monade> =
             mRepository.singInViaFacebook(AuthMapper.mapConvertTokenRequest(token, "facebook", mRepository.getAuthCredentials()))
                     .map { mapSingInResponse(it) }
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribeOn(Schedulers.newThread())
+                    .applySchedulers()
+
+    override fun singInViaGoogle(token: String): Single<Monade> =
+            mRepository.singInViaFacebook(AuthMapper.mapConvertTokenRequest(token, "google-oauth2", mRepository.getAuthCredentials()))
+                    .map { mapSingInResponse(it) }
+                    .applySchedulers()
+
+    override fun singInViaVk(token: String): Single<Monade> =
+            mRepository.singInViaFacebook(AuthMapper.mapConvertTokenRequest(token, "vk-oauth2", mRepository.getAuthCredentials()))
+                    .map { mapSingInResponse(it) }
+                    .applySchedulers()
 
     override fun singInViaTwitter(token: String): Single<Monade> =
             mRepository.singInViaFacebook(AuthMapper.mapConvertTokenRequest(token, "twitter", mRepository.getAuthCredentials()))
                     .map { mapSingInResponse(it) }
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribeOn(Schedulers.newThread())
+                    .applySchedulers()
 
     override fun singInViaGooglePlus(): Observable<Monade> =
             mRepository.singInViaGooglePlus()

@@ -50,7 +50,7 @@
             android:background="?android:attr/selectableItemBackground"
             tools:drawableRight="@drawable/ic_resume"
             android:gravity="center_vertical|start"
-            android:text="@string/download_resume"
+            android:text=""
             app:layout_constraintLeft_toLeftOf="@+id/vResponseTvTimeAgo"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/vResponseIvAvatar" />

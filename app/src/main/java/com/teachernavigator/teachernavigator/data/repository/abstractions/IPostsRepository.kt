@@ -29,6 +29,8 @@ interface IPostsRepository {
     fun getSavedImportantInfos(): Single<PostsResponse>
     fun getSavedPolls(): Single<PostsResponse>
     fun getSavedNews(): Single<PostsResponse>
+    fun getQuestionAnswerPosts(): Single<PostsResponse>
+    fun getAdvicesPosts(): Single<PostsResponse>
     fun getMyPosts(): Single<BaseListResponse<PostNetwork>>
     fun getUserPost(userId: Int): Single<BaseListResponse<PostNetwork>>
 

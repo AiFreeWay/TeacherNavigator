@@ -38,8 +38,9 @@ class SupportFragment : BaseFragment(), SupportView {
         fmtSupportTvEconomist.setOnClickListener { supportPresenter.openEconomist() }
         fmtSupportTvMethodist.setOnClickListener { supportPresenter.openMethodist() }
         fmtSupportTvPsychologist.setOnClickListener { supportPresenter.openPsychologist() }
-        fmtSupportBtnAnswerQuestion.setOnClickListener { notImplemented() }
-        fmtSupportBtnAdvises.setOnClickListener { notImplemented() }
+
+        fmtSupportBtnAnswerQuestion.setOnClickListener { supportPresenter.openAnswerQuestion() }
+        fmtSupportBtnAdvises.setOnClickListener { supportPresenter.openAdvises() }
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {

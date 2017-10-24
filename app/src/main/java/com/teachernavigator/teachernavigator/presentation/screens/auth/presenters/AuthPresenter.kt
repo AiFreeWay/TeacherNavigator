@@ -15,6 +15,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.auth.api.signin.GoogleSignInResult
 import com.google.android.gms.common.ConnectionResult
 import com.google.android.gms.common.api.GoogleApiClient
+import com.google.android.gms.common.api.Scope
 import com.teachernavigator.teachernavigator.R
 import com.teachernavigator.teachernavigator.application.di.scopes.PerParentScreen
 import com.teachernavigator.teachernavigator.domain.interactors.abstractions.IAuthInteractor
@@ -60,8 +61,9 @@ constructor(val router: Router,
     private val googleApiClient by lazy {
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestProfile()
-                .requestIdToken(mView!!.getContext().getString(R.string.google_client_id))
+//                .requestScopes(Scope.)
                 .requestEmail()
+                .requestIdToken(mView!!.getContext().getString(R.string.google_client_id))
                 .build()
 
         GoogleApiClient.Builder(mView!!.getContext())
@@ -99,14 +101,24 @@ constructor(val router: Router,
                     .doOnSubscribe { startProgress() }
                     .subscribe(this::doOnSingIn, this::doOnError))
 
+    private fun singInViaVkToken(token: String) =
+            addDissposable(authInteractor.singInViaVk(token)
+                    .doOnSubscribe { startProgress() }
+                    .subscribe(this::doOnSingIn, this::doOnError))
+
+    private fun singInViaGoogle(token: String) =
+            addDissposable(authInteractor.singInViaGoogle(token)
+                    .doOnSubscribe { startProgress() }
+                    .subscribe(this::doOnSingIn, this::doOnError))
+
 
     override fun doOnError(error: Throwable) {
         stopProgress()
         mView?.showToast(getContext().getString(R.string.auth_error))
     }
 
-    override fun singInViaVkontakte() {
-        VKSdk.login(mView!!.getParentView().getActivity(), "email", "sex")
+    override fun singInViaVkontakte() = mView?.let {
+        VKSdk.login(it.getParentView().getActivity(), "email", "sex", "profile")
     }
 
     override fun singInViaFacebook(fmt: Fragment) = LoginManager.getInstance().let {
@@ -154,8 +166,11 @@ constructor(val router: Router,
 
     /* G+ Success */
     fun handleSignInResult(result: GoogleSignInResult) {
+
+        result.signInAccount?.idToken?.let { singInViaGoogle(it) }
+
         d(javaClass.name, "-> result ->${result.signInAccount?.displayName}")
-        d(javaClass.name, "-> result ->${result.signInAccount?.idToken}")
+        d(javaClass.name, "-> result ->${result.signInAccount?.familyName}")
     }
 
     /* Fb Success */
@@ -167,39 +182,19 @@ constructor(val router: Router,
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
 
 
-//        if (!VKSdk.onActivityResult(requestCode, resultCode, data, object : VKCallback<VKAccessToken> {
-//
-//            override fun onError(error: VKError?) {
-//                if (error != null) {
-//
-//                    d(javaClass.name, "-> onError -> ${error.errorMessage}")
-//                }
-//            }
-//
-//            override fun onResult(res: VKAccessToken?) {
-//                d(javaClass.name, "-> onResult -> ${res?.accessToken ?: " no token"}")
-//            }
-//
-//        })) else {
         when (requestCode) {
-            RC_SIGN_IN -> {
-                val result = Auth.GoogleSignInApi.getSignInResultFromIntent(data)
-                handleSignInResult(result)
-            }
+            RC_SIGN_IN -> handleSignInResult(Auth.GoogleSignInApi.getSignInResultFromIntent(data))
             twitterAuthClient.requestCode -> twitterAuthClient.onActivityResult(requestCode, resultCode, data)
             else -> if (!callbackManager.onActivityResult(requestCode, resultCode, data)) {
 
                 VKSdk.onActivityResult(requestCode, resultCode, data, object : VKCallback<VKAccessToken> {
 
                     override fun onError(error: VKError?) {
-                        if (error != null) {
-
-                            d(javaClass.name, "-> onError -> ${error.errorMessage}")
-                        }
+                        this@AuthPresenter.doOnError(Error(error?.errorMessage ?: "Unknown error"))
                     }
 
                     override fun onResult(res: VKAccessToken?) {
-                        d(javaClass.name, "-> onResult -> ${res?.accessToken ?: " no token"}")
+                        res?.let { singInViaVkToken(it.accessToken) }
                     }
 
                 })

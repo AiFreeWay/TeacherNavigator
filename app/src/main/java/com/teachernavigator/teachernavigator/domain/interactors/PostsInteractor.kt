@@ -1,5 +1,6 @@
 package com.teachernavigator.teachernavigator.domain.interactors
 
+import com.teachernavigator.teachernavigator.R
 import com.teachernavigator.teachernavigator.data.models.CommentNetwork
 import com.teachernavigator.teachernavigator.data.models.FileInfo
 import com.teachernavigator.teachernavigator.data.models.PostCommentNetwork
@@ -45,24 +46,25 @@ class PostsInteractor @Inject constructor(private val mRepository: IPostsReposit
                 PostType.poll to PostsSource.Saved -> getSavedPolls()
                 PostType.news to PostsSource.Saved -> getSavedNews()
 
+                PostType.post to PostsSource.Advice -> getQuestionAnswerPosts()
+                PostType.importantinfo to PostsSource.Advice -> getInfoPosts(Info.ADVISE)
+
                 else -> throw Error("Unknown Type")
 
             }.map { list -> getFilter(postsSource)?.let { filter -> list.filter { filter(it) } } ?: list }
 
+
     override fun sendPost(title: String, text: String, tags: List<String>, fileInfo: FileInfo?): Single<PostNetwork> =
             mRepository.sendPost(title, text, tags, fileInfo)
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribeOn(Schedulers.newThread())
+                    .applySchedulers()
 
     override fun getTrends(): Single<List<Tag>> =
             mRepository.getTrends()
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribeOn(Schedulers.newThread())
+                    .applySchedulers()
 
     override fun getTags(): Single<List<Tag>> =
             mRepository.getTags()
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribeOn(Schedulers.newThread())
+                    .applySchedulers()
 
     override fun getPost(postId: Int, postType: PostType): Single<PostNetwork> =
             mRepository.getPost(postId, postType)
@@ -70,14 +72,12 @@ class PostsInteractor @Inject constructor(private val mRepository: IPostsReposit
 
     override fun sendComment(postId: Int, postType: PostType, text: String): Single<CommentNetwork> =
             mRepository.comment(CommentRequest.build(postId, postType, text))
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribeOn(Schedulers.newThread())
+                    .applySchedulers()
 
     override fun getInfoPosts(currentTheme: Info): Single<List<PostNetwork>> =
             mRepository.getInfoPosts(currentTheme)
                     .map { it.results }
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribeOn(Schedulers.newThread())
+                    .applySchedulers()
 
     override fun getPolls(): Single<List<PostNetwork>> =
             mRepository.getPolls()
@@ -116,6 +116,16 @@ class PostsInteractor @Inject constructor(private val mRepository: IPostsReposit
 
     private fun getSavedNews(): Single<List<PostNetwork>> =
             mRepository.getSavedNews()
+                    .map { it.results }
+                    .applySchedulers()
+
+    private fun getQuestionAnswerPosts(): Single<List<PostNetwork>> =
+            mRepository.getQuestionAnswerPosts()
+                    .map { it.results }
+                    .applySchedulers()
+
+    private fun getAdvicesPosts(): Single<List<PostNetwork>> =
+            mRepository.getAdvicesPosts()
                     .map { it.results }
                     .applySchedulers()
 

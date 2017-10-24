@@ -11,6 +11,7 @@ import com.teachernavigator.teachernavigator.presentation.screens.jobs.fragments
 import com.teachernavigator.teachernavigator.presentation.screens.jobs.presenters.abstractions.IResumeListPresetner
 import com.teachernavigator.teachernavigator.presentation.transformers.ResumeTransformer
 import com.teachernavigator.teachernavigator.presentation.transformers.transformListEntity
+import com.teachernavigator.teachernavigator.presentation.utils.openUrl
 import ru.terrakok.cicerone.Router
 import javax.inject.Inject
 
@@ -18,7 +19,7 @@ import javax.inject.Inject
  * Created by lliepmah on 27.09.17
  */
 @PerParentScreen
-class ResumeListPresetner
+class ResumeListPresenter
 @Inject constructor(val router: Router,
                     private val resumeTransformer: ResumeTransformer,
                     private val jobsInteractor: IJobInteractor) : BasePresenter<ResumeListView>(), IResumeListPresetner {
@@ -31,6 +32,10 @@ class ResumeListPresetner
 
     override fun refresh() {
         loadResumeList()
+    }
+
+    override fun openResume(resume: String) {
+        mView?.openUrl(resume)
     }
 
     private fun loadResumeList() =

@@ -107,7 +107,8 @@ class AcMainPresenter : BasePresenter<MainView>(), IMainPresenter {
             MenuItemsFactory.MenuItemTypes.MY_PUBLICATION.id -> toPostsFragment(PostsSource.Mine)
 
             MenuItemsFactory.MenuItemTypes.LOGIN.id -> ActivityRouter.openActivityAndClosePrevent(mView!!.getActivity(), AuthActivity::class.java)
-            MenuItemsFactory.MenuItemTypes.SETTINGS.id -> toFragment(SettingsFragment.FRAGMENT_KEY)
+//            MenuItemsFactory.MenuItemTypes.SETTINGS.id -> toFragment(SettingsFragment.FRAGMENT_KEY)
+            MenuItemsFactory.MenuItemTypes.SETTINGS.id -> mView?.notImplemented()
             MenuItemsFactory.MenuItemTypes.BANK_OF_VACANCY.id -> toFragment(JobsBankFragment.FRAGMENT_KEY)
             MenuItemsFactory.MenuItemTypes.IMPORTANT_TO_KNOW.id -> toFragment(ImportantToKnowFragment.FRAGMENT_KEY)
             MenuItemsFactory.MenuItemTypes.SUPPORT.id -> toFragment(SupportFragment.FRAGMENT_KEY)

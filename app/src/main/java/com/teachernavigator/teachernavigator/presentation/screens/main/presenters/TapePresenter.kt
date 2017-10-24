@@ -34,6 +34,7 @@ class TapePresenter
             PostsSource.Mine -> R.string.my_publication
             PostsSource.Saved -> R.string.saved
             PostsSource.Best -> R.string.news_feed
+            PostsSource.Advice -> R.string.advises
         }
         mView?.getParentView()?.setToolbarTitle(title)
     }

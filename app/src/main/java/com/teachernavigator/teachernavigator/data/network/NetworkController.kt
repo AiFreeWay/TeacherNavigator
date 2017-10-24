@@ -139,6 +139,8 @@ class NetworkController {
     fun getSavedImportantInfos(token: String): Single<PostsResponse> = mApiController.getSavedImportantInfos(token)
     fun getSavedPolls(token: String): Single<PostsResponse> = mApiController.getSavedPolls(token)
     fun getSavedNews(token: String): Single<PostsResponse> = mApiController.getSavedNews(token)
+    fun getQuestionAnswerPosts(token: String): Single<PostsResponse> = mApiController.getQuestionAnswerPosts(token)
+    fun getAdvicesPosts(token: String): Single<PostsResponse> = mApiController.getAdvicesPosts(token)
 
     fun getMyPosts(token: String): Single<BaseListResponse<PostNetwork>> = mApiController.getMyPosts(token)
 

@@ -17,6 +17,7 @@ import com.teachernavigator.teachernavigator.presentation.screens.auth.activitie
 import com.teachernavigator.teachernavigator.presentation.screens.auth.fragments.abstractions.RegistrationView
 import com.teachernavigator.teachernavigator.presentation.screens.auth.presenters.abstractions.IRegistrationPresenter
 import com.teachernavigator.teachernavigator.presentation.screens.common.BasePresenter
+import com.teachernavigator.teachernavigator.presentation.screens.main.fragments.AgreementFragment
 import com.teachernavigator.teachernavigator.presentation.utils.DialogUtils
 import com.teachernavigator.teachernavigator.presentation.utils.formatDisplayDate
 import com.teachernavigator.teachernavigator.presentation.utils.formatServerDate
@@ -35,6 +36,10 @@ class RegistrationPresenter
 @Inject
 constructor(private val router: Router,
             private val authInteractor: IAuthInteractor) : BasePresenter<RegistrationView>(), IRegistrationPresenter {
+
+    override fun openAgreement() {
+        router.navigateTo(AgreementFragment.FRAGMENT_KEY)
+    }
 
     private var mBirthDate: Date? = Date()
     private var mExperience = 0

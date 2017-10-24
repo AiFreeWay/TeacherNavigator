@@ -35,9 +35,12 @@ class AuthFragment : BaseFragment(), AuthView {
         presenter.attachView(this)
 
         fmtAuthIvVk.setOnClickListener { presenter.singInViaVkontakte() }
+//        fmtAuthIvVk.setOnClickListener { notImplemented() }
         fmtAuthIvFb.setOnClickListener { presenter.singInViaFacebook(this) }
         fmtAuthIvTw.setOnClickListener { presenter.singInViaTwitter() }
+//        fmtAuthIvTw.setOnClickListener { notImplemented() }
         fmtAuthIvGp.setOnClickListener { presenter.singInViaGooglePlus() }
+//        fmtAuthIvGp.setOnClickListener { notImplemented() }
         fmtAuthTvRestorePassword.setOnClickListener { presenter.openRestorePasswordScreen() }
         fmtAuthBtnSingIn.setOnClickListener {
             if (checkLoginFields()) {

@@ -28,7 +28,7 @@ class MyResumeFragment : BaseFragment(), MyResumeView {
     lateinit var myResumePresenter: IMyResumePresenter
 
     val adapter: UniversalAdapter by lazy {
-        UniversalAdapter(ResumeHolderBuilder(true, myResumePresenter::onProlong, myResumePresenter::onDelete))
+        UniversalAdapter(ResumeHolderBuilder(true, myResumePresenter::onProlong, myResumePresenter::onDelete, myResumePresenter::openResume))
     }
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? =

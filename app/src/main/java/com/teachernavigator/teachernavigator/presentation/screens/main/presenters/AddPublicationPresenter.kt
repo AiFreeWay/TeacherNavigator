@@ -9,12 +9,11 @@ import com.teachernavigator.teachernavigator.application.di.scopes.PerParentScre
 import com.teachernavigator.teachernavigator.data.models.FileInfo
 import com.teachernavigator.teachernavigator.data.models.PostNetwork
 import com.teachernavigator.teachernavigator.domain.interactors.abstractions.IPostsInteractor
-import com.teachernavigator.teachernavigator.domain.models.Post
 import com.teachernavigator.teachernavigator.domain.models.Tag
 import com.teachernavigator.teachernavigator.presentation.screens.common.BasePresenter
+import com.teachernavigator.teachernavigator.presentation.screens.main.fragments.PreviewFragment
 import com.teachernavigator.teachernavigator.presentation.screens.main.fragments.abstractions.AddPublicationView
 import com.teachernavigator.teachernavigator.presentation.screens.main.presenters.abstractions.IAddPublicationPresenter
-import com.teachernavigator.teachernavigator.presentation.utils.ActivityRouter
 import io.reactivex.Single
 import ru.terrakok.cicerone.Router
 import java.io.File
@@ -62,7 +61,14 @@ class AddPublicationPresenter
     }
 
     override fun preview(title: CharSequence, text: CharSequence) = validateAndPerform(title, text) {
-        TODO("Not Impl.")
+
+        val bundle = Bundle()
+        bundle.putString(PreviewFragment.KEY_TITLE, title.toString())
+        bundle.putString(PreviewFragment.KEY_TEXT, text.toString())
+        bundle.putString(PreviewFragment.KEY_FILE, fileInfo?.fileName)
+        bundle.putStringArrayList(PreviewFragment.KEY_TAGS, ArrayList(mPublicationTags.toList()))
+        router.navigateTo(PreviewFragment.FRAGMENT_KEY, bundle)
+
     } ?: Unit
 
     override fun addTag(tag: CharSequence) {

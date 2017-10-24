@@ -14,4 +14,5 @@ interface IRegistrationPresenter : ViewAttacher<RegistrationView> {
 
     fun pickDate(): Unit?
     fun pickExperience(): Unit?
+    fun openAgreement()
 }

@@ -17,8 +17,8 @@ constructor(private val postsRepository: IPostsRepository) : EntityTransformer<P
 
 
     override fun transform(from: Profile): ProfileModel {
-        val likes = from.raiting?.firstOrNull()?.count_likes ?: 0
-        val dislikes = from.raiting?.firstOrNull()?.count_dislikes ?: 0
+        val likes = from.count_likes ?: 0
+        val dislikes = from.count_dislikes ?: 0
         val rating = (likes + dislikes) * 0.5F
 
         return ProfileModel(

@@ -14,7 +14,6 @@ import com.teachernavigator.teachernavigator.presentation.screens.tape.fragments
 import com.teachernavigator.teachernavigator.presentation.screens.tape.presenters.abstractions.IPostsListPresenter
 import com.teachernavigator.teachernavigator.presentation.transformers.PostTransformerFactory
 import com.teachernavigator.teachernavigator.presentation.transformers.transformListEntity
-import com.teachernavigator.teachernavigator.presentation.utils.isNullOrEmpty
 import ru.terrakok.cicerone.Router
 import javax.inject.Inject
 
@@ -49,10 +48,16 @@ constructor(val router: Router,
 
         if (mPostsSource == PostsSource.Mine) {
             mView?.getParentView()?.setToolbarTitle(R.string.my_publication)
+        } else if (mPostsSource == PostsSource.Advice) {
+            if (PostType.post == mPostType) {
+                mView?.getParentView()?.setToolbarTitle(R.string.answer_question)
+            } else {
+                mView?.getParentView()?.setToolbarTitle(R.string.advises)
+            }
         }
 
 //        if (mPosts.isNullOrEmpty()) {
-            refresh()
+        refresh()
 //        }
     }
 

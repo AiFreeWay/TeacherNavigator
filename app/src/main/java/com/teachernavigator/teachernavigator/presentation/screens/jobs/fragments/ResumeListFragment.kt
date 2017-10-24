@@ -28,7 +28,7 @@ class ResumeListFragment : BaseFragment(), ResumeListView {
     lateinit var resumeListPresetner: IResumeListPresetner
 
     val adapter: UniversalAdapter by lazy {
-        UniversalAdapter(ResumeHolderBuilder(false, null, null))
+        UniversalAdapter(ResumeHolderBuilder(false, null, null, resumeListPresetner::openResume))
     }
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? =

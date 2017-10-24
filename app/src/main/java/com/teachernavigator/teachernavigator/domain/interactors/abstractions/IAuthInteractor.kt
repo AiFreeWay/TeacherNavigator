@@ -12,9 +12,12 @@ interface IAuthInteractor {
 
     fun isAuthAsync(): Single<Boolean>
 
-    fun singInViaVkontakte(): Observable<Monade>
-    fun singInViaTwitter(token: String): Single<Monade>
+    fun singInViaGoogle(token: String): Single<Monade>
+    fun singInViaVk(token: String): Single<Monade>
     fun singInViaFacebook(token: String): Single<Monade>
+
+    fun singInViaTwitter(token: String): Single<Monade>
+
     fun singInViaGooglePlus(): Observable<Monade>
     fun singIn(login: String, password: String): Observable<Monade>
 

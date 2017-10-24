@@ -9,4 +9,5 @@ import com.teachernavigator.teachernavigator.presentation.screens.jobs.fragments
 interface IResumeListPresetner : ViewAttacher<ResumeListView> {
 
     fun refresh()
+    fun openResume(resume: String)
 }

@@ -18,7 +18,7 @@ data class ResumeModel(
         val created: Date,
         val expired: Date,
 
-        val file: Any?,
+        val file: String?,
 
         val userName: String,
         val userAvatar: String,

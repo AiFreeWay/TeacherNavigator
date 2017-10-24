@@ -58,6 +58,8 @@ class RegistrationFragment : BaseFragment(), RegistrationView {
 
         fmtRegistrationEtPhone.addTextChangedListener(phoneListener)
         fmtRegistrationEtPhone.onFocusChangeListener = phoneListener
+
+        fmtRegistrationTvAgreement.setOnClickListener { presenter.openAgreement() }
     }
 
     private fun signUp() {

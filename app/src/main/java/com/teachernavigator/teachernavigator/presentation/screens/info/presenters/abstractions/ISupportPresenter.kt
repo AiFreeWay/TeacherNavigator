@@ -13,5 +13,7 @@ interface ISupportPresenter : ViewAttacher<SupportView> {
     fun openLabourProtection()
     fun openMethodist()
     fun openPsychologist()
+    fun openAnswerQuestion()
+    fun openAdvises()
 
 }

@@ -34,7 +34,8 @@ class ImportantToKnowPresenter
 
     override fun attachView(view: ImportantToKnowView) {
         super.attachView(view)
-        view.setThemes(Info.values().asList())
+        val infoThemes = Info.values().filter { it.visible }
+        view.setThemes(infoThemes)
     }
 
     private fun loadPosts() = currentTheme?.let {

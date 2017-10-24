@@ -73,8 +73,6 @@ class MainRepository @Inject constructor(private val mNetwokController: NetworkC
         CacheController.putData(CacheController.TOKEN_KEY, token)
     }
 
-    override fun singInViaVkontakte(): Observable<Monade> = Observable.just(Monade(false))
-
     override fun singInViaFacebook(request: ConvertTokenRequest): Single<SingInResponse> =
             mNetwokController.convertToken(request)
 
@@ -125,6 +123,12 @@ class MainRepository @Inject constructor(private val mNetwokController: NetworkC
 
     override fun getSavedNews(): Single<PostsResponse>
             = mNetwokController.getSavedNews(getAccessToken())
+
+    override fun getQuestionAnswerPosts(): Single<PostsResponse>
+            = mNetwokController.getQuestionAnswerPosts(getAccessToken())
+
+    override fun getAdvicesPosts(): Single<PostsResponse>
+            = mNetwokController.getAdvicesPosts(getAccessToken())
 
     override fun getMyPosts(): Single<BaseListResponse<PostNetwork>>
             = mNetwokController.getMyPosts(getAccessToken())

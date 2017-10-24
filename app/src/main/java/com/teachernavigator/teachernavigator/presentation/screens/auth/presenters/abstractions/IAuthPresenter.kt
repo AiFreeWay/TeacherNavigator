@@ -10,7 +10,7 @@ import com.teachernavigator.teachernavigator.presentation.screens.common.ViewAtt
  */
 interface IAuthPresenter : ViewAttacher<AuthView> {
 
-    fun singInViaVkontakte()
+    fun singInViaVkontakte() : Unit?
     fun singInViaFacebook(fmt: Fragment)
     fun singInViaTwitter()
     fun singInViaGooglePlus()

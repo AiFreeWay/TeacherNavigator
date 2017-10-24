@@ -12,6 +12,7 @@ import com.teachernavigator.teachernavigator.presentation.screens.jobs.fragments
 import com.teachernavigator.teachernavigator.presentation.screens.jobs.presenters.abstractions.IMyResumePresenter
 import com.teachernavigator.teachernavigator.presentation.transformers.ResumeTransformer
 import com.teachernavigator.teachernavigator.presentation.transformers.transformListEntity
+import com.teachernavigator.teachernavigator.presentation.utils.openUrl
 import ru.terrakok.cicerone.Router
 import javax.inject.Inject
 
@@ -23,6 +24,10 @@ class MyResumePresenter
 @Inject constructor(val router: Router,
                     private val resumeTransformer: ResumeTransformer,
                     private val jobsInteractor: IJobInteractor) : BasePresenter<MyResumeView>(), IMyResumePresenter {
+
+    override fun openResume(resume: String) {
+        mView?.openUrl(resume)
+    }
 
     @OnLifecycleEvent(Lifecycle.Event.ON_START)
     private fun onStart() {

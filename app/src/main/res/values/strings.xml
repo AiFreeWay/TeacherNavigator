@@ -178,7 +178,9 @@
     <string name="social_link_instagram">https://www.instagram.com/pronm/</string>
     <string name="social_link_youtube">https://www.youtube.com/channel/UCOeWUQ0sy6oEP0zpKjbSplw</string>
     <string name="browser_not_found">На вашем устройстве не установлен браузер</string>
-    <string name="ask_quesion_spec">Задайте вопрос специалисту</string>
+    <string name="ask_question_to_f">Задайте вопрос %1$s</string>
+    <string name="to_specialist">специалисту</string>
+    <string name="to_experienced">бывалому</string>
     <string name="pending_time">Время ожидания ответа: 24 часа</string>
     <string name="write_question">Напишите Ваш вопрос</string>
     <string name="send">Отправить</string>

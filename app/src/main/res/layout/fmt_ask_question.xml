@@ -15,11 +15,11 @@
         tools:ignore="ContentDescription" />
 
     <TextView
+        android:id="@+id/askQuestionTvAskQuestion"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
         android:layout_margin="@dimen/spacingMedium"
-        android:text="@string/ask_quesion_spec"
         android:textSize="@dimen/titleTextSize" />
 
     <TextView

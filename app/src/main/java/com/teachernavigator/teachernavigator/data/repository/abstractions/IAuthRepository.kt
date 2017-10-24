@@ -20,7 +20,6 @@ interface IAuthRepository {
     fun getTokenAsync(): Single<Token>
     fun isAuth(): Boolean
     fun saveToken(token: Token)
-    fun singInViaVkontakte(): Observable<Monade>
     fun singInViaFacebook(request: ConvertTokenRequest): Single<SingInResponse>
     fun singInViaTwitter(): Observable<Monade>
     fun singInViaGooglePlus(): Observable<Monade>

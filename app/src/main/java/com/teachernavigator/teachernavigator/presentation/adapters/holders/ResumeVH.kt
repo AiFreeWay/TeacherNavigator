@@ -8,6 +8,7 @@ import com.teachernavigator.teachernavigator.R
 import com.teachernavigator.teachernavigator.presentation.models.ResumeModel
 import com.teachernavigator.teachernavigator.presentation.utils.ImageLoader
 import com.teachernavigator.teachernavigator.presentation.utils.find
+import com.teachernavigator.teachernavigator.presentation.utils.listenClickBy
 import ru.lliepmah.HolderBuilder
 import ru.lliepmah.lib.DefaultViewHolder
 
@@ -18,7 +19,8 @@ import ru.lliepmah.lib.DefaultViewHolder
 class ResumeHolder(itemView: View,
                    private val isMine: Boolean,
                    private val onProlongListener: OnProlongResumeListener?,
-                   private val onDeleteListener: OnDeleteResumeListener?) : DefaultViewHolder<ResumeModel>(itemView) {
+                   private val onDeleteListener: OnDeleteResumeListener?,
+                   private val onFileClickListener: OnResumeFileClickListener?) : DefaultViewHolder<ResumeModel>(itemView) {
 
     private val vResumeIvAvatar: ImageView = itemView.find(R.id.vResumeIvAvatar)
     private val vResumeTvName: TextView = itemView.find(R.id.vResumeTvName)
@@ -37,6 +39,7 @@ class ResumeHolder(itemView: View,
     init {
         vResumeBtnDelete.setOnClickListener { onDelete() }
         vResumeBtnProlong.setOnClickListener { onProlong() }
+        vResumeIvFile listenClickBy onFileClickListener andReturnModel { mResume?.file }
     }
 
     override fun bind(resume: ResumeModel?) {
@@ -77,3 +80,4 @@ class ResumeHolder(itemView: View,
 
 typealias OnProlongResumeListener = (ResumeModel) -> Unit
 typealias OnDeleteResumeListener = (ResumeModel) -> Unit
+typealias OnResumeFileClickListener = (String) -> Unit

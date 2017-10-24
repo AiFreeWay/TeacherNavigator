@@ -4,7 +4,10 @@ import com.teachernavigator.teachernavigator.data.models.CommentNetwork
 import com.teachernavigator.teachernavigator.data.models.PostCommentNetwork
 import com.teachernavigator.teachernavigator.data.models.PostNetwork
 import com.teachernavigator.teachernavigator.data.network.requests.*
-import com.teachernavigator.teachernavigator.data.network.responses.*
+import com.teachernavigator.teachernavigator.data.network.responses.BaseListResponse
+import com.teachernavigator.teachernavigator.data.network.responses.BaseResponse
+import com.teachernavigator.teachernavigator.data.network.responses.PostsResponse
+import com.teachernavigator.teachernavigator.data.network.responses.SingInResponse
 import com.teachernavigator.teachernavigator.domain.models.*
 import io.reactivex.Maybe
 import io.reactivex.Observable
@@ -85,6 +88,13 @@ interface ApiController {
     @GET("/api/v0/me/saved/newses/")
     fun getSavedNews(@Header("Authorization") accessToken: String): Single<PostsResponse>
 
+
+    @GET("/api/v0/feed/advise/")
+    fun getQuestionAnswerPosts(@Header("Authorization") accessToken: String): Single<PostsResponse>
+
+    @GET("/api/v0/feed/ni_advise/")
+    fun getAdvicesPosts(@Header("Authorization") accessToken: String): Single<PostsResponse>
+
     @GET("/api/v0/me/posts/")
     fun getMyPosts(@Header("Authorization") accessToken: String): Single<BaseListResponse<PostNetwork>>
 
@@ -139,8 +149,8 @@ interface ApiController {
 
     @Multipart
     @POST("/api/v0/me/avatar/")
-    fun uploadAvatar(@Header("Authorization")  accessToken: String,
-                     @PartMap params: Map<String, @JvmSuppressWildcards RequestBody>) : Single<BaseResponse>
+    fun uploadAvatar(@Header("Authorization") accessToken: String,
+                     @PartMap params: Map<String, @JvmSuppressWildcards RequestBody>): Single<BaseResponse>
 
 
     @GET("/api/v0/vacancies/")

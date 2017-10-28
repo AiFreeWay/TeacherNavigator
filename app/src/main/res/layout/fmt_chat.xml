@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/fmtChatTvStatus"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@color/grey"
+        android:gravity="center"
+        android:padding="@dimen/spacingSmall"
+        android:text="@string/offline_retry"
+        android:textSize="@dimen/smallTextSize"
+        android:textStyle="bold"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:layout_width="0dp"
+        android:layout_height="5dp"
+        android:background="@drawable/bg_divider_shadow"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/fmtChatTvStatus" />
+
+
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/fmtChatSwipeLayout"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/fmtChatLSend"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/fmtChatTvStatus">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/fmtChatRvList"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clipToPadding="false"
+            android:paddingBottom="@dimen/spacingXLarge"
+            android:paddingLeft="@dimen/spacingMedium"
+            android:paddingRight="@dimen/spacingMedium"
+            android:paddingTop="@dimen/spacingMedium" />
+
+    </android.support.v4.widget.SwipeRefreshLayout>
+
+    <TextView
+        android:id="@+id/fmtChatTvNoData"
+        style="@style/Text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="@string/no_data"
+        android:textColor="@color/lightTextColor"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:id="@+id/fmtChatLSend"
+        android:layout_width="0dp"
+        android:padding="@dimen/spacingSmall"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent">
+
+        <EditText
+            android:id="@+id/fmtChatEtSend"
+            android:layout_width="match_parent"
+            android:inputType="text"
+            android:hint="@string/white_your_message"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
+        <ImageView
+            android:id="@+id/fmtChatBtnSend"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="0"
+            android:background="?android:attr/selectableItemBackground"
+            android:padding="@dimen/spacingXSmall"
+            android:src="@drawable/ic_send" />
+
+    </LinearLayout>
+
+
+</android.support.constraint.ConstraintLayout>

@@ -1,5 +1,6 @@
 package com.teachernavigator.teachernavigator.data.repository.abstractions
 
+import com.teachernavigator.teachernavigator.data.models.SocialNetwork
 import com.teachernavigator.teachernavigator.data.network.requests.ConvertTokenRequest
 import com.teachernavigator.teachernavigator.data.network.requests.RestorePasswordRequest
 import com.teachernavigator.teachernavigator.data.network.requests.SingInRequest
@@ -8,6 +9,7 @@ import com.teachernavigator.teachernavigator.data.network.responses.BaseResponse
 import com.teachernavigator.teachernavigator.data.network.responses.SingInResponse
 import com.teachernavigator.teachernavigator.domain.models.AuthCredentials
 import com.teachernavigator.teachernavigator.domain.models.Monade
+import com.teachernavigator.teachernavigator.domain.models.Profile
 import com.teachernavigator.teachernavigator.domain.models.Token
 import io.reactivex.Observable
 import io.reactivex.Single
@@ -28,4 +30,7 @@ interface IAuthRepository {
     fun getAuthCredentials(): AuthCredentials
 
     fun updateFCMToken()
+
+
+    fun createSocialAccount(socialNetwork: SocialNetwork, token: String): Single<Profile>
 }

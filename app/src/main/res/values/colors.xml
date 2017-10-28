@@ -16,4 +16,7 @@
     <color name="lightOrange">#ffc76c</color>
     <color name="white">#fff</color>
     <color name="white_overlay">#AAFFFFFF</color>
+    <color name="black">#000</color>
+    <color name="yellow">#FDFD89</color>
+    <color name="green">#86bf99</color>
 </resources>

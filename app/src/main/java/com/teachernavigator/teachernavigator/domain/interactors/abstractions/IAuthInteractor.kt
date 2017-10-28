@@ -2,7 +2,6 @@ package com.teachernavigator.teachernavigator.domain.interactors.abstractions
 
 import com.teachernavigator.teachernavigator.domain.models.Monade
 import com.teachernavigator.teachernavigator.domain.models.SingUpData
-import io.reactivex.Observable
 import io.reactivex.Single
 
 /**
@@ -15,7 +14,7 @@ interface IAuthInteractor {
     fun singInViaGoogle(token: String): Single<Monade>
     fun singInViaVk(token: String): Single<Monade>
     fun singInViaFacebook(token: String): Single<Monade>
-    fun singInViaTwitter(token: String): Single<Monade>
+    fun singInViaTwitter(oauthToken : String, oauthTokenSecret : String): Single<Monade>
 
     fun singIn(login: String, password: String): Single<Monade>
     fun singUp(singUpData: SingUpData): Single<Monade>

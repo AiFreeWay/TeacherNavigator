@@ -3,6 +3,7 @@ package com.teachernavigator.teachernavigator.application
 import android.support.multidex.MultiDexApplication
 import android.support.v7.app.AppCompatDelegate
 import android.util.Log
+import android.util.Log.d
 import com.crashlytics.android.Crashlytics
 import com.example.root.androidtest.application.di.components.DaggerRootComponent
 import com.example.root.androidtest.application.di.components.RootComponent
@@ -11,18 +12,15 @@ import com.google.firebase.FirebaseApp
 import com.miguelbcr.ui.rx_paparazzo2.RxPaparazzo
 import com.orhanobut.hawk.Hawk
 import com.teachernavigator.teachernavigator.R
+import com.teachernavigator.teachernavigator.presentation.utils.applySchedulers
 import com.twitter.sdk.android.core.DefaultLogger
 import com.twitter.sdk.android.core.Twitter
 import com.twitter.sdk.android.core.TwitterAuthConfig
 import com.twitter.sdk.android.core.TwitterConfig
 import com.vk.sdk.VKSdk
 import io.fabric.sdk.android.Fabric
-import com.neovisionaries.ws.client.WebSocketFactory
-import com.neovisionaries.ws.client.ProxySettings
-
-
-
-
+import io.reactivex.Observable
+import io.reactivex.schedulers.Schedulers
 
 
 /**

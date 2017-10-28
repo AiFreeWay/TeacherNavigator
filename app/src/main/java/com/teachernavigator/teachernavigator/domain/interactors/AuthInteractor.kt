@@ -1,8 +1,6 @@
 package com.teachernavigator.teachernavigator.domain.interactors
 
-import android.os.Build
-import com.google.firebase.iid.FirebaseInstanceId
-import com.teachernavigator.teachernavigator.data.cache.CacheController
+import com.teachernavigator.teachernavigator.data.models.SocialNetwork
 import com.teachernavigator.teachernavigator.data.network.requests.RestorePasswordRequest
 import com.teachernavigator.teachernavigator.data.network.responses.SingInResponse
 import com.teachernavigator.teachernavigator.data.repository.abstractions.IAuthRepository
@@ -26,28 +24,33 @@ class AuthInteractor @Inject constructor(private val mRepository: IAuthRepositor
                     .map { it.isExists() }
 
     override fun singInViaFacebook(token: String): Single<Monade> =
-            mRepository.singInViaSocials(AuthMapper.mapConvertTokenRequest(token, "facebook", mRepository.getAuthCredentials()))
+            mRepository.createSocialAccount(SocialNetwork.Facebook, token)
+                    .flatMap { mRepository.singInViaSocials(AuthMapper.mapConvertTokenRequest(token, SocialNetwork.Facebook, mRepository.getAuthCredentials())) }
                     .map { mapSingInResponse(it) }
-
                     .applySchedulers()
 
     override fun singInViaGoogle(token: String): Single<Monade> =
-            mRepository.singInViaSocials(AuthMapper.mapConvertTokenRequest(token, "google-oauth2", mRepository.getAuthCredentials()))
+            mRepository.createSocialAccount(SocialNetwork.Google, token)
+                    .flatMap { mRepository.singInViaSocials(AuthMapper.mapConvertTokenRequest(token, SocialNetwork.Google, mRepository.getAuthCredentials())) }
                     .map { mapSingInResponse(it) }
                     .sendFCM()
                     .applySchedulers()
 
     override fun singInViaVk(token: String): Single<Monade> =
-            mRepository.singInViaSocials(AuthMapper.mapConvertTokenRequest(token, "vk-oauth2", mRepository.getAuthCredentials()))
+            mRepository.createSocialAccount(SocialNetwork.Vk, token)
+                    .flatMap { mRepository.singInViaSocials(AuthMapper.mapConvertTokenRequest(token, SocialNetwork.Vk, mRepository.getAuthCredentials())) }
                     .map { mapSingInResponse(it) }
                     .sendFCM()
                     .applySchedulers()
 
-    override fun singInViaTwitter(token: String): Single<Monade> =
-            mRepository.singInViaSocials(AuthMapper.mapConvertTokenRequest(token, "twitter", mRepository.getAuthCredentials()))
-                    .map { mapSingInResponse(it) }
-                    .sendFCM()
-                    .applySchedulers()
+    override fun singInViaTwitter(oauthToken: String, oauthTokenSecret: String): Single<Monade> {
+        val token = "oauth_token=$oauthToken&oauth_token_secret=$oauthTokenSecret"
+       return mRepository.createSocialAccount(SocialNetwork.Twitter, token)
+                .flatMap { mRepository.singInViaSocials(AuthMapper.mapConvertTokenRequest(token, SocialNetwork.Twitter, mRepository.getAuthCredentials())) }
+                .map { mapSingInResponse(it) }
+                .sendFCM()
+                .applySchedulers()
+    }
 
     override fun singIn(login: String, password: String): Single<Monade> =
             mRepository.singIn(AuthMapper.mapSingInDataToRequest(login, password, mRepository.getAuthCredentials()))

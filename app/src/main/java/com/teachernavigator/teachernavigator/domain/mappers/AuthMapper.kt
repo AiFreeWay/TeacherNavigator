@@ -1,6 +1,7 @@
 package com.teachernavigator.teachernavigator.domain.mappers
 
 import android.text.TextUtils
+import com.teachernavigator.teachernavigator.data.models.SocialNetwork
 import com.teachernavigator.teachernavigator.data.network.requests.ConvertTokenRequest
 import com.teachernavigator.teachernavigator.data.network.requests.RestorePasswordRequest
 import com.teachernavigator.teachernavigator.data.network.requests.SingInRequest
@@ -15,9 +16,8 @@ import com.teachernavigator.teachernavigator.domain.models.Token
 /**
  * Created by root on 07.09.17
  */
-class AuthMapper {
+object AuthMapper {
 
-    companion object Auth {
 
         fun mapSingUpDataToRequest(singUpData: SingUpData): SingUpRequest =
                 SingUpRequest(singUpData.email,
@@ -39,9 +39,9 @@ class AuthMapper {
                         client_id = authCredentials.clientId,
                         client_secret = authCredentials.clientSecret)
 
-        fun mapConvertTokenRequest(token: String, socialNetwork: String, authCredentials: AuthCredentials) =
+        fun mapConvertTokenRequest(token: String, socialNetwork: SocialNetwork, authCredentials: AuthCredentials) =
                 ConvertTokenRequest(
-                        backend = socialNetwork,
+                        backend = socialNetwork.tokenName,
                         token = token,
                         client_id = authCredentials.clientId,
                         client_secret = authCredentials.clientSecret)
@@ -69,5 +69,6 @@ class AuthMapper {
 //
 //            return number?.replace(" ", "")?.replace("(", "")?.replace(")", "")
 //        }
-    }
+
+
 }

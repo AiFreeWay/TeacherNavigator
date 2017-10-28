@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/spacingMedium"
+    android:orientation="vertical">
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/vMgsLBubble"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/spacingXSmall"
+        android:background="@drawable/bg_msg"
+        android:minHeight="55dp">
+
+        <TextView
+            android:id="@+id/vMgsTvTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:lines="1"
+            android:padding="@dimen/spacingMedium"
+            android:textSize="@dimen/smallTextSize"
+            android:textStyle="bold"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="12:25" />
+
+        <TextView
+            android:id="@+id/vMgsTvName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_toLeftOf="@+id/vMgsTvTime"
+            android:layout_toStartOf="@+id/vMgsTvTime"
+            android:ellipsize="end"
+            android:lines="1"
+            android:padding="@dimen/spacingMedium"
+            android:textColor="@color/colorAccent"
+            android:textStyle="bold"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@+id/vMgsTvTime"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Иван Иванов" />
+
+        <TextView
+            android:id="@+id/vMgsTvMessage"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:paddingBottom="@dimen/spacingMedium"
+            android:paddingLeft="@dimen/spacingMedium"
+            android:paddingRight="@dimen/spacingMedium"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/vMgsTvName"
+            tools:text="Большое сообщение огромное" />
+
+    </android.support.constraint.ConstraintLayout>
+
+    <ImageView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="@+id/vMgsIvAvatar"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="ContentDescription" />
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/vMgsIvAvatar"
+        android:layout_width="55dp"
+        android:layout_height="55dp"
+        android:layout_gravity="bottom|start"
+        android:padding="@dimen/spacingMedium"
+        android:src="@drawable/ic_avatar" />
+
+</FrameLayout>

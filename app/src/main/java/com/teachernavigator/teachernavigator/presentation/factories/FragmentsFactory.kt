@@ -7,7 +7,6 @@ import com.teachernavigator.teachernavigator.presentation.screens.auth.fragments
 import com.teachernavigator.teachernavigator.presentation.screens.auth.fragments.RestorePasswordFragment
 import com.teachernavigator.teachernavigator.presentation.screens.info.fragments.*
 import com.teachernavigator.teachernavigator.presentation.screens.jobs.fragments.*
-import com.teachernavigator.teachernavigator.presentation.screens.main.fragments.ProfileFragment
 import com.teachernavigator.teachernavigator.presentation.screens.main.fragments.*
 import com.teachernavigator.teachernavigator.presentation.screens.tape.fragments.PostsListFragment
 import com.teachernavigator.teachernavigator.presentation.screens.tape.fragments.PostsSearchFragment
@@ -44,6 +43,7 @@ class FragmentsFactory {
                     AddPublicationFragment.FRAGMENT_KEY -> addBundle(AddPublicationFragment(), bundle)
                     ProfileFragment.FRAGMENT_KEY -> addBundle(ProfileFragment(), bundle)
                     ImportantToKnowFragment.FRAGMENT_KEY -> addBundle(ImportantToKnowFragment(), bundle)
+                    ChatFragment.FRAGMENT_KEY -> addBundle(ChatFragment(), bundle)
                     PostCommentsFragment.FRAGMENT_KEY -> addBundle(PostCommentsFragment(), bundle)
                     PreviewFragment.FRAGMENT_KEY -> addBundle(PreviewFragment(), bundle)
                     AskSpecialistFragment.FRAGMENT_KEY -> addBundle(AskSpecialistFragment(), bundle)

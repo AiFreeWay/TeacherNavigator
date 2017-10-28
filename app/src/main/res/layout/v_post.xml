@@ -21,6 +21,8 @@
         android:id="@+id/v_post_tv_author_name"
         style="@style/TitleText"
 
+        android:layout_toLeftOf="@+id/v_post_iv_subscribe"
+        android:layout_toStartOf="@+id/v_post_iv_subscribe"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"

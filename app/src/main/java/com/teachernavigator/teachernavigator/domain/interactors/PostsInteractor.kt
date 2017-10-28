@@ -21,7 +21,8 @@ import javax.inject.Inject
 /**
  * Created by root on 22.08.17
  */
-class PostsInteractor @Inject constructor(private val mRepository: IPostsRepository) : IPostsInteractor {
+class PostsInteractor
+@Inject constructor(private val mRepository: IPostsRepository) : IPostsInteractor {
 
 
     override fun setSearch(source: PostsSource, text: CharSequence, publicationsContent: Pair<Boolean, Boolean>, searchTags: HashSet<String>) {

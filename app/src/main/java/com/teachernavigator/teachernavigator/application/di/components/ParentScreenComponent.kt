@@ -101,5 +101,6 @@ interface ParentScreenComponent {
     fun inject(profileFragment: ProfileFragment)
     fun inject(settingsFragment: SettingsFragment)
     fun inject(appSettingsFragment: AppSettingsFragment)
+    fun inject(chatFragment: ChatFragment)
 
 }

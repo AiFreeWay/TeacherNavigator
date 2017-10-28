@@ -13,7 +13,6 @@ import io.reactivex.Maybe
 import io.reactivex.Observable
 import io.reactivex.Single
 import okhttp3.RequestBody
-import retrofit2.Call
 import retrofit2.http.*
 
 /**
@@ -236,6 +235,12 @@ interface ApiController {
                         @Field("device_id") deviceId: String,
                         @Field("active") active: Boolean,
                         @Field("type") android: String): Single<BaseResponse>
+
+    @GET("/api/v0/history_chat/")
+    fun chatHistory(@Header("Authorization") accessToken: String, @Query("limit") limit: Int = 200, @Query("offset") offset: Int = 0): Single<BaseListResponse<Message>>
+
+    @GET("/api/v0/history_chat/{messageId}")
+    fun chatHistory(@Header("Authorization") accessToken: String, @Path("messageId") messageId: Int): Single<Message>
 
 
 }

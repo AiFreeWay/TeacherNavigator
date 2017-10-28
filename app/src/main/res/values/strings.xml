@@ -215,6 +215,13 @@
     <string name="minute_ago">минуту назад</string>
     <string name="hour_ago">час назад</string>
     <string name="yesterday">вчера</string>
+    <string name="offline_retry">Нет соединения. Повторить?</string>
+    <string name="white_your_message">Напишите сообщение</string>
+
+    <string name="disconnected">Отключено</string>
+    <string name="connected">Подключено</string>
+    <string name="connecting">Подключение</string>
+    <string name="disconnecting">Отключение</string>
 
     <plurals name="plural_years">
         <item quantity="zero">%1$d лет
@@ -228,6 +235,20 @@
         <item quantity="many">%1$d лет
         </item> <!--many — также зависит от языковых правил; в русском языке — от пятёрки и выше;-->
         <item quantity="other">%1$d лет</item> <!--other — остальные варианты-->
+    </plurals>
+
+    <plurals name="members_in_chat">
+        <item quantity="zero">В чате %1$d участников
+        </item> <!--zero — строка для нуля, отсутствия чего-либо; в некоторых языках — ещё и для чисел, оканчивающихся нулём;-->
+        <item quantity="one">В чате %1$d участник
+        </item> <!--one — строка для чисел, заканчивающихся на единицу; в некоторых языках — только для единицы;-->
+        <item quantity="two">В чате %1$d участника
+        </item> <!--two — для чисел, заканчивающихся на двойку, или только для двойки;-->
+        <item quantity="few">В чате %1$d участника
+        </item> <!--few — зависит от языковых правил; например, для русского языка это относится к числам, оканчивающимся на 2, 3 и 4 (несмотря на наличие правила «two»);-->
+        <item quantity="many">В чате %1$d участников
+        </item> <!--many — также зависит от языковых правил; в русском языке — от пятёрки и выше;-->
+        <item quantity="other">В чате %1$d участников</item> <!--other — остальные варианты-->
     </plurals>
 
 

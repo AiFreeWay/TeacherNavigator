@@ -138,4 +138,8 @@ class PresentersModule {
     @PerParentScreen
     fun provideAppSettingsPresenter(presenter: AppSettingsPresenter): IAppSettingsPresenter = presenter
 
+    @Provides
+    @PerParentScreen
+    fun provideChatPresenter(presenter: ChatPresenter): IChatPresenter = presenter
+
 }

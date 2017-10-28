@@ -1,15 +1,12 @@
 package com.teachernavigator.teachernavigator.data.network
 
 import android.support.annotation.VisibleForTesting
-import com.example.root.androidtest.application.utils.Logger
 import com.google.gson.Gson
-import com.google.gson.GsonBuilder
 import com.teachernavigator.teachernavigator.BuildConfig
 import com.teachernavigator.teachernavigator.data.models.CommentNetwork
 import com.teachernavigator.teachernavigator.data.models.FileInfo
 import com.teachernavigator.teachernavigator.data.models.PostCommentNetwork
 import com.teachernavigator.teachernavigator.data.models.PostNetwork
-import com.teachernavigator.teachernavigator.data.network.adapters.UserDeserializer
 import com.teachernavigator.teachernavigator.data.network.requests.*
 import com.teachernavigator.teachernavigator.data.network.responses.BaseListResponse
 import com.teachernavigator.teachernavigator.data.network.responses.BaseResponse
@@ -18,7 +15,6 @@ import com.teachernavigator.teachernavigator.data.network.responses.SingInRespon
 import com.teachernavigator.teachernavigator.data.utils.toRequestBody
 import com.teachernavigator.teachernavigator.domain.models.*
 import com.teachernavigator.teachernavigator.presentation.models.Specialist
-import com.teachernavigator.teachernavigator.presentation.utils.DEFAULT_DATE_FORMAT
 import io.reactivex.Observable
 import io.reactivex.Single
 import okhttp3.Interceptor
@@ -31,17 +27,23 @@ import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import java.io.File
 import java.util.*
+import javax.inject.Inject
+import javax.inject.Singleton
 
 
 /**
  * Created by root on 11.08.17
  */
-class NetworkController {
+@Singleton
+class NetworkController
+@Inject
+constructor(gson: Gson) {
 
     companion object {
-        private const val DOMAIN = "pronm.pr-solution.ru"
-        public const val HTTP = "http://"
-        public const val SERVER = "$HTTP$DOMAIN"
+        const val DOMAIN = "pronm.pr-solution.ru"
+        const val HTTP = "http://"
+        const val SERVER = "$HTTP$DOMAIN"
+
         private const val API_URL = "$SERVER/"
 
         private const val ANDROID = "android"
@@ -53,21 +55,7 @@ class NetworkController {
 
     private var client: OkHttpClient?
 
-    private var gson: Gson
-
     init {
-        Logger.logDebug("created CONTROLLER NetworkController")
-
-        val pureGson = GsonBuilder()
-                .setLenient()
-                .setDateFormat(DEFAULT_DATE_FORMAT)
-                .create()
-
-        gson = GsonBuilder()
-                .setLenient()
-                .setDateFormat(DEFAULT_DATE_FORMAT)
-                .registerTypeAdapter(Author::class.java, UserDeserializer(pureGson))
-                .create()
 
         val httpClient = OkHttpClient.Builder()
                 .addInterceptor(createHeadersInterceptor())
@@ -78,7 +66,8 @@ class NetworkController {
             httpClient.addInterceptor(logging)
         }
 
-        client = httpClient.build()
+        val client = httpClient.build()
+        this.client = client
         val retrofit = Retrofit.Builder()
                 .baseUrl(API_URL)
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
@@ -255,6 +244,14 @@ class NetworkController {
 
     fun updateFCMToken(accessToken: String, deviceName: String, fcmToken: String, deviceId: String, active: Boolean): Single<BaseResponse> =
             mApiController.registerDevices(accessToken, deviceName, fcmToken, deviceId, active, ANDROID)
+
+
+    fun loadMessages(accessToken: String): Single<List<Message>> =
+            mApiController.chatHistory(accessToken)
+                    .map { it.results }
+
+    fun loadMessage(accessToken: String, messageId: Int): Single<Message> =
+            mApiController.chatHistory(accessToken, messageId)
 
     fun getTags(accessToken: String): Single<List<Tag>> =
             Observable.range(1, MAX_PAGE_COUNT)

@@ -8,10 +8,7 @@ import com.google.firebase.iid.FirebaseInstanceId
 import com.teachernavigator.teachernavigator.R
 import com.teachernavigator.teachernavigator.data.cache.CacheController
 import com.teachernavigator.teachernavigator.data.cache.CacheController.Companion.USER_KEY
-import com.teachernavigator.teachernavigator.data.models.CommentNetwork
-import com.teachernavigator.teachernavigator.data.models.FileInfo
-import com.teachernavigator.teachernavigator.data.models.PostCommentNetwork
-import com.teachernavigator.teachernavigator.data.models.PostNetwork
+import com.teachernavigator.teachernavigator.data.models.*
 import com.teachernavigator.teachernavigator.data.network.NetworkController
 import com.teachernavigator.teachernavigator.data.network.requests.*
 import com.teachernavigator.teachernavigator.data.network.responses.BaseListResponse
@@ -45,7 +42,6 @@ class MainRepository @Inject constructor(private val mNetwokController: NetworkC
 
     private val mFilters: SparseArrayCompat<Filter> = SparseArrayCompat()
 
-    @Suppress("CAST_NEVER_SUCCEEDS")
     override fun currentUserId(): Int =
             (CacheController.getData(USER_KEY, null) as? Profile)?.id ?: -1
 
@@ -60,6 +56,12 @@ class MainRepository @Inject constructor(private val mNetwokController: NetworkC
         token.tokenType + " " + token.accessToken
         return token.tokenType + " " + token.accessToken
     }
+
+    override fun accessToken(): String {
+        val token = (CacheController.getData(CacheController.TOKEN_KEY, Token.EMPTY_TOKEN) as Token)
+        return token.accessToken
+    }
+
 
     // ------------------------------- Auth methods --------------------------------
 
@@ -264,6 +266,9 @@ class MainRepository @Inject constructor(private val mNetwokController: NetworkC
             mNetwokController.uploadAvatar(getAccessToken(), fileInfo)
                     .map { Unit }
 
+    override fun createSocialAccount(socialNetwork: SocialNetwork, token: String): Single<Profile> =
+            mNetwokController.getProfile("Bearer ${socialNetwork.tokenName} $token")
+
     // ------------------------------- Info methods --------------------------------
     override fun loadAbout(): Single<List<About>> =
             mNetwokController.loadAbout(getAccessToken())
@@ -286,6 +291,14 @@ class MainRepository @Inject constructor(private val mNetwokController: NetworkC
 
     private val deviceId: String
         get() = CacheController.getDeviceId()
+
+    // ------------------------------- Chat methods --------------------------------
+
+    override fun loadMessages(): Single<List<Message>>
+            = mNetwokController.loadMessages(getAccessToken())
+
+    override fun loadMessage(messageId: Int): Single<Message>
+            = mNetwokController.loadMessage(getAccessToken(), messageId)
 
 
 }

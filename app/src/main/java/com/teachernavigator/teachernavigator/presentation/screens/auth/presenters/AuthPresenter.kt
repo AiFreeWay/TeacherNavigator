@@ -63,6 +63,8 @@ constructor(val router: Router,
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestScopes(Scope(Scopes.PLUS_ME), Scope(Scopes.PLUS_LOGIN))
                 .requestServerAuthCode(mView!!.getContext().getString(R.string.google_server_client_id), false)
+                .requestProfile()
+
                 .build()
 
         GoogleApiClient.Builder(mView!!.getContext())
@@ -81,10 +83,15 @@ constructor(val router: Router,
             doOnError(it)
         } ?: Unit
 
-        override fun success(result: Result<TwitterSession>?) =
-                result?.data?.authToken?.token?.let { singInViaTwitterToken(it) } ?: Unit
-    }
+        override fun success(result: Result<TwitterSession>?) {
+            val token = result?.data?.authToken?.token
+            val secret = result?.data?.authToken?.secret
 
+            if (token != null && secret != null) {
+                singInViaTwitterToken(token, secret)
+            }
+        }
+    }
 
     @OnLifecycleEvent(Lifecycle.Event.ON_START)
     private fun onStart() {
@@ -97,8 +104,8 @@ constructor(val router: Router,
         mDisposables.clear()
     }
 
-    private fun singInViaTwitterToken(token: String) =
-            addDissposable(authInteractor.singInViaTwitter(token)
+    private fun singInViaTwitterToken(oauthToken: String, oauthTokenSecret: String) =
+            addDissposable(authInteractor.singInViaTwitter(oauthToken, oauthTokenSecret)
                     .doOnSubscribe { startProgress() }
                     .subscribe(this::doOnSingIn, this::doOnError))
 
@@ -169,10 +176,11 @@ constructor(val router: Router,
 
         result.signInAccount?.serverAuthCode?.let { singInViaGoogle(it) }
 
-        d(javaClass.name, "-> result ->${result.signInAccount?.serverAuthCode}")
-        d(javaClass.name, "-> result ->${result.signInAccount?.id}")
         d(javaClass.name, "-> result ->${result.signInAccount?.displayName}")
-        d(javaClass.name, "-> result ->${result.signInAccount?.familyName}")
+        d(javaClass.name, "-> result serverAuthCode ->${result.signInAccount?.serverAuthCode}")
+
+//        d(javaClass.name, "-> result ->${result.signInAccount?.id}")
+//        d(javaClass.name, "-> result idToken ->${result.signInAccount?.idToken}")
     }
 
     /* Fb Success */

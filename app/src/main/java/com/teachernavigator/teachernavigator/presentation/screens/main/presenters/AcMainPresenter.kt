@@ -18,16 +18,12 @@ import com.teachernavigator.teachernavigator.presentation.models.MenuData
 import com.teachernavigator.teachernavigator.presentation.models.PostsSource
 import com.teachernavigator.teachernavigator.presentation.screens.auth.activities.AuthActivity
 import com.teachernavigator.teachernavigator.presentation.screens.common.BasePresenter
-import com.teachernavigator.teachernavigator.presentation.screens.info.fragments.AboutFragment
-import com.teachernavigator.teachernavigator.presentation.screens.info.fragments.ImportantToKnowFragment
-import com.teachernavigator.teachernavigator.presentation.screens.info.fragments.SupportFragment
-import com.teachernavigator.teachernavigator.presentation.screens.info.fragments.TagsFragment
+import com.teachernavigator.teachernavigator.presentation.screens.info.fragments.*
 import com.teachernavigator.teachernavigator.presentation.screens.jobs.fragments.JobsBankFragment
-import com.teachernavigator.teachernavigator.presentation.screens.main.fragments.ProfileFragment
 import com.teachernavigator.teachernavigator.presentation.screens.main.activities.abstractions.MainView
 import com.teachernavigator.teachernavigator.presentation.screens.main.fragments.AddPublicationFragment
 import com.teachernavigator.teachernavigator.presentation.screens.main.fragments.MyCommentsFragment
-import com.teachernavigator.teachernavigator.presentation.screens.main.fragments.SettingsFragment
+import com.teachernavigator.teachernavigator.presentation.screens.main.fragments.ProfileFragment
 import com.teachernavigator.teachernavigator.presentation.screens.main.fragments.TapeFragment
 import com.teachernavigator.teachernavigator.presentation.screens.main.presenters.abstractions.IMainPresenter
 import com.teachernavigator.teachernavigator.presentation.screens.tape.fragments.PostsListFragment
@@ -112,7 +108,7 @@ class AcMainPresenter : BasePresenter<MainView>(), IMainPresenter {
             MenuItemsFactory.MenuItemTypes.BANK_OF_VACANCY.id -> toFragment(JobsBankFragment.FRAGMENT_KEY)
             MenuItemsFactory.MenuItemTypes.IMPORTANT_TO_KNOW.id -> toFragment(ImportantToKnowFragment.FRAGMENT_KEY)
             MenuItemsFactory.MenuItemTypes.SUPPORT.id -> toFragment(SupportFragment.FRAGMENT_KEY)
-            MenuItemsFactory.MenuItemTypes.CHAT.id -> mView?.notImplemented()
+            MenuItemsFactory.MenuItemTypes.CHAT.id -> toFragment(ChatFragment.FRAGMENT_KEY)
             MenuItemsFactory.MenuItemTypes.PROFILE_HEADER.id -> toProfile()
             MenuItemsFactory.MenuItemTypes.ADD_PUBLICATION.id -> toFragment(AddPublicationFragment.FRAGMENT_KEY, false)
             MenuItemsFactory.MenuItemTypes.ABOUT.id -> toFragment(AboutFragment.FRAGMENT_KEY, false)

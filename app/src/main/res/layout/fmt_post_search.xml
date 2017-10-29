@@ -2,8 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@android:color/white">
+    android:layout_height="match_parent">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -23,13 +22,11 @@
             android:layout_marginLeft="@dimen/spacingLarge"
             android:layout_marginRight="@dimen/spacingLarge"
             android:layout_marginTop="@dimen/externalPadding"
-            android:background="@drawable/oval_edit_text_backgroud"
             android:hint="@string/search"
             android:lines="1" />
 
         <TextView
             android:id="@+id/fmtPostSearchTvAddTag"
-            style="@style/SmallText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignLeft="@+id/fmtPostSearchEtSearch"
@@ -40,11 +37,13 @@
             android:drawableLeft="@drawable/ic_plus"
             android:drawablePadding="@dimen/internalPadding"
             android:drawableStart="@drawable/ic_plus"
+            android:textColor="@color/textColor"
             android:paddingBottom="@dimen/internalPadding"
             android:paddingLeft="@dimen/externalPadding"
             android:paddingRight="@dimen/externalPadding"
             android:paddingTop="@dimen/internalPadding"
-            android:text="@string/add_tag" />
+            android:text="@string/add_tag"
+            android:textAppearance="?android:textAppearanceSmall" />
 
         <com.greenfrvr.hashtagview.HashtagView
             android:id="@+id/fmtPostSearchTvHashtags"
@@ -64,7 +63,6 @@
 
         <TextView
             android:id="@+id/fmtPostSearchTvPublication"
-            style="@style/TitleText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignLeft="@+id/fmtPostSearchEtSearch"
@@ -74,7 +72,8 @@
             android:layout_marginLeft="@dimen/externalPadding"
             android:layout_marginStart="@dimen/externalPadding"
             android:layout_marginTop="@dimen/spacingXXXLarge"
-            android:text="@string/publications" />
+            android:text="@string/publications"
+            android:textAppearance="?android:textAppearanceLarge" />
 
         <RadioGroup
             android:id="@+id/fmtPostSearchRadioGroup"
@@ -84,36 +83,39 @@
 
             <android.support.v7.widget.AppCompatRadioButton
                 android:id="@+id/fmtPostSearchChbAnyPublication"
-                style="@style/SmallText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/spacingSmall"
                 android:layout_marginLeft="@dimen/spacingLarge"
                 android:layout_marginRight="@dimen/spacingLarge"
                 android:layout_marginTop="@dimen/spacingSmall"
-                android:text="@string/any" />
+                android:text="@string/any"
+                android:textAppearance="?android:textAppearanceSmall"
+                android:textColor="?android:textColor" />
 
             <android.support.v7.widget.AppCompatRadioButton
                 android:id="@+id/fmtPostSearchChbOnlyTextPublication"
-                style="@style/SmallText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/spacingSmall"
                 android:layout_marginLeft="@dimen/spacingLarge"
                 android:layout_marginRight="@dimen/spacingLarge"
                 android:layout_marginTop="@dimen/spacingSmall"
-                android:text="@string/only_text" />
+                android:text="@string/only_text"
+                android:textAppearance="?android:textAppearanceSmall"
+                android:textColor="?android:textColor" />
 
             <android.support.v7.widget.AppCompatRadioButton
                 android:id="@+id/fmtPostSearchChbWithDocumentPublication"
-                style="@style/SmallText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/spacingSmall"
                 android:layout_marginLeft="@dimen/spacingLarge"
                 android:layout_marginRight="@dimen/spacingLarge"
                 android:layout_marginTop="@dimen/spacingSmall"
-                android:text="@string/with_document" />
+                android:text="@string/with_document"
+                android:textAppearance="?android:textAppearanceSmall"
+                android:textColor="?android:textColor" />
 
 
         </RadioGroup>

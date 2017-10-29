@@ -21,10 +21,7 @@ import com.teachernavigator.teachernavigator.presentation.screens.common.BasePre
 import com.teachernavigator.teachernavigator.presentation.screens.info.fragments.*
 import com.teachernavigator.teachernavigator.presentation.screens.jobs.fragments.JobsBankFragment
 import com.teachernavigator.teachernavigator.presentation.screens.main.activities.abstractions.MainView
-import com.teachernavigator.teachernavigator.presentation.screens.main.fragments.AddPublicationFragment
-import com.teachernavigator.teachernavigator.presentation.screens.main.fragments.MyCommentsFragment
-import com.teachernavigator.teachernavigator.presentation.screens.main.fragments.ProfileFragment
-import com.teachernavigator.teachernavigator.presentation.screens.main.fragments.TapeFragment
+import com.teachernavigator.teachernavigator.presentation.screens.main.fragments.*
 import com.teachernavigator.teachernavigator.presentation.screens.main.presenters.abstractions.IMainPresenter
 import com.teachernavigator.teachernavigator.presentation.screens.tape.fragments.PostsListFragment
 import com.teachernavigator.teachernavigator.presentation.utils.ActivityRouter
@@ -103,8 +100,7 @@ class AcMainPresenter : BasePresenter<MainView>(), IMainPresenter {
             MenuItemsFactory.MenuItemTypes.MY_PUBLICATION.id -> toPostsFragment(PostsSource.Mine)
 
             MenuItemsFactory.MenuItemTypes.LOGIN.id -> ActivityRouter.openActivityAndClosePrevent(mView!!.getActivity(), AuthActivity::class.java)
-//            MenuItemsFactory.MenuItemTypes.SETTINGS.id -> toFragment(SettingsFragment.FRAGMENT_KEY)
-            MenuItemsFactory.MenuItemTypes.SETTINGS.id -> mView?.notImplemented()
+            MenuItemsFactory.MenuItemTypes.SETTINGS.id -> toFragment(SettingsFragment.FRAGMENT_KEY)
             MenuItemsFactory.MenuItemTypes.BANK_OF_VACANCY.id -> toFragment(JobsBankFragment.FRAGMENT_KEY)
             MenuItemsFactory.MenuItemTypes.IMPORTANT_TO_KNOW.id -> toFragment(ImportantToKnowFragment.FRAGMENT_KEY)
             MenuItemsFactory.MenuItemTypes.SUPPORT.id -> toFragment(SupportFragment.FRAGMENT_KEY)

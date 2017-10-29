@@ -68,7 +68,7 @@
 
         <TextView
             android:id="@+id/createJobEtTypeOfEmployment"
-            style="@style/EditText"
+            style="@style/EditTextView"
             android:layout_width="match_parent"
             android:layout_height="@dimen/normalControlsHeight"
             android:layout_marginEnd="@dimen/externalPadding"
@@ -81,14 +81,13 @@
 
         <android.support.design.widget.TextInputEditText
             android:id="@+id/createJobEtResponsibilities"
-            style="@style/EditText"
+            style="@style/EditText.Multiline"
             android:layout_width="match_parent"
             android:layout_height="@dimen/largeControlsHeight"
             android:layout_marginBottom="@dimen/spacingXXLarge"
             android:layout_marginEnd="@dimen/externalPadding"
             android:layout_marginStart="@dimen/externalPadding"
             android:layout_marginTop="@dimen/externalPadding"
-            android:background="@drawable/rounded_edit_text_backgroud"
             android:gravity="top"
             android:hint="@string/responsibilities"
             android:inputType="textMultiLine"
@@ -112,30 +111,33 @@
 
             <RadioButton
                 android:id="@+id/createJobChSchool"
-                style="@style/SmallText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:checked="true"
                 android:padding="@dimen/spacingLarge"
-                android:text="@string/school" />
+                android:text="@string/school"
+                android:textAppearance="?android:textAppearanceSmall"
+                android:textColor="?android:textColor" />
 
             <RadioButton
                 android:id="@+id/createJobChCollege"
-                style="@style/SmallText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:checked="true"
                 android:padding="@dimen/spacingLarge"
-                android:text="@string/college" />
+                android:text="@string/college"
+                android:textAppearance="?android:textAppearanceSmall"
+                android:textColor="?android:textColor" />
 
             <RadioButton
                 android:id="@+id/createJobChUniversity"
-                style="@style/SmallText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:checked="true"
                 android:padding="@dimen/spacingLarge"
-                android:text="@string/university" />
+                android:text="@string/university"
+                android:textAppearance="?android:textAppearanceSmall"
+                android:textColor="?android:textColor" />
         </RadioGroup>
 
         <android.support.v7.widget.AppCompatButton
@@ -148,7 +150,6 @@
             android:text="@string/create_vacancy"
             android:textAllCaps="false"
             app:backgroundTint="@color/orange" />
-
 
     </LinearLayout>
 

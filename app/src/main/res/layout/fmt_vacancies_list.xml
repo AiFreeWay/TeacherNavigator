@@ -10,6 +10,7 @@
         android:layout_marginTop="@dimen/spacingXLarge"
         android:layout_marginLeft="@dimen/spacingXLarge"
         android:layout_marginRight="@dimen/spacingXLarge"
+        app:cardBackgroundColor="?cardBackgroundColor"
         android:layout_height="wrap_content"
         android:padding="@dimen/spacingMedium">
 
@@ -36,7 +37,8 @@
 
                 <CheckBox
                     android:id="@+id/vacanciesChSchool"
-                    style="@style/SmallText"
+                    android:textAppearance="?android:textAppearanceSmall"
+                    android:textColor="?android:textColor"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:checked="true"
@@ -45,7 +47,8 @@
 
                 <CheckBox
                     android:id="@+id/vacanciesChCollege"
-                    style="@style/SmallText"
+                    android:textAppearance="?android:textAppearanceSmall"
+                    android:textColor="?android:textColor"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:checked="true"
@@ -54,7 +57,8 @@
 
                 <CheckBox
                     android:id="@+id/vacanciesChUniversity"
-                    style="@style/SmallText"
+                    android:textAppearance="?android:textAppearanceSmall"
+                    android:textColor="?android:textColor"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:checked="true"

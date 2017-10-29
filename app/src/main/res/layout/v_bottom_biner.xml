@@ -7,7 +7,6 @@
 
     <TextView
         android:id="@+id/v_bottom_holder_tv_about"
-        style="@style/Text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
@@ -26,7 +25,6 @@
 
     <TextView
         android:id="@+id/v_bottom_holder_tv_tags"
-        style="@style/Text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
@@ -41,7 +39,6 @@
         android:padding="@dimen/spacingLarge"
         android:text="@string/tags"
         android:textColor="@color/colorAccent" />
-
 
     <View
         android:id="@+id/guidepoint"
@@ -61,5 +58,6 @@
         android:drawablePadding="@dimen/spacingXLarge"
         android:drawableStart="@drawable/ic_pencil"
         android:text="@string/add_publication"
+        android:textColor="@color/white"
         app:backgroundTint="@color/colorAccent" />
 </RelativeLayout>

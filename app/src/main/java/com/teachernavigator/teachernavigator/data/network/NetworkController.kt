@@ -15,7 +15,6 @@ import com.teachernavigator.teachernavigator.data.network.responses.SingInRespon
 import com.teachernavigator.teachernavigator.data.utils.toRequestBody
 import com.teachernavigator.teachernavigator.domain.models.*
 import com.teachernavigator.teachernavigator.presentation.models.Specialist
-import io.reactivex.Observable
 import io.reactivex.Single
 import okhttp3.Interceptor
 import okhttp3.MediaType
@@ -95,6 +94,9 @@ constructor(gson: Gson) {
 
     fun convertToken(request: ConvertTokenRequest): Single<SingInResponse> =
             mApiController.convertToken(request)
+
+    fun googleAuth(code: String): Single<SingInResponse> =
+            mApiController.googleAuth(code)
 
     fun restorePassword(request: RestorePasswordRequest): Single<BaseResponse> =
             mApiController.restorePassword(request)
@@ -254,23 +256,15 @@ constructor(gson: Gson) {
             mApiController.chatHistory(accessToken, messageId)
 
     fun getTags(accessToken: String): Single<List<Tag>> =
-            Observable.range(1, MAX_PAGE_COUNT)
-                    .flatMap { loadTags(accessToken, it) }
-                    .takeUntil { it.next.isNullOrBlank() || it.count == 0 }
+            loadTags(accessToken)
                     .map { it.results }
-                    .flatMap { Observable.fromIterable(it) }
-                    .toList()
 
     fun getTrends(accessToken: String): Single<List<Tag>> =
-            Observable.range(1, MAX_PAGE_COUNT)
-                    .flatMap { loadTrends(accessToken, it) }
-                    .takeUntil { it.next.isNullOrBlank() || it.count == 0 }
+            loadTrends(accessToken)
                     .map { it.results }
-                    .flatMap { Observable.fromIterable(it) }
-                    .toList()
 
-    private fun loadTags(accessToken: String, page: Int) = mApiController.tags(accessToken, page)
-    private fun loadTrends(accessToken: String, page: Int) = mApiController.tagsTrends(accessToken, page)
+    private fun loadTags(accessToken: String) = mApiController.tags(accessToken)
+    private fun loadTrends(accessToken: String) = mApiController.tagsTrends(accessToken)
 
 
     fun sendPost(accessToken: String, title: String, text: String, tags: List<String>, fileInfo: FileInfo?): Single<PostNetwork> {

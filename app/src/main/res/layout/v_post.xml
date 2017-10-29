@@ -19,27 +19,26 @@
 
     <TextView
         android:id="@+id/v_post_tv_author_name"
-        style="@style/TitleText"
-
-        android:layout_toLeftOf="@+id/v_post_iv_subscribe"
-        android:layout_toStartOf="@+id/v_post_iv_subscribe"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_marginLeft="@dimen/externalPadding"
         android:layout_marginStart="@dimen/externalPadding"
         android:layout_toEndOf="@+id/v_post_iv_avatar"
+        android:layout_toLeftOf="@+id/v_post_iv_subscribe"
         android:layout_toRightOf="@+id/v_post_iv_avatar"
+        android:layout_toStartOf="@+id/v_post_iv_subscribe"
+        android:textAppearance="?android:textAppearanceLarge"
         tools:text="Имя Автора" />
 
     <TextView
         android:id="@+id/v_post_tv_post_time"
-        style="@style/SmallText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/v_post_tv_author_name"
         android:layout_alignStart="@+id/v_post_tv_author_name"
         android:layout_below="@+id/v_post_tv_author_name"
+        android:textAppearance="?android:textAppearanceSmall"
         android:textColor="@color/lightTextColor"
         tools:text="Только что" />
 
@@ -56,7 +55,6 @@
 
     <TextView
         android:id="@+id/v_post_tv_title"
-        style="@style/Text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/v_post_tv_author_name"
@@ -65,12 +63,10 @@
         android:layout_marginTop="@dimen/externalPadding"
         android:fontFamily="sans-serif-medium"
         android:textAllCaps="false"
-        android:textColor="@color/darkTextColor"
         tools:text="Название поста" />
 
     <TextView
         android:id="@+id/v_post_tv_text"
-        style="@style/Text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/v_post_tv_title"
@@ -145,21 +141,22 @@
             android:layout_height="wrap_content"
             android:text="@string/more"
             android:textAllCaps="false"
+            android:textAppearance="?android:textAppearanceSmall"
+            android:textColor="@color/white"
             app:backgroundTint="@color/colorAccent" />
 
         <android.support.v7.widget.AppCompatButton
             android:id="@+id/v_post_btn_pass_test"
-            style="@style/Button.Small"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/pass_test"
             android:textAllCaps="false"
+            android:textAppearance="?android:textAppearanceSmall"
             android:visibility="gone"
             app:backgroundTint="@color/colorAccent" />
 
         <TextView
             android:id="@+id/v_post_tv_complain"
-            style="@style/Text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/spacingXLarge"
@@ -168,7 +165,7 @@
             android:gravity="center_vertical"
             android:padding="@dimen/spacingLarge"
             android:text="@string/complain"
-            android:textColor="@color/greyTextColor"
+            android:textAppearance="?android:textAppearanceSmall"
             android:textSize="@dimen/smallTextSize"
             android:visibility="visible" />
     </LinearLayout>
@@ -220,7 +217,6 @@
 
     <TextView
         android:id="@+id/v_post_tv_like"
-        style="@style/Text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
@@ -235,7 +231,6 @@
 
     <TextView
         android:id="@+id/v_post_tv_dislike"
-        style="@style/Text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@+id/v_post_tv_like"
@@ -251,7 +246,6 @@
 
     <TextView
         android:id="@+id/v_post_tv_comments"
-        style="@style/Text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/v_post_v_devider"
@@ -287,6 +281,7 @@
         android:layout_margin="@dimen/spacingSmall"
         android:text="@string/open_branch"
         android:textAllCaps="false"
+        android:textAppearance="?android:textAppearanceSmall"
         android:visibility="gone"
         app:backgroundTint="@color/colorAccent" />
 

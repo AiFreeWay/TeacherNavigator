@@ -18,8 +18,8 @@
         android:gravity="center"
         android:padding="@dimen/spacingXXLarge"
         android:text="@string/me_employer"
+        android:textColor="@color/greyTextColor"
         android:textSize="@dimen/titleTextSize"
-
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -36,6 +36,8 @@
         android:gravity="center"
         android:padding="@dimen/spacingXXLarge"
         android:text="@string/applicant"
+        android:textAppearance="?android:textAppearanceLargeInverse"
+        android:textColor="@color/greyTextColor"
         android:textSize="@dimen/titleTextSize"
 
         app:layout_constraintLeft_toLeftOf="parent"
@@ -158,10 +160,10 @@
         android:layout_marginRight="@dimen/spacingXXLarge"
 
         android:background="@drawable/ic_circle_orange"
-        app:srcCompat="@drawable/ic_chosen"
-
         app:layout_constraintBottom_toBottomOf="@+id/jobsBankCardApplicant"
+
         app:layout_constraintRight_toRightOf="@+id/jobsBankCardApplicant"
+        app:srcCompat="@drawable/ic_chosen"
 
         tools:ignore="ContentDescription"
 

@@ -26,20 +26,20 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
+        android:textAppearance="?android:textAppearanceSmall"
         android:layout_margin="@dimen/spacingMedium"
         android:text="@string/pending_time"
-        android:textSize="@dimen/normalTextSize" />
+        />
 
     <android.support.design.widget.TextInputEditText
         android:id="@+id/askQuestionEtMessage"
-        style="@style/EditText"
+        style="@style/EditText.Multiline"
         android:layout_width="match_parent"
         android:layout_height="@dimen/largeControlsHeight"
         android:layout_marginBottom="@dimen/spacingMedium"
         android:layout_marginEnd="@dimen/externalPadding"
         android:layout_marginStart="@dimen/externalPadding"
         android:layout_marginTop="@dimen/spacingXXXLarge"
-        android:background="@drawable/rounded_edit_text_backgroud"
         android:gravity="top"
         android:hint="@string/write_question"
         android:inputType="textMultiLine"

@@ -25,6 +25,7 @@
             android:padding="@dimen/spacingMedium"
             android:textSize="@dimen/smallTextSize"
             android:textStyle="bold"
+            android:textColor="@color/lightTextColor"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="12:25" />
@@ -52,6 +53,7 @@
             android:paddingBottom="@dimen/spacingMedium"
             android:paddingLeft="@dimen/spacingMedium"
             android:paddingRight="@dimen/spacingMedium"
+            android:textColor="@color/textColor"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"

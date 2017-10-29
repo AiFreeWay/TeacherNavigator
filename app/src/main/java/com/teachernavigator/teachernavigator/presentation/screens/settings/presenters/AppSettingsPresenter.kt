@@ -38,6 +38,7 @@ constructor(val router: Router,
     override fun changeNightTheme(state: Boolean) {
         mSettings.isNithThemeOn = state
         settingsInteractor.putSettings(mSettings)
+        mView?.setSettings(mSettings)
     }
 
     override fun changePush(state: Boolean) {
@@ -52,21 +53,21 @@ constructor(val router: Router,
 
     override fun doOnError(error: Throwable) {
         super.doOnError(error)
-        mView!!.getParentView().stopProgress()
-        mView!!.unlockUi()
+        mView?.getParentView()?.stopProgress()
+        mView?.unlockUi()
         Toast.makeText(mView!!.getContext(), mView!!.getContext().getString(R.string.error_throwed), Toast.LENGTH_SHORT).show()
     }
 
     private fun doOnGetSettings(settings: Settings) {
         mSettings = settings
-        mView!!.getParentView().stopProgress()
-        mView!!.unlockUi()
-        mView!!.loadSettings(settings)
+        mView?.getParentView()?.stopProgress()
+        mView?.unlockUi()
+        mView?.setSettings(settings)
     }
 
     private fun doOnSubscribe() {
-        mView!!.getParentView().startProgress()
-        mView!!.lockUi()
+        mView?.getParentView()?.startProgress()
+        mView?.lockUi()
     }
 
 }

@@ -3,7 +3,6 @@ package com.teachernavigator.teachernavigator.presentation.screens.main.fragment
 import android.Manifest
 import android.app.Activity
 import android.os.Bundle
-import android.support.v7.app.AlertDialog
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.view.*
@@ -21,6 +20,7 @@ import com.teachernavigator.teachernavigator.presentation.screens.common.BaseFra
 import com.teachernavigator.teachernavigator.presentation.screens.main.fragments.abstractions.ProfileView
 import com.teachernavigator.teachernavigator.presentation.screens.main.presenters.abstractions.IPostActionsController
 import com.teachernavigator.teachernavigator.presentation.screens.main.presenters.abstractions.IProfilePresenter
+import com.teachernavigator.teachernavigator.presentation.utils.DialogUtils
 import com.teachernavigator.teachernavigator.presentation.utils.argNullable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
@@ -165,16 +165,26 @@ class ProfileFragment : BaseFragment(), ProfileView {
     }
 
     private fun exit() {
-        AlertDialog.Builder(context)
-                .setTitle(getString(R.string.you_want_exit))
-                .setPositiveButton(R.string.yes, { a, b ->
-                    presenter.exit()
-                    getParentView().updateToolbarAlpha(1F)
-                    a.dismiss()
-                })
-                .setNegativeButton(R.string.no, { a, b -> a.dismiss() })
-                .setCancelable(true)
-                .show()
+        DialogUtils.showConfirmDialog(context,
+                R.string.you_want_exit,
+                R.string.yes,
+                R.string.no) {
+            if (it) {
+                presenter.exit()
+                getParentView().updateToolbarAlpha(1F)
+            }
+        }
+
+//        AlertDialog.Builder(context)
+//                .setTitle(getString(R.string.you_want_exit))
+//                .setPositiveButton(R.string.yes, { a, b ->
+//                    presenter.exit()
+//                    getParentView().updateToolbarAlpha(1F)
+//                    a.dismiss()
+//                })
+//                .setNegativeButton(R.string.no, { a, b -> a.dismiss() })
+//                .setCancelable(true)
+//                .show()
     }
 
     private fun onChangeAvatar(profileModel: ProfileModel) {

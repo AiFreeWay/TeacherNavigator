@@ -10,5 +10,5 @@ interface AppSettingsView : ChildView {
 
     fun lockUi()
     fun unlockUi()
-    fun loadSettings(settings: Settings)
+    fun setSettings(settings: Settings)
 }

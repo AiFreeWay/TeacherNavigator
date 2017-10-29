@@ -11,7 +11,7 @@ interface IAuthInteractor {
 
     fun isAuthAsync(): Single<Boolean>
 
-    fun singInViaGoogle(token: String): Single<Monade>
+    fun singInViaGoogle(code: String): Single<Monade>
     fun singInViaVk(token: String): Single<Monade>
     fun singInViaFacebook(token: String): Single<Monade>
     fun singInViaTwitter(oauthToken : String, oauthTokenSecret : String): Single<Monade>

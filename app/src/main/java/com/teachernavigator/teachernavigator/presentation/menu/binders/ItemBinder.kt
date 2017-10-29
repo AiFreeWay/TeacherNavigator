@@ -1,34 +1,30 @@
 package com.teachernavigator.teachernavigator.presentation.menu.binders
 
+import android.support.v4.content.ContextCompat
 import android.view.ViewGroup
-import android.widget.ImageView
 import android.widget.TextView
-import butterknife.BindView
-import butterknife.ButterKnife
 import com.teachernavigator.teachernavigator.R
 import com.teachernavigator.teachernavigator.presentation.models.MenuData
 import com.teachernavigator.teachernavigator.presentation.models.MenuItem
+import com.teachernavigator.teachernavigator.presentation.utils.find
 
 /**
- * Created by root on 28.08.17.
+ * Created by root on 28.08.17
  */
 class ItemBinder(viewGroup: ViewGroup) : BaseMenuBinder(viewInflater(viewGroup, R.layout.v_item_binder)) {
 
-    @BindView(R.id.v_item_tv_title)
-    lateinit var mTvTitle: TextView
-    @BindView(R.id.v_item_iv_icon)
-    lateinit var mIvIcon: ImageView
-
-    init {
-        ButterKnife.bind(this, mView)
-    }
+    val context = viewGroup.context
+    val mTvTitle: TextView = mView.find(R.id.v_item_tv_title)
 
     override fun bind(menuItem: MenuItem) {
-        mTvTitle.setText(menuItem.mTitle)
-        mIvIcon.setImageResource(menuItem.mIconRes!!)
+        mTvTitle.text = menuItem.mTitle
+        val icon = menuItem.mIconRes
+        if (icon != null) {
+            mTvTitle.setCompoundDrawablesWithIntrinsicBounds(ContextCompat.getDrawable(context, icon), null, null, null)
+        }
+
         mView.setOnClickListener {
-            val action = MenuData<Any>(menuItem.mType, null)
-            mOutputChannel?.onNext(action)
+            mOutputChannel?.onNext(MenuData<Any>(menuItem.mType, null))
         }
     }
 }

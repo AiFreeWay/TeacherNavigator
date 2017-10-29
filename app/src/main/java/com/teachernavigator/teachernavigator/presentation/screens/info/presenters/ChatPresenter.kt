@@ -2,7 +2,6 @@ package com.teachernavigator.teachernavigator.presentation.screens.info.presente
 
 import android.arch.lifecycle.Lifecycle
 import android.arch.lifecycle.OnLifecycleEvent
-import android.util.Log
 import android.util.Log.d
 import com.teachernavigator.teachernavigator.R
 import com.teachernavigator.teachernavigator.application.di.scopes.PerParentScreen
@@ -63,7 +62,7 @@ class ChatPresenter
 
         when (envelope) {
 
-            is ChatEnvelope.ChatMessage -> mView?.addMessage(messageTransformer.transform(envelope.message.apply { user = envelope.user }))
+            is ChatEnvelope.ChatMessage -> mView?.addMessage(messageTransformer.transform(envelope.message))
             is ChatEnvelope.ChatStatus -> mView?.setState(envelope.status)
             is ChatEnvelope.ChatMembers -> mView?.setMembersCount(envelope.membersCount)
 

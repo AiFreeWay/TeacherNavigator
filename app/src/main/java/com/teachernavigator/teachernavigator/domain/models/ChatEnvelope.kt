@@ -12,7 +12,8 @@ sealed class ChatEnvelope {
     data class ChatStatus(val status: WebSocketState) : ChatEnvelope()
 
     data class ChatMembers(@SerializedName("amount_of_members") val membersCount: Int) : ChatEnvelope()
-    data class ChatMessage(val message: Message, val user: Author) : ChatEnvelope()
+
+    data class ChatMessage(val message: Message) : ChatEnvelope()
 
     data class ChatError(val error: Throwable) : ChatEnvelope()
 

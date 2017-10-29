@@ -90,7 +90,6 @@
             android:layout_marginEnd="@dimen/spacingXXLarge"
             android:layout_marginStart="@dimen/spacingXXLarge"
             android:layout_marginTop="@dimen/externalPadding"
-            android:background="@drawable/oval_edit_text_backgroud"
             android:hint="@string/login_hint"
             android:lines="1" />
 
@@ -103,7 +102,6 @@
             android:layout_marginEnd="@dimen/spacingXXLarge"
             android:layout_marginStart="@dimen/spacingXXLarge"
             android:layout_marginTop="@dimen/internalPadding"
-            android:background="@drawable/oval_edit_text_backgroud"
             android:hint="@string/password"
             android:inputType="textPassword"
             android:lines="1" />

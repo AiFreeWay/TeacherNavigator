@@ -29,8 +29,9 @@
 
     <TextView
         android:id="@+id/v_login_binder_tv_sing_in"
-        style="@style/TitleText"
+        android:textAppearance="?android:textAppearanceLarge"
         android:layout_width="wrap_content"
+        android:textColor="@color/textColor"
         android:layout_height="wrap_content"
         android:layout_below="@+id/v_login_binder_iv_avatar"
         android:layout_centerHorizontal="true"

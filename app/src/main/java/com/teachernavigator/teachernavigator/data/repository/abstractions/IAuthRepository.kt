@@ -23,6 +23,7 @@ interface IAuthRepository {
     fun isAuth(): Boolean
     fun saveToken(token: Token)
     fun singInViaSocials(request: ConvertTokenRequest): Single<SingInResponse>
+    fun singInViaGoogle(code: String): Single<SingInResponse>
     fun singInViaTwitter(): Observable<Monade>
     fun singIn(request: SingInRequest): Single<SingInResponse>
     fun singUp(request: SingUpRequest): Single<BaseResponse>

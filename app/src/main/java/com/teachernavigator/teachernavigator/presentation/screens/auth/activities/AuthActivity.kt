@@ -41,6 +41,8 @@ class AuthActivity : AppCompatActivity(), AuthParentView {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setTheme(R.style.AppTheme_Day)
+
         setContentView(R.layout.ac_auth)
         mParentScreenComponent.inject(this)
         initToolbar()

@@ -10,21 +10,59 @@
 
         <item name="cardBackgroundColor">@color/white</item>
 
+        <item name="android:windowBackground">@color/black</item>
+
     </style>
 
-    <style name="TitleText">
-        <item name="android:textSize">@dimen/titleTextSize</item>
-        <item name="android:textColor">@color/textColor</item>
+    <style name="AppTheme.Night">
+        <item name="android:windowBackground">@color/black</item>
+        <item name="cardBackgroundColor">@color/black</item>
+
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textColorHint">@color/grey</item>
+
+        <item name="android:textAppearance">@style/TextAppearance</item>
+        <item name="android:textAppearanceSmall">@style/TextAppearanceSmall</item>
+        <item name="android:textAppearanceLarge">@style/TextAppearanceLarge</item>
+
     </style>
+
+    <style name="AppTheme.Day">
+        <item name="android:windowBackground">@color/white</item>
+        <item name="cardBackgroundColor">@color/white</item>
+
+        <item name="android:textColor">@color/textColor</item>
+        <item name="android:textColorHint">@color/grey</item>
+
+        <item name="android:textAppearance">@style/TextAppearance</item>
+        <item name="android:textAppearanceSmall">@style/TextAppearanceSmall</item>
+        <item name="android:textAppearanceLarge">@style/TextAppearanceLarge</item>
+
+    </style>
+
+
+    <style name="TextAppearanceLarge" parent="@android:style/TextAppearance">
+        <item name="android:textSize">@dimen/titleTextSize</item>
+    </style>
+
+    <style name="TextAppearance" parent="@android:style/TextAppearance">
+        <item name="android:textSize">@dimen/normalTextSize</item>
+    </style>
+
+    <style name="TextAppearanceSmall" parent="@android:style/TextAppearance">
+        <item name="android:textSize">@dimen/smallTextSize</item>
+    </style>
+
+
 
     <style name="Text">
         <item name="android:textSize">@dimen/normalTextSize</item>
-        <item name="android:textColor">@color/textColor</item>
+        <item name="android:textColor">@color/colorAccent</item>
     </style>
 
     <style name="SmallText">
         <item name="android:textSize">@dimen/smallTextSize</item>
-        <item name="android:textColor">@color/textColor</item>
+        <item name="android:textColor">@color/orange</item>
     </style>
 
     <style name="Dialog" parent="Theme.AppCompat.Light.Dialog.Alert">
@@ -60,6 +98,13 @@
         <item name="android:paddingBottom">@dimen/spacingLarge</item>
         <item name="android:paddingTop">@dimen/spacingLarge</item>
         <item name="android:inputType">text</item>
+        <item name="android:textColor">?android:textColor</item>
+    </style>
+
+    <style name="EditText.Multiline" parent="Base.Widget.AppCompat.EditText">
+        <item name="android:background">@drawable/oval_text_backgroud</item>
+        <item name="android:minLines">5</item>
+        <item name="android:textColor">?android:textColor</item>
     </style>
 
     <style name="EditTextView">
@@ -69,6 +114,7 @@
         <item name="android:paddingBottom">@dimen/spacingLarge</item>
         <item name="android:paddingTop">@dimen/spacingLarge</item>
         <item name="android:textSize">@dimen/titleTextSize</item>
+        <item name="android:textColor">?android:textColor</item>
     </style>
 
     <style name="TransperentToolbar" parent="AppTheme">

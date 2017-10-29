@@ -35,6 +35,8 @@ class MainActivity : AppCompatActivity(), MainView {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setTheme(R.style.AppTheme_Night)
+
         setContentView(R.layout.ac_main)
         initToolbar()
         mPresenter.attachView(this)

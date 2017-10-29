@@ -2,7 +2,10 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+
+
+    >
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -37,7 +40,8 @@
                 android:layout_weight="1"
                 android:background="?android:attr/selectableItemBackground"
                 android:padding="@dimen/spacingMedium"
-                android:src="@drawable/ic_social_vk" />
+                android:src="@drawable/ic_social_vk"
+                tools:ignore="ContentDescription" />
 
             <ImageView
                 android:id="@+id/fmtAboutSocialTw"
@@ -47,7 +51,9 @@
                 android:background="?android:attr/selectableItemBackground"
                 android:padding="@dimen/spacingMedium"
                 android:src="@drawable/ic_social_tw"
-                android:visibility="gone" />
+                android:visibility="gone"
+
+                tools:ignore="ContentDescription" />
 
             <ImageView
                 android:id="@+id/fmtAboutSocialFb"
@@ -56,7 +62,8 @@
                 android:layout_weight="1"
                 android:background="?android:attr/selectableItemBackground"
                 android:padding="@dimen/spacingMedium"
-                android:src="@drawable/ic_social_fb" />
+                android:src="@drawable/ic_social_fb"
+                tools:ignore="ContentDescription" />
 
             <ImageView
                 android:id="@+id/fmtAboutInstagram"
@@ -65,7 +72,8 @@
                 android:layout_weight="1"
                 android:background="?android:attr/selectableItemBackground"
                 android:padding="@dimen/spacingMedium"
-                android:src="@drawable/ic_instagram" />
+                android:src="@drawable/ic_instagram"
+                tools:ignore="ContentDescription" />
 
             <ImageView
                 android:id="@+id/fmtAboutYoutube"
@@ -75,7 +83,8 @@
                 android:background="?android:attr/selectableItemBackground"
                 android:padding="@dimen/spacingMedium"
                 android:src="@drawable/ic_youtube"
-                android:visibility="visible" />
+                android:visibility="visible"
+                tools:ignore="ContentDescription" />
 
         </LinearLayout>
 

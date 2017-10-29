@@ -9,7 +9,7 @@ import io.reactivex.Observable
 import io.reactivex.Observer
 
 /**
- * Created by root on 28.08.17.
+ * Created by root on 28.08.17
  */
 abstract class BaseMenuBinder(protected val mView: View) {
 

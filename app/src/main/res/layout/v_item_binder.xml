@@ -1,26 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/v_item_tv_title"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginBottom="12dp"
-    android:layout_marginEnd="@dimen/externalPadding"
-    android:layout_marginStart="@dimen/externalPadding"
-    android:layout_marginTop="12dp"
-    android:background="@android:color/white"
+    android:background="?android:attr/selectableItemBackground"
+    android:drawablePadding="@dimen/spacingLarge"
     android:gravity="center_vertical"
-    android:orientation="horizontal">
-
-    <ImageView
-        android:id="@+id/v_item_iv_icon"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="32dp" />
-
-    <TextView
-        android:id="@+id/v_item_tv_title"
-        style="@style/Text"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="22dp"
-        android:layout_marginStart="22dp" />
-</LinearLayout>
+    android:paddingBottom="@dimen/spacingXLarge"
+    android:paddingEnd="@dimen/spacingXXXLarge"
+    android:paddingStart="@dimen/spacingXXXLarge"
+    android:paddingTop="@dimen/spacingXLarge"
+    android:textColor="@color/black" />

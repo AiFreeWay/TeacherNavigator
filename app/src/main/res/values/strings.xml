@@ -222,6 +222,9 @@
     <string name="connected">Подключено</string>
     <string name="connecting">Подключение</string>
     <string name="disconnecting">Отключение</string>
+    <string name="input_text_publication">Введите ткст публикации</string>
+    <string name="author_example">Иван Иванов</string>
+    <string name="apply_changes">Применить</string>
 
     <plurals name="plural_years">
         <item quantity="zero">%1$d лет

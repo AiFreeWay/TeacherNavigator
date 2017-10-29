@@ -4,34 +4,24 @@ import android.text.TextUtils
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import butterknife.BindView
-import butterknife.ButterKnife
 import com.teachernavigator.teachernavigator.R
 import com.teachernavigator.teachernavigator.domain.models.Profile
 import com.teachernavigator.teachernavigator.presentation.factories.MenuItemsFactory
 import com.teachernavigator.teachernavigator.presentation.models.MenuData
 import com.teachernavigator.teachernavigator.presentation.models.MenuItem
 import com.teachernavigator.teachernavigator.presentation.utils.ImageLoader
+import com.teachernavigator.teachernavigator.presentation.utils.find
 
 /**
- * Created by root on 28.08.17.
+ * Created by root on 28.08.17
  */
 class HeaderBinder(viewGroup: ViewGroup) : BaseMenuBinder(viewInflater(viewGroup, R.layout.v_header_binder)) {
 
-    @BindView(R.id.v_header_binder_iv_settings)
-    lateinit var mIvSettings: ImageView
-    @BindView(R.id.v_header_binder_iv_avatar)
-    lateinit var mIvAvatar: ImageView
-    @BindView(R.id.v_header_binder_tv_title)
-    lateinit var mTvTitle: TextView
-    @BindView(R.id.v_header_binder_tv_rating)
-    lateinit var mTvRating: TextView
-    @BindView(R.id.v_header_binder_tv_subscribers)
-    lateinit var mTvSubscribers: TextView
-
-    init {
-        ButterKnife.bind(this, mView)
-    }
+    private val mIvSettings: ImageView = mView.find(R.id.v_header_binder_iv_settings)
+    private val mIvAvatar: ImageView = mView.find(R.id.v_header_binder_iv_avatar)
+    private val mTvTitle: TextView = mView.find(R.id.v_header_binder_tv_title)
+    private val mTvRating: TextView = mView.find(R.id.v_header_binder_tv_rating)
+    private val mTvSubscribers: TextView = mView.find(R.id.v_header_binder_tv_subscribers)
 
     override fun bind(menuItem: MenuItem) {
         mView.setOnClickListener {
@@ -60,14 +50,14 @@ class HeaderBinder(viewGroup: ViewGroup) : BaseMenuBinder(viewInflater(viewGroup
             ImageLoader.load(mView.context, profile.avatar, mIvAvatar)
 
         if (!TextUtils.isEmpty(profile.full_name))
-            mTvTitle.setText(profile.full_name)
+            mTvTitle.text = profile.full_name
         else
-            mTvTitle.setText(mView.context.getString(R.string.not_define))
+            mTvTitle.text = mView.context.getString(R.string.not_define)
 
-        val subscribers = if (profile.count_subscribers != null && profile.count_subscribers >0 )
+        val subscribers = if (profile.count_subscribers != null && profile.count_subscribers > 0)
             profile.count_subscribers
         else 0
 
-        mTvSubscribers.setText(subscribers.toString())
+        mTvSubscribers.text = subscribers.toString()
     }
 }

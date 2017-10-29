@@ -2,6 +2,7 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
+    android:background="?android:windowBackground"
     android:layout_height="match_parent">
 
     <LinearLayout
@@ -18,7 +19,6 @@
             android:paddingRight="40dp">
 
             <TextView
-                style="@style/Text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.2"
@@ -31,11 +31,10 @@
 
             <android.support.v7.widget.SwitchCompat
                 android:id="@+id/fmtAppSettingsSwhNightTheme"
-                style="@style/Text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.2"
-                android:gravity="right" />
+                android:gravity="end" />
         </LinearLayout>
 
         <LinearLayout
@@ -47,7 +46,6 @@
             android:paddingRight="40dp">
 
             <TextView
-                style="@style/Text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.2"
@@ -60,11 +58,10 @@
 
             <android.support.v7.widget.SwitchCompat
                 android:id="@+id/fmtAppSettingsSwhPushNotification"
-                style="@style/Text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.2"
-                android:gravity="right" />
+                android:gravity="end" />
         </LinearLayout>
 
         <LinearLayout
@@ -76,7 +73,6 @@
             android:paddingRight="40dp">
 
             <TextView
-                style="@style/Text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.2"
@@ -90,7 +86,6 @@
 
             <android.support.v7.widget.SwitchCompat
                 android:id="@+id/fmtAppSettingsSwhSound"
-                style="@style/Text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.2"
@@ -107,7 +102,6 @@
             android:paddingRight="40dp">
 
             <TextView
-                style="@style/Text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.1"
@@ -120,187 +114,33 @@
                 android:progress="50" />
 
             <TextView
-                style="@style/TitleText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.1"
                 android:gravity="right"
-                android:text="@string/a" />
+                android:text="@string/a"
+                android:textAppearance="?android:textAppearanceLarge" />
         </LinearLayout>
 
-        <android.support.v7.widget.CardView
+        <android.support.v7.widget.AppCompatButton
+            android:id="@+id/fmtAppSettingsBtnApply"
+            style="@style/Button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="20dp"
-            android:layout_marginLeft="@dimen/externalPadding"
-            android:layout_marginRight="@dimen/externalPadding"
-            android:layout_marginTop="@dimen/externalPadding">
+            android:layout_gravity="center"
+            android:layout_marginEnd="@dimen/spacingXXLarge"
+            android:layout_marginStart="@dimen/spacingXXLarge"
+            android:layout_marginTop="@dimen/externalPadding"
+            android:padding="@dimen/spacingMedium"
+            android:text="@string/apply_changes"
+            android:textAllCaps="false"
+            app:backgroundTint="@color/orange" />
 
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="@dimen/externalPadding">
+        <FrameLayout
+            android:id="@+id/fmtAppSettingsLPost"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="@dimen/spacingMedium" />
 
-                <ImageView
-                    android:id="@+id/vPostIvAvatar"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentStart="true"
-                    android:layout_alignParentTop="true"
-                    android:src="@drawable/ic_avatar" />
-
-                <TextView
-                    android:id="@+id/vPostTvAuthorName"
-                    style="@style/TitleText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentTop="true"
-                    android:layout_marginLeft="@dimen/externalPadding"
-                    android:layout_marginStart="@dimen/externalPadding"
-                    android:layout_marginTop="@dimen/internalPadding"
-                    android:layout_toEndOf="@+id/vPostIvAvatar"
-                    android:layout_toRightOf="@+id/vPostIvAvatar"
-                    android:text="@string/name" />
-
-                <TextView
-                    android:id="@+id/vPostTvPostTime"
-                    style="@style/SmallText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignLeft="@+id/vPostTvAuthorName"
-                    android:layout_alignStart="@+id/vPostTvAuthorName"
-                    android:layout_below="@+id/vPostTvAuthorName"
-                    android:text="@string/publication_time"
-                    android:textColor="@color/lightTextColor" />
-
-                <ImageView
-                    android:id="@+id/vPostIvSubscribe"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:layout_alignParentRight="true"
-                    android:layout_alignTop="@+id/vPostTvAuthorName"
-                    android:src="@drawable/ic_subscribe" />
-
-                <TextView
-                    android:id="@+id/vPostTvTitle"
-                    style="@style/Text"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_alignLeft="@+id/vPostTvAuthorName"
-                    android:layout_alignStart="@+id/vPostTvAuthorName"
-                    android:layout_below="@+id/vPostTvPostTime"
-                    android:layout_marginTop="@dimen/externalPadding"
-                    android:fontFamily="sans-serif-medium"
-                    android:text="@string/title_example"
-                    android:textAllCaps="false"
-                    android:textColor="@color/darkTextColor" />
-
-                <TextView
-                    android:id="@+id/vPostTvText"
-                    style="@style/Text"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_alignLeft="@+id/vPostTvTitle"
-                    android:layout_alignStart="@+id/vPostTvTitle"
-                    android:layout_below="@+id/vPostTvTitle"
-                    android:layout_marginTop="@dimen/externalPadding"
-                    android:ellipsize="end"
-                    android:maxLines="4"
-                    android:text="@string/text_example" />
-
-                <LinearLayout
-                    android:id="@+id/vPostLlMoreAndComplain"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/normalControlsHeight"
-                    android:layout_alignLeft="@+id/vPostTvTitle"
-                    android:layout_alignStart="@+id/vPostTvTitle"
-                    android:layout_below="@+id/vPostTvText"
-                    android:layout_marginTop="@dimen/externalPadding"
-                    android:gravity="end"
-                    android:orientation="horizontal">
-
-                    <android.support.v7.widget.AppCompatButton
-                        android:id="@+id/vPostBtnMore"
-                        style="@style/Button"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/more"
-                        android:textAllCaps="false"
-                        app:backgroundTint="@color/colorAccent" />
-                </LinearLayout>
-
-                <com.greenfrvr.hashtagview.HashtagView
-                    android:id="@+id/vPostHvHasttags"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentStart="true"
-                    android:layout_below="@+id/vPostLlMoreAndComplain"
-                    android:paddingTop="@dimen/externalPadding"
-                    app:rowGravity="left"
-                    app:tagBackground="@drawable/hash_tag_background"
-                    app:tagPaddingLeft="12dp"
-                    app:tagPaddingRight="12dp"
-                    app:tagTextColor="@color/greyTextColor"
-                    app:tagTextSize="@dimen/normalTextSize" />
-
-                <View
-                    android:id="@+id/vPostVDevider"
-                    android:layout_width="match_parent"
-                    android:layout_height="2dp"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentStart="true"
-                    android:layout_below="@+id/vPostHvHasttags"
-                    android:layout_marginTop="@dimen/internalPadding"
-                    android:background="@color/colorDevider" />
-
-                <TextView
-                    android:id="@+id/vPostTvLike"
-                    style="@style/Text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentStart="true"
-                    android:layout_below="@+id/vPostVDevider"
-                    android:layout_marginTop="10dp"
-                    android:drawableLeft="@drawable/ic_like"
-                    android:drawablePadding="@dimen/internalPadding"
-                    android:drawableStart="@drawable/ic_like"
-                    android:text="@string/zero" />
-
-                <TextView
-                    android:id="@+id/vPostTvDislike"
-                    style="@style/Text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignBaseline="@+id/vPostTvLike"
-                    android:layout_alignBottom="@+id/vPostTvLike"
-                    android:layout_marginEnd="@dimen/internalPadding"
-                    android:layout_marginLeft="@dimen/externalPadding"
-                    android:layout_marginRight="@dimen/internalPadding"
-                    android:layout_marginStart="@dimen/externalPadding"
-                    android:layout_toEndOf="@+id/vPostTvLike"
-                    android:layout_toRightOf="@+id/vPostTvLike"
-                    android:drawableLeft="@drawable/ic_dislike"
-                    android:drawablePadding="@dimen/internalPadding"
-                    android:drawableStart="@drawable/ic_dislike"
-                    android:text="@string/zero" />
-
-                <TextView
-                    android:id="@+id/vPostTvComments"
-                    style="@style/Text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/vPostVDevider"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginTop="10dp"
-                    android:drawableLeft="@drawable/ic_comments"
-                    android:drawablePadding="@dimen/internalPadding"
-                    android:drawableStart="@drawable/ic_comments"
-                    android:text="@string/zero" />
-            </RelativeLayout>
-        </android.support.v7.widget.CardView>
     </LinearLayout>
 </ScrollView>

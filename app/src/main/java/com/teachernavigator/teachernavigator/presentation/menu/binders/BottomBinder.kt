@@ -1,20 +1,26 @@
 package com.teachernavigator.teachernavigator.presentation.menu.binders
 
+import android.support.v7.widget.AppCompatButton
 import android.view.ViewGroup
-import butterknife.ButterKnife
-import butterknife.OnClick
+import android.widget.TextView
 import com.teachernavigator.teachernavigator.R
 import com.teachernavigator.teachernavigator.presentation.factories.MenuItemsFactory
 import com.teachernavigator.teachernavigator.presentation.models.MenuData
 import com.teachernavigator.teachernavigator.presentation.models.MenuItem
 
 /**
- * Created by root on 28.08.17.
+ * Created by root on 28.08.17
  */
 class BottomBinder(viewGroup: ViewGroup) : BaseMenuBinder(viewInflater(viewGroup, R.layout.v_bottom_biner)) {
 
+    private val btnAddPublication: AppCompatButton = mView.findViewById(R.id.v_bottom_binder_btn_add_publication)
+    private val tvAbout: TextView = mView.findViewById(R.id.v_bottom_holder_tv_about)
+    private val tvTags: TextView = mView.findViewById(R.id.v_bottom_holder_tv_tags)
+
     init {
-        ButterKnife.bind(this, mView)
+        btnAddPublication.setOnClickListener { addPublication() }
+        tvAbout.setOnClickListener { about() }
+        tvTags.setOnClickListener { tags() }
     }
 
     private var mMenuItem: MenuItem? = null
@@ -23,29 +29,21 @@ class BottomBinder(viewGroup: ViewGroup) : BaseMenuBinder(viewInflater(viewGroup
         mMenuItem = menuItem
     }
 
-    @OnClick(R.id.v_bottom_binder_btn_add_publication)
     fun addPublication() {
         mMenuItem?.run {
-            val action = MenuData<Any>(mType, null)
-            mOutputChannel?.onNext(action)
-
+            mOutputChannel?.onNext(MenuData<Any>(mType, null))
         }
     }
 
-    @OnClick(R.id.v_bottom_holder_tv_about)
     fun about() {
         mMenuItem?.run {
-            val action = MenuData<Any>(MenuItemsFactory.MenuItemTypes.ABOUT.id, null)
-            mOutputChannel?.onNext(action)
-
+            mOutputChannel?.onNext(MenuData<Any>(MenuItemsFactory.MenuItemTypes.ABOUT.id, null))
         }
     }
 
-    @OnClick(R.id.v_bottom_holder_tv_tags)
     fun tags() {
         mMenuItem?.run {
-            val action = MenuData<Any>(MenuItemsFactory.MenuItemTypes.TAGS.id, null)
-            mOutputChannel?.onNext(action)
+            mOutputChannel?.onNext(MenuData<Any>(MenuItemsFactory.MenuItemTypes.TAGS.id, null))
 
         }
     }

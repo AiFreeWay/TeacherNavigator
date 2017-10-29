@@ -114,8 +114,8 @@ constructor(val router: Router,
                     .doOnSubscribe { startProgress() }
                     .subscribe(this::doOnSingIn, this::doOnError))
 
-    private fun singInViaGoogle(token: String) =
-            addDissposable(authInteractor.singInViaGoogle(token)
+    private fun singInViaGoogle(code: String) =
+            addDissposable(authInteractor.singInViaGoogle(code)
                     .doOnSubscribe { startProgress() }
                     .subscribe(this::doOnSingIn, this::doOnError))
 
@@ -173,14 +173,10 @@ constructor(val router: Router,
 
     /* G+ Success */
     fun handleSignInResult(result: GoogleSignInResult) {
-
         result.signInAccount?.serverAuthCode?.let { singInViaGoogle(it) }
 
         d(javaClass.name, "-> result ->${result.signInAccount?.displayName}")
         d(javaClass.name, "-> result serverAuthCode ->${result.signInAccount?.serverAuthCode}")
-
-//        d(javaClass.name, "-> result ->${result.signInAccount?.id}")
-//        d(javaClass.name, "-> result idToken ->${result.signInAccount?.idToken}")
     }
 
     /* Fb Success */

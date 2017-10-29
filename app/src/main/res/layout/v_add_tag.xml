@@ -11,7 +11,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_margin="@dimen/spacingXXLarge">
+        android:layout_margin="@dimen/spacingXXLarge"
+        app:cardBackgroundColor="?cardBackgroundColor">
 
         <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
@@ -47,6 +48,8 @@
 
                 <EditText
                     android:id="@+id/vAddTagEtTag"
+                    android:textColor="?android:textColor"
+                    android:textColorHint="?android:textColorHint"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@null"

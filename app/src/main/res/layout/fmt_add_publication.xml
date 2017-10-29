@@ -29,7 +29,6 @@
 
             <TextView
                 android:id="@+id/fmtAddPublicationTvTitle"
-                style="@style/TitleText"
                 android:layout_width="@dimen/buttonAndTextWidth"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/fmtAddPublicationEtTitle"
@@ -38,10 +37,12 @@
                 android:layout_marginLeft="@dimen/spacingLarge"
                 android:layout_marginRight="@dimen/spacingLarge"
                 android:layout_marginTop="@dimen/spacingLarge"
-                android:text="@string/publication_text" />
+                android:text="@string/publication_text"
+                android:textAppearance="?android:textAppearanceLarge" />
 
             <android.support.design.widget.TextInputEditText
                 android:id="@+id/fmtAddPublicationEtText"
+                style="@style/EditText.Multiline"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/fmtAddPublicationTvTitle"
@@ -49,20 +50,20 @@
                 android:layout_marginBottom="@dimen/spacingSmall"
                 android:layout_marginLeft="@dimen/spacingLarge"
                 android:layout_marginRight="@dimen/spacingLarge"
+                android:hint="@string/input_text_publication"
                 android:layout_marginTop="@dimen/spacingSmall"
-                android:background="@drawable/oval_text_backgroud"
                 android:gravity="top"
-                android:minLines="5"
                 android:padding="@dimen/internalPadding" />
 
             <TextView
                 android:id="@+id/fmtAddPublicationTvAddTag"
-                style="@style/SmallText"
                 android:layout_width="wrap_content"
+                android:textAppearance="?android:textAppearanceSmall"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/fmtAddPublicationEtText"
                 android:layout_marginBottom="@dimen/spacingMedium"
                 android:layout_marginLeft="@dimen/spacingLarge"
+                android:textColor="@color/textColor"
                 android:layout_marginRight="@dimen/spacingLarge"
                 android:layout_marginTop="@dimen/spacingMedium"
                 android:background="@drawable/hash_tag_background"

@@ -6,8 +6,8 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:layout_marginBottom="32dp"
-        android:layout_marginEnd="22dp"
-        android:layout_marginStart="22dp"
+        android:layout_marginBottom="@dimen/spacingXLarge"
+        android:layout_marginEnd="@dimen/spacingXLarge"
+        android:layout_marginStart="@dimen/spacingXLarge"
         android:background="@color/colorDevider" />
 </FrameLayout>

@@ -10,7 +10,6 @@ import com.teachernavigator.teachernavigator.data.network.responses.PostsRespons
 import com.teachernavigator.teachernavigator.data.network.responses.SingInResponse
 import com.teachernavigator.teachernavigator.domain.models.*
 import io.reactivex.Maybe
-import io.reactivex.Observable
 import io.reactivex.Single
 import okhttp3.RequestBody
 import retrofit2.http.*
@@ -194,13 +193,13 @@ interface ApiController {
                      @Field("user") user: Int = 0): Single<Unit>
 
     @GET("/api/v0/tags/")
-    fun tags(@Header("Authorization") accessToken: String, @Query("page") page: Int): Observable<BaseListResponse<Tag>>
+    fun tags(@Header("Authorization") accessToken: String, @Query("limit") limit: Int = 300, @Query("offset") offset: Int = 0): Single<BaseListResponse<Tag>>
 
     @GET("/api/v0/me/comments/")
     fun myComments(@Header("Authorization") accessToken: String): Single<BaseListResponse<PostCommentNetwork>>
 
     @GET("/api/v0/tags/trends")
-    fun tagsTrends(@Header("Authorization") accessToken: String, @Query("page") page: Int): Observable<BaseListResponse<Tag>>
+    fun tagsTrends(@Header("Authorization") accessToken: String, @Query("limit") limit: Int = 300, @Query("offset") offset: Int = 0): Single<BaseListResponse<Tag>>
 
     @Multipart
     @POST("/api/v0/post/")
@@ -241,6 +240,10 @@ interface ApiController {
 
     @GET("/api/v0/history_chat/{messageId}")
     fun chatHistory(@Header("Authorization") accessToken: String, @Path("messageId") messageId: Int): Single<Message>
+
+    @Multipart
+    @POST("/api/v0/googleauth/")
+    fun googleAuth(@Part("code") code: String): Single<SingInResponse>
 
 
 }

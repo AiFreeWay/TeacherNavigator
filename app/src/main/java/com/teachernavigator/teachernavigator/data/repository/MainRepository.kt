@@ -80,6 +80,9 @@ class MainRepository @Inject constructor(private val mNetwokController: NetworkC
     override fun singInViaSocials(request: ConvertTokenRequest): Single<SingInResponse> =
             mNetwokController.convertToken(request)
 
+    override fun singInViaGoogle(code: String): Single<SingInResponse> =
+            mNetwokController.googleAuth(code)
+
     override fun singInViaTwitter(): Observable<Monade> = Observable.just(Monade(false))
 
     override fun singIn(request: SingInRequest): Single<SingInResponse> =
@@ -87,6 +90,9 @@ class MainRepository @Inject constructor(private val mNetwokController: NetworkC
 
     override fun singUp(request: SingUpRequest): Single<BaseResponse> =
             mNetwokController.singUp(request)
+
+
+
 
     override fun getAuthCredentials(): AuthCredentials {
         val clientId = mContext.getString(R.string.client_id)

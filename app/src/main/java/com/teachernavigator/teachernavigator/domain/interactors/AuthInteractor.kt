@@ -29,9 +29,8 @@ class AuthInteractor @Inject constructor(private val mRepository: IAuthRepositor
                     .map { mapSingInResponse(it) }
                     .applySchedulers()
 
-    override fun singInViaGoogle(token: String): Single<Monade> =
-            mRepository.createSocialAccount(SocialNetwork.Google, token)
-                    .flatMap { mRepository.singInViaSocials(AuthMapper.mapConvertTokenRequest(token, SocialNetwork.Google, mRepository.getAuthCredentials())) }
+    override fun singInViaGoogle(code: String): Single<Monade> =
+            mRepository.singInViaGoogle(code)
                     .map { mapSingInResponse(it) }
                     .sendFCM()
                     .applySchedulers()

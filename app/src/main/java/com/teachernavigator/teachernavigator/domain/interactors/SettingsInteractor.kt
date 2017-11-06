@@ -11,6 +11,9 @@ import javax.inject.Inject
  */
 class SettingsInteractor @Inject constructor(private val mRepository: ISettingsRepository) : ISettingsInteractor {
 
+    override fun updateFCM() =
+            mRepository.updateFCM()
+
     override fun getSettings(): Observable<Settings> = mRepository.getSettings()
 
     override fun putSettings(settings: Settings) {

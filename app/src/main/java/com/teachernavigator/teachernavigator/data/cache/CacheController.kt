@@ -2,6 +2,7 @@ package com.teachernavigator.teachernavigator.data.cache
 
 import com.google.firebase.iid.FirebaseInstanceId
 import com.orhanobut.hawk.Hawk
+import com.teachernavigator.teachernavigator.domain.models.Settings
 import java.util.*
 
 /**
@@ -36,12 +37,8 @@ class CacheController {
             return Hawk.get(DEVICE_ID_KEY)
         }
 
-        fun isPushEnabled(): Boolean {
-            if (!Hawk.contains(PUSH_ENABLED_KEY)) {
-                Hawk.put(PUSH_ENABLED_KEY, true)
-            }
-            return Hawk.get(PUSH_ENABLED_KEY)
-        }
+        fun isPushEnabled() =
+                Hawk.get<Settings>(SETTINGS_KEY)?.isPushOn == true
 
 
         fun logout() {

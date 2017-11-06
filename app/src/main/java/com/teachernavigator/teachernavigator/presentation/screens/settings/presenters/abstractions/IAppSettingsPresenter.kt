@@ -13,6 +13,7 @@ interface IAppSettingsPresenter : ViewAttacher<AppSettingsView> {
     fun setFont(value: Int)
     fun changePush(state: Boolean)
     fun changeSound(state: Boolean)
-    fun applyTheme()
+
+    fun applySettings()
 
 }

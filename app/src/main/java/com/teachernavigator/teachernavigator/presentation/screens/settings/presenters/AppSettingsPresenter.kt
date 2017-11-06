@@ -22,8 +22,9 @@ class AppSettingsPresenter
 constructor(val router: Router,
             private val settingsInteractor: ISettingsInteractor) : BasePresenter<AppSettingsView>(), IAppSettingsPresenter {
 
-    override fun applyTheme() {
+    override fun applySettings() {
         settingsInteractor.putSettings(mSettings)
+        settingsInteractor.updateFCM()
         mView?.getParentView()?.getActivity()?.recreate()
     }
 

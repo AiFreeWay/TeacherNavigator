@@ -103,9 +103,14 @@ class MainRepository @Inject constructor(private val mNetwokController: NetworkC
 
     override fun updateFCMToken() {
         mNetwokController.updateFCMToken(getAccessToken(), deviceName, fcmToken, deviceId, CacheController.isPushEnabled())
+                .applySchedulers()
                 .subscribe { _, throwable ->
                     throwable?.printStackTrace()
                 }
+    }
+
+    override fun updateFCM() {
+        updateFCMToken()
     }
 
     // ------------------------------- Posts methods --------------------------------

@@ -57,7 +57,7 @@ class AppSettingsFragment : BaseFragment(), AppSettingsView {
         super.onActivityCreated(savedInstanceState)
         mParentScreenComponent.inject(this)
         mPresenterApp.attachView(this)
-        fmtAppSettingsBtnApply.setOnClickListener { mPresenterApp.applyTheme() }
+        fmtAppSettingsBtnApply.setOnClickListener { save() }
         fmtAppSettingsSwhNightTheme.setOnCheckedChangeListener { _, b -> mPresenterApp.changeNightTheme(b) }
         fmtAppSettingsSwhPushNotification.setOnCheckedChangeListener { _, b -> mPresenterApp.changePush(b) }
         fmtAppSettingsSwhSound.setOnCheckedChangeListener { _, b -> mPresenterApp.changeSound(b) }
@@ -71,6 +71,10 @@ class AppSettingsFragment : BaseFragment(), AppSettingsView {
         })
 
         mPresenterApp.getSettings()
+    }
+
+    private fun save() {
+        mPresenterApp.applySettings()
     }
 
     override fun onDestroyView() {

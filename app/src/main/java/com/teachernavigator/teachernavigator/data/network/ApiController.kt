@@ -235,9 +235,9 @@ interface ApiController {
     @GET("/api/v0/history_chat/{messageId}")
     fun chatHistory(@Header("Authorization") accessToken: String, @Path("messageId") messageId: Int): Single<Message>
 
-    @Multipart
+    @FormUrlEncoded
     @POST("/api/v0/googleauth/")
-    fun googleAuth(@Part("code") code: String): Single<SingInResponse>
+    fun googleAuth(@Field("code") code: String): Single<SingInResponse>
 
     @PATCH("/api/v0/me/update/")
     fun editProfile(@Header("Authorization") accessToken: String, @Body singUpData: EditProfileData): Single<EditProfileData>

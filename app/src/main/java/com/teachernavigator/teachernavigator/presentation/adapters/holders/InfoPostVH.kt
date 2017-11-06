@@ -142,7 +142,7 @@ open class InfoPostVH(itemView: View,
         tvDislike.setCompoundDrawablesWithIntrinsicBounds(getDislikeDrawable(model?.vote), null, null, null)
 
         ivSubscribe.visibility = if (onSubscribeListener == null || model == null || model.authorId <= 0 || model.isMine == true) GONE else VISIBLE
-        tvComplain.visibility = if (onComplaintListener == null || model?.isMine == true) GONE else VISIBLE
+        tvComplain.visibility = if (onComplaintListener == null || model?.isMine == true || model?.type == PostType.news) GONE else VISIBLE
 
         lMore.visibility = if (tvComplain.visibility == GONE && btnMore.visibility == GONE) GONE else VISIBLE
     }

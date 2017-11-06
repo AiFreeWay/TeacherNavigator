@@ -10,5 +10,6 @@ interface AddPublicationView : ChildView {
 
     fun setSearchTags(tags: List<Tag>)
     fun setTags(tags: List<String>)
+    fun setFileName(fileName: String)
 
 }

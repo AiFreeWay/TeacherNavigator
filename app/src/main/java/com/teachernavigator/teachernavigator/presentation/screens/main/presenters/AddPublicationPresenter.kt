@@ -36,6 +36,8 @@ class AddPublicationPresenter
     @OnLifecycleEvent(Lifecycle.Event.ON_START)
     private fun onStart() {
         mView?.getParentView()?.setToolbarTitle(R.string.add_publication)
+        mView?.setTags(mPublicationTags.toList())
+        fileInfo?.let { mView?.setFileName(it.fileName) }
     }
 
     @OnLifecycleEvent(Lifecycle.Event.ON_STOP)

@@ -154,4 +154,9 @@ class AddPublicationFragment : BaseFragment(), AddPublicationView {
         presenter.detachView()
     }
 
+    override fun setFileName(fileName: String) {
+        fmtAddPublicationTvAddFile.text = fileName
+        fmtAddPublicationVFileIcon.setFilename(fileName)
+    }
+
 }

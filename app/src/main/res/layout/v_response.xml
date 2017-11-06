@@ -28,6 +28,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/spacingLarge"
             android:layout_marginStart="@dimen/spacingLarge"
+            android:textAppearance="?android:textAppearance"
             app:layout_constraintLeft_toRightOf="@+id/vResponseIvAvatar"
             app:layout_constraintTop_toTopOf="@+id/vResponseIvAvatar"
             tools:text="Иванов Иван" />
@@ -38,6 +39,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/spacingLarge"
             android:layout_marginStart="@dimen/spacingLarge"
+            android:textAppearance="?android:textAppearance"
             android:textColor="@color/grey"
             app:layout_constraintBottom_toBottomOf="@+id/vResponseIvAvatar"
             app:layout_constraintLeft_toRightOf="@+id/vResponseIvAvatar"
@@ -48,12 +50,13 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:background="?android:attr/selectableItemBackground"
-            tools:drawableRight="@drawable/ic_resume"
             android:gravity="center_vertical|start"
             android:text=""
+            android:textAppearance="?android:textAppearance"
             app:layout_constraintLeft_toLeftOf="@+id/vResponseTvTimeAgo"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/vResponseIvAvatar" />
+            app:layout_constraintTop_toBottomOf="@+id/vResponseIvAvatar"
+            tools:drawableRight="@drawable/ic_resume" />
 
     </android.support.constraint.ConstraintLayout>
 </android.support.v7.widget.CardView>

@@ -35,7 +35,7 @@
 
         <android.support.design.widget.TextInputEditText
             android:id="@+id/postCommentsEtSendText"
-            style="@style/Text"
+            android:textColor="?android:textColor"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/internalPadding"

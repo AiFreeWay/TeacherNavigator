@@ -8,8 +8,9 @@ import com.teachernavigator.teachernavigator.data.models.PostNetwork
 import com.teachernavigator.teachernavigator.data.repository.abstractions.IPostsRepository
 import com.teachernavigator.teachernavigator.domain.models.PostType
 import com.teachernavigator.teachernavigator.presentation.models.PostModel
+import com.teachernavigator.teachernavigator.presentation.utils.formatDisplayDate
+import com.teachernavigator.teachernavigator.presentation.utils.formatDisplayDateTime
 import com.teachernavigator.teachernavigator.presentation.utils.makeLess
-import v_aniskin.com.trucktaxi.application.utils.DateMapper
 import javax.inject.Inject
 
 /**
@@ -51,7 +52,7 @@ constructor(private val commentTransformer: CommentTransformer,
                         title = from.title?.let { if (shorter) it.makeLess(SHORT_TEXT_LENGTH) else it } ?: "",
                         shortTitle = from.title.makeLess(SHORT_TITLE_LENGTH) ?: "",
                         text = from.text?.let { if (shorter) it.makeLess(SHORT_TEXT_LENGTH) else it } ?: "",
-                        created = if (!from.created.isNullOrBlank()) DateMapper.mapDate(from.created!!) else "",
+                        created = if (from.created != null) from.created.formatDisplayDateTime else "",
                         tags = from.tags.orEmpty(),
                         count_likes = from.count_likes ?: 0,
                         count_dislikes = from.count_dislikes ?: 0,

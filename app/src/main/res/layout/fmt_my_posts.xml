@@ -24,9 +24,9 @@
 
     <TextView
         android:id="@+id/fmtMyPostsTvNoData"
-        style="@style/Text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textAppearance="?android:textAppearance"
         android:layout_gravity="center"
         android:text="@string/no_data"
         android:textColor="@color/lightTextColor"

@@ -20,7 +20,7 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:layout_margin="@dimen/spacingMedium"
-        android:textSize="@dimen/titleTextSize" />
+        android:textAppearance="?android:textAppearanceLarge" />
 
     <TextView
         android:layout_width="match_parent"

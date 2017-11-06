@@ -19,16 +19,16 @@
         android:src="@drawable/ic_avatar" />
 
     <LinearLayout
+        android:id="@+id/v_comment_l_authors"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/v_comment_l_authors"
         android:layout_alignParentTop="true"
         android:layout_alignTop="@+id/v_comment_iv_avatar"
         android:layout_toEndOf="@+id/v_comment_iv_avatar"
 
         android:layout_toLeftOf="@+id/v_comment_iv_subscribe"
-        android:layout_toStartOf="@+id/v_comment_iv_subscribe"
         android:layout_toRightOf="@+id/v_comment_iv_avatar"
+        android:layout_toStartOf="@+id/v_comment_iv_subscribe"
         android:orientation="horizontal">
 
         <TextView
@@ -45,6 +45,7 @@
             android:fontFamily="sans-serif-medium"
             android:gravity="center"
             android:lines="1"
+            android:textAppearance="?android:textAppearance"
             android:textColor="@color/colorAccent"
             android:visibility="visible"
             tools:text="Иван Иванов" />
@@ -52,14 +53,15 @@
         <TextView
             android:id="@+id/v_comment_tv_author_name"
             android:layout_width="match_parent"
-            android:layout_weight="1"
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/externalPadding"
             android:layout_marginLeft="@dimen/externalPadding"
             android:layout_marginRight="@dimen/externalPadding"
             android:layout_marginStart="@dimen/externalPadding"
+            android:layout_weight="1"
             android:ellipsize="end"
             android:lines="1"
+            android:textAppearance="?android:textAppearance"
             tools:text="Иван Иванов Милонов" />
 
     </LinearLayout>
@@ -67,7 +69,6 @@
 
     <TextView
         android:id="@+id/v_comment_tv_post_time"
-        android:textAppearance="?android:textAppearanceSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/v_comment_l_authors"
@@ -76,6 +77,7 @@
         android:layout_marginTop="@dimen/spacingSmall"
         android:layout_toEndOf="@+id/v_comment_iv_avatar"
         android:layout_toRightOf="@+id/v_comment_iv_avatar"
+        android:textAppearance="?android:textAppearanceSmall"
         android:textColor="@color/lightTextColor"
         tools:text="только что" />
 
@@ -95,7 +97,8 @@
         android:layout_alignLeft="@+id/v_comment_tv_post_time"
         android:layout_alignStart="@+id/v_comment_tv_post_time"
         android:layout_below="@+id/v_comment_tv_post_time"
-        android:layout_marginTop="@dimen/spacingMedium" />
+        android:layout_marginTop="@dimen/spacingMedium"
+        android:textAppearance="?android:textAppearance" />
 
     <LinearLayout
         android:id="@+id/v_comment_ll_open_branch"

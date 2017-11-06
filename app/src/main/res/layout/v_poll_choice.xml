@@ -2,9 +2,9 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/vPollRoot"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:id="@+id/vPollRoot"
     android:orientation="vertical"
     android:padding="@dimen/spacingSmall">
 
@@ -16,6 +16,7 @@
         android:gravity="end|center_vertical"
         android:paddingLeft="@dimen/spacingMedium"
         android:paddingRight="@dimen/spacingMedium"
+        android:textAppearance="?android:textAppearance"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="@+id/vPollGuidelineChoice"
@@ -41,6 +42,7 @@
         android:id="@+id/vPollTvQuestion"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:textAppearance="?android:textAppearance"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="@+id/vPollGuidelineCenter"

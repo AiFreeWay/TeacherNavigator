@@ -17,7 +17,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="@dimen/spacingXLarge"
-            android:textSize="@dimen/normalTextSize"
+            android:textAppearance="?android:textAppearance"
             tools:text="@string/about" />
 
         <TextView
@@ -26,7 +26,7 @@
             android:gravity="center"
             android:padding="@dimen/spacingXLarge"
             android:text="@string/we_in_social"
-            android:textSize="@dimen/largeTextSize" />
+            android:textAppearance="?android:textAppearanceLarge" />
 
         <LinearLayout
             android:layout_width="match_parent"

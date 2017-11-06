@@ -5,9 +5,9 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginLeft="@dimen/externalPadding"
-    app:cardBackgroundColor="?cardBackgroundColor"
     android:layout_marginRight="@dimen/externalPadding"
-    android:layout_marginTop="@dimen/externalPadding">
+    android:layout_marginTop="@dimen/externalPadding"
+    app:cardBackgroundColor="?cardBackgroundColor">
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
@@ -29,6 +29,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/spacingLarge"
             android:layout_marginRight="@dimen/spacingLarge"
+            android:textAppearance="?android:textAppearance"
             app:layout_constraintLeft_toRightOf="@+id/vResumeIvAvatar"
             app:layout_constraintTop_toTopOf="@+id/vResumeIvAvatar"
             tools:text="Иванов Иван" />
@@ -39,6 +40,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/spacingLarge"
             android:layout_marginRight="@dimen/spacingLarge"
+            android:textAppearance="?android:textAppearance"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@+id/vResumeIvAvatar"
             app:layout_constraintLeft_toRightOf="@+id/vResumeIvAvatar"
@@ -60,6 +62,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/spacingLarge"
             android:layout_marginRight="@dimen/spacingLarge"
+            android:textAppearance="?android:textAppearance"
             app:layout_constraintLeft_toRightOf="@+id/vResumeIvFile"
             app:layout_constraintTop_toTopOf="@+id/vResumeIvFile"
             tools:text="Межрайонный совет №250" />
@@ -70,6 +73,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/spacingLarge"
             android:layout_marginRight="@dimen/spacingLarge"
+            android:textAppearance="?android:textAppearance"
             app:layout_constraintBottom_toBottomOf="@+id/vResumeIvFile"
             app:layout_constraintLeft_toRightOf="@+id/vResumeIvFile"
             tools:text="35 000 рублей" />
@@ -80,6 +84,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/spacingLarge"
             android:padding="@dimen/spacingSmall"
+            android:textAppearance="?android:textAppearance"
             android:textStyle="bold"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
@@ -92,6 +97,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/spacingLarge"
             android:padding="@dimen/spacingSmall"
+            android:textAppearance="?android:textAppearance"
             android:textColor="@color/grey"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"

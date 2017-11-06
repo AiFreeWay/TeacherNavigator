@@ -18,7 +18,7 @@
             android:paddingTop="@dimen/externalPadding"
             android:text="@string/auth"
             android:textColor="@android:color/white"
-            android:textSize="@dimen/titleTextSize" />
+            android:textAppearance="?android:textAppearanceLarge" />
 
         <ImageView
             android:layout_width="match_parent"
@@ -108,11 +108,11 @@
 
         <TextView
             android:id="@+id/fmtAuthTvRestorePassword"
-            style="@style/Text"
             android:layout_width="@dimen/buttonAndTextWidth"
             android:layout_height="@dimen/normalControlsHeight"
             android:layout_gravity="center"
             android:layout_marginBottom="@dimen/internalPadding"
+            android:textAppearance="?android:textAppearance"
             android:layout_marginEnd="@dimen/externalPadding"
             android:layout_marginStart="@dimen/externalPadding"
             android:layout_marginTop="@dimen/internalPadding"
@@ -135,11 +135,11 @@
 
         <TextView
             android:id="@+id/fmtAuthTvSingUp"
-            style="@style/Text"
             android:layout_width="180dp"
             android:layout_height="@dimen/normalControlsHeight"
             android:layout_gravity="center"
             android:layout_marginBottom="@dimen/externalPadding"
+            android:textAppearance="?android:textAppearance"
             android:layout_marginTop="@dimen/internalPadding"
             android:background="?android:attr/selectableItemBackground"
             android:gravity="center"

@@ -5,9 +5,9 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginLeft="@dimen/externalPadding"
-    app:cardBackgroundColor="?cardBackgroundColor"
     android:layout_marginRight="@dimen/externalPadding"
-    android:layout_marginTop="@dimen/externalPadding">
+    android:layout_marginTop="@dimen/externalPadding"
+    app:cardBackgroundColor="?cardBackgroundColor">
 
     <android.support.constraint.ConstraintLayout
         android:id="@+id/vVacancyRoot"
@@ -20,6 +20,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:padding="@dimen/spacingSmall"
+            android:textAppearance="?android:textAppearance"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -30,6 +31,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:padding="@dimen/spacingSmall"
+            android:textAppearance="?android:textAppearance"
             android:textStyle="bold"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
@@ -43,6 +45,7 @@
             android:layout_marginLeft="@dimen/spacingXXLarge"
             android:layout_marginStart="@dimen/spacingXXLarge"
             android:padding="@dimen/spacingSmall"
+            android:textAppearance="?android:textAppearance"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/vVacancyTvVacancy"
@@ -53,6 +56,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:padding="@dimen/spacingSmall"
+            android:textAppearance="?android:textAppearance"
             app:layout_constraintLeft_toLeftOf="@+id/vVacancyTvCity"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/vVacancyTvCity"
@@ -63,6 +67,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:padding="@dimen/spacingSmall"
+            android:textAppearance="?android:textAppearance"
             app:layout_constraintLeft_toLeftOf="@+id/vVacancyTvCity"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/vVacancyTvSalary"
@@ -73,6 +78,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:padding="@dimen/spacingSmall"
+            android:textAppearance="?android:textAppearance"
             app:layout_constraintLeft_toLeftOf="@+id/vVacancyTvCity"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/vVacancyTvTypeOfEmployment"
@@ -84,6 +90,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/spacingXLarge"
             android:padding="@dimen/spacingSmall"
+            android:textAppearance="?android:textAppearance"
             android:textColor="@color/grey"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
@@ -100,9 +107,14 @@
             android:text="@string/response_to_vacancy"
             android:textAllCaps="false"
             app:backgroundTint="@color/orange"
+
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/vVacancyTvResponsibility" />
+            app:layout_constraintTop_toBottomOf="@+id/vVacancyTvResponsibility"
+
+            android:visibility="invisible"
+            android:layout_marginTop="12dp"
+            app:layout_constraintHorizontal_bias="0.447" />
 
         <Button
             android:id="@+id/vVacancyBtnDelete"

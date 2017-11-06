@@ -58,8 +58,7 @@
             app:tagBackground="@drawable/hash_tag_background"
             app:tagPaddingLeft="12dp"
             app:tagPaddingRight="12dp"
-            app:tagTextColor="@color/greyTextColor"
-            app:tagTextSize="@dimen/normalTextSize" />
+            app:tagTextColor="@color/greyTextColor" />
 
         <TextView
             android:id="@+id/fmtPostSearchTvPublication"

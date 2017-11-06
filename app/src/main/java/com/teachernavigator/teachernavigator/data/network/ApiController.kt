@@ -245,5 +245,10 @@ interface ApiController {
     @POST("/api/v0/googleauth/")
     fun googleAuth(@Part("code") code: String): Single<SingInResponse>
 
+    @PATCH("/api/v0/me/update/")
+    fun editProfile(@Header("Authorization") accessToken: String, @Body singUpData: EditProfileData): Single<EditProfileData>
+
+    @PATCH("/api/v0/me/update/")
+    fun getProfileSettings(@Header("Authorization") accessToken: String): Single<EditProfileData>
 
 }

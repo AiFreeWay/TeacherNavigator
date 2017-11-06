@@ -6,6 +6,7 @@ import android.support.transition.TransitionManager
 import android.support.v7.view.ContextThemeWrapper
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.SeekBar
 import com.teachernavigator.teachernavigator.R
 import com.teachernavigator.teachernavigator.domain.models.PostType
 import com.teachernavigator.teachernavigator.domain.models.Settings
@@ -56,11 +57,20 @@ class AppSettingsFragment : BaseFragment(), AppSettingsView {
         super.onActivityCreated(savedInstanceState)
         mParentScreenComponent.inject(this)
         mPresenterApp.attachView(this)
+        fmtAppSettingsBtnApply.setOnClickListener { mPresenterApp.applyTheme() }
         fmtAppSettingsSwhNightTheme.setOnCheckedChangeListener { _, b -> mPresenterApp.changeNightTheme(b) }
         fmtAppSettingsSwhPushNotification.setOnCheckedChangeListener { _, b -> mPresenterApp.changePush(b) }
         fmtAppSettingsSwhSound.setOnCheckedChangeListener { _, b -> mPresenterApp.changeSound(b) }
-        mPresenterApp.getSettings()
+        fmtAppSettingsSbFont.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
+            override fun onProgressChanged(p0: SeekBar?, value: Int, changed: Boolean) {
+                mPresenterApp.setFont(value)
+            }
 
+            override fun onStartTrackingTouch(p0: SeekBar?) = Unit
+            override fun onStopTrackingTouch(p0: SeekBar?) = Unit
+        })
+
+        mPresenterApp.getSettings()
     }
 
     override fun onDestroyView() {
@@ -69,28 +79,23 @@ class AppSettingsFragment : BaseFragment(), AppSettingsView {
     }
 
     override fun setSettings(settings: Settings) {
-        fmtAppSettingsSwhNightTheme.isChecked = settings.isNithThemeOn
+
+        fmtAppSettingsSwhNightTheme.isChecked = settings.night
         fmtAppSettingsSwhPushNotification.isChecked = settings.isPushOn
         fmtAppSettingsSwhSound.isChecked = settings.isSoundOn
+        fmtAppSettingsSbFont.progress = settings.fontType
 
         val fade = Fade()
         fade.duration = 250
         TransitionManager.beginDelayedTransition(fmtAppSettingsLPost, fade)
 
-        val theme = when {
-            settings.isNithThemeOn -> R.style.AppTheme_Night
-            !settings.isNithThemeOn -> R.style.AppTheme_Day
-
-            else -> R.style.AppTheme_Day
-        }
-
         if (fmtAppSettingsLPost.childCount > 0) {
             fmtAppSettingsLPost.removeAllViews()
         }
 
-        val postView = LayoutInflater.from(ContextThemeWrapper(context, theme)).inflate(R.layout.v_info_post, fmtAppSettingsLPost, true)
-        val vh = InfoPostVH(postView, {}, {}, {}, {}, {}, {}, {}, null, {}, {})
-        vh.bind(exampleModel)
+        val postView = LayoutInflater.from(ContextThemeWrapper(context, settings.theme)).inflate(R.layout.v_info_post, fmtAppSettingsLPost, true)
+        InfoPostVH(postView, {}, {}, {}, {}, {}, {}, {}, null, {}, {})
+                .bind(exampleModel)
     }
 
     override fun lockUi() {

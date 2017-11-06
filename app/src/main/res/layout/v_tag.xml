@@ -12,12 +12,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="0"
-        android:textColor="@color/textColor"
         android:background="@drawable/bg_tag"
         android:paddingBottom="@dimen/spacingMedium"
         android:paddingLeft="@dimen/spacingXLarge"
         android:paddingRight="@dimen/spacingXLarge"
         android:paddingTop="@dimen/spacingMedium"
+        android:textAppearance="?android:textAppearance"
+        android:textColor="@color/textColor"
         android:textStyle="bold"
         tools:text="Такой то тег" />
 
@@ -31,6 +32,7 @@
         android:paddingLeft="@dimen/spacingXLarge"
         android:paddingRight="@dimen/spacingXLarge"
         android:paddingTop="@dimen/spacingMedium"
+        android:textAppearance="?android:textAppearance"
         android:textStyle="bold"
         tools:text="218" />
 

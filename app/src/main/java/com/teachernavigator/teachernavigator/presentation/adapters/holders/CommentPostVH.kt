@@ -1,8 +1,7 @@
 package com.teachernavigator.teachernavigator.presentation.adapters.holders
 
 import android.view.View
-import android.view.View.GONE
-import android.view.View.VISIBLE
+import android.view.View.*
 import android.widget.Button
 import android.widget.TextView
 import com.teachernavigator.teachernavigator.R
@@ -37,7 +36,7 @@ class CommentPostVH(itemView: View,
     private val lYourComment: View = itemView.find(R.id.v_post_l_your_comment)
     private val tvCommentText: TextView = itemView.find(R.id.v_post_tv_comment_text)
     private val btnOpenBranch: Button = itemView.find(R.id.v_post_btn_open_branch)
-
+    private val divider: View = itemView.find(R.id.v_post_v_devider)
 
     private var mModel: PostCommentModel? = null
 
@@ -46,10 +45,10 @@ class CommentPostVH(itemView: View,
         postHolder.tvComments.visibility = GONE
         lYourComment.visibility = VISIBLE
         btnOpenBranch.visibility = VISIBLE
+        divider.visibility = INVISIBLE
 
         btnOpenBranch listenClickBy onCommentsListener andReturnModel { mModel?.postModel }
     }
-
 
     override fun bind(postComment: PostCommentModel?) {
         mModel = postComment

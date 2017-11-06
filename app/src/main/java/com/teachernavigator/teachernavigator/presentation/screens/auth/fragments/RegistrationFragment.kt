@@ -30,7 +30,6 @@ class RegistrationFragment : BaseFragment(), RegistrationView {
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? =
             inflater?.inflate(R.layout.fmt_registration, container, false)
 
-
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         mParentScreenComponent.inject(this)
@@ -114,7 +113,7 @@ class RegistrationFragment : BaseFragment(), RegistrationView {
     }
 
     override fun setExperience(experience: Int) {
-        fmtRegistrationTvExperience.text = resources.getQuantityString(R.plurals.plural_years, experience, experience)
+        fmtRegistrationTvExperience.text = resources.getQuantityString(R.plurals.plural_years_exp, experience, experience)
     }
 
     override fun showAccountCreatedDialog() {

@@ -128,7 +128,7 @@ constructor(private val router: Router,
         dismissDateDialog()
         mDateDialog = DialogUtils.showDateDialog(getContext(), mBirthDate, null, Date()) {
             mBirthDate = it
-            setDate(it.formatDisplayDate ?: "")
+            setDate(it.formatDisplayDate)
         }
     }
 
@@ -185,19 +185,19 @@ constructor(private val router: Router,
         }
 
         if (district.isBlank()) {
-            mView!!.showToast(getContext().getString(R.string.indicate_district))
+            mView?.showToast(getContext().getString(R.string.indicate_district))
             return false
         }
         return true
     }
 
     private fun startProgress() {
-        mView!!.getParentView().startProgress()
-        mView!!.lockUi()
+        mView?.getParentView()?.startProgress()
+        mView?.lockUi()
     }
 
     private fun stopProgress() {
-        mView!!.getParentView().stopProgress()
-        mView!!.unlockUi()
+        mView?.getParentView()?.stopProgress()
+        mView?.unlockUi()
     }
 }

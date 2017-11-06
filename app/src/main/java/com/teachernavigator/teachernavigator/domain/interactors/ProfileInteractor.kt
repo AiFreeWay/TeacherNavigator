@@ -4,6 +4,7 @@ import com.teachernavigator.teachernavigator.data.models.FileInfo
 import com.teachernavigator.teachernavigator.data.repository.abstractions.IProfileRepository
 import com.teachernavigator.teachernavigator.domain.interactors.abstractions.IProfileInteractor
 import com.teachernavigator.teachernavigator.domain.models.About
+import com.teachernavigator.teachernavigator.domain.models.EditProfileData
 import com.teachernavigator.teachernavigator.domain.models.Profile
 import com.teachernavigator.teachernavigator.presentation.models.Specialist
 import com.teachernavigator.teachernavigator.presentation.utils.applySchedulers
@@ -29,6 +30,14 @@ class ProfileInteractor @Inject constructor(private val mRepository: IProfileRep
     override fun getProfile(): Single<Profile> =
             mRepository.getProfile()
                     .map { it }
+                    .applySchedulers()
+
+    override fun editProfile(singUpData: EditProfileData): Single<EditProfileData> =
+            mRepository.editProfile(singUpData)
+                    .applySchedulers()
+
+    override fun getProfileSettings(): Single<EditProfileData> =
+            mRepository.getProfileSettings()
                     .applySchedulers()
 
     override fun getProfile(userId: Int): Single<Profile> =

@@ -53,6 +53,7 @@ open class InfoPostVH(itemView: View,
     private val tvDislike: TextView = itemView.find(R.id.v_post_tv_dislike)
     private val passTestButton: Button = itemView.find(R.id.v_post_btn_pass_test)
     private val fileTv: TextView = itemView.find(R.id.v_post_tv_file)
+    private val divider: View = itemView.find(R.id.v_post_v_devider)
 
     val tvComments: TextView = itemView.find(R.id.v_post_tv_comments)
     val ivSave: ImageView = itemView.find(R.id.v_post_iv_save)

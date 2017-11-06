@@ -12,7 +12,8 @@
         android:gravity="center"
         android:padding="@dimen/spacingSmall"
         android:text="@string/offline_retry"
-        android:textSize="@dimen/smallTextSize"
+        android:textAppearance="?android:textAppearanceSmall"
+        android:textColor="@color/textColor"
         android:textStyle="bold"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
@@ -50,8 +51,8 @@
 
     <TextView
         android:id="@+id/fmtChatTvNoData"
-        style="@style/Text"
         android:layout_width="wrap_content"
+        android:textAppearance="?android:textAppearance"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:text="@string/no_data"

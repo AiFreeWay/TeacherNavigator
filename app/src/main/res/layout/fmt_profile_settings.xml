@@ -1,52 +1,200 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:clipToPadding="false"
+    android:padding="@dimen/spacingLarge">
 
-    <android.support.design.widget.TextInputEditText
-        android:id="@+id/fmt_profile_settings_et_email"
-        style="@style/EditText"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/normalControlsHeight"
-        android:layout_marginEnd="40dp"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="30dp"
-        android:hint="@string/email"
-        android:inputType="textWebEmailAddress"
-        android:lines="1" />
-
-    <TextView
-        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginEnd="@dimen/externalPadding"
-        android:layout_marginStart="@dimen/externalPadding"
-        android:layout_marginTop="@dimen/externalPadding"
-        android:text="@string/or" />
+        android:orientation="vertical">
 
-    <android.support.design.widget.TextInputEditText
-        android:id="@+id/fmt_profile_settings_et_phone"
-        style="@style/EditText"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/normalControlsHeight"
-        android:layout_marginEnd="40dp"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="@dimen/externalPadding"
-        android:hint="@string/phone"
-        android:inputType="phone"
-        android:lines="1" />
+        <android.support.design.widget.TextInputEditText
+            android:id="@+id/fmtProfileSettingsEtFullName"
+            style="@style/EditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/externalPadding"
+            android:layout_marginStart="@dimen/externalPadding"
+            android:layout_marginTop="@dimen/spacingXXLarge"
+            android:hint="@string/full_name"
+            android:inputType="textPersonName"
+            android:lines="1" />
 
-    <android.support.v7.widget.AppCompatButton
-        android:id="@+id/fmt_profile_settings_btn_save"
-        style="@style/Button"
-        android:layout_width="@dimen/buttonAndTextWidth"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginBottom="@dimen/externalPadding"
-        android:layout_marginTop="20dp"
-        android:text="@string/save"
-        android:textAllCaps="false"
-        app:backgroundTint="@color/orange" />
-</LinearLayout>
+        <TextView
+            android:id="@+id/fmtProfileSettingsTvBirthday"
+            style="@style/EditTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/externalPadding"
+            android:layout_marginStart="@dimen/externalPadding"
+            android:layout_marginTop="@dimen/spacingXLarge"
+            android:hint="@string/birthday"
+            android:lines="1" />
+
+        <android.support.design.widget.TextInputEditText
+            android:id="@+id/fmtProfileSettingsEtWorkPlace"
+            style="@style/EditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/externalPadding"
+            android:layout_marginStart="@dimen/externalPadding"
+            android:layout_marginTop="@dimen/spacingXLarge"
+            android:hint="@string/work_place"
+            android:inputType="text"
+            android:lines="1" />
+
+        <android.support.design.widget.TextInputEditText
+            android:id="@+id/fmtProfileSettingsEtDistrict"
+            style="@style/EditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/externalPadding"
+            android:layout_marginStart="@dimen/externalPadding"
+            android:layout_marginTop="@dimen/spacingXLarge"
+            android:hint="@string/district"
+            android:inputType="numberDecimal"
+            android:lines="1" />
+
+        <android.support.design.widget.TextInputEditText
+            android:id="@+id/fmtProfileSettingsEtPosition"
+            style="@style/EditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/externalPadding"
+            android:layout_marginStart="@dimen/externalPadding"
+            android:layout_marginTop="@dimen/spacingXLarge"
+            android:hint="@string/position"
+            android:inputType="text"
+            android:lines="1" />
+
+        <TextView
+            android:id="@+id/fmtProfileSettingsTvExperience"
+            style="@style/EditTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/externalPadding"
+            android:layout_marginStart="@dimen/externalPadding"
+            android:layout_marginTop="@dimen/spacingXLarge"
+            android:hint="@string/experience"
+            android:lines="1" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/normalControlsHeight"
+            android:layout_marginEnd="@dimen/externalPadding"
+            android:layout_marginStart="@dimen/externalPadding"
+            android:layout_marginTop="@dimen/spacingXLarge"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingLeft="@dimen/externalPadding"
+            android:paddingRight="@dimen/externalPadding">
+
+            <TextView
+                android:id="@+id/fmtProfileSettingsTvTradeUnionist"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:lines="1"
+                android:text="@string/is_trade_unionist"
+                android:textAppearance="?android:textAppearance" />
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.3" />
+
+            <RadioGroup
+                android:id="@+id/fmtProfileSettingsRgTradeUnionist"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <android.support.v7.widget.AppCompatRadioButton
+                    android:id="@+id/fmtProfileSettingsChbTradeUnionistYes"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.1"
+                    android:text="@string/yes"
+                    android:textAppearance="?android:textAppearanceSmall"
+                    android:textColor="?android:textColor" />
+
+                <android.support.v7.widget.AppCompatRadioButton
+                    android:id="@+id/fmtProfileSettingsChbTradeUnionistNo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.1"
+                    android:text="@string/no"
+                    android:textAppearance="?android:textAppearanceSmall"
+                    android:textColor="?android:textColor" />
+            </RadioGroup>
+        </LinearLayout>
+
+        <android.support.design.widget.TextInputEditText
+            android:id="@+id/fmtProfileSettingsEtTradeUnionTicketNumber"
+            style="@style/EditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/externalPadding"
+            android:layout_marginStart="@dimen/externalPadding"
+            android:layout_marginTop="@dimen/spacingXLarge"
+            android:hint="@string/trade_union_ticket_number"
+            android:inputType="numberDecimal"
+            android:lines="1" />
+
+        <android.support.design.widget.TextInputEditText
+            android:id="@+id/fmtProfileSettingsEtEmail"
+            style="@style/EditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/internalPadding"
+            android:layout_marginEnd="@dimen/externalPadding"
+            android:layout_marginStart="@dimen/externalPadding"
+            android:layout_marginTop="@dimen/spacingXLarge"
+            android:hint="@string/email"
+            android:inputType="textWebEmailAddress"
+            android:lines="1" />
+
+
+        <android.support.design.widget.TextInputEditText
+            android:id="@+id/fmtProfileSettingsEtPhone"
+            style="@style/EditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/externalPadding"
+            android:layout_marginStart="@dimen/externalPadding"
+            android:layout_marginTop="@dimen/spacingXLarge"
+            android:hint="@string/phone"
+            android:inputType="phone"
+            android:lines="1" />
+
+        <android.support.design.widget.TextInputEditText
+            android:id="@+id/fmtProfileSettingsEtPassword"
+            style="@style/EditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/externalPadding"
+            android:layout_marginStart="@dimen/externalPadding"
+            android:layout_marginTop="@dimen/spacingXLarge"
+            android:hint="@string/password"
+            android:inputType="textPassword"
+            android:lines="1" />
+
+
+        <android.support.v7.widget.AppCompatButton
+            android:id="@+id/fmtProfileSettingsBtnSingUp"
+            style="@style/Button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="@dimen/externalPadding"
+            android:layout_marginEnd="@dimen/externalPadding"
+            android:layout_marginStart="@dimen/externalPadding"
+            android:layout_marginTop="@dimen/externalPadding"
+            android:text="@string/save"
+            android:textAllCaps="false"
+            app:backgroundTint="@color/orange" />
+    </LinearLayout>
+</ScrollView>

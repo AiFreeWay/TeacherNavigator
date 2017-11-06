@@ -2,6 +2,7 @@ package com.teachernavigator.teachernavigator.data.repository.abstractions
 
 import com.teachernavigator.teachernavigator.data.models.FileInfo
 import com.teachernavigator.teachernavigator.domain.models.About
+import com.teachernavigator.teachernavigator.domain.models.EditProfileData
 import com.teachernavigator.teachernavigator.domain.models.Profile
 import com.teachernavigator.teachernavigator.presentation.models.Specialist
 import io.reactivex.Observable
@@ -19,4 +20,6 @@ interface IProfileRepository {
     fun exit()
     fun askSpecialist(specialist: Specialist, question: String): Single<Unit>
     fun uploadAvatar(fileInfo: FileInfo): Single<Unit>
+    fun editProfile(singUpData: EditProfileData): Single<EditProfileData>
+    fun getProfileSettings(): Single<EditProfileData>
 }

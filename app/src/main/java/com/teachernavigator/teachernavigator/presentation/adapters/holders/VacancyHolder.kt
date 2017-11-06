@@ -6,7 +6,6 @@ import android.widget.TextView
 import com.teachernavigator.teachernavigator.R
 import com.teachernavigator.teachernavigator.presentation.models.VacancyModel
 import com.teachernavigator.teachernavigator.presentation.utils.find
-import com.teachernavigator.teachernavigator.presentation.utils.toVisibility
 import ru.lliepmah.HolderBuilder
 import ru.lliepmah.lib.DefaultViewHolder
 
@@ -20,6 +19,8 @@ class VacancyHolder(itemView: View,
                     private val onDeleteListener: OnDeleteVacancyListener?,
                     private val onResponseListener: OnResponseVacancyListener?,
                     private val onClickListener: OnClickVacancyListener?) : DefaultViewHolder<VacancyModel>(itemView) {
+
+    private val context by lazy { itemView.context }
 
     private var mVacancy: VacancyModel? = null
 
@@ -46,7 +47,8 @@ class VacancyHolder(itemView: View,
 
         vVacancyBtnResponse.visibility = if (isMine || onResponseListener == null) View.GONE else View.VISIBLE
 
-        vVacancyTvRemains.visibility = if (isMine) View.VISIBLE else View.GONE
+//        vVacancyTvRemains.visibility = if (isMine) View.VISIBLE else View.GONE
+
         vVacancyBtnDelete.visibility = if (isMine && onDeleteListener != null) View.VISIBLE else View.GONE
         vVacancyBtnProlong.visibility = if (isMine && onProlongListener != null) View.VISIBLE else View.GONE
     }
@@ -54,14 +56,22 @@ class VacancyHolder(itemView: View,
     override fun bind(vacancy: VacancyModel?) {
         mVacancy = vacancy
 
-        vVacancyBtnResponse.visibility = (!isMine && vacancy?.responded != true).toVisibility()
+        val canResponse = !isMine && vacancy?.responded != true
+
+        vVacancyBtnResponse.visibility = if (canResponse) View.VISIBLE else View.GONE
+
         vVacancyTvOrganization.text = vacancy?.organization ?: ""
         vVacancyTvVacancy.text = vacancy?.vacancy ?: ""
         vVacancyTvCity.text = vacancy?.city ?: ""
         vVacancyTvSalary.text = vacancy?.salary ?: ""
         vVacancyTvTypeOfEmployment.text = vacancy?.typeOfEmployment ?: ""
         vVacancyTvResponsibility.text = vacancy?.responsibility ?: ""
-        vVacancyTvRemains.text = vacancy?.daysRemains ?: ""
+
+        vVacancyTvRemains.text = when {
+            isMine -> vacancy?.daysRemains ?: ""
+            vacancy?.responded == true -> context.getString(R.string.already_respond)
+            else -> ""
+        }
 
     }
 

@@ -1,7 +1,10 @@
 package com.teachernavigator.teachernavigator.presentation.utils
 
 import android.content.Context
+import com.google.gson.internal.bind.util.ISO8601Utils
 import com.teachernavigator.teachernavigator.R
+import java.text.ParseException
+import java.text.ParsePosition
 import java.text.SimpleDateFormat
 import java.util.*
 import java.util.concurrent.atomic.AtomicReference
@@ -16,26 +19,63 @@ private val HOUR_MILLIS = 60 * MINUTE_MILLIS
 private val DAY_MILLIS = 24 * HOUR_MILLIS
 
 /***************************************************************2017-06-13T01:41:31+03:00 */
-const val DEFAULT_DATE_FORMAT = "yyyy-MM-dd'T'HH:mm:ss.Z"
+const val DEFAULT_DATE_FORMAT = "yyyy-MM-dd'T'HH:mm:ss.SSSSSS'Z' Z"
 const val SERVER_DATE = "dd.MM.yy"
 
 private val DISPLAY_DATE_FORMAT = AtomicReference(SimpleDateFormat("dd MMMM yyyy", Locale.getDefault()))
 private val DISPLAY_TIME_FORMAT = AtomicReference(SimpleDateFormat("HH:mm", Locale.getDefault()))
+private val DISPLAY_DATETIME_FORMAT = AtomicReference(SimpleDateFormat("dd.MM.yyyy в HH:mm", Locale.getDefault()))
+
 private val SERVER_DATETIME_FORMAT = AtomicReference(SimpleDateFormat(DEFAULT_DATE_FORMAT, Locale.getDefault()))
 private val SERVER_DATE_FORMAT = AtomicReference(SimpleDateFormat(SERVER_DATE, Locale.getDefault()))
 
-//fun String.parseServerDate(): Date? = DISPLAY_TIME_FORMAT.get().parse(this)
-//fun String.parsePlaylistDate(): Date? = PLAYLIST_FORMAT.get().parse(this)
-
 val Date.formatDisplayTime: String?
     get() = DISPLAY_TIME_FORMAT.get().format(this)
+val Date.formatDisplayDateTime: String
+    get() = DISPLAY_DATETIME_FORMAT.get().format(this)
 val Date.formatServerDate: String?
     get() = SERVER_DATE_FORMAT.get().format(this)
-val Date.formatDisplayDate: String?
+val Date.formatDisplayDate: String
     get() = DISPLAY_DATE_FORMAT.get().format(this)
 val Date.formatServerDatetime: String?
     get() = SERVER_DATETIME_FORMAT.get().format(this)
 
+val String.parseServerDate: Date?
+    get() {
+
+        try {
+            return SERVER_DATE_FORMAT.get().parse(this)
+        } catch (ex: ParseException) {
+            //
+        }
+
+        try {
+            return ISO8601Utils.parse(this, ParsePosition(0))
+        } catch (ex: ParseException) {
+            //
+        }
+
+        return null
+    }
+
+
+val String.parseServerDatetime: Date?
+    get() {
+
+        try {
+            return SERVER_DATETIME_FORMAT.get().parse(this)
+        } catch (ex: ParseException) {
+            //
+        }
+
+        try {
+            return ISO8601Utils.parse(this, ParsePosition(0))
+        } catch (ex: ParseException) {
+            //
+        }
+
+        return null
+    }
 
 fun Date.getTimeAgo(context: Context): String =
         time.getTimeAgo(context)

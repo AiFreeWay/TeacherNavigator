@@ -57,19 +57,13 @@ class ChatPresenter
     }
 
     private fun onChatEnvelope(envelope: ChatEnvelope) {
-
-        d(javaClass.name, "-> onChatEnvelope -> threadName=${Thread.currentThread().name}")
-
         when (envelope) {
-
             is ChatEnvelope.ChatMessage -> mView?.addMessage(messageTransformer.transform(envelope.message))
             is ChatEnvelope.ChatStatus -> mView?.setState(envelope.status)
             is ChatEnvelope.ChatMembers -> mView?.setMembersCount(envelope.membersCount)
-
             is ChatEnvelope.ChatError -> d(javaClass.name, "-> error -> ${envelope.error}")
         }
     }
-
 
     override fun refresh() {
         addDissposable(chatInteractor.loadMessages()

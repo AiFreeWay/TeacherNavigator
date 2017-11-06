@@ -27,7 +27,7 @@
                 android:gravity="center"
                 android:padding="@dimen/spacingMedium"
                 android:text="@string/choose_type_of_institution"
-                android:textSize="@dimen/titleTextSize" />
+                android:textAppearance="?android:textAppearanceLarge" />
 
             <LinearLayout
                 android:layout_width="match_parent"

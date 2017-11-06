@@ -22,6 +22,11 @@ class AppSettingsPresenter
 constructor(val router: Router,
             private val settingsInteractor: ISettingsInteractor) : BasePresenter<AppSettingsView>(), IAppSettingsPresenter {
 
+    override fun applyTheme() {
+        settingsInteractor.putSettings(mSettings)
+        mView?.getParentView()?.getActivity()?.recreate()
+    }
+
     private var mSettings = Settings()
 
     @OnLifecycleEvent(Lifecycle.Event.ON_STOP)
@@ -35,9 +40,14 @@ constructor(val router: Router,
                 .subscribe(this::doOnGetSettings, this::doOnError))
     }
 
+    override fun setFont(value: Int) {
+        mSettings.fontType = value
+        mView?.setSettings(mSettings)
+    }
+
+
     override fun changeNightTheme(state: Boolean) {
-        mSettings.isNithThemeOn = state
-        settingsInteractor.putSettings(mSettings)
+        mSettings.night = state
         mView?.setSettings(mSettings)
     }
 

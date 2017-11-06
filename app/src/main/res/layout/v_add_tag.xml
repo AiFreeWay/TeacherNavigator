@@ -19,7 +19,6 @@
             android:layout_height="wrap_content"
             android:padding="@dimen/spacingLarge">
 
-
             <TextView
                 android:id="@+id/vAddTagTvTitle"
                 android:layout_width="0dp"
@@ -30,7 +29,7 @@
                 android:layout_marginRight="@dimen/spacingLarge"
                 android:layout_marginStart="@dimen/spacingLarge"
                 android:text="@string/add_tag"
-                android:textSize="@dimen/titleTextSize"
+                android:textAppearance="?android:textAppearanceLarge"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />

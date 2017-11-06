@@ -6,5 +6,5 @@
     android:layout_height="wrap_content"
     android:layout_gravity="center_horizontal"
     android:layout_margin="@dimen/spacingLarge"
-    android:textSize="@dimen/titleTextSize"
+    android:textAppearance="?android:textAppearanceLarge"
     tools:text="@string/label_choose_theme" />

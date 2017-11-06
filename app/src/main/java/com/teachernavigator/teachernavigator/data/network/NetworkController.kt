@@ -282,4 +282,10 @@ constructor(gson: Gson) {
         return mApiController.sendPost(accessToken, params)
     }
 
+    fun editProfile(accessToken: String, singUpData: EditProfileData): Single<EditProfileData> =
+            mApiController.editProfile(accessToken, singUpData)
+
+    fun getProfileSettings(accessToken: String): Single<EditProfileData> =
+            mApiController.getProfileSettings(accessToken)
+
 }

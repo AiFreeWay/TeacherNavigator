@@ -50,20 +50,18 @@
                 android:layout_marginBottom="@dimen/spacingSmall"
                 android:layout_marginLeft="@dimen/spacingLarge"
                 android:layout_marginRight="@dimen/spacingLarge"
-                android:hint="@string/input_text_publication"
                 android:layout_marginTop="@dimen/spacingSmall"
                 android:gravity="top"
+                android:hint="@string/input_text_publication"
                 android:padding="@dimen/internalPadding" />
 
             <TextView
                 android:id="@+id/fmtAddPublicationTvAddTag"
                 android:layout_width="wrap_content"
-                android:textAppearance="?android:textAppearanceSmall"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/fmtAddPublicationEtText"
                 android:layout_marginBottom="@dimen/spacingMedium"
                 android:layout_marginLeft="@dimen/spacingLarge"
-                android:textColor="@color/textColor"
                 android:layout_marginRight="@dimen/spacingLarge"
                 android:layout_marginTop="@dimen/spacingMedium"
                 android:background="@drawable/hash_tag_background"
@@ -74,7 +72,9 @@
                 android:paddingLeft="@dimen/externalPadding"
                 android:paddingRight="@dimen/externalPadding"
                 android:paddingTop="@dimen/internalPadding"
-                android:text="@string/add_tag" />
+                android:text="@string/add_tag"
+                android:textAppearance="?android:textAppearanceSmall"
+                android:textColor="@color/textColor" />
 
             <com.greenfrvr.hashtagview.HashtagView
                 android:id="@+id/fmtAddPublicationHvHashtags"
@@ -89,8 +89,7 @@
                 app:tagBackground="@drawable/hash_tag_background"
                 app:tagPaddingLeft="12dp"
                 app:tagPaddingRight="12dp"
-                app:tagTextColor="@color/greyTextColor"
-                app:tagTextSize="@dimen/normalTextSize" />
+                app:tagTextColor="@color/greyTextColor" />
 
             <TextView
                 android:id="@+id/fmtAddPublicationTvAddFile"
@@ -107,6 +106,7 @@
                 android:gravity="center_vertical|start"
                 android:padding="@dimen/spacingMedium"
                 android:text="@string/attach_file"
+                android:textAppearance="?android:textAppearance"
                 tools:drawableRight="@drawable/ic_resume" />
 
             <android.support.v7.widget.AppCompatButton

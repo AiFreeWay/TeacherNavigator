@@ -1,9 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="titleTextSize">20sp</dimen>
-    <dimen name="largeTextSize">18sp</dimen>
-    <dimen name="normalTextSize">14sp</dimen>
-    <dimen name="smallTextSize">12sp</dimen>
+    <dimen name="titleTextSizeLeast">16sp</dimen>
+    <dimen name="titleTextSizeLesser">17sp</dimen>
+    <dimen name="titleTextSizeMedium">18sp</dimen>
+    <dimen name="titleTextSizeLarger">19sp</dimen>
+    <dimen name="titleTextSizeLargest">20sp</dimen>
+
+    <dimen name="normalTextSizeLeast">12sp</dimen>
+    <dimen name="normalTextSizeLesser">13sp</dimen>
+    <dimen name="normalTextSizeMedium">14sp</dimen>
+    <dimen name="normalTextSizeLarger">15sp</dimen>
+    <dimen name="normalTextSizeLargest">16sp</dimen>
+
+    <dimen name="smallTextSizeLeast">9sp</dimen>
+    <dimen name="smallTextSizeLesser">10sp</dimen>
+    <dimen name="smallTextSizeMedium">11sp</dimen>
+    <dimen name="smallTextSizeLarger">12sp</dimen>
+    <dimen name="smallTextSizeLargest">13sp</dimen>
+
     <dimen name="externalPadding">16dp</dimen>
     <dimen name="internalPadding">8dp</dimen>
     <dimen name="miniPadding">4dp</dimen>

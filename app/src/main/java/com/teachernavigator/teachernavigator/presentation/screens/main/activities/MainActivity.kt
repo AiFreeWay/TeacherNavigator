@@ -13,6 +13,8 @@ import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.RelativeLayout
 import com.teachernavigator.teachernavigator.R
+import com.teachernavigator.teachernavigator.data.cache.CacheController
+import com.teachernavigator.teachernavigator.domain.models.Settings
 import com.teachernavigator.teachernavigator.presentation.models.ToolbarStyle
 import com.teachernavigator.teachernavigator.presentation.screens.main.activities.abstractions.MainView
 import com.teachernavigator.teachernavigator.presentation.screens.main.presenters.AcMainPresenter
@@ -35,7 +37,9 @@ class MainActivity : AppCompatActivity(), MainView {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setTheme(R.style.AppTheme_Night)
+
+        val settings = CacheController.getData(CacheController.SETTINGS_KEY, Settings()) ?: Settings()
+        setTheme(settings.theme)
 
         setContentView(R.layout.ac_main)
         initToolbar()

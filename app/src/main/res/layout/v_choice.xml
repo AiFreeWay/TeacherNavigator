@@ -2,19 +2,21 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/internalPadding"
     android:gravity="center"
-    android:orientation="horizontal"
-    android:layout_marginBottom="@dimen/internalPadding">
+    android:orientation="horizontal">
 
     <TextView
         android:id="@+id/v_choice_tv_choice"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:textAppearance" />
 
     <TextView
         android:id="@+id/v_choice_tv_count"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/internalPadding"
-        android:layout_marginStart="@dimen/internalPadding" />
+        android:layout_marginStart="@dimen/internalPadding"
+        android:textAppearance="?android:textAppearance" />
 </LinearLayout>

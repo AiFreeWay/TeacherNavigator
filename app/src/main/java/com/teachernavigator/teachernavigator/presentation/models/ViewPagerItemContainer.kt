@@ -5,4 +5,4 @@ import android.support.v4.app.Fragment
 /**
  * Created by root on 17.08.17
  */
-data class ViewPagerItemContainer(var mTabTitle: String, var mFragment: Fragment)
+data class ViewPagerItemContainer(var tabTitle: String, var fragment: Fragment)

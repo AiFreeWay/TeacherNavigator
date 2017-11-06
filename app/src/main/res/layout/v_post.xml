@@ -63,6 +63,7 @@
         android:layout_marginTop="@dimen/externalPadding"
         android:fontFamily="sans-serif-medium"
         android:textAllCaps="false"
+        android:textAppearance="?android:textAppearance"
         tools:text="Название поста" />
 
     <TextView
@@ -74,6 +75,7 @@
         android:layout_below="@+id/v_post_tv_title"
         android:layout_marginTop="@dimen/externalPadding"
         android:ellipsize="end"
+        android:textAppearance="?android:textAppearance"
         tools:text="Текст поста" />
 
     <RadioGroup
@@ -106,22 +108,8 @@
         android:background="?android:attr/selectableItemBackground"
         android:gravity="center_vertical|start"
         android:text="@string/download_resume"
+        android:textAppearance="?android:textAppearance"
         tools:drawableRight="@drawable/ic_resume" />
-
-    <com.greenfrvr.hashtagview.HashtagView
-        android:id="@+id/v_post_hv_hasttags"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/v_post_tv_file"
-        android:paddingTop="@dimen/externalPadding"
-        app:rowGravity="left"
-        app:tagBackground="@drawable/hash_tag_background"
-        app:tagPaddingLeft="12dp"
-        app:tagPaddingRight="12dp"
-        app:tagTextColor="@color/greyTextColor"
-        app:tagTextSize="@dimen/normalTextSize" />
 
     <LinearLayout
         android:id="@+id/v_post_ll_more_and_complain"
@@ -129,7 +117,7 @@
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/v_post_tv_title"
         android:layout_alignStart="@+id/v_post_tv_title"
-        android:layout_below="@+id/v_post_hv_hasttags"
+        android:layout_below="@+id/v_post_tv_file"
         android:layout_marginTop="@dimen/externalPadding"
         android:gravity="start"
         android:orientation="horizontal">
@@ -166,15 +154,28 @@
             android:padding="@dimen/spacingLarge"
             android:text="@string/complain"
             android:textAppearance="?android:textAppearanceSmall"
-            android:textSize="@dimen/smallTextSize"
             android:visibility="visible" />
     </LinearLayout>
+
+    <com.greenfrvr.hashtagview.HashtagView
+        android:id="@+id/v_post_hv_hasttags"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/v_post_ll_more_and_complain"
+        android:paddingTop="@dimen/externalPadding"
+        app:rowGravity="left"
+        app:tagBackground="@drawable/hash_tag_background"
+        app:tagPaddingLeft="12dp"
+        app:tagPaddingRight="12dp"
+        app:tagTextColor="@color/greyTextColor" />
 
     <LinearLayout
         android:id="@+id/v_post_l_your_comment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/v_post_ll_more_and_complain"
+        android:layout_below="@+id/v_post_hv_hasttags"
         android:orientation="vertical"
         android:visibility="gone">
 
@@ -186,7 +187,7 @@
             android:layout_marginRight="@dimen/spacingLarge"
             android:layout_marginTop="@dimen/spacingMedium"
             android:text="@string/your_comment"
-            android:textSize="@dimen/normalTextSize" />
+            android:textAppearance="?android:textAppearance" />
 
         <TextView
             android:id="@+id/v_post_tv_comment_text"
@@ -201,6 +202,7 @@
             android:gravity="top"
             android:minLines="3"
             android:padding="@dimen/internalPadding"
+            android:textAppearance="?android:textAppearance"
             tools:text="Такой то комментарий!" />
 
     </LinearLayout>
@@ -227,7 +229,8 @@
         android:drawablePadding="@dimen/internalPadding"
         android:drawableStart="@drawable/ic_like"
         android:padding="@dimen/spacingLarge"
-        android:text="@string/zero" />
+        android:text="@string/zero"
+        android:textAppearance="?android:textAppearance" />
 
     <TextView
         android:id="@+id/v_post_tv_dislike"
@@ -242,7 +245,8 @@
         android:drawablePadding="@dimen/internalPadding"
         android:drawableStart="@drawable/ic_dislike"
         android:padding="@dimen/spacingLarge"
-        android:text="@string/zero" />
+        android:text="@string/zero"
+        android:textAppearance="?android:textAppearance" />
 
     <TextView
         android:id="@+id/v_post_tv_comments"
@@ -255,7 +259,8 @@
         android:drawablePadding="@dimen/internalPadding"
         android:drawableStart="@drawable/ic_comments"
         android:padding="@dimen/spacingLarge"
-        android:text="@string/zero" />
+        android:text="@string/zero"
+        android:textAppearance="?android:textAppearance" />
 
     <ImageView
         android:id="@+id/v_post_iv_save"

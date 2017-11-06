@@ -32,7 +32,7 @@
     <string name="birthday">Дата рождения</string>
     <string name="work_place">Место работы (учёбы)</string>
     <string name="position">Должность</string>
-    <string name="experience">Опыт</string>
+    <string name="experience">Стаж работы</string>
     <string name="is_trade_unionist">Член профсоюза?</string>
     <string name="trade_union_ticket_number">№ профсоюзного билета</string>
     <string name="email">E-mail</string>
@@ -199,7 +199,7 @@
     <string name="error_enter_valid_email">Введите корректный e-mail</string>
     <string name="input_phone">Введите корректный номер телефона</string>
     <string name="input_phone_or_email">Введите e-mail или номер телефона</string>
-    <string name="district">Округ</string>
+    <string name="district">Межрайон</string>
     <string name="trade_unionist">Член профсоюза</string>
     <string name="phone_number">Номер телефона</string>
     <string name="email_not_registered">Указанный Email не зарегистрирован</string>
@@ -210,7 +210,7 @@
     <string name="ask_subscribe_to_user">Вы действительно хотите подписаться на пользователя %1$s</string>
     <string name="ask_complaint_to_post">Вы действительно хотите пожаловаться на запись: %1$s</string>
     <string name="pass_test">Ответить</string>
-    <string name="your_comment">Ваш Комментарий:</string>
+    <string name="your_comment">Ваш комментарий:</string>
     <string name="just_now">только что</string>
     <string name="minute_ago">минуту назад</string>
     <string name="hour_ago">час назад</string>
@@ -225,9 +225,12 @@
     <string name="input_text_publication">Введите ткст публикации</string>
     <string name="author_example">Иван Иванов</string>
     <string name="apply_changes">Применить</string>
+    <string name="vacancy_is_yours">Данная вакансия принадлежит Вам</string>
+    <string name="already_respond">Вы уже откликнулись</string>
+    <string name="profile_is_saved">Профиль сохранён</string>
 
-    <plurals name="plural_years">
-        <item quantity="zero">%1$d лет
+    <plurals name="plural_years_exp">
+        <item quantity="zero">без опыта
         </item> <!--zero — строка для нуля, отсутствия чего-либо; в некоторых языках — ещё и для чисел, оканчивающихся нулём;-->
         <item quantity="one">%1$d год
         </item> <!--one — строка для чисел, заканчивающихся на единицу; в некоторых языках — только для единицы;-->

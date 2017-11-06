@@ -16,7 +16,9 @@ import com.teachernavigator.teachernavigator.presentation.screens.jobs.presenter
 import com.teachernavigator.teachernavigator.presentation.screens.main.presenters.*
 import com.teachernavigator.teachernavigator.presentation.screens.main.presenters.abstractions.*
 import com.teachernavigator.teachernavigator.presentation.screens.settings.presenters.AppSettingsPresenter
+import com.teachernavigator.teachernavigator.presentation.screens.settings.presenters.ProfileSettingsPresenter
 import com.teachernavigator.teachernavigator.presentation.screens.settings.presenters.abstractions.IAppSettingsPresenter
+import com.teachernavigator.teachernavigator.presentation.screens.settings.presenters.abstractions.IProfileSettingsPresenter
 import com.teachernavigator.teachernavigator.presentation.screens.tape.presenters.PostSearchPresenter
 import com.teachernavigator.teachernavigator.presentation.screens.tape.presenters.PostsListPresenter
 import com.teachernavigator.teachernavigator.presentation.screens.tape.presenters.abstractions.IPostSearchPresenter
@@ -93,6 +95,10 @@ class PresentersModule {
     @Provides
     @PerParentScreen
     fun provideAddPublicationPresenter(presenter: AddPublicationPresenter): IAddPublicationPresenter = presenter
+
+    @Provides
+    @PerParentScreen
+    fun provideProfileSettingsPresenter(presenter: ProfileSettingsPresenter): IProfileSettingsPresenter = presenter
 
     @Provides
     @PerParentScreen

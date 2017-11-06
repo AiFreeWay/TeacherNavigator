@@ -12,15 +12,13 @@ import com.google.firebase.FirebaseApp
 import com.miguelbcr.ui.rx_paparazzo2.RxPaparazzo
 import com.orhanobut.hawk.Hawk
 import com.teachernavigator.teachernavigator.R
-import com.teachernavigator.teachernavigator.presentation.utils.applySchedulers
+import com.teachernavigator.teachernavigator.presentation.utils.parseServerDatetime
 import com.twitter.sdk.android.core.DefaultLogger
 import com.twitter.sdk.android.core.Twitter
 import com.twitter.sdk.android.core.TwitterAuthConfig
 import com.twitter.sdk.android.core.TwitterConfig
 import com.vk.sdk.VKSdk
 import io.fabric.sdk.android.Fabric
-import io.reactivex.Observable
-import io.reactivex.schedulers.Schedulers
 
 
 /**

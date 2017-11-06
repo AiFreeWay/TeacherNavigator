@@ -1,30 +1,13 @@
 <resources>
 
-    <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
-        <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
 
-
         <item name="cardBackgroundColor">@color/white</item>
 
         <item name="android:windowBackground">@color/black</item>
-
-    </style>
-
-    <style name="AppTheme.Night">
-        <item name="android:windowBackground">@color/black</item>
-        <item name="cardBackgroundColor">@color/black</item>
-
-        <item name="android:textColor">@color/white</item>
-        <item name="android:textColorHint">@color/grey</item>
-
-        <item name="android:textAppearance">@style/TextAppearance</item>
-        <item name="android:textAppearanceSmall">@style/TextAppearanceSmall</item>
-        <item name="android:textAppearanceLarge">@style/TextAppearanceLarge</item>
-
     </style>
 
     <style name="AppTheme.Day">
@@ -34,35 +17,154 @@
         <item name="android:textColor">@color/textColor</item>
         <item name="android:textColorHint">@color/grey</item>
 
-        <item name="android:textAppearance">@style/TextAppearance</item>
-        <item name="android:textAppearanceSmall">@style/TextAppearanceSmall</item>
-        <item name="android:textAppearanceLarge">@style/TextAppearanceLarge</item>
-
+        <item name="android:textAppearance">@style/TextAppearanceMedium</item>
+        <item name="android:textAppearanceSmall">@style/TextAppearanceSmallMedium</item>
+        <item name="android:textAppearanceLarge">@style/TextAppearanceLargeMedium</item>
     </style>
 
 
-    <style name="TextAppearanceLarge" parent="@android:style/TextAppearance">
-        <item name="android:textSize">@dimen/titleTextSize</item>
+    <style name="AppTheme.Night">
+        <item name="android:windowBackground">@color/black</item>
+        <item name="cardBackgroundColor">@color/black</item>
+
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textColorHint">@color/grey</item>
+
+        <item name="android:textAppearance">@style/TextAppearanceMedium</item>
+        <item name="android:textAppearanceSmall">@style/TextAppearanceSmallMedium</item>
+        <item name="android:textAppearanceLarge">@style/TextAppearanceLargeMedium</item>
+
     </style>
 
-    <style name="TextAppearance" parent="@android:style/TextAppearance">
-        <item name="android:textSize">@dimen/normalTextSize</item>
+    <style name="AppTheme.Day.Largest">
+        <item name="android:textAppearance">@style/TextAppearanceLargest</item>
+
+        <item name="android:textAppearanceSmall">@style/TextAppearanceSmallLargest</item>
+        <item name="android:textAppearanceLarge">@style/TextAppearanceLargeLargest</item>
     </style>
 
-    <style name="TextAppearanceSmall" parent="@android:style/TextAppearance">
-        <item name="android:textSize">@dimen/smallTextSize</item>
+    <style name="AppTheme.Day.Least">
+        <item name="android:textAppearance">@style/TextAppearanceLeast</item>
+
+        <item name="android:textAppearanceSmall">@style/TextAppearanceSmallLeast</item>
+        <item name="android:textAppearanceLarge">@style/TextAppearanceLargeLeast</item>
+    </style>
+
+    <style name="AppTheme.Day.Lesser">
+        <item name="android:textAppearance">@style/TextAppearanceLesser</item>
+
+        <item name="android:textAppearanceSmall">@style/TextAppearanceSmallLesser</item>
+        <item name="android:textAppearanceLarge">@style/TextAppearanceLargeLesser</item>
+    </style>
+
+    <style name="AppTheme.Day.Medium">
+        <item name="android:textAppearance">@style/TextAppearanceMedium</item>
+
+        <item name="android:textAppearanceSmall">@style/TextAppearanceSmallMedium</item>
+        <item name="android:textAppearanceLarge">@style/TextAppearanceLargeMedium</item>
+    </style>
+
+    <style name="AppTheme.Day.Larger">
+        <item name="android:textAppearance">@style/TextAppearanceLarger</item>
+
+        <item name="android:textAppearanceSmall">@style/TextAppearanceSmallLarger</item>
+        <item name="android:textAppearanceLarge">@style/TextAppearanceLargeLarger</item>
+    </style>
+
+    <style name="AppTheme.Night.Largest">
+        <item name="android:textAppearance">@style/TextAppearanceLargest</item>
+
+        <item name="android:textAppearanceSmall">@style/TextAppearanceSmallLargest</item>
+        <item name="android:textAppearanceLarge">@style/TextAppearanceLargeLargest</item>
+    </style>
+
+    <style name="AppTheme.Night.Least">
+        <item name="android:textAppearance">@style/TextAppearanceLeast</item>
+
+        <item name="android:textAppearanceSmall">@style/TextAppearanceSmallLeast</item>
+        <item name="android:textAppearanceLarge">@style/TextAppearanceLargeLeast</item>
+    </style>
+
+    <style name="AppTheme.Night.Lesser">
+        <item name="android:textAppearance">@style/TextAppearanceLesser</item>
+
+        <item name="android:textAppearanceSmall">@style/TextAppearanceSmallLesser</item>
+        <item name="android:textAppearanceLarge">@style/TextAppearanceLargeLesser</item>
+    </style>
+
+    <style name="AppTheme.Night.Medium">
+        <item name="android:textAppearance">@style/TextAppearanceMedium</item>
+
+        <item name="android:textAppearanceSmall">@style/TextAppearanceSmallMedium</item>
+        <item name="android:textAppearanceLarge">@style/TextAppearanceLargeMedium</item>
+    </style>
+
+    <style name="AppTheme.Night.Larger">
+        <item name="android:textAppearance">@style/TextAppearanceLarger</item>
+
+        <item name="android:textAppearanceSmall">@style/TextAppearanceSmallLarger</item>
+        <item name="android:textAppearanceLarge">@style/TextAppearanceLargeLarger</item>
     </style>
 
 
-
-    <style name="Text">
-        <item name="android:textSize">@dimen/normalTextSize</item>
-        <item name="android:textColor">@color/colorAccent</item>
+    <style name="TextAppearanceLeast" parent="@android:style/TextAppearance">
+        <item name="android:textSize">@dimen/normalTextSizeLeast</item>
     </style>
 
-    <style name="SmallText">
-        <item name="android:textSize">@dimen/smallTextSize</item>
-        <item name="android:textColor">@color/orange</item>
+    <style name="TextAppearanceLesser" parent="@android:style/TextAppearance">
+        <item name="android:textSize">@dimen/normalTextSizeLesser</item>
+    </style>
+
+    <style name="TextAppearanceMedium" parent="@android:style/TextAppearance">
+        <item name="android:textSize">@dimen/normalTextSizeMedium</item>
+    </style>
+
+    <style name="TextAppearanceLarger" parent="@android:style/TextAppearance">
+        <item name="android:textSize">@dimen/normalTextSizeLarger</item>
+    </style>
+
+    <style name="TextAppearanceLargest" parent="@android:style/TextAppearance">
+        <item name="android:textSize">@dimen/normalTextSizeLargest</item>
+    </style>
+
+    <style name="TextAppearanceLargeLeast" parent="@android:style/TextAppearance">
+        <item name="android:textSize">@dimen/titleTextSizeLeast</item>
+    </style>
+
+    <style name="TextAppearanceLargeLesser" parent="@android:style/TextAppearance">
+        <item name="android:textSize">@dimen/titleTextSizeLesser</item>
+    </style>
+
+    <style name="TextAppearanceLargeMedium" parent="@android:style/TextAppearance">
+        <item name="android:textSize">@dimen/titleTextSizeMedium</item>
+    </style>
+
+    <style name="TextAppearanceLargeLarger" parent="@android:style/TextAppearance">
+        <item name="android:textSize">@dimen/titleTextSizeLarger</item>
+    </style>
+
+    <style name="TextAppearanceLargeLargest" parent="@android:style/TextAppearance">
+        <item name="android:textSize">@dimen/titleTextSizeLargest</item>
+    </style>
+
+    <style name="TextAppearanceSmallLeast" parent="@android:style/TextAppearance">
+        <item name="android:textSize">@dimen/smallTextSizeLeast</item>
+    </style>
+
+    <style name="TextAppearanceSmallLesser" parent="@android:style/TextAppearance">
+        <item name="android:textSize">@dimen/smallTextSizeLesser</item>
+    </style>
+
+    <style name="TextAppearanceSmallMedium" parent="@android:style/TextAppearance">
+        <item name="android:textSize">@dimen/smallTextSizeMedium</item>
+    </style>
+
+    <style name="TextAppearanceSmallLarger" parent="@android:style/TextAppearance">
+        <item name="android:textSize">@dimen/smallTextSizeLarger</item>
+    </style>
+
+    <style name="TextAppearanceSmallLargest" parent="@android:style/TextAppearance">
+        <item name="android:textSize">@dimen/smallTextSizeLargest</item>
     </style>
 
     <style name="Dialog" parent="Theme.AppCompat.Light.Dialog.Alert">
@@ -74,13 +176,13 @@
         <item name="android:paddingRight">@dimen/spacingLarge</item>
         <item name="android:paddingTop">@dimen/spacingMedium</item>
         <item name="android:paddingBottom">@dimen/spacingMedium</item>
-        <item name="android:textSize">@dimen/smallTextSize</item>
+        <item name="android:textSize">@dimen/smallTextSizeMedium</item>
     </style>
 
     <style name="Button" parent="Base.Widget.AppCompat.Button">
         <item name="android:minHeight">24dip</item>
 
-        <item name="android:textSize">@dimen/normalTextSize</item>
+        <item name="android:textSize">@dimen/normalTextSizeMedium</item>
         <item name="android:textColor">@android:color/white</item>
         <item name="android:fontFamily">sans-serif</item>
         <item name="android:textAllCaps">false</item>
@@ -113,7 +215,7 @@
         <item name="android:paddingRight">@dimen/spacingXXLarge</item>
         <item name="android:paddingBottom">@dimen/spacingLarge</item>
         <item name="android:paddingTop">@dimen/spacingLarge</item>
-        <item name="android:textSize">@dimen/titleTextSize</item>
+        <item name="android:textSize">@dimen/titleTextSizeMedium</item>
         <item name="android:textColor">?android:textColor</item>
     </style>
 

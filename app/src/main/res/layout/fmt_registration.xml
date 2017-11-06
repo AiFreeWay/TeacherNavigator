@@ -96,11 +96,11 @@
 
             <TextView
                 android:id="@+id/fmtRegistrationTvTradeUnionist"
-                style="@style/Text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.5"
                 android:lines="1"
+                android:textAppearance="?android:textAppearance"
                 android:text="@string/is_trade_unionist" />
 
             <View
@@ -217,7 +217,7 @@
                 android:layout_weight="0"
                 android:text="\?"
                 android:textColor="@color/colorAccent"
-                android:textSize="@dimen/largeTextSize"
+                android:textAppearance="?android:textAppearanceLarge"
                 android:textStyle="bold" />
 
         </LinearLayout>

@@ -10,4 +10,5 @@
     android:paddingEnd="@dimen/spacingXXXLarge"
     android:paddingStart="@dimen/spacingXXXLarge"
     android:paddingTop="@dimen/spacingXLarge"
+    android:textAppearance="?android:textAppearance"
     android:textColor="@color/black" />

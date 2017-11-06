@@ -92,8 +92,6 @@ class MainRepository @Inject constructor(private val mNetwokController: NetworkC
             mNetwokController.singUp(request)
 
 
-
-
     override fun getAuthCredentials(): AuthCredentials {
         val clientId = mContext.getString(R.string.client_id)
         val clientSecret = mContext.getString(R.string.client_secret)
@@ -221,6 +219,12 @@ class MainRepository @Inject constructor(private val mNetwokController: NetworkC
                     .doOnSuccess { CacheController.putData(USER_KEY, it) }
 
     override fun getProfile(userId: Int): Single<Profile> = mNetwokController.getProfile(getAccessToken(), userId)
+
+    override fun editProfile(singUpData: EditProfileData): Single<EditProfileData>
+            = mNetwokController.editProfile(getAccessToken(), singUpData)
+
+    override fun getProfileSettings(): Single<EditProfileData>
+            = mNetwokController.getProfileSettings(getAccessToken())
 
     override fun exit() {
         CacheController.removeData(CacheController.TOKEN_KEY)

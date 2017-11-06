@@ -1,6 +1,5 @@
 package com.teachernavigator.teachernavigator.presentation.adapters.holders
 
-import android.support.v4.content.ContextCompat
 import android.view.View
 import android.view.View.GONE
 import android.view.View.VISIBLE
@@ -11,6 +10,7 @@ import com.teachernavigator.teachernavigator.presentation.models.ResponseModel
 import com.teachernavigator.teachernavigator.presentation.utils.ImageLoader
 import com.teachernavigator.teachernavigator.presentation.utils.find
 import com.teachernavigator.teachernavigator.presentation.utils.listenClickBy
+import com.teachernavigator.teachernavigator.presentation.views.FileIconView
 import ru.lliepmah.HolderBuilder
 import ru.lliepmah.lib.DefaultViewHolder
 
@@ -25,15 +25,13 @@ class ResponseHolder(itemView: View,
     private val vResponseIvAvatar: ImageView = itemView.find(R.id.vResponseIvAvatar)
     private val vResponseTvName: TextView = itemView.find(R.id.vResponseTvName)
     private val vResponseTvTimeAgo: TextView = itemView.find(R.id.vResponseTvTimeAgo)
-    private val vResponseTvDownload: TextView = itemView.find(R.id.vResponseTvDownload)
+    private val vResponseVResumeFile: FileIconView = itemView.find(R.id.vResponseVResumeFile)
 
     private var mResponseModel: ResponseModel? = null
 
     init {
-        vResponseTvDownload listenClickBy onDownloadListener andReturnModel { mResponseModel }
+        vResponseVResumeFile listenClickBy onDownloadListener andReturnModel { mResponseModel }
         vResponseIvAvatar listenClickBy onUserClickListener andReturnModel { mResponseModel }
-
-        vResponseTvDownload.setCompoundDrawablesWithIntrinsicBounds(null, null, ContextCompat.getDrawable(itemView.context, R.drawable.ic_resume), null)
     }
 
     override fun bind(response: ResponseModel?) {
@@ -44,7 +42,9 @@ class ResponseHolder(itemView: View,
             }
             vResponseTvTimeAgo.text = it.timeAgo
             vResponseTvName.text = it.userName
-            vResponseTvDownload.visibility = if (it.portfolio.isBlank()) GONE else VISIBLE
+
+            vResponseVResumeFile.visibility = if (it.portfolio.isBlank()) GONE else VISIBLE
+            vResponseVResumeFile.setFilename(it.portfolio)
         }
     }
 

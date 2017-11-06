@@ -139,13 +139,7 @@ interface ApiController {
     @Multipart
     @POST("/api/v0/me/resume/")
     fun createResumeAndUpload(@Header("Authorization") accessToken: String,
-                              @Part("file\"; filename=\"file.jpg") file: RequestBody,
-                              @Part("career_objective") career_objective: String,
-                              @Part("district_council") district_council: Int,
-                              @Part("amount_of_wages") amount_of_wages: String,
-                              @Part("education") education: String,
-                              @Part("experience") experience: String
-    ): Single<Resume>
+                              @PartMap params: Map<String, @JvmSuppressWildcards RequestBody>): Single<Resume>
 
     @Multipart
     @POST("/api/v0/me/avatar/")

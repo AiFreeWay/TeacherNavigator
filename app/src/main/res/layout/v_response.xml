@@ -24,39 +24,41 @@
 
         <TextView
             android:id="@+id/vResponseTvName"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
+            android:lines="1"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/spacingLarge"
             android:layout_marginStart="@dimen/spacingLarge"
+            android:ellipsize="end"
             android:textAppearance="?android:textAppearance"
+            app:layout_constraintHorizontal_bias="0"
             app:layout_constraintLeft_toRightOf="@+id/vResponseIvAvatar"
+            app:layout_constraintRight_toLeftOf="@+id/vResponseVResumeFile"
             app:layout_constraintTop_toTopOf="@+id/vResponseIvAvatar"
-            tools:text="Иванов Иван" />
+            tools:text="Сальников Алексей геннадиевич" />
 
         <TextView
             android:id="@+id/vResponseTvTimeAgo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="1dp"
             android:layout_marginLeft="@dimen/spacingLarge"
             android:layout_marginStart="@dimen/spacingLarge"
             android:textAppearance="?android:textAppearance"
             android:textColor="@color/grey"
             app:layout_constraintBottom_toBottomOf="@+id/vResponseIvAvatar"
+            app:layout_constraintHorizontal_bias="0"
             app:layout_constraintLeft_toRightOf="@+id/vResponseIvAvatar"
+            app:layout_constraintRight_toLeftOf="@+id/vResponseVResumeFile"
             tools:text="36 минут назад" />
 
-        <TextView
-            android:id="@+id/vResponseTvDownload"
-            android:layout_width="0dp"
+        <com.teachernavigator.teachernavigator.presentation.views.FileIconView
+            android:id="@+id/vResponseVResumeFile"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="?android:attr/selectableItemBackground"
-            android:gravity="center_vertical|start"
-            android:text=""
-            android:textAppearance="?android:textAppearance"
-            app:layout_constraintLeft_toLeftOf="@+id/vResponseTvTimeAgo"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/vResponseIvAvatar"
-            tools:drawableRight="@drawable/ic_resume" />
+            app:layout_constraintTop_toTopOf="parent" />
 
     </android.support.constraint.ConstraintLayout>
 </android.support.v7.widget.CardView>

@@ -9,6 +9,7 @@ import com.teachernavigator.teachernavigator.presentation.models.ResumeModel
 import com.teachernavigator.teachernavigator.presentation.utils.ImageLoader
 import com.teachernavigator.teachernavigator.presentation.utils.find
 import com.teachernavigator.teachernavigator.presentation.utils.listenClickBy
+import com.teachernavigator.teachernavigator.presentation.views.FileIconView
 import ru.lliepmah.HolderBuilder
 import ru.lliepmah.lib.DefaultViewHolder
 
@@ -20,12 +21,12 @@ class ResumeHolder(itemView: View,
                    private val isMine: Boolean,
                    private val onProlongListener: OnProlongResumeListener?,
                    private val onDeleteListener: OnDeleteResumeListener?,
-                   private val onFileClickListener: OnResumeFileClickListener?) : DefaultViewHolder<ResumeModel>(itemView) {
+                   onFileClickListener: OnResumeFileClickListener?) : DefaultViewHolder<ResumeModel>(itemView) {
 
     private val vResumeIvAvatar: ImageView = itemView.find(R.id.vResumeIvAvatar)
     private val vResumeTvName: TextView = itemView.find(R.id.vResumeTvName)
     private val vResumeTvCareerObjective: TextView = itemView.find(R.id.vResumeTvCareerObjective)
-    private val vResumeIvFile: ImageView = itemView.find(R.id.vResumeIvFile)
+    private val vResumeVFileIcon: FileIconView = itemView.find(R.id.vResumeVFileIcon)
     private val vResumeTvDistrictCouncil: TextView = itemView.find(R.id.vResumeTvDistrictCouncil)
     private val vResumeTvSalary: TextView = itemView.find(R.id.vResumeTvSalary)
     private val vResumeTvSuitableVacancies: TextView = itemView.find(R.id.vResumeTvSuitableVacancies)
@@ -39,7 +40,7 @@ class ResumeHolder(itemView: View,
     init {
         vResumeBtnDelete.setOnClickListener { onDelete() }
         vResumeBtnProlong.setOnClickListener { onProlong() }
-        vResumeIvFile listenClickBy onFileClickListener andReturnModel { mResume?.file }
+        vResumeVFileIcon listenClickBy onFileClickListener andReturnModel { mResume?.file }
     }
 
     override fun bind(resume: ResumeModel?) {
@@ -62,7 +63,7 @@ class ResumeHolder(itemView: View,
             vResumeBtnDelete.visibility = if (isMine) View.VISIBLE else View.GONE
             vResumeBtnProlong.visibility = if (isMine) View.VISIBLE else View.GONE
 
-
+            vResumeVFileIcon.setFilename(it.file ?: "")
             vResumeTvSuitableVacancies.text = it.appropriateCount
             vResumeTvRemains.text = it.daysRemains
         }

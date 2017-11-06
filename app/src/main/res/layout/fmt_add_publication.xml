@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -91,10 +90,10 @@
                 app:tagPaddingRight="12dp"
                 app:tagTextColor="@color/greyTextColor" />
 
-            <TextView
-                android:id="@+id/fmtAddPublicationTvAddFile"
+            <LinearLayout
+                android:id="@+id/fmtAddPublicationLAddFile"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/normalControlsHeight"
+                android:layout_height="wrap_content"
                 android:layout_below="@+id/fmtAddPublicationHvHashtags"
                 android:layout_marginBottom="@dimen/spacingMedium"
                 android:layout_marginEnd="@dimen/externalPadding"
@@ -102,19 +101,33 @@
                 android:layout_marginRight="@dimen/spacingLarge"
                 android:layout_marginStart="@dimen/externalPadding"
                 android:layout_marginTop="@dimen/spacingMedium"
-                android:background="?android:attr/selectableItemBackground"
-                android:gravity="center_vertical|start"
-                android:padding="@dimen/spacingMedium"
-                android:text="@string/attach_file"
-                android:textAppearance="?android:textAppearance"
-                tools:drawableRight="@drawable/ic_resume" />
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/fmtAddPublicationTvAddFile"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/normalControlsHeight"
+                    android:background="?android:attr/selectableItemBackground"
+                    android:gravity="center_vertical|start"
+                    android:padding="@dimen/spacingMedium"
+                    android:layout_weight="1"
+                    android:text="@string/attach_file"
+                    android:textAppearance="?android:textAppearance" />
+
+                <com.teachernavigator.teachernavigator.presentation.views.FileIconView
+                    android:id="@+id/fmtAddPublicationVFileIcon"
+                    android:layout_width="wrap_content"
+                    android:layout_weight="0"
+                    android:layout_height="wrap_content" />
+
+            </LinearLayout>
 
             <android.support.v7.widget.AppCompatButton
                 android:id="@+id/fmtAddPublicationBtnPublic"
                 style="@style/Button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/fmtAddPublicationTvAddFile"
+                android:layout_below="@+id/fmtAddPublicationLAddFile"
                 android:layout_marginBottom="@dimen/spacingMedium"
                 android:layout_marginLeft="@dimen/spacingXXLarge"
                 android:layout_marginRight="@dimen/spacingXXLarge"

@@ -60,7 +60,8 @@
         android:layout_alignLeft="@+id/v_post_tv_author_name"
         android:layout_alignStart="@+id/v_post_tv_author_name"
         android:layout_below="@+id/v_post_tv_post_time"
-        android:layout_marginTop="@dimen/externalPadding"
+        android:layout_marginBottom="@dimen/spacingMedium"
+        android:layout_marginTop="@dimen/spacingMedium"
         android:fontFamily="sans-serif-medium"
         android:textAllCaps="false"
         android:textAppearance="?android:textAppearance"
@@ -73,7 +74,8 @@
         android:layout_alignLeft="@+id/v_post_tv_title"
         android:layout_alignStart="@+id/v_post_tv_title"
         android:layout_below="@+id/v_post_tv_title"
-        android:layout_marginTop="@dimen/externalPadding"
+        android:layout_marginBottom="@dimen/spacingMedium"
+        android:layout_marginTop="@dimen/spacingMedium"
         android:ellipsize="end"
         android:textAppearance="?android:textAppearance"
         tools:text="Текст поста" />
@@ -100,25 +102,40 @@
         android:orientation="vertical"
         android:visibility="gone" />
 
-    <TextView
-        android:id="@+id/v_post_tv_file"
+    <LinearLayout
+        android:id="@+id/v_post_l_file"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/v_post_ll_choiced_choices"
-        android:background="?android:attr/selectableItemBackground"
-        android:gravity="center_vertical|start"
-        android:text="@string/download_resume"
-        android:textAppearance="?android:textAppearance"
-        tools:drawableRight="@drawable/ic_resume" />
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/normalControlsHeight"
+            android:layout_weight="1"
+            android:background="?android:attr/selectableItemBackground"
+            android:gravity="center_vertical|start"
+            android:padding="@dimen/spacingMedium"
+            android:text="@string/view_document"
+            android:textAppearance="?android:textAppearance" />
+
+        <com.teachernavigator.teachernavigator.presentation.views.FileIconView
+            android:id="@+id/v_post_v_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0" />
+
+    </LinearLayout>
 
     <LinearLayout
         android:id="@+id/v_post_ll_more_and_complain"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/v_post_tv_title"
-        android:layout_alignStart="@+id/v_post_tv_title"
-        android:layout_below="@+id/v_post_tv_file"
-        android:layout_marginTop="@dimen/externalPadding"
+        android:layout_below="@+id/v_post_l_file"
+        android:layout_marginBottom="@dimen/spacingMedium"
+        android:layout_marginTop="@dimen/spacingMedium"
+        android:layout_marginLeft="@dimen/size_avatar_small"
+        android:layout_marginStart="@dimen/size_avatar_small"
         android:gravity="start"
         android:orientation="horizontal">
 
@@ -164,7 +181,8 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/v_post_ll_more_and_complain"
-        android:paddingTop="@dimen/externalPadding"
+        android:layout_marginBottom="@dimen/spacingMedium"
+        android:layout_marginTop="@dimen/spacingMedium"
         app:rowGravity="left"
         app:tagBackground="@drawable/hash_tag_background"
         app:tagPaddingLeft="12dp"

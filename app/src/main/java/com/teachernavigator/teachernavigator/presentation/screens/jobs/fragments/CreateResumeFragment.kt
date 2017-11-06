@@ -3,7 +3,6 @@ package com.teachernavigator.teachernavigator.presentation.screens.jobs.fragment
 import android.Manifest
 import android.app.Activity.RESULT_OK
 import android.os.Bundle
-import android.support.v4.content.ContextCompat
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,6 +11,7 @@ import com.miguelbcr.ui.rx_paparazzo2.entities.FileData
 import com.miguelbcr.ui.rx_paparazzo2.entities.Response
 import com.tbruyelle.rxpermissions2.RxPermissions
 import com.teachernavigator.teachernavigator.R
+import com.teachernavigator.teachernavigator.data.models.FileInfo
 import com.teachernavigator.teachernavigator.presentation.screens.common.BaseFragment
 import com.teachernavigator.teachernavigator.presentation.screens.jobs.fragments.abstractions.CreateResumeView
 import com.teachernavigator.teachernavigator.presentation.screens.jobs.presenters.abstractions.ICreateResumePresenter
@@ -42,9 +42,10 @@ class CreateResumeFragment : BaseFragment(), CreateResumeView {
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        createResumeTvAttachResume.setCompoundDrawablesWithIntrinsicBounds(null, null, ContextCompat.getDrawable(context, R.drawable.ic_resume), null)
         createResumeBtnCreate.setOnClickListener { createResume() }
         createResumeTvAttachResume.setOnClickListener { attachFile() }
+        createResumeLAttachResume.setOnClickListener { attachFile() }
+        createResumeVFileIcon.setOnClickListener { attachFile() }
 
     }
 
@@ -70,9 +71,11 @@ class CreateResumeFragment : BaseFragment(), CreateResumeView {
     private fun onFileAttached(response: Response<CreateResumeFragment, FileData>) {
         val data = response.data()
         if (response.resultCode() == RESULT_OK && data != null) {
-            createResumeTvAttachResume.text = data.filename
-            createResumePresenter.resumePath = data.file.path
-            createResumePresenter.resumeMime = data.mimeType
+            if (data.file.exists()) {
+                createResumeTvAttachResume.text = data.filename
+                createResumePresenter.fileInfo = FileInfo(data.file.path, data.mimeType, data.file.name)
+                createResumeVFileIcon.setFilename(data.file.name)
+            }
         }
     }
 

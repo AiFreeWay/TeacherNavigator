@@ -1,5 +1,6 @@
 package com.teachernavigator.teachernavigator.domain.interactors.abstractions
 
+import com.teachernavigator.teachernavigator.data.models.FileInfo
 import com.teachernavigator.teachernavigator.data.network.requests.ResumeRequest
 import com.teachernavigator.teachernavigator.data.network.requests.VacancyRequest
 import com.teachernavigator.teachernavigator.domain.models.Resume
@@ -18,7 +19,7 @@ interface IJobInteractor {
     fun prolongVacancy(vacancyId: Int): Single<Unit>
     fun respondVacancy(vacancyId: Int): Single<Unit>
     fun prolongResume(resumeId: Int): Single<Unit>
-    fun createResume(resumeRequest: ResumeRequest): Single<Resume>
+    fun createResume(resumeRequest: ResumeRequest, fileInfo: FileInfo?): Single<Resume>
     fun loadMyVacancies(): Single<List<Vacancy>>
     fun loadVacancies(): Single<List<Vacancy>>
     fun loadMyResume(): Single<List<Resume>>

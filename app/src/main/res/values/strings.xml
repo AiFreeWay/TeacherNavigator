@@ -56,6 +56,7 @@
     <string name="any">Любые</string>
     <string name="only_text">Только текст</string>
     <string name="with_document">С документом</string>
+    <string name="view_document">Посмотреть документ</string>
     <string name="find">Найти</string>
     <string name="your_account_succesfuly_created">Ваш аккаунт успешно создан</string>
     <string name="account_created_text">На Ваш E-mail или моб. телефон высланы регистрационные данные</string>

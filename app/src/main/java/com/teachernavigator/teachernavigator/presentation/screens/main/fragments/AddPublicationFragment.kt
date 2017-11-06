@@ -5,7 +5,6 @@ import android.app.Activity
 import android.os.Bundle
 import android.support.transition.Fade
 import android.support.transition.TransitionManager
-import android.support.v4.content.ContextCompat
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.LayoutInflater
@@ -48,11 +47,6 @@ class AddPublicationFragment : BaseFragment(), AddPublicationView {
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? =
             inflater?.inflate(R.layout.fmt_add_publication, container, false)
 
-    override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        fmtAddPublicationTvAddFile.setCompoundDrawablesWithIntrinsicBounds(null, null, ContextCompat.getDrawable(context, R.drawable.ic_resume), null)
-    }
-
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         mParentScreenComponent.inject(this)
@@ -69,6 +63,8 @@ class AddPublicationFragment : BaseFragment(), AddPublicationView {
         fmtAddPublicationBtnPreview.setOnClickListener { preview() }
         fmtAddPublicationTvAddTag.setOnClickListener { showAddTags() }
         fmtAddPublicationTvAddFile.setOnClickListener { attachFile() }
+        fmtAddPublicationLAddFile.setOnClickListener { attachFile() }
+        fmtAddPublicationVFileIcon.setOnClickListener { attachFile() }
         fmtAddPublicationVAddTag.setOnClickListener { cancelTags() }
 
         vAddTagEtTag.addTextChangedListener(object : TextWatcher {
@@ -101,6 +97,7 @@ class AddPublicationFragment : BaseFragment(), AddPublicationView {
         val data = response.data()
         if (response.resultCode() == Activity.RESULT_OK && data != null) {
             fmtAddPublicationTvAddFile.text = data.filename
+            fmtAddPublicationVFileIcon.setFilename(data.filename)
             presenter.setFile(data.file, data.mimeType)
         }
     }

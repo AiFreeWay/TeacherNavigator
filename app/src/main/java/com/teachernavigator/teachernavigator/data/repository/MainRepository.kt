@@ -249,8 +249,8 @@ class MainRepository @Inject constructor(private val mNetwokController: NetworkC
     override fun loadMyResume(): Single<List<Resume>> =
             mNetwokController.loadMyResume(getAccessToken())
 
-    override fun createResume(resumeRequest: ResumeRequest): Single<Resume> =
-            mNetwokController.createResume(getAccessToken(), resumeRequest)
+    override fun createResume(resumeRequest: ResumeRequest, fileInfo: FileInfo?): Single<Resume> =
+            mNetwokController.createResume(getAccessToken(), resumeRequest, fileInfo)
 
     override fun loadResumeList(): Single<List<Resume>> =
             mNetwokController.loadResumeList(getAccessToken())

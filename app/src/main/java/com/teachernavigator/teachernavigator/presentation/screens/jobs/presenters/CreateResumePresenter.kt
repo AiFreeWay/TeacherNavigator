@@ -4,6 +4,7 @@ import android.arch.lifecycle.Lifecycle
 import android.arch.lifecycle.OnLifecycleEvent
 import com.teachernavigator.teachernavigator.R
 import com.teachernavigator.teachernavigator.application.di.scopes.PerParentScreen
+import com.teachernavigator.teachernavigator.data.models.FileInfo
 import com.teachernavigator.teachernavigator.data.network.requests.ResumeRequest
 import com.teachernavigator.teachernavigator.domain.interactors.abstractions.IJobInteractor
 import com.teachernavigator.teachernavigator.domain.models.Resume
@@ -22,8 +23,7 @@ class CreateResumePresenter
 @Inject constructor(val router: Router,
                     private val jobInteractor: IJobInteractor) : BasePresenter<CreateResumeView>(), ICreateResumePresenter {
 
-    override var resumePath: String? = null
-    override var resumeMime: String? = null
+    override var fileInfo: FileInfo? = null
 
     override fun validateAndCreate(careerObjective: CharSequence,
                                    districtCouncil: CharSequence,
@@ -43,16 +43,13 @@ class CreateResumePresenter
                     districtCouncil = districtCouncil.toString().toInt(),
                     education = education.toString(),
                     experience = experience.toString(),
-                    salary = salary.toString(),
-                    resumePath = resumePath,
-                    mime = resumeMime
-
-            ))
+                    salary = salary.toString()
+            ), fileInfo)
         }
     } ?: Unit
 
-    private fun createResume(resumeRequest: ResumeRequest) =
-            addDissposable(jobInteractor.createResume(resumeRequest)
+    private fun createResume(resumeRequest: ResumeRequest, fileInfo: FileInfo?) =
+            addDissposable(jobInteractor.createResume(resumeRequest, fileInfo)
                     .doOnSubscribe { startProgress() }
                     .subscribe(this::onCreated, this::onError))
 

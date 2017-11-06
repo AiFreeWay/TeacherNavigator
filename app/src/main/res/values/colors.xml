@@ -11,6 +11,8 @@
     <color name="greyTextColor">#555760</color>
     <color name="lightTextColor">#afafaf</color>
     <color name="red">#ff0000</color>
+    <color name="bright_red">#f15642</color>
+    <color name="bright_blue">#4256f1</color>
     <color name="blue">#0000ff</color>
     <color name="orange">#ff9f00</color>
     <color name="lightOrange">#ffc76c</color>
@@ -19,4 +21,5 @@
     <color name="black">#000</color>
     <color name="yellow">#FDFD89</color>
     <color name="green">#86bf99</color>
+    <color name="transparent">#00000000</color>
 </resources>

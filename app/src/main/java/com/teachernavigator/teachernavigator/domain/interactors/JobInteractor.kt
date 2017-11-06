@@ -1,5 +1,6 @@
 package com.teachernavigator.teachernavigator.domain.interactors
 
+import com.teachernavigator.teachernavigator.data.models.FileInfo
 import com.teachernavigator.teachernavigator.data.network.requests.ResumeRequest
 import com.teachernavigator.teachernavigator.data.network.requests.VacancyRequest
 import com.teachernavigator.teachernavigator.data.repository.abstractions.IJobRepository
@@ -51,8 +52,8 @@ class JobInteractor @Inject constructor(private val jobRepository: IJobRepositor
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribeOn(Schedulers.newThread())
 
-    override fun createResume(resumeRequest: ResumeRequest): Single<Resume> =
-            jobRepository.createResume(resumeRequest)
+    override fun createResume(resumeRequest: ResumeRequest, fileInfo: FileInfo?): Single<Resume> =
+            jobRepository.createResume(resumeRequest, fileInfo)
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribeOn(Schedulers.newThread())
 

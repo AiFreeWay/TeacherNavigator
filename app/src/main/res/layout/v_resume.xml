@@ -46,15 +46,13 @@
             app:layout_constraintLeft_toRightOf="@+id/vResumeIvAvatar"
             tools:text="Учитель информатики и ИКТ" />
 
-        <ImageView
-            android:id="@+id/vResumeIvFile"
-            android:layout_width="@dimen/iconSmall"
-            android:layout_height="@dimen/iconSmall"
+        <com.teachernavigator.teachernavigator.presentation.views.FileIconView
+            android:id="@+id/vResumeVFileIcon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/spacingXLarge"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/vResumeIvAvatar"
-            app:srcCompat="@drawable/ic_resume"
-            tools:ignore="ContentDescription" />
+            app:layout_constraintTop_toBottomOf="@+id/vResumeIvAvatar" />
 
         <TextView
             android:id="@+id/vResumeTvDistrictCouncil"
@@ -63,8 +61,8 @@
             android:layout_marginLeft="@dimen/spacingLarge"
             android:layout_marginRight="@dimen/spacingLarge"
             android:textAppearance="?android:textAppearance"
-            app:layout_constraintLeft_toRightOf="@+id/vResumeIvFile"
-            app:layout_constraintTop_toTopOf="@+id/vResumeIvFile"
+            app:layout_constraintLeft_toRightOf="@+id/vResumeVFileIcon"
+            app:layout_constraintTop_toTopOf="@+id/vResumeVFileIcon"
             tools:text="Межрайонный совет №250" />
 
         <TextView
@@ -74,8 +72,8 @@
             android:layout_marginLeft="@dimen/spacingLarge"
             android:layout_marginRight="@dimen/spacingLarge"
             android:textAppearance="?android:textAppearance"
-            app:layout_constraintBottom_toBottomOf="@+id/vResumeIvFile"
-            app:layout_constraintLeft_toRightOf="@+id/vResumeIvFile"
+            app:layout_constraintBottom_toBottomOf="@+id/vResumeVFileIcon"
+            app:layout_constraintLeft_toRightOf="@+id/vResumeVFileIcon"
             tools:text="35 000 рублей" />
 
         <TextView
@@ -88,7 +86,7 @@
             android:textStyle="bold"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/vResumeIvFile"
+            app:layout_constraintTop_toBottomOf="@+id/vResumeVFileIcon"
             tools:text="Подходящих вакансий: 296" />
 
         <TextView

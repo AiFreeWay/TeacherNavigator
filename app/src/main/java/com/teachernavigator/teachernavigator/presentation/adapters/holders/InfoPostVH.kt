@@ -13,6 +13,7 @@ import com.teachernavigator.teachernavigator.domain.models.PostType
 import com.teachernavigator.teachernavigator.presentation.models.ChoiceModel
 import com.teachernavigator.teachernavigator.presentation.models.PostModel
 import com.teachernavigator.teachernavigator.presentation.utils.*
+import com.teachernavigator.teachernavigator.presentation.views.FileIconView
 import com.teachernavigator.teachernavigator.presentation.views.PollChoiceView
 import ru.lliepmah.HolderBuilder
 import ru.lliepmah.lib.DefaultViewHolder
@@ -31,7 +32,7 @@ open class InfoPostVH(itemView: View,
                       private val onComplaintListener: OnComplaintListener?,
                       onPollPassListener: OnPollPassListener?,
                       private val onFileClickListener: OnFileClickListener?,
-                      onOpenUserListener : OnOpenUserListener?
+                      onOpenUserListener: OnOpenUserListener?
 
 ) : DefaultViewHolder<PostModel>(itemView) {
 
@@ -52,8 +53,10 @@ open class InfoPostVH(itemView: View,
     private val tvLike: TextView = itemView.find(R.id.v_post_tv_like)
     private val tvDislike: TextView = itemView.find(R.id.v_post_tv_dislike)
     private val passTestButton: Button = itemView.find(R.id.v_post_btn_pass_test)
-    private val fileTv: TextView = itemView.find(R.id.v_post_tv_file)
+    private val fileLayout: ViewGroup = itemView.find(R.id.v_post_l_file)
+    private val fileIcon: FileIconView = itemView.find(R.id.v_post_v_icon)
     private val divider: View = itemView.find(R.id.v_post_v_devider)
+
 
     val tvComments: TextView = itemView.find(R.id.v_post_tv_comments)
     val ivSave: ImageView = itemView.find(R.id.v_post_iv_save)
@@ -70,9 +73,7 @@ open class InfoPostVH(itemView: View,
         ivSubscribe listenClickBy onSubscribeListener andReturnModelOrHide { mModel }
         btnMore listenClickBy onReadMoreListener andReturnModelOrHide { mModel }
         tvComplain listenClickBy onComplaintListener andReturnModelOrHide { mModel }
-        fileTv listenClickBy onFileClickListener andReturnModelOrHide { mModel?.file }
-
-        fileTv.setCompoundDrawablesWithIntrinsicBounds(null, null, ContextCompat.getDrawable(itemView.context, R.drawable.ic_resume), null)
+        fileLayout listenClickBy onFileClickListener andReturnModelOrHide { mModel?.file }
 
         if (onPollPassListener != null) {
             passTestButton.setOnClickListener { passTest(onPollPassListener) }
@@ -113,7 +114,13 @@ open class InfoPostVH(itemView: View,
         tvText.setTextOrHide(model?.text)
 
         if (onFileClickListener != null) {
-            fileTv.setTextOrHide(model?.file?.let { Uri.parse(it).lastPathSegment })
+            val filename = model?.file?.let { Uri.parse(it).lastPathSegment }
+            fileLayout.visibility = if (filename != null) {
+                fileIcon.setFilename(filename)
+                VISIBLE
+            } else {
+                GONE
+            }
         }
 
         if (model?.type == PostType.poll && btnMore.visibility == GONE && !model.choices.isNullOrEmpty()) {
@@ -125,6 +132,7 @@ open class InfoPostVH(itemView: View,
         }
 
         hvHasttags.setData(model?.tags ?: emptyList())
+        hvHasttags.visibility = if (model?.tags.isNullOrEmpty()) GONE else VISIBLE
 
         tvLike.text = (model?.count_likes ?: 0).toString()
         tvDislike.text = (model?.count_dislikes ?: 0).toString()
@@ -135,6 +143,8 @@ open class InfoPostVH(itemView: View,
 
         ivSubscribe.visibility = if (onSubscribeListener == null || model == null || model.authorId <= 0 || model.isMine == true) GONE else VISIBLE
         tvComplain.visibility = if (onComplaintListener == null || model?.isMine == true) GONE else VISIBLE
+
+        lMore.visibility = if (tvComplain.visibility == GONE && btnMore.visibility == GONE) GONE else VISIBLE
     }
 
 

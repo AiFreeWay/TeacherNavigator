@@ -17,14 +17,12 @@ import com.teachernavigator.teachernavigator.domain.models.*
 import com.teachernavigator.teachernavigator.presentation.models.Specialist
 import io.reactivex.Single
 import okhttp3.Interceptor
-import okhttp3.MediaType
 import okhttp3.OkHttpClient
 import okhttp3.RequestBody
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
-import java.io.File
 import java.util.*
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -169,11 +167,17 @@ constructor(gson: Gson) {
             mApiController.myResume(accessToken)
                     .map { it.results }
 
-    fun createResume(accessToken: String, resumeRequest: ResumeRequest): Single<Resume> =
-            if (resumeRequest.resumePath != null && File(resumeRequest.resumePath).exists()) {
-                val file = RequestBody.create(MediaType.parse(resumeRequest.mime), File(resumeRequest.resumePath))
-                mApiController.createResumeAndUpload(accessToken, file, resumeRequest.careerObjective, resumeRequest.districtCouncil, resumeRequest.salary,
-                        resumeRequest.education, resumeRequest.experience)
+    fun createResume(accessToken: String, resumeRequest: ResumeRequest, fileInfo: FileInfo?): Single<Resume> =
+            if (fileInfo != null) {
+                val params = HashMap<String, RequestBody>().apply {
+                    put("career_objective", resumeRequest.careerObjective.toRequestBody())
+                    put("district_council", resumeRequest.districtCouncil.toString().toRequestBody())
+                    put("amount_of_wages", resumeRequest.salary.toRequestBody())
+                    put("education", resumeRequest.education.toRequestBody())
+                    put("experience", resumeRequest.experience.toRequestBody())
+                    put("file\"; filename=\"${fileInfo.fileName}", fileInfo.toRequestBody())
+                }
+                mApiController.createResumeAndUpload(accessToken, params)
             } else {
                 mApiController.createResume(accessToken, resumeRequest)
             }

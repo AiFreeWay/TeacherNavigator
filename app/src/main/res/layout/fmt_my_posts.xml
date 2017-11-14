@@ -26,9 +26,14 @@
         android:id="@+id/fmtMyPostsTvNoData"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:textAppearance"
         android:layout_gravity="center"
-        android:text="@string/no_data"
-        android:textColor="@color/lightTextColor"
+        android:layout_margin="@dimen/spacingXXXLarge"
+        android:drawableBottom="@drawable/img_empty_list"
+        android:drawablePadding="@dimen/spacingXXXLarge"
+        android:gravity="center"
+        android:text="@string/no_my_posts_yet"
+        android:textAppearance="?android:textAppearance"
+        android:textSize="@dimen/titleTextSizeMedium"
         android:visibility="gone" />
+
 </FrameLayout>

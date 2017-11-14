@@ -229,6 +229,9 @@
     <string name="vacancy_is_yours">Данная вакансия принадлежит Вам</string>
     <string name="already_respond">Вы уже откликнулись</string>
     <string name="profile_is_saved">Профиль сохранён</string>
+    <string name="no_comments_yet">У Вас ещё\nнет комментариев</string>
+    <string name="no_my_posts_yet">У Вас ещё нет\nсохранённых публикаций</string>
+    <string name="no_publications">Публикации отсутствуют</string>
 
     <plurals name="plural_years_exp">
         <item quantity="zero">без опыта

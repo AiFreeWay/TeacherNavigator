@@ -25,7 +25,6 @@ import com.teachernavigator.teachernavigator.presentation.screens.main.fragments
 import com.teachernavigator.teachernavigator.presentation.screens.main.presenters.abstractions.IMainPresenter
 import com.teachernavigator.teachernavigator.presentation.screens.tape.fragments.PostsListFragment
 import com.teachernavigator.teachernavigator.presentation.utils.ActivityRouter
-import com.teachernavigator.teachernavigator.presentation.utils.notImplemented
 import ru.terrakok.cicerone.Router
 import javax.inject.Inject
 
@@ -166,9 +165,16 @@ class AcMainPresenter : BasePresenter<MainView>(), IMainPresenter {
         }
     }
 
+    private var mProfile: Profile? = null
+
     private fun sendProfile(profile: Profile) {
-        Logger.testLog("Get profile " + profile.full_name)
+        mProfile = profile
         val data = MenuData(MenuItemsFactory.MenuItemTypes.PROFILE_HEADER.id, profile)
         mMenuController!!.getPresenterChannel().getOutputChannel().onNext(data)
     }
+
+    override fun updateProfile() {
+        loadProfileIsAuth(true)
+    }
+
 }

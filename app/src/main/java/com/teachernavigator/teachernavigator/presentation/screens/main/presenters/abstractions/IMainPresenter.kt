@@ -3,11 +3,13 @@ package com.teachernavigator.teachernavigator.presentation.screens.main.presente
 import android.os.Bundle
 import android.view.ViewGroup
 import com.teachernavigator.teachernavigator.application.di.components.ParentScreenComponent
+import com.teachernavigator.teachernavigator.domain.models.EditProfileData
+import com.teachernavigator.teachernavigator.presentation.models.ProfileModel
 import com.teachernavigator.teachernavigator.presentation.screens.common.ViewAttacher
 import com.teachernavigator.teachernavigator.presentation.screens.main.activities.abstractions.MainView
 
 /**
- * Created by root on 14.08.17.
+ * Created by root on 14.08.17
  */
 interface IMainPresenter : ViewAttacher<MainView> {
 
@@ -16,4 +18,5 @@ interface IMainPresenter : ViewAttacher<MainView> {
     fun getParentScreenComponent(): ParentScreenComponent
     fun navigateBack()
     fun loadProfile()
+    fun updateProfile()
 }

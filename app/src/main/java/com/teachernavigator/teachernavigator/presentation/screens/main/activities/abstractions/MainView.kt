@@ -4,10 +4,11 @@ import com.teachernavigator.teachernavigator.presentation.screens.common.ParentV
 
 
 /**
- * Created by root on 14.08.17.
+ * Created by root on 14.08.17
  */
 interface MainView : ParentView {
 
     fun openSideMenu()
     fun closeSideMenu()
+    fun updateProfile()
 }

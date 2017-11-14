@@ -7,12 +7,12 @@ import com.teachernavigator.teachernavigator.presentation.menu.MenuController
 import com.teachernavigator.teachernavigator.presentation.menu.binders.BaseMenuBinder
 
 /**
- * Created by root on 15.08.17.
+ * Created by root on 15.08.17
  */
 class MenuBindStrategy(private val mMenuController: MenuController) : BindStrategy {
 
     override fun createBinder(parent: ViewGroup, type: Int): BaseMenuBinder {
-        val binder  = when(type) {
+        val binder = when(type) {
             MenuItemsFactory.MenuItemTypes.LOGIN.id -> LoginBinder(parent)
             MenuItemsFactory.MenuItemTypes.PROFILE_HEADER.id -> HeaderBinder(parent)
             MenuItemsFactory.MenuItemTypes.ADD_PUBLICATION.id -> BottomBinder(parent)

@@ -13,9 +13,13 @@ import com.teachernavigator.teachernavigator.domain.interactors.abstractions.IPr
 import com.teachernavigator.teachernavigator.domain.models.EditProfileData
 import com.teachernavigator.teachernavigator.presentation.models.FieldNames
 import com.teachernavigator.teachernavigator.presentation.screens.common.BasePresenter
+import com.teachernavigator.teachernavigator.presentation.screens.main.activities.abstractions.MainView
 import com.teachernavigator.teachernavigator.presentation.screens.settings.fragments.abstractions.ProfileSettingsView
 import com.teachernavigator.teachernavigator.presentation.screens.settings.presenters.abstractions.IProfileSettingsPresenter
-import com.teachernavigator.teachernavigator.presentation.utils.*
+import com.teachernavigator.teachernavigator.presentation.utils.DialogUtils
+import com.teachernavigator.teachernavigator.presentation.utils.formatDisplayDate
+import com.teachernavigator.teachernavigator.presentation.utils.formatServerDate
+import com.teachernavigator.teachernavigator.presentation.utils.parseServerDate
 import com.teachernavigator.teachernavigator.presentation.validators.EmailValidator
 import retrofit2.HttpException
 import ru.terrakok.cicerone.Router
@@ -189,6 +193,9 @@ constructor(private val router: Router,
     private fun onProfileLoaded(editProfileData: EditProfileData) {
         stopProgress()
 
+        val userName = editProfileData.full_name
+        (mView?.getParentView() as? MainView)?.updateProfile()
+
         mBirthDate = editProfileData.birthday?.parseServerDate
         mExperience = editProfileData.experience ?: 0
 
@@ -196,7 +203,7 @@ constructor(private val router: Router,
         mView?.setDate(mBirthDate?.formatDisplayDate ?: "")
         mView?.setExperience(mExperience)
         mView?.setProfile(
-                fullName = editProfileData.full_name ?: "",
+                fullName = userName ?: "",
                 workOrLearnPlace = editProfileData.work_or_learn_place ?: "",
                 position = editProfileData.position ?: "",
                 district = editProfileData.district ?: "",

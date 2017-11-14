@@ -14,7 +14,9 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.RelativeLayout
 import com.teachernavigator.teachernavigator.R
 import com.teachernavigator.teachernavigator.data.cache.CacheController
+import com.teachernavigator.teachernavigator.domain.models.EditProfileData
 import com.teachernavigator.teachernavigator.domain.models.Settings
+import com.teachernavigator.teachernavigator.presentation.models.ProfileModel
 import com.teachernavigator.teachernavigator.presentation.models.ToolbarStyle
 import com.teachernavigator.teachernavigator.presentation.screens.main.activities.abstractions.MainView
 import com.teachernavigator.teachernavigator.presentation.screens.main.presenters.AcMainPresenter
@@ -163,5 +165,10 @@ class MainActivity : AppCompatActivity(), MainView {
 //            acMainAppBarLayout?.elevation = (15 * alpha)
 //        }
     }
+
+    override fun updateProfile() {
+        mPresenter.updateProfile()
+    }
+
 
 }

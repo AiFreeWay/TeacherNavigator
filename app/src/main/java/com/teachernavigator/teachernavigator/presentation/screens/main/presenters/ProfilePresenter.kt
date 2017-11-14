@@ -12,6 +12,7 @@ import com.teachernavigator.teachernavigator.presentation.models.PostModel
 import com.teachernavigator.teachernavigator.presentation.models.ProfileModel
 import com.teachernavigator.teachernavigator.presentation.screens.auth.activities.AuthActivity
 import com.teachernavigator.teachernavigator.presentation.screens.common.BasePresenter
+import com.teachernavigator.teachernavigator.presentation.screens.main.activities.abstractions.MainView
 import com.teachernavigator.teachernavigator.presentation.screens.main.fragments.abstractions.ProfileView
 import com.teachernavigator.teachernavigator.presentation.screens.main.presenters.abstractions.IProfilePresenter
 import com.teachernavigator.teachernavigator.presentation.transformers.PostTransformerFactory
@@ -96,10 +97,6 @@ constructor(private val router: Router,
         mView?.stopProgress()
     }
 
-//    override fun navigateBack() {
-//        router.exit()
-//    }
-
     override fun uploadPhoto(fileName:String, filePath: String, fileMime: String) {
         addDissposable(profileInteractor.uploadAvatar(FileInfo(filePath, fileMime, fileName))
                 .doOnSubscribe { startProgress() }
@@ -110,6 +107,7 @@ constructor(private val router: Router,
     private fun onProfileChanged(profile: ProfileModel) {
         stopProgress()
         mView?.updateProfile(profile)
+        (mView?.getParentView() as? MainView)?.updateProfile()
     }
 
     override fun exit() {

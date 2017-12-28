@@ -15,6 +15,7 @@ enum class Info(@StringRes val title: Int = 0,
     INTERNET(R.string.label_internet_friend, R.drawable.ic_internet),
     CARE(R.string.label_care, R.drawable.ic_donation),
     COURSES(R.string.label_courses, R.drawable.ic_courses),
+    FINANCE(R.string.label_finance, R.drawable.ic_finance),
     ADVISE(0, 0, false);
 
 }

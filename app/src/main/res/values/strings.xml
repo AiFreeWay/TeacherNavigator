@@ -156,6 +156,7 @@
     <string name="label_choose_theme">Выберите тематику</string>
     <string name="not_implemented">Данный функционал находится на стадии тестирования</string>
     <string name="label_courses">Курсы повышения квалификации</string>
+    <string name="label_finance">Финансовая грамотность</string>
     <string name="label_legal">Законодательство</string>
     <string name="label_internet_friend">Интернет - друг педагога</string>
     <string name="label_care">С заботой о Вас</string>
@@ -223,7 +224,7 @@
     <string name="connected">Подключено</string>
     <string name="connecting">Подключение</string>
     <string name="disconnecting">Отключение</string>
-    <string name="input_text_publication">Введите ткст публикации</string>
+    <string name="input_text_publication">Введите текст публикации</string>
     <string name="author_example">Иван Иванов</string>
     <string name="apply_changes">Применить</string>
     <string name="vacancy_is_yours">Данная вакансия принадлежит Вам</string>

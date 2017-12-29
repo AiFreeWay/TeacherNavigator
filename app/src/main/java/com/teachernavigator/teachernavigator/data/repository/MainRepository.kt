@@ -175,7 +175,7 @@ class MainRepository @Inject constructor(private val mNetwokController: NetworkC
             mNetwokController.getUserPost(getAccessToken(), userId)
 
     override fun getInfoPosts(currentTheme: Info): Single<PostsResponse> =
-            mNetwokController.getInfoPosts(getAccessToken(), currentTheme.ordinal)
+            mNetwokController.getInfoPosts(getAccessToken(), currentTheme.pathId)
 
     override fun getPost(postId: Int, postType: PostType): Single<PostNetwork> = when (postType) {
 

@@ -3,12 +3,11 @@ package com.teachernavigator.teachernavigator.presentation.screens.common
 import android.app.Activity
 import android.arch.lifecycle.LifecycleObserver
 import android.content.Context
-import com.example.root.androidtest.application.di.components.RootComponent
-import com.example.root.androidtest.application.utils.Logger
+import com.teachernavigator.teachernavigator.application.di.components.RootComponent
+import com.teachernavigator.teachernavigator.application.utils.Logger
 import com.teachernavigator.teachernavigator.BuildConfig
 import com.teachernavigator.teachernavigator.application.TeacherNavigatopApp
 import com.teachernavigator.teachernavigator.data.cache.CacheController
-import com.teachernavigator.teachernavigator.data.cache.CacheController.Companion.TOKEN_KEY
 import com.teachernavigator.teachernavigator.presentation.screens.auth.activities.AuthActivity
 import com.teachernavigator.teachernavigator.presentation.utils.ActivityRouter
 import io.reactivex.disposables.CompositeDisposable

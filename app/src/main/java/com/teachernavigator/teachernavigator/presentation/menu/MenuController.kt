@@ -3,7 +3,6 @@ package com.teachernavigator.teachernavigator.presentation.menu
 import android.arch.lifecycle.*
 import android.content.Context
 import android.view.ViewGroup
-import com.example.root.androidtest.application.utils.Logger
 import com.teachernavigator.teachernavigator.presentation.factories.MenuItemsFactory
 import com.teachernavigator.teachernavigator.presentation.menu.bind_strategy.BindStrategy
 import com.teachernavigator.teachernavigator.presentation.menu.bind_strategy.MenuBindStrategy

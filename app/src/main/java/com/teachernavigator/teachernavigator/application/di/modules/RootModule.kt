@@ -1,4 +1,4 @@
-package com.example.root.androidtest.application.di.modules
+package com.teachernavigator.teachernavigator.application.di.modules
 
 import android.content.Context
 import com.google.gson.Gson

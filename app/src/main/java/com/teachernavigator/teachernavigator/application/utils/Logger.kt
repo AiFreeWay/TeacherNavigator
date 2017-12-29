@@ -1,4 +1,4 @@
-package com.example.root.androidtest.application.utils
+package com.teachernavigator.teachernavigator.application.utils
 
 import android.util.Log
 import com.teachernavigator.teachernavigator.BuildConfig

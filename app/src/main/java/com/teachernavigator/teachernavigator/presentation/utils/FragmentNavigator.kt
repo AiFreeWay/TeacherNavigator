@@ -4,8 +4,7 @@ import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v7.app.AppCompatActivity
-import android.text.TextUtils
-import com.example.root.androidtest.application.utils.Logger
+import com.teachernavigator.teachernavigator.application.utils.Logger
 import com.teachernavigator.teachernavigator.presentation.factories.FragmentsFactory
 import ru.terrakok.cicerone.android.SupportFragmentNavigator
 

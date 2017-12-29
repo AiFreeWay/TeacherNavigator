@@ -1,7 +1,7 @@
-package com.example.root.androidtest.application.di.components
+package com.teachernavigator.teachernavigator.application.di.components
 
 import android.content.Context
-import com.example.root.androidtest.application.di.modules.RootModule
+import com.teachernavigator.teachernavigator.application.di.modules.RootModule
 import com.google.gson.Gson
 import com.teachernavigator.teachernavigator.data.network.NetworkController
 import com.teachernavigator.teachernavigator.data.repository.abstractions.IMainRepository

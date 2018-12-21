@@ -1,0 +1,11 @@
+keytool -exportcert -alias monte -keystore ./store.jks | openssl sha1 -binary | openssl base64
+XTy8Fbf3nVWLl5wsZtP4WEK4IAA=
+
+
+
+keytool -exportcert -list -v -alias monte -keystore ./store.jks
+	 MD5:  8A:5E:C9:E4:4A:96:83:F5:50:2B:C7:A5:71:D4:DD:A6
+	 SHA1: A7:22:30:68:E2:EA:3A:C4:E4:97:AF:44:D2:AA:5B:27:D0:30:27:26
+	 SHA256: DB:AA:CD:CC:81:51:AE:C7:6E:F0:6B:E3:3C:2C:D3:4F:3C:BC:27:4F:3C:6C:C7:A6:B6:C7:62:0F:D8:50:C4:2E
+
+

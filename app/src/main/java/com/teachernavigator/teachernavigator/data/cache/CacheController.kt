@@ -3,7 +3,8 @@ package com.teachernavigator.teachernavigator.data.cache
 import com.google.firebase.iid.FirebaseInstanceId
 import com.orhanobut.hawk.Hawk
 import com.teachernavigator.teachernavigator.domain.models.Settings
-import java.util.*
+import io.reactivex.Completable
+import java.util.UUID
 
 /**
  * Created by root on 23.08.17
@@ -38,14 +39,13 @@ class CacheController {
         }
 
         fun isPushEnabled() =
-                Hawk.get<Settings>(SETTINGS_KEY)?.isPushOn == true
+            Hawk.get<Settings>(SETTINGS_KEY)?.isPushOn == true
 
-
-        fun logout() {
-            FirebaseInstanceId.getInstance().deleteInstanceId()
+        fun logout(): Completable = Completable.fromAction {
+            FirebaseInstanceId.getInstance()
+                .deleteInstanceId()
             removeData(TOKEN_KEY)
         }
-
 
     }
 }

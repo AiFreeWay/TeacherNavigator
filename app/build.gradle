@@ -16,8 +16,8 @@ android {
         applicationId "com.teachernavigator.teachernavigator"
         minSdkVersion 16
         targetSdkVersion 27
-        versionCode 9
-        versionName "1.0.9"
+        versionCode 11
+        versionName "1.0.11"
         vectorDrawables.useSupportLibrary = true
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
@@ -105,15 +105,12 @@ dependencies {
     compile "com.twitter.sdk.android:twitter-core:$twiterVersion"
     compile "com.vk:androidsdk:$androidsdkVersion"
 
-    compile('com.crashlytics.sdk.android:crashlytics:2.7.1@aar') {
-        transitive = true;
+    compile('com.crashlytics.sdk.android:crashlytics:2.9.3@aar') {
+        transitive = true
     }
 
     compile 'com.neovisionaries:nv-websocket-client:2.3'
 
-    //Crash Reporting
-
-//    compile "com.google.firebase:firebase-crash:$firebaseCrash"
 }
 
 repositories {
